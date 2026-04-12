@@ -1,0 +1,14 @@
+{
+  "diagnostic.displayByAle": true,
+  "tsserver.enable": true,
+  "tsserver.useLocalTsdk": true,
+  "coc.preferences.formatOnSave": false,
+  "javascript.suggestionActions.enabled": false,
+  "css.validate": false,
+  "scss.validate": false,
+  "tailwindCSS.enable": true,
+  "tailwindCSS.lint.invalidConfigPath": "ignore",
+  "astro.enable": true,
+  "astro.useWorkspaceTsdk": true,
+  "astro.autoCreateQuotes": false
+}
