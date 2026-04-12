@@ -1,0 +1,36 @@
+---
+import Base, { type Props as BaseProps } from '@layouts/Base.astro'
+import HeaderImage, {
+  type Props as HeaderImageProps,
+} from '@components/HeaderImage.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+
+export interface Props extends BaseProps {
+  useAsTitle?: boolean
+  headerImage?: string
+  headerImagePosition?: HeaderImageProps['imagePosition']
+}
+
+const { useAsTitle, headerImage, headerImagePosition, ogImage, ...props } =
+  Astro.props
+---
+
+<Base ogImage={ogImage || headerImage} {...props}>
+  {
+    headerImage && Astro.slots.has('header-title') ? (
+      <HeaderImage
+        image={headerImage}
+        imagePosition={headerImagePosition}
+        useAsTitle={useAsTitle}
+      >
+        <slot name="header-image" slot="background-image" />
+        <slot name="header-title" />
+      </HeaderImage>
+    ) : (
+      <Header useAsTitle={useAsTitle} />
+    )
+  }
+  <slot />
+  <Footer />
+</Base>
