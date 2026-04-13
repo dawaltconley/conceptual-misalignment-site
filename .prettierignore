@@ -3,3 +3,5 @@ public/
 tina/__generated__/
 tina/tina-lock.json
 content/
+.agents/
+.claude/
