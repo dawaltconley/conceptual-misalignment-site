@@ -37,7 +37,7 @@ export default function Network(
       .alphaDecay(0.005)
       .velocityDecay(0.5)
       .on('tick', () => {
-        setData(nodes)
+        setData([...nodes])
       })
   }, [])
 
