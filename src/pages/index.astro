@@ -1,8 +1,12 @@
 ---
 import Layout from '@layouts/Page.astro'
 import Network from '@components/Network'
-import benevolence from '@data/cooccurrence_benevolence.json'
-import ren from '@data/cooccurrence_仁.json'
+import { WeightedNodeLinkDataSchema } from '@lib/networkx'
+import benevolenceRaw from '@data/cooccurrence_benevolence.json'
+import renRaw from '@data/cooccurrence_仁.json'
+
+const benevolence = WeightedNodeLinkDataSchema.parse(benevolenceRaw)
+const ren = WeightedNodeLinkDataSchema.parse(renRaw)
 ---
 
 <Layout>
