@@ -3,25 +3,24 @@ import { useState, useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 
 interface NetworkProps {
-  // width: number
-  // height: number
-  // data: WeightedNodeLinkData
-  // children: React.ReactNode
+  centralNodeId?: NodeId
 }
 
-export default function Network(
-  {
-    // width,
-    // height,
-    // data,
-  }: NetworkProps,
-): JSX.Element {
+export default function Network({
+  centralNodeId = 'benevolence',
+}: NetworkProps): JSX.Element {
   const [data, setData] = useState<Node[]>()
   const svg = useRef<SVGSVGElement | null>(null)
 
   // consider useLayoutEffect?
   useEffect(() => {
-    const nodes = DATA.nodes.map<Node>((n) => ({ id: n.id }))
+    const nodes = DATA.nodes.map<Node>((n) => {
+      if (n.id === centralNodeId) {
+        // fix the central node in the center
+        return { ...n, fx: 50, fy: 50 }
+      }
+      return { ...n }
+    })
     const links = DATA.edges.map<Link>((e) => ({ ...e, value: e.weight }))
     d3.forceSimulation(nodes)
       .force(
@@ -39,7 +38,7 @@ export default function Network(
       .on('tick', () => {
         setData([...nodes])
       })
-  }, [])
+  }, [centralNodeId])
 
   return (
     <div className="min-h-96 w-full">
