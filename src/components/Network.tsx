@@ -108,7 +108,10 @@ export default function Network({
   }
 
   return (
-    <div ref={containerRef} className="relative aspect-square min-h-96 w-full">
+    <div
+      ref={containerRef}
+      className="relative aspect-square min-h-96 w-full overflow-hidden"
+    >
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
