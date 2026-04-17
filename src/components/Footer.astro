@@ -1,12 +1,14 @@
 ---
 import { getIconFromUrl } from '@data/icons'
 import Icon from './Icon'
-import { SOCIALS } from '@data/site.mjs'
+import { SITE, SOCIALS } from '@data/site.mjs'
+
+const copyrightYear = SITE.copyright.getFullYear()
 ---
 
 <footer class="mt-auto bg-gray-900 py-8 text-white">
   <div class="container mx-auto flex justify-between">
-    <div>&copy; 2024 Dylan Awalt-Conley</div>
+    <div>&copy; {copyrightYear} Dylan Awalt-Conley</div>
     <div class="flex space-x-3">
       {
         SOCIALS.map((url) => {
