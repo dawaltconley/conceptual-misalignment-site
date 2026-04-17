@@ -28,12 +28,12 @@ export default function Network({
         d3
           .forceLink<Node, Link>(links)
           .id((d) => d.id)
-          .distance(16),
+          .distance(8),
       )
       .force('collide', d3.forceCollide().radius(RADIUS * 2))
-      .force('charge', d3.forceManyBody().strength(-8))
+      .force('charge', d3.forceManyBody().strength(-4))
       .force('center', d3.forceCenter(50, 50))
-      .alphaDecay(0.005)
+      .alphaDecay(0.05)
       .velocityDecay(0.5)
       .on('tick', () => {
         setData([...nodes])
@@ -66,11 +66,11 @@ export default function Network({
                 x={node.x}
                 y={node.y}
                 fontSize={1}
-                strokeWidth={0.1}
+                strokeWidth={0.02}
                 transform="translate(-50%, -50%)"
                 textAnchor="middle"
-                stroke="black"
-                fill="black"
+                stroke={node.id === centralNodeId ? 'red' : 'black'}
+                fill={node.id === centralNodeId ? 'red' : 'black'}
               >
                 {node.id}
               </text>
@@ -92,7 +92,7 @@ interface Link extends d3.SimulationLinkDatum<Node> {
   value: number
 }
 
-const RADIUS = 2
+const RADIUS = 3
 
 const DATA: WeightedNodeLinkData = {
   directed: false,
