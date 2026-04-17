@@ -2,6 +2,7 @@
 import Layout from '@layouts/Page.astro'
 import Network from '@components/Network'
 import benevolence from '@data/cooccurrence_benevolence.json'
+import ren from '@data/cooccurrence_仁.json'
 
 const title = 'Starter Site'
 const description = 'Home page'
@@ -11,6 +12,9 @@ const description = 'Home page'
   <main class="container mx-auto py-8">
     <h1>Starter</h1>
     <p>{description}</p>
-    <Network client:only data={benevolence} , centralNodeId="benevolence" />
+    <div class="xl:flex">
+      <Network client:only data={ren} , centralNodeId="仁" />
+      <Network client:only data={benevolence} , centralNodeId="benevolence" />
+    </div>
   </main>
 </Layout>

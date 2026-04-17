@@ -1,0 +1,222 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "\u675e"
+    },
+    {
+      "id": "\u5167"
+    },
+    {
+      "id": "\u53c8"
+    },
+    {
+      "id": "\u7fa9"
+    },
+    {
+      "id": "\u706b"
+    },
+    {
+      "id": "\u4fe1"
+    },
+    {
+      "id": "\u52dd"
+    },
+    {
+      "id": "\u67f3"
+    },
+    {
+      "id": "\u79ae"
+    },
+    {
+      "id": "\u719f"
+    },
+    {
+      "id": "\u5b58"
+    },
+    {
+      "id": "\u5916"
+    },
+    {
+      "id": "\u5fb7"
+    },
+    {
+      "id": "\u8cca"
+    },
+    {
+      "id": "\u4ec1"
+    },
+    {
+      "id": "\u667a"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 3.9435216724875173,
+      "source": "\u675e",
+      "target": "\u67f3"
+    },
+    {
+      "weight": 1.3044643428722584,
+      "source": "\u675e",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.0531499145913523,
+      "source": "\u675e",
+      "target": "\u7fa9"
+    },
+    {
+      "weight": 3.5380565643793527,
+      "source": "\u675e",
+      "target": "\u8cca"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u5167",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.6817585740137264,
+      "source": "\u5167",
+      "target": "\u5916"
+    },
+    {
+      "weight": 1.563975538357343,
+      "source": "\u5167",
+      "target": "\u7fa9"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u53c8",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.9694406464655074,
+      "source": "\u7fa9",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.0531499145913523,
+      "source": "\u7fa9",
+      "target": "\u67f3"
+    },
+    {
+      "weight": 1.563975538357343,
+      "source": "\u7fa9",
+      "target": "\u8cca"
+    },
+    {
+      "weight": 1.6817585740137264,
+      "source": "\u7fa9",
+      "target": "\u5916"
+    },
+    {
+      "weight": 1.563975538357343,
+      "source": "\u7fa9",
+      "target": "\u667a"
+    },
+    {
+      "weight": 2.257122718917288,
+      "source": "\u7fa9",
+      "target": "\u79ae"
+    },
+    {
+      "weight": 1.2762934659055623,
+      "source": "\u7fa9",
+      "target": "\u5b58"
+    },
+    {
+      "weight": 1.9694406464655074,
+      "source": "\u7fa9",
+      "target": "\u4fe1"
+    },
+    {
+      "weight": 1.563975538357343,
+      "source": "\u7fa9",
+      "target": "\u5fb7"
+    },
+    {
+      "weight": 4.048882188145344,
+      "source": "\u706b",
+      "target": "\u52dd"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u706b",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 2.2207550747464135,
+      "source": "\u4fe1",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u52dd",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.3044643428722584,
+      "source": "\u67f3",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 3.5380565643793527,
+      "source": "\u67f3",
+      "target": "\u8cca"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u79ae",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 2.3749057545736716,
+      "source": "\u79ae",
+      "target": "\u5916"
+    },
+    {
+      "weight": 3.355735007585398,
+      "source": "\u79ae",
+      "target": "\u667a"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u719f",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.5276078941864681,
+      "source": "\u5b58",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.5276078941864681,
+      "source": "\u5916",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 2.3749057545736716,
+      "source": "\u5916",
+      "target": "\u667a"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u5fb7",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u8cca",
+      "target": "\u4ec1"
+    },
+    {
+      "weight": 1.8152899666382492,
+      "source": "\u4ec1",
+      "target": "\u667a"
+    }
+  ]
+}
