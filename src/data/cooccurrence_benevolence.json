@@ -1,0 +1,168 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "benevolence"
+    },
+    {
+      "id": "divine benevolence"
+    },
+    {
+      "id": "real cause"
+    },
+    {
+      "id": "true substance"
+    },
+    {
+      "id": "physical substance"
+    },
+    {
+      "id": "sensible ideas"
+    },
+    {
+      "id": "true cause"
+    },
+    {
+      "id": "divine agency"
+    },
+    {
+      "id": "real power"
+    },
+    {
+      "id": "general benevolence"
+    },
+    {
+      "id": "true virtuous benevolence"
+    },
+    {
+      "id": "true benevolence"
+    },
+    {
+      "id": "divine reality"
+    },
+    {
+      "id": "new simple idea"
+    },
+    {
+      "id": "holy things evoke"
+    },
+    {
+      "id": "true beauty"
+    },
+    {
+      "id": "new spiritual sensation"
+    },
+    {
+      "id": "simple ideas"
+    },
+    {
+      "id": "human benevolence"
+    },
+    {
+      "id": "spiritual beauty"
+    },
+    {
+      "id": "benevolence mirrors"
+    },
+    {
+      "id": "divine things"
+    },
+    {
+      "id": "divine throne chariot"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "divine benevolence"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "general benevolence"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "true virtuous benevolence"
+    },
+    {
+      "weight": 3,
+      "source": "benevolence",
+      "target": "true benevolence"
+    },
+    {
+      "weight": 2,
+      "source": "benevolence",
+      "target": "true beauty"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "new simple idea"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "human benevolence"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "spiritual beauty"
+    },
+    {
+      "weight": 1,
+      "source": "benevolence",
+      "target": "benevolence mirrors"
+    },
+    {
+      "weight": 1,
+      "source": "real cause",
+      "target": "true substance"
+    },
+    {
+      "weight": 3,
+      "source": "true substance",
+      "target": "true cause"
+    },
+    {
+      "weight": 1,
+      "source": "physical substance",
+      "target": "sensible ideas"
+    },
+    {
+      "weight": 1,
+      "source": "divine agency",
+      "target": "real power"
+    },
+    {
+      "weight": 1,
+      "source": "divine reality",
+      "target": "new simple idea"
+    },
+    {
+      "weight": 1,
+      "source": "new simple idea",
+      "target": "simple ideas"
+    },
+    {
+      "weight": 1,
+      "source": "holy things evoke",
+      "target": "true beauty"
+    },
+    {
+      "weight": 1,
+      "source": "new spiritual sensation",
+      "target": "simple ideas"
+    },
+    {
+      "weight": 1,
+      "source": "divine things",
+      "target": "divine throne chariot"
+    }
+  ]
+}
