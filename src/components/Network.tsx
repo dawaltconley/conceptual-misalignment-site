@@ -1,15 +1,11 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
-import {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  type RefObject,
-} from 'react'
-import useResizeObserver from '@react-hook/resize-observer'
+import { useState, useEffect, useRef } from 'react'
+import useSize from '@lib/browser/hooks/useSize'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
+
+const COLLISION_RADIUS = 6
 
 interface NetworkProps {
   data: WeightedNodeLinkData
@@ -139,15 +135,14 @@ export default function Network({
   )
 }
 
-function useSize(target: RefObject<Element>): DOMRect | undefined {
-  const [size, setSize] = useState<DOMRect>()
-  useLayoutEffect(() => {
-    if (target.current) {
-      setSize(target.current.getBoundingClientRect())
-    }
-  }, [target])
-  useResizeObserver(target, (entry) => setSize(entry.contentRect))
-  return size
+interface Node extends d3.SimulationNodeDatum {
+  id: NodeId
+}
+
+interface Link extends d3.SimulationLinkDatum<Node> {
+  source: NodeId
+  target: NodeId
+  value: number
 }
 
 interface Edge {
@@ -204,15 +199,3 @@ function drawEdges(
     ctx.stroke()
   }
 }
-
-interface Node extends d3.SimulationNodeDatum {
-  id: NodeId
-}
-
-interface Link extends d3.SimulationLinkDatum<Node> {
-  source: NodeId
-  target: NodeId
-  value: number
-}
-
-const COLLISION_RADIUS = 6
