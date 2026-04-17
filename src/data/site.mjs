@@ -11,11 +11,11 @@
 
 /** @type {SiteConfig} */
 export const SITE = {
-  title: 'Starter site',
-  description: 'Site description',
-  domain: new URL('https://example.com'),
+  title: 'Conceptual Misalignment',
+  description: 'A network graph representation of conceptual misalignment.',
+  domain: new URL('https://conceptual-misalignment.netlify.app/'),
   ogImage: undefined,
-  favicon: '/favicon.svg',
+  // favicon: '/favicon.svg',
 }
 
 /** @type {(string | URL)[]} */
