@@ -4,165 +4,284 @@
   "graph": {},
   "nodes": [
     {
+      "id": "beauty"
+    },
+    {
       "id": "benevolence"
     },
     {
-      "id": "divine benevolence"
+      "id": "mind"
     },
     {
-      "id": "real cause"
+      "id": "substance"
     },
     {
-      "id": "true substance"
+      "id": "thing"
     },
     {
-      "id": "physical substance"
+      "id": "true"
     },
     {
-      "id": "sensible ideas"
+      "id": "world"
     },
     {
-      "id": "true cause"
+      "id": "divine"
     },
     {
-      "id": "divine agency"
+      "id": "love"
     },
     {
-      "id": "real power"
+      "id": "cause"
     },
     {
-      "id": "general benevolence"
+      "id": "virtue"
     },
     {
-      "id": "true virtuous benevolence"
+      "id": "idea"
     },
     {
-      "id": "true benevolence"
+      "id": "power"
     },
     {
-      "id": "divine reality"
+      "id": "act"
     },
     {
-      "id": "new simple idea"
+      "id": "god"
     },
     {
-      "id": "holy things evoke"
-    },
-    {
-      "id": "true beauty"
-    },
-    {
-      "id": "new spiritual sensation"
-    },
-    {
-      "id": "simple ideas"
-    },
-    {
-      "id": "human benevolence"
-    },
-    {
-      "id": "spiritual beauty"
-    },
-    {
-      "id": "benevolence mirrors"
-    },
-    {
-      "id": "divine things"
-    },
-    {
-      "id": "divine throne chariot"
+      "id": "sense"
     }
   ],
   "edges": [
     {
-      "weight": 1,
+      "weight": 0.9379475255284606,
+      "source": "beauty",
+      "target": "true"
+    },
+    {
+      "weight": 0.7398776117663668,
+      "source": "beauty",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.5857269319391084,
+      "source": "beauty",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.637020226326659,
+      "source": "beauty",
+      "target": "divine"
+    },
+    {
+      "weight": 0.505684224265572,
+      "source": "beauty",
+      "target": "sense"
+    },
+    {
+      "weight": 0.3233626674716173,
+      "source": "beauty",
+      "target": "idea"
+    },
+    {
+      "weight": 0.8576606474227502,
       "source": "benevolence",
-      "target": "divine benevolence"
+      "target": "virtue"
     },
     {
-      "weight": 1,
+      "weight": 0.4803664162812822,
       "source": "benevolence",
-      "target": "general benevolence"
+      "target": "love"
     },
     {
-      "weight": 1,
+      "weight": 0.6810371117434333,
       "source": "benevolence",
-      "target": "true virtuous benevolence"
+      "target": "true"
     },
     {
-      "weight": 3,
+      "weight": 0.29804485948732756,
       "source": "benevolence",
-      "target": "true benevolence"
+      "target": "thing"
     },
     {
-      "weight": 2,
+      "weight": 0.14389417966006912,
       "source": "benevolence",
-      "target": "true beauty"
+      "target": "mind"
     },
     {
-      "weight": 1,
+      "weight": 0.2180021518137911,
       "source": "benevolence",
-      "target": "new simple idea"
+      "target": "idea"
     },
     {
-      "weight": 1,
-      "source": "benevolence",
-      "target": "human benevolence"
+      "weight": 0.9801422038606878,
+      "source": "mind",
+      "target": "idea"
     },
     {
-      "weight": 1,
-      "source": "benevolence",
-      "target": "spiritual beauty"
+      "weight": 0.4315762521118502,
+      "source": "mind",
+      "target": "thing"
     },
     {
-      "weight": 1,
-      "source": "benevolence",
-      "target": "benevolence mirrors"
+      "weight": 0.3775090308415744,
+      "source": "mind",
+      "target": "substance"
     },
     {
-      "weight": 1,
-      "source": "real cause",
-      "target": "true substance"
+      "weight": 0.3262157364540238,
+      "source": "mind",
+      "target": "power"
     },
     {
-      "weight": 3,
-      "source": "true substance",
-      "target": "true cause"
+      "weight": 0.6138978089058048,
+      "source": "mind",
+      "target": "love"
     },
     {
-      "weight": 1,
-      "source": "physical substance",
-      "target": "sensible ideas"
+      "weight": 0.14389417966006912,
+      "source": "mind",
+      "target": "virtue"
     },
     {
-      "weight": 1,
-      "source": "divine agency",
-      "target": "real power"
+      "weight": 1.2735970553982099,
+      "source": "substance",
+      "target": "cause"
     },
     {
-      "weight": 1,
-      "source": "divine reality",
-      "target": "new simple idea"
+      "weight": 0.5843034441542547,
+      "source": "substance",
+      "target": "god"
     },
     {
-      "weight": 1,
-      "source": "new simple idea",
-      "target": "simple ideas"
+      "weight": 0.12619460256066833,
+      "source": "substance",
+      "target": "true"
     },
     {
-      "weight": 1,
-      "source": "holy things evoke",
-      "target": "true beauty"
+      "weight": 0.42629919501100644,
+      "source": "substance",
+      "target": "power"
     },
     {
-      "weight": 1,
-      "source": "new spiritual sensation",
-      "target": "simple ideas"
+      "weight": 0.07212738129039248,
+      "source": "substance",
+      "target": "divine"
     },
     {
-      "weight": 1,
-      "source": "divine things",
-      "target": "divine throne chariot"
+      "weight": 0.5888181245087812,
+      "source": "substance",
+      "target": "world"
+    },
+    {
+      "weight": 0.5316597106688327,
+      "source": "thing",
+      "target": "divine"
+    },
+    {
+      "weight": 0.23742023767089263,
+      "source": "thing",
+      "target": "world"
+    },
+    {
+      "weight": 1.3276642766684856,
+      "source": "true",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.2572228649670723,
+      "source": "true",
+      "target": "cause"
+    },
+    {
+      "weight": 0.5449049374188533,
+      "source": "true",
+      "target": "love"
+    },
+    {
+      "weight": 0.23742023767089263,
+      "source": "true",
+      "target": "world"
+    },
+    {
+      "weight": 0.21002126348277816,
+      "source": "world",
+      "target": "god"
+    },
+    {
+      "weight": 0.13205972201306632,
+      "source": "world",
+      "target": "cause"
+    },
+    {
+      "weight": 0.24397763821705182,
+      "source": "divine",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.9371248187769972,
+      "source": "divine",
+      "target": "power"
+    },
+    {
+      "weight": 0.24397763821705182,
+      "source": "divine",
+      "target": "act"
+    },
+    {
+      "weight": 0.4516170029952962,
+      "source": "divine",
+      "target": "sense"
+    },
+    {
+      "weight": 0.20165301381226156,
+      "source": "love",
+      "target": "god"
+    },
+    {
+      "weight": 0.9911920400472729,
+      "source": "love",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.4803664162812822,
+      "source": "love",
+      "target": "act"
+    },
+    {
+      "weight": 0.6880057810595267,
+      "source": "love",
+      "target": "sense"
+    },
+    {
+      "weight": 0.36595606510353795,
+      "source": "cause",
+      "target": "god"
+    },
+    {
+      "weight": 0.19268434382950114,
+      "source": "cause",
+      "target": "act"
+    },
+    {
+      "weight": 0.2180021518137911,
+      "source": "virtue",
+      "target": "sense"
+    },
+    {
+      "weight": 0.6234672599219555,
+      "source": "idea",
+      "target": "power"
+    },
+    {
+      "weight": 0.19268434382950114,
+      "source": "power",
+      "target": "act"
+    },
+    {
+      "weight": 0.8057888167159101,
+      "source": "power",
+      "target": "sense"
     }
   ]
 }
