@@ -7,7 +7,6 @@ import {
   type RefObject,
 } from 'react'
 import useResizeObserver from '@react-hook/resize-observer'
-import twColors from 'tailwindcss/colors'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
@@ -121,10 +120,10 @@ export default function Network({
         <div
           key={node.id}
           className={clsx(
-            'absolute rounded-full bg-white px-1.5 py-0.5 text-xs shadow-sm ring-1 ring-gray-200 active:cursor-grabbing',
+            'absolute rounded-full px-1.5 py-0.5 text-xs shadow-sm ring-1 ring-gray-200',
             node.id === centralNodeId
-              ? 'z-10 cursor-default bg-red-500 text-white ring-transparent active:cursor-default'
-              : 'cursor-grab select-none',
+              ? 'z-10 cursor-default bg-red-500 text-white ring-transparent'
+              : 'cursor-grab select-none bg-white active:cursor-grabbing',
           )}
           style={{
             transform: `translate(calc(${(node.x ?? 0) * 0.01 * width}px - 50%), calc(${(node.y ?? 0) * 0.01 * height}px - 50%))`,
@@ -198,7 +197,7 @@ function drawEdges(
 
   for (const { x1, y1, x2, y2, weight = 1 } of edges) {
     ctx.beginPath()
-    ctx.strokeStyle = twColors.gray['400']
+    ctx.strokeStyle = '#9ca3af'
     ctx.lineWidth = Math.log2(weight + 1) * 0.4
     ctx.moveTo(toX(x1), toY(y1))
     ctx.lineTo(toX(x2), toY(y2))
