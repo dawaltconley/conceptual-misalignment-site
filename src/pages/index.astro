@@ -2,18 +2,21 @@
 import Layout from '@layouts/Page.astro'
 import Network from '@components/Network'
 import { WeightedNodeLinkDataSchema } from '@lib/networkx'
+import { buildDictionary } from '@build/cedict'
 import benevolenceRaw from '@data/cooccurrence_benevolence.json'
 import renRaw from '@data/cooccurrence_仁.json'
 
 const benevolence = WeightedNodeLinkDataSchema.parse(benevolenceRaw)
 const ren = WeightedNodeLinkDataSchema.parse(renRaw)
+
+const renDict = await buildDictionary(ren.nodes.map((n) => String(n.id)))
 ---
 
 <Layout>
   <main class="container mx-auto py-8">
     <div class="xl:flex">
-      <Network client:only data={ren} , centralNodeId="仁" />
-      <Network client:only data={benevolence} , centralNodeId="benevolence" />
+      <Network client:only data={ren} centralNodeId="仁" dictionary={renDict} />
+      <Network client:only data={benevolence} centralNodeId="benevolence" />
     </div>
   </main>
 </Layout>

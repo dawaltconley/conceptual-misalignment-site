@@ -1,20 +1,24 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
+import type { Dictionary } from '@build/cedict'
 import { useState, useEffect, useRef } from 'react'
 import useSize from '@lib/browser/hooks/useSize'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
+import HanziNode from '@components/HanziNode'
 
 const COLLISION_RADIUS = 6
 
-interface NetworkProps {
+export interface NetworkProps {
   data: WeightedNodeLinkData
   centralNodeId: NodeId
+  dictionary?: Dictionary
 }
 
 export default function Network({
   data,
   centralNodeId,
+  dictionary,
 }: NetworkProps): JSX.Element {
   const [nodes, setNodes] = useState<Node[]>([])
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -128,7 +132,9 @@ export default function Network({
           onPointerMove={handlePointerMove}
           onPointerUp={(e) => handlePointerUp(e, node.id)}
         >
-          {node.id}
+          {dictionary?.[String(node.id)]
+            ? <HanziNode id={node.id} entry={dictionary[String(node.id)]} isCentral={node.id === centralNodeId} />
+            : String(node.id)}
         </div>
       ))}
     </div>
