@@ -1,6 +1,6 @@
 from pathlib import Path
 
-DATA = Path("src/data")
+DATA = Path("../src/data")
 DATA.mkdir(exist_ok=True)
 
 SEP = DATA / "sep"
