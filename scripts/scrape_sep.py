@@ -13,12 +13,15 @@ class SEP:
         r.raise_for_status()
         if not r.from_cache:  # type: ignore
             time.sleep(random() * 2 + 1)
+
         soup = BeautifulSoup(r.text, 'html.parser')
+
         title = soup.title and str(soup.title.text)
         if not title:
             h1 = soup.find("h1")
             title = str(h1.text) if h1 else "UNTITLED"
         self.title = str(title)
+
         article = {
             "preamble": soup.find("div", id="preamble"),
             "toc": soup.find("div", id="toc"),
@@ -26,6 +29,11 @@ class SEP:
         }
         self.text = str(article["preamble"]) + \
             str(article["toc"]) + str(article["main-text"])
+
+        description = soup.description and str(soup.description.text)
+        if not description:
+            description = str(article["preamble"])[:160]
+        self.description = str(description)
 
 
 def _search(term: str) -> str:
