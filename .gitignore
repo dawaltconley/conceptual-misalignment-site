@@ -9,6 +9,7 @@ node_modules/
 
 # cache
 .cache/
+scripts/.cache/
 
 # logs
 npm-debug.log*
@@ -26,3 +27,6 @@ pnpm-debug.log*
 # claude local files
 CLAUDE.local.md
 .claude/*.local.*
+
+# Local Netlify folder
+.netlify

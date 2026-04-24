@@ -19,9 +19,12 @@ Books and their ctext URNs:
   7B  盡心下    ctp:mengzi/jin-xin-ii
 """
 
-import time
-
 import requests
+import time
+import cache
+from random import random
+cache.install()
+
 
 API_BASE = "https://api.ctext.org"
 
@@ -46,6 +49,8 @@ BOOKS = [
 def _fetch_text(urn: str) -> dict:
     r = requests.get(f"{API_BASE}/gettext", params={"urn": urn}, timeout=30)
     r.raise_for_status()
+    if not r.from_cache:  # type: ignore
+        time.sleep(random() * 2 + 1)
     return r.json()
 
 

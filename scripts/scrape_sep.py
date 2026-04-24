@@ -1,6 +1,9 @@
-import time
-import requests
 from bs4 import BeautifulSoup
+import requests
+import time
+import cache
+from random import random
+cache.install()
 
 
 class SEP:
@@ -8,6 +11,8 @@ class SEP:
         self.url = url
         r = requests.get(url, timeout=30)
         r.raise_for_status()
+        if not r.from_cache:  # type: ignore
+            time.sleep(random() * 2 + 1)
         soup = BeautifulSoup(r.text, 'html.parser')
         self.title = soup.title and soup.title.text
         if not self.title:
