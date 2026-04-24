@@ -6,6 +6,7 @@ import toPinyinTones from 'pinyin-tone'
 export interface DictionaryEntry {
   pinyin: string
   definitions: string[]
+  altPronunciation?: string[]
 }
 
 export type Dictionary = Record<string, DictionaryEntry>
@@ -24,20 +25,43 @@ export async function buildDictionary(
     crlfDelay: Infinity,
   })
 
-  for await (const line of rl) {
-    if (line.startsWith('#')) continue
+  rl.on('line', (line) => {
+    if (line.startsWith('#')) return
     const m = line.match(LINE_RE)
-    if (!m) continue
+    if (!m) return
     const [, traditional, pinyinRaw, defsRaw] = m
-    if (!targets.has(traditional)) continue
+    if (!targets.has(traditional)) return
     // If we already have an entry, keep it unless this one has lowercase pinyin
     // (lowercase = common entry; uppercase = proper noun / surname)
-    if (result[traditional] && /^[A-Z]/.test(pinyinRaw)) continue
+    if (result[traditional] && /^[A-Z]/.test(pinyinRaw)) return
+
+    const defs = defsRaw
+      .split('/')
+      .filter((def) => Boolean(def) && !def.startsWith('CL:'))
+    const altPronIndex = defs.findLastIndex((def) =>
+      def.startsWith('also pr. '),
+    )
+    const altPronRaw = defs.splice(altPronIndex, 1)[0]
+
     result[traditional] = {
       pinyin: toPinyinTones(pinyinRaw),
-      definitions: defsRaw.split('/').filter(Boolean),
+      definitions: defs,
     }
-  }
 
-  return result
+    if (altPronRaw[9] === '[' && altPronRaw[altPronRaw.length - 1] === ']') {
+      const altPron = altPronRaw
+        .slice(10, -1)
+        .split(' ')
+        .filter(Boolean)
+        .map(toPinyinTones)
+      if (altPron.length > 0) {
+        result[traditional].altPronunciation = altPron
+      }
+    }
+  })
+
+  return new Promise((resolve, reject) => {
+    rl.on('close', () => resolve(result))
+    rl.on('error', (e) => reject(e))
+  })
 }

@@ -7,7 +7,7 @@ import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
 import HanziNode from '@components/HanziNode'
 
-const COLLISION_RADIUS = 6
+const COLLISION_RADIUS = 12
 
 export interface NetworkProps {
   data: WeightedNodeLinkData
@@ -120,7 +120,7 @@ export default function Network({
         <div
           key={node.id}
           className={clsx(
-            'absolute rounded-full px-1.5 py-0.5 text-xs shadow-sm ring-1 ring-gray-200',
+            'absolute rounded-full px-2.5 py-0.5 text-lg shadow-sm ring-1 ring-gray-200',
             node.id === centralNodeId
               ? 'z-10 cursor-default bg-red-500 text-white ring-transparent'
               : 'cursor-grab select-none bg-white active:cursor-grabbing',
@@ -132,9 +132,15 @@ export default function Network({
           onPointerMove={handlePointerMove}
           onPointerUp={(e) => handlePointerUp(e, node.id)}
         >
-          {dictionary?.[String(node.id)]
-            ? <HanziNode id={node.id} entry={dictionary[String(node.id)]} isCentral={node.id === centralNodeId} />
-            : String(node.id)}
+          {dictionary?.[String(node.id)] ? (
+            <HanziNode
+              id={node.id}
+              entry={dictionary[String(node.id)]}
+              isCentral={node.id === centralNodeId}
+            />
+          ) : (
+            String(node.id)
+          )}
         </div>
       ))}
     </div>

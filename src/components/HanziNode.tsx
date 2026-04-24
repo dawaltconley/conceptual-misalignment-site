@@ -6,10 +6,16 @@ import type { DictionaryEntry } from '@build/cedict'
 interface HanziNodeProps {
   id: NodeId
   entry: DictionaryEntry
+  maxEntries?: number
   isCentral?: boolean
 }
 
-export default function HanziNode({ id, entry, isCentral }: HanziNodeProps) {
+export default function HanziNode({
+  id,
+  entry,
+  isCentral = false,
+  maxEntries = 7,
+}: HanziNodeProps) {
   const nodeRef = useRef<HTMLSpanElement>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null)
@@ -28,13 +34,15 @@ export default function HanziNode({ id, entry, isCentral }: HanziNodeProps) {
   return (
     <span
       ref={nodeRef}
-      className="flex flex-col items-center leading-none"
+      className="flex flex-col items-center py-1 leading-none"
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerLeave}
     >
-      <span>{String(id)}</span>
-      <span className={`mt-0.5 text-[0.6rem] ${isCentral ? 'text-red-100' : 'text-gray-400'}`}>
+      <span>{id.toString()}</span>
+      <span
+        className={`mt-0.5 text-xs ${isCentral ? 'text-red-100' : 'text-gray-400'}`}
+      >
         {entry.pinyin}
       </span>
       {tooltipRect &&
@@ -47,8 +55,26 @@ export default function HanziNode({ id, entry, isCentral }: HanziNodeProps) {
               transform: 'translate(-50%, -100%)',
             }}
           >
-            <p className="mb-1 font-semibold text-gray-900">{entry.pinyin}</p>
-            <p className="text-gray-500">{entry.definitions.slice(0, 3).join('; ')}</p>
+            <p className="mb-1 align-baseline font-semibold text-gray-900">
+              <span className="mr-0.5 text-lg">{id}</span> {entry.pinyin}
+              {entry.altPronunciation && (
+                <span className="font-normal">
+                  {' '}
+                  (or {entry.altPronunciation?.join(', ')})
+                </span>
+              )}
+            </p>
+            <ol className="list-inside list-decimal text-gray-500">
+              {entry.definitions
+                .slice(0, maxEntries)
+                .filter((def) => !def.startsWith('CL:'))
+                .map((def) => (
+                  <li>{def}</li>
+                ))}
+              {entry.definitions.length > maxEntries && (
+                <li role="presentation">…</li>
+              )}
+            </ol>
           </div>,
           document.body,
         )}
