@@ -14,10 +14,11 @@ class SEP:
         if not r.from_cache:  # type: ignore
             time.sleep(random() * 2 + 1)
         soup = BeautifulSoup(r.text, 'html.parser')
-        self.title = soup.title and soup.title.text
-        if not self.title:
+        title = soup.title and str(soup.title.text)
+        if not title:
             h1 = soup.find("h1")
-            self.title = h1.text if h1 else "UNTITLED"
+            title = str(h1.text) if h1 else "UNTITLED"
+        self.title = str(title)
         article = {
             "preamble": soup.find("div", id="preamble"),
             "toc": soup.find("div", id="toc"),
