@@ -1,0 +1,347 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "qi"
+    },
+    {
+      "id": "virtue"
+    },
+    {
+      "id": "humaneness"
+    },
+    {
+      "id": "angle"
+    },
+    {
+      "id": "tiwald"
+    },
+    {
+      "id": "see"
+    },
+    {
+      "id": "human"
+    },
+    {
+      "id": "system"
+    },
+    {
+      "id": "life"
+    },
+    {
+      "id": "pattern"
+    },
+    {
+      "id": "thing"
+    },
+    {
+      "id": "wang"
+    },
+    {
+      "id": "li"
+    },
+    {
+      "id": "self"
+    },
+    {
+      "id": "heartmind"
+    },
+    {
+      "id": "moral"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 1.258954938743289,
+      "source": "qi",
+      "target": "pattern"
+    },
+    {
+      "weight": 0.6123277738182367,
+      "source": "qi",
+      "target": "human"
+    },
+    {
+      "weight": 0.9488000104394496,
+      "source": "qi",
+      "target": "li"
+    },
+    {
+      "weight": 0.6486954179891115,
+      "source": "qi",
+      "target": "moral"
+    },
+    {
+      "weight": 0.19111430874193308,
+      "source": "qi",
+      "target": "wang"
+    },
+    {
+      "weight": 0.7019399325079237,
+      "source": "qi",
+      "target": "thing"
+    },
+    {
+      "weight": 0.52135599561251,
+      "source": "qi",
+      "target": "angle"
+    },
+    {
+      "weight": 0.3610133455373305,
+      "source": "qi",
+      "target": "tiwald"
+    },
+    {
+      "weight": 1.0217532831424978,
+      "source": "virtue",
+      "target": "human"
+    },
+    {
+      "weight": 0.8574502318512216,
+      "source": "virtue",
+      "target": "moral"
+    },
+    {
+      "weight": 0.2978344439157989,
+      "source": "virtue",
+      "target": "life"
+    },
+    {
+      "weight": 0.22146146513122492,
+      "source": "virtue",
+      "target": "self"
+    },
+    {
+      "weight": 0.5697681593994407,
+      "source": "virtue",
+      "target": "tiwald"
+    },
+    {
+      "weight": 0.3074038949319497,
+      "source": "virtue",
+      "target": "heartmind"
+    },
+    {
+      "weight": 0.5697681593994407,
+      "source": "virtue",
+      "target": "li"
+    },
+    {
+      "weight": 0.43000621702428204,
+      "source": "virtue",
+      "target": "angle"
+    },
+    {
+      "weight": 1.550597412411167,
+      "source": "virtue",
+      "target": "humaneness"
+    },
+    {
+      "weight": 1.599387576580599,
+      "source": "humaneness",
+      "target": "li"
+    },
+    {
+      "weight": 1.4596256342054401,
+      "source": "humaneness",
+      "target": "angle"
+    },
+    {
+      "weight": 1.550597412411167,
+      "source": "humaneness",
+      "target": "life"
+    },
+    {
+      "weight": 1.8870696490323797,
+      "source": "humaneness",
+      "target": "system"
+    },
+    {
+      "weight": 1.0116009116784799,
+      "source": "humaneness",
+      "target": "tiwald"
+    },
+    {
+      "weight": 2.065761437775756,
+      "source": "angle",
+      "target": "tiwald"
+    },
+    {
+      "weight": 1.1113189399372245,
+      "source": "angle",
+      "target": "self"
+    },
+    {
+      "weight": 0.20686266571007234,
+      "source": "angle",
+      "target": "life"
+    },
+    {
+      "weight": 0.5433349023312852,
+      "source": "angle",
+      "target": "system"
+    },
+    {
+      "weight": 0.16430305129127634,
+      "source": "tiwald",
+      "target": "life"
+    },
+    {
+      "weight": 0.030771658666753687,
+      "source": "tiwald",
+      "target": "thing"
+    },
+    {
+      "weight": 0.6632942174102642,
+      "source": "tiwald",
+      "target": "self"
+    },
+    {
+      "weight": 0.09531017980432493,
+      "source": "tiwald",
+      "target": "system"
+    },
+    {
+      "weight": 0.8292793548845252,
+      "source": "see",
+      "target": "moral"
+    },
+    {
+      "weight": 1.0805937831654315,
+      "source": "see",
+      "target": "life"
+    },
+    {
+      "weight": 0.11778303565638346,
+      "source": "see",
+      "target": "pattern"
+    },
+    {
+      "weight": 0.43623676677491807,
+      "source": "see",
+      "target": "wang"
+    },
+    {
+      "weight": 0.37561214495848316,
+      "source": "see",
+      "target": "self"
+    },
+    {
+      "weight": 1.1451323043030026,
+      "source": "human",
+      "target": "moral"
+    },
+    {
+      "weight": 0.4156174795721824,
+      "source": "human",
+      "target": "life"
+    },
+    {
+      "weight": 0.6875511950558242,
+      "source": "human",
+      "target": "thing"
+    },
+    {
+      "weight": 0.4644076437416143,
+      "source": "human",
+      "target": "li"
+    },
+    {
+      "weight": 0.5232481437645479,
+      "source": "human",
+      "target": "pattern"
+    },
+    {
+      "weight": 1.327453861096957,
+      "source": "system",
+      "target": "life"
+    },
+    {
+      "weight": 0.9062403960206536,
+      "source": "system",
+      "target": "thing"
+    },
+    {
+      "weight": 0.15246859364427354,
+      "source": "system",
+      "target": "self"
+    },
+    {
+      "weight": 0.346624608085231,
+      "source": "life",
+      "target": "li"
+    },
+    {
+      "weight": 0.8109302162163288,
+      "source": "life",
+      "target": "pattern"
+    },
+    {
+      "weight": 0.7929117107136504,
+      "source": "life",
+      "target": "thing"
+    },
+    {
+      "weight": 0.04652001563489291,
+      "source": "life",
+      "target": "moral"
+    },
+    {
+      "weight": 1.1110348086666668,
+      "source": "pattern",
+      "target": "li"
+    },
+    {
+      "weight": 1.290503296478215,
+      "source": "pattern",
+      "target": "heartmind"
+    },
+    {
+      "weight": 0.6410311794209312,
+      "source": "pattern",
+      "target": "thing"
+    },
+    {
+      "weight": 0.053244514518812285,
+      "source": "pattern",
+      "target": "wang"
+    },
+    {
+      "weight": 0.3308762511170917,
+      "source": "thing",
+      "target": "li"
+    },
+    {
+      "weight": 0.9158098470368043,
+      "source": "wang",
+      "target": "heartmind"
+    },
+    {
+      "weight": 1.024023431677037,
+      "source": "wang",
+      "target": "li"
+    },
+    {
+      "weight": 0.5415972824327444,
+      "source": "wang",
+      "target": "moral"
+    },
+    {
+      "weight": 1.0116009116784799,
+      "source": "li",
+      "target": "moral"
+    },
+    {
+      "weight": 1.049341239661327,
+      "source": "li",
+      "target": "heartmind"
+    },
+    {
+      "weight": 0.23841102344499815,
+      "source": "heartmind",
+      "target": "moral"
+    }
+  ]
+}

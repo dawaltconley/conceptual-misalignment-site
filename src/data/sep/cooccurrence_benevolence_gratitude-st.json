@@ -1,0 +1,412 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "feeling"
+    },
+    {
+      "id": "response"
+    },
+    {
+      "id": "section"
+    },
+    {
+      "id": "ingratitude"
+    },
+    {
+      "id": "favor"
+    },
+    {
+      "id": "gratitude"
+    },
+    {
+      "id": "relationship"
+    },
+    {
+      "id": "beneficiary"
+    },
+    {
+      "id": "instance"
+    },
+    {
+      "id": "call"
+    },
+    {
+      "id": "owe"
+    },
+    {
+      "id": "benefactor"
+    },
+    {
+      "id": "inclination"
+    },
+    {
+      "id": "belief"
+    },
+    {
+      "id": "benevolence"
+    },
+    {
+      "id": "act"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 1.0784095813505903,
+      "source": "feeling",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.32699349266666916,
+      "source": "feeling",
+      "target": "response"
+    },
+    {
+      "weight": 2.1059259483349697,
+      "source": "feeling",
+      "target": "belief"
+    },
+    {
+      "weight": 0.8686890503685212,
+      "source": "feeling",
+      "target": "beneficiary"
+    },
+    {
+      "weight": 0.5776342934381009,
+      "source": "feeling",
+      "target": "act"
+    },
+    {
+      "weight": 0.4542552722775964,
+      "source": "feeling",
+      "target": "section"
+    },
+    {
+      "weight": 0.7709248816026295,
+      "source": "feeling",
+      "target": "favor"
+    },
+    {
+      "weight": 0.23468954231127054,
+      "source": "feeling",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.4906229164484712,
+      "source": "feeling",
+      "target": "instance"
+    },
+    {
+      "weight": 0.3852624007906449,
+      "source": "feeling",
+      "target": "ingratitude"
+    },
+    {
+      "weight": 0.15110282620300503,
+      "source": "response",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.11727296168460001,
+      "source": "response",
+      "target": "beneficiary"
+    },
+    {
+      "weight": 0.7837518951623841,
+      "source": "response",
+      "target": "call"
+    },
+    {
+      "weight": 0.026463277737039277,
+      "source": "response",
+      "target": "gratitude"
+    },
+    {
+      "weight": 1.089133544713566,
+      "source": "response",
+      "target": "section"
+    },
+    {
+      "weight": 0.32699349266666916,
+      "source": "response",
+      "target": "act"
+    },
+    {
+      "weight": 0.6634657292878821,
+      "source": "response",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.014618807624516651,
+      "source": "response",
+      "target": "owe"
+    },
+    {
+      "weight": 0.7896170146147822,
+      "source": "response",
+      "target": "belief"
+    },
+    {
+      "weight": 0.5093150494606238,
+      "source": "response",
+      "target": "ingratitude"
+    },
+    {
+      "weight": 0.9110136747733113,
+      "source": "section",
+      "target": "call"
+    },
+    {
+      "weight": 0.24169383029392355,
+      "source": "section",
+      "target": "gratitude"
+    },
+    {
+      "weight": 0.01600034134644112,
+      "source": "section",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.6466271649250525,
+      "source": "section",
+      "target": "act"
+    },
+    {
+      "weight": 0.6167742017753713,
+      "source": "section",
+      "target": "belief"
+    },
+    {
+      "weight": 0.04879016416943205,
+      "source": "section",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.8597203803857607,
+      "source": "section",
+      "target": "ingratitude"
+    },
+    {
+      "weight": 0.8109302162163288,
+      "source": "section",
+      "target": "inclination"
+    },
+    {
+      "weight": 0.5130957723005298,
+      "source": "ingratitude",
+      "target": "act"
+    },
+    {
+      "weight": 0.26009925783663895,
+      "source": "ingratitude",
+      "target": "belief"
+    },
+    {
+      "weight": 0.3524725779676541,
+      "source": "ingratitude",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.6863674935745665,
+      "source": "ingratitude",
+      "target": "beneficiary"
+    },
+    {
+      "weight": 0.3852624007906449,
+      "source": "ingratitude",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.5543387308345789,
+      "source": "ingratitude",
+      "target": "call"
+    },
+    {
+      "weight": 1.1192315758708453,
+      "source": "ingratitude",
+      "target": "instance"
+    },
+    {
+      "weight": 0.8420208032863598,
+      "source": "ingratitude",
+      "target": "relationship"
+    },
+    {
+      "weight": 0.6457617386486236,
+      "source": "favor",
+      "target": "belief"
+    },
+    {
+      "weight": 1.0258171312314197,
+      "source": "favor",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.6863674935745665,
+      "source": "favor",
+      "target": "beneficiary"
+    },
+    {
+      "weight": 0.26009925783663895,
+      "source": "favor",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.5182337261924627,
+      "source": "gratitude",
+      "target": "call"
+    },
+    {
+      "weight": 0.24996973959778324,
+      "source": "gratitude",
+      "target": "relationship"
+    },
+    {
+      "weight": 0.5534734543247649,
+      "source": "gratitude",
+      "target": "owe"
+    },
+    {
+      "weight": 0.07739077900264724,
+      "source": "gratitude",
+      "target": "act"
+    },
+    {
+      "weight": 0.0008507018803128285,
+      "source": "gratitude",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.3528464270523506,
+      "source": "relationship",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.053563442922089685,
+      "source": "relationship",
+      "target": "act"
+    },
+    {
+      "weight": 0.8542483662137268,
+      "source": "beneficiary",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.09858082867244759,
+      "source": "beneficiary",
+      "target": "instance"
+    },
+    {
+      "weight": 0.5220644422832903,
+      "source": "beneficiary",
+      "target": "act"
+    },
+    {
+      "weight": 0.6863674935745665,
+      "source": "beneficiary",
+      "target": "belief"
+    },
+    {
+      "weight": 0.6863674935745665,
+      "source": "beneficiary",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.28090238546640217,
+      "source": "beneficiary",
+      "target": "inclination"
+    },
+    {
+      "weight": 0.4578330936254803,
+      "source": "instance",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.26178134401962383,
+      "source": "instance",
+      "target": "act"
+    },
+    {
+      "weight": 0.40139178272052856,
+      "source": "instance",
+      "target": "owe"
+    },
+    {
+      "weight": 0.7709248816026295,
+      "source": "instance",
+      "target": "belief"
+    },
+    {
+      "weight": 0.4906229164484712,
+      "source": "instance",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.12418101013604309,
+      "source": "call",
+      "target": "owe"
+    },
+    {
+      "weight": 0.053563442922089685,
+      "source": "call",
+      "target": "act"
+    },
+    {
+      "weight": 0.1488736227264145,
+      "source": "call",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.7168576603323539,
+      "source": "call",
+      "target": "belief"
+    },
+    {
+      "weight": 0.14545840858332787,
+      "source": "owe",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.07288771574849257,
+      "source": "owe",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.5022848561963142,
+      "source": "benefactor",
+      "target": "act"
+    },
+    {
+      "weight": 0.9884613446876507,
+      "source": "benefactor",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.10952639935726458,
+      "source": "benefactor",
+      "target": "belief"
+    },
+    {
+      "weight": 1.052092273033217,
+      "source": "inclination",
+      "target": "act"
+    },
+    {
+      "weight": 0.45247115048409503,
+      "source": "belief",
+      "target": "act"
+    },
+    {
+      "weight": 0.5477813302884199,
+      "source": "belief",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.331406095814481,
+      "source": "benevolence",
+      "target": "act"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "love"
+    },
+    {
+      "id": "virtue"
+    },
+    {
+      "id": "beauty"
+    },
+    {
+      "id": "god"
+    },
+    {
+      "id": "power"
+    },
+    {
+      "id": "benevolence"
+    },
+    {
+      "id": "edwards"
+    },
+    {
+      "id": "mind"
+    },
+    {
+      "id": "cause"
+    },
+    {
+      "id": "idea"
+    },
+    {
+      "id": "divine"
+    },
+    {
+      "id": "thing"
+    },
+    {
+      "id": "sense"
+    },
+    {
+      "id": "vol"
+    },
+    {
+      "id": "true"
+    },
+    {
+      "id": "act"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.4219944100593749,
+      "source": "love",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.1846662237532087,
+      "source": "love",
+      "target": "god"
+    },
+    {
+      "weight": 0.5090057870490047,
+      "source": "love",
+      "target": "true"
+    },
+    {
+      "weight": 0.9328200338253656,
+      "source": "love",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.5555258026838976,
+      "source": "love",
+      "target": "mind"
+    },
+    {
+      "weight": 0.4219944100593749,
+      "source": "love",
+      "target": "act"
+    },
+    {
+      "weight": 0.6296337748376194,
+      "source": "love",
+      "target": "sense"
+    },
+    {
+      "weight": 0.6815056055444596,
+      "source": "virtue",
+      "target": "beauty"
+    },
+    {
+      "weight": 1.2917651262986372,
+      "source": "virtue",
+      "target": "true"
+    },
+    {
+      "weight": 0.7992886412008431,
+      "source": "virtue",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.18560563199514457,
+      "source": "virtue",
+      "target": "divine"
+    },
+    {
+      "weight": 0.15963014559188393,
+      "source": "virtue",
+      "target": "sense"
+    },
+    {
+      "weight": 0.08552217343816193,
+      "source": "virtue",
+      "target": "mind"
+    },
+    {
+      "weight": 0.9020483751586119,
+      "source": "beauty",
+      "target": "true"
+    },
+    {
+      "weight": 0.5273549257172012,
+      "source": "beauty",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.5786482201047518,
+      "source": "beauty",
+      "target": "divine"
+    },
+    {
+      "weight": 0.44731221804366483,
+      "source": "beauty",
+      "target": "sense"
+    },
+    {
+      "weight": 0.2649906612497102,
+      "source": "beauty",
+      "target": "idea"
+    },
+    {
+      "weight": 0.34896927504448505,
+      "source": "god",
+      "target": "cause"
+    },
+    {
+      "weight": 0.13431233760759406,
+      "source": "power",
+      "target": "act"
+    },
+    {
+      "weight": 0.7474168104940029,
+      "source": "power",
+      "target": "sense"
+    },
+    {
+      "weight": 0.8787528125550899,
+      "source": "power",
+      "target": "divine"
+    },
+    {
+      "weight": 0.5650952537000482,
+      "source": "power",
+      "target": "idea"
+    },
+    {
+      "weight": 0.26784373023211666,
+      "source": "power",
+      "target": "mind"
+    },
+    {
+      "weight": 0.6451379613735847,
+      "source": "benevolence",
+      "target": "true"
+    },
+    {
+      "weight": 0.23967285326542026,
+      "source": "benevolence",
+      "target": "thing"
+    },
+    {
+      "weight": 0.08552217343816193,
+      "source": "benevolence",
+      "target": "mind"
+    },
+    {
+      "weight": 0.15963014559188393,
+      "source": "benevolence",
+      "target": "idea"
+    },
+    {
+      "weight": 0.3609341532981286,
+      "source": "edwards",
+      "target": "mind"
+    },
+    {
+      "weight": 0.8027669055771679,
+      "source": "edwards",
+      "target": "vol"
+    },
+    {
+      "weight": 0.029577017343686052,
+      "source": "edwards",
+      "target": "sense"
+    },
+    {
+      "weight": 0.9217701976387807,
+      "source": "mind",
+      "target": "idea"
+    },
+    {
+      "weight": 0.3732042458899429,
+      "source": "mind",
+      "target": "thing"
+    },
+    {
+      "weight": 0.4501652870260712,
+      "source": "mind",
+      "target": "vol"
+    },
+    {
+      "weight": 0.13431233760759406,
+      "source": "cause",
+      "target": "act"
+    },
+    {
+      "weight": 0.22132371459722383,
+      "source": "cause",
+      "target": "true"
+    },
+    {
+      "weight": 0.47328770444692553,
+      "source": "divine",
+      "target": "thing"
+    },
+    {
+      "weight": 0.14478363747488937,
+      "source": "divine",
+      "target": "vol"
+    },
+    {
+      "weight": 0.18560563199514457,
+      "source": "divine",
+      "target": "act"
+    },
+    {
+      "weight": 0.39324499677338903,
+      "source": "divine",
+      "target": "sense"
+    },
+    {
+      "weight": 0.19885085874516517,
+      "source": "thing",
+      "target": "vol"
+    }
+  ]
+}

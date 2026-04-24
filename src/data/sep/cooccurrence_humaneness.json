@@ -1,0 +1,407 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "conduct"
+    },
+    {
+      "id": "virtue"
+    },
+    {
+      "id": "notion"
+    },
+    {
+      "id": "humaneness"
+    },
+    {
+      "id": "need"
+    },
+    {
+      "id": "goodness"
+    },
+    {
+      "id": "issue"
+    },
+    {
+      "id": "realization"
+    },
+    {
+      "id": "jia"
+    },
+    {
+      "id": "fundamental"
+    },
+    {
+      "id": "humanity"
+    },
+    {
+      "id": "interest"
+    },
+    {
+      "id": "emphasize"
+    },
+    {
+      "id": "ritual"
+    },
+    {
+      "id": "act"
+    },
+    {
+      "id": "maintain"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2.6192348263451555,
+      "source": "conduct",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.1103381431329324,
+      "source": "conduct",
+      "target": "issue"
+    },
+    {
+      "weight": 1.3239122434309916,
+      "source": "conduct",
+      "target": "act"
+    },
+    {
+      "weight": 0.9897101553443178,
+      "source": "conduct",
+      "target": "virtue"
+    },
+    {
+      "weight": 1.9705394083560441,
+      "source": "conduct",
+      "target": "realization"
+    },
+    {
+      "weight": 1.5650743002478797,
+      "source": "conduct",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.6795552270404783,
+      "source": "conduct",
+      "target": "ritual"
+    },
+    {
+      "weight": 0.8420741565382532,
+      "source": "conduct",
+      "target": "humanity"
+    },
+    {
+      "weight": 0.40192349044219877,
+      "source": "virtue",
+      "target": "emphasize"
+    },
+    {
+      "weight": 1.5005357791103087,
+      "source": "virtue",
+      "target": "ritual"
+    },
+    {
+      "weight": 1.810690707414148,
+      "source": "virtue",
+      "target": "humaneness"
+    },
+    {
+      "weight": 1.1640635424890955,
+      "source": "virtue",
+      "target": "act"
+    },
+    {
+      "weight": 0.9504894421910366,
+      "source": "virtue",
+      "target": "need"
+    },
+    {
+      "weight": 0.018931238186092998,
+      "source": "virtue",
+      "target": "realization"
+    },
+    {
+      "weight": 0.6676266561752044,
+      "source": "virtue",
+      "target": "maintain"
+    },
+    {
+      "weight": 0.9504894421910366,
+      "source": "virtue",
+      "target": "issue"
+    },
+    {
+      "weight": 1.6283691506201934,
+      "source": "virtue",
+      "target": "fundamental"
+    },
+    {
+      "weight": 0.7585984343809312,
+      "source": "virtue",
+      "target": "goodness"
+    },
+    {
+      "weight": 0.6676266561752044,
+      "source": "virtue",
+      "target": "interest"
+    },
+    {
+      "weight": 1.506805392123904,
+      "source": "notion",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.5724961547470705,
+      "source": "notion",
+      "target": "act"
+    },
+    {
+      "weight": 0.9089683913682834,
+      "source": "notion",
+      "target": "emphasize"
+    },
+    {
+      "weight": 1.1746715571012891,
+      "source": "notion",
+      "target": "interest"
+    },
+    {
+      "weight": 1.2656433353070158,
+      "source": "notion",
+      "target": "goodness"
+    },
+    {
+      "weight": 0.5259761391121777,
+      "source": "notion",
+      "target": "fundamental"
+    },
+    {
+      "weight": 1.0520692350089569,
+      "source": "notion",
+      "target": "need"
+    },
+    {
+      "weight": 1.7882178515620895,
+      "source": "humaneness",
+      "target": "emphasize"
+    },
+    {
+      "weight": 2.1448927955008217,
+      "source": "humaneness",
+      "target": "goodness"
+    },
+    {
+      "weight": 2.173880332374074,
+      "source": "humaneness",
+      "target": "humanity"
+    },
+    {
+      "weight": 1.5258535870945984,
+      "source": "humaneness",
+      "target": "issue"
+    },
+    {
+      "weight": 2.098372779865929,
+      "source": "humaneness",
+      "target": "fundamental"
+    },
+    {
+      "weight": 1.6484559091869306,
+      "source": "humaneness",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.5258535870945984,
+      "source": "humaneness",
+      "target": "need"
+    },
+    {
+      "weight": 2.0113614028762994,
+      "source": "humaneness",
+      "target": "ritual"
+    },
+    {
+      "weight": 1.6929076717577647,
+      "source": "humaneness",
+      "target": "realization"
+    },
+    {
+      "weight": 1.6484559091869306,
+      "source": "humaneness",
+      "target": "interest"
+    },
+    {
+      "weight": 1.6484559091869306,
+      "source": "humaneness",
+      "target": "jia"
+    },
+    {
+      "weight": 1.7394276873926575,
+      "source": "humaneness",
+      "target": "act"
+    },
+    {
+      "weight": 2.0266288750070878,
+      "source": "need",
+      "target": "emphasize"
+    },
+    {
+      "weight": 2.2497724263212975,
+      "source": "need",
+      "target": "ritual"
+    },
+    {
+      "weight": 1.1937197520719836,
+      "source": "need",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.9313186952027628,
+      "source": "need",
+      "target": "fundamental"
+    },
+    {
+      "weight": 1.0711174299796513,
+      "source": "need",
+      "target": "issue"
+    },
+    {
+      "weight": 1.2846915302777102,
+      "source": "need",
+      "target": "act"
+    },
+    {
+      "weight": 1.7095747242429762,
+      "source": "goodness",
+      "target": "humanity"
+    },
+    {
+      "weight": 1.2846915302777102,
+      "source": "goodness",
+      "target": "issue"
+    },
+    {
+      "weight": 1.4072938523700427,
+      "source": "goodness",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.8347378671969823,
+      "source": "goodness",
+      "target": "emphasize"
+    },
+    {
+      "weight": 0.8539086141852561,
+      "source": "goodness",
+      "target": "ritual"
+    },
+    {
+      "weight": 1.9313186952027628,
+      "source": "issue",
+      "target": "fundamental"
+    },
+    {
+      "weight": 0.8028534433849719,
+      "source": "issue",
+      "target": "humanity"
+    },
+    {
+      "weight": 1.1937197520719836,
+      "source": "issue",
+      "target": "interest"
+    },
+    {
+      "weight": 1.2846915302777102,
+      "source": "issue",
+      "target": "act"
+    },
+    {
+      "weight": 1.1937197520719836,
+      "source": "issue",
+      "target": "jia"
+    },
+    {
+      "weight": 1.3334816944471424,
+      "source": "issue",
+      "target": "ritual"
+    },
+    {
+      "weight": 2.0685198167162477,
+      "source": "realization",
+      "target": "humanity"
+    },
+    {
+      "weight": 2.0094692547242614,
+      "source": "jia",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.316322074164316,
+      "source": "jia",
+      "target": "interest"
+    },
+    {
+      "weight": 1.4517456149408765,
+      "source": "fundamental",
+      "target": "act"
+    },
+    {
+      "weight": 0.8073885985503633,
+      "source": "fundamental",
+      "target": "ritual"
+    },
+    {
+      "weight": 0.9254557654773042,
+      "source": "humanity",
+      "target": "interest"
+    },
+    {
+      "weight": 1.6186029460372495,
+      "source": "humanity",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.016427543683031,
+      "source": "humanity",
+      "target": "act"
+    },
+    {
+      "weight": 1.065217707852463,
+      "source": "humanity",
+      "target": "ritual"
+    },
+    {
+      "weight": 1.4072938523700427,
+      "source": "interest",
+      "target": "act"
+    },
+    {
+      "weight": 1.7437660889912556,
+      "source": "emphasize",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.190380850806469,
+      "source": "emphasize",
+      "target": "ritual"
+    },
+    {
+      "weight": 0.7629368359795294,
+      "source": "ritual",
+      "target": "maintain"
+    },
+    {
+      "weight": 1.5470557947452015,
+      "source": "ritual",
+      "target": "act"
+    },
+    {
+      "weight": 1.4072938523700427,
+      "source": "act",
+      "target": "maintain"
+    }
+  ]
+}

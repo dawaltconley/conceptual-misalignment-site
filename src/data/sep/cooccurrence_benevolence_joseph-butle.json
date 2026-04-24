@@ -1,0 +1,327 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "love"
+    },
+    {
+      "id": "resentment"
+    },
+    {
+      "id": "butler"
+    },
+    {
+      "id": "human"
+    },
+    {
+      "id": "natural"
+    },
+    {
+      "id": "benevolence"
+    },
+    {
+      "id": "compassion"
+    },
+    {
+      "id": "principle"
+    },
+    {
+      "id": "happiness"
+    },
+    {
+      "id": "analogy"
+    },
+    {
+      "id": "nature"
+    },
+    {
+      "id": "virtue"
+    },
+    {
+      "id": "particular"
+    },
+    {
+      "id": "conscience"
+    },
+    {
+      "id": "passion"
+    },
+    {
+      "id": "self"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.012568900735113563,
+      "source": "love",
+      "target": "butler"
+    },
+    {
+      "weight": 0.4219944100593749,
+      "source": "love",
+      "target": "conscience"
+    },
+    {
+      "weight": 1.0623910252337914,
+      "source": "love",
+      "target": "self"
+    },
+    {
+      "weight": 1.2334055111130544,
+      "source": "love",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.32668423025505017,
+      "source": "love",
+      "target": "principle"
+    },
+    {
+      "weight": 0.4320447459128764,
+      "source": "love",
+      "target": "compassion"
+    },
+    {
+      "weight": 0.9890597521482417,
+      "source": "love",
+      "target": "particular"
+    },
+    {
+      "weight": 0.8220056674850754,
+      "source": "love",
+      "target": "passion"
+    },
+    {
+      "weight": 0.4320447459128764,
+      "source": "love",
+      "target": "happiness"
+    },
+    {
+      "weight": 1.102719070620763,
+      "source": "resentment",
+      "target": "compassion"
+    },
+    {
+      "weight": 0.016529301951210506,
+      "source": "resentment",
+      "target": "human"
+    },
+    {
+      "weight": 0.19885085874516517,
+      "source": "butler",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.49440698762785207,
+      "source": "butler",
+      "target": "analogy"
+    },
+    {
+      "weight": 0.24141047316396105,
+      "source": "butler",
+      "target": "natural"
+    },
+    {
+      "weight": 0.21815361099969394,
+      "source": "butler",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.10560893200489933,
+      "source": "butler",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.1151415906193203,
+      "source": "human",
+      "target": "nature"
+    },
+    {
+      "weight": 0.4219944100593749,
+      "source": "human",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.5555258026838976,
+      "source": "human",
+      "target": "principle"
+    },
+    {
+      "weight": 0.15006069457573326,
+      "source": "human",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.2327524104208466,
+      "source": "human",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.10354067894084036,
+      "source": "human",
+      "target": "particular"
+    },
+    {
+      "weight": 1.0198314108149955,
+      "source": "natural",
+      "target": "analogy"
+    },
+    {
+      "weight": 0.6631564668762631,
+      "source": "natural",
+      "target": "nature"
+    },
+    {
+      "weight": 0.7435780341868372,
+      "source": "natural",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.4219944100593749,
+      "source": "natural",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.7096764825111558,
+      "source": "natural",
+      "target": "happiness"
+    },
+    {
+      "weight": 0.7034459327605198,
+      "source": "benevolence",
+      "target": "self"
+    },
+    {
+      "weight": 0.46021562287957274,
+      "source": "benevolence",
+      "target": "nature"
+    },
+    {
+      "weight": 0.21905356606268467,
+      "source": "benevolence",
+      "target": "principle"
+    },
+    {
+      "weight": 0.87710942681136,
+      "source": "benevolence",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.6608863183417238,
+      "source": "benevolence",
+      "target": "compassion"
+    },
+    {
+      "weight": 0.3732042458899429,
+      "source": "benevolence",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.7478976953313536,
+      "source": "benevolence",
+      "target": "particular"
+    },
+    {
+      "weight": 0.7349942904954458,
+      "source": "benevolence",
+      "target": "passion"
+    },
+    {
+      "weight": 0.8150369981689821,
+      "source": "compassion",
+      "target": "happiness"
+    },
+    {
+      "weight": 0.20890119459866657,
+      "source": "compassion",
+      "target": "particular"
+    },
+    {
+      "weight": 0.7349942904954458,
+      "source": "compassion",
+      "target": "passion"
+    },
+    {
+      "weight": 0.673308838340281,
+      "source": "principle",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.632065879806232,
+      "source": "principle",
+      "target": "nature"
+    },
+    {
+      "weight": 0.46021562287957274,
+      "source": "principle",
+      "target": "particular"
+    },
+    {
+      "weight": 0.5808436106681875,
+      "source": "principle",
+      "target": "passion"
+    },
+    {
+      "weight": 0.016529301951210506,
+      "source": "happiness",
+      "target": "conscience"
+    },
+    {
+      "weight": 1.0561990549858702,
+      "source": "happiness",
+      "target": "particular"
+    },
+    {
+      "weight": 0.5526727337014911,
+      "source": "happiness",
+      "target": "passion"
+    },
+    {
+      "weight": 0.3381129260786729,
+      "source": "happiness",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.6482678543825123,
+      "source": "analogy",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.7321493383632145,
+      "source": "nature",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.050430853626891904,
+      "source": "virtue",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.2576913587680986,
+      "source": "particular",
+      "target": "conscience"
+    },
+    {
+      "weight": 0.25146080901746254,
+      "source": "particular",
+      "target": "self"
+    },
+    {
+      "weight": 1.22747077559324,
+      "source": "particular",
+      "target": "passion"
+    },
+    {
+      "weight": 0.13913162404354287,
+      "source": "conscience",
+      "target": "self"
+    },
+    {
+      "weight": 0.30755027566850607,
+      "source": "passion",
+      "target": "self"
+    }
+  ]
+}

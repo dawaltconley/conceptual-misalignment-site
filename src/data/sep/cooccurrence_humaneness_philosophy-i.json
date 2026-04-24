@@ -1,0 +1,422 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "ruler"
+    },
+    {
+      "id": "find"
+    },
+    {
+      "id": "state"
+    },
+    {
+      "id": "humaneness"
+    },
+    {
+      "id": "philosophy"
+    },
+    {
+      "id": "concern"
+    },
+    {
+      "id": "good"
+    },
+    {
+      "id": "political"
+    },
+    {
+      "id": "jia"
+    },
+    {
+      "id": "people"
+    },
+    {
+      "id": "development"
+    },
+    {
+      "id": "early"
+    },
+    {
+      "id": "confucian"
+    },
+    {
+      "id": "follow"
+    },
+    {
+      "id": "chinese"
+    },
+    {
+      "id": "moral"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.8574502318512216,
+      "source": "ruler",
+      "target": "concern"
+    },
+    {
+      "weight": 0.3523552827942159,
+      "source": "ruler",
+      "target": "early"
+    },
+    {
+      "weight": 0.723918839226699,
+      "source": "ruler",
+      "target": "good"
+    },
+    {
+      "weight": 1.7535382564078572,
+      "source": "ruler",
+      "target": "jia"
+    },
+    {
+      "weight": 1.3217558399823195,
+      "source": "ruler",
+      "target": "state"
+    },
+    {
+      "weight": 1.7047480922384253,
+      "source": "ruler",
+      "target": "people"
+    },
+    {
+      "weight": 0.9315582040049435,
+      "source": "ruler",
+      "target": "moral"
+    },
+    {
+      "weight": 0.7664784536454948,
+      "source": "ruler",
+      "target": "confucian"
+    },
+    {
+      "weight": 2.1102132003465894,
+      "source": "ruler",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.8574502318512216,
+      "source": "find",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.8223589120399516,
+      "source": "find",
+      "target": "early"
+    },
+    {
+      "weight": 0.06252035698133393,
+      "source": "find",
+      "target": "political"
+    },
+    {
+      "weight": 1.1451323043030026,
+      "source": "find",
+      "target": "development"
+    },
+    {
+      "weight": 1.0541605260972757,
+      "source": "find",
+      "target": "confucian"
+    },
+    {
+      "weight": 1.0986122886681098,
+      "source": "state",
+      "target": "philosophy"
+    },
+    {
+      "weight": 0.46798546508949834,
+      "source": "state",
+      "target": "political"
+    },
+    {
+      "weight": 0.723918839226699,
+      "source": "state",
+      "target": "good"
+    },
+    {
+      "weight": 1.1939224684724346,
+      "source": "state",
+      "target": "jia"
+    },
+    {
+      "weight": 0.23841102344499815,
+      "source": "state",
+      "target": "moral"
+    },
+    {
+      "weight": 0.8938178760220965,
+      "source": "state",
+      "target": "people"
+    },
+    {
+      "weight": 1.1408126431584862,
+      "source": "humaneness",
+      "target": "early"
+    },
+    {
+      "weight": 2.205523380150914,
+      "source": "humaneness",
+      "target": "jia"
+    },
+    {
+      "weight": 1.463586035421537,
+      "source": "humaneness",
+      "target": "development"
+    },
+    {
+      "weight": 1.2500119351234782,
+      "source": "humaneness",
+      "target": "moral"
+    },
+    {
+      "weight": 1.463586035421537,
+      "source": "humaneness",
+      "target": "concern"
+    },
+    {
+      "weight": 1.0741212686598138,
+      "source": "humaneness",
+      "target": "political"
+    },
+    {
+      "weight": 0.5346768395881706,
+      "source": "philosophy",
+      "target": "early"
+    },
+    {
+      "weight": 1.1451323043030026,
+      "source": "philosophy",
+      "target": "concern"
+    },
+    {
+      "weight": 0.030771658666753687,
+      "source": "philosophy",
+      "target": "good"
+    },
+    {
+      "weight": 0.5007752879124892,
+      "source": "philosophy",
+      "target": "jia"
+    },
+    {
+      "weight": 0.8574502318512216,
+      "source": "philosophy",
+      "target": "development"
+    },
+    {
+      "weight": 0.8574502318512216,
+      "source": "philosophy",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.7556675375412792,
+      "source": "philosophy",
+      "target": "political"
+    },
+    {
+      "weight": 0.17573174711489914,
+      "source": "concern",
+      "target": "early"
+    },
+    {
+      "weight": 0.7704388548615918,
+      "source": "concern",
+      "target": "good"
+    },
+    {
+      "weight": 0.9527604116555465,
+      "source": "concern",
+      "target": "jia"
+    },
+    {
+      "weight": 1.1916523199378954,
+      "source": "concern",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.4985051393779501,
+      "source": "concern",
+      "target": "development"
+    },
+    {
+      "weight": 0.6526558192052084,
+      "source": "concern",
+      "target": "follow"
+    },
+    {
+      "weight": 0.5145054807243912,
+      "source": "concern",
+      "target": "political"
+    },
+    {
+      "weight": 1.3238240930463785,
+      "source": "concern",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.6526558192052084,
+      "source": "concern",
+      "target": "people"
+    },
+    {
+      "weight": 1.2012217709540463,
+      "source": "concern",
+      "target": "moral"
+    },
+    {
+      "weight": 0.12608183847107848,
+      "source": "good",
+      "target": "jia"
+    },
+    {
+      "weight": 0.5191244265806858,
+      "source": "good",
+      "target": "people"
+    },
+    {
+      "weight": 0.07729167430164649,
+      "source": "good",
+      "target": "development"
+    },
+    {
+      "weight": 0.7978678920316558,
+      "source": "political",
+      "target": "early"
+    },
+    {
+      "weight": 1.410593505281027,
+      "source": "political",
+      "target": "jia"
+    },
+    {
+      "weight": 1.2076526612843366,
+      "source": "political",
+      "target": "chinese"
+    },
+    {
+      "weight": 1.1794817843176404,
+      "source": "political",
+      "target": "follow"
+    },
+    {
+      "weight": 0.5886134528781131,
+      "source": "political",
+      "target": "moral"
+    },
+    {
+      "weight": 0.4235337025186645,
+      "source": "political",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.1090403726162269,
+      "source": "political",
+      "target": "development"
+    },
+    {
+      "weight": 0.44766546259854084,
+      "source": "jia",
+      "target": "early"
+    },
+    {
+      "weight": 0.008298802814695064,
+      "source": "jia",
+      "target": "follow"
+    },
+    {
+      "weight": 0.333721203249323,
+      "source": "jia",
+      "target": "moral"
+    },
+    {
+      "weight": 0.9891280558264214,
+      "source": "jia",
+      "target": "people"
+    },
+    {
+      "weight": 0.8617886334498198,
+      "source": "jia",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.4013413909243023,
+      "source": "people",
+      "target": "follow"
+    },
+    {
+      "weight": 0.43908171890714937,
+      "source": "people",
+      "target": "moral"
+    },
+    {
+      "weight": 0.15621893289131739,
+      "source": "people",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.4985051393779501,
+      "source": "development",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.8688789276748444,
+      "source": "development",
+      "target": "early"
+    },
+    {
+      "weight": 1.2012217709540463,
+      "source": "development",
+      "target": "moral"
+    },
+    {
+      "weight": 0.4075333611722234,
+      "source": "development",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.9866619633312278,
+      "source": "early",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.3079035202233821,
+      "source": "early",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.5530259782563671,
+      "source": "early",
+      "target": "follow"
+    },
+    {
+      "weight": 0.5217734347522628,
+      "source": "early",
+      "target": "moral"
+    },
+    {
+      "weight": 0.5616840409994817,
+      "source": "confucian",
+      "target": "follow"
+    },
+    {
+      "weight": 1.292571549542274,
+      "source": "confucian",
+      "target": "moral"
+    },
+    {
+      "weight": 0.4075333611722234,
+      "source": "confucian",
+      "target": "chinese"
+    },
+    {
+      "weight": 0.8445468270153138,
+      "source": "follow",
+      "target": "moral"
+    }
+  ]
+}

@@ -1,0 +1,387 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "benevolent"
+    },
+    {
+      "id": "love"
+    },
+    {
+      "id": "virtue"
+    },
+    {
+      "id": "find"
+    },
+    {
+      "id": "beauty"
+    },
+    {
+      "id": "compassion"
+    },
+    {
+      "id": "tendency"
+    },
+    {
+      "id": "relationship"
+    },
+    {
+      "id": "term"
+    },
+    {
+      "id": "human"
+    },
+    {
+      "id": "benefactor"
+    },
+    {
+      "id": "important"
+    },
+    {
+      "id": "self"
+    },
+    {
+      "id": "true"
+    },
+    {
+      "id": "nature"
+    },
+    {
+      "id": "benevolence"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.9772514316638422,
+      "source": "benevolent",
+      "target": "love"
+    },
+    {
+      "weight": 1.1358564618404807,
+      "source": "benevolent",
+      "target": "self"
+    },
+    {
+      "weight": 0.8831541082847267,
+      "source": "benevolent",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.5762406739050582,
+      "source": "benevolent",
+      "target": "beauty"
+    },
+    {
+      "weight": 0.4119376226137819,
+      "source": "benevolent",
+      "target": "human"
+    },
+    {
+      "weight": 0.8639227463568392,
+      "source": "benevolent",
+      "target": "compassion"
+    },
+    {
+      "weight": 0.23214451217318596,
+      "source": "benevolent",
+      "target": "virtue"
+    },
+    {
+      "weight": 0.7729509681511124,
+      "source": "benevolent",
+      "target": "tendency"
+    },
+    {
+      "weight": 0.751444762930149,
+      "source": "benevolent",
+      "target": "benefactor"
+    },
+    {
+      "weight": 1.3329550302129427,
+      "source": "love",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.898779816222347,
+      "source": "love",
+      "target": "true"
+    },
+    {
+      "weight": 0.9516090010505046,
+      "source": "love",
+      "target": "virtue"
+    },
+    {
+      "weight": 2.2300144001592104,
+      "source": "love",
+      "target": "self"
+    },
+    {
+      "weight": 0.8690378470236095,
+      "source": "love",
+      "target": "nature"
+    },
+    {
+      "weight": 1.0360919316867758,
+      "source": "love",
+      "target": "human"
+    },
+    {
+      "weight": 1.488077055429833,
+      "source": "love",
+      "target": "compassion"
+    },
+    {
+      "weight": 1.1314021114911006,
+      "source": "love",
+      "target": "important"
+    },
+    {
+      "weight": 0.8028980445190645,
+      "source": "love",
+      "target": "term"
+    },
+    {
+      "weight": 1.4849074806685538,
+      "source": "virtue",
+      "target": "beauty"
+    },
+    {
+      "weight": 0.8170781080928985,
+      "source": "virtue",
+      "target": "nature"
+    },
+    {
+      "weight": 1.9454323659597457,
+      "source": "virtue",
+      "target": "true"
+    },
+    {
+      "weight": 1.1268446114549735,
+      "source": "virtue",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.8787716770982383,
+      "source": "virtue",
+      "target": "human"
+    },
+    {
+      "weight": 0.5040782276568277,
+      "source": "virtue",
+      "target": "self"
+    },
+    {
+      "weight": 1.52746709508735,
+      "source": "virtue",
+      "target": "tendency"
+    },
+    {
+      "weight": 0.7917603001086085,
+      "source": "virtue",
+      "target": "important"
+    },
+    {
+      "weight": 0.5072478024181067,
+      "source": "find",
+      "target": "beauty"
+    },
+    {
+      "weight": 0.62057648772511,
+      "source": "find",
+      "target": "term"
+    },
+    {
+      "weight": 0.9964827935917299,
+      "source": "find",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.24206767937862,
+      "source": "find",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.703958096664161,
+      "source": "find",
+      "target": "relationship"
+    },
+    {
+      "weight": 0.7949298748698876,
+      "source": "find",
+      "target": "compassion"
+    },
+    {
+      "weight": 0.24488353795061557,
+      "source": "beauty",
+      "target": "nature"
+    },
+    {
+      "weight": 2.7107419927679217,
+      "source": "beauty",
+      "target": "true"
+    },
+    {
+      "weight": 1.0654756650786812,
+      "source": "beauty",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.4660981487110576,
+      "source": "beauty",
+      "target": "tendency"
+    },
+    {
+      "weight": 0.9476926294222979,
+      "source": "compassion",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.0180734261840974,
+      "source": "compassion",
+      "target": "self"
+    },
+    {
+      "weight": 0.6996196950655629,
+      "source": "compassion",
+      "target": "human"
+    },
+    {
+      "weight": 1.7112206067440427,
+      "source": "compassion",
+      "target": "important"
+    },
+    {
+      "weight": 0.8280107453341398,
+      "source": "tendency",
+      "target": "true"
+    },
+    {
+      "weight": 1.0798644025307809,
+      "source": "tendency",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.8862796534581157,
+      "source": "tendency",
+      "target": "term"
+    },
+    {
+      "weight": 0.2339544674184253,
+      "source": "tendency",
+      "target": "self"
+    },
+    {
+      "weight": 0.9481550571762031,
+      "source": "tendency",
+      "target": "benefactor"
+    },
+    {
+      "weight": 0.9696612623971667,
+      "source": "tendency",
+      "target": "relationship"
+    },
+    {
+      "weight": 2.0257139366464805,
+      "source": "relationship",
+      "target": "important"
+    },
+    {
+      "weight": 1.0798644025307809,
+      "source": "relationship",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.8862796534581157,
+      "source": "relationship",
+      "target": "term"
+    },
+    {
+      "weight": 0.25500787661625773,
+      "source": "relationship",
+      "target": "benefactor"
+    },
+    {
+      "weight": 1.536867219599265,
+      "source": "term",
+      "target": "important"
+    },
+    {
+      "weight": 0.9964827935917299,
+      "source": "term",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.525266307920785,
+      "source": "term",
+      "target": "human"
+    },
+    {
+      "weight": 0.9812153214609415,
+      "source": "human",
+      "target": "benevolence"
+    },
+    {
+      "weight": 2.095483507201604,
+      "source": "human",
+      "target": "nature"
+    },
+    {
+      "weight": 0.9715534105492045,
+      "source": "human",
+      "target": "self"
+    },
+    {
+      "weight": 0.5660883024410402,
+      "source": "human",
+      "target": "important"
+    },
+    {
+      "weight": 0.8958392678120424,
+      "source": "benefactor",
+      "target": "benevolence"
+    },
+    {
+      "weight": 1.0921813983378192,
+      "source": "important",
+      "target": "nature"
+    },
+    {
+      "weight": 1.373777024733198,
+      "source": "important",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.8845420335595747,
+      "source": "important",
+      "target": "self"
+    },
+    {
+      "weight": 0.8747858586142101,
+      "source": "self",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.39903421777787396,
+      "source": "self",
+      "target": "nature"
+    },
+    {
+      "weight": 0.5230868664478528,
+      "source": "true",
+      "target": "nature"
+    },
+    {
+      "weight": 1.033524065272079,
+      "source": "true",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.9572620804384486,
+      "source": "nature",
+      "target": "benevolence"
+    }
+  ]
+}

@@ -1,0 +1,437 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "change"
+    },
+    {
+      "id": "order"
+    },
+    {
+      "id": "notion"
+    },
+    {
+      "id": "xi"
+    },
+    {
+      "id": "humaneness"
+    },
+    {
+      "id": "ethical"
+    },
+    {
+      "id": "confucius"
+    },
+    {
+      "id": "cultivation"
+    },
+    {
+      "id": "human"
+    },
+    {
+      "id": "life"
+    },
+    {
+      "id": "confucian"
+    },
+    {
+      "id": "practice"
+    },
+    {
+      "id": "self"
+    },
+    {
+      "id": "situation"
+    },
+    {
+      "id": "nature"
+    },
+    {
+      "id": "moral"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 1.0062389685370945,
+      "source": "change",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.7484098592349948,
+      "source": "change",
+      "target": "human"
+    },
+    {
+      "weight": 0.1505728584793744,
+      "source": "change",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.5813557745718286,
+      "source": "change",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.877621590715001,
+      "source": "change",
+      "target": "nature"
+    },
+    {
+      "weight": 0.47215648260683657,
+      "source": "change",
+      "target": "self"
+    },
+    {
+      "weight": 1.1538749673431592,
+      "source": "change",
+      "target": "notion"
+    },
+    {
+      "weight": 0.703958096664161,
+      "source": "change",
+      "target": "life"
+    },
+    {
+      "weight": 0.05526267867504952,
+      "source": "change",
+      "target": "order"
+    },
+    {
+      "weight": 0.5765596023083356,
+      "source": "order",
+      "target": "moral"
+    },
+    {
+      "weight": 1.7863975260866696,
+      "source": "order",
+      "target": "situation"
+    },
+    {
+      "weight": 0.14227405566467927,
+      "source": "order",
+      "target": "human"
+    },
+    {
+      "weight": 0.26290204345329393,
+      "source": "order",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.3855043655456263,
+      "source": "order",
+      "target": "life"
+    },
+    {
+      "weight": 0.5591678595964664,
+      "source": "order",
+      "target": "nature"
+    },
+    {
+      "weight": 0.49247648509779424,
+      "source": "notion",
+      "target": "ethical"
+    },
+    {
+      "weight": 0.14227405566467927,
+      "source": "notion",
+      "target": "human"
+    },
+    {
+      "weight": 0.5591678595964664,
+      "source": "notion",
+      "target": "nature"
+    },
+    {
+      "weight": 0.26290204345329393,
+      "source": "notion",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.525266307920785,
+      "source": "notion",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.06525562407256794,
+      "source": "xi",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.4623524825102158,
+      "source": "xi",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.15762894420358306,
+      "source": "xi",
+      "target": "ethical"
+    },
+    {
+      "weight": 0.15119805387329266,
+      "source": "xi",
+      "target": "cultivation"
+    },
+    {
+      "weight": 0.30820180268295755,
+      "source": "xi",
+      "target": "practice"
+    },
+    {
+      "weight": 0.09078892607773263,
+      "source": "xi",
+      "target": "self"
+    },
+    {
+      "weight": 0.17717354027655335,
+      "source": "xi",
+      "target": "moral"
+    },
+    {
+      "weight": 0.04583753821546639,
+      "source": "xi",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.5207311527553937,
+      "source": "humaneness",
+      "target": "confucian"
+    },
+    {
+      "weight": 1.0185695809945732,
+      "source": "humaneness",
+      "target": "ethical"
+    },
+    {
+      "weight": 0.9560492240132392,
+      "source": "humaneness",
+      "target": "human"
+    },
+    {
+      "weight": 0.9115974614424055,
+      "source": "humaneness",
+      "target": "life"
+    },
+    {
+      "weight": 0.8149706257533337,
+      "source": "humaneness",
+      "target": "moral"
+    },
+    {
+      "weight": 0.38353003124190865,
+      "source": "humaneness",
+      "target": "cultivation"
+    },
+    {
+      "weight": 1.4568245119257286,
+      "source": "humaneness",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.35821222325761887,
+      "source": "humaneness",
+      "target": "practice"
+    },
+    {
+      "weight": 1.0986122886681098,
+      "source": "ethical",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.7672551527136672,
+      "source": "ethical",
+      "target": "cultivation"
+    },
+    {
+      "weight": 1.4350845252893227,
+      "source": "ethical",
+      "target": "practice"
+    },
+    {
+      "weight": 0.750305594399894,
+      "source": "ethical",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.0425596144187959,
+      "source": "ethical",
+      "target": "life"
+    },
+    {
+      "weight": 0.5039051809214169,
+      "source": "ethical",
+      "target": "self"
+    },
+    {
+      "weight": 0.49247648509779424,
+      "source": "ethical",
+      "target": "human"
+    },
+    {
+      "weight": 0.216223108469636,
+      "source": "ethical",
+      "target": "nature"
+    },
+    {
+      "weight": 0.4567584024957149,
+      "source": "ethical",
+      "target": "moral"
+    },
+    {
+      "weight": 0.750305594399894,
+      "source": "ethical",
+      "target": "situation"
+    },
+    {
+      "weight": 0.4954133447711038,
+      "source": "confucius",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.6458942957093998,
+      "source": "confucius",
+      "target": "cultivation"
+    },
+    {
+      "weight": 0.62057648772511,
+      "source": "confucius",
+      "target": "practice"
+    },
+    {
+      "weight": 0.6544780394007913,
+      "source": "confucius",
+      "target": "nature"
+    },
+    {
+      "weight": 0.237584235469004,
+      "source": "confucius",
+      "target": "human"
+    },
+    {
+      "weight": 0.24901293129262678,
+      "source": "confucius",
+      "target": "self"
+    },
+    {
+      "weight": 1.4568245119257286,
+      "source": "cultivation",
+      "target": "practice"
+    },
+    {
+      "weight": 0.26290204345329393,
+      "source": "cultivation",
+      "target": "human"
+    },
+    {
+      "weight": 0.679795847385081,
+      "source": "cultivation",
+      "target": "nature"
+    },
+    {
+      "weight": 1.7784081360531907,
+      "source": "cultivation",
+      "target": "self"
+    },
+    {
+      "weight": 0.33840959596143905,
+      "source": "cultivation",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.5636561974724277,
+      "source": "cultivation",
+      "target": "moral"
+    },
+    {
+      "weight": 0.11526604464722937,
+      "source": "cultivation",
+      "target": "situation"
+    },
+    {
+      "weight": 1.0786515461055717,
+      "source": "human",
+      "target": "life"
+    },
+    {
+      "weight": 1.3323577478299482,
+      "source": "human",
+      "target": "nature"
+    },
+    {
+      "weight": 0.3768463028025117,
+      "source": "human",
+      "target": "self"
+    },
+    {
+      "weight": 0.5542538447940374,
+      "source": "human",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.3556514023959451,
+      "source": "life",
+      "target": "confucian"
+    },
+    {
+      "weight": 0.8862796534581157,
+      "source": "life",
+      "target": "practice"
+    },
+    {
+      "weight": 0.7552513910517115,
+      "source": "life",
+      "target": "moral"
+    },
+    {
+      "weight": 0.6433334748477262,
+      "source": "life",
+      "target": "situation"
+    },
+    {
+      "weight": 0.08994823666293958,
+      "source": "confucian",
+      "target": "practice"
+    },
+    {
+      "weight": 0.4115318607904018,
+      "source": "confucian",
+      "target": "nature"
+    },
+    {
+      "weight": 0.8950133334268701,
+      "source": "practice",
+      "target": "moral"
+    },
+    {
+      "weight": 1.3476252199607366,
+      "source": "practice",
+      "target": "self"
+    },
+    {
+      "weight": 0.7830954172228849,
+      "source": "practice",
+      "target": "situation"
+    },
+    {
+      "weight": 0.28291448296830823,
+      "source": "self",
+      "target": "nature"
+    },
+    {
+      "weight": 0.9934534062401227,
+      "source": "self",
+      "target": "moral"
+    },
+    {
+      "weight": 1.057532262924645,
+      "source": "situation",
+      "target": "moral"
+    },
+    {
+      "weight": 0.5234497769943871,
+      "source": "nature",
+      "target": "moral"
+    }
+  ]
+}

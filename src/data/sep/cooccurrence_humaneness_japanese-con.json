@@ -1,0 +1,352 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "way"
+    },
+    {
+      "id": "notion"
+    },
+    {
+      "id": "line"
+    },
+    {
+      "id": "ancient"
+    },
+    {
+      "id": "mencius"
+    },
+    {
+      "id": "humaneness"
+    },
+    {
+      "id": "ethical"
+    },
+    {
+      "id": "political"
+    },
+    {
+      "id": "confucius"
+    },
+    {
+      "id": "mind"
+    },
+    {
+      "id": "meaning"
+    },
+    {
+      "id": "emphasize"
+    },
+    {
+      "id": "discourse"
+    },
+    {
+      "id": "sage"
+    },
+    {
+      "id": "analects"
+    },
+    {
+      "id": "rule"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.7400114895361631,
+      "source": "way",
+      "target": "political"
+    },
+    {
+      "weight": 0.9964410184838396,
+      "source": "way",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.4703479225870605,
+      "source": "way",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.2291858657701724,
+      "source": "way",
+      "target": "meaning"
+    },
+    {
+      "weight": 0.8758130306952248,
+      "source": "way",
+      "target": "sage"
+    },
+    {
+      "weight": 1.7696309067173213,
+      "source": "notion",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.8716893135113628,
+      "source": "notion",
+      "target": "rule"
+    },
+    {
+      "weight": 0.9094296414942098,
+      "source": "notion",
+      "target": "analects"
+    },
+    {
+      "weight": 0.6265668554783779,
+      "source": "notion",
+      "target": "emphasize"
+    },
+    {
+      "weight": 1.3641657986091569,
+      "source": "notion",
+      "target": "ethical"
+    },
+    {
+      "weight": 0.4298565612323235,
+      "source": "notion",
+      "target": "political"
+    },
+    {
+      "weight": 0.4298565612323235,
+      "source": "notion",
+      "target": "ancient"
+    },
+    {
+      "weight": 0.6265668554783779,
+      "source": "notion",
+      "target": "line"
+    },
+    {
+      "weight": 1.41068581424405,
+      "source": "notion",
+      "target": "discourse"
+    },
+    {
+      "weight": 0.831361268124391,
+      "source": "line",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.18473410319933856,
+      "source": "line",
+      "target": "political"
+    },
+    {
+      "weight": 1.1923746136617215,
+      "source": "line",
+      "target": "emphasize"
+    },
+    {
+      "weight": 0.33888478302659686,
+      "source": "line",
+      "target": "rule"
+    },
+    {
+      "weight": 0.9784225129811612,
+      "source": "ancient",
+      "target": "analects"
+    },
+    {
+      "weight": 0.4675968892151706,
+      "source": "ancient",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.9223330463301177,
+      "source": "ancient",
+      "target": "humaneness"
+    },
+    {
+      "weight": 1.086636097621394,
+      "source": "ancient",
+      "target": "political"
+    },
+    {
+      "weight": 0.4675968892151706,
+      "source": "ancient",
+      "target": "mencius"
+    },
+    {
+      "weight": 0.18473410319933856,
+      "source": "ancient",
+      "target": "emphasize"
+    },
+    {
+      "weight": 1.1454765976443275,
+      "source": "ancient",
+      "target": "sage"
+    },
+    {
+      "weight": 0.5417048613688924,
+      "source": "mencius",
+      "target": "confucius"
+    },
+    {
+      "weight": 0.7087589460320587,
+      "source": "mencius",
+      "target": "humaneness"
+    },
+    {
+      "weight": 0.9784225129811612,
+      "source": "mencius",
+      "target": "mind"
+    },
+    {
+      "weight": 1.927999222488783,
+      "source": "mencius",
+      "target": "analects"
+    },
+    {
+      "weight": 0.7087589460320587,
+      "source": "mencius",
+      "target": "ethical"
+    },
+    {
+      "weight": 0.9094296414942098,
+      "source": "mencius",
+      "target": "rule"
+    },
+    {
+      "weight": 0.015611765472113433,
+      "source": "humaneness",
+      "target": "confucius"
+    },
+    {
+      "weight": 1.401906126592004,
+      "source": "humaneness",
+      "target": "analects"
+    },
+    {
+      "weight": 1.5245084486843363,
+      "source": "humaneness",
+      "target": "emphasize"
+    },
+    {
+      "weight": 1.5689602112551702,
+      "source": "humaneness",
+      "target": "ethical"
+    },
+    {
+      "weight": 1.3277981544382822,
+      "source": "humaneness",
+      "target": "mind"
+    },
+    {
+      "weight": 0.6346509738783368,
+      "source": "humaneness",
+      "target": "meaning"
+    },
+    {
+      "weight": 1.0764837261573759,
+      "source": "humaneness",
+      "target": "rule"
+    },
+    {
+      "weight": 0.2291858657701724,
+      "source": "humaneness",
+      "target": "political"
+    },
+    {
+      "weight": 0.6346509738783368,
+      "source": "ethical",
+      "target": "political"
+    },
+    {
+      "weight": 0.7087589460320587,
+      "source": "ethical",
+      "target": "analects"
+    },
+    {
+      "weight": 0.13821408756444573,
+      "source": "ethical",
+      "target": "emphasize"
+    },
+    {
+      "weight": 0.2291858657701724,
+      "source": "ethical",
+      "target": "discourse"
+    },
+    {
+      "weight": 0.2291858657701724,
+      "source": "ethical",
+      "target": "mind"
+    },
+    {
+      "weight": 0.8353216693404878,
+      "source": "political",
+      "target": "rule"
+    },
+    {
+      "weight": 0.27570588140506525,
+      "source": "political",
+      "target": "discourse"
+    },
+    {
+      "weight": 1.2348520419288378,
+      "source": "confucius",
+      "target": "analects"
+    },
+    {
+      "weight": 0.37662511100944396,
+      "source": "confucius",
+      "target": "emphasize"
+    },
+    {
+      "weight": 0.9319024973462683,
+      "source": "confucius",
+      "target": "sage"
+    },
+    {
+      "weight": 1.3277981544382822,
+      "source": "mind",
+      "target": "sage"
+    },
+    {
+      "weight": 0.4298565612323235,
+      "source": "mind",
+      "target": "rule"
+    },
+    {
+      "weight": 0.39348891706144873,
+      "source": "mind",
+      "target": "meaning"
+    },
+    {
+      "weight": 0.590199211307503,
+      "source": "mind",
+      "target": "emphasize"
+    },
+    {
+      "weight": 0.6346509738783368,
+      "source": "meaning",
+      "target": "sage"
+    },
+    {
+      "weight": 0.4675968892151706,
+      "source": "meaning",
+      "target": "analects"
+    },
+    {
+      "weight": 0.14217448878054254,
+      "source": "meaning",
+      "target": "rule"
+    },
+    {
+      "weight": 0.6643071834612249,
+      "source": "emphasize",
+      "target": "analects"
+    },
+    {
+      "weight": 1.2368263762325553,
+      "source": "emphasize",
+      "target": "sage"
+    },
+    {
+      "weight": 0.2162824609342645,
+      "source": "analects",
+      "target": "rule"
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "social"
+    },
+    {
+      "id": "harm"
+    },
+    {
+      "id": "limit"
+    },
+    {
+      "id": "person"
+    },
+    {
+      "id": "principle"
+    },
+    {
+      "id": "ethic"
+    },
+    {
+      "id": "benevolence"
+    },
+    {
+      "id": "theory"
+    },
+    {
+      "id": "beneficent"
+    },
+    {
+      "id": "obligation"
+    },
+    {
+      "id": "beneficence"
+    },
+    {
+      "id": "action"
+    },
+    {
+      "id": "health"
+    },
+    {
+      "id": "act"
+    },
+    {
+      "id": "moral"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 0.5389965007326869,
+      "source": "social",
+      "target": "health"
+    },
+    {
+      "weight": 0.3602085165200435,
+      "source": "social",
+      "target": "beneficence"
+    },
+    {
+      "weight": 0.25131442828090617,
+      "source": "social",
+      "target": "theory"
+    },
+    {
+      "weight": 0.15552336363923056,
+      "source": "harm",
+      "target": "obligation"
+    },
+    {
+      "weight": 0.07429792371664463,
+      "source": "harm",
+      "target": "principle"
+    },
+    {
+      "weight": 0.31352761278247876,
+      "source": "harm",
+      "target": "person"
+    },
+    {
+      "weight": 0.08141539148550864,
+      "source": "harm",
+      "target": "action"
+    },
+    {
+      "weight": 0.6567795363890705,
+      "source": "harm",
+      "target": "health"
+    },
+    {
+      "weight": 0.2956699953824724,
+      "source": "limit",
+      "target": "beneficence"
+    },
+    {
+      "weight": 0.09038406146826894,
+      "source": "limit",
+      "target": "person"
+    },
+    {
+      "weight": 0.4107701603378576,
+      "source": "limit",
+      "target": "principle"
+    },
+    {
+      "weight": 0.6293805622009561,
+      "source": "person",
+      "target": "action"
+    },
+    {
+      "weight": 0.14754247530821754,
+      "source": "person",
+      "target": "beneficent"
+    },
+    {
+      "weight": 0.01034135379473253,
+      "source": "person",
+      "target": "obligation"
+    },
+    {
+      "weight": 0.4470590054070014,
+      "source": "person",
+      "target": "act"
+    },
+    {
+      "weight": 0.11143747066610143,
+      "source": "person",
+      "target": "principle"
+    },
+    {
+      "weight": 0.24773053309335324,
+      "source": "principle",
+      "target": "beneficence"
+    },
+    {
+      "weight": 0.14742018854560726,
+      "source": "principle",
+      "target": "moral"
+    },
+    {
+      "weight": 0.2566194805105993,
+      "source": "principle",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.3550595533238517,
+      "source": "principle",
+      "target": "ethic"
+    },
+    {
+      "weight": 0.22864562846819314,
+      "source": "ethic",
+      "target": "benevolence"
+    },
+    {
+      "weight": 0.4675375367505421,
+      "source": "ethic",
+      "target": "health"
+    },
+    {
+      "weight": 0.21494678411003132,
+      "source": "benevolence",
+      "target": "theory"
+    },
+    {
+      "weight": 0.22864562846819314,
+      "source": "benevolence",
+      "target": "moral"
+    },
+    {
+      "weight": 0.16969019252191028,
+      "source": "theory",
+      "target": "beneficence"
+    },
+    {
+      "weight": 0.4311698925796672,
+      "source": "theory",
+      "target": "moral"
+    },
+    {
+      "weight": 0.04789269944686505,
+      "source": "theory",
+      "target": "obligation"
+    },
+    {
+      "weight": 0.3484781767345539,
+      "source": "theory",
+      "target": "health"
+    },
+    {
+      "weight": 1.2735537381644417,
+      "source": "beneficent",
+      "target": "action"
+    },
+    {
+      "weight": 1.5612358106162227,
+      "source": "beneficent",
+      "target": "act"
+    },
+    {
+      "weight": 0.5453152377932263,
+      "source": "beneficent",
+      "target": "moral"
+    },
+    {
+      "weight": 0.09489874182279573,
+      "source": "beneficent",
+      "target": "obligation"
+    },
+    {
+      "weight": 0.28905475626375304,
+      "source": "obligation",
+      "target": "act"
+    },
+    {
+      "weight": 0.3407904306629419,
+      "source": "obligation",
+      "target": "beneficence"
+    },
+    {
+      "weight": 0.25396343645248304,
+      "source": "obligation",
+      "target": "moral"
+    },
+    {
+      "weight": 0.6653632800804619,
+      "source": "action",
+      "target": "moral"
+    },
+    {
+      "weight": 0.21494678411003132,
+      "source": "action",
+      "target": "act"
+    },
+    {
+      "weight": 0.3340061441260194,
+      "source": "act",
+      "target": "moral"
+    }
+  ]
+}

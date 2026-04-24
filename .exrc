@@ -20,7 +20,7 @@ let g:ale_fixers['astro'] = ['prettier']
 " let g:ale_fix_on_save = 0 " use coc-prettier
 " let g:ale_completion_enabled = 0 " use coc completion
 let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 source ~/.vim/coc.vim
 
