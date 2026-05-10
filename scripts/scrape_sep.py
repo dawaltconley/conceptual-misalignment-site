@@ -21,7 +21,7 @@ class SEP:
         if not r.from_cache:  # type: ignore
             time.sleep(random() * 2 + 1)
 
-        soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(r.text, "html.parser")
 
         title = soup.title and str(soup.title.text)
         if not title:
@@ -40,7 +40,8 @@ class SEP:
 
         return cls(
             url=url,
-            title=str(title),
+            title=str(title).strip().replace(
+                " (Stanford Encyclopedia of Philosophy)", ""),
             description=str(description),
             text=str(article["preamble"]) +
             str(article["toc"]) + str(article["main-text"])
