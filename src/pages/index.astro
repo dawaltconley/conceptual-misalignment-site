@@ -1,22 +1,35 @@
 ---
 import Layout from '@layouts/Page.astro'
-import Network from '@components/Network'
-import { WeightedNodeLinkDataSchema } from '@lib/networkx'
+import SEPNetwork from '@components/SEPNetwork'
+import { TermSchema } from '@lib/networkx'
 import { buildDictionary } from '@build/cedict'
-import benevolenceRaw from '@data/cooccurrence_benevolence.json'
-import renRaw from '@data/cooccurrence_仁.json'
+import benevolenceRaw from '@data/sep/benevolence.json'
+import renRaw from '@data/ctext/仁.json'
 
-const benevolence = WeightedNodeLinkDataSchema.parse(benevolenceRaw)
-const ren = WeightedNodeLinkDataSchema.parse(renRaw)
+const benevolence = TermSchema.parse(benevolenceRaw)
+const ren = TermSchema.parse(renRaw)
 
-const renDict = await buildDictionary(ren.nodes.map((n) => String(n.id)))
+const hanzi = ren.sources
+  .map((s) => s.co_occurance.nodes)
+  .flat()
+  .map((n) => n.id.toString())
+const renDict = await buildDictionary(hanzi)
 ---
 
 <Layout>
-  <main class="container mx-auto py-8">
-    <div class="xl:flex">
-      <Network client:only data={ren} centralNodeId="仁" dictionary={renDict} />
-      <Network client:only data={benevolence} centralNodeId="benevolence" />
+  <main class="mx-auto w-full px-4 py-8">
+    <div class="items-center justify-center xl:flex">
+      <div class="xl:w-1/2">
+        <SEPNetwork
+          client:only
+          data={ren}
+          sourceAlign="left"
+          dictionary={renDict}
+        />
+      </div>
+      <div class="xl:w-1/2">
+        <SEPNetwork client:only data={benevolence} sourceAlign="right" />
+      </div>
     </div>
   </main>
 </Layout>

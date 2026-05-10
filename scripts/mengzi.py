@@ -54,15 +54,41 @@ def _fetch_text(urn: str) -> dict:
     return r.json()
 
 
+def _fetch_text_url(urn: str) -> str:
+    print(f"fetching url: {urn}")
+    r = requests.get(f"{API_BASE}/getlink", params={"urn": urn}, timeout=30)
+    r.raise_for_status()
+    if not r.from_cache:  # type: ignore
+        print("not cached, staggering fetches")
+        time.sleep(random() * 2 + 1)
+    return r.json().get("url", "")
+
+
 class Chapter:
+    urn: str
+    url: str
+    title: str
+    description: str
+    text: str
+
     def __init__(self, urn):
+        self.urn = urn
+        self.url = _fetch_text_url(urn)
         data = _fetch_text(urn)
         self.title = data.get("title", "")
-        paragraphs = data.get("fulltext", [])
-        if not paragraphs:
+        paragraphs: list[str] = data.get("fulltext", [])
+        subsections: list[str] = data.get("subsections", [])
+        if len(paragraphs) > 0:
+            self.description = paragraphs[0][:160]
+            self.text = "\n".join(p.strip() for p in paragraphs if p.strip())
+        elif len(subsections) > 0:
+            chapters = [Chapter(s) for s in subsections]
+            self.description = chapters[0].description
+            self.text = "\n".join(c.text.strip()
+                                  for c in chapters if c.text.strip())
+        else:
             raise RuntimeError(
                 f"No text returned for {urn}. Full response: {data}")
-        self.text = "\n".join(p.strip() for p in paragraphs if p.strip())
 
 
 def fetch_mengzi() -> list[Chapter]:

@@ -18,3 +18,18 @@ export const WeightedNodeLinkDataSchema = z.object({
   nodes: z.array(GraphNode),
   edges: z.array(WeightedEdge),
 }) satisfies z.ZodType<WeightedNodeLinkData>
+
+const SourceSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  url: z.url(),
+  // occurances: z.number(),
+  co_occurance: WeightedNodeLinkDataSchema,
+})
+
+export const TermSchema = z.object({
+  term: z.string(),
+  sources: z.array(SourceSchema),
+})
+
+export type Term = z.infer<typeof TermSchema>

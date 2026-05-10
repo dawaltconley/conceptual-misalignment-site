@@ -26,8 +26,10 @@ const passthroughProps = [
   'borderColor',
 ] as const
 
-export interface ArticlePreviewProps
-  extends Pick<ImageCardProps, (typeof passthroughProps)[number]> {
+export interface ArticlePreviewProps extends Pick<
+  ImageCardProps,
+  (typeof passthroughProps)[number]
+> {
   url: string | URL
   title: string
   image?: string | ResponsiveImageData[string] | null

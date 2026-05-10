@@ -7,6 +7,11 @@ cache.install()
 
 
 class SEP:
+    url: str
+    title: str
+    description: str
+    text: str
+
     def __init__(self, url: str):
         self.url = url
         r = requests.get(url, timeout=30)

@@ -1,0 +1,1583 @@
+{
+  "term": "humaneness",
+  "sources": [
+    {
+      "url": "https://plato.stanford.edu/entries/japanese-confucian/",
+      "title": "\nJapanese Confucian Philosophy (Stanford Encyclopedia of Philosophy)\n",
+      "description": "<div id=\"preamble\">\n<p>\nIn Japan, Confucianism stands, along with Buddhism, as a major\nreligio-philosophical teaching introduced from the larger Asian\ncultural ",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "political"
+          },
+          {
+            "id": "ancient"
+          },
+          {
+            "id": "mind"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
+            "id": "ethical"
+          },
+          {
+            "id": "confucius"
+          },
+          {
+            "id": "mencius"
+          },
+          {
+            "id": "meaning"
+          },
+          {
+            "id": "analects"
+          },
+          {
+            "id": "way"
+          },
+          {
+            "id": "emphasize"
+          },
+          {
+            "id": "discourse"
+          },
+          {
+            "id": "notion"
+          },
+          {
+            "id": "sage"
+          },
+          {
+            "id": "line"
+          },
+          {
+            "id": "rule"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.6346509738783368,
+            "source": "political",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.8353216693404878,
+            "source": "political",
+            "target": "rule"
+          },
+          {
+            "weight": 0.7400114895361631,
+            "source": "political",
+            "target": "way"
+          },
+          {
+            "weight": 0.27570588140506525,
+            "source": "political",
+            "target": "discourse"
+          },
+          {
+            "weight": 0.4298565612323235,
+            "source": "political",
+            "target": "notion"
+          },
+          {
+            "weight": 1.086636097621394,
+            "source": "political",
+            "target": "ancient"
+          },
+          {
+            "weight": 0.18473410319933856,
+            "source": "political",
+            "target": "line"
+          },
+          {
+            "weight": 0.2291858657701724,
+            "source": "political",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.9784225129811612,
+            "source": "ancient",
+            "target": "analects"
+          },
+          {
+            "weight": 0.4675968892151706,
+            "source": "ancient",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.9223330463301177,
+            "source": "ancient",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.4298565612323235,
+            "source": "ancient",
+            "target": "notion"
+          },
+          {
+            "weight": 0.4675968892151706,
+            "source": "ancient",
+            "target": "mencius"
+          },
+          {
+            "weight": 0.18473410319933856,
+            "source": "ancient",
+            "target": "emphasize"
+          },
+          {
+            "weight": 1.1454765976443275,
+            "source": "ancient",
+            "target": "sage"
+          },
+          {
+            "weight": 1.3277981544382822,
+            "source": "mind",
+            "target": "sage"
+          },
+          {
+            "weight": 1.3277981544382822,
+            "source": "mind",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.9784225129811612,
+            "source": "mind",
+            "target": "mencius"
+          },
+          {
+            "weight": 0.4298565612323235,
+            "source": "mind",
+            "target": "rule"
+          },
+          {
+            "weight": 0.39348891706144873,
+            "source": "mind",
+            "target": "meaning"
+          },
+          {
+            "weight": 0.590199211307503,
+            "source": "mind",
+            "target": "emphasize"
+          },
+          {
+            "weight": 0.2291858657701724,
+            "source": "mind",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.015611765472113433,
+            "source": "humaneness",
+            "target": "confucius"
+          },
+          {
+            "weight": 1.7696309067173213,
+            "source": "humaneness",
+            "target": "notion"
+          },
+          {
+            "weight": 1.401906126592004,
+            "source": "humaneness",
+            "target": "analects"
+          },
+          {
+            "weight": 0.4703479225870605,
+            "source": "humaneness",
+            "target": "way"
+          },
+          {
+            "weight": 1.5245084486843363,
+            "source": "humaneness",
+            "target": "emphasize"
+          },
+          {
+            "weight": 1.5689602112551702,
+            "source": "humaneness",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.7087589460320587,
+            "source": "humaneness",
+            "target": "mencius"
+          },
+          {
+            "weight": 0.831361268124391,
+            "source": "humaneness",
+            "target": "line"
+          },
+          {
+            "weight": 0.6346509738783368,
+            "source": "humaneness",
+            "target": "meaning"
+          },
+          {
+            "weight": 1.0764837261573759,
+            "source": "humaneness",
+            "target": "rule"
+          },
+          {
+            "weight": 0.7087589460320587,
+            "source": "ethical",
+            "target": "analects"
+          },
+          {
+            "weight": 0.13821408756444573,
+            "source": "ethical",
+            "target": "emphasize"
+          },
+          {
+            "weight": 1.3641657986091569,
+            "source": "ethical",
+            "target": "notion"
+          },
+          {
+            "weight": 0.7087589460320587,
+            "source": "ethical",
+            "target": "mencius"
+          },
+          {
+            "weight": 0.2291858657701724,
+            "source": "ethical",
+            "target": "discourse"
+          },
+          {
+            "weight": 0.9964410184838396,
+            "source": "confucius",
+            "target": "way"
+          },
+          {
+            "weight": 1.2348520419288378,
+            "source": "confucius",
+            "target": "analects"
+          },
+          {
+            "weight": 0.37662511100944396,
+            "source": "confucius",
+            "target": "emphasize"
+          },
+          {
+            "weight": 0.5417048613688924,
+            "source": "confucius",
+            "target": "mencius"
+          },
+          {
+            "weight": 0.9319024973462683,
+            "source": "confucius",
+            "target": "sage"
+          },
+          {
+            "weight": 1.927999222488783,
+            "source": "mencius",
+            "target": "analects"
+          },
+          {
+            "weight": 0.9094296414942098,
+            "source": "mencius",
+            "target": "rule"
+          },
+          {
+            "weight": 0.2291858657701724,
+            "source": "meaning",
+            "target": "way"
+          },
+          {
+            "weight": 0.6346509738783368,
+            "source": "meaning",
+            "target": "sage"
+          },
+          {
+            "weight": 0.4675968892151706,
+            "source": "meaning",
+            "target": "analects"
+          },
+          {
+            "weight": 0.14217448878054254,
+            "source": "meaning",
+            "target": "rule"
+          },
+          {
+            "weight": 0.6643071834612249,
+            "source": "analects",
+            "target": "emphasize"
+          },
+          {
+            "weight": 0.9094296414942098,
+            "source": "analects",
+            "target": "notion"
+          },
+          {
+            "weight": 0.2162824609342645,
+            "source": "analects",
+            "target": "rule"
+          },
+          {
+            "weight": 0.8758130306952248,
+            "source": "way",
+            "target": "sage"
+          },
+          {
+            "weight": 0.6265668554783779,
+            "source": "emphasize",
+            "target": "notion"
+          },
+          {
+            "weight": 1.2368263762325553,
+            "source": "emphasize",
+            "target": "sage"
+          },
+          {
+            "weight": 1.1923746136617215,
+            "source": "emphasize",
+            "target": "line"
+          },
+          {
+            "weight": 1.41068581424405,
+            "source": "discourse",
+            "target": "notion"
+          },
+          {
+            "weight": 0.8716893135113628,
+            "source": "notion",
+            "target": "rule"
+          },
+          {
+            "weight": 0.6265668554783779,
+            "source": "notion",
+            "target": "line"
+          },
+          {
+            "weight": 0.33888478302659686,
+            "source": "line",
+            "target": "rule"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/zhu-xi/",
+      "title": "\nZhu Xi (Stanford Encyclopedia of Philosophy)\n",
+      "description": "<div id=\"preamble\">\n<p>\nZhu Xi, the preeminent Neo-Confucian (<em>daoxue</em>) master of the\nSouthern Song (1126\u20131271), is generally ranked as second only to\nCo",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "situation"
+          },
+          {
+            "id": "confucian"
+          },
+          {
+            "id": "self"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
+            "id": "order"
+          },
+          {
+            "id": "human"
+          },
+          {
+            "id": "ethical"
+          },
+          {
+            "id": "confucius"
+          },
+          {
+            "id": "practice"
+          },
+          {
+            "id": "xi"
+          },
+          {
+            "id": "cultivation"
+          },
+          {
+            "id": "nature"
+          },
+          {
+            "id": "life"
+          },
+          {
+            "id": "change"
+          },
+          {
+            "id": "notion"
+          },
+          {
+            "id": "moral"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 1.057532262924645,
+            "source": "situation",
+            "target": "moral"
+          },
+          {
+            "weight": 1.7863975260866696,
+            "source": "situation",
+            "target": "order"
+          },
+          {
+            "weight": 0.750305594399894,
+            "source": "situation",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.7830954172228849,
+            "source": "situation",
+            "target": "practice"
+          },
+          {
+            "weight": 0.11526604464722937,
+            "source": "situation",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.6433334748477262,
+            "source": "situation",
+            "target": "life"
+          },
+          {
+            "weight": 0.4954133447711038,
+            "source": "confucian",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.06525562407256794,
+            "source": "confucian",
+            "target": "xi"
+          },
+          {
+            "weight": 1.0062389685370945,
+            "source": "confucian",
+            "target": "change"
+          },
+          {
+            "weight": 0.33840959596143905,
+            "source": "confucian",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.3556514023959451,
+            "source": "confucian",
+            "target": "life"
+          },
+          {
+            "weight": 0.08994823666293958,
+            "source": "confucian",
+            "target": "practice"
+          },
+          {
+            "weight": 0.750305594399894,
+            "source": "confucian",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.5542538447940374,
+            "source": "confucian",
+            "target": "human"
+          },
+          {
+            "weight": 0.4115318607904018,
+            "source": "confucian",
+            "target": "nature"
+          },
+          {
+            "weight": 0.5207311527553937,
+            "source": "confucian",
+            "target": "humaneness"
+          },
+          {
+            "weight": 1.7784081360531907,
+            "source": "self",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.3768463028025117,
+            "source": "self",
+            "target": "human"
+          },
+          {
+            "weight": 0.28291448296830823,
+            "source": "self",
+            "target": "nature"
+          },
+          {
+            "weight": 0.5039051809214169,
+            "source": "self",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.9934534062401227,
+            "source": "self",
+            "target": "moral"
+          },
+          {
+            "weight": 1.3476252199607366,
+            "source": "self",
+            "target": "practice"
+          },
+          {
+            "weight": 0.24901293129262678,
+            "source": "self",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.09078892607773263,
+            "source": "self",
+            "target": "xi"
+          },
+          {
+            "weight": 0.47215648260683657,
+            "source": "self",
+            "target": "change"
+          },
+          {
+            "weight": 1.0185695809945732,
+            "source": "humaneness",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.9560492240132392,
+            "source": "humaneness",
+            "target": "human"
+          },
+          {
+            "weight": 0.9115974614424055,
+            "source": "humaneness",
+            "target": "life"
+          },
+          {
+            "weight": 0.26290204345329393,
+            "source": "humaneness",
+            "target": "order"
+          },
+          {
+            "weight": 0.8149706257533337,
+            "source": "humaneness",
+            "target": "moral"
+          },
+          {
+            "weight": 0.38353003124190865,
+            "source": "humaneness",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.26290204345329393,
+            "source": "humaneness",
+            "target": "notion"
+          },
+          {
+            "weight": 1.4568245119257286,
+            "source": "humaneness",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.5813557745718286,
+            "source": "humaneness",
+            "target": "change"
+          },
+          {
+            "weight": 0.04583753821546639,
+            "source": "humaneness",
+            "target": "xi"
+          },
+          {
+            "weight": 0.35821222325761887,
+            "source": "humaneness",
+            "target": "practice"
+          },
+          {
+            "weight": 0.5765596023083356,
+            "source": "order",
+            "target": "moral"
+          },
+          {
+            "weight": 0.14227405566467927,
+            "source": "order",
+            "target": "human"
+          },
+          {
+            "weight": 0.3855043655456263,
+            "source": "order",
+            "target": "life"
+          },
+          {
+            "weight": 0.5591678595964664,
+            "source": "order",
+            "target": "nature"
+          },
+          {
+            "weight": 0.05526267867504952,
+            "source": "order",
+            "target": "change"
+          },
+          {
+            "weight": 1.0786515461055717,
+            "source": "human",
+            "target": "life"
+          },
+          {
+            "weight": 1.3323577478299482,
+            "source": "human",
+            "target": "nature"
+          },
+          {
+            "weight": 0.26290204345329393,
+            "source": "human",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.237584235469004,
+            "source": "human",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.49247648509779424,
+            "source": "human",
+            "target": "ethical"
+          },
+          {
+            "weight": 0.14227405566467927,
+            "source": "human",
+            "target": "notion"
+          },
+          {
+            "weight": 0.7484098592349948,
+            "source": "human",
+            "target": "change"
+          },
+          {
+            "weight": 1.0986122886681098,
+            "source": "ethical",
+            "target": "confucius"
+          },
+          {
+            "weight": 0.7672551527136672,
+            "source": "ethical",
+            "target": "cultivation"
+          },
+          {
+            "weight": 1.4350845252893227,
+            "source": "ethical",
+            "target": "practice"
+          },
+          {
+            "weight": 0.0425596144187959,
+            "source": "ethical",
+            "target": "life"
+          },
+          {
+            "weight": 0.15762894420358306,
+            "source": "ethical",
+            "target": "xi"
+          },
+          {
+            "weight": 0.216223108469636,
+            "source": "ethical",
+            "target": "nature"
+          },
+          {
+            "weight": 0.49247648509779424,
+            "source": "ethical",
+            "target": "notion"
+          },
+          {
+            "weight": 0.4567584024957149,
+            "source": "ethical",
+            "target": "moral"
+          },
+          {
+            "weight": 0.4623524825102158,
+            "source": "confucius",
+            "target": "xi"
+          },
+          {
+            "weight": 0.6458942957093998,
+            "source": "confucius",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.62057648772511,
+            "source": "confucius",
+            "target": "practice"
+          },
+          {
+            "weight": 0.6544780394007913,
+            "source": "confucius",
+            "target": "nature"
+          },
+          {
+            "weight": 0.1505728584793744,
+            "source": "confucius",
+            "target": "change"
+          },
+          {
+            "weight": 0.525266307920785,
+            "source": "confucius",
+            "target": "notion"
+          },
+          {
+            "weight": 1.4568245119257286,
+            "source": "practice",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.8862796534581157,
+            "source": "practice",
+            "target": "life"
+          },
+          {
+            "weight": 0.8950133334268701,
+            "source": "practice",
+            "target": "moral"
+          },
+          {
+            "weight": 0.30820180268295755,
+            "source": "practice",
+            "target": "xi"
+          },
+          {
+            "weight": 0.15119805387329266,
+            "source": "xi",
+            "target": "cultivation"
+          },
+          {
+            "weight": 0.17717354027655335,
+            "source": "xi",
+            "target": "moral"
+          },
+          {
+            "weight": 0.679795847385081,
+            "source": "cultivation",
+            "target": "nature"
+          },
+          {
+            "weight": 0.5636561974724277,
+            "source": "cultivation",
+            "target": "moral"
+          },
+          {
+            "weight": 0.5591678595964664,
+            "source": "nature",
+            "target": "notion"
+          },
+          {
+            "weight": 0.5234497769943871,
+            "source": "nature",
+            "target": "moral"
+          },
+          {
+            "weight": 0.877621590715001,
+            "source": "nature",
+            "target": "change"
+          },
+          {
+            "weight": 0.7552513910517115,
+            "source": "life",
+            "target": "moral"
+          },
+          {
+            "weight": 0.703958096664161,
+            "source": "life",
+            "target": "change"
+          },
+          {
+            "weight": 1.1538749673431592,
+            "source": "change",
+            "target": "notion"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/han-dynasty/",
+      "title": "\nPhilosophy in Han Dynasty China (Stanford Encyclopedia of Philosophy)\n",
+      "description": "<div id=\"preamble\">\n<p>\nPhilosophy in early China underwent a major transformation after the\nbeginning of empire in the late third century BCE. These were the\ny",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "early"
+          },
+          {
+            "id": "find"
+          },
+          {
+            "id": "confucian"
+          },
+          {
+            "id": "political"
+          },
+          {
+            "id": "chinese"
+          },
+          {
+            "id": "people"
+          },
+          {
+            "id": "development"
+          },
+          {
+            "id": "follow"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
+            "id": "concern"
+          },
+          {
+            "id": "good"
+          },
+          {
+            "id": "state"
+          },
+          {
+            "id": "ruler"
+          },
+          {
+            "id": "moral"
+          },
+          {
+            "id": "philosophy"
+          },
+          {
+            "id": "jia"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.5346768395881706,
+            "source": "early",
+            "target": "philosophy"
+          },
+          {
+            "weight": 0.9866619633312278,
+            "source": "early",
+            "target": "chinese"
+          },
+          {
+            "weight": 0.7978678920316558,
+            "source": "early",
+            "target": "political"
+          },
+          {
+            "weight": 0.17573174711489914,
+            "source": "early",
+            "target": "concern"
+          },
+          {
+            "weight": 0.44766546259854084,
+            "source": "early",
+            "target": "jia"
+          },
+          {
+            "weight": 0.3523552827942159,
+            "source": "early",
+            "target": "ruler"
+          },
+          {
+            "weight": 0.8223589120399516,
+            "source": "early",
+            "target": "find"
+          },
+          {
+            "weight": 0.3079035202233821,
+            "source": "early",
+            "target": "confucian"
+          },
+          {
+            "weight": 0.5530259782563671,
+            "source": "early",
+            "target": "follow"
+          },
+          {
+            "weight": 0.5217734347522628,
+            "source": "early",
+            "target": "moral"
+          },
+          {
+            "weight": 1.1408126431584862,
+            "source": "early",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.8688789276748444,
+            "source": "early",
+            "target": "development"
+          },
+          {
+            "weight": 0.8574502318512216,
+            "source": "find",
+            "target": "chinese"
+          },
+          {
+            "weight": 0.06252035698133393,
+            "source": "find",
+            "target": "political"
+          },
+          {
+            "weight": 1.1451323043030026,
+            "source": "find",
+            "target": "development"
+          },
+          {
+            "weight": 1.0541605260972757,
+            "source": "find",
+            "target": "confucian"
+          },
+          {
+            "weight": 0.5616840409994817,
+            "source": "confucian",
+            "target": "follow"
+          },
+          {
+            "weight": 1.292571549542274,
+            "source": "confucian",
+            "target": "moral"
+          },
+          {
+            "weight": 0.15621893289131739,
+            "source": "confucian",
+            "target": "people"
+          },
+          {
+            "weight": 0.7664784536454948,
+            "source": "confucian",
+            "target": "ruler"
+          },
+          {
+            "weight": 1.3238240930463785,
+            "source": "confucian",
+            "target": "concern"
+          },
+          {
+            "weight": 0.8617886334498198,
+            "source": "confucian",
+            "target": "jia"
+          },
+          {
+            "weight": 0.4235337025186645,
+            "source": "confucian",
+            "target": "political"
+          },
+          {
+            "weight": 0.4075333611722234,
+            "source": "confucian",
+            "target": "chinese"
+          },
+          {
+            "weight": 0.4075333611722234,
+            "source": "confucian",
+            "target": "development"
+          },
+          {
+            "weight": 0.46798546508949834,
+            "source": "political",
+            "target": "state"
+          },
+          {
+            "weight": 0.7556675375412792,
+            "source": "political",
+            "target": "philosophy"
+          },
+          {
+            "weight": 1.410593505281027,
+            "source": "political",
+            "target": "jia"
+          },
+          {
+            "weight": 1.2076526612843366,
+            "source": "political",
+            "target": "chinese"
+          },
+          {
+            "weight": 1.1794817843176404,
+            "source": "political",
+            "target": "follow"
+          },
+          {
+            "weight": 0.5145054807243912,
+            "source": "political",
+            "target": "concern"
+          },
+          {
+            "weight": 0.5886134528781131,
+            "source": "political",
+            "target": "moral"
+          },
+          {
+            "weight": 1.0741212686598138,
+            "source": "political",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.1090403726162269,
+            "source": "political",
+            "target": "development"
+          },
+          {
+            "weight": 1.1916523199378954,
+            "source": "chinese",
+            "target": "concern"
+          },
+          {
+            "weight": 0.4985051393779501,
+            "source": "chinese",
+            "target": "development"
+          },
+          {
+            "weight": 0.8574502318512216,
+            "source": "chinese",
+            "target": "philosophy"
+          },
+          {
+            "weight": 1.7047480922384253,
+            "source": "people",
+            "target": "ruler"
+          },
+          {
+            "weight": 0.4013413909243023,
+            "source": "people",
+            "target": "follow"
+          },
+          {
+            "weight": 0.43908171890714937,
+            "source": "people",
+            "target": "moral"
+          },
+          {
+            "weight": 0.9891280558264214,
+            "source": "people",
+            "target": "jia"
+          },
+          {
+            "weight": 0.8938178760220965,
+            "source": "people",
+            "target": "state"
+          },
+          {
+            "weight": 0.6526558192052084,
+            "source": "people",
+            "target": "concern"
+          },
+          {
+            "weight": 0.5191244265806858,
+            "source": "people",
+            "target": "good"
+          },
+          {
+            "weight": 0.8574502318512216,
+            "source": "development",
+            "target": "philosophy"
+          },
+          {
+            "weight": 0.4985051393779501,
+            "source": "development",
+            "target": "concern"
+          },
+          {
+            "weight": 1.463586035421537,
+            "source": "development",
+            "target": "humaneness"
+          },
+          {
+            "weight": 1.2012217709540463,
+            "source": "development",
+            "target": "moral"
+          },
+          {
+            "weight": 0.07729167430164649,
+            "source": "development",
+            "target": "good"
+          },
+          {
+            "weight": 0.6526558192052084,
+            "source": "follow",
+            "target": "concern"
+          },
+          {
+            "weight": 0.8445468270153138,
+            "source": "follow",
+            "target": "moral"
+          },
+          {
+            "weight": 0.008298802814695064,
+            "source": "follow",
+            "target": "jia"
+          },
+          {
+            "weight": 2.205523380150914,
+            "source": "humaneness",
+            "target": "jia"
+          },
+          {
+            "weight": 2.1102132003465894,
+            "source": "humaneness",
+            "target": "ruler"
+          },
+          {
+            "weight": 1.2500119351234782,
+            "source": "humaneness",
+            "target": "moral"
+          },
+          {
+            "weight": 1.463586035421537,
+            "source": "humaneness",
+            "target": "concern"
+          },
+          {
+            "weight": 0.7704388548615918,
+            "source": "concern",
+            "target": "good"
+          },
+          {
+            "weight": 0.9527604116555465,
+            "source": "concern",
+            "target": "jia"
+          },
+          {
+            "weight": 1.1451323043030026,
+            "source": "concern",
+            "target": "philosophy"
+          },
+          {
+            "weight": 0.8574502318512216,
+            "source": "concern",
+            "target": "ruler"
+          },
+          {
+            "weight": 1.2012217709540463,
+            "source": "concern",
+            "target": "moral"
+          },
+          {
+            "weight": 0.12608183847107848,
+            "source": "good",
+            "target": "jia"
+          },
+          {
+            "weight": 0.030771658666753687,
+            "source": "good",
+            "target": "philosophy"
+          },
+          {
+            "weight": 0.723918839226699,
+            "source": "good",
+            "target": "ruler"
+          },
+          {
+            "weight": 0.723918839226699,
+            "source": "good",
+            "target": "state"
+          },
+          {
+            "weight": 1.0986122886681098,
+            "source": "state",
+            "target": "philosophy"
+          },
+          {
+            "weight": 1.1939224684724346,
+            "source": "state",
+            "target": "jia"
+          },
+          {
+            "weight": 1.3217558399823195,
+            "source": "state",
+            "target": "ruler"
+          },
+          {
+            "weight": 0.23841102344499815,
+            "source": "state",
+            "target": "moral"
+          },
+          {
+            "weight": 1.7535382564078572,
+            "source": "ruler",
+            "target": "jia"
+          },
+          {
+            "weight": 0.9315582040049435,
+            "source": "ruler",
+            "target": "moral"
+          },
+          {
+            "weight": 0.333721203249323,
+            "source": "moral",
+            "target": "jia"
+          },
+          {
+            "weight": 0.5007752879124892,
+            "source": "philosophy",
+            "target": "jia"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/song-ming-confucianism/",
+      "title": "\nSong-Ming Confucianism (Stanford Encyclopedia of Philosophy)\n",
+      "description": "<div id=\"preamble\">\n<p>\nConfucian thought in China\u2019s Song (960\u20131279 CE), Yuan\n(1279\u20131368 CE), and Ming (1368\u20131644 CE) dynasties is\nmarked by concerted efforts t",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "thing"
+          },
+          {
+            "id": "heartmind"
+          },
+          {
+            "id": "self"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
+            "id": "wang"
+          },
+          {
+            "id": "human"
+          },
+          {
+            "id": "system"
+          },
+          {
+            "id": "life"
+          },
+          {
+            "id": "pattern"
+          },
+          {
+            "id": "virtue"
+          },
+          {
+            "id": "see"
+          },
+          {
+            "id": "tiwald"
+          },
+          {
+            "id": "moral"
+          },
+          {
+            "id": "li"
+          },
+          {
+            "id": "angle"
+          },
+          {
+            "id": "qi"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.3308762511170917,
+            "source": "thing",
+            "target": "li"
+          },
+          {
+            "weight": 0.7929117107136504,
+            "source": "thing",
+            "target": "life"
+          },
+          {
+            "weight": 0.6410311794209312,
+            "source": "thing",
+            "target": "pattern"
+          },
+          {
+            "weight": 0.9062403960206536,
+            "source": "thing",
+            "target": "system"
+          },
+          {
+            "weight": 0.030771658666753687,
+            "source": "thing",
+            "target": "tiwald"
+          },
+          {
+            "weight": 0.6875511950558242,
+            "source": "thing",
+            "target": "human"
+          },
+          {
+            "weight": 0.7019399325079237,
+            "source": "thing",
+            "target": "qi"
+          },
+          {
+            "weight": 1.290503296478215,
+            "source": "heartmind",
+            "target": "pattern"
+          },
+          {
+            "weight": 1.049341239661327,
+            "source": "heartmind",
+            "target": "li"
+          },
+          {
+            "weight": 0.3074038949319497,
+            "source": "heartmind",
+            "target": "virtue"
+          },
+          {
+            "weight": 0.9158098470368043,
+            "source": "heartmind",
+            "target": "wang"
+          },
+          {
+            "weight": 0.23841102344499815,
+            "source": "heartmind",
+            "target": "moral"
+          },
+          {
+            "weight": 0.22146146513122492,
+            "source": "self",
+            "target": "virtue"
+          },
+          {
+            "weight": 0.15246859364427354,
+            "source": "self",
+            "target": "system"
+          },
+          {
+            "weight": 1.1113189399372245,
+            "source": "self",
+            "target": "angle"
+          },
+          {
+            "weight": 0.6632942174102642,
+            "source": "self",
+            "target": "tiwald"
+          },
+          {
+            "weight": 0.37561214495848316,
+            "source": "self",
+            "target": "see"
+          },
+          {
+            "weight": 1.599387576580599,
+            "source": "humaneness",
+            "target": "li"
+          },
+          {
+            "weight": 1.4596256342054401,
+            "source": "humaneness",
+            "target": "angle"
+          },
+          {
+            "weight": 1.550597412411167,
+            "source": "humaneness",
+            "target": "life"
+          },
+          {
+            "weight": 1.8870696490323797,
+            "source": "humaneness",
+            "target": "system"
+          },
+          {
+            "weight": 1.0116009116784799,
+            "source": "humaneness",
+            "target": "tiwald"
+          },
+          {
+            "weight": 1.550597412411167,
+            "source": "humaneness",
+            "target": "virtue"
+          },
+          {
+            "weight": 1.024023431677037,
+            "source": "wang",
+            "target": "li"
+          },
+          {
+            "weight": 0.5415972824327444,
+            "source": "wang",
+            "target": "moral"
+          },
+          {
+            "weight": 0.053244514518812285,
+            "source": "wang",
+            "target": "pattern"
+          },
+          {
+            "weight": 0.19111430874193308,
+            "source": "wang",
+            "target": "qi"
+          },
+          {
+            "weight": 0.43623676677491807,
+            "source": "wang",
+            "target": "see"
+          },
+          {
+            "weight": 1.1451323043030026,
+            "source": "human",
+            "target": "moral"
+          },
+          {
+            "weight": 1.0217532831424978,
+            "source": "human",
+            "target": "virtue"
+          },
+          {
+            "weight": 0.4156174795721824,
+            "source": "human",
+            "target": "life"
+          },
+          {
+            "weight": 0.6123277738182367,
+            "source": "human",
+            "target": "qi"
+          },
+          {
+            "weight": 0.4644076437416143,
+            "source": "human",
+            "target": "li"
+          },
+          {
+            "weight": 0.5232481437645479,
+            "source": "human",
+            "target": "pattern"
+          },
+          {
+            "weight": 1.327453861096957,
+            "source": "system",
+            "target": "life"
+          },
+          {
+            "weight": 0.5433349023312852,
+            "source": "system",
+            "target": "angle"
+          },
+          {
+            "weight": 0.09531017980432493,
+            "source": "system",
+            "target": "tiwald"
+          },
+          {
+            "weight": 0.2978344439157989,
+            "source": "life",
+            "target": "virtue"
+          },
+          {
+            "weight": 0.16430305129127634,
+            "source": "life",
+            "target": "tiwald"
+          },
+          {
+            "weight": 0.346624608085231,
+            "source": "life",
+            "target": "li"
+          },
+          {
+            "weight": 0.8109302162163288,
+            "source": "life",
+            "target": "pattern"
+          },
+          {
+            "weight": 1.0805937831654315,
+            "source": "life",
+            "target": "see"
+          },
+          {
+            "weight": 0.04652001563489291,
+            "source": "life",
+            "target": "moral"
+          },
+          {
+            "weight": 0.20686266571007234,
+            "source": "life",
+            "target": "angle"
+          },
+          {
+            "weight": 1.1110348086666668,
+            "source": "pattern",
+            "target": "li"
+          },
+          {
+            "weight": 1.258954938743289,
+            "source": "pattern",
+            "target": "qi"
+          },
+          {
+            "weight": 0.11778303565638346,
+            "source": "pattern",
+            "target": "see"
+          },
+          {
+            "weight": 0.8574502318512216,
+            "source": "virtue",
+            "target": "moral"
+          },
+          {
+            "weight": 0.5697681593994407,
+            "source": "virtue",
+            "target": "tiwald"
+          },
+          {
+            "weight": 0.5697681593994407,
+            "source": "virtue",
+            "target": "li"
+          },
+          {
+            "weight": 0.43000621702428204,
+            "source": "virtue",
+            "target": "angle"
+          },
+          {
+            "weight": 0.8292793548845252,
+            "source": "see",
+            "target": "moral"
+          },
+          {
+            "weight": 2.065761437775756,
+            "source": "tiwald",
+            "target": "angle"
+          },
+          {
+            "weight": 0.3610133455373305,
+            "source": "tiwald",
+            "target": "qi"
+          },
+          {
+            "weight": 1.0116009116784799,
+            "source": "moral",
+            "target": "li"
+          },
+          {
+            "weight": 0.6486954179891115,
+            "source": "moral",
+            "target": "qi"
+          },
+          {
+            "weight": 0.9488000104394496,
+            "source": "li",
+            "target": "qi"
+          },
+          {
+            "weight": 0.52135599561251,
+            "source": "angle",
+            "target": "qi"
+          }
+        ]
+      }
+    }
+  ]
+}
