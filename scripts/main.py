@@ -1,5 +1,5 @@
 from config import TERMS, SEP, CTEXT
-from mengzi import fetch_mengzi, Chapter as MengziChapter
+from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from scrape_sep import search_sep, SEP as SEPArticle
 from utils import filter_to_sent_node_lists, build_cooccurrence_network
 from nlp.english import tokenize_english_html
@@ -9,12 +9,14 @@ from networkx import node_link_data, Graph
 from dataclasses import dataclass, asdict
 import json
 from pathlib import Path
+from typing import Protocol
 
 cooccurrence = []
 
-print("Fetching Mengzi...")
-mengzi = fetch_mengzi()
-print(f"  Fetched {len(mengzi)} chapters")
+print("Fetching Mengzi full text...")
+mengzi = [fetch_mengzi_full()]
+print("Fetching Mengzi chapters...")
+mengzi = mengzi + fetch_mengzi_chapters()
 
 
 def get_cooccurence_english(term: str, text: str) -> Graph:
@@ -25,52 +27,41 @@ def get_cooccurence_english(term: str, text: str) -> Graph:
         sent_node_lists, nodes, term, max_nodes=15)
 
 
+def get_cooccurence_chinese(term: str, text: str) -> Graph:
+    print(f"  [{term}] Tokenizing classical Chinese...")
+    tokens = tokenize_classical_chinese(text)
+
+    print(f"  [{term}] {len(tokens)} tokens — building cooccurrence network...")
+    sent_node_lists, nodes = filter_to_sent_node_lists(
+        tokens, term, min_freq=3, stopwords=CHINESE_STOPWORDS)
+    return build_cooccurrence_network(
+        sent_node_lists, nodes, term, max_nodes=15)
+
+
+class Source(Protocol):
+    url: str
+    title: str
+    description: str
+
+
 @dataclass
-class Source:
+class NLPSource(Source):
     url: str
     title: str
     description: str
     co_occurance: object
 
-    @classmethod
-    def from_sep(cls, term: str, sep: SEPArticle) -> "Source":
-        print(f"  [{term}] Processing article: {sep.title!r}")
-        tokens = tokenize_english_html(sep.text)
-        sent_node_lists, nodes = filter_to_sent_node_lists(
-            tokens, term, min_freq=22)
-        G = build_cooccurrence_network(
-            sent_node_lists, nodes, term, max_nodes=15)
-
-        return cls(
-            url=sep.url,
-            title=sep.title,
-            description=sep.description,
-            co_occurance=node_link_data(G)
-        )
-
-    @classmethod
-    def from_mengzi(cls, term: str, chapter: MengziChapter) -> "Source":
-        print(f"  [{term}] Tokenizing classical Chinese...")
-        tokens = tokenize_classical_chinese(chapter.text)
-
-        print(f"  [{term}] {len(tokens)} tokens — building cooccurrence network...")
-        sent_node_lists, nodes = filter_to_sent_node_lists(
-            tokens, term, min_freq=3, stopwords=CHINESE_STOPWORDS)
-        G = build_cooccurrence_network(
-            sent_node_lists, nodes, term, max_nodes=15)
-
-        return cls(
-            url=chapter.url,
-            title=chapter.title,
-            description=chapter.description,
-            co_occurance=node_link_data(G)
-        )
+    def __init__(self, source: Source, /, co_occurance: Graph):
+        self.url = source.url
+        self.title = source.title
+        self.description = source.description
+        self.co_occurance = node_link_data(co_occurance)
 
 
 @dataclass
 class TermData:
     term: str
-    sources: list[Source]
+    sources: list[NLPSource]
 
     def save_json(self, filepath: Path) -> None:
         serialized = json.dumps(asdict(self), indent=2)
@@ -88,8 +79,9 @@ for term_pairs in TERMS:
     # First run NLP for the Chinese term in the Mengzi
     term = term_pairs.hanzi
     data = TermData(
-        term_pairs.hanzi,
-        [Source.from_mengzi(term, chapter) for chapter in mengzi]
+        term,
+        [NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
+         for m in mengzi]
     )
     data.save_json(CTEXT / f"{term}.json")
 
@@ -99,6 +91,22 @@ for term_pairs in TERMS:
         sep_articles = search_sep(term, 4)
         print(f"  [{term}] {len(sep_articles)} articles found")
 
-        # run NLP on each article
-        data = TermData(term, [Source.from_sep(term, a) for a in sep_articles])
+        slugified_search_term = term.replace(" ", "+")
+        all_articles = SEPArticle(
+            url=f"https://plato.stanford.edu/search/searcher.py?query={slugified_search_term}",
+            title="Combined",
+            description="Results from all articles",
+            text="\n\n".join(a.text for a in sep_articles)
+        )
+        sep_articles = [all_articles] + sep_articles
+
+        sources: list[NLPSource] = []
+        for article in sep_articles:
+            source = NLPSource(
+                article,
+                co_occurance=get_cooccurence_english(term, article.text)
+            )
+            sources.append(source)
+
+        data = TermData(term, sources)
         data.save_json(SEP / f"{slugify(term)}.json")

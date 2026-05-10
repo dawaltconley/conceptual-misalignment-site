@@ -2,18 +2,20 @@ from bs4 import BeautifulSoup
 import requests
 import time
 import cache
+from dataclasses import dataclass
 from random import random
 cache.install()
 
 
+@dataclass
 class SEP:
     url: str
     title: str
     description: str
     text: str
 
-    def __init__(self, url: str):
-        self.url = url
+    @classmethod
+    def from_url(cls, url: str):
         r = requests.get(url, timeout=30)
         r.raise_for_status()
         if not r.from_cache:  # type: ignore
@@ -25,20 +27,24 @@ class SEP:
         if not title:
             h1 = soup.find("h1")
             title = str(h1.text) if h1 else "UNTITLED"
-        self.title = str(title)
 
         article = {
             "preamble": soup.find("div", id="preamble"),
             "toc": soup.find("div", id="toc"),
             "main-text": soup.find("div", id="main-text"),
         }
-        self.text = str(article["preamble"]) + \
-            str(article["toc"]) + str(article["main-text"])
 
         description = soup.description and str(soup.description.text)
         if not description:
             description = str(article["preamble"])[:160]
-        self.description = str(description)
+
+        return cls(
+            url=url,
+            title=str(title),
+            description=str(description),
+            text=str(article["preamble"]) +
+            str(article["toc"]) + str(article["main-text"])
+        )
 
 
 def _search(term: str) -> str:
@@ -65,6 +71,6 @@ def search_sep(search_term: str, max_results: int | None = None) -> list[SEP]:
     if max_results:
         results = results[:max_results]
     for url in results:
-        articles.append(SEP(url))
+        articles.append(SEP.from_url(url))
         time.sleep(1)
     return articles

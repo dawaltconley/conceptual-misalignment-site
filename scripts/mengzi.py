@@ -23,6 +23,7 @@ import requests
 import time
 import cache
 from random import random
+from dataclasses import dataclass
 cache.install()
 
 
@@ -64,6 +65,7 @@ def _fetch_text_url(urn: str) -> str:
     return r.json().get("url", "")
 
 
+@dataclass
 class Chapter:
     urn: str
     url: str
@@ -71,29 +73,44 @@ class Chapter:
     description: str
     text: str
 
-    def __init__(self, urn):
-        self.urn = urn
-        self.url = _fetch_text_url(urn)
+    @classmethod
+    def from_urn(cls, urn):
+        url = _fetch_text_url(urn)
         data = _fetch_text(urn)
-        self.title = data.get("title", "")
+        title = data.get("title", "")
         paragraphs: list[str] = data.get("fulltext", [])
         subsections: list[str] = data.get("subsections", [])
         if len(paragraphs) > 0:
-            self.description = paragraphs[0][:160]
-            self.text = "\n".join(p.strip() for p in paragraphs if p.strip())
+            return cls(
+                urn=urn,
+                url=url,
+                title=title,
+                description=paragraphs[0][:160],
+                text="\n".join(p.strip() for p in paragraphs if p.strip())
+            )
         elif len(subsections) > 0:
-            chapters = [Chapter(s) for s in subsections]
-            self.description = chapters[0].description
-            self.text = "\n".join(c.text.strip()
-                                  for c in chapters if c.text.strip())
+            chapters = [Chapter.from_urn(s) for s in subsections]
+            return cls(
+                urn=urn,
+                url=url,
+                title=title,
+                description=chapters[0].description,
+                text="\n".join(c.text.strip()
+                               for c in chapters if c.text.strip())
+            )
         else:
             raise RuntimeError(
                 f"No text returned for {urn}. Full response: {data}")
 
 
-def fetch_mengzi() -> list[Chapter]:
+def fetch_mengzi_full() -> Chapter:
+    return Chapter.from_urn("ctp:mengzi")
+
+
+def fetch_mengzi_chapters() -> list[Chapter]:
     full_text = []
     for urn in BOOKS:
-        full_text.append(Chapter(urn))
-        time.sleep(1)
+        full_text.append(Chapter.from_urn(urn))
     return full_text
+
+# def compile_full_text(chapters: list[Chapter]) -> Chapter:
