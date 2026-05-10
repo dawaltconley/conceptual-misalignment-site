@@ -3,5 +3,8 @@ public/
 tina/__generated__/
 tina/tina-lock.json
 content/
+scripts/.venv/
+src/data/ctext/
+src/data/sep/
 .agents/
 .claude/

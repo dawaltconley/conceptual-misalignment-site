@@ -28,7 +28,7 @@
  * arrive as strings or numbers (booleans and None are technically possible
  * but extremely rare in practice).
  */
-export type NodeId = string | number;
+export type NodeId = string | number
 
 // ---------------------------------------------------------------------------
 // Node
@@ -48,9 +48,9 @@ export type NodeId = string | number;
  *   type N = GraphNode<"label", { color: string; weight: number }>;
  */
 export type GraphNode<
-  TNameKey extends string = "id",
+  TNameKey extends string = 'id',
   TAttrs extends Record<string, unknown> = Record<string, unknown>,
-> = { [K in TNameKey]: NodeId } & TAttrs;
+> = { [K in TNameKey]: NodeId } & TAttrs
 
 // ---------------------------------------------------------------------------
 // Edges
@@ -71,10 +71,10 @@ export type GraphNode<
  *   type E = SimpleEdge<"source", "target", { weight: number }>;
  */
 export type SimpleEdge<
-  TSrcKey extends string = "source",
-  TTgtKey extends string = "target",
+  TSrcKey extends string = 'source',
+  TTgtKey extends string = 'target',
   TAttrs extends Record<string, unknown> = Record<string, unknown>,
-> = { [K in TSrcKey]: NodeId } & { [K in TTgtKey]: NodeId } & TAttrs;
+> = { [K in TSrcKey]: NodeId } & { [K in TTgtKey]: NodeId } & TAttrs
 
 /**
  * An edge object for a multigraph. Identical to SimpleEdge but adds the edge
@@ -86,11 +86,11 @@ export type SimpleEdge<
  * @template TAttrs    Any additional per-edge attributes.
  */
 export type MultiEdge<
-  TSrcKey extends string = "source",
-  TTgtKey extends string = "target",
-  TKeyKey extends string = "key",
+  TSrcKey extends string = 'source',
+  TTgtKey extends string = 'target',
+  TKeyKey extends string = 'key',
   TAttrs extends Record<string, unknown> = Record<string, unknown>,
-> = SimpleEdge<TSrcKey, TTgtKey, TAttrs> & { [K in TKeyKey]: NodeId };
+> = SimpleEdge<TSrcKey, TTgtKey, TAttrs> & { [K in TKeyKey]: NodeId }
 
 // ---------------------------------------------------------------------------
 // Top-level graph object
@@ -127,22 +127,21 @@ export type MultiEdge<
  *   >;
  */
 export type NodeLinkData<
-  TEdgeKey extends string = "edges",
-  TNodeKey extends string = "nodes",
+  TEdgeKey extends string = 'edges',
+  TNodeKey extends string = 'nodes',
   TEdge extends SimpleEdge = SimpleEdge,
   TNode extends GraphNode = GraphNode,
 > = {
   /** Whether the graph is directed. */
-  directed: boolean;
+  directed: boolean
   /** Whether the graph is a multigraph (allows parallel edges). */
-  multigraph: boolean;
+  multigraph: boolean
   /**
    * Graph-level attribute dict. May contain any JSON-serialisable values;
    * empty ({}) when no graph attributes have been set.
    */
-  graph: Record<string, unknown>;
-} & { [K in TNodeKey]: TNode[] } &
-  { [K in TEdgeKey]: TEdge[] };
+  graph: Record<string, unknown>
+} & { [K in TNodeKey]: TNode[] } & { [K in TEdgeKey]: TEdge[] }
 
 // ---------------------------------------------------------------------------
 // Convenience aliases for the two most common cases
@@ -153,17 +152,17 @@ export type NodeLinkData<
  * Matches the output of nx.node_link_data(G) on NetworkX ≥ 3.4.
  */
 export type WeightedNodeLinkData = NodeLinkData<
-  "edges",
-  "nodes",
-  SimpleEdge<"source", "target", { weight: number }>
->;
+  'edges',
+  'nodes',
+  SimpleEdge<'source', 'target', { weight: number }>
+>
 
 /**
  * Same as WeightedNodeLinkData but with "links" as the edge array key.
  * Matches older NetworkX defaults and explicit edges="links" calls.
  */
 export type WeightedNodeLinkDataLegacy = NodeLinkData<
-  "links",
-  "nodes",
-  SimpleEdge<"source", "target", { weight: number }>
->;
+  'links',
+  'nodes',
+  SimpleEdge<'source', 'target', { weight: number }>
+>
