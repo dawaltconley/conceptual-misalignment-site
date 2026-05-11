@@ -19,7 +19,7 @@ export default function SEPNetwork({
   const network = data.sources[selected].co_occurance
 
   return (
-    <div className="flex flex-row">
+    <div className="flex-row xl:flex">
       <Network
         centralNodeId={data.term}
         data={network}
@@ -28,8 +28,8 @@ export default function SEPNetwork({
 
       <div
         className={clsx(
-          'shrink space-y-2',
-          sourceAlign === 'left' && '-order-1',
+          'mt-4 flex shrink flex-row flex-wrap gap-2 xl:mt-0 xl:flex-col',
+          sourceAlign === 'right' ? 'items-start' : '-order-1 items-end',
         )}
       >
         {data.sources.map((s, i) => (
@@ -63,7 +63,7 @@ function SEPPage({
   return (
     <button
       className={clsx(
-        'block max-w-40 overflow-hidden overflow-ellipsis whitespace-nowrap rounded border border-gray-900 p-1 duration-150 hover:bg-red-200',
+        'max-w-40 overflow-hidden overflow-ellipsis whitespace-nowrap rounded border border-gray-900 p-1 duration-150 hover:bg-red-200 xl:block',
         isActive && 'border-red-500 bg-red-500 text-white',
       )}
       onClick={onClick}
