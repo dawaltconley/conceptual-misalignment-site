@@ -8,7 +8,8 @@
     "build": "NODE_ENV=production astro build",
     "preview": "npm run build && npx astro preview",
     "astro": "astro",
-    "lint": "npx astro check && npx stylelint src/**/*.{css,scss,sass,astro} && npx prettier -c .",
+    "lint": "npx astro check && npx stylelint src/**/*.{css,scss,sass,astro} && npm run lint:python && npx prettier -c .",
+    "lint:python": "cd scripts && pyright .",
     "cloudformation:package": "aws cloudformation package --template-file aws.template.yaml --s3-bucket cf-templates-m6s9n0rrcicj-us-east-1 --s3-prefix static-websites --output-template-file ./packaged.template.yaml",
     "cloudformation:deploy": "aws cloudformation deploy --template-file ./packaged.template.yaml --stack-name AstroStarter --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
   },
