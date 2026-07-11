@@ -53,6 +53,9 @@ VALID_TAGS = set(TAGSET)
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
+# Set at runtime (main); when True, api requests are constrained by a per-sentence
+# GBNF grammar so the model can only emit the exact input characters.
+USE_GRAMMAR = False
 
 # --------------------------------------------------------------------------- #
 # FEW-SHOT EXAMPLES  ---  PLACEHOLDERS. Replace with your own gold-verified
@@ -162,6 +165,39 @@ def qc_check(sentence: str, tokens):
 # --------------------------------------------------------------------------- #
 # Model
 # --------------------------------------------------------------------------- #
+def build_gbnf(sentence: str, tags=None):
+    """
+    Build a GBNF grammar that forces output to be a segmentation of EXACTLY the
+    input characters, in order. The model may only choose (a) where word
+    boundaries fall and (b) a POS tag per word (when `tags` is given). It cannot
+    drop, add, or substitute any character -- so every 'char mismatch' failure
+    (dropped punctuation, swapped rare glyphs, hallucinated text) becomes
+    impossible at the decode step. Guarantees fidelity, NOT segmentation
+    correctness. Pass tags=None for segmentation-only (no POS) output.
+    """
+    def esc(s):
+        return s.replace("\\", "\\\\").replace('"', '\\"')
+
+    seq = []
+    chars = list(sentence)
+    for i, ch in enumerate(chars):
+        seq.append(f'"{esc(ch)}"')
+        if i < len(chars) - 1:
+            seq.append("gap")
+    if tags:
+        seq.append("tag")                       # closing tag of the final word
+        return "\n".join([
+            "root ::= " + " ".join(seq),
+            # break: /TAG + space, or continue
+            'gap ::= (tag " ") | ""',
+            "tag ::= " + " | ".join(f'"/{t}"' for t in tags),
+        ])
+    return "\n".join([
+        "root ::= " + " ".join(seq),
+        'gap ::= " " | ""',                      # break: space, or continue
+    ])
+
+
 def build_messages(sentence: str):
     msgs = [{"role": "system", "content": SYSTEM_PROMPT}]
     for src, tagged in FEWSHOT:
@@ -228,6 +264,8 @@ def tag_sentence(tok, model, sentence: str, max_new_tokens: int, arch: str, stri
             )
         resp = client.chat.completions.create(
             model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=max_new_tokens,
+            extra_body={"grammar": build_gbnf(
+                sentence, sorted(VALID_TAGS))} if USE_GRAMMAR else {},
         )
         return (resp.choices[0].message.content or "").strip()
 
@@ -290,6 +328,9 @@ def main():
     ap.add_argument("--device", default="auto", choices=["auto", "cpu"],
                     help="'auto' uses GPU/MPS if available; 'cpu' forces CPU")
     ap.add_argument("--max-new-tokens", type=int, default=512)
+    ap.add_argument("--grammar", action="store_true",
+                    help="(api + llama.cpp only) constrain decoding to the exact input "
+                         "characters via a per-sentence GBNF grammar; prevents char-mismatch errors")
     ap.add_argument("--limit", type=int, default=0,
                     help="tag only first N sentences (0 = all; use for a dry run)")
     args = ap.parse_args()
@@ -303,8 +344,9 @@ def main():
         sentences = sentences[: args.limit]
     print(f"[info] {len(sentences)} sentences to tag", file=sys.stderr)
 
-    global API_MODEL
+    global API_MODEL, USE_GRAMMAR
     API_MODEL = args.api_model
+    USE_GRAMMAR = args.grammar
     tok, model = load_model(args.model, args.device, args.arch, args.api_base)
 
     try:
