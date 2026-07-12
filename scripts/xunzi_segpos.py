@@ -26,6 +26,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from config import TERMS
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
@@ -48,7 +49,10 @@ SYSTEM_PROMPT = """
     results; do not include explanations, numbering, or extraneous text. Ensure
     the characters in the segmented output match the original sentence exactly
     (no added, omitted, or altered characters).
-""".strip()
+
+    Unless they are used as part of a proper noun, treat terms in the following
+    list as distinct words: {terms}
+""".format(terms=", ".join([t.hanzi for t in TERMS])).strip()
 
 
 # --------------------------------------------------------------------------- #
@@ -83,6 +87,8 @@ def split_sentences(text: str):
 # --------------------------------------------------------------------------- #
 # Parsing + QC
 # --------------------------------------------------------------------------- #
+
+
 def parse_segmented(output: str):
     """
     Parse a 'word/word/word ...' string into [word, word, ...].
@@ -134,6 +140,13 @@ def qc_check(sentence: str, tokens):
     recombined = "".join(w for w in tokens)
     if recombined != sentence:
         return False, f"char mismatch: got {recombined!r} vs {sentence!r}"
+    bad_words = []
+    for word in tokens:
+        for term in TERMS:
+            if term.hanzi in word and term.hanzi != word:
+                bad_words.append(word)
+    if bad_words:
+        return False, f"obfuscated core term: found {', '.join(bad_words)}"
     return True, "ok"
 
 
