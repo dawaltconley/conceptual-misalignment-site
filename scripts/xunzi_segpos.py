@@ -27,67 +27,29 @@ import re
 import sys
 from pathlib import Path
 
-# --------------------------------------------------------------------------- #
-# POS tagset. A compact, classical-Chinese-appropriate set. ADJUST to match the
-# reference standard you will validate against; the distinction of modal/final
-# particles (y) matters a great deal for 文言文.
-# --------------------------------------------------------------------------- #
-TAGSET = {
-    "n":  "名词 noun",
-    "nr": "人名 person name",
-    "ns": "地名 place name",
-    "t":  "时间词 time word",
-    "v":  "动词 verb",
-    "a":  "形容词 adjective",
-    "d":  "副词 adverb",
-    "r":  "代词 pronoun",
-    "m":  "数词 numeral",
-    "q":  "量词 classifier",
-    "p":  "介词 preposition",
-    "c":  "连词 conjunction",
-    "u":  "助词 structural particle (之/所/者 ...)",
-    "y":  "语气词 modal/final particle (也/矣/乎/哉 ...)",
-    "w":  "标点 punctuation",
-}
-VALID_TAGS = set(TAGSET)
-
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
 # Set at runtime (main); when True, api requests are constrained by a per-sentence
 # GBNF grammar so the model can only emit the exact input characters.
 USE_GRAMMAR = False
 
-# --------------------------------------------------------------------------- #
-# FEW-SHOT EXAMPLES  ---  PLACEHOLDERS. Replace with your own gold-verified
-# annotations. These define the output format ("word/TAG word/TAG ...") and the
-# tagset by demonstration. Two or three short, function-word-rich sentences from
-# the Mengzi work best. The segmentation/tags below are a plausible first pass
-# and are NOT authoritative -- you are the philologist; make them match your
-# standard before trusting bulk output.
-# --------------------------------------------------------------------------- #
-FEWSHOT = [
-    (
-        "孟子見梁惠王。",
-        "孟子/nr 見/v 梁惠王/nr 。/w",
-    ),
-    (
-        "王何必曰利？",
-        "王/n 何/r 必/d 曰/v 利/n ？/w",
-    ),
-    (
-        "亦有仁義而已矣。",
-        "亦/d 有/v 仁義/n 而已/y 矣/y 。/w",
-    ),
-]
+# FEW-SHOT EXAMPLES --- Drawn from the XunziALLM sample data: https://github.com/Xunzi-LLM-of-Chinese-classics/XunziALLM/blob/a10d6e9ad4e03c8c0cc4370e9d76e04cfa3aa011/sample%20data/sample%20data%20for%20downstream%20tasks%20evaluation/seg_downstream.json
+FEWSHOT = []
+with open('seg_data.json') as seg_data:
+    data = json.load(seg_data)
+    for shot in data:
+        FEWSHOT.append((shot['input'], shot['output']))
 
-SYSTEM_PROMPT = (
-    "你是古汉语文本处理助手。请对输入的古文句子进行分词和词性标注。"
-    "输出格式为“词/词性 词/词性 …”，词与词之间用一个空格分隔，"
-    "每个词后用斜杠加词性标记。词性标记集为："
-    + "，".join(f"{k}={v}" for k, v in TAGSET.items())
-    + "。只输出标注结果，不要输出任何解释、编号或多余文字，"
-    "保证标注结果中的字与原句完全一致（不增字、不减字、不改字）。"
-)
+
+SYSTEM_PROMPT = """
+    You are an assistant to help in the processing of Classical Chinese texts.
+    Please perform word segmentation on the input Classical Chinese sentences,
+    using the "/" character to delimit word boundaries. Output only the segmented
+    results; do not include explanations, numbering, or extraneous text. Ensure
+    the characters in the segmented output match the original sentence exactly
+    (no added, omitted, or altered characters).
+""".strip()
+
 
 # --------------------------------------------------------------------------- #
 # Sentence splitting
@@ -121,7 +83,23 @@ def split_sentences(text: str):
 # --------------------------------------------------------------------------- #
 # Parsing + QC
 # --------------------------------------------------------------------------- #
-def parse_tagged(output: str):
+def parse_segmented(output: str):
+    """
+    Parse a 'word/word/word ...' string into [word, word, ...].
+    Tolerates stray whitespace/newlines. Splits each token on its LAST slash so
+    that a word containing '/' would still parse (rare in this domain).
+    Returns None if any token is malformed.
+    """
+    output = output.strip()
+    # If the model wrapped the answer in extra lines, keep the line that looks
+    # most like a tagged sequence (contains '/').
+    candidate_lines = [ln for ln in output.splitlines() if "/" in ln]
+    if candidate_lines:
+        output = max(candidate_lines, key=len)
+    return output.split("/")
+
+
+def parse_tagged(output: str) -> list[tuple[str, str]] | None:
     """
     Parse a 'word/TAG word/TAG ...' string into [(word, tag), ...].
     Tolerates stray whitespace/newlines. Splits each token on its LAST slash so
@@ -153,12 +131,9 @@ def qc_check(sentence: str, tokens):
     """
     if tokens is None:
         return False, "unparseable output"
-    recombined = "".join(w for w, _ in tokens)
+    recombined = "".join(w for w in tokens)
     if recombined != sentence:
         return False, f"char mismatch: got {recombined!r} vs {sentence!r}"
-    bad = sorted({t for _, t in tokens if t not in VALID_TAGS})
-    if bad:
-        return False, f"unknown tags: {bad}"
     return True, "ok"
 
 
@@ -194,7 +169,7 @@ def build_gbnf(sentence: str, tags=None):
         ])
     return "\n".join([
         "root ::= " + " ".join(seq),
-        'gap ::= " " | ""',                      # break: space, or continue
+        'gap ::= "/" | ""',                      # break: "/" delimiter, or continue
     ])
 
 
@@ -260,12 +235,12 @@ def tag_sentence(tok, model, sentence: str, max_new_tokens: int, arch: str, stri
         if strict:
             msgs.insert(
                 len(msgs) - 1,
-                {"role": "user", "content": "请严格只输出“词/词性”序列，字数须与原句完全相同。"},
+                {"role": "user", "content": 'Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.'},
             )
         resp = client.chat.completions.create(
             model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=max_new_tokens,
             extra_body={"grammar": build_gbnf(
-                sentence, sorted(VALID_TAGS))} if USE_GRAMMAR else {},
+                sentence)} if USE_GRAMMAR else {},
         )
         return (resp.choices[0].message.content or "").strip()
 
@@ -277,7 +252,7 @@ def tag_sentence(tok, model, sentence: str, max_new_tokens: int, arch: str, stri
         history = [[src, tagged] for src, tagged in FEWSHOT]
         query = sentence
         if strict:
-            query = "（严格只输出“词/词性”序列，字数须与原句完全相同）\n" + sentence
+            query = '(Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.)\n' + sentence
         model.generation_config.max_new_tokens = max_new_tokens
         response, _ = model.chat(
             tok, query, history=history, system=SYSTEM_PROMPT)
@@ -288,7 +263,7 @@ def tag_sentence(tok, model, sentence: str, max_new_tokens: int, arch: str, stri
     if strict:
         msgs.insert(
             len(msgs) - 1,
-            {"role": "user", "content": "请严格只输出“词/词性”序列，字数须与原句完全相同。"},
+            {"role": "user", "content": 'Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.'},
         )
     text = tok.apply_chat_template(
         msgs, tokenize=False, add_generation_prompt=True)
@@ -361,17 +336,17 @@ def main():
         for i, sent in iterator:
             raw = tag_sentence(
                 tok, model, sent, args.max_new_tokens, args.arch)
-            tokens = parse_tagged(raw)
+            tokens = parse_segmented(raw)
             ok, reason = qc_check(sent, tokens)
             if not ok:  # one stricter retry
                 raw = tag_sentence(
                     tok, model, sent, args.max_new_tokens, args.arch, strict=True)
-                tokens = parse_tagged(raw)
+                tokens = parse_segmented(raw)
                 ok, reason = qc_check(sent, tokens)
             rec = {"id": i, "sentence": sent}
             assert tokens is not None
             if ok:
-                rec["tokens"] = [{"word": w, "pos": t} for w, t in tokens]
+                rec["tokens"] = [w for w in tokens]
                 fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n_ok += 1
             else:
