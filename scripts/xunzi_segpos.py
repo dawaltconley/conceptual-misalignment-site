@@ -351,15 +351,21 @@ def main():
                 tok, model, sent, args.max_new_tokens, args.arch)
             tokens = parse_segmented(raw)
             ok, reason = qc_check(sent, tokens)
-            if not ok:  # one stricter retry
-                raw = tag_sentence(
-                    tok, model, sent, args.max_new_tokens, args.arch, strict=True)
-                tokens = parse_segmented(raw)
-                ok, reason = qc_check(sent, tokens)
-            rec = {"id": i, "sentence": sent}
+            if not ok:
+                # handle a common case where xunzi drops a trailing quote
+                if "".join(tokens) == sent[:-1] and sent[-1:] == "」":
+                    print("fixing dropped quote on line " + str(i))
+                    tokens.append("」")
+                    ok = True
+                else:  # one stricter retry
+                    raw = tag_sentence(
+                        tok, model, sent, args.max_new_tokens, args.arch, strict=True)
+                    tokens = parse_segmented(raw)
+                    ok, reason = qc_check(sent, tokens)
             assert tokens is not None
+            rec = {"id": i, "sentence": sent,
+                   "tokens": [w for w in tokens if w]}
             if ok:
-                rec["tokens"] = [w for w in tokens]
                 fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n_ok += 1
             else:
