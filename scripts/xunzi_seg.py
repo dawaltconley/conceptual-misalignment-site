@@ -384,7 +384,7 @@ def main():
             ok, reason = segpos.qc_check(sent, tokens)
             if not ok:
                 # handle a common case where xunzi drops a trailing quote
-                if tokens and "".join([t.word for t in tokens]) == sent[:-1]:
+                if tokens and reason == f"char mismatch: got {sent[:-1]!r} vs {sent!r}":
                     if sent[-1:] == "」":
                         missing = Word("」")
                         if segpos.process == "segpos":
