@@ -1,26 +1,26 @@
 # Conceptual Misalignment — Proof of Concept
 
-A Digital Humanities proof of concept that visualizes *conceptual misalignment* 
-between philosophical terms across languages. The current prototype compares 
-the classical Chinese concept **仁 (rén)** with its common English translations 
-— **benevolence** and **humaneness** — by surfacing the different semantic 
+A Digital Humanities proof of concept that visualizes _conceptual misalignment_
+between philosophical terms across languages. The current prototype compares
+the classical Chinese concept **仁 (rén)** with its common English translations
+— **benevolence** and **humaneness** — by surfacing the different semantic
 neighborhoods each term occupies in its respective philosophical tradition.
 
-The site places interactive co-occurrence networks side by side: on one side, 
-what concepts cluster around 仁 in the *Mengzi*; on the other, what concepts 
-cluster around "benevolence" or "humaneness" in the Stanford Encyclopedia of 
+The site places interactive co-occurrence networks side by side: on one side,
+what concepts cluster around 仁 in the _Mengzi_; on the other, what concepts
+cluster around "benevolence" or "humaneness" in the Stanford Encyclopedia of
 Philosophy. Where the two networks diverge, conceptual misalignment is visible.
 
 ---
 
 ## How It Works
 
-The project has two phases: an offline NLP pipeline that produces JSON data 
+The project has two phases: an offline NLP pipeline that produces JSON data
 files, and a static site that visualizes them.
 
 ### Phase 1 — NLP Pipeline (`scripts/`)
 
-The pipeline is run once (or whenever source texts change) to generate the 
+The pipeline is run once (or whenever source texts change) to generate the
 co-occurrence network data the site consumes.
 
 ```
@@ -38,39 +38,39 @@ scripts/
 
 **English text — Stanford Encyclopedia of Philosophy**
 
-For each English translation of a term (e.g. "benevolence"), `scrape_sep.py` 
-queries the SEP search API and downloads the top-N articles. `nlp/english.py` 
-tokenizes each article's HTML using [spaCy](https://spacy.io/) 
-(`en_core_web_sm`) with an HTML-aware tokenizer. Only content words (nouns, 
-verbs, adjectives, proper nouns) are kept, and each token is reduced to its 
+For each English translation of a term (e.g. "benevolence"), `scrape_sep.py`
+queries the SEP search API and downloads the top-N articles. `nlp/english.py`
+tokenizes each article's HTML using [spaCy](https://spacy.io/)
+(`en_core_web_sm`) with an HTML-aware tokenizer. Only content words (nouns,
+verbs, adjectives, proper nouns) are kept, and each token is reduced to its
 lemma.
 
 **Chinese text — the Mengzi**
 
-`mengzi.py` fetches the full text and all 14 books of the Mengzi via the 
-[Chinese Text Project API](https://api.ctext.org). `nlp/chinese.py` tokenizes 
-classical Chinese using [CLTK](https://cltk.org/)'s classical Chinese (`lzh`) 
-model. A domain-specific stopword list removes function words, pronouns, and 
+`mengzi.py` fetches the full text and all 14 books of the Mengzi via the
+[Chinese Text Project API](https://api.ctext.org). `nlp/chinese.py` tokenizes
+classical Chinese using [CLTK](https://cltk.org/)'s classical Chinese (`lzh`)
+model. A domain-specific stopword list removes function words, pronouns, and
 common classical particles.
 
 **Building co-occurrence networks**
 
 `utils.py` builds a [NetworkX](https://networkx.org/) graph for each text/source:
 
-1. A vocabulary is built by frequency-filtering tokens (minimum sentence 
+1. A vocabulary is built by frequency-filtering tokens (minimum sentence
    frequency threshold).
-2. For every pair of vocabulary tokens that appear in the same sentence, a 
-   **Pointwise Mutual Information (PMI)** score is computed. Only pairs with 
+2. For every pair of vocabulary tokens that appear in the same sentence, a
+   **Pointwise Mutual Information (PMI)** score is computed. Only pairs with
    positive PMI (i.e. co-occurring more than chance) become edges.
-3. The graph is pruned to the 15 nodes most proximate to the query term 
-   (prioritizing direct 1-hop neighbors by weight, then 2-hop neighbors by path 
+3. The graph is pruned to the 15 nodes most proximate to the query term
+   (prioritizing direct 1-hop neighbors by weight, then 2-hop neighbors by path
    product weight).
-4. The resulting subgraph is serialized to [NetworkX node-link JSON 
+4. The resulting subgraph is serialized to [NetworkX node-link JSON
    format](https://networkx.org/documentation/stable/reference/readwrite/generated/networkx.readwrite.json_graph.node_link_data.html).
 
 **Output**
 
-Serialized graphs are written to `src/data/`, where the Astro build can import 
+Serialized graphs are written to `src/data/`, where the Astro build can import
 them:
 
 ```
@@ -99,19 +99,19 @@ src/
         └── cedict.ts          # Parses CC-CEDICT dictionary at build time
 ```
 
-**`index.astro`** imports the two JSON files at build time, validates them with 
-Zod, and passes them as props to the React components. For the Chinese side, it 
-also pre-builds a dictionary of character definitions from the bundled 
+**`index.astro`** imports the two JSON files at build time, validates them with
+Zod, and passes them as props to the React components. For the Chinese side, it
+also pre-builds a dictionary of character definitions from the bundled
 CC-CEDICT data (`src/data/cedict_1_0_ts_utf-8_mdbg.txt`).
 
-**`SEPNetwork.tsx`** renders a row of source buttons (one per SEP article, or 
+**`SEPNetwork.tsx`** renders a row of source buttons (one per SEP article, or
 one per Mengzi book) and swaps the active network when clicked.
 
-**`Network.tsx`** renders a D3 force-directed layout. Edges are drawn on an 
-HTML5 Canvas; nodes are absolutely positioned DOM elements that can be dragged. 
+**`Network.tsx`** renders a D3 force-directed layout. Edges are drawn on an
+HTML5 Canvas; nodes are absolutely positioned DOM elements that can be dragged.
 Edge thickness is proportional to PMI weight.
 
-**`HanziNode.tsx`** wraps Chinese character nodes with a tooltip showing the 
+**`HanziNode.tsx`** wraps Chinese character nodes with a tooltip showing the
 CC-CEDICT definition.
 
 ---
@@ -127,7 +127,7 @@ TERMS: list[Term] = [
 ]
 ```
 
-Then re-run the pipeline and update `src/pages/index.astro` to import and 
+Then re-run the pipeline and update `src/pages/index.astro` to import and
 display the new data files.
 
 ---
@@ -163,11 +163,11 @@ cd scripts
 python main.py
 ```
 
-This fetches texts (with SQLite caching at `scripts/.cache/http_cache.sqlite`), 
-runs NLP, and writes JSON to `src/data/`. Running it again will use cached HTTP 
+This fetches texts (with SQLite caching at `scripts/.cache/http_cache.sqlite`),
+runs NLP, and writes JSON to `src/data/`. Running it again will use cached HTTP
 responses and complete in seconds.
 
-The output files are already committed to the repository, so **this step is 
+The output files are already committed to the repository, so **this step is
 optional** if you just want to run the site with the existing data.
 
 ### 4. Run the development server
