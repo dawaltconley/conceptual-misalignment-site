@@ -5,7 +5,6 @@ Xunzi-Qwen1.5-7B_chat model.
 
 Pipeline:
   raw text  ->  sentence split  ->  per-sentence LLM tagging  ->  QC  ->  JSONL
-
 Design choices worth knowing:
   * The output format and the tagset are pinned by FEW-SHOT EXAMPLES, not by
     trusting the model's defaults. This makes results reproducible regardless of
@@ -26,34 +25,17 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import Literal
 from config import TERMS
+
+import xunzi.seg
+import xunzi.segpos
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
 # Set at runtime (main); when True, api requests are constrained by a per-sentence
 # GBNF grammar so the model can only emit the exact input characters.
 USE_GRAMMAR = False
-
-# FEW-SHOT EXAMPLES --- Drawn from the XunziALLM sample data: https://github.com/Xunzi-LLM-of-Chinese-classics/XunziALLM/blob/a10d6e9ad4e03c8c0cc4370e9d76e04cfa3aa011/sample%20data/sample%20data%20for%20downstream%20tasks%20evaluation/seg_downstream.json
-FEWSHOT = []
-with open('seg_data.json') as seg_data:
-    data = json.load(seg_data)
-    for shot in data:
-        FEWSHOT.append((shot['input'], shot['output']))
-
-
-SYSTEM_PROMPT = """
-    You are an assistant to help in the processing of Classical Chinese texts.
-    Please perform word segmentation on the input Classical Chinese sentences,
-    using the "/" character to delimit word boundaries. Output only the segmented
-    results; do not include explanations, numbering, or extraneous text. Ensure
-    the characters in the segmented output match the original sentence exactly
-    (no added, omitted, or altered characters).
-
-    Unless they are used as part of a proper noun, treat terms in the following
-    list as distinct words: {terms}
-""".format(terms=", ".join([t.hanzi for t in TERMS])).strip()
-
 
 # --------------------------------------------------------------------------- #
 # Sentence splitting
@@ -84,76 +66,157 @@ def split_sentences(text: str):
     return sentences
 
 
-# --------------------------------------------------------------------------- #
-# Parsing + QC
-# --------------------------------------------------------------------------- #
+class Word:
+    def __init__(self, word: str, pos: str | None = None):
+        self.word = word
+        self.pos = pos
+
+    def serialize(self):
+        if self.pos:
+            return {"word": self.word, "pos": self.pos}
+        return self.word
 
 
-def parse_segmented(output: str):
-    """
-    Parse a 'word/word/word ...' string into [word, word, ...].
-    Tolerates stray whitespace/newlines. Splits each token on its LAST slash so
-    that a word containing '/' would still parse (rare in this domain).
-    Returns None if any token is malformed.
-    """
-    output = output.strip()
-    # If the model wrapped the answer in extra lines, keep the line that looks
-    # most like a tagged sequence (contains '/').
-    candidate_lines = [ln for ln in output.splitlines() if "/" in ln]
-    if candidate_lines:
-        output = max(candidate_lines, key=len)
-    return output.split("/")
+class SegPos:
+    def __init__(self, process: Literal['seg', 'segpos'], *, system_prompt: str, fewshot: list[tuple[str, str]], core_terms: list[str] = []):
+        self.process: Literal['seg', 'segpos'] = process
+        self.system_prompt = system_prompt
+        if core_terms:
+            self.system_prompt += "\n\n"
+            "Unless they are used as part of a proper noun, treat terms in the following"
+            "list as distinct words: {terms}".format(
+                terms=", ".join(core_terms))
+        self.fewshot = fewshot
+        self.core_terms = core_terms
 
+    def parse(self, output: str) -> list[Word] | None:
+        if self.process == "seg":
+            # words = [Word(w) for w in xunzi.seg.parse(output)]
+            parsed = xunzi.seg.parse(output)
+            if not parsed:
+                return None
+            return [Word(w) for w in parsed]
+        elif self.process == "segpos":
+            parsed = xunzi.segpos.parse(output)
+            if not parsed:
+                return None
+            return [Word(w, pos) for w, pos in parsed]
 
-def parse_tagged(output: str) -> list[tuple[str, str]] | None:
-    """
-    Parse a 'word/TAG word/TAG ...' string into [(word, tag), ...].
-    Tolerates stray whitespace/newlines. Splits each token on its LAST slash so
-    that a word containing '/' would still parse (rare in this domain).
-    Returns None if any token is malformed.
-    """
-    output = output.strip()
-    # If the model wrapped the answer in extra lines, keep the line that looks
-    # most like a tagged sequence (contains '/').
-    candidate_lines = [ln for ln in output.splitlines() if "/" in ln]
-    if candidate_lines:
-        output = max(candidate_lines, key=len)
-    tokens = []
-    for chunk in output.split():
-        if "/" not in chunk:
-            return None
-        word, _, tag = chunk.rpartition("/")
-        if not word or not tag:
-            return None
-        tokens.append((word, tag))
-    return tokens or None
+    def qc_check(self, sentence: str, tokens: list[Word] | None) -> tuple[bool, str]:
+        """
+        Return (ok, reason). Two invariants:
+          1. concatenation of segmented words == original sentence (character-exact)
+          2. every tag is in the defined tagset
+        """
+        if tokens is None:
+            return False, "unparseable output"
+        error: list[str] = []
+        recombined = "".join(t.word for t in tokens)
+        if recombined != sentence:
+            error.append(f"char mismatch: got {recombined!r} vs {sentence!r}")
+        if self.process == "segpos":
+            bad_tags = []
+            for t in tokens:
+                if not (t.pos and t.pos in xunzi.segpos.VALID_TAGS):
+                    bad_tags.append(t.pos)
+            if bad_tags:
+                error.append(f"unknown tags: {sorted(bad_tags)}")
+        bad_words = []
+        for t in tokens:
+            for term in self.core_terms:
+                if term in t.word and term != t.word:
+                    bad_words.append(t.word)
+                    break
+        if bad_words:
+            error.append(f"obfuscated core term: found {', '.join(bad_words)}")
+        if error:
+            return False, "; ".join(error)
+        return True, "ok"
 
+    def validate_tokens(self, tokens: list[Word]) -> None:
+        for t in tokens:
+            if self.process == "seg" and t.pos != None:
+                raise ValueError(
+                    "Bad token, found pos during segmentation: " + t.pos)
+            elif self.process == "segpos" and t.pos == None:
+                raise ValueError("Bad token, no pos during segpos: " + t.word)
 
-def qc_check(sentence: str, tokens):
-    """
-    Return (ok, reason). Two invariants:
-      1. concatenation of segmented words == original sentence (character-exact)
-      2. every tag is in the defined tagset
-    """
-    if tokens is None:
-        return False, "unparseable output"
-    recombined = "".join(w for w in tokens)
-    if recombined != sentence:
-        return False, f"char mismatch: got {recombined!r} vs {sentence!r}"
-    bad_words = []
-    for word in tokens:
-        for term in TERMS:
-            if term.hanzi in word and term.hanzi != word:
-                bad_words.append(word)
-    if bad_words:
-        return False, f"obfuscated core term: found {', '.join(bad_words)}"
-    return True, "ok"
+    def build_messages(self, sentence: str):
+        msgs = [{"role": "system", "content": self.system_prompt}]
+        for src, tagged in self.fewshot:
+            msgs.append({"role": "user", "content": src})
+            msgs.append({"role": "assistant", "content": tagged})
+        msgs.append({"role": "user", "content": sentence})
+        return msgs
+
+    def tag_sentence(self, *, tok, model, sentence: str, max_new_tokens: int, arch: Literal["api", "qwen1", "qwen1.5"], strict: bool = False):
+        strict_prompt: str
+        if self.process == "seg":
+            strict_prompt = xunzi.seg.get_strict_prompt(arch)
+        elif self.process == "segpos":
+            strict_prompt = xunzi.segpos.get_strict_prompt(arch)
+        else:
+            raise ValueError(f"Bad process value: {self.process!r}")
+
+        if arch == "api":
+            # `model` is an OpenAI-compatible client; reuse the chat-template messages.
+            client = model
+            msgs = self.build_messages(sentence)
+            if strict:
+                msgs.insert(
+                    len(msgs) - 1,
+                    {"role": "user", "content": strict_prompt},
+                )
+            grammar = None
+            if USE_GRAMMAR:
+                if self.process == "seg":
+                    grammar = build_gbnf(sentence, word_break="/")
+                elif self.process == "segpos":
+                    tags = sorted(xunzi.segpos.VALID_TAGS)
+                    grammar = build_gbnf(sentence, tags, word_break=" ")
+            resp = client.chat.completions.create(
+                model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=max_new_tokens,
+                extra_body={"grammar": grammar} if grammar else {},
+            )
+            return (resp.choices[0].message.content or "").strip()
+
+        import torch
+
+        if arch == "qwen1":
+            # Original Qwen exposes a .chat() helper; few-shot goes in `history`
+            # as a list of [user, assistant] pairs, and the system prompt via system=.
+            history = [[src, tagged] for src, tagged in self.fewshot]
+            query = sentence
+            if strict:
+                query = strict_prompt + sentence
+            model.generation_config.max_new_tokens = max_new_tokens
+            response, _ = model.chat(
+                tok, query, history=history, system=self.system_prompt)
+            return response.strip()
+
+        # arch == "qwen1.5" : build messages and use the chat template
+        msgs = self.build_messages(sentence)
+        if strict:
+            msgs.insert(
+                len(msgs) - 1,
+                {"role": "user", "content": strict_prompt},
+            )
+        text = tok.apply_chat_template(
+            msgs, tokenize=False, add_generation_prompt=True)
+        inputs = tok(text, return_tensors="pt").to(model.device)
+        with torch.no_grad():
+            out = model.generate(
+                **inputs, max_new_tokens=max_new_tokens, do_sample=False,
+                repetition_penalty=1.0, pad_token_id=tok.eos_token_id,
+            )
+        gen = out[0][inputs.input_ids.shape[1]:]
+        return tok.decode(gen, skip_special_tokens=True).strip()
 
 
 # --------------------------------------------------------------------------- #
 # Model
 # --------------------------------------------------------------------------- #
-def build_gbnf(sentence: str, tags=None):
+def build_gbnf(sentence: str, tags: list[str] | None = None, word_break=" "):
     """
     Build a GBNF grammar that forces output to be a segmentation of EXACTLY the
     input characters, in order. The model may only choose (a) where word
@@ -173,7 +236,8 @@ def build_gbnf(sentence: str, tags=None):
         if i < len(chars) - 1:
             seq.append("gap")
     if tags:
-        seq.append("tag")                       # closing tag of the final word
+        # closing tag of the final word
+        seq.append("tag")
         return "\n".join([
             "root ::= " + " ".join(seq),
             # break: /TAG + space, or continue
@@ -182,22 +246,16 @@ def build_gbnf(sentence: str, tags=None):
         ])
     return "\n".join([
         "root ::= " + " ".join(seq),
-        'gap ::= "/" | ""',                      # break: "/" delimiter, or continue
+        f'gap ::= "{word_break}" | ""',
     ])
 
 
-def build_messages(sentence: str):
-    msgs = [{"role": "system", "content": SYSTEM_PROMPT}]
-    for src, tagged in FEWSHOT:
-        msgs.append({"role": "user", "content": src})
-        msgs.append({"role": "assistant", "content": tagged})
-    msgs.append({"role": "user", "content": sentence})
-    return msgs
-
-
-def load_model(model_id: str, device: str, arch: str, api_base: str | None = None):
+def load_model(*, model_id: str, device: str, arch: str, api_base: str | None = None):
     """Lazy import so the parsing/QC logic can be used without torch installed."""
     if arch == "api":
+        if not api_base:
+            raise ValueError(
+                "must provide api_base if using the api architecture")
         # No local model: return an OpenAI-compatible client in the `model` slot.
         from openai import OpenAI
         client = OpenAI(base_url=api_base, api_key="not-needed")
@@ -240,62 +298,15 @@ def load_model(model_id: str, device: str, arch: str, api_base: str | None = Non
     return tok, model
 
 
-def tag_sentence(tok, model, sentence: str, max_new_tokens: int, arch: str, strict: bool = False):
-    if arch == "api":
-        # `model` is an OpenAI-compatible client; reuse the chat-template messages.
-        client = model
-        msgs = build_messages(sentence)
-        if strict:
-            msgs.insert(
-                len(msgs) - 1,
-                {"role": "user", "content": 'Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.'},
-            )
-        resp = client.chat.completions.create(
-            model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=max_new_tokens,
-            extra_body={"grammar": build_gbnf(
-                sentence)} if USE_GRAMMAR else {},
-        )
-        return (resp.choices[0].message.content or "").strip()
-
-    import torch
-
-    if arch == "qwen1":
-        # Original Qwen exposes a .chat() helper; few-shot goes in `history`
-        # as a list of [user, assistant] pairs, and the system prompt via system=.
-        history = [[src, tagged] for src, tagged in FEWSHOT]
-        query = sentence
-        if strict:
-            query = '(Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.)\n' + sentence
-        model.generation_config.max_new_tokens = max_new_tokens
-        response, _ = model.chat(
-            tok, query, history=history, system=SYSTEM_PROMPT)
-        return response.strip()
-
-    # arch == "qwen1.5" : build messages and use the chat template
-    msgs = build_messages(sentence)
-    if strict:
-        msgs.insert(
-            len(msgs) - 1,
-            {"role": "user", "content": 'Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.'},
-        )
-    text = tok.apply_chat_template(
-        msgs, tokenize=False, add_generation_prompt=True)
-    inputs = tok(text, return_tensors="pt").to(model.device)
-    with torch.no_grad():
-        out = model.generate(
-            **inputs, max_new_tokens=max_new_tokens, do_sample=False,
-            repetition_penalty=1.0, pad_token_id=tok.eos_token_id,
-        )
-    gen = out[0][inputs.input_ids.shape[1]:]
-    return tok.decode(gen, skip_special_tokens=True).strip()
-
-
 # --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 def main():
     ap = argparse.ArgumentParser(
         description="Xunzi seg+POS for classical Chinese")
+    ap.add_argument("process", choices=("seg", "segpos"),
+                    help="whether to perform only word segmentation, "
+                    "or word segmentation and part-of-speech analysis")
     ap.add_argument("--model", default="./Xunzi-Qwen-Chat",
                     help="local path to model dir (from `ms cache scan`), or an HF id "
                          "such as ccwu0918/XunziALLM")
@@ -335,7 +346,27 @@ def main():
     global API_MODEL, USE_GRAMMAR
     API_MODEL = args.api_model
     USE_GRAMMAR = args.grammar
-    tok, model = load_model(args.model, args.device, args.arch, args.api_base)
+
+    segpos: SegPos
+    if args.process == "seg":
+        segpos = SegPos(
+            "seg",
+            system_prompt=xunzi.seg.SYSTEM_PROMPT,
+            fewshot=xunzi.seg.FEWSHOT,
+            core_terms=[t.hanzi for t in TERMS]
+        )
+    elif args.process == "segpos":
+        segpos = SegPos(
+            "segpos",
+            system_prompt=xunzi.segpos.SYSTEM_PROMPT,
+            fewshot=xunzi.segpos.FEWSHOT,
+            core_terms=[t.hanzi for t in TERMS]
+        )
+    else:
+        raise ValueError(f"Bad process value: {args.process!r}")
+
+    tok, model = load_model(
+        model_id=args.model, device=args.device, arch=args.arch, api_base=args.api_base)
 
     try:
         from tqdm import tqdm
@@ -347,24 +378,34 @@ def main():
     with open(args.output, "w", encoding="utf-8") as fout, \
             open(errors_path, "w", encoding="utf-8") as ferr:
         for i, sent in iterator:
-            raw = tag_sentence(
-                tok, model, sent, args.max_new_tokens, args.arch)
-            tokens = parse_segmented(raw)
-            ok, reason = qc_check(sent, tokens)
+            raw = segpos.tag_sentence(
+                tok=tok, model=model, arch=args.arch, sentence=sent, max_new_tokens=args.max_new_tokens)
+            tokens = segpos.parse(raw)
+            ok, reason = segpos.qc_check(sent, tokens)
             if not ok:
                 # handle a common case where xunzi drops a trailing quote
-                if "".join(tokens) == sent[:-1] and sent[-1:] == "」":
-                    print("fixing dropped quote on line " + str(i))
-                    tokens.append("」")
-                    ok = True
+                if tokens and "".join([t.word for t in tokens]) == sent[:-1]:
+                    if sent[-1:] == "」":
+                        missing = Word("」")
+                        if segpos.process == "segpos":
+                            missing = Word("」", "w")
+                        tokens.append(missing)
+                        ok = True
+                    elif sent[-1:] == "』":
+                        missing = Word("』")
+                        if segpos.process == "segpos":
+                            missing = Word("』", "w")
+                        tokens.append(missing)
+                        ok = True
                 else:  # one stricter retry
-                    raw = tag_sentence(
-                        tok, model, sent, args.max_new_tokens, args.arch, strict=True)
-                    tokens = parse_segmented(raw)
-                    ok, reason = qc_check(sent, tokens)
+                    raw = segpos.tag_sentence(
+                        tok=tok, model=model, arch=args.arch, sentence=sent, max_new_tokens=args.max_new_tokens, strict=True)
+                    tokens = segpos.parse(raw)
+                    ok, reason = segpos.qc_check(sent, tokens)
             assert tokens is not None
+            segpos.validate_tokens(tokens)
             rec = {"id": i, "sentence": sent,
-                   "tokens": [w for w in tokens if w]}
+                   "tokens": [w.serialize() for w in tokens if w.word]}
             if ok:
                 fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n_ok += 1
