@@ -1,9 +1,4 @@
 # Direct dependencies only. Transitive deps are resolved by pip.
-#
-# NOTE: PyTorch is intentionally NOT listed here. The ROCm build
-# (torch==2.9.1+rocm6.3) only exists on AMD's index and is installed
-# separately by init-env.sh. Do not add torch / triton / rocm-sdk-* /
-# nvidia-cuda-* here — the ROCm torch wheel is self-contained.
 
 # --- NLP / ML ---
 numpy==2.4.4                 # pin: cltk/scipy need >=2.x; a 1.x downgrade breaks sklearn
@@ -14,6 +9,7 @@ spacy-html-tokenizer==0.1.3
 cltk==2.5.1                  # pulls in stanza + the classical-Chinese pipeline
 stanza==1.11.1
 openai==2.45.0
+torch==2.9.1+rocm6.3         # must be installed separately, see init-env.sh
 
 # --- scraping / data / output ---
 beautifulsoup4==4.14.3
