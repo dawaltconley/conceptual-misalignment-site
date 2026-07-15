@@ -31,9 +31,11 @@ scripts/
 ├── mengzi.py        # Fetch the Mengzi from the Chinese Text Project (ctext.org) API
 ├── cache.py         # SQLite HTTP cache (7-day TTL via requests-cache)
 ├── utils.py         # PMI graph construction, cosine similarity, graph pruning
+├── segpos.py        # Diagnostic: dump Mengzi seg + UD POS to segpos/*.jsonl (not read by the build)
 └── nlp/
     ├── english.py   # spaCy tokenizer for English HTML
-    └── chinese.py   # CLTK tokenizer for classical Chinese (lzh model)
+    ├── chinese.py   # SuPar-Kanbun tokenizer for classical Chinese (spaCy, UD POS)
+    └── sentences.py # Classical-Chinese sentence splitter (shared)
 ```
 
 **English text — Stanford Encyclopedia of Philosophy**
@@ -49,9 +51,14 @@ lemma.
 
 `mengzi.py` fetches the full text and all 14 books of the Mengzi via the
 [Chinese Text Project API](https://api.ctext.org). `nlp/chinese.py` tokenizes
-classical Chinese using [CLTK](https://cltk.org/)'s classical Chinese (`lzh`)
-model. A domain-specific stopword list removes function words, pronouns, and
-common classical particles.
+classical Chinese using [SuPar-Kanbun](https://github.com/KoichiYasuoka/SuPar-Kanbun),
+which returns a native spaCy `Doc` with Universal Dependencies POS tags — the
+same shape as the English side. As with English, only content words (nouns,
+verbs, adjectives, proper nouns) are kept; a domain-specific stopword list
+additionally removes common classical particles and function words that tag as
+content POS. (`segpos.py` can dump the full segmentation + POS for inspection to
+`segpos/mengzi.segpos.jsonl`; that artifact is diagnostic and is not read by the
+build.)
 
 **Building co-occurrence networks**
 
@@ -154,7 +161,9 @@ source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-The CLTK classical Chinese model will be downloaded automatically on first run.
+The SuPar-Kanbun classical Chinese model (a transformer, a few hundred MB) is
+downloaded automatically on first run. `scripts/init-env.sh` pre-downloads it
+along with the spaCy English model.
 
 ### 3. Run the NLP pipeline
 
