@@ -38,6 +38,13 @@ echo "==> Downloading spaCy en_core_web_sm model..."
 echo ""
 python -m spacy download en_core_web_sm
 
+# Warm up the SuPar-Kanbun classical-Chinese model (nlp/chinese.py) so the first
+# main.py run doesn't pause to download the transformer weights.
+echo ""
+echo "==> Downloading SuPar-Kanbun classical-Chinese model..."
+echo ""
+python -c "import suparkanbun; suparkanbun.load()"
+
 echo ""
 echo "==> Sanity check..."
 echo ""
