@@ -3,7 +3,6 @@ from collections import defaultdict
 from spacy.tokens import Doc
 
 from utils import is_cjk
-from nlp.sentences import split_sentences
 
 # UD UPOS tags kept as "content words" — mirrors nlp/english.py::CONTENT_POS.
 CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
@@ -31,6 +30,15 @@ STOPWORDS: set[str] = {
     "然", "得", "能", "可", "將", "及", "皆", "未", "與",
 }
 
+PUNCTUATION: set[str] = {
+    "、", "。", "《", "》", "「", "」", "『", "』", "！", "，", "：", "；", "？"
+}
+
+
+def strip_punct(text: str) -> str:
+    return "".join([char for char in text if char not in PUNCTUATION])
+
+
 _nlp = None
 
 
@@ -40,7 +48,7 @@ def get_nlp():
     if _nlp is None:
         import suparkanbun
 
-        _nlp = suparkanbun.load()
+        _nlp = suparkanbun.load(Danku=True)
     return _nlp
 
 
@@ -83,33 +91,34 @@ def _merge_word_formation(doc: Doc) -> Doc:
     return doc
 
 
-def tag_sentence(sentence: str) -> Doc:
-    """Tag one classical-Chinese sentence and merge word-formation compounds.
+def tag_segment(segment: str) -> Doc:
+    """Tag one classical-Chinese segment and merge word-formation compounds.
 
     Returns the retokenized spaCy ``Doc`` (used by both the co-occurrence
     tokenizer below and the diagnostic segpos dump).
     """
-    return _merge_word_formation(get_nlp()(sentence))
+    nlp = get_nlp()
+    return _merge_word_formation(nlp(segment))
 
 
 def tokenize_classical_chinese(text: str) -> list[list[str]]:
-    """Per-sentence content-word token lists via SuPar-Kanbun (spaCy, UD POS).
+    """Per-segment content-word token lists via SuPar-Kanbun (spaCy, UD POS).
 
-    SuPar-Kanbun treats its whole input string as a single sentence, so we split
-    on sentence-final punctuation first and tag each sentence independently. Word-
-    formation compounds (e.g. 天下) are merged into a single token before filtering,
+    Word-formation compounds (e.g. 天下) are merged into a single token before filtering,
     so co-occurrence is computed over whole words. Each surviving token's surface
     form (``token.text``, traditional characters as in the source) is kept when it
     is all-CJK and its UD ``pos_`` is a content tag.
     """
-    sent_token_lists: list[list[str]] = []
-    for sentence in split_sentences(text):
-        doc = tag_sentence(sentence)
-        tokens = [
+
+    doc = tag_segment(strip_punct(text))
+    sents = list(doc.sents)
+    return [
+        [
             token.text
-            for token in doc
-            if is_cjk(token.text) and token.pos_ in CONTENT_POS
+            for token in sent
+            if not token.is_punct
+            and is_cjk(token.text)
+            and token.pos_ in CONTENT_POS
         ]
-        if tokens:
-            sent_token_lists.append(tokens)
-    return sent_token_lists
+        for sent in sents
+    ]

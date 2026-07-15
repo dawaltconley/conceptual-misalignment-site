@@ -10,19 +10,19 @@ import json
 from pathlib import Path
 
 from mengzi import fetch_mengzi_full
-from nlp.chinese import tag_sentence
-from nlp.sentences import split_sentences
+from nlp.chinese import tag_segment, strip_punct
 
-OUTPUT = Path(__file__).resolve().parent.parent / "segpos" / "mengzi.segpos.jsonl"
+OUTPUT = Path(__file__).resolve().parent.parent / \
+    "segpos" / "mengzi.segpos.jsonl"
 
 
 def main() -> None:
     text = fetch_mengzi_full().text
+    doc = tag_segment(strip_punct(text))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     n = 0
     with OUTPUT.open("w", encoding="utf-8") as fout:
-        for i, sentence in enumerate(split_sentences(text)):
-            doc = tag_sentence(sentence)
+        for i, sentence in enumerate(doc.sents):
             tokens = [
                 {
                     "word": t.text,
@@ -31,10 +31,10 @@ def main() -> None:
                     "lemma": t.lemma_,
                     "gloss": t.norm_,  # English gloss
                 }
-                for t in doc
+                for t in sentence
                 if t.text.strip()
             ]
-            rec = {"id": i, "sentence": sentence, "tokens": tokens}
+            rec = {"id": i, "sentence": sentence.text, "tokens": tokens}
             fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
             n += 1
     print(f"Wrote {n} sentences to {OUTPUT}")
