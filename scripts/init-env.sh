@@ -11,13 +11,6 @@ source .venv/bin/activate
 
 python -m pip install --upgrade pip setuptools wheel
 
-# ---------------------------------------------------------------------------
-# 1. PyTorch for AMD ROCm.
-#    MUST come from the ROCm index, not PyPI. This wheel is self-contained
-#    and automatically pulls the matching pytorch-triton-rocm. Do NOT install
-#    the nvidia-cuda-*, standalone triton, or rocm-sdk-* packages that were in
-#    the old pip-freeze requirements — they are unused on this setup.
-# ---------------------------------------------------------------------------
 echo "==> Installing ROCm PyTorch..."
 pip install torch==2.9.1+rocm6.3 --index-url https://download.pytorch.org/whl/rocm6.3
 
