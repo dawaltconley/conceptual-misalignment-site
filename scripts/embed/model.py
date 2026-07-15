@@ -14,7 +14,7 @@ from transformers import AutoModel, AutoTokenizer
 
 from embed.occurrences import SentenceSpans
 
-DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_jian_fan"
+DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 
 
 def pick_device() -> str:
@@ -32,13 +32,15 @@ class Embedder:
     ):
         self.device = device or pick_device()
         self.max_length = max_length
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name, use_fast=True)
         if not self.tokenizer.is_fast:
             raise RuntimeError(
                 f"{model_name} lacks a fast tokenizer; offset mapping "
                 "(needed for span extraction) is unavailable."
             )
-        self.model = AutoModel.from_pretrained(model_name).to(self.device).eval()
+        self.model = AutoModel.from_pretrained(
+            model_name).to(self.device).eval()
         self.hidden_size = self.model.config.hidden_size
 
     @torch.no_grad()
@@ -54,7 +56,7 @@ class Embedder:
         """
         by_word: dict[str, list[np.ndarray]] = {}
         for start in range(0, len(records), batch_size):
-            batch = records[start : start + batch_size]
+            batch = records[start: start + batch_size]
             self._embed_batch(batch, by_word)
         return by_word
 
