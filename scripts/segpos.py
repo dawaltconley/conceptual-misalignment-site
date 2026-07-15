@@ -10,20 +10,19 @@ import json
 from pathlib import Path
 
 from mengzi import fetch_mengzi_full
-from nlp.chinese import get_nlp
+from nlp.chinese import tag_sentence
 from nlp.sentences import split_sentences
 
 OUTPUT = Path(__file__).resolve().parent.parent / "segpos" / "mengzi.segpos.jsonl"
 
 
 def main() -> None:
-    nlp = get_nlp()
     text = fetch_mengzi_full().text
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     n = 0
     with OUTPUT.open("w", encoding="utf-8") as fout:
         for i, sentence in enumerate(split_sentences(text)):
-            doc = nlp(sentence)
+            doc = tag_sentence(sentence)
             tokens = [
                 {
                     "word": t.text,
