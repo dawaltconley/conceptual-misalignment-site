@@ -64,7 +64,7 @@ def dry_run(args: argparse.Namespace, targets: set[str]) -> None:
         return
 
     emb = Embedder(args.model)
-    print(f"[dry-run] device            : {emb.device}")
+    print(f"[dry-run] device            : {emb.device_label}")
     print(f"[dry-run] hidden size       : {emb.hidden_size}")
     by_word = emb.embed(records, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)
@@ -93,7 +93,7 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
     print(f"occurrences: {n_occ}")
 
     emb = Embedder(args.model)
-    print(f"device     : {emb.device}  hidden: {emb.hidden_size}")
+    print(f"device     : {emb.device_label}  hidden: {emb.hidden_size}")
     by_word = emb.embed(records, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)
     is_target = np.array([lbl in targets for lbl in labels])

@@ -18,7 +18,15 @@ DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 
 
 def pick_device() -> str:
+    """Return the compute device string."""
     return "cuda" if torch.cuda.is_available() else "cpu"
+
+
+def device_label(device: str) -> str:
+    """Human-readable device label, e.g. ``cuda:0 (AMD Radeon Graphics)``."""
+    if device.startswith("cuda") and torch.cuda.is_available():
+        return f"{device} ({torch.cuda.get_device_name(0)})"
+    return device
 
 
 class Embedder:
@@ -31,6 +39,7 @@ class Embedder:
         max_length: int = 512,
     ):
         self.device = device or pick_device()
+        self.device_label = device_label(self.device)
         self.max_length = max_length
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_name, use_fast=True)
