@@ -1,16 +1,21 @@
-"""Extract term / vocabulary occurrences (with char spans) from the segpos corpus.
+"""Extract term / vocabulary occurrences and pack sentences into passages.
 
 The corpus is word-segmented and, verified across all 2890 lines,
 ``"".join(tokens) == sentence``. That lets us compute each token's character
 span by simple cumulative offsets, which then map exactly onto the HuggingFace
-tokenizer's ``offset_mapping`` (also character offsets into the raw sentence).
+tokenizer's ``offset_mapping`` (also character offsets into the raw text).
+
+Sentences are packed greedily into passages that stay under the model's token
+cap, so each term is embedded *with* its neighboring-sentence context (via
+self-attention across the packed sequence) rather than in isolation. Span
+coordinates are re-based into passage coordinates during packing.
 """
 
 from __future__ import annotations
 
 import json
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from utils import is_cjk
@@ -21,20 +26,20 @@ DEFAULT_CORPUS = Path("../segpos/full-seg-2/mengzi.segpos.jsonl")
 
 @dataclass(frozen=True)
 class Span:
-    """One occurrence of a word of interest inside a sentence."""
+    """One occurrence of a word of interest, with char offsets into its passage."""
 
     word: str
-    start: int  # char offset into `sentence`
+    start: int
     end: int
 
 
 @dataclass
-class SentenceSpans:
-    """A sentence plus every word-of-interest occurrence found in it."""
+class Passage:
+    """One packed passage: concatenated sentence text + every occurrence in it."""
 
-    sent_id: int
-    sentence: str
-    spans: list[Span]
+    text: str
+    spans: list[Span] = field(default_factory=list)
+    sent_ids: list[int] = field(default_factory=list)
 
 
 def load_sentences(path: Path = DEFAULT_CORPUS) -> list[dict]:
@@ -64,24 +69,51 @@ def build_vocab(
     return vocab
 
 
-def find_occurrences(
+def sentence_spans(tokens: list[str], words_of_interest: set[str]) -> list[Span]:
+    """Spans (relative to the sentence) of every standalone word of interest.
+
+    A word only counts as an occurrence when it is a *standalone segmented
+    token* (``token == word``), which excludes compound / proper-name uses.
+    """
+    spans: list[Span] = []
+    offset = 0
+    for tok in tokens:
+        if tok in words_of_interest:
+            spans.append(Span(tok, offset, offset + len(tok)))
+        offset += len(tok)
+    return spans
+
+
+def build_passages(
     sentences: list[dict],
     words_of_interest: set[str],
-) -> list[SentenceSpans]:
-    """For each sentence, locate every occurrence of a word of interest.
+    sent_token_lens: list[int],
+    max_tokens: int,
+) -> list[Passage]:
+    """Greedily pack consecutive sentences into passages under the token cap.
 
-    A word only counts when it is a *standalone segmented token* (``token ==
-    word``), which excludes compound / proper-name uses (e.g. 仁 inside a name).
-    Sentences with no matches are dropped.
+    Every sentence (occurrence-bearing or not) is included so that packed
+    context is faithful to the source text. ``sent_token_lens[i]`` is the model
+    token count of ``sentences[i]`` (special tokens excluded); the budget
+    reserves 2 slots for ``[CLS]``/``[SEP]``. A lone sentence longer than the
+    budget becomes its own (over-cap) passage and is truncated at embed time.
     """
-    results: list[SentenceSpans] = []
-    for sent in sentences:
-        offset = 0
-        spans: list[Span] = []
-        for tok in sent["tokens"]:
-            if tok in words_of_interest:
-                spans.append(Span(tok, offset, offset + len(tok)))
-            offset += len(tok)
-        if spans:
-            results.append(SentenceSpans(sent["id"], sent["sentence"], spans))
-    return results
+    budget = max_tokens - 2
+    passages: list[Passage] = []
+    cur = Passage(text="")
+    cur_len = 0
+
+    for sent, tlen in zip(sentences, sent_token_lens):
+        if cur.text and cur_len + tlen > budget:
+            passages.append(cur)
+            cur, cur_len = Passage(text=""), 0
+        base = len(cur.text)
+        for sp in sentence_spans(sent["tokens"], words_of_interest):
+            cur.spans.append(Span(sp.word, base + sp.start, base + sp.end))
+        cur.text += sent["sentence"]
+        cur.sent_ids.append(sent["id"])
+        cur_len += tlen
+
+    if cur.text:
+        passages.append(cur)
+    return passages

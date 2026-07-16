@@ -1,18 +1,20 @@
 """GujiRoBERTa embedding: final-layer, per-occurrence mean over subword tokens.
 
-For each sentence we take the model's final hidden states and, for every
-word-of-interest span in that sentence, average the hidden vectors of the tokens
+For each passage we take the model's final hidden states and, for every
+word-of-interest span in that passage, average the hidden vectors of the tokens
 overlapping the span. A single hanzi is normally one token, but the overlap +
 mean logic keeps this correct for multi-char neighbors or any subword splitting.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 import numpy as np
 import torch
 from transformers import AutoModel, AutoTokenizer
 
-from embed.occurrences import SentenceSpans
+from embed.occurrences import Passage
 
 DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 
@@ -52,30 +54,35 @@ class Embedder:
             model_name).to(self.device).eval()
         self.hidden_size = self.model.config.hidden_size
 
+    def token_lengths(self, texts: list[str]) -> list[int]:
+        """Model token count per text (special tokens excluded), for packing."""
+        enc = self.tokenizer(texts, add_special_tokens=False)
+        return [len(ids) for ids in enc["input_ids"]]
+
     @torch.no_grad()
     def embed(
         self,
-        records: list[SentenceSpans],
+        passages: list[Passage],
         batch_size: int = 32,
     ) -> dict[str, list[np.ndarray]]:
-        """Return ``{word: [occurrence_vector, ...]}`` across all records.
+        """Return ``{word: [occurrence_vector, ...]}`` across all passages.
 
         Each occurrence vector is the mean of the final-layer hidden states of
         the tokens overlapping that occurrence's character span.
         """
         by_word: dict[str, list[np.ndarray]] = {}
-        for start in range(0, len(records), batch_size):
-            batch = records[start: start + batch_size]
+        for start in range(0, len(passages), batch_size):
+            batch = passages[start: start + batch_size]
             self._embed_batch(batch, by_word)
         return by_word
 
     def _embed_batch(
         self,
-        batch: list[SentenceSpans],
+        batch: list[Passage],
         by_word: dict[str, list[np.ndarray]],
     ) -> None:
         enc = self.tokenizer(
-            [r.sentence for r in batch],
+            [r.text for r in batch],
             padding=True,
             truncation=True,
             max_length=self.max_length,

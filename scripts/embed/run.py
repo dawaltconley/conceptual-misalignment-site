@@ -19,12 +19,23 @@ from embed import analyze, vectors
 from embed.model import DEFAULT_MODEL, Embedder
 from embed.occurrences import (
     DEFAULT_CORPUS,
+    Passage,
+    build_passages,
     build_vocab,
-    find_occurrences,
     load_sentences,
 )
 
 DEFAULT_OUT = Path("../analysis/task1")
+
+
+def pack(emb: Embedder, sentences: list[dict], woi: set[str]) -> list[Passage]:
+    """Token-length each sentence, then greedily pack under the model cap."""
+    lens = emb.token_lengths([s["sentence"] for s in sentences])
+    passages = build_passages(sentences, woi, lens, emb.max_length)
+    n_occ = sum(len(p.spans) for p in passages)
+    print(f"packed     : {len(sentences)} sentences -> {len(passages)} passages "
+          f"(<= {emb.max_length} tok); {n_occ} occurrences")
+    return passages
 
 
 def parse_args() -> argparse.Namespace:
@@ -53,20 +64,17 @@ def target_set(args: argparse.Namespace) -> set[str]:
 
 def dry_run(args: argparse.Namespace, targets: set[str]) -> None:
     sentences = load_sentences(args.corpus)[: args.limit]
-    records = find_occurrences(sentences, targets)
-    n_occ = sum(len(r.spans) for r in records)
     print(f"[dry-run] sentences scanned : {len(sentences)}")
     print(f"[dry-run] targets           : {sorted(targets)}")
-    print(f"[dry-run] sentences w/ hits : {len(records)}")
-    print(f"[dry-run] total occurrences : {n_occ}")
-    if n_occ == 0:
-        print("[dry-run] no occurrences found — check corpus / target chars.")
-        return
 
     emb = Embedder(args.model)
     print(f"[dry-run] device            : {emb.device_label}")
     print(f"[dry-run] hidden size       : {emb.hidden_size}")
-    by_word = emb.embed(records, batch_size=args.batch_size)
+    passages = pack(emb, sentences, targets)
+    if sum(len(p.spans) for p in passages) == 0:
+        print("[dry-run] no occurrences found — check corpus / target chars.")
+        return
+    by_word = emb.embed(passages, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)
     print(f"[dry-run] pooled words      : {labels}")
     print(f"[dry-run] vector shape      : {matrix[0].shape}")
@@ -87,14 +95,10 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
     print(f"targets    : {sorted(targets)}")
     print(f"vocab size : {len(vocab)} (min_freq={args.min_freq})")
 
-    records = find_occurrences(sentences, vocab)
-    n_occ = sum(len(r.spans) for r in records)
-    print(f"sentences  : {len(records)} with occurrences / {len(sentences)} total")
-    print(f"occurrences: {n_occ}")
-
     emb = Embedder(args.model)
     print(f"device     : {emb.device_label}  hidden: {emb.hidden_size}")
-    by_word = emb.embed(records, batch_size=args.batch_size)
+    passages = pack(emb, sentences, vocab)
+    by_word = emb.embed(passages, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)
     is_target = np.array([lbl in targets for lbl in labels])
     print(f"pooled     : {len(labels)} words ({int(is_target.sum())} targets)")
