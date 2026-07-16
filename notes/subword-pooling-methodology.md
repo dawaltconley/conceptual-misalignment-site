@@ -3,6 +3,16 @@
 How a term's vector is built in `scripts/embed/`, and the literature supporting
 each step. Relevant to defending the method in the dissertation.
 
+**Note:** Wu and Wang (2025) uses max pooling, and they explain why on p. 5:
+
+> In contrast to conventional average pooling, which tends to smooth out 
+salient semantic features and suffers from noise introduced by subword 
+fragmentation, we adopted a max pooling strategy. This approach preserves the 
+most dominant semantic signals across token dimensions, thereby enhancing both 
+the expressiveness and contrastiveness of word representations—particularly for 
+philosophically meaningful but polysemous terms in Pre-Qin texts (Wu and Wang, 
+2025, p. 5).
+
 ## What the code does
 
 Building a term vector happens in **two distinct pooling stages**:
