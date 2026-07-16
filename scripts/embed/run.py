@@ -38,6 +38,17 @@ def pack(emb: Embedder, sentences: list[dict], woi: set[str]) -> list[Passage]:
     return passages
 
 
+def unk_check(emb: Embedder, words: set[str]) -> None:
+    """Warn if any word we embed loses a character to [UNK]."""
+    unk = emb.unk_words(sorted(words))
+    if unk:
+        print(f"WARNING: {len(unk)} word(s) tokenize to [UNK]:")
+        for w, toks in list(unk.items())[:20]:
+            print(f"    {w!r} -> {toks}")
+    else:
+        print(f"UNK check  : OK — all {len(words)} words in-vocab")
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--dry-run", action="store_true",
@@ -70,6 +81,7 @@ def dry_run(args: argparse.Namespace, targets: set[str]) -> None:
     emb = Embedder(args.model)
     print(f"[dry-run] device            : {emb.device_label}")
     print(f"[dry-run] hidden size       : {emb.hidden_size}")
+    unk_check(emb, targets)
     passages = pack(emb, sentences, targets)
     if sum(len(p.spans) for p in passages) == 0:
         print("[dry-run] no occurrences found — check corpus / target chars.")
@@ -97,6 +109,7 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
 
     emb = Embedder(args.model)
     print(f"device     : {emb.device_label}  hidden: {emb.hidden_size}")
+    unk_check(emb, vocab)
     passages = pack(emb, sentences, vocab)
     by_word = emb.embed(passages, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)

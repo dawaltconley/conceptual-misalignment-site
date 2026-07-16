@@ -59,6 +59,21 @@ class Embedder:
         enc = self.tokenizer(texts, add_special_tokens=False)
         return [len(ids) for ids in enc["input_ids"]]
 
+    def unk_words(self, words: Iterable[str]) -> dict[str, list[str]]:
+        """Words that tokenize to at least one ``[UNK]`` → their token list.
+
+        Spot-check for out-of-vocab characters among the terms we embed: any
+        word here loses a character to ``[UNK]``, so its vector is degraded.
+        """
+        words = list(words)
+        unk_id = self.tokenizer.unk_token_id
+        encs = self.tokenizer(words, add_special_tokens=False)["input_ids"]
+        return {
+            w: self.tokenizer.convert_ids_to_tokens(ids)
+            for w, ids in zip(words, encs)
+            if unk_id in ids
+        }
+
     @torch.no_grad()
     def embed(
         self,
