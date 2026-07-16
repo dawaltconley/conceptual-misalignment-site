@@ -1,9 +1,12 @@
 from typing import Literal
+import os
 import json
+
+SEG_DATA = os.path.dirname(os.path.realpath(__file__)) + '/seg_data.json'
 
 # FEW-SHOT EXAMPLES --- Drawn from the XunziALLM sample data: https://github.com/Xunzi-LLM-of-Chinese-classics/XunziALLM/blob/a10d6e9ad4e03c8c0cc4370e9d76e04cfa3aa011/sample%20data/sample%20data%20for%20downstream%20tasks%20evaluation/seg_downstream.json
 FEWSHOT: list[tuple[str, str]] = []
-with open('seg_data.json') as seg_data:
+with open(SEG_DATA) as seg_data:
     data = json.load(seg_data)
     for shot in data:
         FEWSHOT.append((shot['input'], shot['output']))
