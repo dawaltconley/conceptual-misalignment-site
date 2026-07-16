@@ -7,6 +7,16 @@ communities serialized in the site's node-link JSON schema.
 """
 
 from __future__ import annotations
+from itertools import cycle
+from utils import prune_to_neighborhood, save_graph_json
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+import numpy as np
+import networkx as nx
+from matplotlib import font_manager
+import matplotlib.pyplot as plt
 
 import csv
 from pathlib import Path
@@ -14,8 +24,6 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")  # headless
-import matplotlib.pyplot as plt
-from matplotlib import font_manager
 
 # Render CJK glyphs (default DejaVu Sans has none) using system Noto Sans CJK.
 _CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
@@ -25,14 +33,7 @@ try:
     plt.rcParams["axes.unicode_minus"] = False
 except (FileNotFoundError, RuntimeError):
     pass  # fall back to default font (CJK glyphs will be boxes)
-import networkx as nx
-import numpy as np
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
-from sklearn.metrics.pairwise import cosine_similarity
 
-from utils import prune_to_neighborhood, save_graph_json
 
 EPS = 1e-12
 
@@ -62,7 +63,8 @@ def write_matrix_csv(path: Path, labels: list[str], mat: np.ndarray) -> None:
         w = csv.writer(f)
         w.writerow([""] + labels)
         for lbl, row in zip(labels, mat):
-            w.writerow([lbl] + [f"{v:.4f}" if np.isfinite(v) else "" for v in row])
+            w.writerow(
+                [lbl] + [f"{v:.4f}" if np.isfinite(v) else "" for v in row])
 
 
 # ---------------------------------------------------------------------------
@@ -123,7 +125,8 @@ def _scatter(coords, labels, is_target, title, path: Path) -> None:
 
 def pca_plot(vectors, labels, is_target, path: Path) -> None:
     coords = PCA(n_components=2, random_state=0).fit_transform(vectors)
-    _scatter(coords, labels, is_target, "PCA of virtue + neighbor vectors", path)
+    _scatter(coords, labels, is_target,
+             "PCA of virtue + neighbor vectors", path)
 
 
 def tsne_plot(vectors, labels, is_target, path: Path) -> None:
@@ -141,10 +144,15 @@ def tsne_plot(vectors, labels, is_target, path: Path) -> None:
 
 def kmeans_assignments(vectors, labels, is_target, k: int) -> list[dict]:
     k = max(1, min(k, len(labels)))
-    km = KMeans(n_clusters=k, random_state=0, n_init=10).fit(vectors)
+    km = KMeans(
+        n_clusters=k,
+        random_state=0,
+        n_init=10  # pyright:ignore -- bad typing
+    ).fit(vectors)
+    clusters = km.labels_ if not km.labels_ is None else cycle([0])
     return [
         {"term": lbl, "is_target": bool(t), "cluster": int(c)}
-        for lbl, t, c in zip(labels, is_target, km.labels_)
+        for lbl, t, c in zip(labels, is_target, clusters)
     ]
 
 
@@ -213,7 +221,8 @@ def build_and_save_networks(
 # ---------------------------------------------------------------------------
 
 def heatmap(mat: np.ndarray, labels: list[str], title: str, path: Path) -> None:
-    fig, ax = plt.subplots(figsize=(1.2 * len(labels) + 2, 1.2 * len(labels) + 2))
+    fig, ax = plt.subplots(
+        figsize=(1.2 * len(labels) + 2, 1.2 * len(labels) + 2))
     data = np.where(np.isfinite(mat), mat, np.nan)
     im = ax.imshow(data, cmap="viridis")
     ax.set_xticks(range(len(labels)), labels)
@@ -271,7 +280,8 @@ def run_analysis(
     write_rows_csv(out_dir / "kmeans.csv", km)
 
     # Network + Louvain.
-    n_comms = build_and_save_networks(labels, matrix, is_target, threshold, out_dir)
+    n_comms = build_and_save_networks(
+        labels, matrix, is_target, threshold, out_dir)
 
     return {
         "n_terms": len(labels),
