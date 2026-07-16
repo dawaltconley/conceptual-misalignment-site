@@ -10,6 +10,7 @@
     "astro": "astro",
     "lint": "npx astro check && npx stylelint src/**/*.{css,scss,sass,astro} && npm run lint:python && npx prettier -c .",
     "lint:python": "cd scripts && pyright .",
+    "xunzi:api": "llama serve -m \"$XUNZI\" -ngl 99 -c 4096 --host 127.0.0.1 --port 8080",
     "cloudformation:package": "aws cloudformation package --template-file aws.template.yaml --s3-bucket cf-templates-m6s9n0rrcicj-us-east-1 --s3-prefix static-websites --output-template-file ./packaged.template.yaml",
     "cloudformation:deploy": "aws cloudformation deploy --template-file ./packaged.template.yaml --stack-name AstroStarter --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
   },
