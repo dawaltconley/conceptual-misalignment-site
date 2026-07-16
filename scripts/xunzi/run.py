@@ -25,6 +25,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from difflib import ndiff
 from typing import Literal
 from config import TERMS
 
@@ -213,9 +214,36 @@ class SegPos:
         return tok.decode(gen, skip_special_tokens=True).strip()
 
 
+def diff_str(a, b):
+    diff = list(ndiff(a, b))
+    diff_segs: list[str] = []
+    i = 0
+    while i < len(diff):
+        d = diff[i]
+        if not d.startswith(' '):
+            j = i + 1
+            last = d
+            diff_str = last
+            while j < len(diff) and not diff[j].startswith(' '):
+                if diff[j][0] == last[0]:
+                    diff_str += diff[j][-1]
+                else:
+                    last = diff[j]
+                    diff_str += last
+                j += 1
+            pre = [d[-1] for d in diff[max(0, i - 5): i] if d.startswith(' ')]
+            post = [d[-1]
+                    for d in diff[j: min(len(diff) - 1, j + 5)] if d.startswith(' ')]
+            diff_segs.append(''.join(pre + [f"({diff_str})"] + post))
+            i = j
+        i += 1
+    return diff_segs
+
 # --------------------------------------------------------------------------- #
 # Model
 # --------------------------------------------------------------------------- #
+
+
 def build_gbnf(sentence: str, tags: list[str] | None = None, word_break=" "):
     """
     Build a GBNF grammar that forces output to be a segmentation of EXACTLY the
@@ -412,6 +440,8 @@ def main():
             else:
                 rec["raw_output"] = raw
                 rec["reason"] = reason
+                rec["diffs"] = diff_str(
+                    ''.join([t.word for t in tokens]), sent)
                 ferr.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n_err += 1
 
