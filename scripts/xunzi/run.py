@@ -347,9 +347,17 @@ def main():
     ap.add_argument("--api-model", default="xunzi",
                     help="model name to send to the API (llama.cpp ignores it; Ollama needs the tag)")
     ap.add_argument("--input", required=True,
-                    help="UTF-8 text file (e.g. mengzi.txt)")
+                    help="UTF-8 text file (e.g. mengzi.txt, or a chapter file)")
     ap.add_argument("--output", required=True,
-                    help="output JSONL of tagged sentences")
+                    help="output JSONL of tagged units")
+    ap.add_argument("--unit", choices=("sentence", "line"), default="sentence",
+                    help="'sentence' splits the input on 。！？； before tagging "
+                         "(one record per sentence); 'line' tags each whole line "
+                         "as a single unit (one record per passage) and leaves "
+                         "sentence splitting to a downstream consumer")
+    ap.add_argument("--chapter", default=None,
+                    help="chapter label written into each record when --unit line "
+                         "(default: input filename stem, e.g. '1A')")
     ap.add_argument("--errors", default=None,
                     help="JSONL for QC failures (default: <output>.errors.jsonl)")
     ap.add_argument("--device", default="auto", choices=["auto", "cpu"],
@@ -366,10 +374,16 @@ def main():
         str(args.output) + ".errors.jsonl")
 
     text = Path(args.input).read_text(encoding="utf-8")
-    sentences = split_sentences(text)
+    if args.unit == "line":
+        # Each non-empty line is a passage, tagged as one whole unit.
+        units = [ln.strip() for ln in text.replace(
+            "\r", "").split("\n") if ln.strip()]
+    else:
+        units = split_sentences(text)
     if args.limit:
-        sentences = sentences[: args.limit]
-    print(f"[info] {len(sentences)} sentences to tag", file=sys.stderr)
+        units = units[: args.limit]
+    chapter = args.chapter or Path(args.input).stem
+    print(f"[info] {len(units)} {args.unit}(s) to tag", file=sys.stderr)
 
     global API_MODEL, USE_GRAMMAR
     API_MODEL = args.api_model
@@ -398,9 +412,9 @@ def main():
 
     try:
         from tqdm import tqdm
-        iterator = tqdm(list(enumerate(sentences)), total=len(sentences))
+        iterator = tqdm(list(enumerate(units)), total=len(units))
     except ImportError:
-        iterator = enumerate(sentences)
+        iterator = enumerate(units)
 
     n_ok = n_err = 0
     with open(args.output, "w", encoding="utf-8") as fout, \
@@ -432,8 +446,12 @@ def main():
                     ok, reason = segpos.qc_check(sent, tokens)
             assert tokens is not None
             segpos.validate_tokens(tokens)
-            rec = {"id": i, "sentence": sent,
-                   "tokens": [w.serialize() for w in tokens if w.word]}
+            serialized = [w.serialize() for w in tokens if w.word]
+            if args.unit == "line":
+                rec = {"chapter": chapter, "id": i,
+                       "passage": sent, "tokens": serialized}
+            else:
+                rec = {"id": i, "sentence": sent, "tokens": serialized}
             if ok:
                 fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n_ok += 1
