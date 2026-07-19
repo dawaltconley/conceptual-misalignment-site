@@ -22,29 +22,51 @@ Books and their ctext URNs:
 import requests
 import time
 import cache
+from typing import Literal
 from random import random
-from dataclasses import dataclass
 cache.install()
 
+_CHAPTER_ID = Literal["1A", "1B", "2A", "2B", "3A",
+                      "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B"]
+
+_ID_TITLE_DICT: dict[str, str] = {
+    '1A':  '梁惠王上',
+    '1B':  '梁惠王下',
+    '2A':  '公孫丑上',
+    '2B':  '公孫丑下',
+    '3A':  '滕文公上',
+    '3B':  '滕文公下',
+    '4A':  '離婁上',
+    '4B':  '離婁下',
+    '5A':  '萬章上',
+    '5B':  '萬章下',
+    '6A':  '告子上',
+    '6B':  '告子下',
+    '7A':  '盡心上',
+    '7B':  '盡心下',
+}
+
+for id, title in list(_ID_TITLE_DICT.items()):
+    _ID_TITLE_DICT[title] = id
 
 API_BASE = "https://api.ctext.org"
 
-BOOKS = [
-    "ctp:mengzi/liang-hui-wang-i",
-    "ctp:mengzi/liang-hui-wang-ii",
-    "ctp:mengzi/gong-sun-chou-i",
-    "ctp:mengzi/gong-sun-chou-ii",
-    "ctp:mengzi/teng-wen-gong-i",
-    "ctp:mengzi/teng-wen-gong-ii",
-    "ctp:mengzi/li-lou-i",
-    "ctp:mengzi/li-lou-ii",
-    "ctp:mengzi/wan-zhang-i",
-    "ctp:mengzi/wan-zhang-ii",
-    "ctp:mengzi/gaozi-i",
-    "ctp:mengzi/gaozi-ii",
-    "ctp:mengzi/jin-xin-i",
-    "ctp:mengzi/jin-xin-ii",
-]
+# _BOOK_URNS = [
+#     "ctp:mengzi/liang-hui-wang-i",
+#     "ctp:mengzi/liang-hui-wang-ii",
+#     "ctp:mengzi/gong-sun-chou-i",
+#     "ctp:mengzi/gong-sun-chou-ii",
+#     "ctp:mengzi/teng-wen-gong-i",
+#     "ctp:mengzi/teng-wen-gong-ii",
+#     "ctp:mengzi/li-lou-i",
+#     "ctp:mengzi/li-lou-ii",
+#     "ctp:mengzi/wan-zhang-i",
+#     "ctp:mengzi/wan-zhang-ii",
+#     "ctp:mengzi/gaozi-i",
+#     "ctp:mengzi/gaozi-ii",
+#     "ctp:mengzi/jin-xin-i",
+#     "ctp:mengzi/jin-xin-ii",
+# ]
 
 
 def _fetch_text(urn: str) -> dict:
@@ -53,6 +75,11 @@ def _fetch_text(urn: str) -> dict:
     if not r.from_cache:  # type: ignore
         time.sleep(random() * 2 + 1)
     return r.json()
+
+
+def _fetch_text_local(id: _CHAPTER_ID) -> str:
+    with open(f"mengzi/{id}.txt", "r") as file:
+        return file.read()
 
 
 def _fetch_text_url(urn: str) -> str:
@@ -65,7 +92,6 @@ def _fetch_text_url(urn: str) -> str:
     return r.json().get("url", "")
 
 
-@dataclass
 class Chapter:
     urn: str
     url: str
@@ -73,9 +99,15 @@ class Chapter:
     description: str
     text: str
 
+    def __init__(self, *, urn: str, title: str, description: str | None = None, text: str):
+        self.urn = urn
+        self.url = _fetch_text_url(urn)
+        self.title = title
+        self.description = description or text[:160]
+        self.text = text
+
     @classmethod
     def from_urn(cls, urn):
-        url = _fetch_text_url(urn)
         data = _fetch_text(urn)
         title = data.get("title", "")
         paragraphs: list[str] = data.get("fulltext", [])
@@ -83,7 +115,6 @@ class Chapter:
         if len(paragraphs) > 0:
             return cls(
                 urn=urn,
-                url=url,
                 title=title,
                 description=paragraphs[0][:160],
                 text="\n".join(p.strip() for p in paragraphs if p.strip())
@@ -92,7 +123,6 @@ class Chapter:
             chapters = [Chapter.from_urn(s) for s in subsections]
             return cls(
                 urn=urn,
-                url=url,
                 title=title,
                 description=chapters[0].description,
                 text="\n".join(c.text.strip()
@@ -103,14 +133,103 @@ class Chapter:
                 f"No text returned for {urn}. Full response: {data}")
 
 
-def fetch_mengzi_full() -> Chapter:
-    return Chapter.from_urn("ctp:mengzi")
+class Mengzi(Chapter):
+    chapters = [
+        Chapter(
+            title='梁惠王上',
+            urn='ctp:mengzi/liang-hui-wang-i',
+            text=_fetch_text_local('1A'),
+        ),
+        Chapter(
+            title='梁惠王下',
+            urn='ctp:mengzi/liang-hui-wang-ii',
+            text=_fetch_text_local('1B'),
+        ),
+        Chapter(
+            title='公孫丑上',
+            urn='ctp:mengzi/gongsun-chou-i',
+            text=_fetch_text_local('2A'),
+        ),
+        Chapter(
+            title='公孫丑下',
+            urn='ctp:mengzi/gongsun-chou-ii',
+            text=_fetch_text_local('2B'),
+        ),
+        Chapter(
+            title='滕文公上',
+            urn='ctp:mengzi/teng-wen-gong-i',
+            text=_fetch_text_local('3A'),
+        ),
+        Chapter(
+            title='滕文公下',
+            urn='ctp:mengzi/teng-wen-gong-ii',
+            text=_fetch_text_local('3B'),
+        ),
+        Chapter(
+            title='離婁上',
+            urn='ctp:mengzi/li-lou-i',
+            text=_fetch_text_local('4A'),
+        ),
+        Chapter(
+            title='離婁下',
+            urn='ctp:mengzi/li-lou-ii',
+            text=_fetch_text_local('4B'),
+        ),
+        Chapter(
+            title='萬章上',
+            urn='ctp:mengzi/wan-zhang-i',
+            text=_fetch_text_local('5A'),
+        ),
+        Chapter(
+            title='萬章下',
+            urn='ctp:mengzi/wan-zhang-ii',
+            text=_fetch_text_local('5B'),
+        ),
+        Chapter(
+            title='告子上',
+            urn='ctp:mengzi/gaozi-i',
+            text=_fetch_text_local('6A'),
+        ),
+        Chapter(
+            title='告子下',
+            urn='ctp:mengzi/gaozi-ii',
+            text=_fetch_text_local('6B'),
+        ),
+        Chapter(
+            title='盡心上',
+            urn='ctp:mengzi/jin-xin-i',
+            text=_fetch_text_local('7A'),
+        ),
+        Chapter(
+            title='盡心下',
+            urn='ctp:mengzi/jin-xin-ii',
+            text=_fetch_text_local('7B'),
+        ),
+    ]
+
+    def __init__(self):
+        self.urn = 'ctp:mengzi'
+        self.url = _fetch_text_url(self.urn)
+        self.title = '孟子'
+        self.description = 'Full text of the Mengzi'
+        self.text = '\n'.join(
+            [c.text.strip() for c in self.chapters if c.text.strip()]
+        )
+
+    def get_chapter(self, id: _CHAPTER_ID) -> Chapter:
+        title = _ID_TITLE_DICT[id]
+        for c in self.chapters:
+            if c.title == title:
+                return c
+        raise ValueError('Bad chapter ID, none found: ' + id)
+
+
+_mengzi = Mengzi()
+
+
+def fetch_mengzi_full() -> Mengzi:
+    return _mengzi
 
 
 def fetch_mengzi_chapters() -> list[Chapter]:
-    full_text = []
-    for urn in BOOKS:
-        full_text.append(Chapter.from_urn(urn))
-    return full_text
-
-# def compile_full_text(chapters: list[Chapter]) -> Chapter:
+    return _mengzi.chapters
