@@ -93,6 +93,7 @@ def _fetch_text_url(urn: str) -> str:
 
 
 class Chapter:
+    id: str
     urn: str
     url: str
     title: str
@@ -100,6 +101,7 @@ class Chapter:
     text: str
 
     def __init__(self, *, urn: str, title: str, description: str | None = None, text: str):
+        self.id = _ID_TITLE_DICT[title]
         self.urn = urn
         self.url = _fetch_text_url(urn)
         self.title = title
