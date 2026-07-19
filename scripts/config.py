@@ -17,5 +17,6 @@ class Term:
 
 
 TERMS: list[Term] = [
-    Term('仁', {'benevolence', 'humaneness'})
+    Term('仁', {'benevolence', 'humaneness'}),
+    Term('義', {'righteousness', 'justice'}),
 ]
