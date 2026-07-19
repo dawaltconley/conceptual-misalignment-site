@@ -1,4 +1,4 @@
-from typing import Literal
+from xunzi.utils import ARCH
 
 # --------------------------------------------------------------------------- #
 # POS tagset. A compact, classical-Chinese-appropriate set. ADJUST to match the
@@ -81,7 +81,7 @@ def parse(output: str):
     return tokens or None
 
 
-def get_strict_prompt(arch: Literal["api", "qwen1", "qwen1.5"]) -> str:
+def get_strict_prompt(arch: ARCH) -> str:
     """Get the message used in the stricter retry."""
     if arch == "api":
         return "请严格只输出“词/词性”序列，字数须与原句完全相同。"

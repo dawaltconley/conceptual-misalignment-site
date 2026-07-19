@@ -24,16 +24,21 @@ import argparse
 import json
 import re
 import sys
+from typing import Literal
+from dataclasses import dataclass, asdict
 from pathlib import Path
 from difflib import ndiff
-from typing import Literal
 from config import TERMS
+from mengzi import Chapter, fetch_mengzi_full
 
 import xunzi.seg
 import xunzi.segpos
+from xunzi.utils import ARCH, TOKENIZER, assert_arch
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
+
+
 # Set at runtime (main); when True, api requests are constrained by a per-sentence
 # GBNF grammar so the model can only emit the exact input characters.
 USE_GRAMMAR = False
@@ -79,7 +84,9 @@ class Word:
 
 
 class SegPos:
-    def __init__(self, process: Literal['seg', 'segpos'], *, system_prompt: str, fewshot: list[tuple[str, str]], core_terms: list[str] = []):
+    arch: ARCH
+
+    def __init__(self, process: Literal['seg', 'segpos'], *, system_prompt: str, fewshot: list[tuple[str, str]], arch: ARCH, core_terms: list[str] = [], max_new_tokens: int = 2048):
         self.process: Literal['seg', 'segpos'] = process
         self.system_prompt = system_prompt
         if core_terms:
@@ -89,6 +96,8 @@ class SegPos:
                 terms=", ".join(core_terms))
         self.fewshot = fewshot
         self.core_terms = core_terms
+        self.arch = arch
+        self.max_new_tokens = max_new_tokens
 
     def parse(self, output: str) -> list[Word] | None:
         if self.process == "seg":
@@ -150,16 +159,16 @@ class SegPos:
         msgs.append({"role": "user", "content": sentence})
         return msgs
 
-    def tag_sentence(self, *, tok, model, sentence: str, max_new_tokens: int, arch: Literal["api", "qwen1", "qwen1.5"], strict: bool = False):
+    def tag_sentence(self, *, tok, model, sentence: str, strict: bool = False):
         strict_prompt: str
         if self.process == "seg":
-            strict_prompt = xunzi.seg.get_strict_prompt(arch)
+            strict_prompt = xunzi.seg.get_strict_prompt(self.arch)
         elif self.process == "segpos":
-            strict_prompt = xunzi.segpos.get_strict_prompt(arch)
+            strict_prompt = xunzi.segpos.get_strict_prompt(self.arch)
         else:
             raise ValueError(f"Bad process value: {self.process!r}")
 
-        if arch == "api":
+        if self.arch == "api":
             # `model` is an OpenAI-compatible client; reuse the chat-template messages.
             client = model
             msgs = self.build_messages(sentence)
@@ -176,21 +185,21 @@ class SegPos:
                     tags = sorted(xunzi.segpos.VALID_TAGS)
                     grammar = build_gbnf(sentence, tags, word_break=" ")
             resp = client.chat.completions.create(
-                model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=max_new_tokens,
+                model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=self.max_new_tokens,
                 extra_body={"grammar": grammar} if grammar else {},
             )
             return (resp.choices[0].message.content or "").strip()
 
         import torch
 
-        if arch == "qwen1":
+        if self.arch == "qwen1":
             # Original Qwen exposes a .chat() helper; few-shot goes in `history`
             # as a list of [user, assistant] pairs, and the system prompt via system=.
             history = [[src, tagged] for src, tagged in self.fewshot]
             query = sentence
             if strict:
                 query = strict_prompt + sentence
-            model.generation_config.max_new_tokens = max_new_tokens
+            model.generation_config.max_new_tokens = self.max_new_tokens
             response, _ = model.chat(
                 tok, query, history=history, system=self.system_prompt)
             return response.strip()
@@ -207,7 +216,7 @@ class SegPos:
         inputs = tok(text, return_tensors="pt").to(model.device)
         with torch.no_grad():
             out = model.generate(
-                **inputs, max_new_tokens=max_new_tokens, do_sample=False,
+                **inputs, max_new_tokens=self.max_new_tokens, do_sample=False,
                 repetition_penalty=1.0, pad_token_id=tok.eos_token_id,
             )
         gen = out[0][inputs.input_ids.shape[1]:]
@@ -278,7 +287,7 @@ def build_gbnf(sentence: str, tags: list[str] | None = None, word_break=" "):
     ])
 
 
-def load_model(*, model_id: str, device: str, arch: str, api_base: str | None = None):
+def load_model(*, model_id: str, device: str, arch: ARCH, api_base: str | None = None):
     """Lazy import so the parsing/QC logic can be used without torch installed."""
     if arch == "api":
         if not api_base:
@@ -313,7 +322,6 @@ def load_model(*, model_id: str, device: str, arch: str, api_base: str | None = 
             pass
         model.generation_config.do_sample = False   # deterministic
         return tok, model
-
     # arch == "qwen1.5" : native transformers, no remote code
     from transformers import AutoModelForCausalLM, AutoTokenizer
     dtype = torch.bfloat16 if device != "cpu" else torch.float32
@@ -324,6 +332,79 @@ def load_model(*, model_id: str, device: str, arch: str, api_base: str | None = 
     if device == "cpu":
         model = model.to("cpu")  # pyright: ignore[reportArgumentType]
     return tok, model
+
+
+@dataclass
+class Tokenized:
+    id: int
+    chapter: str
+    passage: str
+    tokens: list[Word]
+
+    def serialize(self) -> str:
+        serialized = asdict(self)
+        serialized['tokens'] = [w.serialize() for w in self.tokens if w.word]
+        return json.dumps(serialized, ensure_ascii=False)
+
+
+@dataclass
+class TokenizedError(Tokenized):
+    raw_output: str
+    reason: str
+    diffs: list[str]
+
+
+def process(segpos: SegPos, chapter: Chapter, *, tok: TOKENIZER, model) -> list[Tokenized | TokenizedError]:
+    lines = chapter.text.split("\n")
+    processed: list[Tokenized] = []
+
+    print(f"Processing chapter {chapter.id}")
+    print(
+        f"[info] {len(chapter.text.split('\n'))}  line(s) to tag", file=sys.stderr)
+
+    try:
+        from tqdm import tqdm
+        iterator = tqdm(list(enumerate(lines)), total=len(lines))
+    except ImportError:
+        iterator = enumerate(lines)
+
+    for i, sent in iterator:
+        raw = segpos.tag_sentence(tok=tok, model=model, sentence=sent)
+        tokens = segpos.parse(raw)
+        ok, reason = segpos.qc_check(sent, tokens)
+        if not ok:
+            # handle a common case where xunzi drops a trailing quote
+            if tokens and reason == f"char mismatch: got {sent[:-1]!r} vs {sent!r}":
+                if sent[-1:] == "」":
+                    missing = Word("」")
+                    if segpos.process == "segpos":
+                        missing = Word("」", "w")
+                    tokens.append(missing)
+                    ok = True
+                elif sent[-1:] == "』":
+                    missing = Word("』")
+                    if segpos.process == "segpos":
+                        missing = Word("』", "w")
+                    tokens.append(missing)
+                    ok = True
+            else:  # one stricter retry
+                raw = segpos.tag_sentence(
+                    tok=tok, model=model, sentence=sent, strict=True)
+                tokens = segpos.parse(raw)
+                ok, reason = segpos.qc_check(sent, tokens)
+        assert tokens is not None
+        segpos.validate_tokens(tokens)
+        if ok:
+            processed.append(
+                Tokenized(id=i, chapter=chapter.id, passage=sent, tokens=tokens))
+        else:
+            processed.append(TokenizedError(
+                id=i, chapter=chapter.id, passage=sent, tokens=tokens,
+                raw_output=raw, reason=reason, diffs=diff_str(
+                    ''.join([t.word for t in tokens]), sent)
+            ))
+
+    return processed
 
 
 # --------------------------------------------------------------------------- #
@@ -346,23 +427,13 @@ def main():
                     help="OpenAI-compatible base URL (used only with --arch api)")
     ap.add_argument("--api-model", default="xunzi",
                     help="model name to send to the API (llama.cpp ignores it; Ollama needs the tag)")
-    ap.add_argument("--input", required=True,
-                    help="UTF-8 text file (e.g. mengzi.txt, or a chapter file)")
     ap.add_argument("--output", required=True,
                     help="output JSONL of tagged units")
-    ap.add_argument("--unit", choices=("sentence", "line"), default="sentence",
-                    help="'sentence' splits the input on 。！？； before tagging "
-                         "(one record per sentence); 'line' tags each whole line "
-                         "as a single unit (one record per passage) and leaves "
-                         "sentence splitting to a downstream consumer")
-    ap.add_argument("--chapter", default=None,
-                    help="chapter label written into each record when --unit line "
-                         "(default: input filename stem, e.g. '1A')")
     ap.add_argument("--errors", default=None,
                     help="JSONL for QC failures (default: <output>.errors.jsonl)")
     ap.add_argument("--device", default="auto", choices=["auto", "cpu"],
                     help="'auto' uses GPU/MPS if available; 'cpu' forces CPU")
-    ap.add_argument("--max-new-tokens", type=int, default=512)
+    ap.add_argument("--max-new-tokens", type=int, default=2048)
     ap.add_argument("--grammar", action="store_true",
                     help="(api + llama.cpp only) constrain decoding to the exact input "
                          "characters via a per-sentence GBNF grammar; prevents char-mismatch errors")
@@ -373,18 +444,6 @@ def main():
     errors_path = Path(args.errors) if args.errors else Path(
         str(args.output) + ".errors.jsonl")
 
-    text = Path(args.input).read_text(encoding="utf-8")
-    if args.unit == "line":
-        # Each non-empty line is a passage, tagged as one whole unit.
-        units = [ln.strip() for ln in text.replace(
-            "\r", "").split("\n") if ln.strip()]
-    else:
-        units = split_sentences(text)
-    if args.limit:
-        units = units[: args.limit]
-    chapter = args.chapter or Path(args.input).stem
-    print(f"[info] {len(units)} {args.unit}(s) to tag", file=sys.stderr)
-
     global API_MODEL, USE_GRAMMAR
     API_MODEL = args.api_model
     USE_GRAMMAR = args.grammar
@@ -393,6 +452,7 @@ def main():
     if args.process == "seg":
         segpos = SegPos(
             "seg",
+            arch=assert_arch(args.arch),
             system_prompt=xunzi.seg.SYSTEM_PROMPT,
             fewshot=xunzi.seg.FEWSHOT,
             core_terms=[t.hanzi for t in TERMS]
@@ -400,6 +460,7 @@ def main():
     elif args.process == "segpos":
         segpos = SegPos(
             "segpos",
+            arch=assert_arch(args.arch),
             system_prompt=xunzi.segpos.SYSTEM_PROMPT,
             fewshot=xunzi.segpos.FEWSHOT,
             core_terms=[t.hanzi for t in TERMS]
@@ -408,60 +469,36 @@ def main():
         raise ValueError(f"Bad process value: {args.process!r}")
 
     tok, model = load_model(
-        model_id=args.model, device=args.device, arch=args.arch, api_base=args.api_base)
+        model_id=args.model, device=args.device, arch=segpos.arch, api_base=args.api_base)
+
+    mengzi = fetch_mengzi_full()
+
+    print(
+        f"[info] {len(mengzi.text.split('\n'))}  line(s) to tag", file=sys.stderr)
 
     try:
         from tqdm import tqdm
-        iterator = tqdm(list(enumerate(units)), total=len(units))
+        iterator = tqdm(list(mengzi.chapters), total=len(mengzi.chapters))
     except ImportError:
-        iterator = enumerate(units)
+        iterator = mengzi.chapters
 
     n_ok = n_err = 0
     with open(args.output, "w", encoding="utf-8") as fout, \
             open(errors_path, "w", encoding="utf-8") as ferr:
-        for i, sent in iterator:
-            raw = segpos.tag_sentence(
-                tok=tok, model=model, arch=args.arch, sentence=sent, max_new_tokens=args.max_new_tokens)
-            tokens = segpos.parse(raw)
-            ok, reason = segpos.qc_check(sent, tokens)
-            if not ok:
-                # handle a common case where xunzi drops a trailing quote
-                if tokens and reason == f"char mismatch: got {sent[:-1]!r} vs {sent!r}":
-                    if sent[-1:] == "」":
-                        missing = Word("」")
-                        if segpos.process == "segpos":
-                            missing = Word("」", "w")
-                        tokens.append(missing)
-                        ok = True
-                    elif sent[-1:] == "』":
-                        missing = Word("』")
-                        if segpos.process == "segpos":
-                            missing = Word("』", "w")
-                        tokens.append(missing)
-                        ok = True
-                else:  # one stricter retry
-                    raw = segpos.tag_sentence(
-                        tok=tok, model=model, arch=args.arch, sentence=sent, max_new_tokens=args.max_new_tokens, strict=True)
-                    tokens = segpos.parse(raw)
-                    ok, reason = segpos.qc_check(sent, tokens)
-            assert tokens is not None
-            segpos.validate_tokens(tokens)
-            serialized = [w.serialize() for w in tokens if w.word]
-            if args.unit == "line":
-                rec = {"chapter": chapter, "id": i,
-                       "passage": sent, "tokens": serialized}
-            else:
-                rec = {"id": i, "sentence": sent, "tokens": serialized}
-            if ok:
-                fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                n_ok += 1
-            else:
-                rec["raw_output"] = raw
-                rec["reason"] = reason
-                rec["diffs"] = diff_str(
-                    ''.join([t.word for t in tokens]), sent)
-                ferr.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                n_err += 1
+        for chapter in iterator:
+            tokenized_lines = process(segpos, chapter, tok=tok, model=model)
+            # if isinstance(tokenized, TokenizedError):
+
+            for line in tokenized_lines:
+                if isinstance(line, TokenizedError):
+                    ferr.write(line.serialize() + "\n")
+                    n_err += 1
+                else:
+                    fout.write(line.serialize() + "\n")
+                    n_ok += 1
+
+            if n_ok + n_err >= args.limit:
+                break
 
     print(
         f"[done] ok={n_ok}  needs_review={n_err}  -> {args.output}", file=sys.stderr)

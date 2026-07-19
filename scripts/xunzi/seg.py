@@ -1,6 +1,6 @@
-from typing import Literal
 import os
 import json
+from xunzi.utils import ARCH
 
 SEG_DATA = os.path.dirname(os.path.realpath(__file__)) + '/seg_data.json'
 
@@ -38,7 +38,7 @@ def parse(output: str):
     return output.split("/") or None
 
 
-def get_strict_prompt(arch: Literal["api", "qwen1", "qwen1.5"]) -> str:
+def get_strict_prompt(arch: ARCH) -> str:
     """Get the message used in the stricter retry."""
     if arch == "api":
         return 'Please output only this text with added word boundaries using the "/" delimiter. Except for the "/" delimiter, the text must exactly match its input.'
