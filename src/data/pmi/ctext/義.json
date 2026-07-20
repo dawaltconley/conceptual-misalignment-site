@@ -1,0 +1,4165 @@
+{
+  "term": "\u7fa9",
+  "sources": [
+    {
+      "url": "https://ctext.org/mengzi",
+      "title": "\u5b5f\u5b50",
+      "description": "Full text of the Mengzi",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u68ec"
+          },
+          {
+            "id": "\u9912"
+          },
+          {
+            "id": "\u7f77"
+          },
+          {
+            "id": "\u5026"
+          },
+          {
+            "id": "\u608c"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u914d"
+          },
+          {
+            "id": "\u61f7"
+          },
+          {
+            "id": "\u995c"
+          },
+          {
+            "id": "\u7fb9"
+          },
+          {
+            "id": "\u7533"
+          },
+          {
+            "id": "\u8c46"
+          },
+          {
+            "id": "\u686e"
+          },
+          {
+            "id": "\u72af"
+          },
+          {
+            "id": "\u5145"
+          },
+          {
+            "id": "\u585e"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 6.76365393500788,
+            "source": "\u68ec",
+            "target": "\u686e"
+          },
+          {
+            "weight": 2.9135063332978217,
+            "source": "\u68ec",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.443502704052086,
+            "source": "\u9912",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 5.88818519765398,
+            "source": "\u9912",
+            "target": "\u914d"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u7f77",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u5026",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 6.581332378213926,
+            "source": "\u608c",
+            "target": "\u7533"
+          },
+          {
+            "weight": 3.1366498846120314,
+            "source": "\u608c",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.443502704052086,
+            "source": "\u7fa9",
+            "target": "\u995c"
+          },
+          {
+            "weight": 3.424331957063812,
+            "source": "\u7fa9",
+            "target": "\u7533"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u7fa9",
+            "target": "\u914d"
+          },
+          {
+            "weight": 2.4947959984396366,
+            "source": "\u7fa9",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.9135063332978217,
+            "source": "\u7fa9",
+            "target": "\u585e"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u7fa9",
+            "target": "\u72af"
+          },
+          {
+            "weight": 2.9135063332978217,
+            "source": "\u7fa9",
+            "target": "\u686e"
+          },
+          {
+            "weight": 3.424331957063812,
+            "source": "\u7fa9",
+            "target": "\u61f7"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u7fa9",
+            "target": "\u7fb9"
+          },
+          {
+            "weight": 2.731184776503867,
+            "source": "\u7fa9",
+            "target": "\u8c46"
+          },
+          {
+            "weight": 6.8690144506657065,
+            "source": "\u7fb9",
+            "target": "\u8c46"
+          },
+          {
+            "weight": 4.512362136401385,
+            "source": "\u5145",
+            "target": "\u585e"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/liang-hui-wang-i",
+      "title": "\u6881\u60e0\u738b\u4e0a",
+      "description": "\u5b5f\u5b50\u898b\u6881\u60e0\u738b\u3002\u738b\u66f0\uff1a\u300c\u53df\u4e0d\u9060\u5343\u91cc\u800c\u4f86\uff0c\u4ea6\u5c07\u6709\u4ee5\u5229\u543e\u570b\u4e4e\uff1f\u300d\n\u5b5f\u5b50\u5c0d\u66f0\uff1a\u300c\u738b\u4f55\u5fc5\u66f0\u5229\uff1f\u4ea6\u6709\u4ec1\u7fa9\u800c\u5df2\u77e3\u3002\u738b\u66f0\u300e\u4f55\u4ee5\u5229\u543e\u570b\u300f\uff1f\u5927\u592b\u66f0\u300e\u4f55\u4ee5\u5229\u543e\u5bb6\u300f\uff1f\u58eb\u5eb6\u4eba\u66f0\u300e\u4f55\u4ee5\u5229\u543e\u8eab\u300f\uff1f\u4e0a\u4e0b\u4ea4\u5f81\u5229\u800c\u570b\u5371\u77e3\u3002\u842c\u4e58\u4e4b\u570b\u5f12\u5176\u541b\u8005\uff0c\u5fc5\u5343\u4e58\u4e4b\u5bb6\uff1b\u5343\u4e58\u4e4b\u570b\u5f12\u5176\u541b\u8005\uff0c\u5fc5\u767e\u4e58\u4e4b\u5bb6\u3002\u842c\u53d6\u5343\u7109\uff0c\u5343\u53d6\u767e\u7109\uff0c\u4e0d\u70ba\u4e0d\u591a\u77e3\u3002\u82df\u70ba\u5f8c\u7fa9\u800c\u5148\u5229\uff0c\u4e0d\u596a\u4e0d\u995c\u3002\u672a\u6709\u4ec1\u800c\u907a\u5176\u89aa\u8005",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u596a"
+          },
+          {
+            "id": "\u5f8c"
+          },
+          {
+            "id": "\u6b72"
+          },
+          {
+            "id": "\u608c"
+          },
+          {
+            "id": "\u5b50"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u541b"
+          },
+          {
+            "id": "\u6a02"
+          },
+          {
+            "id": "\u5229"
+          },
+          {
+            "id": "\u6b7b"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u5b5d"
+          },
+          {
+            "id": "\u8eab"
+          },
+          {
+            "id": "\u51f6"
+          },
+          {
+            "id": "\u4ea1"
+          },
+          {
+            "id": "\u514d"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u596a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u596a",
+            "target": "\u5229"
+          },
+          {
+            "weight": 1.5926307941177191,
+            "source": "\u596a",
+            "target": "\u5f8c"
+          },
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u596a",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.0330150061822965,
+            "source": "\u5f8c",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.0330150061822965,
+            "source": "\u5f8c",
+            "target": "\u5229"
+          },
+          {
+            "weight": 1.7261621867422416,
+            "source": "\u5f8c",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.3694872428035094,
+            "source": "\u5f8c",
+            "target": "\u541b"
+          },
+          {
+            "weight": 0.7817005779013904,
+            "source": "\u5f8c",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 3.672072335797555,
+            "source": "\u6b72",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 3.2666072276893905,
+            "source": "\u6b72",
+            "target": "\u5b50"
+          },
+          {
+            "weight": 2.8611421195812263,
+            "source": "\u6b72",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 3.672072335797555,
+            "source": "\u6b72",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 3.2666072276893905,
+            "source": "\u6b72",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 3.2666072276893905,
+            "source": "\u6b72",
+            "target": "\u514d"
+          },
+          {
+            "weight": 1.9673242435591298,
+            "source": "\u6b72",
+            "target": "\u6b7b"
+          },
+          {
+            "weight": 2.419309367302187,
+            "source": "\u6b72",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 4.3652195163575005,
+            "source": "\u608c",
+            "target": "\u5b5d"
+          },
+          {
+            "weight": 3.1124565478621324,
+            "source": "\u608c",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.9673242435591298,
+            "source": "\u5b50",
+            "target": "\u6b7b"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u5b50",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 2.167994939021281,
+            "source": "\u5b50",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u5b50",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 2.5734600471294455,
+            "source": "\u5b50",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.5734600471294455,
+            "source": "\u5b50",
+            "target": "\u514d"
+          },
+          {
+            "weight": 1.7261621867422416,
+            "source": "\u5b50",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.670623795583093,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.265158687474929,
+            "source": "\u7fa9",
+            "target": "\u5229"
+          },
+          {
+            "weight": 1.9084837435361963,
+            "source": "\u7fa9",
+            "target": "\u541b"
+          },
+          {
+            "weight": 3.1124565478621324,
+            "source": "\u7fa9",
+            "target": "\u5b5d"
+          },
+          {
+            "weight": 2.419309367302187,
+            "source": "\u7fa9",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.419309367302187,
+            "source": "\u7fa9",
+            "target": "\u514d"
+          },
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u7fa9",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 1.3206970786340775,
+            "source": "\u7fa9",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 1.1200263831719262,
+            "source": "\u7fa9",
+            "target": "\u6b7b"
+          },
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u7fa9",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 2.5734600471294455,
+            "source": "\u6a02",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 2.5734600471294455,
+            "source": "\u6a02",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 2.167994939021281,
+            "source": "\u6a02",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.167994939021281,
+            "source": "\u6a02",
+            "target": "\u514d"
+          },
+          {
+            "weight": 0.86871195489102,
+            "source": "\u6a02",
+            "target": "\u6b7b"
+          },
+          {
+            "weight": 2.265158687474929,
+            "source": "\u5229",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.1316272948504063,
+            "source": "\u5229",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 2.6604714241190752,
+            "source": "\u6b7b",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.6604714241190752,
+            "source": "\u6b7b",
+            "target": "\u514d"
+          },
+          {
+            "weight": 1.6796421711073488,
+            "source": "\u6b7b",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 1.6796421711073488,
+            "source": "\u6b7b",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 3.3843902633457743,
+            "source": "\u8eab",
+            "target": "\u51f6"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u8eab",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u8eab",
+            "target": "\u514d"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u51f6",
+            "target": "\u4ea1"
+          },
+          {
+            "weight": 2.9789251552376097,
+            "source": "\u51f6",
+            "target": "\u514d"
+          },
+          {
+            "weight": 3.959754408249336,
+            "source": "\u4ea1",
+            "target": "\u514d"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/liang-hui-wang-ii",
+      "title": "\u6881\u60e0\u738b\u4e0b",
+      "description": "\u838a\u66b4\u898b\u5b5f\u5b50\uff0c\u66f0\uff1a\u300c\u66b4\u898b\u65bc\u738b\uff0c\u738b\u8a9e\u66b4\u4ee5\u597d\u6a02\uff0c\u66b4\u672a\u6709\u4ee5\u5c0d\u4e5f\u3002\u300d\u66f0\uff1a\u300c\u597d\u6a02\u4f55\u5982\uff1f\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u738b\u4e4b\u597d\u6a02\u751a\uff0c\u5247\u9f4a\u570b\u5176\u5eb6\u5e7e\u4e4e\uff01\u300d\n\u4ed6\u65e5\uff0c\u898b\u65bc\u738b\u66f0\uff1a\u300c\u738b\u5617\u8a9e\u838a\u5b50\u4ee5\u597d\u6a02\uff0c\u6709\u8af8\uff1f\u300d\u738b\u8b8a\u4e4e\u8272\uff0c\u66f0\uff1a\u300c\u5be1\u4eba\u975e\u80fd\u597d\u5148\u738b\u4e4b\u6a02\u4e5f\uff0c\u76f4\u597d\u4e16\u4fd7\u4e4b\u6a02\u8033\u3002\u300d\n\u66f0\uff1a\u300c\u738b\u4e4b\u597d\u6a02\u751a\uff0c\u5247\u9f4a\u5176\u5eb6\u5e7e\u4e4e\uff01\u4eca\u4e4b\u6a02\u7336\u53e4\u4e4b\u6a02\u4e5f\u3002\u300d\u66f0\uff1a\u300c\u53ef\u5f97\u805e\u8207\uff1f\u300d\n\u66f0\uff1a\u300c\u7368\u6a02\u6a02\uff0c\u8207\u4eba\u6a02\u6a02\uff0c\u5b70",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u6b98"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u6b62"
+          },
+          {
+            "id": "\u8cca"
+          },
+          {
+            "id": "\u4e00"
+          },
+          {
+            "id": "\u653f"
+          },
+          {
+            "id": "\u4e0a"
+          },
+          {
+            "id": "\u8ce2"
+          },
+          {
+            "id": "\u65e5"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u8b00"
+          },
+          {
+            "id": "\u6212"
+          },
+          {
+            "id": "\u9b6f"
+          },
+          {
+            "id": "\u51fa"
+          },
+          {
+            "id": "\u65c4"
+          },
+          {
+            "id": "\u65af"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.893453424433573,
+            "source": "\u6b98",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.9920657131016823,
+            "source": "\u6b98",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 4.685212893661628,
+            "source": "\u6b98",
+            "target": "\u8cca"
+          },
+          {
+            "weight": 2.487988316325408,
+            "source": "\u6b98",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u6b98",
+            "target": "\u4e0a"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 4.3975308212098465,
+            "source": "\u7fa9",
+            "target": "\u8cca"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u7fa9",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u7fa9",
+            "target": "\u8ce2"
+          },
+          {
+            "weight": 2.605771351981792,
+            "source": "\u6b62",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u6b62",
+            "target": "\u65c4"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u6b62",
+            "target": "\u8b00"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u8cca",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u8cca",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u653f",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.0757749812275277,
+            "source": "\u653f",
+            "target": "\u65af"
+          },
+          {
+            "weight": 2.2003062438736274,
+            "source": "\u653f",
+            "target": "\u4e0a"
+          },
+          {
+            "weight": 2.2003062438736274,
+            "source": "\u4e0a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.3826278006675823,
+            "source": "\u4e0a",
+            "target": "\u65af"
+          },
+          {
+            "weight": 2.2003062438736274,
+            "source": "\u8ce2",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u65e5",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 3.0757749812275277,
+            "source": "\u4ec1",
+            "target": "\u65af"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u8b00",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 3.586600604993518,
+            "source": "\u8b00",
+            "target": "\u65c4"
+          },
+          {
+            "weight": 3.298918532541737,
+            "source": "\u6212",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u9b6f",
+            "target": "\u51fa"
+          },
+          {
+            "weight": 2.893453424433573,
+            "source": "\u51fa",
+            "target": "\u65c4"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/gongsun-chou-i",
+      "title": "\u516c\u5b6b\u4e11\u4e0a",
+      "description": "\u516c\u5b6b\u4e11\u554f\u66f0\uff1a\u300c\u592b\u5b50\u7576\u8def\u65bc\u9f4a\uff0c\u7ba1\u4ef2\u3001\u664f\u5b50\u4e4b\u529f\uff0c\u53ef\u5fa9\u8a31\u4e4e\uff1f\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u5b50\u8aa0\u9f4a\u4eba\u4e5f\uff0c\u77e5\u7ba1\u4ef2\u3001\u664f\u5b50\u800c\u5df2\u77e3\u3002\u6216\u554f\u4e4e\u66fe\u897f\u66f0\uff1a\u300e\u543e\u5b50\u8207\u5b50\u8def\u5b70\u8ce2\uff1f\u300f\u66fe\u897f\u8e74\u7136\u66f0\uff1a\u300e\u543e\u5148\u5b50\u4e4b\u6240\u754f\u4e5f\u3002\u300f\u66f0\uff1a\u300e\u7136\u5247\u543e\u5b50\u8207\u7ba1\u4ef2\u5b70\u8ce2\uff1f\u300f\u66fe\u897f\u8274\u7136\u4e0d\u6085\uff0c\u66f0\uff1a\u300e\u723e\u4f55\u66fe\u6bd4\u4e88\u65bc\u7ba1\u4ef2\uff1f\u7ba1\u4ef2\u5f97\u541b\uff0c\u5982\u5f7c\u5176\u5c08\u4e5f\uff1b\u884c\u4e4e\u570b\u653f\uff0c\u5982\u5f7c\u5176\u4e45\u4e5f\uff1b\u529f\u70c8\uff0c\u5982\u5f7c\u5176\u5351\u4e5f\u3002\u723e\u4f55\u66fe\u6bd4\u4e88\u65bc\u662f\uff1f\u300f\u300d\u66f0\uff1a\u300c",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u667a"
+          },
+          {
+            "id": "\u751f"
+          },
+          {
+            "id": "\u53d6"
+          },
+          {
+            "id": "\u5b50"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u5f79"
+          },
+          {
+            "id": "\u4e00"
+          },
+          {
+            "id": "\u884c"
+          },
+          {
+            "id": "\u544a"
+          },
+          {
+            "id": "\u7f9e"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u9053"
+          },
+          {
+            "id": "\u77e5"
+          },
+          {
+            "id": "\u60e1"
+          },
+          {
+            "id": "\u79ae"
+          },
+          {
+            "id": "\u7aef"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.2870809064580806,
+            "source": "\u667a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u667a",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 1.807507826196194,
+            "source": "\u667a",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 3.060270794691562,
+            "source": "\u667a",
+            "target": "\u5f79"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u667a",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.9616585060234524,
+            "source": "\u667a",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u751f",
+            "target": "\u53d6"
+          },
+          {
+            "weight": 1.9616585060234524,
+            "source": "\u751f",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u751f",
+            "target": "\u5b50"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u53d6",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.6925460145662448,
+            "source": "\u5b50",
+            "target": "\u544a"
+          },
+          {
+            "weight": 1.1084259101164342,
+            "source": "\u5b50",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u5b50",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.9616585060234524,
+            "source": "\u7fa9",
+            "target": "\u9053"
+          },
+          {
+            "weight": 2.367123614131617,
+            "source": "\u7fa9",
+            "target": "\u544a"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u7fa9",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 2.367123614131617,
+            "source": "\u7fa9",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 1.2685113254635072,
+            "source": "\u7fa9",
+            "target": "\u884c"
+          },
+          {
+            "weight": 1.4508328822574619,
+            "source": "\u7fa9",
+            "target": "\u60e1"
+          },
+          {
+            "weight": 1.807507826196194,
+            "source": "\u7fa9",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u7fa9",
+            "target": "\u7f9e"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.060270794691562,
+            "source": "\u7fa9",
+            "target": "\u5f79"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u7fa9",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 2.2870809064580806,
+            "source": "\u5f79",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.7534179752515073,
+            "source": "\u5f79",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.6739764335716716,
+            "source": "\u4e00",
+            "target": "\u884c"
+          },
+          {
+            "weight": 1.5939337258981352,
+            "source": "\u884c",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.2685113254635072,
+            "source": "\u884c",
+            "target": "\u9053"
+          },
+          {
+            "weight": 1.5939337258981352,
+            "source": "\u544a",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 2.8371272433773522,
+            "source": "\u7f9e",
+            "target": "\u60e1"
+          },
+          {
+            "weight": 2.5006550067561393,
+            "source": "\u7f9e",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 2.6548056865833978,
+            "source": "\u7f9e",
+            "target": "\u9053"
+          },
+          {
+            "weight": 0.6776429940239801,
+            "source": "\u4ec1",
+            "target": "\u60e1"
+          },
+          {
+            "weight": 1.0343179379627125,
+            "source": "\u4ec1",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 1.881615798349916,
+            "source": "\u4ec1",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.1884686177899706,
+            "source": "\u9053",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 1.881615798349916,
+            "source": "\u77e5",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.0343179379627125,
+            "source": "\u77e5",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 1.2966822024302034,
+            "source": "\u60e1",
+            "target": "\u7aef"
+          },
+          {
+            "weight": 2.5006550067561393,
+            "source": "\u79ae",
+            "target": "\u7aef"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/gongsun-chou-ii",
+      "title": "\u516c\u5b6b\u4e11\u4e0b",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u5929\u6642\u4e0d\u5982\u5730\u5229\uff0c\u5730\u5229\u4e0d\u5982\u4eba\u548c\u3002\u4e09\u91cc\u4e4b\u57ce\uff0c\u4e03\u91cc\u4e4b\u90ed\uff0c\u74b0\u800c\u653b\u4e4b\u800c\u4e0d\u52dd\u3002\u592b\u74b0\u800c\u653b\u4e4b\uff0c\u5fc5\u6709\u5f97\u5929\u6642\u8005\u77e3\uff1b\u7136\u800c\u4e0d\u52dd\u8005\uff0c\u662f\u5929\u6642\u4e0d\u5982\u5730\u5229\u4e5f\u3002\u57ce\u975e\u4e0d\u9ad8\u4e5f\uff0c\u6c60\u975e\u4e0d\u6df1\u4e5f\uff0c\u5175\u9769\u975e\u4e0d\u5805\u5229\u4e5f\uff0c\u7c73\u7c9f\u975e\u4e0d\u591a\u4e5f\uff1b\u59d4\u800c\u53bb\u4e4b\uff0c\u662f\u5730\u5229\u4e0d\u5982\u4eba\u548c\u4e5f\u3002\u6545\u66f0\uff1a\u57df\u6c11\u4e0d\u4ee5\u5c01\u7586\u4e4b\u754c\uff0c\u56fa\u570b\u4e0d\u4ee5\u5c71\u8c3f\u4e4b\u96aa\uff0c\u5a01\u5929\u4e0b\u4e0d\u4ee5\u5175\u9769\u4e4b\u5229\u3002\u5f97\u9053\u8005\u591a\u52a9\uff0c\u5931\u9053\u8005\u5be1\u52a9\u3002\u5be1\u52a9\u4e4b\u81f3\uff0c\u89aa\u621a\u7554\u4e4b\uff1b",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u667a"
+          },
+          {
+            "id": "\u9f4a"
+          },
+          {
+            "id": "\u81ea"
+          },
+          {
+            "id": "\u8db3"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u4eba"
+          },
+          {
+            "id": "\u5b70"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u9053"
+          },
+          {
+            "id": "\u4f55"
+          },
+          {
+            "id": "\u5fb7"
+          },
+          {
+            "id": "\u738b"
+          },
+          {
+            "id": "\u7528"
+          },
+          {
+            "id": "\u8a00"
+          },
+          {
+            "id": "\u7235"
+          },
+          {
+            "id": "\u7f8e"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 3.6592789843376456,
+            "source": "\u667a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.23746231547275454,
+            "source": "\u9f4a",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 0.6147565466142226,
+            "source": "\u9f4a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.2963028154956879,
+            "source": "\u9f4a",
+            "target": "\u738b"
+          },
+          {
+            "weight": 1.020221654722387,
+            "source": "\u9f4a",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.020221654722387,
+            "source": "\u9f4a",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 1.020221654722387,
+            "source": "\u9f4a",
+            "target": "\u5fb7"
+          },
+          {
+            "weight": 0.10393092284823194,
+            "source": "\u9f4a",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 1.020221654722387,
+            "source": "\u9f4a",
+            "target": "\u81ea"
+          },
+          {
+            "weight": 0.5093960309563963,
+            "source": "\u81ea",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.272984623217755,
+            "source": "\u81ea",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.6784497313259195,
+            "source": "\u81ea",
+            "target": "\u5b70"
+          },
+          {
+            "weight": 0.5682365309793297,
+            "source": "\u81ea",
+            "target": "\u738b"
+          },
+          {
+            "weight": 2.560666695669536,
+            "source": "\u8db3",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.049841071903545,
+            "source": "\u8db3",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u8db3",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.8675195151095907,
+            "source": "\u8db3",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u8db3",
+            "target": "\u5fb7"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u8db3",
+            "target": "\u9053"
+          },
+          {
+            "weight": 0.8559186034311106,
+            "source": "\u8db3",
+            "target": "\u738b"
+          },
+          {
+            "weight": 3.253813876229481,
+            "source": "\u8db3",
+            "target": "\u7528"
+          },
+          {
+            "weight": 0.5093960309563963,
+            "source": "\u7fa9",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 3.371596911885865,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.5682365309793297,
+            "source": "\u7fa9",
+            "target": "\u738b"
+          },
+          {
+            "weight": 2.272984623217755,
+            "source": "\u7fa9",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 4.06474409244581,
+            "source": "\u7fa9",
+            "target": "\u7f8e"
+          },
+          {
+            "weight": 1.7621589994517644,
+            "source": "\u7fa9",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 2.6784497313259195,
+            "source": "\u7fa9",
+            "target": "\u7235"
+          },
+          {
+            "weight": 0.008620743043906955,
+            "source": "\u4eba",
+            "target": "\u738b"
+          },
+          {
+            "weight": 0.10393092284823194,
+            "source": "\u4eba",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.7970781034081772,
+            "source": "\u4eba",
+            "target": "\u7528"
+          },
+          {
+            "weight": 0.2862524796421865,
+            "source": "\u4eba",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 0.5093960309563963,
+            "source": "\u4eba",
+            "target": "\u5b70"
+          },
+          {
+            "weight": 2.272984623217755,
+            "source": "\u5b70",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.5682365309793297,
+            "source": "\u5b70",
+            "target": "\u738b"
+          },
+          {
+            "weight": 0.8559186034311106,
+            "source": "\u4ec1",
+            "target": "\u738b"
+          },
+          {
+            "weight": 1.8675195151095907,
+            "source": "\u4ec1",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 3.6592789843376456,
+            "source": "\u4ec1",
+            "target": "\u7f8e"
+          },
+          {
+            "weight": 1.3566938913436,
+            "source": "\u4ec1",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 2.6784497313259195,
+            "source": "\u9053",
+            "target": "\u5fb7"
+          },
+          {
+            "weight": 2.272984623217755,
+            "source": "\u4f55",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 2.6784497313259195,
+            "source": "\u5fb7",
+            "target": "\u7235"
+          },
+          {
+            "weight": 0.5682365309793297,
+            "source": "\u738b",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 1.5490657839910558,
+            "source": "\u738b",
+            "target": "\u7528"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/teng-wen-gong-i",
+      "title": "\u6ed5\u6587\u516c\u4e0a",
+      "description": "\u6ed5\u6587\u516c\u70ba\u4e16\u5b50\uff0c\u5c07\u4e4b\u695a\uff0c\u904e\u5b8b\u800c\u898b\u5b5f\u5b50\u3002\u5b5f\u5b50\u9053\u6027\u5584\uff0c\u8a00\u5fc5\u7a31\u582f\u821c\u3002\n\u4e16\u5b50\u81ea\u695a\u53cd\uff0c\u5fa9\u898b\u5b5f\u5b50\u3002\u5b5f\u5b50\u66f0\uff1a\u300c\u4e16\u5b50\u7591\u543e\u8a00\u4e4e\uff1f\u592b\u9053\u4e00\u800c\u5df2\u77e3\u3002\u6210\u89b8\u8b02\u9f4a\u666f\u516c\u66f0\uff1a\u300e\u5f7c\u4e08\u592b\u4e5f\uff0c\u6211\u4e08\u592b\u4e5f\uff0c\u543e\u4f55\u754f\u5f7c\u54c9\uff1f\u300f\u984f\u6df5\u66f0\uff1a\u300e\u821c\u4f55\u4eba\u4e5f\uff1f\u4e88\u4f55\u4eba\u4e5f\uff1f\u6709\u70ba\u8005\u4ea6\u82e5\u662f\u3002\u300f\u516c\u660e\u5100\u66f0\uff1a\u300e\u6587\u738b\u6211\u5e2b\u4e5f\uff0c\u5468\u516c\u8c48\u6b3a\u6211\u54c9\uff1f\u300f\u4eca\u6ed5\uff0c\u7d55\u9577\u88dc\u77ed\uff0c\u5c07\u4e94\u5341\u91cc\u4e5f\uff0c\u7336\u53ef\u4ee5\u70ba\u5584\u570b\u3002\u300a\u66f8\u300b\u66f0\uff1a\u300e\u82e5\u85e5\u4e0d",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u529b"
+          },
+          {
+            "id": "\u6cbb"
+          },
+          {
+            "id": "\u7236"
+          },
+          {
+            "id": "\u5f92"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u89aa"
+          },
+          {
+            "id": "\u541b"
+          },
+          {
+            "id": "\u52de"
+          },
+          {
+            "id": "\u6559"
+          },
+          {
+            "id": "\u5929"
+          },
+          {
+            "id": "\u4e0b"
+          },
+          {
+            "id": "\u5fc3"
+          },
+          {
+            "id": "\u98df"
+          },
+          {
+            "id": "\u6216"
+          },
+          {
+            "id": "\u502b"
+          },
+          {
+            "id": "\u4f7f"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.174751721484161,
+            "source": "\u529b",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 3.784189633918261,
+            "source": "\u529b",
+            "target": "\u52de"
+          },
+          {
+            "weight": 2.3178525651248343,
+            "source": "\u529b",
+            "target": "\u5929"
+          },
+          {
+            "weight": 3.091042453358316,
+            "source": "\u529b",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 2.9368917735310576,
+            "source": "\u529b",
+            "target": "\u6216"
+          },
+          {
+            "weight": 2.580216829592325,
+            "source": "\u529b",
+            "target": "\u6cbb"
+          },
+          {
+            "weight": 4.189654742026425,
+            "source": "\u529b",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.9368917735310576,
+            "source": "\u529b",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.951608170169951,
+            "source": "\u6cbb",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 0.9707789171582248,
+            "source": "\u6cbb",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 1.8070269413588433,
+            "source": "\u6cbb",
+            "target": "\u5929"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u6cbb",
+            "target": "\u52de"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u6cbb",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 1.327453861096957,
+            "source": "\u6cbb",
+            "target": "\u6216"
+          },
+          {
+            "weight": 2.580216829592325,
+            "source": "\u6cbb",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.327453861096957,
+            "source": "\u6cbb",
+            "target": "\u98df"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u7236",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 2.6855773452501515,
+            "source": "\u7236",
+            "target": "\u502b"
+          },
+          {
+            "weight": 1.2992829841302609,
+            "source": "\u7236",
+            "target": "\u541b"
+          },
+          {
+            "weight": 2.6855773452501515,
+            "source": "\u7236",
+            "target": "\u5f92"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u7236",
+            "target": "\u6559"
+          },
+          {
+            "weight": 3.091042453358316,
+            "source": "\u7236",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.3862943611198906,
+            "source": "\u7236",
+            "target": "\u89aa"
+          },
+          {
+            "weight": 2.531426665422893,
+            "source": "\u5f92",
+            "target": "\u98df"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u5f92",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 3.378724525810097,
+            "source": "\u5f92",
+            "target": "\u502b"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u5f92",
+            "target": "\u541b"
+          },
+          {
+            "weight": 2.6855773452501515,
+            "source": "\u5f92",
+            "target": "\u6559"
+          },
+          {
+            "weight": 3.784189633918261,
+            "source": "\u5f92",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.0794415416798357,
+            "source": "\u5f92",
+            "target": "\u89aa"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u7fa9",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 3.784189633918261,
+            "source": "\u7fa9",
+            "target": "\u52de"
+          },
+          {
+            "weight": 2.3178525651248343,
+            "source": "\u7fa9",
+            "target": "\u5929"
+          },
+          {
+            "weight": 3.091042453358316,
+            "source": "\u7fa9",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 2.9368917735310576,
+            "source": "\u7fa9",
+            "target": "\u6216"
+          },
+          {
+            "weight": 2.9368917735310576,
+            "source": "\u7fa9",
+            "target": "\u98df"
+          },
+          {
+            "weight": 2.580216829592325,
+            "source": "\u7fa9",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 3.784189633918261,
+            "source": "\u7fa9",
+            "target": "\u502b"
+          },
+          {
+            "weight": 2.3978952727983707,
+            "source": "\u7fa9",
+            "target": "\u541b"
+          },
+          {
+            "weight": 3.091042453358316,
+            "source": "\u7fa9",
+            "target": "\u6559"
+          },
+          {
+            "weight": 2.4849066497880004,
+            "source": "\u7fa9",
+            "target": "\u89aa"
+          },
+          {
+            "weight": 0.47000362924573563,
+            "source": "\u89aa",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 0.8754687373538999,
+            "source": "\u89aa",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 2.0794415416798357,
+            "source": "\u89aa",
+            "target": "\u502b"
+          },
+          {
+            "weight": 0.6931471805599453,
+            "source": "\u89aa",
+            "target": "\u541b"
+          },
+          {
+            "weight": 1.3862943611198906,
+            "source": "\u89aa",
+            "target": "\u6559"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "\u541b",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u541b",
+            "target": "\u502b"
+          },
+          {
+            "weight": 1.2992829841302609,
+            "source": "\u541b",
+            "target": "\u6559"
+          },
+          {
+            "weight": 3.378724525810097,
+            "source": "\u52de",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 3.2245738459828384,
+            "source": "\u52de",
+            "target": "\u6216"
+          },
+          {
+            "weight": 1.7692866133759964,
+            "source": "\u52de",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 1.9123874570166697,
+            "source": "\u52de",
+            "target": "\u5929"
+          },
+          {
+            "weight": 2.531426665422893,
+            "source": "\u52de",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.8382794848629478,
+            "source": "\u6559",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "\u6559",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 2.6855773452501515,
+            "source": "\u6559",
+            "target": "\u502b"
+          },
+          {
+            "weight": 2.605534637576615,
+            "source": "\u5929",
+            "target": "\u4e0b"
+          },
+          {
+            "weight": 1.9123874570166697,
+            "source": "\u5929",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 1.065089596629466,
+            "source": "\u5929",
+            "target": "\u6216"
+          },
+          {
+            "weight": 1.065089596629466,
+            "source": "\u5929",
+            "target": "\u98df"
+          },
+          {
+            "weight": 0.5653138090500605,
+            "source": "\u4e0b",
+            "target": "\u4f7f"
+          },
+          {
+            "weight": 1.7692866133759964,
+            "source": "\u4e0b",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 0.9219887529887928,
+            "source": "\u4e0b",
+            "target": "\u6216"
+          },
+          {
+            "weight": 0.9219887529887928,
+            "source": "\u4e0b",
+            "target": "\u98df"
+          },
+          {
+            "weight": 2.531426665422893,
+            "source": "\u5fc3",
+            "target": "\u6216"
+          },
+          {
+            "weight": 1.8382794848629478,
+            "source": "\u5fc3",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.6841288050356895,
+            "source": "\u98df",
+            "target": "\u6216"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u502b",
+            "target": "\u4f7f"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/teng-wen-gong-ii",
+      "title": "\u6ed5\u6587\u516c\u4e0b",
+      "description": "\u9673\u4ee3\u66f0\uff1a\u300c\u4e0d\u898b\u8af8\u4faf\uff0c\u5b9c\u82e5\u5c0f\u7136\uff1b\u4eca\u4e00\u898b\u4e4b\uff0c\u5927\u5247\u4ee5\u738b\uff0c\u5c0f\u5247\u4ee5\u9738\u3002\u4e14\u5fd7\u66f0\uff1a\u300e\u6789\u5c3a\u800c\u76f4\u5c0b\u300f\uff0c\u5b9c\u82e5\u53ef\u70ba\u4e5f\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u6614\u9f4a\u666f\u516c\u7530\uff0c\u62db\u865e\u4eba\u4ee5\u65cc\uff0c\u4e0d\u81f3\uff0c\u5c07\u6bba\u4e4b\u3002\u5fd7\u58eb\u4e0d\u5fd8\u5728\u6e9d\u58d1\uff0c\u52c7\u58eb\u4e0d\u5fd8\u55aa\u5176\u5143\u3002\u5b54\u5b50\u595a\u53d6\u7109\uff1f\u53d6\u975e\u5176\u62db\u4e0d\u5f80\u4e5f\uff0c\u5982\u4e0d\u5f85\u5176\u62db\u800c\u5f80\uff0c\u4f55\u54c9\uff1f\u4e14\u592b\u6789\u5c3a\u800c\u76f4\u5c0b\u8005\uff0c\u4ee5\u5229\u8a00\u4e5f\u3002\u5982\u4ee5\u5229\uff0c\u5247\u6789\u5c0b\u76f4\u5c3a\u800c\u5229\uff0c\u4ea6\u53ef\u70ba\u8207\uff1f\u6614\u8005\u8d99\u7c21\u5b50\u4f7f\u738b\u826f\u8207\u5b16\u595a\u4e58\uff0c\u7d42",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u5f8c"
+          },
+          {
+            "id": "\u797f"
+          },
+          {
+            "id": "\u5ba4"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u8aaa"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u9053"
+          },
+          {
+            "id": "\u77e5"
+          },
+          {
+            "id": "\u6893"
+          },
+          {
+            "id": "\u6c11"
+          },
+          {
+            "id": "\u4f55"
+          },
+          {
+            "id": "\u5144"
+          },
+          {
+            "id": "\u5320"
+          },
+          {
+            "id": "\u5b54\u5b50"
+          },
+          {
+            "id": "\u5145"
+          },
+          {
+            "id": "\u5c45"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.959350221334602,
+            "source": "\u5f8c",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 0.696985956867111,
+            "source": "\u5f8c",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 1.8756409532087572,
+            "source": "\u5f8c",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 1.3160251652733344,
+            "source": "\u5f8c",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 0.6228779847133892,
+            "source": "\u5f8c",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 2.5687881337687024,
+            "source": "\u5f8c",
+            "target": "\u5145"
+          },
+          {
+            "weight": 3.6186102582673803,
+            "source": "\u797f",
+            "target": "\u5144"
+          },
+          {
+            "weight": 3.6186102582673803,
+            "source": "\u797f",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.4701758451005926,
+            "source": "\u5ba4",
+            "target": "\u9053"
+          },
+          {
+            "weight": 2.637781005255654,
+            "source": "\u5ba4",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 2.925463077707435,
+            "source": "\u5ba4",
+            "target": "\u5144"
+          },
+          {
+            "weight": 2.2323158971474895,
+            "source": "\u5ba4",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 3.6186102582673803,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.5199979695992702,
+            "source": "\u7fa9",
+            "target": "\u5320"
+          },
+          {
+            "weight": 2.5199979695992702,
+            "source": "\u7fa9",
+            "target": "\u6893"
+          },
+          {
+            "weight": 1.0536609008058433,
+            "source": "\u7fa9",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 2.2323158971474895,
+            "source": "\u7fa9",
+            "target": "\u77e5"
+          },
+          {
+            "weight": 2.925463077707435,
+            "source": "\u7fa9",
+            "target": "\u5145"
+          },
+          {
+            "weight": 1.6727001092120668,
+            "source": "\u7fa9",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 1.3160251652733344,
+            "source": "\u7fa9",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 2.0091723458332797,
+            "source": "\u7fa9",
+            "target": "\u8aaa"
+          },
+          {
+            "weight": 0.9105600571651701,
+            "source": "\u7fa9",
+            "target": "\u9053"
+          },
+          {
+            "weight": 2.365847289772012,
+            "source": "\u7fa9",
+            "target": "\u5144"
+          },
+          {
+            "weight": 0.9795529286521215,
+            "source": "\u7fa9",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 2.3456445824544927,
+            "source": "\u8aaa",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 1.9401794743463283,
+            "source": "\u8aaa",
+            "target": "\u9053"
+          },
+          {
+            "weight": 2.856470206220483,
+            "source": "\u8aaa",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.5687881337687024,
+            "source": "\u8aaa",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.0091723458332797,
+            "source": "\u8aaa",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 3.367295829986474,
+            "source": "\u4ec1",
+            "target": "\u5320"
+          },
+          {
+            "weight": 3.367295829986474,
+            "source": "\u4ec1",
+            "target": "\u6893"
+          },
+          {
+            "weight": 3.7727609380946383,
+            "source": "\u4ec1",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.5199979695992702,
+            "source": "\u4ec1",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 2.163323025660538,
+            "source": "\u4ec1",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 1.7578579175523736,
+            "source": "\u4ec1",
+            "target": "\u9053"
+          },
+          {
+            "weight": 0.21741287660522474,
+            "source": "\u9053",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 1.247032293786383,
+            "source": "\u9053",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 1.4701758451005926,
+            "source": "\u9053",
+            "target": "\u5145"
+          },
+          {
+            "weight": 0.9105600571651701,
+            "source": "\u9053",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 4.465908118654584,
+            "source": "\u6893",
+            "target": "\u5320"
+          },
+          {
+            "weight": 0.6228779847133892,
+            "source": "\u6c11",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 1.8756409532087572,
+            "source": "\u6c11",
+            "target": "\u5145"
+          },
+          {
+            "weight": 1.3160251652733344,
+            "source": "\u6c11",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 1.6727001092120668,
+            "source": "\u5144",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 2.2323158971474895,
+            "source": "\u5b54\u5b50",
+            "target": "\u5145"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/li-lou-i",
+      "title": "\u96e2\u5a41\u4e0a",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u96e2\u5a41\u4e4b\u660e\uff0c\u516c\u8f38\u5b50\u4e4b\u5de7\uff0c\u4e0d\u4ee5\u898f\u77e9\uff0c\u4e0d\u80fd\u6210\u65b9\u54e1\uff1a\u5e2b\u66e0\u4e4b\u8070\uff0c\u4e0d\u4ee5\u516d\u5f8b\uff0c\u4e0d\u80fd\u6b63\u4e94\u97f3\uff1b\u582f\u821c\u4e4b\u9053\uff0c\u4e0d\u4ee5\u4ec1\u653f\uff0c\u4e0d\u80fd\u5e73\u6cbb\u5929\u4e0b\u3002\u4eca\u6709\u4ec1\u5fc3\u4ec1\u805e\u800c\u6c11\u4e0d\u88ab\u5176\u6fa4\uff0c\u4e0d\u53ef\u6cd5\u65bc\u5f8c\u4e16\u8005\uff0c\u4e0d\u884c\u5148\u738b\u4e4b\u9053\u4e5f\u3002\n\u300c\u6545\u66f0\uff0c\u5f92\u5584\u4e0d\u8db3\u4ee5\u70ba\u653f\uff0c\u5f92\u6cd5\u4e0d\u80fd\u4ee5\u81ea\u884c\u3002\u300a\u8a69\u300b\u4e91\uff1a\u300e\u4e0d\u6106\u4e0d\u5fd8\uff0c\u7387\u7531\u820a\u7ae0\u3002\u300f\u9075\u5148\u738b\u4e4b\u6cd5\u800c\u904e\u8005\uff0c\u672a\u4e4b\u6709\u4e5f\u3002\u8056\u4eba\u65e2\u7aed\u76ee\u529b\u7109\uff0c\u7e7c\u4e4b\u4ee5\u898f\u77e9\u6e96\u7e69\uff0c\u4ee5\u70ba\u65b9",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u66b4"
+          },
+          {
+            "id": "\u81ea"
+          },
+          {
+            "id": "\u6b63"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u541b"
+          },
+          {
+            "id": "\u5be6"
+          },
+          {
+            "id": "\u4e8b"
+          },
+          {
+            "id": "\u541b\u5b50"
+          },
+          {
+            "id": "\u83ab"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u8eab"
+          },
+          {
+            "id": "\u5f9e"
+          },
+          {
+            "id": "\u5c45"
+          },
+          {
+            "id": "\u8a00"
+          },
+          {
+            "id": "\u7531"
+          },
+          {
+            "id": "\u79ae"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.833213344056216,
+            "source": "\u66b4",
+            "target": "\u81ea"
+          },
+          {
+            "weight": 2.833213344056216,
+            "source": "\u66b4",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 2.496741107435003,
+            "source": "\u66b4",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 2.496741107435003,
+            "source": "\u66b4",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.62924053973028,
+            "source": "\u81ea",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 1.292768303109067,
+            "source": "\u81ea",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.292768303109067,
+            "source": "\u81ea",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 0.7790896103606699,
+            "source": "\u6b63",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 1.3981288187668934,
+            "source": "\u6b63",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.245426679154097,
+            "source": "\u6b63",
+            "target": "\u7531"
+          },
+          {
+            "weight": 0.7790896103606699,
+            "source": "\u6b63",
+            "target": "\u541b"
+          },
+          {
+            "weight": 1.5522794985941517,
+            "source": "\u6b63",
+            "target": "\u83ab"
+          },
+          {
+            "weight": 2.9022062155431674,
+            "source": "\u7fa9",
+            "target": "\u541b\u5b50"
+          },
+          {
+            "weight": 1.1974581233047423,
+            "source": "\u7fa9",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 1.7235512192015214,
+            "source": "\u7fa9",
+            "target": "\u541b"
+          },
+          {
+            "weight": 1.6494432470477995,
+            "source": "\u7fa9",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.292768303109067,
+            "source": "\u7fa9",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 0.45985918017396316,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.9859154836690125,
+            "source": "\u7fa9",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 2.496741107435003,
+            "source": "\u7fa9",
+            "target": "\u7531"
+          },
+          {
+            "weight": 1.030404038641576,
+            "source": "\u7fa9",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 1.8035939268750578,
+            "source": "\u7fa9",
+            "target": "\u83ab"
+          },
+          {
+            "weight": 1.9859154836690125,
+            "source": "\u7fa9",
+            "target": "\u5be6"
+          },
+          {
+            "weight": 2.9022062155431674,
+            "source": "\u7fa9",
+            "target": "\u5f9e"
+          },
+          {
+            "weight": 1.2715660954584642,
+            "source": "\u541b",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 0.9394322604358494,
+            "source": "\u541b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.283167007136944,
+            "source": "\u541b",
+            "target": "\u83ab"
+          },
+          {
+            "weight": 1.5339303599259553,
+            "source": "\u5be6",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 0.7963314167951762,
+            "source": "\u5be6",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.2386784521643803,
+            "source": "\u5be6",
+            "target": "\u5f9e"
+          },
+          {
+            "weight": 1.9859154836690125,
+            "source": "\u5be6",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.2715660954584642,
+            "source": "\u4e8b",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 0.007874056430905866,
+            "source": "\u4e8b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.6140098600012215,
+            "source": "\u83ab",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.7963314167951762,
+            "source": "\u4ec1",
+            "target": "\u8a00"
+          },
+          {
+            "weight": 0.533967152327685,
+            "source": "\u4ec1",
+            "target": "\u8eab"
+          },
+          {
+            "weight": 0.7963314167951762,
+            "source": "\u4ec1",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 1.3071570405611668,
+            "source": "\u4ec1",
+            "target": "\u7531"
+          },
+          {
+            "weight": 1.366876275262789,
+            "source": "\u8eab",
+            "target": "\u5c45"
+          },
+          {
+            "weight": 1.8777018990287797,
+            "source": "\u8eab",
+            "target": "\u7531"
+          },
+          {
+            "weight": 2.833213344056216,
+            "source": "\u5c45",
+            "target": "\u7531"
+          },
+          {
+            "weight": 1.9859154836690125,
+            "source": "\u8a00",
+            "target": "\u79ae"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/li-lou-ii",
+      "title": "\u96e2\u5a41\u4e0b",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u821c\u751f\u65bc\u8af8\u99ae\uff0c\u9077\u65bc\u8ca0\u590f\uff0c\u5352\u65bc\u9cf4\u689d\uff0c\u6771\u5937\u4e4b\u4eba\u4e5f\u3002\u6587\u738b\u751f\u65bc\u5c90\u5468\uff0c\u5352\u65bc\u7562\u90e2\uff0c\u897f\u5937\u4e4b\u4eba\u4e5f\u3002\u5730\u4e4b\u76f8\u53bb\u4e5f\uff0c\u5343\u6709\u9918\u91cc\uff1b\u4e16\u4e4b\u76f8\u5f8c\u4e5f\uff0c\u5343\u6709\u9918\u6b72\u3002\u5f97\u5fd7\u884c\u4e4e\u4e2d\u570b\uff0c\u82e5\u5408\u7b26\u7bc0\u3002\u5148\u8056\u5f8c\u8056\uff0c\u5176\u63c6\u4e00\u4e5f\u3002\u300d\n\u5b50\u7522\u807d\u912d\u570b\u4e4b\u653f\uff0c\u4ee5\u5176\u4e58\u8f3f\u6fdf\u4eba\u65bc\u6eb1\u6d27\u3002\u5b5f\u5b50\u66f0\uff1a\u300c\u60e0\u800c\u4e0d\u77e5\u70ba\u653f\u3002\u6b72\u5341\u4e00\u6708\u5f92\u6760\u6210\uff0c\u5341\u4e8c\u6708\u8f3f\u6881\u6210\uff0c\u6c11\u672a\u75c5\u6d89\u4e5f\u3002\u541b\u5b50\u5e73\u5176\u653f\uff0c\u884c\u8f9f\u4eba\u53ef\u4e5f\u3002\u7109\u5f97\u4eba\u4eba\u800c\u6fdf",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u79ae"
+          },
+          {
+            "id": "\u611b"
+          },
+          {
+            "id": "\u5b58"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u541b"
+          },
+          {
+            "id": "\u4eba"
+          },
+          {
+            "id": "\u884c"
+          },
+          {
+            "id": "\u7fbf"
+          },
+          {
+            "id": "\u6b7b"
+          },
+          {
+            "id": "\u60df"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u5df1"
+          },
+          {
+            "id": "\u9006"
+          },
+          {
+            "id": "\u7a37"
+          },
+          {
+            "id": "\u6a6b"
+          },
+          {
+            "id": "\u7531"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.7689072264414809,
+            "source": "\u79ae",
+            "target": "\u541b"
+          },
+          {
+            "weight": 1.8675195151095907,
+            "source": "\u79ae",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.3820116993278897,
+            "source": "\u79ae",
+            "target": "\u884c"
+          },
+          {
+            "weight": 1.4620544070014263,
+            "source": "\u79ae",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.8675195151095907,
+            "source": "\u79ae",
+            "target": "\u5b58"
+          },
+          {
+            "weight": 3.253813876229481,
+            "source": "\u79ae",
+            "target": "\u611b"
+          },
+          {
+            "weight": 1.6898383378721382,
+            "source": "\u611b",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 3.6592789843376456,
+            "source": "\u611b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 4.06474409244581,
+            "source": "\u611b",
+            "target": "\u5b58"
+          },
+          {
+            "weight": 0.9966911573121928,
+            "source": "\u5b58",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u5b58",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.5798374426578097,
+            "source": "\u7fa9",
+            "target": "\u541b"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u7fa9",
+            "target": "\u60df"
+          },
+          {
+            "weight": 0.3035439767522475,
+            "source": "\u7fa9",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.272984623217755,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.118833943390497,
+            "source": "\u7fa9",
+            "target": "\u7531"
+          },
+          {
+            "weight": 1.4997947349842733,
+            "source": "\u7fa9",
+            "target": "\u884c"
+          },
+          {
+            "weight": 1.1743723345496453,
+            "source": "\u541b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.22350126907871118,
+            "source": "\u4eba",
+            "target": "\u884c"
+          },
+          {
+            "weight": 0.5912260492040285,
+            "source": "\u4eba",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.4370753693767701,
+            "source": "\u4eba",
+            "target": "\u7531"
+          },
+          {
+            "weight": 1.094329626876109,
+            "source": "\u884c",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.9401789470488504,
+            "source": "\u884c",
+            "target": "\u7531"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u7fbf",
+            "target": "\u5df1"
+          },
+          {
+            "weight": 2.9661318037777002,
+            "source": "\u7fbf",
+            "target": "\u60df"
+          },
+          {
+            "weight": 3.253813876229481,
+            "source": "\u6b7b",
+            "target": "\u60df"
+          },
+          {
+            "weight": 3.253813876229481,
+            "source": "\u60df",
+            "target": "\u5df1"
+          },
+          {
+            "weight": 1.7133688352823322,
+            "source": "\u4ec1",
+            "target": "\u7531"
+          },
+          {
+            "weight": 3.099663196402223,
+            "source": "\u5df1",
+            "target": "\u7531"
+          },
+          {
+            "weight": 3.6592789843376456,
+            "source": "\u5df1",
+            "target": "\u7a37"
+          },
+          {
+            "weight": 4.352426164897591,
+            "source": "\u9006",
+            "target": "\u6a6b"
+          },
+          {
+            "weight": 3.099663196402223,
+            "source": "\u9006",
+            "target": "\u7531"
+          },
+          {
+            "weight": 2.8119811239504418,
+            "source": "\u7a37",
+            "target": "\u7531"
+          },
+          {
+            "weight": 3.099663196402223,
+            "source": "\u6a6b",
+            "target": "\u7531"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/wan-zhang-i",
+      "title": "\u842c\u7ae0\u4e0a",
+      "description": "\u842c\u7ae0\u554f\u66f0\uff1a\u300c\u821c\u5f80\u4e8e\u7530\uff0c\u865f\u6ce3\u4e8e\u65fb\u5929\uff0c\u4f55\u70ba\u5176\u865f\u6ce3\u4e5f\uff1f\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u6028\u6155\u4e5f\u3002\u300d\n\u842c\u7ae0\u66f0\uff1a\u300c\u7236\u6bcd\u611b\u4e4b\uff0c\u559c\u800c\u4e0d\u5fd8\uff1b\u7236\u6bcd\u60e1\u4e4b\uff0c\u52de\u800c\u4e0d\u6028\u3002\u7136\u5247\u821c\u6028\u4e4e\uff1f\u300d\n\u66f0\uff1a\u300c\u9577\u606f\u554f\u65bc\u516c\u660e\u9ad8\u66f0\uff1a\u300e\u821c\u5f80\u4e8e\u7530\uff0c\u5247\u543e\u65e2\u5f97\u805e\u547d\u77e3\uff1b\u865f\u6ce3\u4e8e\u65fb\u5929\uff0c\u4e8e\u7236\u6bcd\uff0c\u5247\u543e\u4e0d\u77e5\u4e5f\u3002\u300f\u516c\u660e\u9ad8\u66f0\uff1a\u300e\u662f\u975e\u723e\u6240\u77e5\u4e5f\u3002\u300f\u592b\u516c\u660e\u9ad8\u4ee5\u5b5d\u5b50\u4e4b\u5fc3\uff0c\u70ba\u4e0d\u82e5\u662f\u605d\uff0c\u6211\u7aed\u529b\u8015\u7530\uff0c\u5171\u70ba\u5b50\u8077\u800c\u5df2\u77e3\uff0c\u7236\u6bcd\u4e4b",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u5e74"
+          },
+          {
+            "id": "\u81ea"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u755d"
+          },
+          {
+            "id": "\u8af8"
+          },
+          {
+            "id": "\u6a02"
+          },
+          {
+            "id": "\u4e00"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u547d"
+          },
+          {
+            "id": "\u4e2d"
+          },
+          {
+            "id": "\u754e"
+          },
+          {
+            "id": "\u9053"
+          },
+          {
+            "id": "\u8655"
+          },
+          {
+            "id": "\u5b54\u5b50"
+          },
+          {
+            "id": "\u7531"
+          },
+          {
+            "id": "\u4e09"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.887796428118432,
+            "source": "\u5e74",
+            "target": "\u4e09"
+          },
+          {
+            "weight": 1.7528164952794476,
+            "source": "\u5e74",
+            "target": "\u81ea"
+          },
+          {
+            "weight": 1.5296729439652377,
+            "source": "\u5e74",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.7528164952794476,
+            "source": "\u5e74",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.0404985677312286,
+            "source": "\u5e74",
+            "target": "\u8655"
+          },
+          {
+            "weight": 2.0404985677312286,
+            "source": "\u81ea",
+            "target": "\u4e09"
+          },
+          {
+            "weight": 1.9351380520734023,
+            "source": "\u81ea",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.158281603387612,
+            "source": "\u81ea",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.445963675839393,
+            "source": "\u81ea",
+            "target": "\u8655"
+          },
+          {
+            "weight": 1.7528164952794476,
+            "source": "\u81ea",
+            "target": "\u4e2d"
+          },
+          {
+            "weight": 2.0404985677312286,
+            "source": "\u7fa9",
+            "target": "\u4e09"
+          },
+          {
+            "weight": 2.6282852326333477,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.139110856399338,
+            "source": "\u7fa9",
+            "target": "\u8655"
+          },
+          {
+            "weight": 3.544575964507503,
+            "source": "\u7fa9",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 2.2918129960121347,
+            "source": "\u7fa9",
+            "target": "\u5b54\u5b50"
+          },
+          {
+            "weight": 2.158281603387612,
+            "source": "\u7fa9",
+            "target": "\u547d"
+          },
+          {
+            "weight": 3.8322580369592836,
+            "source": "\u755d",
+            "target": "\u4e2d"
+          },
+          {
+            "weight": 4.5254052175192285,
+            "source": "\u755d",
+            "target": "\u754e"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u755d",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u755d",
+            "target": "\u7531"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u755d",
+            "target": "\u8655"
+          },
+          {
+            "weight": 3.139110856399338,
+            "source": "\u755d",
+            "target": "\u9053"
+          },
+          {
+            "weight": 2.733645748291174,
+            "source": "\u8af8",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 3.544575964507503,
+            "source": "\u6a02",
+            "target": "\u9053"
+          },
+          {
+            "weight": 3.426792928851119,
+            "source": "\u6a02",
+            "target": "\u4e2d"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u6a02",
+            "target": "\u7531"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u6a02",
+            "target": "\u754e"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u6a02",
+            "target": "\u8655"
+          },
+          {
+            "weight": 1.8173550164170187,
+            "source": "\u4ec1",
+            "target": "\u4e09"
+          },
+          {
+            "weight": 2.9159673050851285,
+            "source": "\u4ec1",
+            "target": "\u8655"
+          },
+          {
+            "weight": 3.8322580369592836,
+            "source": "\u4e2d",
+            "target": "\u754e"
+          },
+          {
+            "weight": 3.426792928851119,
+            "source": "\u4e2d",
+            "target": "\u7531"
+          },
+          {
+            "weight": 3.426792928851119,
+            "source": "\u4e2d",
+            "target": "\u8655"
+          },
+          {
+            "weight": 2.445963675839393,
+            "source": "\u4e2d",
+            "target": "\u9053"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u754e",
+            "target": "\u7531"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u754e",
+            "target": "\u8655"
+          },
+          {
+            "weight": 3.139110856399338,
+            "source": "\u754e",
+            "target": "\u9053"
+          },
+          {
+            "weight": 3.139110856399338,
+            "source": "\u9053",
+            "target": "\u7531"
+          },
+          {
+            "weight": 3.139110856399338,
+            "source": "\u9053",
+            "target": "\u8655"
+          },
+          {
+            "weight": 2.3281806401830094,
+            "source": "\u8655",
+            "target": "\u4e09"
+          },
+          {
+            "weight": 4.119940109411065,
+            "source": "\u8655",
+            "target": "\u7531"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/wan-zhang-ii",
+      "title": "\u842c\u7ae0\u4e0b",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u4f2f\u5937\uff0c\u76ee\u4e0d\u8996\u60e1\u8272\uff0c\u8033\u4e0d\u807d\u60e1\u8072\u3002\u975e\u5176\u541b\u4e0d\u4e8b\uff0c\u975e\u5176\u6c11\u4e0d\u4f7f\u3002\u6cbb\u5247\u9032\uff0c\u4e82\u5247\u9000\u3002\u6a6b\u653f\u4e4b\u6240\u51fa\uff0c\u6a6b\u6c11\u4e4b\u6240\u6b62\uff0c\u4e0d\u5fcd\u5c45\u4e5f\u3002\u601d\u8207\u9109\u4eba\u8655\uff0c\u5982\u4ee5\u671d\u8863\u671d\u51a0\u5750\u65bc\u5857\u70ad\u4e5f\u3002\u7576\u7d02\u4e4b\u6642\uff0c\u5c45\u5317\u6d77\u4e4b\u6ff1\uff0c\u4ee5\u5f85\u5929\u4e0b\u4e4b\u6e05\u4e5f\u3002\u6545\u805e\u4f2f\u5937\u4e4b\u98a8\u8005\uff0c\u9811\u592b\u5ec9\uff0c\u61e6\u592b\u6709\u7acb\u5fd7\u3002\n\u300c\u4f0a\u5c39\u66f0\uff1a\u300e\u4f55\u4e8b\u975e\u541b\uff1f\u4f55\u4f7f\u975e\u6c11\uff1f\u300f\u6cbb\u4ea6\u9032\uff0c\u4e82\u4ea6\u9032\u3002\u66f0\uff1a\u300e\u5929\u4e4b\u751f\u65af\u6c11\u4e5f\uff0c\u4f7f\u5148\u77e5\u89ba\u5f8c\u77e5\uff0c\u4f7f\u5148\u89ba\u89ba\u5f8c",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u9f4a"
+          },
+          {
+            "id": "\u81f3"
+          },
+          {
+            "id": "\u53d6"
+          },
+          {
+            "id": "\u53d7"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u5f79"
+          },
+          {
+            "id": "\u8af8"
+          },
+          {
+            "id": "\u4faf"
+          },
+          {
+            "id": "\u4e00"
+          },
+          {
+            "id": "\u8cb4"
+          },
+          {
+            "id": "\u5f80"
+          },
+          {
+            "id": "\u8ce2"
+          },
+          {
+            "id": "\u5c0a"
+          },
+          {
+            "id": "\u898b"
+          },
+          {
+            "id": "\u4f55"
+          },
+          {
+            "id": "\u6c11"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 3.355735007585398,
+            "source": "\u9f4a",
+            "target": "\u81f3"
+          },
+          {
+            "weight": 2.3749057545736716,
+            "source": "\u81f3",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.5572273113676265,
+            "source": "\u53d6",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.334083760053417,
+            "source": "\u53d6",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 2.0717194955859255,
+            "source": "\u53d6",
+            "target": "\u8af8"
+          },
+          {
+            "weight": 1.3785723150259803,
+            "source": "\u53d6",
+            "target": "\u4faf"
+          },
+          {
+            "weight": 1.9976115234322036,
+            "source": "\u53d6",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 0.423060869998544,
+            "source": "\u53d7",
+            "target": "\u4faf"
+          },
+          {
+            "weight": 0.84794406396381,
+            "source": "\u53d7",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 0.9085686857802447,
+            "source": "\u53d7",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.075622770443411,
+            "source": "\u7fa9",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 1.5276078941864681,
+            "source": "\u7fa9",
+            "target": "\u5c0a"
+          },
+          {
+            "weight": 1.864080130807681,
+            "source": "\u7fa9",
+            "target": "\u8cb4"
+          },
+          {
+            "weight": 1.075622770443411,
+            "source": "\u7fa9",
+            "target": "\u8ce2"
+          },
+          {
+            "weight": 1.170932950247736,
+            "source": "\u7fa9",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 1.60171586634019,
+            "source": "\u7fa9",
+            "target": "\u8af8"
+          },
+          {
+            "weight": 1.3334518797455106,
+            "source": "\u7fa9",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 0.9085686857802447,
+            "source": "\u7fa9",
+            "target": "\u4faf"
+          },
+          {
+            "weight": 1.6817585740137264,
+            "source": "\u7fa9",
+            "target": "\u898b"
+          },
+          {
+            "weight": 2.780370862681836,
+            "source": "\u7fa9",
+            "target": "\u5f79"
+          },
+          {
+            "weight": 2.2207550747464135,
+            "source": "\u7fa9",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 3.607049435866304,
+            "source": "\u5f79",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 2.7256459629925898,
+            "source": "\u8af8",
+            "target": "\u4faf"
+          },
+          {
+            "weight": 1.3785723150259803,
+            "source": "\u8af8",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 0.84794406396381,
+            "source": "\u8af8",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 1.1962507582320256,
+            "source": "\u8af8",
+            "target": "\u898b"
+          },
+          {
+            "weight": 0.5901149546617102,
+            "source": "\u4faf",
+            "target": "\u4e00"
+          },
+          {
+            "weight": 0.685425134466035,
+            "source": "\u4faf",
+            "target": "\u6c11"
+          },
+          {
+            "weight": 0.84794406396381,
+            "source": "\u4faf",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 1.1962507582320256,
+            "source": "\u4faf",
+            "target": "\u898b"
+          },
+          {
+            "weight": 1.2091541630679337,
+            "source": "\u4e00",
+            "target": "\u5c0a"
+          },
+          {
+            "weight": 1.5456263996891464,
+            "source": "\u4e00",
+            "target": "\u8cb4"
+          },
+          {
+            "weight": 0.7571690393248763,
+            "source": "\u4e00",
+            "target": "\u8ce2"
+          },
+          {
+            "weight": 2.690758703992149,
+            "source": "\u8cb4",
+            "target": "\u5c0a"
+          },
+          {
+            "weight": 2.2387735802490916,
+            "source": "\u8cb4",
+            "target": "\u8ce2"
+          },
+          {
+            "weight": 0.773836091810088,
+            "source": "\u5f80",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u5f80",
+            "target": "\u898b"
+          },
+          {
+            "weight": 2.8185920755020337,
+            "source": "\u8ce2",
+            "target": "\u5c0a"
+          },
+          {
+            "weight": 1.363304842895192,
+            "source": "\u8ce2",
+            "target": "\u898b"
+          },
+          {
+            "weight": 0.9279867716373463,
+            "source": "\u898b",
+            "target": "\u4f55"
+          },
+          {
+            "weight": 0.4171611478713556,
+            "source": "\u4f55",
+            "target": "\u6c11"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/gaozi-i",
+      "title": "\u544a\u5b50\u4e0a",
+      "description": "\u544a\u5b50\u66f0\uff1a\u300c\u6027\uff0c\u7336\u675e\u67f3\u4e5f\uff1b\u7fa9\uff0c\u7336\u686e\u68ec\u4e5f\u3002\u4ee5\u4eba\u6027\u70ba\u4ec1\u7fa9\uff0c\u7336\u4ee5\u675e\u67f3\u70ba\u686e\u68ec\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u5b50\u80fd\u9806\u675e\u67f3\u4e4b\u6027\u800c\u4ee5\u70ba\u686e\u68ec\u4e4e\uff1f\u5c07\u6215\u8cca\u675e\u67f3\u800c\u5f8c\u4ee5\u70ba\u686e\u68ec\u4e5f\uff1f\u5982\u5c07\u6215\u8cca\u675e\u67f3\u800c\u4ee5\u70ba\u686e\u68ec\uff0c\u5247\u4ea6\u5c07\u6215\u8cca\u4eba\u4ee5\u70ba\u4ec1\u7fa9\u8207\uff1f\u7387\u5929\u4e0b\u4e4b\u4eba\u800c\u798d\u4ec1\u7fa9\u8005\uff0c\u5fc5\u5b50\u4e4b\u8a00\u592b\uff01\u300d\n\u544a\u5b50\u66f0\uff1a\u300c\u6027\u7336\u6e4d\u6c34\u4e5f\uff0c\u6c7a\u8af8\u6771\u65b9\u5247\u6771\u6d41\uff0c\u6c7a\u8af8\u897f\u65b9\u5247\u897f\u6d41\u3002\u4eba\u6027\u4e4b\u7121\u5206\u65bc\u5584\u4e0d\u5584\u4e5f\uff0c\u7336\u6c34\u4e4b\u7121\u5206\u65bc\u6771\u897f\u4e5f\u3002\u300d",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u68ec"
+          },
+          {
+            "id": "\u667a"
+          },
+          {
+            "id": "\u4fe1"
+          },
+          {
+            "id": "\u53d6"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u7570"
+          },
+          {
+            "id": "\u5916"
+          },
+          {
+            "id": "\u8cca"
+          },
+          {
+            "id": "\u6085"
+          },
+          {
+            "id": "\u4e8c"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u5167"
+          },
+          {
+            "id": "\u5fb7"
+          },
+          {
+            "id": "\u686e"
+          },
+          {
+            "id": "\u8def"
+          },
+          {
+            "id": "\u79ae"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 3.9435216724875173,
+            "source": "\u68ec",
+            "target": "\u686e"
+          },
+          {
+            "weight": 1.7462970951512977,
+            "source": "\u68ec",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.3044643428722584,
+            "source": "\u68ec",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.8449093838194073,
+            "source": "\u68ec",
+            "target": "\u8cca"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u667a",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.3749057545736716,
+            "source": "\u667a",
+            "target": "\u5916"
+          },
+          {
+            "weight": 3.355735007585398,
+            "source": "\u667a",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u667a",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.2207550747464135,
+            "source": "\u4fe1",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.9694406464655074,
+            "source": "\u4fe1",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 4.454347296253507,
+            "source": "\u53d6",
+            "target": "\u4e8c"
+          },
+          {
+            "weight": 1.9694406464655074,
+            "source": "\u53d6",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.7462970951512977,
+            "source": "\u7fa9",
+            "target": "\u686e"
+          },
+          {
+            "weight": 1.9694406464655074,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u8cca"
+          },
+          {
+            "weight": 1.6817585740137264,
+            "source": "\u7fa9",
+            "target": "\u5916"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u5167"
+          },
+          {
+            "weight": 1.2762934659055623,
+            "source": "\u7fa9",
+            "target": "\u7570"
+          },
+          {
+            "weight": 2.257122718917288,
+            "source": "\u7fa9",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u6085"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u4e8c"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u8def"
+          },
+          {
+            "weight": 1.563975538357343,
+            "source": "\u7fa9",
+            "target": "\u5fb7"
+          },
+          {
+            "weight": 1.5276078941864681,
+            "source": "\u5916",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.6817585740137264,
+            "source": "\u5916",
+            "target": "\u5167"
+          },
+          {
+            "weight": 2.3749057545736716,
+            "source": "\u5916",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 2.8449093838194073,
+            "source": "\u8cca",
+            "target": "\u686e"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u8cca",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.3044643428722584,
+            "source": "\u4ec1",
+            "target": "\u686e"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u4ec1",
+            "target": "\u5167"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u4ec1",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.8152899666382492,
+            "source": "\u4ec1",
+            "target": "\u5fb7"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/gaozi-ii",
+      "title": "\u544a\u5b50\u4e0b",
+      "description": "\u4efb\u4eba\u6709\u554f\u5c4b\u5eec\u5b50\u66f0\uff1a\u300c\u79ae\u8207\u98df\u5b70\u91cd\uff1f\u300d\u66f0\uff1a\u300c\u79ae\u91cd\u3002\u300d\n\u300c\u8272\u8207\u79ae\u5b70\u91cd\uff1f\u300d\u66f0\uff1a\u300c\u79ae\u91cd\u3002\u300d\n\u66f0\uff1a\u300c\u4ee5\u79ae\u98df\uff0c\u5247\u98e2\u800c\u6b7b\uff1b\u4e0d\u4ee5\u79ae\u98df\uff0c\u5247\u5f97\u98df\uff0c\u5fc5\u4ee5\u79ae\u4e4e\uff1f\u89aa\u8fce\uff0c\u5247\u4e0d\u5f97\u59bb\uff1b\u4e0d\u89aa\u8fce\uff0c\u5247\u5f97\u59bb\uff0c\u5fc5\u89aa\u8fce\u4e4e\uff01\u300d\n\u5c4b\u5eec\u5b50\u4e0d\u80fd\u5c0d\uff0c\u660e\u65e5\u4e4b\u9112\u4ee5\u544a\u5b5f\u5b50\u3002\u5b5f\u5b50\u66f0\uff1a\u300c\u65bc\u7b54\u662f\u4e5f\u4f55\u6709\uff1f\u4e0d\u63e3\u5176\u672c\u800c\u9f4a\u5176\u672b\uff0c\u65b9\u5bf8\u4e4b\u6728\u53ef\u4f7f\u9ad8\u65bc\u5c91\u6a13\u3002\u91d1\u91cd\u65bc\u7fbd\u8005\uff0c\u8c48\u8b02\u4e00\u9264\u91d1\u8207\u4e00\u8f3f\u7fbd\u4e4b\u8b02\u54c9\uff1f\u53d6\u98df\u4e4b",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u7f77"
+          },
+          {
+            "id": "\u5f1f"
+          },
+          {
+            "id": "\u7236"
+          },
+          {
+            "id": "\u58eb"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u4e8b"
+          },
+          {
+            "id": "\u6a02"
+          },
+          {
+            "id": "\u61f7"
+          },
+          {
+            "id": "\u5229"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u76f8"
+          },
+          {
+            "id": "\u695a"
+          },
+          {
+            "id": "\u5144"
+          },
+          {
+            "id": "\u81e3"
+          },
+          {
+            "id": "\u53bb"
+          },
+          {
+            "id": "\u8ecd"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u7f77",
+            "target": "\u5229"
+          },
+          {
+            "weight": 2.112231364502827,
+            "source": "\u7f77",
+            "target": "\u695a"
+          },
+          {
+            "weight": 3.2108436531709366,
+            "source": "\u7f77",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 2.8053785450627724,
+            "source": "\u7f77",
+            "target": "\u58eb"
+          },
+          {
+            "weight": 3.028522096376982,
+            "source": "\u7f77",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u7f77",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.0826119473216687,
+            "source": "\u7f77",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.217591880160653,
+            "source": "\u5f1f",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 3.4985257256227174,
+            "source": "\u5f1f",
+            "target": "\u5144"
+          },
+          {
+            "weight": 2.8743714165497236,
+            "source": "\u5f1f",
+            "target": "\u5229"
+          },
+          {
+            "weight": 3.316204168828763,
+            "source": "\u5f1f",
+            "target": "\u61f7"
+          },
+          {
+            "weight": 3.721669276936927,
+            "source": "\u5f1f",
+            "target": "\u7236"
+          },
+          {
+            "weight": 2.181224235989778,
+            "source": "\u5f1f",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u5f1f",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.8743714165497236,
+            "source": "\u5f1f",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u5f1f",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 2.6230569882688175,
+            "source": "\u5f1f",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 2.6230569882688175,
+            "source": "\u7236",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 3.903990833730882,
+            "source": "\u7236",
+            "target": "\u5144"
+          },
+          {
+            "weight": 3.279836524657888,
+            "source": "\u7236",
+            "target": "\u5229"
+          },
+          {
+            "weight": 3.721669276936927,
+            "source": "\u7236",
+            "target": "\u61f7"
+          },
+          {
+            "weight": 2.586689344097943,
+            "source": "\u7236",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.8743714165497236,
+            "source": "\u7236",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 3.279836524657888,
+            "source": "\u7236",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.8743714165497236,
+            "source": "\u7236",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 3.028522096376982,
+            "source": "\u7236",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u58eb",
+            "target": "\u5229"
+          },
+          {
+            "weight": 3.2108436531709366,
+            "source": "\u58eb",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 2.987700101856727,
+            "source": "\u58eb",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 1.264933504115623,
+            "source": "\u58eb",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u58eb",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.7067662563946624,
+            "source": "\u58eb",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 2.720220736722465,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.056692973343678,
+            "source": "\u7fa9",
+            "target": "\u5144"
+          },
+          {
+            "weight": 2.314755628614301,
+            "source": "\u7fa9",
+            "target": "\u5229"
+          },
+          {
+            "weight": 2.314755628614301,
+            "source": "\u7fa9",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 3.1620534890015044,
+            "source": "\u7fa9",
+            "target": "\u61f7"
+          },
+          {
+            "weight": 2.720220736722465,
+            "source": "\u7fa9",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u7fa9",
+            "target": "\u695a"
+          },
+          {
+            "weight": 2.181224235989778,
+            "source": "\u7fa9",
+            "target": "\u6a02"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u7fa9",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 2.063441200333395,
+            "source": "\u7fa9",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u7fa9",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 2.063441200333395,
+            "source": "\u4e8b",
+            "target": "\u5229"
+          },
+          {
+            "weight": 2.9107390607205983,
+            "source": "\u4e8b",
+            "target": "\u61f7"
+          },
+          {
+            "weight": 2.063441200333395,
+            "source": "\u4e8b",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 2.399913436954608,
+            "source": "\u4e8b",
+            "target": "\u5144"
+          },
+          {
+            "weight": 1.3702940197734494,
+            "source": "\u4e8b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.181224235989778,
+            "source": "\u6a02",
+            "target": "\u5229"
+          },
+          {
+            "weight": 3.2108436531709366,
+            "source": "\u6a02",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 1.488077055429833,
+            "source": "\u6a02",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 3.1620534890015044,
+            "source": "\u61f7",
+            "target": "\u5229"
+          },
+          {
+            "weight": 3.1620534890015044,
+            "source": "\u61f7",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 3.4985257256227174,
+            "source": "\u61f7",
+            "target": "\u5144"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u61f7",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u61f7",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.6230569882688175,
+            "source": "\u61f7",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u5229",
+            "target": "\u695a"
+          },
+          {
+            "weight": 2.651227865235514,
+            "source": "\u5229",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 2.720220736722465,
+            "source": "\u5229",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 3.056692973343678,
+            "source": "\u5229",
+            "target": "\u5144"
+          },
+          {
+            "weight": 1.6216084480543556,
+            "source": "\u5229",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.314755628614301,
+            "source": "\u5229",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u5229",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 2.3635457927837327,
+            "source": "\u4ec1",
+            "target": "\u5144"
+          },
+          {
+            "weight": 1.6216084480543556,
+            "source": "\u4ec1",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.02707355616252,
+            "source": "\u4ec1",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 1.9580806846755685,
+            "source": "\u4ec1",
+            "target": "\u695a"
+          },
+          {
+            "weight": 1.264933504115623,
+            "source": "\u4ec1",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 1.7757591278816138,
+            "source": "\u4ec1",
+            "target": "\u76f8"
+          },
+          {
+            "weight": 2.8053785450627724,
+            "source": "\u76f8",
+            "target": "\u5144"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u76f8",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.4689063084415594,
+            "source": "\u76f8",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 2.2945529212967815,
+            "source": "\u695a",
+            "target": "\u8ecd"
+          },
+          {
+            "weight": 2.651227865235514,
+            "source": "\u5144",
+            "target": "\u53bb"
+          },
+          {
+            "weight": 2.651227865235514,
+            "source": "\u5144",
+            "target": "\u81e3"
+          },
+          {
+            "weight": 2.314755628614301,
+            "source": "\u81e3",
+            "target": "\u53bb"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/jin-xin-i",
+      "title": "\u76e1\u5fc3\u4e0a",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u76e1\u5176\u5fc3\u8005\uff0c\u77e5\u5176\u6027\u4e5f\u3002\u77e5\u5176\u6027\uff0c\u5247\u77e5\u5929\u77e3\u3002\u5b58\u5176\u5fc3\uff0c\u990a\u5176\u6027\uff0c\u6240\u4ee5\u4e8b\u5929\u4e5f\u3002\u6b80\u58fd\u4e0d\u8cb3\uff0c\u4fee\u8eab\u4ee5\u4fdf\u4e4b\uff0c\u6240\u4ee5\u7acb\u547d\u4e5f\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u83ab\u975e\u547d\u4e5f\uff0c\u9806\u53d7\u5176\u6b63\u3002\u662f\u6545\u77e5\u547d\u8005\uff0c\u4e0d\u7acb\u4e4e\u5dd6\u7246\u4e4b\u4e0b\u3002\u76e1\u5176\u9053\u800c\u6b7b\u8005\uff0c\u6b63\u547d\u4e5f\u3002\u684e\u688f\u6b7b\u8005\uff0c\u975e\u6b63\u547d\u4e5f\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u6c42\u5247\u5f97\u4e4b\uff0c\u820d\u5247\u5931\u4e4b\uff0c\u662f\u6c42\u6709\u76ca\u65bc\u5f97\u4e5f\uff0c\u6c42\u5728\u6211\u8005\u4e5f\u3002\u6c42\u4e4b\u6709\u9053\uff0c\u5f97\u4e4b\u6709\u547d\uff0c\u662f\u6c42\u7121\u76ca\u65bc\u5f97\u4e5f\uff0c\u6c42\u5728\u5916\u8005",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u9f4a"
+          },
+          {
+            "id": "\u5931"
+          },
+          {
+            "id": "\u656c"
+          },
+          {
+            "id": "\u7aae"
+          },
+          {
+            "id": "\u5f17"
+          },
+          {
+            "id": "\u53d7"
+          },
+          {
+            "id": "\u58eb"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u4e8b"
+          },
+          {
+            "id": "\u5728"
+          },
+          {
+            "id": "\u9577"
+          },
+          {
+            "id": "\u4ec1"
+          },
+          {
+            "id": "\u5fb7"
+          },
+          {
+            "id": "\u98df"
+          },
+          {
+            "id": "\u60e1"
+          },
+          {
+            "id": "\u79ae"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 3.6018680771243066,
+            "source": "\u9f4a",
+            "target": "\u53d7"
+          },
+          {
+            "weight": 2.5032557884561966,
+            "source": "\u9f4a",
+            "target": "\u5f17"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u9f4a",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u5931",
+            "target": "\u58eb"
+          },
+          {
+            "weight": 3.091042453358316,
+            "source": "\u5931",
+            "target": "\u7aae"
+          },
+          {
+            "weight": 2.174751721484161,
+            "source": "\u5931",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.6210388241125804,
+            "source": "\u656c",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.7047480922384253,
+            "source": "\u656c",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.908720896564361,
+            "source": "\u656c",
+            "target": "\u9577"
+          },
+          {
+            "weight": 2.3978952727983707,
+            "source": "\u7aae",
+            "target": "\u58eb"
+          },
+          {
+            "weight": 2.3978952727983707,
+            "source": "\u7aae",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.908720896564361,
+            "source": "\u5f17",
+            "target": "\u53d7"
+          },
+          {
+            "weight": 1.2992829841302609,
+            "source": "\u5f17",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u5f17",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.6559579280689933,
+            "source": "\u5f17",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.3978952727983707,
+            "source": "\u53d7",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "\u58eb",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.3978952727983707,
+            "source": "\u58eb",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u7fa9",
+            "target": "\u5fb7"
+          },
+          {
+            "weight": 1.992430164690206,
+            "source": "\u7fa9",
+            "target": "\u9577"
+          },
+          {
+            "weight": 1.550597412411167,
+            "source": "\u7fa9",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 1.7047480922384253,
+            "source": "\u7fa9",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.2992829841302609,
+            "source": "\u7fa9",
+            "target": "\u5728"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "\u7fa9",
+            "target": "\u60e1"
+          },
+          {
+            "weight": 1.7047480922384253,
+            "source": "\u7fa9",
+            "target": "\u4e8b"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "\u7fa9",
+            "target": "\u98df"
+          },
+          {
+            "weight": 1.3682758556172123,
+            "source": "\u4e8b",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 0.9628107475090479,
+            "source": "\u5728",
+            "target": "\u4ec1"
+          },
+          {
+            "weight": 2.6855773452501515,
+            "source": "\u5728",
+            "target": "\u60e1"
+          },
+          {
+            "weight": 2.2155737160044158,
+            "source": "\u5728",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.3682758556172123,
+            "source": "\u4ec1",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 1.1451323043030026,
+            "source": "\u4ec1",
+            "target": "\u60e1"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://ctext.org/mengzi/jin-xin-ii",
+      "title": "\u76e1\u5fc3\u4e0b",
+      "description": "\u5b5f\u5b50\u66f0\uff1a\u300c\u4e0d\u4ec1\u54c9\uff0c\u6881\u60e0\u738b\u4e5f\uff01\u4ec1\u8005\u4ee5\u5176\u6240\u611b\u53ca\u5176\u6240\u4e0d\u611b\uff0c\u4e0d\u4ec1\u8005\u4ee5\u5176\u6240\u4e0d\u611b\u53ca\u5176\u6240\u611b\u3002\u300d\n\u516c\u5b6b\u4e11\u554f\u66f0\uff1a\u300c\u4f55\u8b02\u4e5f\uff1f\u300d\n\u300c\u6881\u60e0\u738b\u4ee5\u571f\u5730\u4e4b\u6545\uff0c\u7cdc\u721b\u5176\u6c11\u800c\u6230\u4e4b\uff0c\u5927\u6557\uff0c\u5c07\u5fa9\u4e4b\uff0c\u6050\u4e0d\u80fd\u52dd\uff0c\u6545\u9a45\u5176\u6240\u611b\u5b50\u5f1f\u4ee5\u6b89\u4e4b\uff0c\u662f\u4e4b\u8b02\u4ee5\u5176\u6240\u4e0d\u611b\u53ca\u5176\u6240\u611b\u4e5f\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u300a\u6625\u79cb\u300b\u7121\u7fa9\u6230\u3002\u5f7c\u5584\u65bc\u6b64\uff0c\u5247\u6709\u4e4b\u77e3\u3002\u5f81\u8005\u4e0a\u4f10\u4e0b\u4e5f\uff0c\u6575\u570b\u4e0d\u76f8\u5f81\u4e5f\u3002\u300d\n\u5b5f\u5b50\u66f0\uff1a\u300c\u76e1\u4fe1\u300a\u66f8\u300b",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "\u4e82"
+          },
+          {
+            "id": "\u53d7"
+          },
+          {
+            "id": "\u7fa9"
+          },
+          {
+            "id": "\u5be6"
+          },
+          {
+            "id": "\u541b"
+          },
+          {
+            "id": "\u52dd"
+          },
+          {
+            "id": "\u4eba"
+          },
+          {
+            "id": "\u5f80"
+          },
+          {
+            "id": "\u6050"
+          },
+          {
+            "id": "\u5fc3"
+          },
+          {
+            "id": "\u723e"
+          },
+          {
+            "id": "\u5584"
+          },
+          {
+            "id": "\u7528"
+          },
+          {
+            "id": "\u79ae"
+          },
+          {
+            "id": "\u6230"
+          },
+          {
+            "id": "\u5145"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 1.230188646456829,
+            "source": "\u4e82",
+            "target": "\u7528"
+          },
+          {
+            "weight": 3.1554795083094067,
+            "source": "\u4e82",
+            "target": "\u6050"
+          },
+          {
+            "weight": 1.3637200390813515,
+            "source": "\u4e82",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 2.681021528714291,
+            "source": "\u53d7",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 0.6268977950187447,
+            "source": "\u53d7",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.681021528714291,
+            "source": "\u53d7",
+            "target": "\u5145"
+          },
+          {
+            "weight": 3.1918471524802814,
+            "source": "\u53d7",
+            "target": "\u5be6"
+          },
+          {
+            "weight": 3.597312260588446,
+            "source": "\u53d7",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 4.290459441148391,
+            "source": "\u53d7",
+            "target": "\u723e"
+          },
+          {
+            "weight": 2.344549292093078,
+            "source": "\u53d7",
+            "target": "\u7fa9"
+          },
+          {
+            "weight": 1.045266307962817,
+            "source": "\u7fa9",
+            "target": "\u5584"
+          },
+          {
+            "weight": 2.0568672196412967,
+            "source": "\u7fa9",
+            "target": "\u6230"
+          },
+          {
+            "weight": 2.750014400201242,
+            "source": "\u7fa9",
+            "target": "\u79ae"
+          },
+          {
+            "weight": 2.750014400201242,
+            "source": "\u7fa9",
+            "target": "\u541b"
+          },
+          {
+            "weight": 0.8782122232996508,
+            "source": "\u7fa9",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.5268708488870324,
+            "source": "\u7fa9",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.344549292093078,
+            "source": "\u7fa9",
+            "target": "\u52dd"
+          },
+          {
+            "weight": 1.8337236683270872,
+            "source": "\u7fa9",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 1.3637200390813515,
+            "source": "\u7fa9",
+            "target": "\u7528"
+          },
+          {
+            "weight": 2.344549292093078,
+            "source": "\u7fa9",
+            "target": "\u5be6"
+          },
+          {
+            "weight": 2.750014400201242,
+            "source": "\u7fa9",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 3.4431615807611875,
+            "source": "\u7fa9",
+            "target": "\u723e"
+          },
+          {
+            "weight": 1.4972514317058743,
+            "source": "\u7fa9",
+            "target": "\u6050"
+          },
+          {
+            "weight": 3.7796338173824005,
+            "source": "\u5be6",
+            "target": "\u5145"
+          },
+          {
+            "weight": 1.8925641683500207,
+            "source": "\u5be6",
+            "target": "\u5584"
+          },
+          {
+            "weight": 0.6268977950187447,
+            "source": "\u5be6",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 3.597312260588446,
+            "source": "\u5be6",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 4.290459441148391,
+            "source": "\u5be6",
+            "target": "\u723e"
+          },
+          {
+            "weight": 2.344549292093078,
+            "source": "\u52dd",
+            "target": "\u6050"
+          },
+          {
+            "weight": 2.9041650800285006,
+            "source": "\u52dd",
+            "target": "\u7528"
+          },
+          {
+            "weight": 0.6268977950187447,
+            "source": "\u52dd",
+            "target": "\u4eba"
+          },
+          {
+            "weight": 2.681021528714291,
+            "source": "\u52dd",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.681021528714291,
+            "source": "\u52dd",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 0.020761991448429225,
+            "source": "\u4eba",
+            "target": "\u5584"
+          },
+          {
+            "weight": 1.2146844599208637,
+            "source": "\u4eba",
+            "target": "\u5145"
+          },
+          {
+            "weight": 0.8092193518126993,
+            "source": "\u4eba",
+            "target": "\u5fc3"
+          },
+          {
+            "weight": 1.032362903126909,
+            "source": "\u4eba",
+            "target": "\u5f80"
+          },
+          {
+            "weight": 1.7255100836868542,
+            "source": "\u4eba",
+            "target": "\u723e"
+          },
+          {
+            "weight": 3.086486636822455,
+            "source": "\u5f80",
+            "target": "\u5145"
+          },
+          {
+            "weight": 4.695924549256556,
+            "source": "\u5f80",
+            "target": "\u723e"
+          },
+          {
+            "weight": 2.8633430855082453,
+            "source": "\u5fc3",
+            "target": "\u5145"
+          },
+          {
+            "weight": 1.7001922757025645,
+            "source": "\u5fc3",
+            "target": "\u7528"
+          },
+          {
+            "weight": 1.38173854458403,
+            "source": "\u5fc3",
+            "target": "\u5584"
+          },
+          {
+            "weight": 3.7796338173824005,
+            "source": "\u723e",
+            "target": "\u5145"
+          },
+          {
+            "weight": 2.298029276458185,
+            "source": "\u5584",
+            "target": "\u6230"
+          },
+          {
+            "weight": 1.38173854458403,
+            "source": "\u5584",
+            "target": "\u5145"
+          },
+          {
+            "weight": 1.9233358270167742,
+            "source": "\u7528",
+            "target": "\u6230"
+          },
+          {
+            "weight": 1.7001922757025645,
+            "source": "\u7528",
+            "target": "\u5145"
+          }
+        ]
+      }
+    }
+  ]
+}

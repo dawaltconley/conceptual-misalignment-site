@@ -3,8 +3,8 @@ import Layout from '@layouts/Page.astro'
 import SEPNetwork from '@components/SEPNetwork'
 import { TermSchema } from '@lib/networkx'
 import { buildDictionary } from '@build/cedict'
-import benevolenceRaw from '@data/sep/benevolence.json'
-import renRaw from '@data/ctext/仁.json'
+import benevolenceRaw from '@data/pmi/sep/benevolence.json'
+import renRaw from '@data/pmi/ctext/仁.json'
 
 const benevolence = TermSchema.parse(benevolenceRaw)
 const ren = TermSchema.parse(renRaw)

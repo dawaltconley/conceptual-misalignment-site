@@ -1,0 +1,1705 @@
+{
+  "term": "justice",
+  "sources": [
+    {
+      "url": "https://plato.stanford.edu/search/searcher.py?query=justice",
+      "title": "Combined",
+      "description": "Results from all articles",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "theory"
+          },
+          {
+            "id": "apply"
+          },
+          {
+            "id": "comparative"
+          },
+          {
+            "id": "matter"
+          },
+          {
+            "id": "debate"
+          },
+          {
+            "id": "understand"
+          },
+          {
+            "id": "virtue"
+          },
+          {
+            "id": "relationship"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "general"
+          },
+          {
+            "id": "exist"
+          },
+          {
+            "id": "scope"
+          },
+          {
+            "id": "global"
+          },
+          {
+            "id": "contrast"
+          },
+          {
+            "id": "distributive"
+          },
+          {
+            "id": "ideal"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.7598483078055832,
+            "source": "theory",
+            "target": "justice"
+          },
+          {
+            "weight": 0.7737512129745746,
+            "source": "theory",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.40218765654209165,
+            "source": "theory",
+            "target": "apply"
+          },
+          {
+            "weight": 0.9585758999866479,
+            "source": "theory",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.3194959406969784,
+            "source": "theory",
+            "target": "virtue"
+          },
+          {
+            "weight": 1.0222125722730744,
+            "source": "theory",
+            "target": "ideal"
+          },
+          {
+            "weight": 1.2845768367405654,
+            "source": "theory",
+            "target": "general"
+          },
+          {
+            "weight": 0.4736466205242367,
+            "source": "theory",
+            "target": "understand"
+          },
+          {
+            "weight": 0.18596454807245566,
+            "source": "theory",
+            "target": "debate"
+          },
+          {
+            "weight": 0.6400373552459969,
+            "source": "apply",
+            "target": "debate"
+          },
+          {
+            "weight": 0.7030954912131339,
+            "source": "apply",
+            "target": "justice"
+          },
+          {
+            "weight": 1.7812092583329024,
+            "source": "apply",
+            "target": "scope"
+          },
+          {
+            "weight": 1.5844989640868483,
+            "source": "apply",
+            "target": "relationship"
+          },
+          {
+            "weight": 1.1632854990105446,
+            "source": "apply",
+            "target": "general"
+          },
+          {
+            "weight": 1.0455024633541612,
+            "source": "apply",
+            "target": "understand"
+          },
+          {
+            "weight": 0.3115332882739609,
+            "source": "apply",
+            "target": "exist"
+          },
+          {
+            "weight": 0.27231257512067947,
+            "source": "apply",
+            "target": "ideal"
+          },
+          {
+            "weight": 1.3331845358059422,
+            "source": "apply",
+            "target": "contrast"
+          },
+          {
+            "weight": 0.4318194541484629,
+            "source": "apply",
+            "target": "distributive"
+          },
+          {
+            "weight": 1.6332891282562803,
+            "source": "apply",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.4858866754187386,
+            "source": "apply",
+            "target": "virtue"
+          },
+          {
+            "weight": 1.2992829841302609,
+            "source": "comparative",
+            "target": "contrast"
+          },
+          {
+            "weight": 1.3370233121131079,
+            "source": "comparative",
+            "target": "ideal"
+          },
+          {
+            "weight": 0.8515154963314071,
+            "source": "comparative",
+            "target": "justice"
+          },
+          {
+            "weight": 1.1293839473348635,
+            "source": "comparative",
+            "target": "general"
+          },
+          {
+            "weight": 1.550597412411167,
+            "source": "comparative",
+            "target": "relationship"
+          },
+          {
+            "weight": 0.8268228837410356,
+            "source": "matter",
+            "target": "justice"
+          },
+          {
+            "weight": 0.6584042321160724,
+            "source": "matter",
+            "target": "exist"
+          },
+          {
+            "weight": 0.8327576192608502,
+            "source": "matter",
+            "target": "relationship"
+          },
+          {
+            "weight": 0.29376111852816317,
+            "source": "matter",
+            "target": "understand"
+          },
+          {
+            "weight": 0.37322528988240994,
+            "source": "matter",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.29376111852816317,
+            "source": "matter",
+            "target": "debate"
+          },
+          {
+            "weight": 0.4115441541845465,
+            "source": "matter",
+            "target": "general"
+          },
+          {
+            "weight": 0.7232611608077283,
+            "source": "debate",
+            "target": "justice"
+          },
+          {
+            "weight": 1.0628942060660305,
+            "source": "debate",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.42381424677636087,
+            "source": "debate",
+            "target": "understand"
+          },
+          {
+            "weight": 0.8718389693033212,
+            "source": "debate",
+            "target": "scope"
+          },
+          {
+            "weight": 1.0805937831654315,
+            "source": "debate",
+            "target": "global"
+          },
+          {
+            "weight": 0.5415972824327444,
+            "source": "debate",
+            "target": "general"
+          },
+          {
+            "weight": 1.2347444629926896,
+            "source": "understand",
+            "target": "general"
+          },
+          {
+            "weight": 0.7232611608077283,
+            "source": "understand",
+            "target": "justice"
+          },
+          {
+            "weight": 1.4816045409242156,
+            "source": "understand",
+            "target": "exist"
+          },
+          {
+            "weight": 0.21559634567882682,
+            "source": "understand",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.9628107475090479,
+            "source": "understand",
+            "target": "relationship"
+          },
+          {
+            "weight": 0.7114963192281419,
+            "source": "understand",
+            "target": "contrast"
+          },
+          {
+            "weight": 0.8827680398355114,
+            "source": "virtue",
+            "target": "justice"
+          },
+          {
+            "weight": 1.0422749188632947,
+            "source": "virtue",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.11551288712184424,
+            "source": "virtue",
+            "target": "global"
+          },
+          {
+            "weight": 1.4108354700360082,
+            "source": "virtue",
+            "target": "scope"
+          },
+          {
+            "weight": 2.3491051086289385,
+            "source": "virtue",
+            "target": "contrast"
+          },
+          {
+            "weight": 0.8027253321619752,
+            "source": "relationship",
+            "target": "justice"
+          },
+          {
+            "weight": 0.3491277383033495,
+            "source": "relationship",
+            "target": "distributive"
+          },
+          {
+            "weight": 2.509447758704118,
+            "source": "relationship",
+            "target": "scope"
+          },
+          {
+            "weight": 1.0805937831654315,
+            "source": "relationship",
+            "target": "general"
+          },
+          {
+            "weight": 0.7869769751938359,
+            "source": "justice",
+            "target": "general"
+          },
+          {
+            "weight": 0.7055615837083273,
+            "source": "justice",
+            "target": "contrast"
+          },
+          {
+            "weight": 1.0258688834761849,
+            "source": "justice",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.9374579261321317,
+            "source": "justice",
+            "target": "ideal"
+          },
+          {
+            "weight": 1.060060248224464,
+            "source": "justice",
+            "target": "scope"
+          },
+          {
+            "weight": 0.7157139551723454,
+            "source": "justice",
+            "target": "global"
+          },
+          {
+            "weight": 0.7084146526907337,
+            "source": "justice",
+            "target": "exist"
+          },
+          {
+            "weight": 0.9896220049597046,
+            "source": "general",
+            "target": "scope"
+          },
+          {
+            "weight": 0.3333793813352103,
+            "source": "general",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.8670196828673724,
+            "source": "general",
+            "target": "ideal"
+          },
+          {
+            "weight": 2.212492049467008,
+            "source": "exist",
+            "target": "ideal"
+          },
+          {
+            "weight": 0.346624608085231,
+            "source": "exist",
+            "target": "global"
+          },
+          {
+            "weight": 0.9513031406575682,
+            "source": "scope",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.2696635669491026,
+            "source": "global",
+            "target": "contrast"
+          },
+          {
+            "weight": 0.3074038949319497,
+            "source": "global",
+            "target": "ideal"
+          },
+          {
+            "weight": 0.7909604905823886,
+            "source": "contrast",
+            "target": "distributive"
+          },
+          {
+            "weight": 1.7300659002227152,
+            "source": "contrast",
+            "target": "ideal"
+          },
+          {
+            "weight": 1.521847999125181,
+            "source": "distributive",
+            "target": "ideal"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/justice/",
+      "title": "Justice",
+      "description": "<div id=\"preamble\">\n<p>\nThe idea of justice occupies centre stage both in ethics, and in legal\nand political philosophy. We apply it to individual actions, to l",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "theory"
+          },
+          {
+            "id": "apply"
+          },
+          {
+            "id": "sense"
+          },
+          {
+            "id": "non"
+          },
+          {
+            "id": "form"
+          },
+          {
+            "id": "comparative"
+          },
+          {
+            "id": "distributive"
+          },
+          {
+            "id": "way"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "require"
+          },
+          {
+            "id": "different"
+          },
+          {
+            "id": "rawls"
+          },
+          {
+            "id": "claim"
+          },
+          {
+            "id": "example"
+          },
+          {
+            "id": "outcome"
+          },
+          {
+            "id": "equality"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.3340442473476515,
+            "source": "theory",
+            "target": "justice"
+          },
+          {
+            "weight": 0.3213931297940926,
+            "source": "theory",
+            "target": "outcome"
+          },
+          {
+            "weight": 0.2568546086565215,
+            "source": "theory",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.32942530149135685,
+            "source": "theory",
+            "target": "example"
+          },
+          {
+            "weight": 0.2568546086565215,
+            "source": "theory",
+            "target": "non"
+          },
+          {
+            "weight": 1.117882661855627,
+            "source": "theory",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.046362174895870516,
+            "source": "apply",
+            "target": "claim"
+          },
+          {
+            "weight": 0.6658975381125698,
+            "source": "apply",
+            "target": "example"
+          },
+          {
+            "weight": 0.11090069603344174,
+            "source": "apply",
+            "target": "justice"
+          },
+          {
+            "weight": 0.39858276848522267,
+            "source": "apply",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.18786173716957008,
+            "source": "apply",
+            "target": "outcome"
+          },
+          {
+            "weight": 0.11090069603344174,
+            "source": "apply",
+            "target": "require"
+          },
+          {
+            "weight": 0.4110052884837797,
+            "source": "apply",
+            "target": "different"
+          },
+          {
+            "weight": 0.4110052884837797,
+            "source": "apply",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.1486410240162888,
+            "source": "apply",
+            "target": "equality"
+          },
+          {
+            "weight": 0.3701832939635246,
+            "source": "sense",
+            "target": "different"
+          },
+          {
+            "weight": 0.18786173716957008,
+            "source": "sense",
+            "target": "form"
+          },
+          {
+            "weight": 0.005540180375615351,
+            "source": "sense",
+            "target": "justice"
+          },
+          {
+            "weight": 0.5525048507574792,
+            "source": "sense",
+            "target": "outcome"
+          },
+          {
+            "weight": 2.3850863145057892,
+            "source": "non",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.3538468746438311,
+            "source": "non",
+            "target": "justice"
+          },
+          {
+            "weight": 0.8164703965919442,
+            "source": "non",
+            "target": "form"
+          },
+          {
+            "weight": 0.18786173716957008,
+            "source": "non",
+            "target": "require"
+          },
+          {
+            "weight": 1.6637682569791479,
+            "source": "form",
+            "target": "different"
+          },
+          {
+            "weight": 0.11090069603344174,
+            "source": "form",
+            "target": "justice"
+          },
+          {
+            "weight": 0.11090069603344174,
+            "source": "form",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.5541061321244531,
+            "source": "form",
+            "target": "equality"
+          },
+          {
+            "weight": 1.104152469043725,
+            "source": "form",
+            "target": "comparative"
+          },
+          {
+            "weight": 0.005540180375615351,
+            "source": "comparative",
+            "target": "justice"
+          },
+          {
+            "weight": 0.4110052884837797,
+            "source": "comparative",
+            "target": "claim"
+          },
+          {
+            "weight": 0.33096258081024327,
+            "source": "comparative",
+            "target": "equality"
+          },
+          {
+            "weight": 0.1550719143465791,
+            "source": "comparative",
+            "target": "example"
+          },
+          {
+            "weight": 0.18786173716957008,
+            "source": "comparative",
+            "target": "require"
+          },
+          {
+            "weight": 0.43940476300547776,
+            "source": "distributive",
+            "target": "justice"
+          },
+          {
+            "weight": 0.3340442473476515,
+            "source": "distributive",
+            "target": "claim"
+          },
+          {
+            "weight": 0.7632258820731318,
+            "source": "distributive",
+            "target": "outcome"
+          },
+          {
+            "weight": 0.26043243000440547,
+            "source": "distributive",
+            "target": "example"
+          },
+          {
+            "weight": 0.17543921717101285,
+            "source": "distributive",
+            "target": "require"
+          },
+          {
+            "weight": 0.29322225282739633,
+            "source": "distributive",
+            "target": "different"
+          },
+          {
+            "weight": 0.005540180375615351,
+            "source": "way",
+            "target": "justice"
+          },
+          {
+            "weight": 0.005540180375615351,
+            "source": "way",
+            "target": "require"
+          },
+          {
+            "weight": 0.3782154656607889,
+            "source": "way",
+            "target": "example"
+          },
+          {
+            "weight": 0.1233232160319989,
+            "source": "way",
+            "target": "claim"
+          },
+          {
+            "weight": 0.5933268452777344,
+            "source": "way",
+            "target": "different"
+          },
+          {
+            "weight": 0.04328050835846246,
+            "source": "way",
+            "target": "equality"
+          },
+          {
+            "weight": 0.26043243000440547,
+            "source": "justice",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.07915199771886142,
+            "source": "justice",
+            "target": "claim"
+          },
+          {
+            "weight": 0.07811087321045075,
+            "source": "justice",
+            "target": "example"
+          },
+          {
+            "weight": 0.22868373168982511,
+            "source": "justice",
+            "target": "different"
+          },
+          {
+            "weight": 0.1486410240162888,
+            "source": "justice",
+            "target": "equality"
+          },
+          {
+            "weight": 0.11090069603344174,
+            "source": "justice",
+            "target": "require"
+          },
+          {
+            "weight": 0.43632309646806966,
+            "source": "require",
+            "target": "equality"
+          },
+          {
+            "weight": 0.5969046666256184,
+            "source": "require",
+            "target": "example"
+          },
+          {
+            "weight": 0.26043243000440547,
+            "source": "require",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.18786173716957008,
+            "source": "require",
+            "target": "different"
+          },
+          {
+            "weight": 0.1233232160319989,
+            "source": "different",
+            "target": "claim"
+          },
+          {
+            "weight": 0.1550719143465791,
+            "source": "different",
+            "target": "example"
+          },
+          {
+            "weight": 0.3701832939635246,
+            "source": "different",
+            "target": "outcome"
+          },
+          {
+            "weight": 0.1222820915235883,
+            "source": "rawls",
+            "target": "example"
+          },
+          {
+            "weight": 0.1486410240162888,
+            "source": "claim",
+            "target": "equality"
+          },
+          {
+            "weight": 0.800966210055979,
+            "source": "outcome",
+            "target": "equality"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/justice-global/",
+      "title": "Global Justice",
+      "description": "<div id=\"preamble\">\n<p>\nOn common accounts, we have a state of justice when everyone has their\ndue. The study of justice has been concerned with what we owe one",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "entry"
+          },
+          {
+            "id": "state"
+          },
+          {
+            "id": "issue"
+          },
+          {
+            "id": "world"
+          },
+          {
+            "id": "important"
+          },
+          {
+            "id": "international"
+          },
+          {
+            "id": "discussion"
+          },
+          {
+            "id": "change"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "problem"
+          },
+          {
+            "id": "concern"
+          },
+          {
+            "id": "poor"
+          },
+          {
+            "id": "global"
+          },
+          {
+            "id": "rawls"
+          },
+          {
+            "id": "include"
+          },
+          {
+            "id": "war"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.7231280127718812,
+            "source": "entry",
+            "target": "discussion"
+          },
+          {
+            "weight": 0.9606603015381906,
+            "source": "entry",
+            "target": "international"
+          },
+          {
+            "weight": 0.592099750365477,
+            "source": "entry",
+            "target": "justice"
+          },
+          {
+            "weight": 1.138643456733547,
+            "source": "entry",
+            "target": "issue"
+          },
+          {
+            "weight": 0.592099750365477,
+            "source": "entry",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.3584848991839718,
+            "source": "entry",
+            "target": "concern"
+          },
+          {
+            "weight": 0.592099750365477,
+            "source": "entry",
+            "target": "war"
+          },
+          {
+            "weight": 0.010178204915756052,
+            "source": "entry",
+            "target": "important"
+          },
+          {
+            "weight": 0.3465992919499908,
+            "source": "state",
+            "target": "justice"
+          },
+          {
+            "weight": 0.33786561198123627,
+            "source": "state",
+            "target": "international"
+          },
+          {
+            "weight": 0.6207283979970682,
+            "source": "state",
+            "target": "world"
+          },
+          {
+            "weight": 1.2502345221420095,
+            "source": "issue",
+            "target": "concern"
+          },
+          {
+            "weight": 0.2991398680731622,
+            "source": "issue",
+            "target": "global"
+          },
+          {
+            "weight": 0.4542299561423562,
+            "source": "issue",
+            "target": "justice"
+          },
+          {
+            "weight": 0.36211466723455055,
+            "source": "issue",
+            "target": "discussion"
+          },
+          {
+            "weight": 0.04003116806543731,
+            "source": "issue",
+            "target": "international"
+          },
+          {
+            "weight": 0.23108640482814652,
+            "source": "issue",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.23108640482814652,
+            "source": "issue",
+            "target": "war"
+          },
+          {
+            "weight": 0.7331783486253827,
+            "source": "issue",
+            "target": "include"
+          },
+          {
+            "weight": 0.06754726227242473,
+            "source": "world",
+            "target": "global"
+          },
+          {
+            "weight": 0.06403232016498035,
+            "source": "world",
+            "target": "justice"
+          },
+          {
+            "weight": 0.1357555122989583,
+            "source": "important",
+            "target": "global"
+          },
+          {
+            "weight": 0.0834504060220819,
+            "source": "important",
+            "target": "justice"
+          },
+          {
+            "weight": 0.297860277367537,
+            "source": "important",
+            "target": "international"
+          },
+          {
+            "weight": 0.20123344167846524,
+            "source": "important",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.4376222197426958,
+            "source": "important",
+            "target": "discussion"
+          },
+          {
+            "weight": 0.029980832211935857,
+            "source": "international",
+            "target": "discussion"
+          },
+          {
+            "weight": 0.592099750365477,
+            "source": "international",
+            "target": "rawls"
+          },
+          {
+            "weight": 1.2339536365378718,
+            "source": "discussion",
+            "target": "include"
+          },
+          {
+            "weight": 0.6628688212536843,
+            "source": "discussion",
+            "target": "justice"
+          },
+          {
+            "weight": 0.5122330835338704,
+            "source": "discussion",
+            "target": "global"
+          },
+          {
+            "weight": 0.508718141426426,
+            "source": "discussion",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.2751032902449208,
+            "source": "discussion",
+            "target": "concern"
+          },
+          {
+            "weight": 0.7231280127718812,
+            "source": "discussion",
+            "target": "change"
+          },
+          {
+            "weight": 0.07080282673219099,
+            "source": "change",
+            "target": "concern"
+          },
+          {
+            "weight": 0.9975648584736413,
+            "source": "change",
+            "target": "war"
+          },
+          {
+            "weight": 0.592099750365477,
+            "source": "change",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.4010445136027678,
+            "source": "change",
+            "target": "include"
+          },
+          {
+            "weight": 0.20469964965495158,
+            "source": "justice",
+            "target": "concern"
+          },
+          {
+            "weight": 0.6563081113723872,
+            "source": "justice",
+            "target": "global"
+          },
+          {
+            "weight": 0.3263965846324714,
+            "source": "justice",
+            "target": "problem"
+          },
+          {
+            "weight": 0.32991152673991586,
+            "source": "problem",
+            "target": "global"
+          },
+          {
+            "weight": 0.03871451218069043,
+            "source": "problem",
+            "target": "war"
+          },
+          {
+            "weight": 0.3584848991839718,
+            "source": "concern",
+            "target": "include"
+          },
+          {
+            "weight": 0.7726836872608908,
+            "source": "concern",
+            "target": "war"
+          },
+          {
+            "weight": 0.5434856270379749,
+            "source": "poor",
+            "target": "global"
+          },
+          {
+            "weight": 0.08478906870693076,
+            "source": "global",
+            "target": "include"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/justice-climate/",
+      "title": "Climate Justice",
+      "description": "<div id=\"preamble\">\n<p>\nThere is overwhelming evidence that human activities are changing the\nclimate\n system.<sup>[<a href=\"notes.html#note-1\" id=\"ref-1\">1</a>",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "principle"
+          },
+          {
+            "id": "question"
+          },
+          {
+            "id": "right"
+          },
+          {
+            "id": "climate"
+          },
+          {
+            "id": "think"
+          },
+          {
+            "id": "duty"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "account"
+          },
+          {
+            "id": "future"
+          },
+          {
+            "id": "consider"
+          },
+          {
+            "id": "impact"
+          },
+          {
+            "id": "pay"
+          },
+          {
+            "id": "generation"
+          },
+          {
+            "id": "need"
+          },
+          {
+            "id": "person"
+          },
+          {
+            "id": "cost"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.4740074276613846,
+            "source": "principle",
+            "target": "justice"
+          },
+          {
+            "weight": 1.568165365980114,
+            "source": "principle",
+            "target": "pay"
+          },
+          {
+            "weight": 0.23904213738200805,
+            "source": "question",
+            "target": "climate"
+          },
+          {
+            "weight": 0.23904213738200805,
+            "source": "question",
+            "target": "justice"
+          },
+          {
+            "weight": 0.6602556024583116,
+            "source": "question",
+            "target": "consider"
+          },
+          {
+            "weight": 0.1336816217241818,
+            "source": "right",
+            "target": "climate"
+          },
+          {
+            "weight": 0.19822014286175296,
+            "source": "right",
+            "target": "need"
+          },
+          {
+            "weight": 0.6290030589542072,
+            "source": "right",
+            "target": "think"
+          },
+          {
+            "weight": 0.7090457666277435,
+            "source": "right",
+            "target": "person"
+          },
+          {
+            "weight": 0.44733918057922334,
+            "source": "climate",
+            "target": "impact"
+          },
+          {
+            "weight": 0.2545463239179732,
+            "source": "climate",
+            "target": "justice"
+          },
+          {
+            "weight": 0.09594129374133466,
+            "source": "climate",
+            "target": "consider"
+          },
+          {
+            "weight": 0.1336816217241818,
+            "source": "think",
+            "target": "justice"
+          },
+          {
+            "weight": 0.4213636941759626,
+            "source": "think",
+            "target": "person"
+          },
+          {
+            "weight": 0.5965677832010533,
+            "source": "think",
+            "target": "future"
+          },
+          {
+            "weight": 0.4531123924905429,
+            "source": "think",
+            "target": "generation"
+          },
+          {
+            "weight": 1.150878518906783,
+            "source": "think",
+            "target": "cost"
+          },
+          {
+            "weight": 0.38054169965570755,
+            "source": "think",
+            "target": "pay"
+          },
+          {
+            "weight": 0.14942997869232097,
+            "source": "think",
+            "target": "consider"
+          },
+          {
+            "weight": 0.19438136655458724,
+            "source": "duty",
+            "target": "cost"
+          },
+          {
+            "weight": 0.6208998838605839,
+            "source": "duty",
+            "target": "future"
+          },
+          {
+            "weight": 0.7493782086337154,
+            "source": "duty",
+            "target": "generation"
+          },
+          {
+            "weight": 0.024482329759189812,
+            "source": "duty",
+            "target": "justice"
+          },
+          {
+            "weight": 0.040230686727328956,
+            "source": "duty",
+            "target": "consider"
+          },
+          {
+            "weight": 0.16493416522828622,
+            "source": "justice",
+            "target": "consider"
+          },
+          {
+            "weight": 0.6014898604064816,
+            "source": "justice",
+            "target": "account"
+          },
+          {
+            "weight": 0.041874072471059016,
+            "source": "justice",
+            "target": "impact"
+          },
+          {
+            "weight": 0.6191894375058825,
+            "source": "justice",
+            "target": "person"
+          },
+          {
+            "weight": 0.31482044626908695,
+            "source": "justice",
+            "target": "future"
+          },
+          {
+            "weight": 0.3632560633686819,
+            "source": "justice",
+            "target": "generation"
+          },
+          {
+            "weight": 0.9686361042125093,
+            "source": "account",
+            "target": "impact"
+          },
+          {
+            "weight": 1.245846876796995,
+            "source": "account",
+            "target": "person"
+          },
+          {
+            "weight": 0.9173428098249589,
+            "source": "account",
+            "target": "need"
+          },
+          {
+            "weight": 1.1562347181073078,
+            "source": "account",
+            "target": "consider"
+          },
+          {
+            "weight": 1.8069714778572796,
+            "source": "future",
+            "target": "generation"
+          },
+          {
+            "weight": 0.5588274552182062,
+            "source": "future",
+            "target": "cost"
+          },
+          {
+            "weight": 0.06292748166889119,
+            "source": "future",
+            "target": "impact"
+          },
+          {
+            "weight": 0.2505260955636896,
+            "source": "future",
+            "target": "consider"
+          },
+          {
+            "weight": 0.011634187281340825,
+            "source": "future",
+            "target": "need"
+          },
+          {
+            "weight": 0.6766104908745897,
+            "source": "future",
+            "target": "person"
+          },
+          {
+            "weight": 0.8172593512679763,
+            "source": "consider",
+            "target": "need"
+          },
+          {
+            "weight": 0.2294726863658573,
+            "source": "consider",
+            "target": "person"
+          },
+          {
+            "weight": 0.5171547588176382,
+            "source": "consider",
+            "target": "cost"
+          },
+          {
+            "weight": 0.07362277078563917,
+            "source": "impact",
+            "target": "generation"
+          },
+          {
+            "weight": 0.6304834441246414,
+            "source": "pay",
+            "target": "cost"
+          },
+          {
+            "weight": 0.8208371726158602,
+            "source": "generation",
+            "target": "cost"
+          },
+          {
+            "weight": 0.27826285053528926,
+            "source": "need",
+            "target": "person"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/justice-distributive/",
+      "title": "Distributive Justice",
+      "description": "<div id=\"preamble\">\n<p>\nThe economic, political, and social frameworks that each society \nhas\u2014its laws, institutions, policies, etc.\u2014result in\ndifferent distrib",
+      "co_occurance": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+          {
+            "id": "policy"
+          },
+          {
+            "id": "theory"
+          },
+          {
+            "id": "distribution"
+          },
+          {
+            "id": "political"
+          },
+          {
+            "id": "liberty"
+          },
+          {
+            "id": "desert"
+          },
+          {
+            "id": "equal"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "theorist"
+          },
+          {
+            "id": "value"
+          },
+          {
+            "id": "utilitarian"
+          },
+          {
+            "id": "rawls"
+          },
+          {
+            "id": "moral"
+          },
+          {
+            "id": "economic"
+          },
+          {
+            "id": "distributive"
+          },
+          {
+            "id": "feminist"
+          }
+        ],
+        "edges": [
+          {
+            "weight": 0.03960913809504588,
+            "source": "policy",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.905599131494402,
+            "source": "policy",
+            "target": "economic"
+          },
+          {
+            "weight": 0.4215437487930161,
+            "source": "policy",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.2767389313839954,
+            "source": "policy",
+            "target": "justice"
+          },
+          {
+            "weight": 0.29092356637595185,
+            "source": "policy",
+            "target": "moral"
+          },
+          {
+            "weight": 0.8930989687301706,
+            "source": "policy",
+            "target": "utilitarian"
+          },
+          {
+            "weight": 0.2283909111624886,
+            "source": "theory",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.7385120614932156,
+            "source": "theory",
+            "target": "justice"
+          },
+          {
+            "weight": 0.6573865166808471,
+            "source": "theory",
+            "target": "moral"
+          },
+          {
+            "weight": 0.11839001594816007,
+            "source": "theory",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.8540968109269013,
+            "source": "theory",
+            "target": "utilitarian"
+          },
+          {
+            "weight": 0.11839001594816007,
+            "source": "theory",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.8686956103480541,
+            "source": "theory",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.9521191471292948,
+            "source": "distribution",
+            "target": "economic"
+          },
+          {
+            "weight": 0.06259865631974455,
+            "source": "distribution",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.25426607553193686,
+            "source": "distribution",
+            "target": "justice"
+          },
+          {
+            "weight": 0.5059829992902027,
+            "source": "distribution",
+            "target": "utilitarian"
+          },
+          {
+            "weight": 0.2402798335571971,
+            "source": "distribution",
+            "target": "desert"
+          },
+          {
+            "weight": 0.4215437487930161,
+            "source": "political",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.6132111680052084,
+            "source": "political",
+            "target": "justice"
+          },
+          {
+            "weight": 1.3205429835571103,
+            "source": "political",
+            "target": "equal"
+          },
+          {
+            "weight": 0.40425225168295514,
+            "source": "political",
+            "target": "theorist"
+          },
+          {
+            "weight": 0.6273958029971649,
+            "source": "political",
+            "target": "rawls"
+          },
+          {
+            "weight": 1.1382214267631554,
+            "source": "political",
+            "target": "liberty"
+          },
+          {
+            "weight": 0.8505393543113746,
+            "source": "political",
+            "target": "value"
+          },
+          {
+            "weight": 1.8885270211630494,
+            "source": "political",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.6049229471451063,
+            "source": "liberty",
+            "target": "equal"
+          },
+          {
+            "weight": 1.0512100497735257,
+            "source": "liberty",
+            "target": "value"
+          },
+          {
+            "weight": 0.990585427957091,
+            "source": "liberty",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.8970593699462676,
+            "source": "desert",
+            "target": "moral"
+          },
+          {
+            "weight": 1.5981747201553895,
+            "source": "desert",
+            "target": "theorist"
+          },
+          {
+            "weight": 0.1774789323181667,
+            "source": "desert",
+            "target": "utilitarian"
+          },
+          {
+            "weight": 0.540384426007535,
+            "source": "desert",
+            "target": "value"
+          },
+          {
+            "weight": 0.2764188801730702,
+            "source": "equal",
+            "target": "theorist"
+          },
+          {
+            "weight": 0.3172408746933253,
+            "source": "equal",
+            "target": "value"
+          },
+          {
+            "weight": 0.16309019486606693,
+            "source": "equal",
+            "target": "moral"
+          },
+          {
+            "weight": 1.2929802226189775,
+            "source": "justice",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.217898431361062,
+            "source": "justice",
+            "target": "moral"
+          },
+          {
+            "weight": 0.4853777964953235,
+            "source": "justice",
+            "target": "theorist"
+          },
+          {
+            "weight": 0.09063665175013491,
+            "source": "justice",
+            "target": "economic"
+          },
+          {
+            "weight": 0.1489055598741106,
+            "source": "justice",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.31142448937188555,
+            "source": "justice",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.13955969745587288,
+            "source": "theorist",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.16309019486606693,
+            "source": "theorist",
+            "target": "moral"
+          },
+          {
+            "weight": 0.6620813609850548,
+            "source": "theorist",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.13491931789937064,
+            "source": "value",
+            "target": "rawls"
+          },
+          {
+            "weight": 0.009756174945364656,
+            "source": "value",
+            "target": "feminist"
+          },
+          {
+            "weight": 0.24647180380511807,
+            "source": "utilitarian",
+            "target": "moral"
+          },
+          {
+            "weight": 0.18038169197612797,
+            "source": "moral",
+            "target": "distributive"
+          },
+          {
+            "weight": 0.32796483805630106,
+            "source": "moral",
+            "target": "economic"
+          },
+          {
+            "weight": 0.34290062147390293,
+            "source": "distributive",
+            "target": "feminist"
+          }
+        ]
+      }
+    }
+  ]
+}
