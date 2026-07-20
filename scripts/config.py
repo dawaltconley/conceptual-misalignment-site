@@ -13,12 +13,12 @@ CTEXT.mkdir(exist_ok=True)
 
 
 class Term:
-    def __init__(self, hanzi: str, translations: set[str]):
+    def __init__(self, hanzi: str, translations: tuple[str, ...]):
         self.hanzi = hanzi
-        self.english = tuple(translations)
+        self.english = translations
 
 
 TERMS: list[Term] = [
-    Term('仁', {'benevolence', 'humaneness'}),
-    Term('義', {'righteousness', 'justice'}),
+    Term('仁', ('benevolence', 'humaneness')),
+    Term('義', ('righteousness', 'justice')),
 ]
