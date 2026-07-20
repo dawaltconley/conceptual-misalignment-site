@@ -4,6 +4,7 @@
   "tsserver.useLocalTsdk": true,
   "coc.preferences.formatOnSave": true,
   "javascript.suggestionActions.enabled": false,
+  "prettier.enable": true,
   "css.validate": false,
   "scss.validate": false,
   "tailwindCSS.enable": true,

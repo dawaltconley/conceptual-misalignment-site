@@ -17,10 +17,8 @@ let g:ale_linters = {
 let g:ale_linter_aliases['astro'] = ['html', 'css', 'scss', 'javascript', 'typescript']
 let g:ale_linter_aliases['sass'] = ['scss']
 let g:ale_fixers['astro'] = ['prettier']
-" let g:ale_fix_on_save = 0 " use coc-prettier
-" let g:ale_completion_enabled = 0 " use coc completion
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 0 " use coc-prettier
+let g:ale_completion_enabled = 0 " use coc completion
 
 source ~/.vim/coc.vim
 
