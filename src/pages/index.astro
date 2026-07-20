@@ -1,17 +1,10 @@
 ---
 import Layout from '@layouts/Page.astro'
 import MultiNetwork from '@components/MultiNetwork'
-import { TermSchema } from '@lib/networkx'
-import { buildDictionary } from '@build/cedict'
-import renRaw from '~/public/ctext/仁_pmi.json'
+import { buildDictionaryFromNetwork } from '@build/cedict'
+import ren from '~/public/ctext/仁_pmi.json'
 
-const ren = TermSchema.parse(renRaw)
-
-const hanzi = ren.sources
-  .map((s) => s.co_occurance.nodes)
-  .flat()
-  .map((n) => n.id.toString())
-const renDict = await buildDictionary(hanzi)
+const renDict = await buildDictionaryFromNetwork(ren)
 ---
 
 <Layout>

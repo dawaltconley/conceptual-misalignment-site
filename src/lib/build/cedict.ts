@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import readline from 'node:readline'
 import toPinyinTones from 'pinyin-tone'
+import { TermSchema } from '@lib/networkx'
 
 export interface DictionaryEntry {
   pinyin: string
@@ -64,4 +65,16 @@ export async function buildDictionary(
     rl.on('close', () => resolve(result))
     rl.on('error', (e) => reject(e))
   })
+}
+
+export async function buildDictionaryFromNetwork(
+  data: unknown,
+): Promise<Dictionary> {
+  const network = TermSchema.parse(data)
+
+  const hanzi = network.sources
+    .map((s) => s.co_occurance.nodes)
+    .flat()
+    .map((n) => n.id.toString())
+  return buildDictionary(hanzi)
 }
