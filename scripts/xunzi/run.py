@@ -33,7 +33,7 @@ from mengzi import Chapter, fetch_mengzi_full
 
 import xunzi.seg
 import xunzi.segpos
-from xunzi.utils import ARCH, TOKENIZER, assert_arch
+from xunzi.utils import ARCH, assert_arch
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
@@ -353,58 +353,9 @@ class TokenizedError(Tokenized):
     reason: str
     diffs: list[str]
 
-
-def process(segpos: SegPos, chapter: Chapter, *, tok: TOKENIZER, model) -> list[Tokenized | TokenizedError]:
-    lines = chapter.text.split("\n")
-    processed: list[Tokenized] = []
-
-    print(f"Processing chapter {chapter.id}")
-    print(
-        f"[info] {len(chapter.text.split('\n'))}  line(s) to tag", file=sys.stderr)
-
-    try:
-        from tqdm import tqdm
-        iterator = tqdm(list(enumerate(lines)), total=len(lines))
-    except ImportError:
-        iterator = enumerate(lines)
-
-    for i, sent in iterator:
-        raw = segpos.tag_sentence(tok=tok, model=model, sentence=sent)
-        tokens = segpos.parse(raw)
-        ok, reason = segpos.qc_check(sent, tokens)
-        if not ok:
-            # handle a common case where xunzi drops a trailing quote
-            if tokens and reason == f"char mismatch: got {sent[:-1]!r} vs {sent!r}":
-                if sent[-1:] == "」":
-                    missing = Word("」")
-                    if segpos.process == "segpos":
-                        missing = Word("」", "w")
-                    tokens.append(missing)
-                    ok = True
-                elif sent[-1:] == "』":
-                    missing = Word("』")
-                    if segpos.process == "segpos":
-                        missing = Word("』", "w")
-                    tokens.append(missing)
-                    ok = True
-            else:  # one stricter retry
-                raw = segpos.tag_sentence(
-                    tok=tok, model=model, sentence=sent, strict=True)
-                tokens = segpos.parse(raw)
-                ok, reason = segpos.qc_check(sent, tokens)
-        assert tokens is not None
-        segpos.validate_tokens(tokens)
-        if ok:
-            processed.append(
-                Tokenized(id=i, chapter=chapter.id, passage=sent, tokens=tokens))
-        else:
-            processed.append(TokenizedError(
-                id=i, chapter=chapter.id, passage=sent, tokens=tokens,
-                raw_output=raw, reason=reason, diffs=diff_str(
-                    ''.join([t.word for t in tokens]), sent)
-            ))
-
-    return processed
+    @classmethod
+    def from_tokenized(cls, t: Tokenized, raw_output: str, reason: str, diffs: list[str]):
+        return cls(t.id, t.chapter, t.passage, t.tokens, raw_output, reason, diffs)
 
 
 # --------------------------------------------------------------------------- #
@@ -472,33 +423,63 @@ def main():
         model_id=args.model, device=args.device, arch=segpos.arch, api_base=args.api_base)
 
     mengzi = fetch_mengzi_full()
+    lines: list[tuple[str, Chapter]] = []
+    for chapter in mengzi.chapters:
+        for line in chapter.text.split("\n"):
+            lines.append((line, chapter))
+    if args.limit:
+        lines = lines[: args.limit]
 
     print(
-        f"[info] {len(mengzi.text.split('\n'))}  line(s) to tag", file=sys.stderr)
+        f"[info] {len(lines)}  line(s) to tag", file=sys.stderr)
 
     try:
         from tqdm import tqdm
-        iterator = tqdm(list(mengzi.chapters), total=len(mengzi.chapters))
+        iterator = tqdm(enumerate(list(lines)), total=len(lines))
     except ImportError:
-        iterator = mengzi.chapters
+        iterator = enumerate(lines)
 
     n_ok = n_err = 0
     with open(args.output, "w", encoding="utf-8") as fout, \
             open(errors_path, "w", encoding="utf-8") as ferr:
-        for chapter in iterator:
-            tokenized_lines = process(segpos, chapter, tok=tok, model=model)
-            # if isinstance(tokenized, TokenizedError):
-
-            for line in tokenized_lines:
-                if isinstance(line, TokenizedError):
-                    ferr.write(line.serialize() + "\n")
-                    n_err += 1
-                else:
-                    fout.write(line.serialize() + "\n")
-                    n_ok += 1
-
-            if n_ok + n_err >= args.limit:
-                break
+        for i, (line, chapter) in iterator:
+            raw = segpos.tag_sentence(tok=tok, model=model, sentence=line)
+            tokens = segpos.parse(raw)
+            ok, reason = segpos.qc_check(line, tokens)
+            if not ok:
+                # handle a common case where xunzi drops a trailing quote
+                if tokens and reason == f"char mismatch: got {line[:-1]!r} vs {line!r}":
+                    if line[-1:] == "」":
+                        missing = Word("」")
+                        if segpos.process == "segpos":
+                            missing = Word("」", "w")
+                        tokens.append(missing)
+                        ok = True
+                    elif line[-1:] == "』":
+                        missing = Word("』")
+                        if segpos.process == "segpos":
+                            missing = Word("』", "w")
+                        tokens.append(missing)
+                        ok = True
+                else:  # one stricter retry
+                    raw = segpos.tag_sentence(
+                        tok=tok, model=model, sentence=line, strict=True)
+                    tokens = segpos.parse(raw)
+                    ok, reason = segpos.qc_check(line, tokens)
+            assert tokens is not None
+            if ok:
+                record = Tokenized(
+                    id=i, chapter=chapter.title, passage=line, tokens=tokens)
+                fout.write(record.serialize() + "\n")
+                n_ok += 1
+            else:
+                record = TokenizedError(
+                    id=i, chapter=chapter.title, passage=line, tokens=tokens,
+                    raw_output=raw, reason=reason, diffs=diff_str(
+                        ''.join([t.word for t in tokens]), line)
+                )
+                ferr.write(record.serialize() + "\n")
+                n_err += 1
 
     print(
         f"[done] ok={n_ok}  needs_review={n_err}  -> {args.output}", file=sys.stderr)
