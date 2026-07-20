@@ -1,53 +1,82 @@
-import type {Term} from '@lib/networkx'
-import type {Dictionary} from '@build/cedict'
-import Network from './Network'
-import {useState} from 'react'
+import type { Term } from '@lib/networkx'
+import type { Dictionary } from '@build/cedict'
+import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
+import useData from '@lib/browser/hooks/useData'
+import { TermSchema } from '@lib/networkx'
+import { useState, type ReactNode } from 'react'
 import clsx from 'clsx'
 
 interface MultiNetworkProps {
-  data: Term
+  data: string
   sourceAlign?: 'left' | 'right'
   dictionary?: Dictionary
 }
 
 export default function MultiNetwork({
-  data,
+  data: dataPath,
   sourceAlign = 'right',
   dictionary,
 }: MultiNetworkProps): JSX.Element {
   const [selected, setSelected] = useState(0)
-  const network = data.sources[selected].co_occurance
+  const { status, data, errorMessage } = useData(dataPath, assertTerm)
+
+  if (status === 'error')
+    return (
+      <Wrapper>
+        <NetworkWrapper>
+          <div className="absolute inset-0 flex items-center justify-center">
+            Error: {errorMessage}
+          </div>
+        </NetworkWrapper>
+      </Wrapper>
+    )
 
   return (
-    <div className="flex-row xl:flex">
-      <Network
-        centralNodeId={data.term}
-        data={network}
-        dictionary={dictionary}
-      />
+    <Wrapper>
+      {status === 'loading' ? (
+        <NetworkSkeleton />
+      ) : (
+        <Network
+          centralNodeId={data.term}
+          data={data.sources[selected].co_occurance}
+          dictionary={dictionary}
+        />
+      )}
 
       <div
         className={clsx(
           'mt-4 flex shrink flex-row flex-wrap gap-2 xl:mt-0 xl:flex-col',
-          sourceAlign === 'right' ? 'items-start' : '-order-1 items-end',
+          sourceAlign === 'right'
+            ? 'items-start xl:ml-2'
+            : '-order-1 items-end xl:mr-2',
         )}
       >
-        {data.sources.map((s, i) => (
-          <MultiNetworkSource
-            key={s.url}
-            title={s.title}
-            description={s.description}
-            url={new URL(s.url)}
-            isActive={i === selected}
-            onClick={() => setSelected(i)}
-          />
-        ))}
+        {status === 'loading'
+          ? new Array(8).fill(null).map(() => <SourceSkeleton />)
+          : data.sources.map((s, i) => (
+              <Source
+                key={s.url}
+                title={s.title}
+                description={s.description}
+                url={new URL(s.url)}
+                isActive={i === selected}
+                onClick={() => setSelected(i)}
+              />
+            ))}
       </div>
-    </div>
+    </Wrapper>
   )
 }
 
-interface MultiNetworkSourceProps {
+function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+  return <div className="flex-row xl:flex">{children}</div>
+}
+
+function assertTerm(data: any): Term {
+  return TermSchema.parse(data)
+}
+
+interface SourceProps {
   url: URL
   title: string
   description: string
@@ -55,11 +84,11 @@ interface MultiNetworkSourceProps {
   onClick: () => void
 }
 
-function MultiNetworkSource({
+function Source({
   title,
   isActive = false,
   onClick,
-}: MultiNetworkSourceProps): JSX.Element {
+}: SourceProps): JSX.Element {
   return (
     <button
       className={clsx(
@@ -72,3 +101,7 @@ function MultiNetworkSource({
     </button>
   )
 }
+
+const SourceSkeleton = (): JSX.Element => (
+  <div className="skeleton inline-block h-[34px] w-24 rounded xl:block" />
+)

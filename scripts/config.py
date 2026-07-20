@@ -3,10 +3,12 @@ from pathlib import Path
 DATA = Path("../src/data")
 DATA.mkdir(exist_ok=True)
 
-SEP = DATA / "sep"
+PUBLIC = Path("../public")
+
+SEP = PUBLIC / "sep"
 SEP.mkdir(exist_ok=True)
 
-CTEXT = DATA / "ctext"
+CTEXT = PUBLIC / "ctext"
 CTEXT.mkdir(exist_ok=True)
 
 

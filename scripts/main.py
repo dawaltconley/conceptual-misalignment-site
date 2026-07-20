@@ -1,4 +1,4 @@
-from config import TERMS, SEP, CTEXT
+from config import TERMS, DATA, SEP, CTEXT
 from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from scrape_sep import search_sep, SEP as SEPArticle
 from inpho import is_chinese_philosophy
@@ -81,6 +81,11 @@ def filter_chinese_philosophy(sep_url: str) -> bool:
     return True
 
 
+with open(DATA / "terms.json", "w") as file:
+    serialized = [{"hanzi": t.hanzi, "english": t.english} for t in TERMS]
+    file.write(json.dumps(serialized))
+
+
 for term_pairs in TERMS:
     print(f"\n=== {term_pairs.hanzi} / {', '.join(term_pairs.english)} ===")
 
@@ -91,7 +96,7 @@ for term_pairs in TERMS:
         [NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
          for m in mengzi]
     )
-    data.save_json(CTEXT / f"{term}.json")
+    data.save_json(CTEXT / f"{term}_pmi.json")
 
     # Now iterate for each associated english term
     for term in term_pairs.english:
@@ -118,4 +123,4 @@ for term_pairs in TERMS:
             sources.append(source)
 
         data = TermData(term, sources)
-        data.save_json(SEP / f"{slugify(term)}.json")
+        data.save_json(SEP / f"{slugify(term)}_pmi.json")

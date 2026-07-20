@@ -3,10 +3,8 @@ import Layout from '@layouts/Page.astro'
 import MultiNetwork from '@components/MultiNetwork'
 import { TermSchema } from '@lib/networkx'
 import { buildDictionary } from '@build/cedict'
-import benevolenceRaw from '@data/pmi/sep/benevolence.json'
-import renRaw from '@data/pmi/ctext/仁.json'
+import renRaw from '~/public/ctext/仁_pmi.json'
 
-const benevolence = TermSchema.parse(benevolenceRaw)
 const ren = TermSchema.parse(renRaw)
 
 const hanzi = ren.sources
@@ -21,14 +19,18 @@ const renDict = await buildDictionary(hanzi)
     <div class="items-center justify-center xl:flex">
       <div class="xl:w-1/2">
         <MultiNetwork
-          client:only
-          data={ren}
+          client:load
+          data="/ctext/仁_pmi.json"
           sourceAlign="left"
           dictionary={renDict}
         />
       </div>
       <div class="mt-8 xl:mt-0 xl:w-1/2">
-        <MultiNetwork client:only data={benevolence} sourceAlign="right" />
+        <MultiNetwork
+          client:load
+          data="/sep/benevolence_pmi.json"
+          sourceAlign="right"
+        />
       </div>
     </div>
   </main>

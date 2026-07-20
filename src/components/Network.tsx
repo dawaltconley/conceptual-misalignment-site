@@ -1,6 +1,6 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, forwardRef, type ReactNode } from 'react'
 import useSize from '@lib/browser/hooks/useSize'
 import clsx from 'clsx'
 import * as d3 from 'd3'
@@ -81,8 +81,8 @@ export default function Network({
   }
 
   function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
-    if (!draggingId.current || !containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
+    if (!draggingId.current || !canvasRef.current) return
+    const rect = canvasRef.current.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width) * 100
     const y = ((e.clientY - rect.top) / rect.height) * 100
     const node = nodes.find((n) => n.id === draggingId.current)
@@ -107,10 +107,7 @@ export default function Network({
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="relative aspect-square min-h-96 w-full overflow-hidden"
-    >
+    <Wrapper ref={containerRef}>
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
@@ -143,9 +140,29 @@ export default function Network({
           )}
         </div>
       ))}
-    </div>
+    </Wrapper>
   )
 }
+
+export const NetworkSkeleton = (): JSX.Element => (
+  <Wrapper>
+    <div className="absolute inset-0 m-auto flex items-center justify-center text-gray-500">
+      Loading…
+    </div>
+    <div className="skeleton absolute inset-0" />
+  </Wrapper>
+)
+
+export const Wrapper = forwardRef<HTMLDivElement, { children: ReactNode }>(
+  ({ children }, ref) => (
+    <div
+      ref={ref}
+      className="relative aspect-square min-h-96 w-full overflow-hidden"
+    >
+      {children}
+    </div>
+  ),
+)
 
 interface Node extends d3.SimulationNodeDatum {
   id: NodeId
