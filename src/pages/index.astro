@@ -1,6 +1,6 @@
 ---
 import Layout from '@layouts/Page.astro'
-import SEPNetwork from '@components/SEPNetwork'
+import MultiNetwork from '@components/MultiNetwork'
 import { TermSchema } from '@lib/networkx'
 import { buildDictionary } from '@build/cedict'
 import benevolenceRaw from '@data/pmi/sep/benevolence.json'
@@ -20,7 +20,7 @@ const renDict = await buildDictionary(hanzi)
   <main class="mx-auto w-full px-4 py-8">
     <div class="items-center justify-center xl:flex">
       <div class="xl:w-1/2">
-        <SEPNetwork
+        <MultiNetwork
           client:only
           data={ren}
           sourceAlign="left"
@@ -28,7 +28,7 @@ const renDict = await buildDictionary(hanzi)
         />
       </div>
       <div class="mt-8 xl:mt-0 xl:w-1/2">
-        <SEPNetwork client:only data={benevolence} sourceAlign="right" />
+        <MultiNetwork client:only data={benevolence} sourceAlign="right" />
       </div>
     </div>
   </main>

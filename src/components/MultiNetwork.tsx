@@ -1,20 +1,20 @@
-import type { Term } from '@lib/networkx'
-import type { Dictionary } from '@build/cedict'
+import type {Term} from '@lib/networkx'
+import type {Dictionary} from '@build/cedict'
 import Network from './Network'
-import { useState } from 'react'
+import {useState} from 'react'
 import clsx from 'clsx'
 
-interface SEPNetworkProps {
+interface MultiNetworkProps {
   data: Term
   sourceAlign?: 'left' | 'right'
   dictionary?: Dictionary
 }
 
-export default function SEPNetwork({
+export default function MultiNetwork({
   data,
   sourceAlign = 'right',
   dictionary,
-}: SEPNetworkProps): JSX.Element {
+}: MultiNetworkProps): JSX.Element {
   const [selected, setSelected] = useState(0)
   const network = data.sources[selected].co_occurance
 
@@ -33,7 +33,7 @@ export default function SEPNetwork({
         )}
       >
         {data.sources.map((s, i) => (
-          <SEPPage
+          <MultiNetworkSource
             key={s.url}
             title={s.title}
             description={s.description}
@@ -47,7 +47,7 @@ export default function SEPNetwork({
   )
 }
 
-interface SEPPageProps {
+interface MultiNetworkSourceProps {
   url: URL
   title: string
   description: string
@@ -55,11 +55,11 @@ interface SEPPageProps {
   onClick: () => void
 }
 
-function SEPPage({
+function MultiNetworkSource({
   title,
   isActive = false,
   onClick,
-}: SEPPageProps): JSX.Element {
+}: MultiNetworkSourceProps): JSX.Element {
   return (
     <button
       className={clsx(
