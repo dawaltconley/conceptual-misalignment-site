@@ -146,13 +146,28 @@ def write_rows_csv(path: Path, rows: list[dict]) -> None:
 # Dimensionality-reduction plots
 # ---------------------------------------------------------------------------
 
-def _scatter(coords, labels, is_target, title, path: Path) -> None:
+_NO_COMMUNITY_COLOR = "#cccccc"  # nodes absent from the network (isolates)
+
+
+def _community_colors(communities: list[int]) -> dict[int, tuple]:
+    """Map each community id to a distinct color (grey reserved for ``-1``)."""
+    uniq = sorted({c for c in communities if c >= 0})
+    cmap = plt.get_cmap("tab20")
+    return {c: cmap(i % 20) for i, c in enumerate(uniq)}
+
+
+def _scatter(coords, labels, is_target, communities, title, path: Path) -> None:
+    """Scatter colored by Louvain community; targets marked with an edged star."""
+    palette = _community_colors(communities)
     fig, ax = plt.subplots(figsize=(11, 9))
-    for (x, y), lbl, tgt in zip(coords, labels, is_target):
-        ax.scatter(x, y, s=90 if tgt else 30,
-                   c="crimson" if tgt else "steelblue",
-                   zorder=3 if tgt else 2, alpha=0.9 if tgt else 0.6)
-        ax.annotate(lbl, (x, y), fontsize=13 if tgt else 9,
+    for (x, y), lbl, tgt, comm in zip(coords, labels, is_target, communities):
+        color = palette.get(comm, _NO_COMMUNITY_COLOR)
+        ax.scatter(x, y, s=200 if tgt else 34, c=[color],
+                   marker="*" if tgt else "o",
+                   edgecolors="black" if tgt else "none",
+                   linewidths=1.4 if tgt else 0.0,
+                   zorder=3 if tgt else 2, alpha=0.95 if tgt else 0.7)
+        ax.annotate(lbl, (x, y), fontsize=13 if tgt else 8,
                     fontweight="bold" if tgt else "normal",
                     xytext=(3, 3), textcoords="offset points")
     ax.set_title(title)
@@ -161,19 +176,19 @@ def _scatter(coords, labels, is_target, title, path: Path) -> None:
     plt.close(fig)
 
 
-def pca_plot(vectors, labels, is_target, path: Path) -> None:
+def pca_plot(vectors, labels, is_target, communities, path: Path) -> None:
     coords = PCA(n_components=2, random_state=0).fit_transform(vectors)
-    _scatter(coords, labels, is_target,
-             "PCA of virtue + neighbor vectors", path)
+    _scatter(coords, labels, is_target, communities,
+             "PCA of virtue + neighbor vectors (color = community)", path)
 
 
-def tsne_plot(vectors, labels, is_target, path: Path) -> None:
+def tsne_plot(vectors, labels, is_target, communities, path: Path) -> None:
     perplexity = max(2, min(30, len(labels) - 1))
     coords = TSNE(
         n_components=2, random_state=0, perplexity=perplexity, init="pca"
     ).fit_transform(vectors)
-    _scatter(coords, labels, is_target,
-             f"t-SNE (perplexity={perplexity})", path)
+    _scatter(coords, labels, is_target, communities,
+             f"t-SNE (perplexity={perplexity}, color = community)", path)
 
 
 # ---------------------------------------------------------------------------
@@ -257,15 +272,16 @@ def build_and_save_networks(
     method: str = "threshold",
     knn_k: int = 8,
     sim_transform: str = "none",
-) -> int:
+) -> tuple[int, dict[str, int]]:
     """Build the similarity network, detect communities, and serialize JSON.
 
     ``method`` selects edge construction: ``"threshold"`` keeps pairs with
     similarity >= ``threshold``; ``"knn"`` keeps each node's top-``knn_k``
     neighbors (relative neighborhoods). ``sim_transform`` optionally reweights
     the cosine matrix first (see :func:`apply_sim_transform`). Writes the full
-    network plus one pruned neighborhood per target term. Returns the number of
-    Louvain communities found.
+    network plus one pruned neighborhood per target term. Returns
+    ``(n_communities, {node: community_id})``; isolated nodes dropped from the
+    graph are absent from the map (callers treat them as community ``-1``).
     """
     sim = apply_sim_transform(cosine_similarity(vectors), sim_transform)
     if method == "knn":
@@ -276,6 +292,7 @@ def build_and_save_networks(
         raise ValueError(f"unknown network method {method!r}")
     G.remove_nodes_from(list(nx.isolates(G)))
     n_comms = annotate_communities(G)
+    community_map = {n: int(G.nodes[n]["community"]) for n in G}
 
     net_dir = out_dir / "networks"
     net_dir.mkdir(parents=True, exist_ok=True)
@@ -285,7 +302,7 @@ def build_and_save_networks(
     for term in targets:
         pruned = prune_to_neighborhood(G, term, max_nodes)
         save_graph_json(pruned, net_dir / f"{term}.json")
-    return n_comms
+    return n_comms, community_map
 
 
 # ---------------------------------------------------------------------------
@@ -351,19 +368,20 @@ def run_analysis(
     cv = cohesion_variance(target_occ)
     write_rows_csv(out_dir / "cohesion_variance.csv", cv)
 
-    # Dimensionality-reduction plots (all nodes).
-    pca_plot(matrix, labels, is_target, out_dir / "pca.png")
+    # Network + Louvain first, so the scatter plots can color by community.
+    n_comms, community_map = build_and_save_networks(
+        labels, matrix, is_target, threshold, out_dir,
+        method=method, knn_k=knn_k, sim_transform=sim_transform)
+    communities = [community_map.get(lbl, -1) for lbl in labels]
+
+    # Dimensionality-reduction plots (all nodes), colored by community.
+    pca_plot(matrix, labels, is_target, communities, out_dir / "pca.png")
     if len(labels) >= 3:
-        tsne_plot(matrix, labels, is_target, out_dir / "tsne.png")
+        tsne_plot(matrix, labels, is_target, communities, out_dir / "tsne.png")
 
     # K-means.
     km = kmeans_assignments(matrix, labels, is_target, kmeans_k)
     write_rows_csv(out_dir / "kmeans.csv", km)
-
-    # Network + Louvain.
-    n_comms = build_and_save_networks(
-        labels, matrix, is_target, threshold, out_dir,
-        method=method, knn_k=knn_k, sim_transform=sim_transform)
 
     return {
         "n_terms": len(labels),
