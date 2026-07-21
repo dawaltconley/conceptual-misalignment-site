@@ -1,6 +1,7 @@
 from config import TERMS, SEP, CTEXT
 from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from scrape_sep import search_sep, SEP as SEPArticle
+from inpho import is_chinese_philosophy
 from utils import filter_to_sent_node_lists, build_cooccurrence_network
 from nlp.english import tokenize_english_html
 from nlp.chinese import tokenize_classical_chinese, STOPWORDS as CHINESE_STOPWORDS
@@ -88,7 +89,8 @@ for term_pairs in TERMS:
     # Now iterate for each associated english term
     for term in term_pairs.english:
         print(f"\n  [{term}] Searching SEP...")
-        sep_articles = search_sep(term, 4)
+        sep_articles = search_sep(
+            term, 4, pre_filter=lambda url: not is_chinese_philosophy(url))
         print(f"  [{term}] {len(sep_articles)} articles found")
 
         slugified_search_term = term.replace(" ", "+")
