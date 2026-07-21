@@ -74,6 +74,13 @@ def save_term_data_json(term: TermData, filepath: Path) -> None:
     filepath.write_text(serialized, encoding="utf-8")
 
 
+def filter_chinese_philosophy(sep_url: str) -> bool:
+    if is_chinese_philosophy(sep_url):
+        print(" " * 4 + "skipping chinese philosophy search result: " + sep_url)
+        return False
+    return True
+
+
 for term_pairs in TERMS:
     print(f"\n=== {term_pairs.hanzi} / {', '.join(term_pairs.english)} ===")
 
@@ -90,7 +97,7 @@ for term_pairs in TERMS:
     for term in term_pairs.english:
         print(f"\n  [{term}] Searching SEP...")
         sep_articles = search_sep(
-            term, 4, pre_filter=lambda url: not is_chinese_philosophy(url))
+            term, 4, pre_filter=filter_chinese_philosophy)
         print(f"  [{term}] {len(sep_articles)} articles found")
 
         slugified_search_term = term.replace(" ", "+")
