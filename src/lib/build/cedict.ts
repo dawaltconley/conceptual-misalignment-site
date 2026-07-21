@@ -67,12 +67,12 @@ export async function buildDictionary(
   })
 }
 
-export async function buildDictionaryFromNetwork(
-  data: unknown,
+export async function buildDictionaryFromNetworks(
+  ...data: unknown[]
 ): Promise<Dictionary> {
-  const network = TermSchema.parse(data)
-
-  const hanzi = network.sources
+  const hanzi = data
+    .map((d) => TermSchema.parse(d).sources)
+    .flat()
     .map((s) => s.co_occurance.nodes)
     .flat()
     .map((n) => n.id.toString())

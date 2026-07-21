@@ -3,8 +3,9 @@ import Layout from '@layouts/Page.astro'
 import MultiNetwork from '@components/MultiNetwork'
 import { buildDictionaryFromNetwork } from '@build/cedict'
 import ren from '~/public/ctext/仁_pmi.json'
+import { buildDictionaryFromNetworks } from '@build/cedict'
 
-const renDict = await buildDictionaryFromNetwork(ren)
+const renDict = await buildDictionaryFromNetworks(ren)
 ---
 
 <Layout>
