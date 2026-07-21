@@ -49,11 +49,11 @@ class SEP:
         )
 
 
-def _search(term: str) -> str:
+def _search(term: str, page: int = 1) -> str:
     """Returns the HTML of a search results page on the SEP for a given search term."""
     r = requests.get(
         "https://plato.stanford.edu/search/searcher.py",
-        params={"query": term},
+        params={"query": term, "page": max(1, page)},
         timeout=30
     )
     r.raise_for_status()
@@ -69,14 +69,20 @@ def _parse_search_results(search_page: str) -> list[str]:
 
 def search_sep(search_term: str, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
     articles = []
-    results = _parse_search_results(_search(search_term))
-    for url in results:
-        if pre_filter and not pre_filter(url):
-            continue
-        article = SEP.from_url(url)
-        if filter and not filter(article):
-            continue
-        articles.append(SEP.from_url(url))
-        if max_results and len(articles) >= max_results:
-            break
-    return articles
+    page = 1
+    while True:
+        results = _parse_search_results(_search(search_term, page))
+        if not results:
+            # empty search page, break loop
+            return articles
+        for url in results:
+            if pre_filter and not pre_filter(url):
+                continue
+            article = SEP.from_url(url)
+            if filter and not filter(article):
+                continue
+            articles.append(SEP.from_url(url))
+            if max_results and len(articles) >= max_results:
+                # got enough articles, break loop
+                return articles
+        page += 1
