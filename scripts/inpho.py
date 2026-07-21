@@ -8,6 +8,15 @@ from io import StringIO
 cache.install()
 
 
+# doc ids to automatically exclude
+# some SEP articles were published after the hypershelf API was last updated
+# so they have to be excluded manually
+_EXCLUDE = {
+    'han-dynasty',
+    'confucianism-modern',
+}
+
+
 def _get_doc_id(sep_url: str) -> str:
     err = ValueError(f"Bad SEP entry url: {sep_url}")
     paths = urlparse(sep_url).path.split("/")
@@ -40,6 +49,8 @@ def _get_chinese_philosophy_percentage(topics: str) -> float:
 
 def is_chinese_philosophy(sep_url: str) -> bool:
     doc_id = _get_doc_id(sep_url)
+    if doc_id in _EXCLUDE:
+        return True
     topics = _get_topics(doc_id)
     if topics:
         percentage = _get_chinese_philosophy_percentage(topics)
