@@ -71,6 +71,8 @@ def parse_args() -> argparse.Namespace:
                    help="Network construction: global threshold or top-k neighborhoods.")
     p.add_argument("--knn-k", type=int, default=8,
                    help="Neighbors per node when --network knn.")
+    p.add_argument("--max-nodes", type=int, default=15,
+                   help="Neighbors kept per target in the pruned network JSON.")
     p.add_argument("--sim-transform", choices=["none", "neglog", "poslog"],
                    default="none",
                    help="Reweight cosine before building the network: "
@@ -150,6 +152,7 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
         labels, matrix, is_target, target_occ,
         args.out, args.threshold, args.kmeans_k,
         method=args.network, knn_k=args.knn_k, sim_transform=args.sim_transform,
+        max_nodes=args.max_nodes,
     )
     print("\n=== summary ===")
     for row in summary["cohesion_variance"]:

@@ -343,6 +343,7 @@ def run_analysis(
     method: str = "threshold",
     knn_k: int = 8,
     sim_transform: str = "none",
+    max_nodes: int = 15,
 ) -> dict:
     """Run every analysis and write artifacts; return a small summary dict."""
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -370,7 +371,7 @@ def run_analysis(
 
     # Network + Louvain first, so the scatter plots can color by community.
     n_comms, community_map = build_and_save_networks(
-        labels, matrix, is_target, threshold, out_dir,
+        labels, matrix, is_target, threshold, out_dir, max_nodes=max_nodes,
         method=method, knn_k=knn_k, sim_transform=sim_transform)
     communities = [community_map.get(lbl, -1) for lbl in labels]
 
