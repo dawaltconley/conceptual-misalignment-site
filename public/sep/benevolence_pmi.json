@@ -11,255 +11,55 @@
         "graph": {},
         "nodes": [
           {
+            "id": "virtue"
+          },
+          {
+            "id": "compassion"
+          },
+          {
+            "id": "benevolence"
+          },
+          {
+            "id": "true"
+          },
+          {
+            "id": "find"
+          },
+          {
+            "id": "important"
+          },
+          {
+            "id": "human"
+          },
+          {
             "id": "benevolent"
           },
           {
             "id": "love"
           },
           {
-            "id": "tendency"
-          },
-          {
-            "id": "important"
-          },
-          {
-            "id": "find"
-          },
-          {
-            "id": "virtue"
+            "id": "term"
           },
           {
             "id": "relationship"
           },
           {
-            "id": "benefactor"
-          },
-          {
-            "id": "compassion"
+            "id": "self"
           },
           {
             "id": "beauty"
           },
           {
+            "id": "benefactor"
+          },
+          {
             "id": "nature"
           },
           {
-            "id": "self"
-          },
-          {
-            "id": "benevolence"
-          },
-          {
-            "id": "term"
-          },
-          {
-            "id": "human"
-          },
-          {
-            "id": "true"
+            "id": "tendency"
           }
         ],
         "edges": [
-          {
-            "weight": 0.9772514316638422,
-            "source": "benevolent",
-            "target": "love"
-          },
-          {
-            "weight": 1.1358564618404807,
-            "source": "benevolent",
-            "target": "self"
-          },
-          {
-            "weight": 0.8831541082847267,
-            "source": "benevolent",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.5762406739050582,
-            "source": "benevolent",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.4119376226137819,
-            "source": "benevolent",
-            "target": "human"
-          },
-          {
-            "weight": 0.8639227463568392,
-            "source": "benevolent",
-            "target": "compassion"
-          },
-          {
-            "weight": 0.23214451217318596,
-            "source": "benevolent",
-            "target": "virtue"
-          },
-          {
-            "weight": 0.7729509681511124,
-            "source": "benevolent",
-            "target": "tendency"
-          },
-          {
-            "weight": 0.751444762930149,
-            "source": "benevolent",
-            "target": "benefactor"
-          },
-          {
-            "weight": 1.3329550302129427,
-            "source": "love",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.898779816222347,
-            "source": "love",
-            "target": "true"
-          },
-          {
-            "weight": 0.9516090010505046,
-            "source": "love",
-            "target": "virtue"
-          },
-          {
-            "weight": 2.2300144001592104,
-            "source": "love",
-            "target": "self"
-          },
-          {
-            "weight": 0.8690378470236095,
-            "source": "love",
-            "target": "nature"
-          },
-          {
-            "weight": 1.0360919316867758,
-            "source": "love",
-            "target": "human"
-          },
-          {
-            "weight": 1.488077055429833,
-            "source": "love",
-            "target": "compassion"
-          },
-          {
-            "weight": 1.1314021114911006,
-            "source": "love",
-            "target": "important"
-          },
-          {
-            "weight": 0.8028980445190645,
-            "source": "love",
-            "target": "term"
-          },
-          {
-            "weight": 1.4660981487110576,
-            "source": "tendency",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.8280107453341398,
-            "source": "tendency",
-            "target": "true"
-          },
-          {
-            "weight": 1.52746709508735,
-            "source": "tendency",
-            "target": "virtue"
-          },
-          {
-            "weight": 1.0798644025307809,
-            "source": "tendency",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.8862796534581157,
-            "source": "tendency",
-            "target": "term"
-          },
-          {
-            "weight": 0.2339544674184253,
-            "source": "tendency",
-            "target": "self"
-          },
-          {
-            "weight": 0.9481550571762031,
-            "source": "tendency",
-            "target": "benefactor"
-          },
-          {
-            "weight": 0.9696612623971667,
-            "source": "tendency",
-            "target": "relationship"
-          },
-          {
-            "weight": 1.536867219599265,
-            "source": "important",
-            "target": "term"
-          },
-          {
-            "weight": 1.0921813983378192,
-            "source": "important",
-            "target": "nature"
-          },
-          {
-            "weight": 0.7917603001086085,
-            "source": "important",
-            "target": "virtue"
-          },
-          {
-            "weight": 1.373777024733198,
-            "source": "important",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.5660883024410402,
-            "source": "important",
-            "target": "human"
-          },
-          {
-            "weight": 0.8845420335595747,
-            "source": "important",
-            "target": "self"
-          },
-          {
-            "weight": 1.7112206067440427,
-            "source": "important",
-            "target": "compassion"
-          },
-          {
-            "weight": 2.0257139366464805,
-            "source": "important",
-            "target": "relationship"
-          },
-          {
-            "weight": 0.5072478024181067,
-            "source": "find",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.62057648772511,
-            "source": "find",
-            "target": "term"
-          },
-          {
-            "weight": 0.9964827935917299,
-            "source": "find",
-            "target": "benevolence"
-          },
-          {
-            "weight": 1.24206767937862,
-            "source": "find",
-            "target": "benefactor"
-          },
-          {
-            "weight": 0.703958096664161,
-            "source": "find",
-            "target": "relationship"
-          },
-          {
-            "weight": 0.7949298748698876,
-            "source": "find",
-            "target": "compassion"
-          },
           {
             "weight": 1.4849074806685538,
             "source": "virtue",
@@ -286,34 +86,39 @@
             "target": "human"
           },
           {
+            "weight": 0.9516090010505046,
+            "source": "virtue",
+            "target": "love"
+          },
+          {
             "weight": 0.5040782276568277,
             "source": "virtue",
             "target": "self"
           },
           {
-            "weight": 1.0798644025307809,
-            "source": "relationship",
-            "target": "benevolence"
+            "weight": 1.52746709508735,
+            "source": "virtue",
+            "target": "tendency"
           },
           {
-            "weight": 0.8862796534581157,
-            "source": "relationship",
-            "target": "term"
+            "weight": 0.7917603001086085,
+            "source": "virtue",
+            "target": "important"
           },
           {
-            "weight": 0.25500787661625773,
-            "source": "relationship",
-            "target": "benefactor"
-          },
-          {
-            "weight": 0.8958392678120424,
-            "source": "benefactor",
-            "target": "benevolence"
+            "weight": 0.23214451217318596,
+            "source": "virtue",
+            "target": "benevolent"
           },
           {
             "weight": 0.9476926294222979,
             "source": "compassion",
             "target": "benevolence"
+          },
+          {
+            "weight": 1.488077055429833,
+            "source": "compassion",
+            "target": "love"
           },
           {
             "weight": 1.0180734261840974,
@@ -326,49 +131,24 @@
             "target": "human"
           },
           {
-            "weight": 0.24488353795061557,
-            "source": "beauty",
-            "target": "nature"
+            "weight": 0.8639227463568392,
+            "source": "compassion",
+            "target": "benevolent"
           },
           {
-            "weight": 2.7107419927679217,
-            "source": "beauty",
-            "target": "true"
+            "weight": 1.7112206067440427,
+            "source": "compassion",
+            "target": "important"
+          },
+          {
+            "weight": 0.7949298748698876,
+            "source": "compassion",
+            "target": "find"
           },
           {
             "weight": 1.0654756650786812,
-            "source": "beauty",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.5230868664478528,
-            "source": "nature",
-            "target": "true"
-          },
-          {
-            "weight": 0.9572620804384486,
-            "source": "nature",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.39903421777787396,
-            "source": "nature",
-            "target": "self"
-          },
-          {
-            "weight": 2.095483507201604,
-            "source": "nature",
-            "target": "human"
-          },
-          {
-            "weight": 0.8747858586142101,
-            "source": "self",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.9715534105492045,
-            "source": "self",
-            "target": "human"
+            "source": "benevolence",
+            "target": "beauty"
           },
           {
             "weight": 0.9812153214609415,
@@ -376,9 +156,39 @@
             "target": "human"
           },
           {
+            "weight": 1.3329550302129427,
+            "source": "benevolence",
+            "target": "love"
+          },
+          {
             "weight": 1.033524065272079,
             "source": "benevolence",
             "target": "true"
+          },
+          {
+            "weight": 0.9572620804384486,
+            "source": "benevolence",
+            "target": "nature"
+          },
+          {
+            "weight": 0.8747858586142101,
+            "source": "benevolence",
+            "target": "self"
+          },
+          {
+            "weight": 1.0798644025307809,
+            "source": "benevolence",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.8831541082847267,
+            "source": "benevolence",
+            "target": "benevolent"
+          },
+          {
+            "weight": 1.373777024733198,
+            "source": "benevolence",
+            "target": "important"
           },
           {
             "weight": 0.9964827935917299,
@@ -386,9 +196,199 @@
             "target": "term"
           },
           {
-            "weight": 0.525266307920785,
-            "source": "term",
+            "weight": 0.8958392678120424,
+            "source": "benevolence",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.9964827935917299,
+            "source": "benevolence",
+            "target": "find"
+          },
+          {
+            "weight": 1.0798644025307809,
+            "source": "benevolence",
+            "target": "relationship"
+          },
+          {
+            "weight": 2.7107419927679217,
+            "source": "true",
+            "target": "beauty"
+          },
+          {
+            "weight": 0.5230868664478528,
+            "source": "true",
+            "target": "nature"
+          },
+          {
+            "weight": 0.898779816222347,
+            "source": "true",
+            "target": "love"
+          },
+          {
+            "weight": 0.8280107453341398,
+            "source": "true",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.5072478024181067,
+            "source": "find",
+            "target": "beauty"
+          },
+          {
+            "weight": 0.62057648772511,
+            "source": "find",
+            "target": "term"
+          },
+          {
+            "weight": 1.24206767937862,
+            "source": "find",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.703958096664161,
+            "source": "find",
+            "target": "relationship"
+          },
+          {
+            "weight": 1.536867219599265,
+            "source": "important",
+            "target": "term"
+          },
+          {
+            "weight": 1.0921813983378192,
+            "source": "important",
+            "target": "nature"
+          },
+          {
+            "weight": 0.5660883024410402,
+            "source": "important",
             "target": "human"
+          },
+          {
+            "weight": 1.1314021114911006,
+            "source": "important",
+            "target": "love"
+          },
+          {
+            "weight": 0.8845420335595747,
+            "source": "important",
+            "target": "self"
+          },
+          {
+            "weight": 2.0257139366464805,
+            "source": "important",
+            "target": "relationship"
+          },
+          {
+            "weight": 2.095483507201604,
+            "source": "human",
+            "target": "nature"
+          },
+          {
+            "weight": 1.0360919316867758,
+            "source": "human",
+            "target": "love"
+          },
+          {
+            "weight": 0.9715534105492045,
+            "source": "human",
+            "target": "self"
+          },
+          {
+            "weight": 0.4119376226137819,
+            "source": "human",
+            "target": "benevolent"
+          },
+          {
+            "weight": 0.525266307920785,
+            "source": "human",
+            "target": "term"
+          },
+          {
+            "weight": 0.9772514316638422,
+            "source": "benevolent",
+            "target": "love"
+          },
+          {
+            "weight": 1.1358564618404807,
+            "source": "benevolent",
+            "target": "self"
+          },
+          {
+            "weight": 0.5762406739050582,
+            "source": "benevolent",
+            "target": "beauty"
+          },
+          {
+            "weight": 0.7729509681511124,
+            "source": "benevolent",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.751444762930149,
+            "source": "benevolent",
+            "target": "benefactor"
+          },
+          {
+            "weight": 2.2300144001592104,
+            "source": "love",
+            "target": "self"
+          },
+          {
+            "weight": 0.8690378470236095,
+            "source": "love",
+            "target": "nature"
+          },
+          {
+            "weight": 0.8028980445190645,
+            "source": "love",
+            "target": "term"
+          },
+          {
+            "weight": 0.8862796534581157,
+            "source": "term",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.8862796534581157,
+            "source": "term",
+            "target": "relationship"
+          },
+          {
+            "weight": 0.25500787661625773,
+            "source": "relationship",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.9696612623971667,
+            "source": "relationship",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.39903421777787396,
+            "source": "self",
+            "target": "nature"
+          },
+          {
+            "weight": 0.2339544674184253,
+            "source": "self",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.24488353795061557,
+            "source": "beauty",
+            "target": "nature"
+          },
+          {
+            "weight": 1.4660981487110576,
+            "source": "beauty",
+            "target": "tendency"
+          },
+          {
+            "weight": 0.9481550571762031,
+            "source": "benefactor",
+            "target": "tendency"
           }
         ]
       }
@@ -403,34 +403,7 @@
         "graph": {},
         "nodes": [
           {
-            "id": "love"
-          },
-          {
-            "id": "cause"
-          },
-          {
-            "id": "true"
-          },
-          {
-            "id": "sense"
-          },
-          {
-            "id": "divine"
-          },
-          {
-            "id": "mind"
-          },
-          {
             "id": "virtue"
-          },
-          {
-            "id": "thing"
-          },
-          {
-            "id": "act"
-          },
-          {
-            "id": "power"
           },
           {
             "id": "edwards"
@@ -439,53 +412,125 @@
             "id": "benevolence"
           },
           {
-            "id": "vol"
+            "id": "cause"
+          },
+          {
+            "id": "true"
+          },
+          {
+            "id": "mind"
+          },
+          {
+            "id": "thing"
+          },
+          {
+            "id": "act"
           },
           {
             "id": "idea"
           },
           {
-            "id": "beauty"
+            "id": "divine"
+          },
+          {
+            "id": "love"
+          },
+          {
+            "id": "vol"
           },
           {
             "id": "god"
+          },
+          {
+            "id": "beauty"
+          },
+          {
+            "id": "power"
+          },
+          {
+            "id": "sense"
           }
         ],
         "edges": [
           {
-            "weight": 0.4219944100593749,
-            "source": "love",
-            "target": "benevolence"
+            "weight": 0.6815056055444596,
+            "source": "virtue",
+            "target": "beauty"
           },
           {
-            "weight": 0.1846662237532087,
-            "source": "love",
-            "target": "god"
-          },
-          {
-            "weight": 0.5090057870490047,
-            "source": "love",
+            "weight": 1.2917651262986372,
+            "source": "virtue",
             "target": "true"
           },
           {
-            "weight": 0.9328200338253656,
-            "source": "love",
-            "target": "virtue"
+            "weight": 0.7992886412008431,
+            "source": "virtue",
+            "target": "benevolence"
           },
           {
-            "weight": 0.5555258026838976,
-            "source": "love",
+            "weight": 0.18560563199514457,
+            "source": "virtue",
+            "target": "divine"
+          },
+          {
+            "weight": 0.9328200338253656,
+            "source": "virtue",
+            "target": "love"
+          },
+          {
+            "weight": 0.15963014559188393,
+            "source": "virtue",
+            "target": "sense"
+          },
+          {
+            "weight": 0.08552217343816193,
+            "source": "virtue",
             "target": "mind"
           },
           {
-            "weight": 0.4219944100593749,
-            "source": "love",
-            "target": "act"
+            "weight": 0.3609341532981286,
+            "source": "edwards",
+            "target": "mind"
           },
           {
-            "weight": 0.6296337748376194,
-            "source": "love",
+            "weight": 0.8027669055771679,
+            "source": "edwards",
+            "target": "vol"
+          },
+          {
+            "weight": 0.029577017343686052,
+            "source": "edwards",
             "target": "sense"
+          },
+          {
+            "weight": 0.5273549257172012,
+            "source": "benevolence",
+            "target": "beauty"
+          },
+          {
+            "weight": 0.4219944100593749,
+            "source": "benevolence",
+            "target": "love"
+          },
+          {
+            "weight": 0.6451379613735847,
+            "source": "benevolence",
+            "target": "true"
+          },
+          {
+            "weight": 0.23967285326542026,
+            "source": "benevolence",
+            "target": "thing"
+          },
+          {
+            "weight": 0.08552217343816193,
+            "source": "benevolence",
+            "target": "mind"
+          },
+          {
+            "weight": 0.15963014559188393,
+            "source": "benevolence",
+            "target": "idea"
           },
           {
             "weight": 0.34896927504448505,
@@ -508,74 +553,9 @@
             "target": "beauty"
           },
           {
-            "weight": 1.2917651262986372,
+            "weight": 0.5090057870490047,
             "source": "true",
-            "target": "virtue"
-          },
-          {
-            "weight": 0.6451379613735847,
-            "source": "true",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.029577017343686052,
-            "source": "sense",
-            "target": "edwards"
-          },
-          {
-            "weight": 0.7474168104940029,
-            "source": "sense",
-            "target": "power"
-          },
-          {
-            "weight": 0.44731221804366483,
-            "source": "sense",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.15963014559188393,
-            "source": "sense",
-            "target": "virtue"
-          },
-          {
-            "weight": 0.39324499677338903,
-            "source": "sense",
-            "target": "divine"
-          },
-          {
-            "weight": 0.5786482201047518,
-            "source": "divine",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.18560563199514457,
-            "source": "divine",
-            "target": "virtue"
-          },
-          {
-            "weight": 0.47328770444692553,
-            "source": "divine",
-            "target": "thing"
-          },
-          {
-            "weight": 0.8787528125550899,
-            "source": "divine",
-            "target": "power"
-          },
-          {
-            "weight": 0.14478363747488937,
-            "source": "divine",
-            "target": "vol"
-          },
-          {
-            "weight": 0.18560563199514457,
-            "source": "divine",
-            "target": "act"
-          },
-          {
-            "weight": 0.3609341532981286,
-            "source": "mind",
-            "target": "edwards"
+            "target": "love"
           },
           {
             "weight": 0.9217701976387807,
@@ -598,24 +578,14 @@
             "target": "power"
           },
           {
-            "weight": 0.08552217343816193,
+            "weight": 0.5555258026838976,
             "source": "mind",
-            "target": "benevolence"
+            "target": "love"
           },
           {
-            "weight": 0.08552217343816193,
-            "source": "mind",
-            "target": "virtue"
-          },
-          {
-            "weight": 0.6815056055444596,
-            "source": "virtue",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.7992886412008431,
-            "source": "virtue",
-            "target": "benevolence"
+            "weight": 0.47328770444692553,
+            "source": "thing",
+            "target": "divine"
           },
           {
             "weight": 0.19885085874516517,
@@ -623,39 +593,69 @@
             "target": "vol"
           },
           {
-            "weight": 0.23967285326542026,
-            "source": "thing",
-            "target": "benevolence"
-          },
-          {
             "weight": 0.13431233760759406,
             "source": "act",
             "target": "power"
           },
           {
+            "weight": 0.18560563199514457,
+            "source": "act",
+            "target": "divine"
+          },
+          {
+            "weight": 0.4219944100593749,
+            "source": "act",
+            "target": "love"
+          },
+          {
             "weight": 0.5650952537000482,
-            "source": "power",
-            "target": "idea"
-          },
-          {
-            "weight": 0.8027669055771679,
-            "source": "edwards",
-            "target": "vol"
-          },
-          {
-            "weight": 0.5273549257172012,
-            "source": "benevolence",
-            "target": "beauty"
-          },
-          {
-            "weight": 0.15963014559188393,
-            "source": "benevolence",
-            "target": "idea"
+            "source": "idea",
+            "target": "power"
           },
           {
             "weight": 0.2649906612497102,
             "source": "idea",
             "target": "beauty"
+          },
+          {
+            "weight": 0.5786482201047518,
+            "source": "divine",
+            "target": "beauty"
+          },
+          {
+            "weight": 0.8787528125550899,
+            "source": "divine",
+            "target": "power"
+          },
+          {
+            "weight": 0.14478363747488937,
+            "source": "divine",
+            "target": "vol"
+          },
+          {
+            "weight": 0.39324499677338903,
+            "source": "divine",
+            "target": "sense"
+          },
+          {
+            "weight": 0.1846662237532087,
+            "source": "love",
+            "target": "god"
+          },
+          {
+            "weight": 0.6296337748376194,
+            "source": "love",
+            "target": "sense"
+          },
+          {
+            "weight": 0.44731221804366483,
+            "source": "beauty",
+            "target": "sense"
+          },
+          {
+            "weight": 0.7474168104940029,
+            "source": "power",
+            "target": "sense"
           }
         ]
       }
@@ -670,49 +670,49 @@
         "graph": {},
         "nodes": [
           {
-            "id": "analogy"
-          },
-          {
-            "id": "happiness"
-          },
-          {
-            "id": "virtue"
-          },
-          {
-            "id": "compassion"
-          },
-          {
-            "id": "self"
-          },
-          {
-            "id": "love"
+            "id": "passion"
           },
           {
             "id": "resentment"
           },
           {
-            "id": "conscience"
-          },
-          {
-            "id": "principle"
-          },
-          {
-            "id": "passion"
-          },
-          {
-            "id": "natural"
-          },
-          {
-            "id": "butler"
+            "id": "happiness"
           },
           {
             "id": "nature"
           },
           {
-            "id": "benevolence"
+            "id": "virtue"
           },
           {
             "id": "particular"
+          },
+          {
+            "id": "principle"
+          },
+          {
+            "id": "butler"
+          },
+          {
+            "id": "self"
+          },
+          {
+            "id": "natural"
+          },
+          {
+            "id": "compassion"
+          },
+          {
+            "id": "analogy"
+          },
+          {
+            "id": "benevolence"
+          },
+          {
+            "id": "love"
+          },
+          {
+            "id": "conscience"
           },
           {
             "id": "human"
@@ -720,19 +720,49 @@
         ],
         "edges": [
           {
-            "weight": 0.49440698762785207,
-            "source": "analogy",
-            "target": "butler"
+            "weight": 0.8220056674850754,
+            "source": "passion",
+            "target": "love"
           },
           {
-            "weight": 1.0198314108149955,
-            "source": "analogy",
-            "target": "natural"
+            "weight": 1.22747077559324,
+            "source": "passion",
+            "target": "particular"
           },
           {
-            "weight": 0.6482678543825123,
-            "source": "analogy",
-            "target": "virtue"
+            "weight": 0.30755027566850607,
+            "source": "passion",
+            "target": "self"
+          },
+          {
+            "weight": 0.5808436106681875,
+            "source": "passion",
+            "target": "principle"
+          },
+          {
+            "weight": 0.7349942904954458,
+            "source": "passion",
+            "target": "benevolence"
+          },
+          {
+            "weight": 0.5526727337014911,
+            "source": "passion",
+            "target": "happiness"
+          },
+          {
+            "weight": 0.7349942904954458,
+            "source": "passion",
+            "target": "compassion"
+          },
+          {
+            "weight": 1.102719070620763,
+            "source": "resentment",
+            "target": "compassion"
+          },
+          {
+            "weight": 0.016529301951210506,
+            "source": "resentment",
+            "target": "human"
           },
           {
             "weight": 0.016529301951210506,
@@ -750,11 +780,6 @@
             "target": "particular"
           },
           {
-            "weight": 0.5526727337014911,
-            "source": "happiness",
-            "target": "passion"
-          },
-          {
             "weight": 0.8150369981689821,
             "source": "happiness",
             "target": "compassion"
@@ -768,6 +793,36 @@
             "weight": 0.3381129260786729,
             "source": "happiness",
             "target": "virtue"
+          },
+          {
+            "weight": 1.1151415906193203,
+            "source": "nature",
+            "target": "human"
+          },
+          {
+            "weight": 0.7321493383632145,
+            "source": "nature",
+            "target": "conscience"
+          },
+          {
+            "weight": 0.632065879806232,
+            "source": "nature",
+            "target": "principle"
+          },
+          {
+            "weight": 0.6631564668762631,
+            "source": "nature",
+            "target": "natural"
+          },
+          {
+            "weight": 0.46021562287957274,
+            "source": "nature",
+            "target": "benevolence"
+          },
+          {
+            "weight": 0.6482678543825123,
+            "source": "virtue",
+            "target": "analogy"
           },
           {
             "weight": 0.21815361099969394,
@@ -795,29 +850,84 @@
             "target": "conscience"
           },
           {
-            "weight": 1.102719070620763,
-            "source": "compassion",
-            "target": "resentment"
-          },
-          {
-            "weight": 0.6608863183417238,
-            "source": "compassion",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.4320447459128764,
-            "source": "compassion",
+            "weight": 0.9890597521482417,
+            "source": "particular",
             "target": "love"
           },
           {
-            "weight": 0.20890119459866657,
-            "source": "compassion",
-            "target": "particular"
+            "weight": 0.7478976953313536,
+            "source": "particular",
+            "target": "benevolence"
           },
           {
-            "weight": 0.7349942904954458,
-            "source": "compassion",
-            "target": "passion"
+            "weight": 0.2576913587680986,
+            "source": "particular",
+            "target": "conscience"
+          },
+          {
+            "weight": 0.10354067894084036,
+            "source": "particular",
+            "target": "human"
+          },
+          {
+            "weight": 0.46021562287957274,
+            "source": "particular",
+            "target": "principle"
+          },
+          {
+            "weight": 0.25146080901746254,
+            "source": "particular",
+            "target": "self"
+          },
+          {
+            "weight": 0.20890119459866657,
+            "source": "particular",
+            "target": "compassion"
+          },
+          {
+            "weight": 0.673308838340281,
+            "source": "principle",
+            "target": "conscience"
+          },
+          {
+            "weight": 0.5555258026838976,
+            "source": "principle",
+            "target": "human"
+          },
+          {
+            "weight": 0.21905356606268467,
+            "source": "principle",
+            "target": "benevolence"
+          },
+          {
+            "weight": 0.32668423025505017,
+            "source": "principle",
+            "target": "love"
+          },
+          {
+            "weight": 0.19885085874516517,
+            "source": "butler",
+            "target": "conscience"
+          },
+          {
+            "weight": 0.012568900735113563,
+            "source": "butler",
+            "target": "love"
+          },
+          {
+            "weight": 0.49440698762785207,
+            "source": "butler",
+            "target": "analogy"
+          },
+          {
+            "weight": 0.24141047316396105,
+            "source": "butler",
+            "target": "natural"
+          },
+          {
+            "weight": 0.10560893200489933,
+            "source": "butler",
+            "target": "benevolence"
           },
           {
             "weight": 0.13913162404354287,
@@ -835,144 +945,29 @@
             "target": "benevolence"
           },
           {
-            "weight": 0.25146080901746254,
-            "source": "self",
-            "target": "particular"
-          },
-          {
-            "weight": 0.30755027566850607,
-            "source": "self",
-            "target": "passion"
-          },
-          {
-            "weight": 0.012568900735113563,
-            "source": "love",
-            "target": "butler"
+            "weight": 1.0198314108149955,
+            "source": "natural",
+            "target": "analogy"
           },
           {
             "weight": 0.4219944100593749,
-            "source": "love",
+            "source": "natural",
             "target": "conscience"
           },
           {
+            "weight": 0.6608863183417238,
+            "source": "compassion",
+            "target": "benevolence"
+          },
+          {
+            "weight": 0.4320447459128764,
+            "source": "compassion",
+            "target": "love"
+          },
+          {
             "weight": 1.2334055111130544,
-            "source": "love",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.32668423025505017,
-            "source": "love",
-            "target": "principle"
-          },
-          {
-            "weight": 0.9890597521482417,
-            "source": "love",
-            "target": "particular"
-          },
-          {
-            "weight": 0.8220056674850754,
-            "source": "love",
-            "target": "passion"
-          },
-          {
-            "weight": 0.016529301951210506,
-            "source": "resentment",
-            "target": "human"
-          },
-          {
-            "weight": 0.19885085874516517,
-            "source": "conscience",
-            "target": "butler"
-          },
-          {
-            "weight": 0.4219944100593749,
-            "source": "conscience",
-            "target": "human"
-          },
-          {
-            "weight": 0.7321493383632145,
-            "source": "conscience",
-            "target": "nature"
-          },
-          {
-            "weight": 0.673308838340281,
-            "source": "conscience",
-            "target": "principle"
-          },
-          {
-            "weight": 0.3732042458899429,
-            "source": "conscience",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.2576913587680986,
-            "source": "conscience",
-            "target": "particular"
-          },
-          {
-            "weight": 0.4219944100593749,
-            "source": "conscience",
-            "target": "natural"
-          },
-          {
-            "weight": 0.5555258026838976,
-            "source": "principle",
-            "target": "human"
-          },
-          {
-            "weight": 0.632065879806232,
-            "source": "principle",
-            "target": "nature"
-          },
-          {
-            "weight": 0.21905356606268467,
-            "source": "principle",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.46021562287957274,
-            "source": "principle",
-            "target": "particular"
-          },
-          {
-            "weight": 0.5808436106681875,
-            "source": "principle",
-            "target": "passion"
-          },
-          {
-            "weight": 1.22747077559324,
-            "source": "passion",
-            "target": "particular"
-          },
-          {
-            "weight": 0.7349942904954458,
-            "source": "passion",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.24141047316396105,
-            "source": "natural",
-            "target": "butler"
-          },
-          {
-            "weight": 0.6631564668762631,
-            "source": "natural",
-            "target": "nature"
-          },
-          {
-            "weight": 0.10560893200489933,
-            "source": "butler",
-            "target": "benevolence"
-          },
-          {
-            "weight": 1.1151415906193203,
-            "source": "nature",
-            "target": "human"
-          },
-          {
-            "weight": 0.46021562287957274,
-            "source": "nature",
-            "target": "benevolence"
+            "source": "benevolence",
+            "target": "love"
           },
           {
             "weight": 0.15006069457573326,
@@ -980,13 +975,18 @@
             "target": "human"
           },
           {
-            "weight": 0.7478976953313536,
+            "weight": 0.3732042458899429,
             "source": "benevolence",
-            "target": "particular"
+            "target": "conscience"
           },
           {
-            "weight": 0.10354067894084036,
-            "source": "particular",
+            "weight": 0.4219944100593749,
+            "source": "love",
+            "target": "conscience"
+          },
+          {
+            "weight": 0.4219944100593749,
+            "source": "conscience",
             "target": "human"
           }
         ]
@@ -1002,104 +1002,264 @@
         "graph": {},
         "nodes": [
           {
-            "id": "feeling"
-          },
-          {
-            "id": "response"
-          },
-          {
-            "id": "call"
-          },
-          {
-            "id": "inclination"
-          },
-          {
-            "id": "benefactor"
-          },
-          {
-            "id": "relationship"
-          },
-          {
-            "id": "ingratitude"
-          },
-          {
-            "id": "instance"
-          },
-          {
-            "id": "favor"
-          },
-          {
             "id": "section"
           },
           {
-            "id": "gratitude"
-          },
-          {
             "id": "benevolence"
-          },
-          {
-            "id": "beneficiary"
-          },
-          {
-            "id": "owe"
           },
           {
             "id": "belief"
           },
           {
             "id": "act"
+          },
+          {
+            "id": "response"
+          },
+          {
+            "id": "feeling"
+          },
+          {
+            "id": "favor"
+          },
+          {
+            "id": "gratitude"
+          },
+          {
+            "id": "relationship"
+          },
+          {
+            "id": "instance"
+          },
+          {
+            "id": "call"
+          },
+          {
+            "id": "benefactor"
+          },
+          {
+            "id": "ingratitude"
+          },
+          {
+            "id": "owe"
+          },
+          {
+            "id": "beneficiary"
+          },
+          {
+            "id": "inclination"
           }
         ],
         "edges": [
           {
-            "weight": 1.0784095813505903,
-            "source": "feeling",
-            "target": "benevolence"
+            "weight": 0.9110136747733113,
+            "source": "section",
+            "target": "call"
           },
           {
-            "weight": 0.32699349266666916,
-            "source": "feeling",
+            "weight": 0.24169383029392355,
+            "source": "section",
+            "target": "gratitude"
+          },
+          {
+            "weight": 0.01600034134644112,
+            "source": "section",
+            "target": "benefactor"
+          },
+          {
+            "weight": 1.089133544713566,
+            "source": "section",
             "target": "response"
           },
           {
-            "weight": 2.1059259483349697,
-            "source": "feeling",
-            "target": "belief"
-          },
-          {
-            "weight": 0.8686890503685212,
-            "source": "feeling",
-            "target": "beneficiary"
-          },
-          {
-            "weight": 0.5776342934381009,
-            "source": "feeling",
+            "weight": 0.6466271649250525,
+            "source": "section",
             "target": "act"
           },
           {
             "weight": 0.4542552722775964,
-            "source": "feeling",
-            "target": "section"
+            "source": "section",
+            "target": "feeling"
           },
           {
-            "weight": 0.7709248816026295,
-            "source": "feeling",
-            "target": "favor"
+            "weight": 0.6167742017753713,
+            "source": "section",
+            "target": "belief"
           },
           {
-            "weight": 0.23468954231127054,
-            "source": "feeling",
+            "weight": 0.04879016416943205,
+            "source": "section",
+            "target": "benevolence"
+          },
+          {
+            "weight": 0.8597203803857607,
+            "source": "section",
+            "target": "ingratitude"
+          },
+          {
+            "weight": 0.8109302162163288,
+            "source": "section",
+            "target": "inclination"
+          },
+          {
+            "weight": 1.331406095814481,
+            "source": "benevolence",
+            "target": "act"
+          },
+          {
+            "weight": 0.9884613446876507,
+            "source": "benevolence",
             "target": "benefactor"
           },
           {
-            "weight": 0.4906229164484712,
-            "source": "feeling",
-            "target": "instance"
+            "weight": 0.1488736227264145,
+            "source": "benevolence",
+            "target": "call"
+          },
+          {
+            "weight": 0.0008507018803128285,
+            "source": "benevolence",
+            "target": "gratitude"
+          },
+          {
+            "weight": 0.07288771574849257,
+            "source": "benevolence",
+            "target": "owe"
+          },
+          {
+            "weight": 0.6634657292878821,
+            "source": "benevolence",
+            "target": "response"
+          },
+          {
+            "weight": 1.0784095813505903,
+            "source": "benevolence",
+            "target": "feeling"
+          },
+          {
+            "weight": 0.6863674935745665,
+            "source": "benevolence",
+            "target": "beneficiary"
+          },
+          {
+            "weight": 0.5477813302884199,
+            "source": "benevolence",
+            "target": "belief"
           },
           {
             "weight": 0.3852624007906449,
-            "source": "feeling",
+            "source": "benevolence",
             "target": "ingratitude"
+          },
+          {
+            "weight": 0.26009925783663895,
+            "source": "benevolence",
+            "target": "favor"
+          },
+          {
+            "weight": 0.4906229164484712,
+            "source": "benevolence",
+            "target": "instance"
+          },
+          {
+            "weight": 1.3528464270523506,
+            "source": "benevolence",
+            "target": "relationship"
+          },
+          {
+            "weight": 0.6863674935745665,
+            "source": "belief",
+            "target": "beneficiary"
+          },
+          {
+            "weight": 2.1059259483349697,
+            "source": "belief",
+            "target": "feeling"
+          },
+          {
+            "weight": 0.45247115048409503,
+            "source": "belief",
+            "target": "act"
+          },
+          {
+            "weight": 0.7896170146147822,
+            "source": "belief",
+            "target": "response"
+          },
+          {
+            "weight": 0.7168576603323539,
+            "source": "belief",
+            "target": "call"
+          },
+          {
+            "weight": 0.10952639935726458,
+            "source": "belief",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.7709248816026295,
+            "source": "belief",
+            "target": "instance"
+          },
+          {
+            "weight": 0.6457617386486236,
+            "source": "belief",
+            "target": "favor"
+          },
+          {
+            "weight": 0.26009925783663895,
+            "source": "belief",
+            "target": "ingratitude"
+          },
+          {
+            "weight": 0.5022848561963142,
+            "source": "act",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.5220644422832903,
+            "source": "act",
+            "target": "beneficiary"
+          },
+          {
+            "weight": 0.07739077900264724,
+            "source": "act",
+            "target": "gratitude"
+          },
+          {
+            "weight": 0.053563442922089685,
+            "source": "act",
+            "target": "call"
+          },
+          {
+            "weight": 0.32699349266666916,
+            "source": "act",
+            "target": "response"
+          },
+          {
+            "weight": 0.26178134401962383,
+            "source": "act",
+            "target": "instance"
+          },
+          {
+            "weight": 0.5776342934381009,
+            "source": "act",
+            "target": "feeling"
+          },
+          {
+            "weight": 0.5130957723005298,
+            "source": "act",
+            "target": "ingratitude"
+          },
+          {
+            "weight": 1.052092273033217,
+            "source": "act",
+            "target": "inclination"
+          },
+          {
+            "weight": 0.053563442922089685,
+            "source": "act",
+            "target": "relationship"
           },
           {
             "weight": 0.15110282620300503,
@@ -1122,29 +1282,14 @@
             "target": "gratitude"
           },
           {
-            "weight": 1.089133544713566,
-            "source": "response",
-            "target": "section"
-          },
-          {
-            "weight": 0.32699349266666916,
-            "source": "response",
-            "target": "act"
-          },
-          {
-            "weight": 0.6634657292878821,
-            "source": "response",
-            "target": "benevolence"
-          },
-          {
             "weight": 0.014618807624516651,
             "source": "response",
             "target": "owe"
           },
           {
-            "weight": 0.7896170146147822,
+            "weight": 0.32699349266666916,
             "source": "response",
-            "target": "belief"
+            "target": "feeling"
           },
           {
             "weight": 0.5093150494606238,
@@ -1152,209 +1297,49 @@
             "target": "ingratitude"
           },
           {
-            "weight": 0.5182337261924627,
-            "source": "call",
-            "target": "gratitude"
-          },
-          {
-            "weight": 0.9110136747733113,
-            "source": "call",
-            "target": "section"
-          },
-          {
-            "weight": 0.12418101013604309,
-            "source": "call",
-            "target": "owe"
-          },
-          {
-            "weight": 0.053563442922089685,
-            "source": "call",
-            "target": "act"
-          },
-          {
-            "weight": 0.1488736227264145,
-            "source": "call",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.7168576603323539,
-            "source": "call",
-            "target": "belief"
-          },
-          {
-            "weight": 0.5543387308345789,
-            "source": "call",
-            "target": "ingratitude"
-          },
-          {
-            "weight": 0.28090238546640217,
-            "source": "inclination",
+            "weight": 0.8686890503685212,
+            "source": "feeling",
             "target": "beneficiary"
           },
           {
-            "weight": 1.052092273033217,
-            "source": "inclination",
-            "target": "act"
+            "weight": 0.7709248816026295,
+            "source": "feeling",
+            "target": "favor"
           },
           {
-            "weight": 0.8109302162163288,
-            "source": "inclination",
-            "target": "section"
+            "weight": 0.23468954231127054,
+            "source": "feeling",
+            "target": "benefactor"
           },
           {
-            "weight": 0.8542483662137268,
-            "source": "benefactor",
-            "target": "beneficiary"
-          },
-          {
-            "weight": 0.4578330936254803,
-            "source": "benefactor",
+            "weight": 0.4906229164484712,
+            "source": "feeling",
             "target": "instance"
           },
           {
-            "weight": 0.01600034134644112,
-            "source": "benefactor",
-            "target": "section"
-          },
-          {
-            "weight": 0.14545840858332787,
-            "source": "benefactor",
-            "target": "owe"
-          },
-          {
-            "weight": 0.5022848561963142,
-            "source": "benefactor",
-            "target": "act"
-          },
-          {
-            "weight": 0.9884613446876507,
-            "source": "benefactor",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.10952639935726458,
-            "source": "benefactor",
-            "target": "belief"
-          },
-          {
-            "weight": 0.3524725779676541,
-            "source": "benefactor",
+            "weight": 0.3852624007906449,
+            "source": "feeling",
             "target": "ingratitude"
           },
           {
             "weight": 1.0258171312314197,
-            "source": "benefactor",
-            "target": "favor"
+            "source": "favor",
+            "target": "benefactor"
+          },
+          {
+            "weight": 0.6863674935745665,
+            "source": "favor",
+            "target": "beneficiary"
+          },
+          {
+            "weight": 0.5182337261924627,
+            "source": "gratitude",
+            "target": "call"
           },
           {
             "weight": 0.24996973959778324,
-            "source": "relationship",
-            "target": "gratitude"
-          },
-          {
-            "weight": 0.8420208032863598,
-            "source": "relationship",
-            "target": "ingratitude"
-          },
-          {
-            "weight": 1.3528464270523506,
-            "source": "relationship",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.053563442922089685,
-            "source": "relationship",
-            "target": "act"
-          },
-          {
-            "weight": 0.5130957723005298,
-            "source": "ingratitude",
-            "target": "act"
-          },
-          {
-            "weight": 0.26009925783663895,
-            "source": "ingratitude",
-            "target": "belief"
-          },
-          {
-            "weight": 0.6863674935745665,
-            "source": "ingratitude",
-            "target": "beneficiary"
-          },
-          {
-            "weight": 0.3852624007906449,
-            "source": "ingratitude",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.8597203803857607,
-            "source": "ingratitude",
-            "target": "section"
-          },
-          {
-            "weight": 1.1192315758708453,
-            "source": "ingratitude",
-            "target": "instance"
-          },
-          {
-            "weight": 0.09858082867244759,
-            "source": "instance",
-            "target": "beneficiary"
-          },
-          {
-            "weight": 0.26178134401962383,
-            "source": "instance",
-            "target": "act"
-          },
-          {
-            "weight": 0.40139178272052856,
-            "source": "instance",
-            "target": "owe"
-          },
-          {
-            "weight": 0.7709248816026295,
-            "source": "instance",
-            "target": "belief"
-          },
-          {
-            "weight": 0.4906229164484712,
-            "source": "instance",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.6457617386486236,
-            "source": "favor",
-            "target": "belief"
-          },
-          {
-            "weight": 0.6863674935745665,
-            "source": "favor",
-            "target": "beneficiary"
-          },
-          {
-            "weight": 0.26009925783663895,
-            "source": "favor",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.24169383029392355,
-            "source": "section",
-            "target": "gratitude"
-          },
-          {
-            "weight": 0.6466271649250525,
-            "source": "section",
-            "target": "act"
-          },
-          {
-            "weight": 0.6167742017753713,
-            "source": "section",
-            "target": "belief"
-          },
-          {
-            "weight": 0.04879016416943205,
-            "source": "section",
-            "target": "benevolence"
+            "source": "gratitude",
+            "target": "relationship"
           },
           {
             "weight": 0.5534734543247649,
@@ -1362,49 +1347,64 @@
             "target": "owe"
           },
           {
-            "weight": 0.07739077900264724,
-            "source": "gratitude",
-            "target": "act"
+            "weight": 0.8420208032863598,
+            "source": "relationship",
+            "target": "ingratitude"
           },
           {
-            "weight": 0.0008507018803128285,
-            "source": "gratitude",
-            "target": "benevolence"
+            "weight": 0.4578330936254803,
+            "source": "instance",
+            "target": "benefactor"
           },
           {
-            "weight": 1.331406095814481,
-            "source": "benevolence",
-            "target": "act"
-          },
-          {
-            "weight": 0.07288771574849257,
-            "source": "benevolence",
-            "target": "owe"
-          },
-          {
-            "weight": 0.6863674935745665,
-            "source": "benevolence",
+            "weight": 0.09858082867244759,
+            "source": "instance",
             "target": "beneficiary"
           },
           {
-            "weight": 0.5477813302884199,
-            "source": "benevolence",
-            "target": "belief"
+            "weight": 0.40139178272052856,
+            "source": "instance",
+            "target": "owe"
           },
           {
-            "weight": 0.5220644422832903,
-            "source": "beneficiary",
-            "target": "act"
+            "weight": 1.1192315758708453,
+            "source": "instance",
+            "target": "ingratitude"
+          },
+          {
+            "weight": 0.12418101013604309,
+            "source": "call",
+            "target": "owe"
+          },
+          {
+            "weight": 0.5543387308345789,
+            "source": "call",
+            "target": "ingratitude"
+          },
+          {
+            "weight": 0.8542483662137268,
+            "source": "benefactor",
+            "target": "beneficiary"
+          },
+          {
+            "weight": 0.14545840858332787,
+            "source": "benefactor",
+            "target": "owe"
+          },
+          {
+            "weight": 0.3524725779676541,
+            "source": "benefactor",
+            "target": "ingratitude"
           },
           {
             "weight": 0.6863674935745665,
-            "source": "beneficiary",
-            "target": "belief"
+            "source": "ingratitude",
+            "target": "beneficiary"
           },
           {
-            "weight": 0.45247115048409503,
-            "source": "belief",
-            "target": "act"
+            "weight": 0.28090238546640217,
+            "source": "beneficiary",
+            "target": "inclination"
           }
         ]
       }
@@ -1419,31 +1419,16 @@
         "graph": {},
         "nodes": [
           {
-            "id": "principle"
-          },
-          {
-            "id": "theory"
-          },
-          {
-            "id": "beneficent"
-          },
-          {
             "id": "social"
           },
           {
-            "id": "harm"
+            "id": "benevolence"
           },
           {
             "id": "limit"
           },
           {
-            "id": "health"
-          },
-          {
-            "id": "ethic"
-          },
-          {
-            "id": "beneficence"
+            "id": "obligation"
           },
           {
             "id": "moral"
@@ -1452,109 +1437,34 @@
             "id": "act"
           },
           {
-            "id": "benevolence"
+            "id": "health"
+          },
+          {
+            "id": "beneficence"
+          },
+          {
+            "id": "principle"
+          },
+          {
+            "id": "ethic"
           },
           {
             "id": "person"
           },
           {
-            "id": "obligation"
+            "id": "beneficent"
+          },
+          {
+            "id": "harm"
+          },
+          {
+            "id": "theory"
           },
           {
             "id": "action"
           }
         ],
         "edges": [
-          {
-            "weight": 0.24773053309335324,
-            "source": "principle",
-            "target": "beneficence"
-          },
-          {
-            "weight": 0.07429792371664463,
-            "source": "principle",
-            "target": "harm"
-          },
-          {
-            "weight": 0.14742018854560726,
-            "source": "principle",
-            "target": "moral"
-          },
-          {
-            "weight": 0.2566194805105993,
-            "source": "principle",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.3550595533238517,
-            "source": "principle",
-            "target": "ethic"
-          },
-          {
-            "weight": 0.11143747066610143,
-            "source": "principle",
-            "target": "person"
-          },
-          {
-            "weight": 0.4107701603378576,
-            "source": "principle",
-            "target": "limit"
-          },
-          {
-            "weight": 0.16969019252191028,
-            "source": "theory",
-            "target": "beneficence"
-          },
-          {
-            "weight": 0.4311698925796672,
-            "source": "theory",
-            "target": "moral"
-          },
-          {
-            "weight": 0.04789269944686505,
-            "source": "theory",
-            "target": "obligation"
-          },
-          {
-            "weight": 0.21494678411003132,
-            "source": "theory",
-            "target": "benevolence"
-          },
-          {
-            "weight": 0.3484781767345539,
-            "source": "theory",
-            "target": "health"
-          },
-          {
-            "weight": 0.25131442828090617,
-            "source": "theory",
-            "target": "social"
-          },
-          {
-            "weight": 1.2735537381644417,
-            "source": "beneficent",
-            "target": "action"
-          },
-          {
-            "weight": 1.5612358106162227,
-            "source": "beneficent",
-            "target": "act"
-          },
-          {
-            "weight": 0.5453152377932263,
-            "source": "beneficent",
-            "target": "moral"
-          },
-          {
-            "weight": 0.09489874182279573,
-            "source": "beneficent",
-            "target": "obligation"
-          },
-          {
-            "weight": 0.14754247530821754,
-            "source": "beneficent",
-            "target": "person"
-          },
           {
             "weight": 0.5389965007326869,
             "source": "social",
@@ -1566,24 +1476,29 @@
             "target": "beneficence"
           },
           {
-            "weight": 0.15552336363923056,
-            "source": "harm",
-            "target": "obligation"
+            "weight": 0.25131442828090617,
+            "source": "social",
+            "target": "theory"
           },
           {
-            "weight": 0.31352761278247876,
-            "source": "harm",
-            "target": "person"
+            "weight": 0.21494678411003132,
+            "source": "benevolence",
+            "target": "theory"
           },
           {
-            "weight": 0.08141539148550864,
-            "source": "harm",
-            "target": "action"
+            "weight": 0.22864562846819314,
+            "source": "benevolence",
+            "target": "moral"
           },
           {
-            "weight": 0.6567795363890705,
-            "source": "harm",
-            "target": "health"
+            "weight": 0.2566194805105993,
+            "source": "benevolence",
+            "target": "principle"
+          },
+          {
+            "weight": 0.22864562846819314,
+            "source": "benevolence",
+            "target": "ethic"
           },
           {
             "weight": 0.2956699953824724,
@@ -1596,19 +1511,44 @@
             "target": "person"
           },
           {
-            "weight": 0.4675375367505421,
-            "source": "health",
-            "target": "ethic"
+            "weight": 0.4107701603378576,
+            "source": "limit",
+            "target": "principle"
           },
           {
-            "weight": 0.22864562846819314,
-            "source": "ethic",
-            "target": "benevolence"
+            "weight": 0.28905475626375304,
+            "source": "obligation",
+            "target": "act"
           },
           {
             "weight": 0.3407904306629419,
-            "source": "beneficence",
-            "target": "obligation"
+            "source": "obligation",
+            "target": "beneficence"
+          },
+          {
+            "weight": 0.15552336363923056,
+            "source": "obligation",
+            "target": "harm"
+          },
+          {
+            "weight": 0.25396343645248304,
+            "source": "obligation",
+            "target": "moral"
+          },
+          {
+            "weight": 0.04789269944686505,
+            "source": "obligation",
+            "target": "theory"
+          },
+          {
+            "weight": 0.09489874182279573,
+            "source": "obligation",
+            "target": "beneficent"
+          },
+          {
+            "weight": 0.01034135379473253,
+            "source": "obligation",
+            "target": "person"
           },
           {
             "weight": 0.3340061441260194,
@@ -1616,24 +1556,29 @@
             "target": "act"
           },
           {
+            "weight": 0.5453152377932263,
+            "source": "moral",
+            "target": "beneficent"
+          },
+          {
             "weight": 0.6653632800804619,
             "source": "moral",
             "target": "action"
           },
           {
-            "weight": 0.25396343645248304,
+            "weight": 0.14742018854560726,
             "source": "moral",
-            "target": "obligation"
+            "target": "principle"
           },
           {
-            "weight": 0.22864562846819314,
+            "weight": 0.4311698925796672,
             "source": "moral",
-            "target": "benevolence"
+            "target": "theory"
           },
           {
-            "weight": 0.28905475626375304,
+            "weight": 1.5612358106162227,
             "source": "act",
-            "target": "obligation"
+            "target": "beneficent"
           },
           {
             "weight": 0.21494678411003132,
@@ -1646,14 +1591,69 @@
             "target": "person"
           },
           {
+            "weight": 0.6567795363890705,
+            "source": "health",
+            "target": "harm"
+          },
+          {
+            "weight": 0.4675375367505421,
+            "source": "health",
+            "target": "ethic"
+          },
+          {
+            "weight": 0.3484781767345539,
+            "source": "health",
+            "target": "theory"
+          },
+          {
+            "weight": 0.16969019252191028,
+            "source": "beneficence",
+            "target": "theory"
+          },
+          {
+            "weight": 0.24773053309335324,
+            "source": "beneficence",
+            "target": "principle"
+          },
+          {
+            "weight": 0.07429792371664463,
+            "source": "principle",
+            "target": "harm"
+          },
+          {
+            "weight": 0.3550595533238517,
+            "source": "principle",
+            "target": "ethic"
+          },
+          {
+            "weight": 0.11143747066610143,
+            "source": "principle",
+            "target": "person"
+          },
+          {
             "weight": 0.6293805622009561,
             "source": "person",
             "target": "action"
           },
           {
-            "weight": 0.01034135379473253,
+            "weight": 0.14754247530821754,
             "source": "person",
-            "target": "obligation"
+            "target": "beneficent"
+          },
+          {
+            "weight": 0.31352761278247876,
+            "source": "person",
+            "target": "harm"
+          },
+          {
+            "weight": 1.2735537381644417,
+            "source": "beneficent",
+            "target": "action"
+          },
+          {
+            "weight": 0.08141539148550864,
+            "source": "harm",
+            "target": "action"
           }
         ]
       }

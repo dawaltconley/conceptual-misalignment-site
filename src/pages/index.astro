@@ -1,11 +1,19 @@
 ---
 import Layout from '@layouts/Page.astro'
 import MultiNetwork from '@components/MultiNetwork'
-import { buildDictionaryFromNetwork } from '@build/cedict'
-import ren from '~/public/ctext/仁_pmi.json'
+import Network from '@components/Network'
+import { WeightedNodeLinkDataSchema } from '@lib/networkx'
 import { buildDictionaryFromNetworks } from '@build/cedict'
+import renPMI from '~/public/ctext/仁_pmi.json'
+import yiPMI from '~/public/ctext/義_pmi.json'
+import renEmbeds from '~/public/ctext/仁_embeds.json'
+import yiEmbeds from '~/public/ctext/義_embeds.json'
 
-const renDict = await buildDictionaryFromNetworks(ren)
+const renDict = await buildDictionaryFromNetworks(renPMI)
+const yiDict = await buildDictionaryFromNetworks(yiPMI)
+
+const renEmbedNetwork = WeightedNodeLinkDataSchema.parse(renEmbeds)
+const yiEmbedNetwork = WeightedNodeLinkDataSchema.parse(yiEmbeds)
 ---
 
 <Layout>
@@ -26,6 +34,20 @@ const renDict = await buildDictionaryFromNetworks(ren)
           sourceAlign="right"
         />
       </div>
+    </div>
+    <div class="mx-auto max-w-screen-xl">
+      <Network
+        client:only
+        centralNodeId="仁"
+        data={renEmbedNetwork}
+        dictionary={renDict}
+      />
+      <Network
+        client:only
+        centralNodeId="義"
+        data={yiEmbedNetwork}
+        dictionary={yiDict}
+      />
     </div>
   </main>
 </Layout>
