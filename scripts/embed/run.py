@@ -64,6 +64,17 @@ def parse_args() -> argparse.Namespace:
                    help="Override target hanzi (default: config.TERMS).")
     p.add_argument("--threshold", type=float, default=0.75,
                    help="Cosine edge threshold for the network (tune 0.65-0.85).")
+    p.add_argument("--center", action="store_true",
+                   help="Mean-center vectors pipeline-wide (counters anisotropy; "
+                        "retune --threshold to ~0.3 on the centered scale).")
+    p.add_argument("--network", choices=["threshold", "knn"], default="threshold",
+                   help="Network construction: global threshold or top-k neighborhoods.")
+    p.add_argument("--knn-k", type=int, default=8,
+                   help="Neighbors per node when --network knn.")
+    p.add_argument("--sim-transform", choices=["none", "neglog", "poslog"],
+                   default="none",
+                   help="Reweight cosine before building the network: "
+                        "neglog=-ln(1-s) (expands high), poslog=ln(1+s) (compresses high).")
     p.add_argument("--min-freq", type=int, default=5,
                    help="Min token frequency for the content-word vocabulary.")
     p.add_argument("--kmeans-k", type=int, default=4)
@@ -122,17 +133,32 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
     is_target = np.array([lbl in targets for lbl in labels])
     print(f"pooled     : {len(labels)} words ({int(is_target.sum())} targets)")
 
-    vectors.save_vectors(args.out, labels, matrix, targets, by_word)
+    mean = None
+    if args.center:
+        matrix, mean = vectors.center_matrix(matrix)
+        print("centered   : subtracted vocab centroid (anisotropy fix)")
+
+    vectors.save_vectors(args.out, labels, matrix, targets, by_word, mean=mean)
+
+    # Center the occurrence stacks with the same mean so cohesion (cosine to
+    # centroid) is measured in the same space as the pooled vectors.
+    target_occ = vectors.load_target_occurrences(args.out)
+    if mean is not None:
+        target_occ = {w: s - mean for w, s in target_occ.items()}
 
     summary = analyze.run_analysis(
-        labels, matrix, is_target,
-        vectors.load_target_occurrences(args.out),
+        labels, matrix, is_target, target_occ,
         args.out, args.threshold, args.kmeans_k,
+        method=args.network, knn_k=args.knn_k, sim_transform=args.sim_transform,
     )
     print("\n=== summary ===")
     for row in summary["cohesion_variance"]:
         print(f"  {row['term']}: n={row['n']} cohesion={row['cohesion']} "
               f"variance={row['variance']}")
+    net = (f"knn (k={args.knn_k})" if args.network == "knn"
+           else f"threshold {args.threshold}")
+    print(f"  network: {net}  centered={args.center}  "
+          f"sim_transform={args.sim_transform}")
     print(f"  Louvain communities: {summary['louvain_communities']}")
     print(f"  artifacts written to: {args.out.resolve()}")
 

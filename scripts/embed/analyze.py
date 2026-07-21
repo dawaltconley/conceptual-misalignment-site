@@ -46,16 +46,54 @@ def cosine_matrix(vectors: np.ndarray) -> np.ndarray:
     return cosine_similarity(vectors)
 
 
-def log_transform(sim: np.ndarray) -> np.ndarray:
-    """Monotone stretch emphasizing high similarities: ``-ln(1 - sim)``.
+def neglog_transform(sim: np.ndarray) -> np.ndarray:
+    """Convex stretch that *expands* the high-similarity range: ``-ln(1 - sim)``.
 
-    Diagonal (self-similarity 1.0) would diverge, so it is set to NaN. Values
-    grow without bound as similarity approaches 1, spreading out the crowded
-    high-similarity region as in Wu & Wang's log-transformed cosine.
+    Diagonal (self-similarity 1.0) would diverge, so it is set to NaN. The slope
+    ``1/(1 - sim)`` grows without bound as similarity approaches 1, spreading out
+    the crowded high-similarity region (de-crowding reading of Wu & Wang's
+    log-transformed cosine).
     """
     out = -np.log(np.clip(1.0 - sim, EPS, None))
     np.fill_diagonal(out, np.nan)
     return out
+
+
+def poslog_transform(sim: np.ndarray) -> np.ndarray:
+    """Concave stretch that *compresses* the high-similarity range: ``ln(1 + sim)``.
+
+    The reversed counterpart of :func:`neglog_transform`: slope ``1/(1 + sim)``
+    shrinks toward 1, so high similarities are damped and low ones expanded
+    (dampening reading of "attenuating saturation effects"). Diagonal set to NaN
+    to match the other transforms.
+    """
+    out = np.log1p(sim)
+    np.fill_diagonal(out, np.nan)
+    return out
+
+
+# Backwards-compatible alias: the original single transform was ``-ln(1 - sim)``.
+log_transform = neglog_transform
+
+_SIM_TRANSFORMS = {
+    "none": None,
+    "neglog": neglog_transform,
+    "poslog": poslog_transform,
+}
+
+
+def apply_sim_transform(sim: np.ndarray, name: str) -> np.ndarray:
+    """Dispatch a named similarity transform; ``none`` returns ``sim`` unchanged.
+
+    Both transforms are strictly monotone, so at a matched percentile the edge
+    *set* is unchanged; what shifts is the edge *weights* (and hence any
+    weight-based step like weighted Louvain) and the visual scale.
+    """
+    if name not in _SIM_TRANSFORMS:
+        raise ValueError(
+            f"unknown sim transform {name!r}; choose from {sorted(_SIM_TRANSFORMS)}")
+    fn = _SIM_TRANSFORMS[name]
+    return sim if fn is None else fn(sim)
 
 
 def write_matrix_csv(path: Path, labels: list[str], mat: np.ndarray) -> None:
@@ -161,10 +199,9 @@ def kmeans_assignments(vectors, labels, is_target, k: int) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def build_cosine_graph(
-    labels: list[str], vectors: np.ndarray, threshold: float
+    labels: list[str], sim: np.ndarray, threshold: float
 ) -> nx.Graph:
-    """Nodes = words; edges where pooled-vector cosine >= threshold."""
-    sim = cosine_similarity(vectors)
+    """Nodes = words; edges where the (possibly transformed) similarity >= threshold."""
     G = nx.Graph()
     G.add_nodes_from(labels)
     n = len(labels)
@@ -172,6 +209,28 @@ def build_cosine_graph(
         for j in range(i + 1, n):
             if sim[i, j] >= threshold:
                 G.add_edge(labels[i], labels[j], weight=float(sim[i, j]))
+    return G
+
+
+def build_knn_graph(labels: list[str], sim: np.ndarray, k: int) -> nx.Graph:
+    """Nodes = words; edge (a, b) if either ranks the other in its top-``k`` (union kNN).
+
+    Relative-neighborhood alternative to a global threshold: each node keeps its
+    ``k`` most-similar neighbors, which is robust to the anisotropy offset that
+    makes an absolute cutoff meaningless. Edge weight is the similarity. (Mutual
+    kNN — edge only if *both* rank each other — is a stricter variant.)
+    """
+    G = nx.Graph()
+    G.add_nodes_from(labels)
+    n = len(labels)
+    k = max(1, min(k, n - 1))
+    ranked = sim.copy()
+    np.fill_diagonal(ranked, -np.inf)  # never pick self
+    for i in range(n):
+        for j in np.argsort(ranked[i])[::-1][:k]:
+            w = ranked[i, j]
+            if np.isfinite(w):
+                G.add_edge(labels[i], labels[int(j)], weight=float(w))
     return G
 
 
@@ -195,13 +254,26 @@ def build_and_save_networks(
     threshold: float,
     out_dir: Path,
     max_nodes: int = 15,
+    method: str = "threshold",
+    knn_k: int = 8,
+    sim_transform: str = "none",
 ) -> int:
-    """Build the cosine graph, detect communities, and serialize JSON.
+    """Build the similarity network, detect communities, and serialize JSON.
 
-    Writes the full network plus one pruned neighborhood per target term.
-    Returns the number of Louvain communities found.
+    ``method`` selects edge construction: ``"threshold"`` keeps pairs with
+    similarity >= ``threshold``; ``"knn"`` keeps each node's top-``knn_k``
+    neighbors (relative neighborhoods). ``sim_transform`` optionally reweights
+    the cosine matrix first (see :func:`apply_sim_transform`). Writes the full
+    network plus one pruned neighborhood per target term. Returns the number of
+    Louvain communities found.
     """
-    G = build_cosine_graph(labels, vectors, threshold)
+    sim = apply_sim_transform(cosine_similarity(vectors), sim_transform)
+    if method == "knn":
+        G = build_knn_graph(labels, sim, knn_k)
+    elif method == "threshold":
+        G = build_cosine_graph(labels, sim, threshold)
+    else:
+        raise ValueError(f"unknown network method {method!r}")
     G.remove_nodes_from(list(nx.isolates(G)))
     n_comms = annotate_communities(G)
 
@@ -251,20 +323,29 @@ def run_analysis(
     out_dir: Path,
     threshold: float,
     kmeans_k: int,
+    method: str = "threshold",
+    knn_k: int = 8,
+    sim_transform: str = "none",
 ) -> dict:
     """Run every analysis and write artifacts; return a small summary dict."""
     out_dir.mkdir(parents=True, exist_ok=True)
     target_labels = [lbl for lbl, t in zip(labels, is_target) if t]
 
-    # Similarity among target terms only (raw + log-transformed).
+    # Similarity among target terms only. cosine_targets.csv is always the raw
+    # cosine (reference); cosine_targets_log.csv is the -ln(1-s) view (kept for
+    # continuity). The heatmap uses this run's sim_transform so it shares a scale
+    # with the network edges below.
     tgt_idx = [i for i, t in enumerate(is_target) if t]
     tgt_vecs = matrix[tgt_idx]
     sim = cosine_matrix(tgt_vecs)
     write_matrix_csv(out_dir / "cosine_targets.csv", target_labels, sim)
     write_matrix_csv(out_dir / "cosine_targets_log.csv",
                      target_labels, log_transform(sim))
-    heatmap(sim, target_labels, "Cosine similarity (virtues)",
-            out_dir / "cosine_heatmap.png")
+    heat = apply_sim_transform(sim, sim_transform)
+    heat_title = "Cosine similarity (virtues)"
+    if sim_transform != "none":
+        heat_title += f" [{sim_transform}]"
+    heatmap(heat, target_labels, heat_title, out_dir / "cosine_heatmap.png")
 
     # Cohesion / variance.
     cv = cohesion_variance(target_occ)
@@ -281,7 +362,8 @@ def run_analysis(
 
     # Network + Louvain.
     n_comms = build_and_save_networks(
-        labels, matrix, is_target, threshold, out_dir)
+        labels, matrix, is_target, threshold, out_dir,
+        method=method, knn_k=knn_k, sim_transform=sim_transform)
 
     return {
         "n_terms": len(labels),
@@ -290,4 +372,7 @@ def run_analysis(
         "cohesion_variance": cv,
         "louvain_communities": n_comms,
         "threshold": threshold,
+        "method": method,
+        "knn_k": knn_k,
+        "sim_transform": sim_transform,
     }
