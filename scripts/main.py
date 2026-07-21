@@ -81,46 +81,50 @@ def filter_chinese_philosophy(sep_url: str) -> bool:
     return True
 
 
-with open(DATA / "terms.json", "w") as file:
-    serialized = [{"hanzi": t.hanzi, "english": t.english} for t in TERMS]
-    file.write(json.dumps(serialized))
+def main() -> None:
+    with open(DATA / "terms.json", "w") as file:
+        serialized = [{"hanzi": t.hanzi, "english": t.english} for t in TERMS]
+        file.write(json.dumps(serialized))
 
+    for term_pairs in TERMS:
+        print(f"\n=== {term_pairs.hanzi} / {', '.join(term_pairs.english)} ===")
 
-for term_pairs in TERMS:
-    print(f"\n=== {term_pairs.hanzi} / {', '.join(term_pairs.english)} ===")
-
-    # First run NLP for the Chinese term in the Mengzi
-    term = term_pairs.hanzi
-    data = TermData(
-        term,
-        [NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
-         for m in mengzi]
-    )
-    data.save_json(CTEXT / f"{term}_pmi.json")
-
-    # Now iterate for each associated english term
-    for term in term_pairs.english:
-        print(f"\n  [{term}] Searching SEP...")
-        sep_articles = search_sep(
-            term, 4, pre_filter=filter_chinese_philosophy)
-        print(f"  [{term}] {len(sep_articles)} articles found")
-
-        slugified_search_term = term.replace(" ", "+")
-        all_articles = SEPArticle(
-            url=f"https://plato.stanford.edu/search/searcher.py?query={slugified_search_term}",
-            title="Combined",
-            description="Results from all articles",
-            text="\n\n".join(a.text for a in sep_articles)
+        # First run NLP for the Chinese term in the Mengzi
+        term = term_pairs.hanzi
+        data = TermData(
+            term,
+            [NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
+             for m in mengzi]
         )
-        sep_articles = [all_articles] + sep_articles
+        data.save_json(CTEXT / f"{term}_pmi.json")
 
-        sources: list[NLPSource] = []
-        for article in sep_articles:
-            source = NLPSource(
-                article,
-                co_occurance=get_cooccurence_english(term, article.text)
+        # Now iterate for each associated english term
+        for term in term_pairs.english:
+            print(f"\n  [{term}] Searching SEP...")
+            sep_articles = search_sep(
+                term, 4, pre_filter=filter_chinese_philosophy)
+            print(f"  [{term}] {len(sep_articles)} articles found")
+
+            slugified_search_term = term.replace(" ", "+")
+            all_articles = SEPArticle(
+                url=f"https://plato.stanford.edu/search/searcher.py?query={slugified_search_term}",
+                title="Combined",
+                description="Results from all articles",
+                text="\n\n".join(a.text for a in sep_articles)
             )
-            sources.append(source)
+            sep_articles = [all_articles] + sep_articles
 
-        data = TermData(term, sources)
-        data.save_json(SEP / f"{slugify(term)}_pmi.json")
+            sources: list[NLPSource] = []
+            for article in sep_articles:
+                source = NLPSource(
+                    article,
+                    co_occurance=get_cooccurence_english(term, article.text)
+                )
+                sources.append(source)
+
+            data = TermData(term, sources)
+            data.save_json(SEP / f"{slugify(term)}_pmi.json")
+
+
+if __name__ == "__main__":
+    main()
