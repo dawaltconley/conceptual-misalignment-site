@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from collections.abc import Callable
 import requests
 import time
 import cache
@@ -66,12 +67,16 @@ def _parse_search_results(search_page: str) -> list[str]:
     return [r.text.strip() for r in results]
 
 
-def search_sep(search_term: str, max_results: int | None = None) -> list[SEP]:
+def search_sep(search_term: str, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
     articles = []
     results = _parse_search_results(_search(search_term))
-    if max_results:
-        results = results[:max_results]
     for url in results:
+        if pre_filter and not pre_filter(url):
+            continue
+        article = SEP.from_url(url)
+        if filter and not filter(article):
+            continue
         articles.append(SEP.from_url(url))
-        time.sleep(1)
+        if max_results and len(articles) >= max_results:
+            break
     return articles
