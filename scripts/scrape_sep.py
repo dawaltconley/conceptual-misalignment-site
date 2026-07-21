@@ -56,6 +56,8 @@ def _search(term: str, page: int = 1) -> str:
         params={"query": term, "page": max(1, page)},
         timeout=30
     )
+    if not r.from_cache:  # type: ignore
+        time.sleep(random() * 2 + 1)
     r.raise_for_status()
     return r.text
 
