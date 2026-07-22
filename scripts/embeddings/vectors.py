@@ -65,11 +65,12 @@ def save_vectors(
     }
     if mean is not None:
         arrays["mean"] = mean
-    np.savez(out_dir / "vectors.npz", **arrays)
+    np.savez(out_dir / "vectors.npz", allow_pickle=True, **arrays)
     target_stacks = {
         w: np.stack(by_word[w]) for w in targets if by_word.get(w)
     }
-    np.savez(out_dir / "occurrences_targets.npz", **target_stacks)
+    np.savez(out_dir / "occurrences_targets.npz",
+             allow_pickle=True, **target_stacks)
 
 
 def load_vectors(out_dir: Path) -> tuple[list[str], np.ndarray, np.ndarray]:
