@@ -24,9 +24,9 @@ from embed.occurrences import Segment, Span
 from inpho import is_chinese_philosophy
 from scrape_sep import search_sep
 
-# The four English renderings of 仁 / 義 (thick/thin contrast). Matched by lemma.
-DEFAULT_TERMS = frozenset(
-    {"benevolence", "humaneness", "righteousness", "justice"})
+# A matcher maps a (lemma, POS) to a canonical target label, or None. In practice
+# this is ``config.match_rendering`` (glob-based term families).
+MatchFn = Callable[[str, str], "str | None"]
 
 CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
 
@@ -56,13 +56,14 @@ def _clean_html(html: str) -> str:
 
 
 def fetch_corpus(
-    terms: frozenset[str] | set[str] = DEFAULT_TERMS,
+    terms: frozenset[str] | set[str],
     per_term: int = 12,
 ) -> list[Doc]:
     """Search SEP for each term, dedupe articles by URL, and clean the HTML.
 
-    Non-Chinese-philosophy articles only (matches ``main.py``) so the terms carry
-    their Western philosophical sense, the target of the thick/thin contrast.
+    ``terms`` are the search queries (the rendering labels). Non-Chinese-
+    philosophy articles only (matches ``main.py``) so the terms carry their
+    Western philosophical sense, the target of the thick/thin contrast.
     """
     docs: dict[str, Doc] = {}
     for term in sorted(terms):
@@ -76,12 +77,14 @@ def fetch_corpus(
     return list(docs.values())
 
 
-def parse_docs(docs: list[Doc], nlp, targets: frozenset[str] | set[str]) -> list[ParsedSentence]:
+def parse_docs(docs: list[Doc], nlp, match_fn: MatchFn) -> list[ParsedSentence]:
     """Run spaCy over each doc; collect content-word + target tokens per sentence.
 
-    A token is kept if it is a content word (alpha, non-stop, POS in
-    ``CONTENT_POS``) or if its lemma/surface matches a target (regardless of POS,
-    since sentence-initial targets are sometimes mis-tagged ``PROPN``).
+    Each token is keyed by ``match_fn(lemma, pos)`` (its canonical target label,
+    e.g. ``humane`` -> ``humaneness``) if it belongs to a term family; otherwise
+    by its lemma if it is a content word (alpha, non-stop, POS in ``CONTENT_POS``).
+    Re-keying family members here means they pool + count under the label
+    downstream with no further changes.
     """
     sentences: list[ParsedSentence] = []
     for doc in docs:
@@ -91,15 +94,18 @@ def parse_docs(docs: list[Doc], nlp, targets: frozenset[str] | set[str]) -> list
             toks: list[tuple[str, int, int]] = []
             for t in sent:
                 lemma = t.lemma_.lower()
-                is_target = lemma in targets or t.text.lower() in targets
+                label = match_fn(lemma, t.pos_)
                 is_content = (
                     t.is_alpha and not t.is_stop and not t.is_punct
                     and not t.is_space and t.pos_ in CONTENT_POS
                 )
-                if is_target or is_content:
-                    key = lemma if not is_target else (
-                        lemma if lemma in targets else t.text.lower())
-                    toks.append((key, t.idx - base, t.idx - base + len(t.text)))
+                if label:
+                    key = label
+                elif is_content:
+                    key = lemma
+                else:
+                    continue
+                toks.append((key, t.idx - base, t.idx - base + len(t.text)))
             if toks:
                 sentences.append(ParsedSentence(doc.doc_id, sent.text, toks))
     return sentences

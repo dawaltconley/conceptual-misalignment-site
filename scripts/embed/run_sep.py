@@ -19,11 +19,10 @@ from pathlib import Path
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from config import TERMS
+import config
 from embed import analyze, vectors
 from embed.model import Embedder
 from embed.sep_occurrences import (
-    DEFAULT_TERMS,
     build_segments,
     build_vocab,
     fetch_corpus,
@@ -39,11 +38,20 @@ def _load_spacy():
     return spacy.load("en_core_web_sm")
 
 
-def english_targets(args: argparse.Namespace) -> set[str]:
+def target_config(args: argparse.Namespace):
+    """Return ``(target_labels, match_fn)`` from config, or from --terms override.
+
+    Default: the glob-based term families in ``config``. With --terms, each given
+    string is treated as an exact-lemma target (preserving the pre-family behavior).
+    """
     if args.terms:
-        return set(args.terms)
-    from_config = set().union(*(t.english for t in TERMS)) if TERMS else set()
-    return from_config or set(DEFAULT_TERMS)
+        labels = set(args.terms)
+
+        def match_fn(lemma: str, pos: str) -> str | None:
+            return lemma if lemma in labels else None
+
+        return labels, match_fn
+    return set(config.ENGLISH_LABELS), config.match_rendering
 
 
 def segment(emb, sentences, woi):
@@ -91,12 +99,12 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def dry_run(args: argparse.Namespace, targets: set[str]) -> None:
+def dry_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
     docs = fetch_corpus(targets, args.per_term)[: args.limit_docs]
     print(f"[dry-run] articles          : {len(docs)}")
     print(f"[dry-run] targets           : {sorted(targets)}")
     nlp = _load_spacy()
-    sentences = parse_docs(docs, nlp, frozenset(targets))
+    sentences = parse_docs(docs, nlp, match_fn)
     print(f"[dry-run] sentences         : {len(sentences)}")
 
     emb = Embedder(args.model)
@@ -118,11 +126,11 @@ def dry_run(args: argparse.Namespace, targets: set[str]) -> None:
     print("[dry-run] OK — SEP fetch + roberta span mapping validated.")
 
 
-def full_run(args: argparse.Namespace, targets: set[str]) -> None:
+def full_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
     docs = fetch_corpus(targets, args.per_term)
     print(f"articles   : {len(docs)} (>= {args.per_term}/term, deduped)")
     nlp = _load_spacy()
-    sentences = parse_docs(docs, nlp, frozenset(targets))
+    sentences = parse_docs(docs, nlp, match_fn)
     vocab = build_vocab(sentences, targets, args.min_freq)
     print(f"sentences  : {len(sentences)}  vocab: {len(vocab)} (min_freq={args.min_freq})")
 
@@ -165,11 +173,11 @@ def full_run(args: argparse.Namespace, targets: set[str]) -> None:
 
 def main() -> None:
     args = parse_args()
-    targets = english_targets(args)
+    targets, match_fn = target_config(args)
     if args.dry_run:
-        dry_run(args, targets)
+        dry_run(args, targets, match_fn)
     else:
-        full_run(args, targets)
+        full_run(args, targets, match_fn)
 
 
 if __name__ == "__main__":
