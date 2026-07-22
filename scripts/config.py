@@ -25,12 +25,11 @@ class Rendering:
 
     def __init__(
         self,
-        label: str,
-        patterns: tuple[str, ...],
+        *patterns: str,
         pos: tuple[str, ...] | None = None,
     ):
-        self.label = label
-        self.patterns = patterns
+        self.label = patterns[0]
+        self.patterns = tuple(patterns)
         self.pos = frozenset(pos) if pos else None
 
     def matches(self, lemma: str, pos: str | None = None) -> bool:
@@ -52,12 +51,12 @@ class Term:
 
 TERMS: list[Term] = [
     Term('仁', (
-        Rendering('benevolence', ('benevolen*',)),
-        Rendering('humaneness', ('humane*',)),
+        Rendering('benevolence', 'benevolen*'),
+        Rendering('humaneness', 'humane*'),
     )),
     Term('義', (
-        Rendering('righteousness', ('righteous*',)),
-        Rendering('justice', ('justice', 'justness')),
+        Rendering('righteousness', 'righteous*'),
+        Rendering('justice', 'justness'),
     )),
 ]
 
