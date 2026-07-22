@@ -44,7 +44,7 @@ def save_vectors(
     out_dir: Path,
     labels: list[str],
     matrix: np.ndarray,
-    targets: set[str],
+    targets: set[str] | frozenset[str],
     by_word: dict[str, list[np.ndarray]],
     mean: np.ndarray | None = None,
 ) -> None:

@@ -17,16 +17,23 @@ from __future__ import annotations
 from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Protocol
 
 from bs4 import BeautifulSoup
 
+from config import Rendering
 from embed.occurrences import Segment, Span
 from inpho import is_chinese_philosophy
 from scrape_sep import search_sep
 
 # A matcher maps a (lemma, POS) to a canonical target label, or None. In practice
 # this is ``config.match_rendering`` (glob-based term families).
-MatchFn = Callable[[str, str], "str | None"]
+
+
+class MatchFn(Protocol):
+    def __call__(self, lemma: str, pos: str | None = None) -> str | None:
+        ...
+
 
 CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
 
@@ -56,7 +63,7 @@ def _clean_html(html: str) -> str:
 
 
 def fetch_corpus(
-    terms: frozenset[str] | set[str],
+    terms: list[Rendering],
     per_term: int = 12,
 ) -> list[Doc]:
     """Search SEP for each term, dedupe articles by URL, and clean the HTML.
@@ -66,7 +73,7 @@ def fetch_corpus(
     Western philosophical sense, the target of the thick/thin contrast.
     """
     docs: dict[str, Doc] = {}
-    for term in sorted(terms):
+    for term in terms:
         articles = search_sep(
             term, per_term,
             pre_filter=lambda url: not is_chinese_philosophy(url),

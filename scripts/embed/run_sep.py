@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-import config
+from config import TERMS, Rendering
 from embed import analyze, vectors
 from embed.model import Embedder
 from embed.sep_occurrences import (
@@ -27,6 +27,7 @@ from embed.sep_occurrences import (
     build_vocab,
     fetch_corpus,
     parse_docs,
+    MatchFn
 )
 
 DEFAULT_MODEL = "roberta-base"
@@ -38,24 +39,24 @@ def _load_spacy():
     return spacy.load("en_core_web_sm")
 
 
-def target_config(args: argparse.Namespace):
-    """Return ``(target_labels, match_fn)`` from config, or from --terms override.
-
-    Default: the glob-based term families in ``config``. With --terms, each given
-    string is treated as an exact-lemma target (preserving the pre-family behavior).
-    """
+def target_config(args: argparse.Namespace) -> tuple[list[Rendering], MatchFn]:
+    renderings = [r for term in TERMS for r in term.renderings]
     if args.terms:
         labels = set(args.terms)
+        renderings = [r for r in renderings if r.label in labels]
 
-        def match_fn(lemma: str, pos: str) -> str | None:
-            return lemma if lemma in labels else None
+    def match_fn(lemma: str, pos: str | None = None) -> str | None:
+        """Return the canonical rendering label a (lemma, POS) belongs to, or None."""
+        for r in renderings:
+            if r.matches(lemma, pos):
+                return r.label
 
-        return labels, match_fn
-    return set(config.ENGLISH_LABELS), config.match_rendering
+    return renderings, match_fn
 
 
 def segment(emb, sentences, woi):
-    segments = build_segments(sentences, woi, emb.token_lengths, emb.max_length)
+    segments = build_segments(
+        sentences, woi, emb.token_lengths, emb.max_length)
     n_occ = sum(len(s.spans) for s in segments)
     n_docs = len({s.chapter for s in segments})
     print(f"segmented  : {len(sentences)} sentences ({n_docs} articles) -> "
@@ -63,7 +64,7 @@ def segment(emb, sentences, woi):
     return segments
 
 
-def unk_check(emb, words):
+def unk_check(emb: Embedder, words: set[str]):
     unk = emb.unk_words(sorted(words))
     if unk:
         print(f"WARNING: {len(unk)} word(s) tokenize to [UNK]:")
@@ -87,7 +88,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--threshold", type=float, default=0.75)
     p.add_argument("--center", action="store_true",
                    help="Mean-center vectors (anisotropy fix; retune --threshold).")
-    p.add_argument("--network", choices=["threshold", "knn"], default="threshold")
+    p.add_argument(
+        "--network", choices=["threshold", "knn"], default="threshold")
     p.add_argument("--knn-k", type=int, default=8)
     p.add_argument("--max-nodes", type=int, default=15)
     p.add_argument("--sim-transform", choices=["none", "neglog", "poslog"],
@@ -99,17 +101,18 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def dry_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
+def dry_run(args: argparse.Namespace, targets: list[Rendering], match_fn: MatchFn) -> None:
     docs = fetch_corpus(targets, args.per_term)[: args.limit_docs]
     print(f"[dry-run] articles          : {len(docs)}")
-    print(f"[dry-run] targets           : {sorted(targets)}")
+    print(
+        f"[dry-run] targets           : {', '.join([t.label for t in targets])}")
     nlp = _load_spacy()
     sentences = parse_docs(docs, nlp, match_fn)
     print(f"[dry-run] sentences         : {len(sentences)}")
 
     emb = Embedder(args.model)
     print(f"[dry-run] device            : {emb.device_label}")
-    unk_check(emb, targets)
+    unk_check(emb, set([t.label for t in targets]))
     segments = segment(emb, sentences, set(targets))
     if sum(len(s.spans) for s in segments) == 0:
         print("[dry-run] no target occurrences found.")
@@ -122,17 +125,23 @@ def dry_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
         sim = cosine_similarity(matrix)
         for i in range(len(labels)):
             for j in range(i + 1, len(labels)):
-                print(f"[dry-run] cos({labels[i]},{labels[j]}) = {sim[i, j]:.4f}")
+                print(
+                    f"[dry-run] cos({labels[i]},{labels[j]}) = {sim[i, j]:.4f}")
     print("[dry-run] OK — SEP fetch + roberta span mapping validated.")
 
 
-def full_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
+def full_run(args: argparse.Namespace, targets: list[Rendering], match_fn: MatchFn) -> None:
+    # ensure that target_labels matches the results from match_fn
+    target_labels = frozenset(
+        [l for l in [match_fn(t.label) for t in targets] if l is not None])
+
     docs = fetch_corpus(targets, args.per_term)
     print(f"articles   : {len(docs)} (>= {args.per_term}/term, deduped)")
     nlp = _load_spacy()
     sentences = parse_docs(docs, nlp, match_fn)
-    vocab = build_vocab(sentences, targets, args.min_freq)
-    print(f"sentences  : {len(sentences)}  vocab: {len(vocab)} (min_freq={args.min_freq})")
+    vocab = build_vocab(sentences, target_labels, args.min_freq)
+    print(
+        f"sentences  : {len(sentences)}  vocab: {len(vocab)} (min_freq={args.min_freq})")
 
     emb = Embedder(args.model)
     print(f"device     : {emb.device_label}  hidden: {emb.hidden_size}")
@@ -140,7 +149,7 @@ def full_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
     segments = segment(emb, sentences, vocab)
     by_word = emb.embed(segments, batch_size=args.batch_size)
     labels, matrix = vectors.max_pool(by_word)
-    is_target = np.array([lbl in targets for lbl in labels])
+    is_target = np.array([lbl in target_labels for lbl in labels])
     print(f"pooled     : {len(labels)} words ({int(is_target.sum())} targets)")
 
     mean = None
@@ -148,7 +157,8 @@ def full_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
-    vectors.save_vectors(args.out, labels, matrix, targets, by_word, mean=mean)
+    vectors.save_vectors(args.out, labels, matrix,
+                         target_labels, by_word, mean=mean)
     target_occ = vectors.load_target_occurrences(args.out)
     if mean is not None:
         target_occ = {w: s - mean for w, s in target_occ.items()}
@@ -174,6 +184,7 @@ def full_run(args: argparse.Namespace, targets: set[str], match_fn) -> None:
 def main() -> None:
     args = parse_args()
     targets, match_fn = target_config(args)
+
     if args.dry_run:
         dry_run(args, targets, match_fn)
     else:

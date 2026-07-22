@@ -59,15 +59,3 @@ TERMS: list[Term] = [
         Rendering('justice', 'justness'),
     )),
 ]
-
-# All canonical English target labels across every term.
-ENGLISH_LABELS: set[str] = {r.label for t in TERMS for r in t.renderings}
-
-
-def match_rendering(lemma: str, pos: str) -> str | None:
-    """Return the canonical rendering label a (lemma, POS) belongs to, or None."""
-    for term in TERMS:
-        for r in term.renderings:
-            if r.matches(lemma, pos):
-                return r.label
-    return None
