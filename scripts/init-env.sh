@@ -24,13 +24,15 @@ echo ""
 python -c "import torch; assert torch.cuda.is_available(), 'ROCm GPU not visible to torch'; print('GPU:', torch.cuda.get_device_name(0))"
 
 # ---------------------------------------------------------------------------
-# 2. Everything else from PyPI. numpy is pinned to 2.4.4 in requirements.txt
-#    so this step cannot silently downgrade it and break scipy/sklearn/cltk.
+# 2. Everything else from PyPI, via the editable install of the project defined
+#    in ../pyproject.toml. numpy is pinned to >=2.4.4 there so this step cannot
+#    silently downgrade it and break scipy/sklearn/cltk. torch (installed above
+#    from the rocm index) already satisfies its pin, so it is not re-fetched.
 # ---------------------------------------------------------------------------
 echo ""
-echo "==> Installing project requirements..."
+echo "==> Installing the project (editable) + dependencies..."
 echo ""
-pip install -r requirements.txt
+pip install -e "..[dev]"
 
 # spaCy English pipeline loaded by nlp/english.py (spacy.load("en_core_web_sm"))
 echo ""

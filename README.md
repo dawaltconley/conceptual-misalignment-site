@@ -151,8 +151,12 @@ npm install
 cd scripts
 python -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+# torch is a ROCm build and must be installed first (see init-env.sh); then:
+pip install -e "..[dev]"       # editable install from the repo-root pyproject.toml
 ```
+
+Or just run `scripts/init-env.sh`, which does all of the above (ROCm torch, the
+editable install, and the spaCy model) in order.
 
 The CLTK classical Chinese model will be downloaded automatically on first run.
 
