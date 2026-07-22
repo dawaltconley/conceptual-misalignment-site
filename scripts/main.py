@@ -1,4 +1,4 @@
-from config import TERMS, DATA, SEP, CTEXT
+from config import Term, TERMS, DATA, SEP, CTEXT
 from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from scrape_sep import search_sep, SEP as SEPArticle
 from inpho import is_chinese_philosophy
@@ -20,7 +20,7 @@ print("Fetching Mengzi chapters...")
 mengzi = mengzi + fetch_mengzi_chapters()
 
 
-def get_cooccurence_english(term: str, text: str) -> Graph:
+def get_cooccurence_english(term: Term, text: str) -> Graph:
     tokens = tokenize_english_html(text)
     sent_node_lists, nodes = filter_to_sent_node_lists(
         tokens, term, min_freq=22)
@@ -98,14 +98,20 @@ def main() -> None:
         )
         data.save_json(CTEXT / f"{term}_pmi.json")
 
-        # Now iterate for each associated english term
-        for term in term_pairs.english:
-            print(f"\n  [{term}] Searching SEP...")
-            sep_articles = search_sep(
-                term, 4, pre_filter=filter_chinese_philosophy)
-            print(f"  [{term}] {len(sep_articles)} articles found")
+        # word_stems: list[str] = [p for stem in term_pairs.renderings for p in stem.patterns]
 
-            slugified_search_term = term.replace(" ", "+")
+        # Now iterate for each associated english word stem
+        for term in term_pairs.renderings:
+            print(f"\n  [{term}] Searching SEP...")
+            sep_articles: list[SEPArticle] = []
+            for stem in term.patterns:
+                articles = search_sep(
+                    stem, 4, pre_filter=filter_chinese_philosophy)
+                sep_articles.extend(articles)
+
+            print(f"  [{term}] {len(sep_articles)} articles found")
+            slugified_search_term = [stem.replace(
+                " ", "+") for stem in term.patterns]
             all_articles = SEPArticle(
                 url=f"https://plato.stanford.edu/search/searcher.py?query={slugified_search_term}",
                 title="Combined",
@@ -122,8 +128,8 @@ def main() -> None:
                 )
                 sources.append(source)
 
-            data = TermData(term, sources)
-            data.save_json(SEP / f"{slugify(term)}_pmi.json")
+            data = TermData(term.label, sources)
+            data.save_json(SEP / f"{slugify(term.label)}_pmi.json")
 
 
 if __name__ == "__main__":
