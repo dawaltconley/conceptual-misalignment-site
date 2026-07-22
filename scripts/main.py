@@ -126,15 +126,18 @@ def main() -> None:
             )
             sep_articles = [all_articles] + sep_articles
 
+            term_count = 0
             stems: set[str] = set()
             sources: list[NLPSource] = []
-            for article in sep_articles:
+            for a, article in enumerate(sep_articles):
                 tokens = tokenize_english_html(article.text)
                 # replace words that match a stem with its canonical label
                 canonical: str = term.label
                 for i, sent in enumerate(tokens):
                     for j, t in enumerate(sent):
                         if term.matches(t):
+                            if a > 1:
+                                term_count += 1
                             stems.add(t)
                             tokens[i][j] = canonical
                 source = NLPSource(
@@ -143,6 +146,8 @@ def main() -> None:
                 )
                 sources.append(source)
 
+            print(
+                f"  [term.label] found {term_count} occurances accross {len(sep_articles) - 1} articles")
             data = TermData(term.label, stems=list(stems), sources=sources)
             data.save_json(SEP / f"{slugify(term.label)}_pmi.json")
 
