@@ -5,6 +5,7 @@ import time
 import cache
 from dataclasses import dataclass
 from random import random
+from config import Rendering
 cache.install()
 
 
@@ -69,11 +70,18 @@ def _parse_search_results(search_page: str) -> list[str]:
     return [r.text.strip() for r in results]
 
 
-def search_sep(search_term: str, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
+def search_sep(search_term: str | Rendering, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
     articles = []
     page = 1
+
+    search_string: str
+    if isinstance(search_term, str):
+        search_string = search_term
+    else:
+        search_string = ' '.join([stem for stem in search_term.patterns])
+
     while True:
-        results = _parse_search_results(_search(search_term, page))
+        results = _parse_search_results(_search(search_string, page))
         if not results:
             # empty search page, break loop
             return articles
