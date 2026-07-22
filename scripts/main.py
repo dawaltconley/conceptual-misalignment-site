@@ -1,4 +1,4 @@
-from config import Term, TERMS, DATA, SEP, CTEXT
+from config import TERMS, DATA, SEP, CTEXT
 from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from scrape_sep import search_sep, SEP as SEPArticle
 from inpho import is_chinese_philosophy
@@ -20,8 +20,16 @@ print("Fetching Mengzi chapters...")
 mengzi = mengzi + fetch_mengzi_chapters()
 
 
-def get_cooccurence_english(term: Term, text: str) -> Graph:
-    tokens = tokenize_english_html(text)
+def test(foo: str | list[str]) -> list[str]:
+    # if type(foo) is str:
+    if isinstance(foo, str):
+        return [foo]
+    else:
+        return foo
+
+
+def get_cooccurence_english(term: str, text: str | list[list[str]]) -> Graph:
+    tokens = text if isinstance(text, list) else tokenize_english_html(text)
     sent_node_lists, nodes = filter_to_sent_node_lists(
         tokens, term, min_freq=22)
     return build_cooccurrence_network(
@@ -63,6 +71,7 @@ class NLPSource(Source):
 class TermData:
     term: str
     sources: list[NLPSource]
+    stems: list[str] | None = None
 
     def save_json(self, filepath: Path) -> None:
         serialized = json.dumps(asdict(self), indent=2)
@@ -93,8 +102,8 @@ def main() -> None:
         term = term_pairs.hanzi
         data = TermData(
             term,
-            [NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
-             for m in mengzi]
+            sources=[NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
+                     for m in mengzi]
         )
         data.save_json(CTEXT / f"{term}_pmi.json")
 
@@ -102,16 +111,13 @@ def main() -> None:
 
         # Now iterate for each associated english word stem
         for term in term_pairs.renderings:
-            print(f"\n  [{term}] Searching SEP...")
-            sep_articles: list[SEPArticle] = []
-            for stem in term.patterns:
-                articles = search_sep(
-                    stem, 4, pre_filter=filter_chinese_philosophy)
-                sep_articles.extend(articles)
+            print(f"\n  [{term.label}] Searching SEP...")
+            sep_articles = search_sep(
+                term, 4, pre_filter=filter_chinese_philosophy)
 
-            print(f"  [{term}] {len(sep_articles)} articles found")
-            slugified_search_term = [stem.replace(
-                " ", "+") for stem in term.patterns]
+            print(f"  [{term.label}] {len(sep_articles)} articles found")
+            slugified_search_term = "+".join(
+                [stem for stem in term.patterns]).replace(' ', '+')
             all_articles = SEPArticle(
                 url=f"https://plato.stanford.edu/search/searcher.py?query={slugified_search_term}",
                 title="Combined",
@@ -120,15 +126,24 @@ def main() -> None:
             )
             sep_articles = [all_articles] + sep_articles
 
+            stems: set[str] = set()
             sources: list[NLPSource] = []
             for article in sep_articles:
+                tokens = tokenize_english_html(article.text)
+                # replace words that match a stem with its canonical label
+                canonical: str = term.label
+                for i, sent in enumerate(tokens):
+                    for j, t in enumerate(sent):
+                        if term.matches(t):
+                            stems.add(t)
+                            tokens[i][j] = canonical
                 source = NLPSource(
                     article,
-                    co_occurance=get_cooccurence_english(term, article.text)
+                    co_occurance=get_cooccurence_english(canonical, tokens)
                 )
                 sources.append(source)
 
-            data = TermData(term.label, sources)
+            data = TermData(term.label, stems=list(stems), sources=sources)
             data.save_json(SEP / f"{slugify(term.label)}_pmi.json")
 
 

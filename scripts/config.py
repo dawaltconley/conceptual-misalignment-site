@@ -33,8 +33,8 @@ class Rendering:
         self.patterns = patterns
         self.pos = frozenset(pos) if pos else None
 
-    def matches(self, lemma: str, pos: str) -> bool:
-        if self.pos and pos not in self.pos:
+    def matches(self, lemma: str, pos: str | None = None) -> bool:
+        if pos and self.pos and pos not in self.pos:
             return False
         return any(fnmatchcase(lemma, p) for p in self.patterns)
 
