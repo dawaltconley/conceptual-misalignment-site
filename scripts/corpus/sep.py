@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from collections.abc import Callable
 import requests
 import time
-import cache
+from corpus import cache
 from dataclasses import dataclass
 from random import random
 from config import Rendering

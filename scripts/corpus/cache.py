@@ -2,7 +2,9 @@ from datetime import timedelta
 from pathlib import Path
 import requests_cache
 
-_CACHE_DIR = Path(__file__).parent / ".cache"
+# Anchor the cache at the scripts/ root (corpus/..), so it stays put and is
+# reused regardless of which package the caller lives in.
+_CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache"
 _installed = False
 
 

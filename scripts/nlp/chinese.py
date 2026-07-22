@@ -1,4 +1,4 @@
-from utils import is_cjk
+from nlp.text import is_cjk
 from collections import defaultdict
 
 STOPWORDS: set[str] = {

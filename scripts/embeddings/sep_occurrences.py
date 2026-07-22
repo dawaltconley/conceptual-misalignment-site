@@ -22,9 +22,9 @@ from typing import Protocol
 from bs4 import BeautifulSoup
 
 from config import Rendering
-from embed.occurrences import Segment, Span
-from inpho import is_chinese_philosophy
-from scrape_sep import search_sep
+from embeddings.occurrences import Segment, Span
+from corpus.inpho import is_chinese_philosophy
+from corpus.sep import search_sep
 
 # A matcher maps a (lemma, POS) to a canonical target label, or None. In practice
 # this is ``config.match_rendering`` (glob-based term families).

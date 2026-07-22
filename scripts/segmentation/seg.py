@@ -1,6 +1,6 @@
 import os
 import json
-from xunzi.utils import ARCH
+from segmentation.utils import ARCH
 
 SEG_DATA = os.path.dirname(os.path.realpath(__file__)) + '/seg_data.json'
 

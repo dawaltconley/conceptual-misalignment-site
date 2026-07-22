@@ -21,7 +21,8 @@ Books and their ctext URNs:
 
 import requests
 import time
-import cache
+from corpus import cache
+from config import MENGZI_DIR
 from typing import Literal
 from random import random
 cache.install()
@@ -78,7 +79,7 @@ def _fetch_text(urn: str) -> dict:
 
 
 def _fetch_text_local(id: _CHAPTER_ID) -> str:
-    with open(f"mengzi/{id}.txt", "r") as file:
+    with open(MENGZI_DIR / f"{id}.txt", "r") as file:
         return file.read()
 
 

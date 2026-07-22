@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from transformers import AutoModel, AutoTokenizer
 
-from embed.occurrences import Segment
+from embeddings.occurrences import Segment
 
 DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 

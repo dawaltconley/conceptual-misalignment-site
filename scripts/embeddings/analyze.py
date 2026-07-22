@@ -8,7 +8,8 @@ communities serialized in the site's node-link JSON schema.
 
 from __future__ import annotations
 from itertools import cycle
-from utils import prune_to_neighborhood, save_graph_json
+from graph.prune import prune_to_neighborhood
+from graph.serialize import save_graph_json
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA

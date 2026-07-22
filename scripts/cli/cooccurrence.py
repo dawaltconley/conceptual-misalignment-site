@@ -1,8 +1,8 @@
 from config import TERMS, DATA, SEP, CTEXT
-from mengzi import fetch_mengzi_full, fetch_mengzi_chapters
-from scrape_sep import search_sep, SEP as SEPArticle
-from inpho import is_chinese_philosophy
-from utils import filter_to_sent_node_lists, build_cooccurrence_network
+from corpus.mengzi import fetch_mengzi_full, fetch_mengzi_chapters
+from corpus.sep import search_sep, SEP as SEPArticle
+from corpus.inpho import is_chinese_philosophy
+from cooccurrence.pmi import filter_to_sent_node_lists, build_cooccurrence_network
 from nlp.english import tokenize_english_html
 from nlp.chinese import tokenize_classical_chinese, STOPWORDS as CHINESE_STOPWORDS
 from slugify import slugify

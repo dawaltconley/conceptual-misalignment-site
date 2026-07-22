@@ -18,10 +18,10 @@ from pathlib import Path
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from config import TERMS
-from embed import analyze, vectors
-from embed.model import DEFAULT_MODEL, Embedder
-from embed.occurrences import (
+from config import TERMS, ANALYSIS
+from embeddings import analyze, vectors
+from embeddings.model import DEFAULT_MODEL, Embedder
+from embeddings.occurrences import (
     DEFAULT_CORPUS_DIR,
     Passage,
     Segment,
@@ -30,7 +30,7 @@ from embed.occurrences import (
     load_passages,
 )
 
-DEFAULT_OUT = Path("../analysis/task1")
+DEFAULT_OUT = ANALYSIS / "task1"
 
 
 def segment(emb: Embedder, passages: list[Passage], woi: set[str]) -> list[Segment]:

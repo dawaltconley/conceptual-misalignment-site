@@ -29,11 +29,11 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from difflib import ndiff
 from config import TERMS
-from mengzi import Chapter, fetch_mengzi_full
+from corpus.mengzi import Chapter, fetch_mengzi_full
 
-import xunzi.seg
-import xunzi.segpos
-from xunzi.utils import ARCH, assert_arch
+import segmentation.seg
+import segmentation.segpos
+from segmentation.utils import ARCH, assert_arch
 
 # Set at runtime (main) when --arch api is used.
 API_MODEL = "xunzi"
@@ -101,13 +101,13 @@ class SegPos:
 
     def parse(self, output: str) -> list[Word] | None:
         if self.process == "seg":
-            # words = [Word(w) for w in xunzi.seg.parse(output)]
-            parsed = xunzi.seg.parse(output)
+            # words = [Word(w) for w in segmentation.seg.parse(output)]
+            parsed = segmentation.seg.parse(output)
             if not parsed:
                 return None
             return [Word(w) for w in parsed]
         elif self.process == "segpos":
-            parsed = xunzi.segpos.parse(output)
+            parsed = segmentation.segpos.parse(output)
             if not parsed:
                 return None
             return [Word(w, pos) for w, pos in parsed]
@@ -127,7 +127,7 @@ class SegPos:
         if self.process == "segpos":
             bad_tags = []
             for t in tokens:
-                if not (t.pos and t.pos in xunzi.segpos.VALID_TAGS):
+                if not (t.pos and t.pos in segmentation.segpos.VALID_TAGS):
                     bad_tags.append(t.pos)
             if bad_tags:
                 error.append(f"unknown tags: {sorted(bad_tags)}")
@@ -162,9 +162,9 @@ class SegPos:
     def tag_sentence(self, *, tok, model, sentence: str, strict: bool = False):
         strict_prompt: str
         if self.process == "seg":
-            strict_prompt = xunzi.seg.get_strict_prompt(self.arch)
+            strict_prompt = segmentation.seg.get_strict_prompt(self.arch)
         elif self.process == "segpos":
-            strict_prompt = xunzi.segpos.get_strict_prompt(self.arch)
+            strict_prompt = segmentation.segpos.get_strict_prompt(self.arch)
         else:
             raise ValueError(f"Bad process value: {self.process!r}")
 
@@ -182,7 +182,7 @@ class SegPos:
                 if self.process == "seg":
                     grammar = build_gbnf(sentence, word_break="/")
                 elif self.process == "segpos":
-                    tags = sorted(xunzi.segpos.VALID_TAGS)
+                    tags = sorted(segmentation.segpos.VALID_TAGS)
                     grammar = build_gbnf(sentence, tags, word_break=" ")
             resp = client.chat.completions.create(
                 model=API_MODEL, messages=msgs, temperature=0.0, max_tokens=self.max_new_tokens,
@@ -404,16 +404,16 @@ def main():
         segpos = SegPos(
             "seg",
             arch=assert_arch(args.arch),
-            system_prompt=xunzi.seg.SYSTEM_PROMPT,
-            fewshot=xunzi.seg.FEWSHOT,
+            system_prompt=segmentation.seg.SYSTEM_PROMPT,
+            fewshot=segmentation.seg.FEWSHOT,
             core_terms=[t.hanzi for t in TERMS]
         )
     elif args.process == "segpos":
         segpos = SegPos(
             "segpos",
             arch=assert_arch(args.arch),
-            system_prompt=xunzi.segpos.SYSTEM_PROMPT,
-            fewshot=xunzi.segpos.FEWSHOT,
+            system_prompt=segmentation.segpos.SYSTEM_PROMPT,
+            fewshot=segmentation.segpos.FEWSHOT,
             core_terms=[t.hanzi for t in TERMS]
         )
     else:

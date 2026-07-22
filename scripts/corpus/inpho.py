@@ -1,5 +1,5 @@
 import requests
-import cache
+from corpus import cache
 import time
 import csv
 from urllib.parse import urlparse

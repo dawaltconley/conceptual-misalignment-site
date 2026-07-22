@@ -19,10 +19,10 @@ from pathlib import Path
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from config import TERMS, Rendering
-from embed import analyze, vectors
-from embed.model import Embedder
-from embed.sep_occurrences import (
+from config import TERMS, Rendering, ANALYSIS
+from embeddings import analyze, vectors
+from embeddings.model import Embedder
+from embeddings.sep_occurrences import (
     build_segments,
     build_vocab,
     fetch_corpus,
@@ -31,7 +31,7 @@ from embed.sep_occurrences import (
 )
 
 DEFAULT_MODEL = "roberta-base"
-DEFAULT_OUT = Path("../analysis/sep")
+DEFAULT_OUT = ANALYSIS / "sep"
 
 
 def _load_spacy():

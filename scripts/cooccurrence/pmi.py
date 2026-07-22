@@ -1,20 +1,19 @@
-import json
+"""PMI / co-occurrence network construction (Method 1: the site's *_pmi.json data).
+
+Builds per-term co-occurrence networks from tokenized sentences: a PMI-weighted
+graph (positive-PMI edges) or a cosine-similarity graph over co-occurrence
+vectors, pruned to a term's neighborhood. Used only by the co-occurrence
+pipeline; the embedding pipeline has its own similarity machinery.
+"""
+
 import math
 from collections import Counter
-from pathlib import Path
 
 import networkx as nx
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-
-# ---------------------------------------------------------------------------
-# Character utilities
-# ---------------------------------------------------------------------------
-
-def is_cjk(s: str) -> bool:
-    """Return True if s is non-empty and consists entirely of CJK characters."""
-    return bool(s) and all("\u4e00" <= c <= "\u9fff" for c in s)
+from graph.prune import prune_to_neighborhood
 
 
 # ---------------------------------------------------------------------------
@@ -123,52 +122,6 @@ def build_cosine_similarity_graph(
 
 
 # ---------------------------------------------------------------------------
-# Graph pruning
-# ---------------------------------------------------------------------------
-
-def proximity_score(G: nx.Graph, term: str, node: str) -> float:
-    """Score a node by weighted proximity to term (1-hop weight or best 2-hop product)."""
-    if G.has_edge(term, node):
-        return float(G[term][node]["weight"])
-    return max(
-        (G[term][mid]["weight"] * G[mid][node]["weight"]
-         for mid in nx.common_neighbors(G, term, node)
-         if G.has_edge(term, mid)),
-        default=0.0,
-    )
-
-
-def prune_to_neighborhood(G: nx.Graph, term: str, max_nodes: int) -> nx.Graph:
-    """Return a subgraph of G containing term and its top max_nodes neighbours.
-
-    1-hop neighbors (direct edges) are always prioritised by edge weight.
-    Any remaining capacity is filled by the highest-scoring 2-hop neighbors.
-    If term is not in G, returns G unchanged.
-    """
-    if term not in G:
-        return G
-
-    one_hop = sorted(
-        G.neighbors(term),
-        key=lambda n: G[term][n]["weight"],
-        reverse=True,
-    )
-    keep = {term} | set(one_hop[:max_nodes])
-
-    remaining = max_nodes - (len(keep) - 1)
-    if remaining > 0:
-        ego = nx.ego_graph(G, term, radius=2)
-        two_hop = sorted(
-            (n for n in ego.nodes() if n != term and n not in keep),
-            key=lambda n: proximity_score(ego, term, n),
-            reverse=True,
-        )
-        keep |= set(two_hop[:remaining])
-
-    return G.subgraph(keep).copy()
-
-
-# ---------------------------------------------------------------------------
 # Filter sentence nodes
 # ---------------------------------------------------------------------------
 
@@ -219,13 +172,3 @@ def build_similarity_network(
         sent_node_lists, sorted(nodes), sim_threshold)
     S.remove_nodes_from(list(nx.isolates(S)))
     return prune_to_neighborhood(S, term, max_nodes)
-
-
-# ---------------------------------------------------------------------------
-# Serialization
-# ---------------------------------------------------------------------------
-
-def save_graph_json(G: nx.Graph, path: Path) -> None:
-    """Write a NetworkX graph to a node-link JSON file."""
-    path.write_text(json.dumps(nx.node_link_data(G),
-                    indent=2), encoding="utf-8")

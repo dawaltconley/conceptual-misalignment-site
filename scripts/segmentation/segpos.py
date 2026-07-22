@@ -1,4 +1,4 @@
-from xunzi.utils import ARCH
+from segmentation.utils import ARCH
 
 # --------------------------------------------------------------------------- #
 # POS tagset. A compact, classical-Chinese-appropriate set. ADJUST to match the

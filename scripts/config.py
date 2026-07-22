@@ -1,16 +1,28 @@
 from fnmatch import fnmatchcase
 from pathlib import Path
 
-DATA = Path("../src/data")
-DATA.mkdir(exist_ok=True)
+# Absolute anchors so the pipelines no longer depend on the current working
+# directory. Everything is resolved relative to this file's location.
+_SCRIPTS = Path(__file__).resolve().parent   # .../scripts
+_ROOT = _SCRIPTS.parent                       # repo root
 
-PUBLIC = Path("../public")
+# --- Inputs (live inside scripts/) ---
+MENGZI_DIR = _SCRIPTS / "data" / "mengzi"     # per-chapter Mengzi source .txt
+
+# --- Outputs (live at the repo root) ---
+DATA = _ROOT / "src" / "data"
+DATA.mkdir(parents=True, exist_ok=True)
+
+PUBLIC = _ROOT / "public"
 
 SEP = PUBLIC / "sep"
-SEP.mkdir(exist_ok=True)
+SEP.mkdir(parents=True, exist_ok=True)
 
 CTEXT = PUBLIC / "ctext"
-CTEXT.mkdir(exist_ok=True)
+CTEXT.mkdir(parents=True, exist_ok=True)
+
+ANALYSIS = _ROOT / "analysis"     # embedding-pipeline artifacts
+SEGPOS = _ROOT / "segpos"         # Xunzi segmentation output
 
 
 class Rendering:

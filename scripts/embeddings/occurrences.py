@@ -23,10 +23,11 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from utils import is_cjk
+from config import SEGPOS
+from nlp.text import is_cjk
 from nlp.chinese import STOPWORDS
 
-DEFAULT_CORPUS_DIR = Path("../segpos/chapters")
+DEFAULT_CORPUS_DIR = SEGPOS / "chapters"
 
 # Sentence-final punctuation, plus closers that get pulled back onto the
 # sentence they close (mirrors xunzi.run.split_sentences at token granularity).
