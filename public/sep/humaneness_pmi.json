@@ -2,7 +2,7 @@
   "term": "humaneness",
   "sources": [
     {
-      "url": "https://plato.stanford.edu/search/searcher.py?query=humaneness",
+      "url": "https://plato.stanford.edu/search/searcher.py?query=humaneness+humane*",
       "title": "Combined",
       "description": "Results from all articles",
       "co_occurance": {
@@ -11,149 +11,254 @@
         "graph": {},
         "nodes": [
           {
-            "id": "resource"
-          },
-          {
-            "id": "ideal"
-          },
-          {
-            "id": "virtue"
-          },
-          {
-            "id": "require"
-          },
-          {
-            "id": "humaneness"
-          },
-          {
-            "id": "fact"
-          },
-          {
-            "id": "commitment"
-          },
-          {
-            "id": "consider"
-          },
-          {
-            "id": "appropriate"
-          },
-          {
-            "id": "country"
-          },
-          {
-            "id": "condition"
-          },
-          {
             "id": "politic"
-          },
-          {
-            "id": "great"
-          },
-          {
-            "id": "early"
           },
           {
             "id": "confucian"
           },
           {
+            "id": "value"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
+            "id": "require"
+          },
+          {
+            "id": "virtue"
+          },
+          {
+            "id": "resource"
+          },
+          {
+            "id": "consider"
+          },
+          {
+            "id": "condition"
+          },
+          {
+            "id": "commitment"
+          },
+          {
+            "id": "ideal"
+          },
+          {
+            "id": "early"
+          },
+          {
+            "id": "great"
+          },
+          {
             "id": "modern"
+          },
+          {
+            "id": "appropriate"
+          },
+          {
+            "id": "understand"
           }
         ],
         "edges": [
           {
-            "weight": 1.0474272838469652,
-            "source": "resource",
+            "weight": 0.9200878614703637,
+            "source": "politic",
+            "target": "condition"
+          },
+          {
+            "weight": 1.0899868982657612,
+            "source": "politic",
+            "target": "value"
+          },
+          {
+            "weight": 1.3900914907160993,
+            "source": "politic",
+            "target": "appropriate"
+          },
+          {
+            "weight": 1.1277272262486082,
+            "source": "politic",
+            "target": "commitment"
+          },
+          {
+            "weight": 1.0185279342836162,
+            "source": "politic",
+            "target": "confucian"
+          },
+          {
+            "weight": 1.2503295483409405,
+            "source": "politic",
+            "target": "consider"
+          },
+          {
+            "weight": 2.3063822225902544,
+            "source": "politic",
+            "target": "humaneness"
+          },
+          {
+            "weight": 1.2077699339221446,
+            "source": "politic",
             "target": "modern"
           },
           {
-            "weight": 0.7597452113951843,
-            "source": "resource",
-            "target": "condition"
+            "weight": 1.0536192540948863,
+            "source": "politic",
+            "target": "ideal"
           },
           {
-            "weight": 2.4337216449668557,
-            "source": "resource",
-            "target": "humaneness"
+            "weight": 2.5629333764468623,
+            "source": "confucian",
+            "target": "value"
           },
           {
-            "weight": 0.858185284208437,
-            "source": "resource",
+            "weight": 0.786726320226292,
+            "source": "confucian",
             "target": "great"
           },
           {
-            "weight": 1.8865283770299903,
-            "source": "ideal",
+            "weight": 1.8514370572187202,
+            "source": "confucian",
             "target": "appropriate"
           },
           {
-            "weight": 0.03023038666436409,
-            "source": "ideal",
-            "target": "condition"
+            "weight": 1.5890727927512291,
+            "source": "confucian",
+            "target": "commitment"
           },
           {
-            "weight": 0.8218176400375621,
-            "source": "ideal",
-            "target": "country"
+            "weight": 1.6691155004247655,
+            "source": "confucian",
+            "target": "modern"
           },
           {
-            "weight": 1.0110596396760905,
-            "source": "ideal",
-            "target": "early"
+            "weight": 1.0185279342836162,
+            "source": "confucian",
+            "target": "consider"
           },
           {
-            "weight": 2.397354000795981,
-            "source": "ideal",
+            "weight": 2.7677277890928753,
+            "source": "confucian",
             "target": "humaneness"
           },
           {
-            "weight": 1.0980710166657202,
-            "source": "ideal",
+            "weight": 1.0185279342836162,
+            "source": "confucian",
+            "target": "understand"
+          },
+          {
+            "weight": 1.06297969685445,
+            "source": "confucian",
             "target": "virtue"
           },
           {
-            "weight": 1.3269125890945677,
-            "source": "ideal",
-            "target": "fact"
+            "weight": 0.23649706763063652,
+            "source": "value",
+            "target": "resource"
           },
           {
-            "weight": 1.0536192540948863,
-            "source": "ideal",
-            "target": "politic"
+            "weight": 2.146039572515075,
+            "source": "value",
+            "target": "modern"
           },
           {
-            "weight": 1.06297969685445,
-            "source": "virtue",
+            "weight": 1.4954520063739256,
+            "source": "value",
+            "target": "consider"
+          },
+          {
+            "weight": 0.16503810364849164,
+            "source": "value",
             "target": "great"
           },
           {
-            "weight": 3.3316632381728146,
-            "source": "virtue",
-            "target": "humaneness"
-          },
-          {
-            "weight": 0.27139244348125224,
-            "source": "virtue",
-            "target": "condition"
-          },
-          {
-            "weight": 1.434543253286933,
-            "source": "virtue",
+            "weight": 0.5366016600809747,
+            "source": "value",
             "target": "require"
           },
           {
-            "weight": 1.434543253286933,
-            "source": "virtue",
+            "weight": 0.20012942345976162,
+            "source": "value",
+            "target": "ideal"
+          },
+          {
+            "weight": 0.9673845761734288,
+            "source": "value",
+            "target": "commitment"
+          },
+          {
+            "weight": 0.5366016600809747,
+            "source": "value",
             "target": "appropriate"
           },
           {
-            "weight": 0.8749274653515104,
-            "source": "virtue",
-            "target": "fact"
+            "weight": 2.146039572515075,
+            "source": "value",
+            "target": "humaneness"
           },
           {
-            "weight": 1.06297969685445,
-            "source": "virtue",
-            "target": "confucian"
+            "weight": 0.3542801032870199,
+            "source": "value",
+            "target": "early"
+          },
+          {
+            "weight": 2.07458060853293,
+            "source": "humaneness",
+            "target": "great"
+          },
+          {
+            "weight": 3.0439811657210334,
+            "source": "humaneness",
+            "target": "virtue"
+          },
+          {
+            "weight": 2.3816056438278417,
+            "source": "humaneness",
+            "target": "condition"
+          },
+          {
+            "weight": 2.4461441649654128,
+            "source": "humaneness",
+            "target": "require"
+          },
+          {
+            "weight": 2.146039572515075,
+            "source": "humaneness",
+            "target": "resource"
+          },
+          {
+            "weight": 2.3063822225902544,
+            "source": "humaneness",
+            "target": "understand"
+          },
+          {
+            "weight": 3.139291345525358,
+            "source": "humaneness",
+            "target": "appropriate"
+          },
+          {
+            "weight": 2.2638226081714583,
+            "source": "humaneness",
+            "target": "early"
+          },
+          {
+            "weight": 2.1096719283442,
+            "source": "humaneness",
+            "target": "ideal"
+          },
+          {
+            "weight": 2.183779900497922,
+            "source": "humaneness",
+            "target": "commitment"
+          },
+          {
+            "weight": 2.3063822225902544,
+            "source": "humaneness",
+            "target": "consider"
+          },
+          {
+            "weight": 2.2638226081714583,
+            "source": "humaneness",
+            "target": "modern"
           },
           {
             "weight": 1.2674891686237668,
@@ -166,11 +271,6 @@
             "target": "condition"
           },
           {
-            "weight": 2.733826237417194,
-            "source": "require",
-            "target": "humaneness"
-          },
-          {
             "weight": 1.3900914907160993,
             "source": "require",
             "target": "consider"
@@ -186,104 +286,94 @@
             "target": "great"
           },
           {
-            "weight": 0.9702376451558353,
+            "weight": 1.434543253286933,
             "source": "require",
-            "target": "fact"
+            "target": "virtue"
           },
           {
-            "weight": 2.362262680984711,
-            "source": "humaneness",
+            "weight": 1.06297969685445,
+            "source": "virtue",
             "target": "great"
           },
           {
-            "weight": 2.669287716279623,
-            "source": "humaneness",
+            "weight": 0.27139244348125224,
+            "source": "virtue",
             "target": "condition"
           },
           {
-            "weight": 3.4269734179771394,
-            "source": "humaneness",
+            "weight": 1.0980710166657202,
+            "source": "virtue",
+            "target": "ideal"
+          },
+          {
+            "weight": 1.2947813109117745,
+            "source": "virtue",
+            "target": "understand"
+          },
+          {
+            "weight": 1.434543253286933,
+            "source": "virtue",
             "target": "appropriate"
           },
           {
-            "weight": 2.362262680984711,
-            "source": "humaneness",
-            "target": "country"
-          },
-          {
-            "weight": 2.5515046806232395,
-            "source": "humaneness",
-            "target": "early"
-          },
-          {
-            "weight": 2.4714619729497027,
-            "source": "humaneness",
-            "target": "commitment"
-          },
-          {
-            "weight": 2.362262680984711,
-            "source": "humaneness",
-            "target": "confucian"
-          },
-          {
-            "weight": 2.594064295042035,
-            "source": "humaneness",
-            "target": "consider"
-          },
-          {
-            "weight": 2.1742104494817713,
-            "source": "humaneness",
-            "target": "fact"
-          },
-          {
-            "weight": 2.5515046806232395,
-            "source": "humaneness",
+            "weight": 1.0474272838469652,
+            "source": "resource",
             "target": "modern"
           },
           {
-            "weight": 2.594064295042035,
-            "source": "humaneness",
-            "target": "politic"
+            "weight": 0.7597452113951843,
+            "source": "resource",
+            "target": "condition"
           },
           {
-            "weight": 0.5986740887233523,
-            "source": "fact",
-            "target": "country"
-          },
-          {
-            "weight": 0.5986740887233523,
-            "source": "fact",
+            "weight": 0.858185284208437,
+            "source": "resource",
             "target": "great"
           },
           {
-            "weight": 1.4810632689218262,
-            "source": "fact",
-            "target": "modern"
+            "weight": 1.90091711448209,
+            "source": "consider",
+            "target": "early"
           },
           {
-            "weight": 1.6633848257157806,
-            "source": "fact",
+            "weight": 1.3900914907160993,
+            "source": "consider",
             "target": "appropriate"
           },
           {
-            "weight": 0.7078733806883442,
-            "source": "fact",
+            "weight": 1.1277272262486082,
+            "source": "consider",
             "target": "commitment"
           },
           {
-            "weight": 0.5986740887233523,
-            "source": "fact",
-            "target": "confucian"
+            "weight": 1.90091711448209,
+            "source": "consider",
+            "target": "modern"
           },
           {
-            "weight": 0.8304757027806765,
-            "source": "fact",
-            "target": "consider"
+            "weight": 1.4653149119536868,
+            "source": "condition",
+            "target": "appropriate"
           },
           {
-            "weight": 1.5236228833406218,
-            "source": "fact",
-            "target": "politic"
+            "weight": 1.2829933551597321,
+            "source": "condition",
+            "target": "early"
+          },
+          {
+            "weight": 0.03023038666436409,
+            "source": "condition",
+            "target": "ideal"
+          },
+          {
+            "weight": 0.18438106649162242,
+            "source": "condition",
+            "target": "modern"
+          },
+          {
+            "weight": 1.1277272262486082,
+            "source": "commitment",
+            "target": "understand"
           },
           {
             "weight": 0.895925612191284,
@@ -296,11 +386,6 @@
             "target": "early"
           },
           {
-            "weight": 1.5890727927512291,
-            "source": "commitment",
-            "target": "confucian"
-          },
-          {
             "weight": 1.7783147923897575,
             "source": "commitment",
             "target": "modern"
@@ -311,124 +396,19 @@
             "target": "appropriate"
           },
           {
-            "weight": 1.1277272262486082,
-            "source": "commitment",
-            "target": "consider"
+            "weight": 1.0536192540948863,
+            "source": "ideal",
+            "target": "understand"
           },
           {
-            "weight": 1.1277272262486082,
-            "source": "commitment",
-            "target": "politic"
-          },
-          {
-            "weight": 1.90091711448209,
-            "source": "consider",
-            "target": "early"
-          },
-          {
-            "weight": 1.3900914907160993,
-            "source": "consider",
+            "weight": 1.8865283770299903,
+            "source": "ideal",
             "target": "appropriate"
           },
           {
-            "weight": 1.0185279342836162,
-            "source": "consider",
-            "target": "confucian"
-          },
-          {
-            "weight": 1.90091711448209,
-            "source": "consider",
-            "target": "modern"
-          },
-          {
-            "weight": 1.2503295483409405,
-            "source": "consider",
-            "target": "politic"
-          },
-          {
-            "weight": 1.4653149119536868,
-            "source": "appropriate",
-            "target": "condition"
-          },
-          {
-            "weight": 1.158289876658775,
-            "source": "appropriate",
-            "target": "country"
-          },
-          {
-            "weight": 1.3475318762973034,
-            "source": "appropriate",
+            "weight": 1.0110596396760905,
+            "source": "ideal",
             "target": "early"
-          },
-          {
-            "weight": 2.4461441649654128,
-            "source": "appropriate",
-            "target": "modern"
-          },
-          {
-            "weight": 1.8514370572187202,
-            "source": "appropriate",
-            "target": "confucian"
-          },
-          {
-            "weight": 1.3900914907160993,
-            "source": "appropriate",
-            "target": "politic"
-          },
-          {
-            "weight": 1.158289876658775,
-            "source": "appropriate",
-            "target": "great"
-          },
-          {
-            "weight": 1.4798735007862371,
-            "source": "country",
-            "target": "great"
-          },
-          {
-            "weight": 0.9759683198648204,
-            "source": "country",
-            "target": "early"
-          },
-          {
-            "weight": 0.786726320226292,
-            "source": "country",
-            "target": "confucian"
-          },
-          {
-            "weight": 1.2829933551597321,
-            "source": "condition",
-            "target": "early"
-          },
-          {
-            "weight": 0.18438106649162242,
-            "source": "condition",
-            "target": "modern"
-          },
-          {
-            "weight": 0.9200878614703637,
-            "source": "condition",
-            "target": "politic"
-          },
-          {
-            "weight": 1.0185279342836162,
-            "source": "politic",
-            "target": "confucian"
-          },
-          {
-            "weight": 1.2077699339221446,
-            "source": "politic",
-            "target": "modern"
-          },
-          {
-            "weight": 1.6691155004247655,
-            "source": "great",
-            "target": "early"
-          },
-          {
-            "weight": 0.786726320226292,
-            "source": "great",
-            "target": "confucian"
           },
           {
             "weight": 2.5515046806232395,
@@ -437,8 +417,23 @@
           },
           {
             "weight": 1.6691155004247655,
-            "source": "confucian",
-            "target": "modern"
+            "source": "early",
+            "target": "great"
+          },
+          {
+            "weight": 1.3475318762973034,
+            "source": "early",
+            "target": "appropriate"
+          },
+          {
+            "weight": 1.158289876658775,
+            "source": "great",
+            "target": "appropriate"
+          },
+          {
+            "weight": 2.4461441649654128,
+            "source": "modern",
+            "target": "appropriate"
           }
         ]
       }
@@ -453,13 +448,31 @@
         "graph": {},
         "nodes": [
           {
+            "id": "revolution"
+          },
+          {
             "id": "work"
+          },
+          {
+            "id": "condorcet"
+          },
+          {
+            "id": "law"
           },
           {
             "id": "moral"
           },
           {
-            "id": "law"
+            "id": "human"
+          },
+          {
+            "id": "woman"
+          },
+          {
+            "id": "letter"
+          },
+          {
+            "id": "smith"
           },
           {
             "id": "pain"
@@ -468,28 +481,15 @@
             "id": "grouchy"
           },
           {
-            "id": "revolution"
-          },
-          {
-            "id": "smith"
-          },
-          {
             "id": "sympathy"
-          },
-          {
-            "id": "woman"
-          },
-          {
-            "id": "human"
-          },
-          {
-            "id": "letter"
-          },
-          {
-            "id": "condorcet"
           }
         ],
         "edges": [
+          {
+            "weight": 0.8918178753554294,
+            "source": "revolution",
+            "target": "woman"
+          },
           {
             "weight": 0.30078049649769906,
             "source": "work",
@@ -499,6 +499,26 @@
             "weight": 0.14171580186801158,
             "source": "work",
             "target": "human"
+          },
+          {
+            "weight": 0.016564632022404355,
+            "source": "condorcet",
+            "target": "grouchy"
+          },
+          {
+            "weight": 0.30078049649769906,
+            "source": "condorcet",
+            "target": "human"
+          },
+          {
+            "weight": 0.5545610172737986,
+            "source": "law",
+            "target": "letter"
+          },
+          {
+            "weight": 0.1296778233085326,
+            "source": "law",
+            "target": "woman"
           },
           {
             "weight": 0.22522471751803438,
@@ -522,23 +542,38 @@
           },
           {
             "weight": 0.5545610172737986,
-            "source": "law",
-            "target": "letter"
+            "source": "human",
+            "target": "pain"
           },
           {
-            "weight": 0.1296778233085326,
-            "source": "law",
+            "weight": 0.11845893970374448,
+            "source": "human",
+            "target": "sympathy"
+          },
+          {
+            "weight": 0.004514680354526613,
+            "source": "human",
             "target": "woman"
+          },
+          {
+            "weight": 0.4549311763249573,
+            "source": "letter",
+            "target": "sympathy"
+          },
+          {
+            "weight": 0.2180887806525857,
+            "source": "letter",
+            "target": "smith"
+          },
+          {
+            "weight": 0.7826185833904374,
+            "source": "smith",
+            "target": "sympathy"
           },
           {
             "weight": 0.1451820098444979,
             "source": "pain",
             "target": "grouchy"
-          },
-          {
-            "weight": 0.5545610172737986,
-            "source": "pain",
-            "target": "human"
           },
           {
             "weight": 0.713625711903486,
@@ -549,46 +584,6 @@
             "weight": 0.016564632022404355,
             "source": "grouchy",
             "target": "sympathy"
-          },
-          {
-            "weight": 0.016564632022404355,
-            "source": "grouchy",
-            "target": "condorcet"
-          },
-          {
-            "weight": 0.8918178753554294,
-            "source": "revolution",
-            "target": "woman"
-          },
-          {
-            "weight": 0.7826185833904374,
-            "source": "smith",
-            "target": "sympathy"
-          },
-          {
-            "weight": 0.2180887806525857,
-            "source": "smith",
-            "target": "letter"
-          },
-          {
-            "weight": 0.4549311763249573,
-            "source": "sympathy",
-            "target": "letter"
-          },
-          {
-            "weight": 0.11845893970374448,
-            "source": "sympathy",
-            "target": "human"
-          },
-          {
-            "weight": 0.004514680354526613,
-            "source": "woman",
-            "target": "human"
-          },
-          {
-            "weight": 0.30078049649769906,
-            "source": "human",
-            "target": "condorcet"
           }
         ]
       }
@@ -603,28 +598,28 @@
         "graph": {},
         "nodes": [
           {
-            "id": "resource"
-          },
-          {
-            "id": "white"
-          },
-          {
-            "id": "social"
-          },
-          {
             "id": "live"
           },
           {
-            "id": "humaneness"
+            "id": "work"
           },
           {
             "id": "economic"
           },
           {
+            "id": "continue"
+          },
+          {
+            "id": "humaneness"
+          },
+          {
             "id": "cultural"
           },
           {
-            "id": "life"
+            "id": "white"
+          },
+          {
+            "id": "resource"
           },
           {
             "id": "country"
@@ -633,184 +628,39 @@
             "id": "condition"
           },
           {
-            "id": "work"
+            "id": "political"
+          },
+          {
+            "id": "order"
+          },
+          {
+            "id": "life"
+          },
+          {
+            "id": "race"
           },
           {
             "id": "effort"
           },
           {
-            "id": "american"
-          },
-          {
-            "id": "political"
-          },
-          {
             "id": "way"
-          },
-          {
-            "id": "race"
           }
         ],
         "edges": [
-          {
-            "weight": 0.44277216052097507,
-            "source": "resource",
-            "target": "life"
-          },
-          {
-            "weight": 0.6303707744157735,
-            "source": "resource",
-            "target": "social"
-          },
-          {
-            "weight": 0.1291146016659334,
-            "source": "resource",
-            "target": "work"
-          },
-          {
-            "weight": 1.1536189181803214,
-            "source": "resource",
-            "target": "way"
-          },
-          {
-            "weight": 0.05500662951221158,
-            "source": "resource",
-            "target": "condition"
-          },
-          {
-            "weight": 2.2885988510193056,
-            "source": "resource",
-            "target": "humaneness"
-          },
-          {
-            "weight": 0.9023044898994151,
-            "source": "resource",
-            "target": "live"
-          },
-          {
-            "weight": 0.5539977956311994,
-            "source": "resource",
-            "target": "white"
-          },
-          {
-            "weight": 0.4784902431230542,
-            "source": "resource",
-            "target": "political"
-          },
-          {
-            "weight": 0.05500662951221158,
-            "source": "resource",
-            "target": "economic"
-          },
-          {
-            "weight": 0.2736958304770411,
-            "source": "resource",
-            "target": "race"
-          },
-          {
-            "weight": 0.1485326875230351,
-            "source": "white",
-            "target": "live"
-          },
-          {
-            "weight": 0.6875291882557221,
-            "source": "white",
-            "target": "way"
-          },
-          {
-            "weight": 0.3998471158039411,
-            "source": "white",
-            "target": "condition"
-          },
-          {
-            "weight": 0.7928897039135483,
-            "source": "white",
-            "target": "social"
-          },
-          {
-            "weight": 0.5539977956311994,
-            "source": "white",
-            "target": "country"
-          },
-          {
-            "weight": 0.2355440645126648,
-            "source": "white",
-            "target": "cultural"
-          },
-          {
-            "weight": 1.0929942963638863,
-            "source": "white",
-            "target": "economic"
-          },
-          {
-            "weight": 1.5348270486429256,
-            "source": "white",
-            "target": "humaneness"
-          },
-          {
-            "weight": 0.8233307294147837,
-            "source": "white",
-            "target": "political"
-          },
-          {
-            "weight": 1.024001424876935,
-            "source": "white",
-            "target": "race"
-          },
-          {
-            "weight": 0.9127757897667107,
-            "source": "social",
-            "target": "life"
-          },
-          {
-            "weight": 0.13635226896616395,
-            "source": "social",
-            "target": "effort"
-          },
-          {
-            "weight": 1.3235179549757188,
-            "source": "social",
-            "target": "live"
-          },
-          {
-            "weight": 1.7106339244156867,
-            "source": "social",
-            "target": "political"
-          },
-          {
-            "weight": 1.005064223857184,
-            "source": "social",
-            "target": "cultural"
-          },
-          {
-            "weight": 1.8625144557084057,
-            "source": "social",
-            "target": "economic"
-          },
-          {
-            "weight": 0.5940031302448986,
-            "source": "social",
-            "target": "condition"
-          },
-          {
-            "weight": 1.3235179549757188,
-            "source": "social",
-            "target": "humaneness"
-          },
-          {
-            "weight": 0.9180528468675544,
-            "source": "social",
-            "target": "race"
-          },
           {
             "weight": 1.3077695980075794,
             "source": "live",
             "target": "condition"
           },
           {
-            "weight": 2.2885988510193056,
+            "weight": 2.000916778567525,
             "source": "live",
             "target": "humaneness"
+          },
+          {
+            "weight": 0.9023044898994151,
+            "source": "live",
+            "target": "resource"
           },
           {
             "weight": 0.05500662951221158,
@@ -823,9 +673,19 @@
             "target": "life"
           },
           {
+            "weight": 1.1359193410809203,
+            "source": "live",
+            "target": "order"
+          },
+          {
             "weight": 0.07302513501488982,
             "source": "live",
             "target": "political"
+          },
+          {
+            "weight": 0.1485326875230351,
+            "source": "live",
+            "target": "white"
           },
           {
             "weight": 0.6791609385852054,
@@ -833,59 +693,59 @@
             "target": "race"
           },
           {
-            "weight": 2.5399132793002117,
-            "source": "humaneness",
-            "target": "condition"
+            "weight": 0.2736958304770411,
+            "source": "live",
+            "target": "continue"
           },
           {
-            "weight": 1.3891152374615319,
-            "source": "humaneness",
-            "target": "effort"
+            "weight": 0.480512488503822,
+            "source": "work",
+            "target": "order"
           },
           {
-            "weight": 2.1524666766947256,
-            "source": "humaneness",
-            "target": "political"
-          },
-          {
-            "weight": 0.8222617822258788,
-            "source": "humaneness",
-            "target": "work"
-          },
-          {
-            "weight": 2.1344481711920475,
-            "source": "humaneness",
-            "target": "way"
-          },
-          {
-            "weight": 1.3723081191451507,
-            "source": "humaneness",
-            "target": "american"
-          },
-          {
-            "weight": 2.2885988510193056,
-            "source": "humaneness",
-            "target": "country"
-          },
-          {
-            "weight": 1.9701451199007713,
-            "source": "humaneness",
-            "target": "cultural"
-          },
-          {
-            "weight": 2.1344481711920475,
-            "source": "humaneness",
-            "target": "economic"
-          },
-          {
-            "weight": 0.9127757897667107,
-            "source": "humaneness",
+            "weight": 0.1395859015332288,
+            "source": "work",
             "target": "life"
           },
           {
-            "weight": 1.6599901915969317,
-            "source": "humaneness",
+            "weight": 0.198107473152885,
+            "source": "work",
+            "target": "condition"
+          },
+          {
+            "weight": 0.4167966741177143,
+            "source": "work",
+            "target": "continue"
+          },
+          {
+            "weight": 0.1291146016659334,
+            "source": "work",
+            "target": "resource"
+          },
+          {
+            "weight": 0.14592171998231468,
+            "source": "work",
+            "target": "effort"
+          },
+          {
+            "weight": 1.227726890334043,
+            "source": "work",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.5345797097740977,
+            "source": "work",
+            "target": "country"
+          },
+          {
+            "weight": 0.19365312280350452,
+            "source": "work",
             "target": "race"
+          },
+          {
+            "weight": 0.0338044218616085,
+            "source": "work",
+            "target": "cultural"
           },
           {
             "weight": 2.1344481711920475,
@@ -898,19 +758,24 @@
             "target": "effort"
           },
           {
+            "weight": 1.2049122125678717,
+            "source": "economic",
+            "target": "order"
+          },
+          {
             "weight": 2.1701662537941266,
             "source": "economic",
             "target": "political"
           },
           {
-            "weight": 0.5250102587579472,
-            "source": "economic",
-            "target": "american"
-          },
-          {
             "weight": 0.6250937173149297,
             "source": "economic",
             "target": "life"
+          },
+          {
+            "weight": 0.05500662951221158,
+            "source": "economic",
+            "target": "resource"
           },
           {
             "weight": 0.5940031302448986,
@@ -923,14 +788,144 @@
             "target": "country"
           },
           {
+            "weight": 1.8467660987402665,
+            "source": "economic",
+            "target": "humaneness"
+          },
+          {
             "weight": 1.3723081191451507,
             "source": "economic",
             "target": "race"
           },
           {
+            "weight": 1.0929942963638863,
+            "source": "economic",
+            "target": "white"
+          },
+          {
+            "weight": 0.5250102587579472,
+            "source": "economic",
+            "target": "continue"
+          },
+          {
+            "weight": 0.6483892799184517,
+            "source": "continue",
+            "target": "cultural"
+          },
+          {
+            "weight": 0.40195016600071987,
+            "source": "continue",
+            "target": "life"
+          },
+          {
+            "weight": 0.21962860920676536,
+            "source": "continue",
+            "target": "order"
+          },
+          {
+            "weight": 0.8307108367124064,
+            "source": "continue",
+            "target": "political"
+          },
+          {
+            "weight": 0.6791609385852054,
+            "source": "continue",
+            "target": "resource"
+          },
+          {
+            "weight": 1.3723081191451507,
+            "source": "continue",
+            "target": "humaneness"
+          },
+          {
+            "weight": 0.21307120866060617,
+            "source": "continue",
+            "target": "white"
+          },
+          {
+            "weight": 0.2736958304770411,
+            "source": "continue",
+            "target": "country"
+          },
+          {
+            "weight": 0.6269751854146351,
+            "source": "continue",
+            "target": "effort"
+          },
+          {
+            "weight": 0.561377902928822,
+            "source": "continue",
+            "target": "race"
+          },
+          {
+            "weight": 0.5250102587579472,
+            "source": "continue",
+            "target": "way"
+          },
+          {
+            "weight": 2.252231206848431,
+            "source": "humaneness",
+            "target": "condition"
+          },
+          {
+            "weight": 1.101433165009751,
+            "source": "humaneness",
+            "target": "effort"
+          },
+          {
+            "weight": 1.8647846042429448,
+            "source": "humaneness",
+            "target": "political"
+          },
+          {
+            "weight": 2.000916778567525,
+            "source": "humaneness",
+            "target": "resource"
+          },
+          {
+            "weight": 1.8467660987402665,
+            "source": "humaneness",
+            "target": "way"
+          },
+          {
+            "weight": 1.318240897874875,
+            "source": "humaneness",
+            "target": "life"
+          },
+          {
+            "weight": 1.541384449189085,
+            "source": "humaneness",
+            "target": "order"
+          },
+          {
+            "weight": 2.000916778567525,
+            "source": "humaneness",
+            "target": "country"
+          },
+          {
+            "weight": 1.6824630474489903,
+            "source": "humaneness",
+            "target": "cultural"
+          },
+          {
+            "weight": 1.3723081191451507,
+            "source": "humaneness",
+            "target": "race"
+          },
+          {
+            "weight": 1.2471449761911448,
+            "source": "humaneness",
+            "target": "white"
+          },
+          {
             "weight": 0.9997871667563404,
             "source": "cultural",
             "target": "life"
+          },
+          {
+            "weight": 1.0406091612765955,
+            "source": "cultural",
+            "target": "order"
           },
           {
             "weight": 1.7004815529516686,
@@ -948,19 +943,14 @@
             "target": "effort"
           },
           {
-            "weight": 0.07302513501488982,
-            "source": "cultural",
-            "target": "american"
-          },
-          {
             "weight": 0.6483892799184517,
             "source": "cultural",
             "target": "race"
           },
           {
-            "weight": 0.0338044218616085,
+            "weight": 0.2355440645126648,
             "source": "cultural",
-            "target": "work"
+            "target": "white"
           },
           {
             "weight": 0.4297000789536223,
@@ -968,39 +958,64 @@
             "target": "way"
           },
           {
-            "weight": 0.1395859015332288,
-            "source": "life",
-            "target": "work"
+            "weight": 0.5539977956311994,
+            "source": "white",
+            "target": "resource"
           },
           {
-            "weight": 0.569004250663886,
-            "source": "life",
-            "target": "political"
-          },
-          {
-            "weight": 1.077078841057987,
-            "source": "life",
-            "target": "condition"
-          },
-          {
-            "weight": 0.2886214806937166,
-            "source": "life",
+            "weight": 0.6875291882557221,
+            "source": "white",
             "target": "way"
           },
           {
-            "weight": 0.15063573771981376,
-            "source": "life",
+            "weight": 0.3998471158039411,
+            "source": "white",
+            "target": "condition"
+          },
+          {
+            "weight": 0.7876126468127046,
+            "source": "white",
+            "target": "order"
+          },
+          {
+            "weight": 0.5539977956311994,
+            "source": "white",
+            "target": "country"
+          },
+          {
+            "weight": 0.8233307294147837,
+            "source": "white",
+            "target": "political"
+          },
+          {
+            "weight": 1.024001424876935,
+            "source": "white",
             "target": "race"
           },
           {
-            "weight": 0.5345797097740977,
-            "source": "country",
-            "target": "work"
+            "weight": 0.44277216052097507,
+            "source": "resource",
+            "target": "life"
           },
           {
-            "weight": 0.39147886613342453,
-            "source": "country",
-            "target": "american"
+            "weight": 1.1536189181803214,
+            "source": "resource",
+            "target": "way"
+          },
+          {
+            "weight": 0.05500662951221158,
+            "source": "resource",
+            "target": "condition"
+          },
+          {
+            "weight": 0.4784902431230542,
+            "source": "resource",
+            "target": "political"
+          },
+          {
+            "weight": 0.2736958304770411,
+            "source": "resource",
+            "target": "race"
           },
           {
             "weight": 0.07302513501488982,
@@ -1013,14 +1028,14 @@
             "target": "way"
           },
           {
+            "weight": 1.077078841057987,
+            "source": "condition",
+            "target": "life"
+          },
+          {
             "weight": 0.8351651870617867,
             "source": "condition",
             "target": "political"
-          },
-          {
-            "weight": 0.198107473152885,
-            "source": "condition",
-            "target": "work"
           },
           {
             "weight": 0.30632105779311763,
@@ -1028,49 +1043,29 @@
             "target": "way"
           },
           {
+            "weight": 0.0009394082419358841,
+            "source": "condition",
+            "target": "order"
+          },
+          {
             "weight": 0.5250102587579472,
             "source": "condition",
             "target": "race"
           },
           {
-            "weight": 0.14592171998231468,
-            "source": "work",
-            "target": "effort"
+            "weight": 0.569004250663886,
+            "source": "political",
+            "target": "life"
           },
           {
-            "weight": 0.19365312280350452,
-            "source": "work",
-            "target": "race"
-          },
-          {
-            "weight": 0.5418173770743283,
-            "source": "effort",
-            "target": "way"
+            "weight": 1.318240897874875,
+            "source": "political",
+            "target": "order"
           },
           {
             "weight": 0.08983225333127111,
-            "source": "effort",
-            "target": "political"
-          },
-          {
-            "weight": 0.0028208763416412634,
-            "source": "effort",
-            "target": "american"
-          },
-          {
-            "weight": 0.5430287642606254,
-            "source": "american",
-            "target": "political"
-          },
-          {
-            "weight": 0.4560173872709956,
-            "source": "american",
-            "target": "race"
-          },
-          {
-            "weight": 0.23732818630616614,
-            "source": "american",
-            "target": "way"
+            "source": "political",
+            "target": "effort"
           },
           {
             "weight": 0.9484938723687899,
@@ -1078,9 +1073,39 @@
             "target": "race"
           },
           {
-            "weight": 0.5250102587579472,
-            "source": "way",
+            "weight": 0.45957927883735633,
+            "source": "order",
+            "target": "effort"
+          },
+          {
+            "weight": 0.771697191506805,
+            "source": "order",
+            "target": "life"
+          },
+          {
+            "weight": 0.21962860920676536,
+            "source": "order",
             "target": "race"
+          },
+          {
+            "weight": 0.2886214806937166,
+            "source": "life",
+            "target": "way"
+          },
+          {
+            "weight": 0.15063573771981376,
+            "source": "life",
+            "target": "race"
+          },
+          {
+            "weight": 0.5250102587579472,
+            "source": "race",
+            "target": "way"
+          },
+          {
+            "weight": 0.5418173770743283,
+            "source": "effort",
+            "target": "way"
           }
         ]
       }
@@ -1095,62 +1120,92 @@
         "graph": {},
         "nodes": [
           {
+            "id": "asian"
+          },
+          {
             "id": "humaneness"
-          },
-          {
-            "id": "argue"
-          },
-          {
-            "id": "debate"
-          },
-          {
-            "id": "right"
-          },
-          {
-            "id": "east"
-          },
-          {
-            "id": "society"
-          },
-          {
-            "id": "moral"
-          },
-          {
-            "id": "practice"
-          },
-          {
-            "id": "western"
-          },
-          {
-            "id": "form"
           },
           {
             "id": "life"
           },
           {
-            "id": "value"
-          },
-          {
-            "id": "asian"
+            "id": "example"
           },
           {
             "id": "family"
           },
           {
-            "id": "liberal"
+            "id": "society"
+          },
+          {
+            "id": "practice"
+          },
+          {
+            "id": "moral"
+          },
+          {
+            "id": "form"
+          },
+          {
+            "id": "east"
+          },
+          {
+            "id": "argue"
           },
           {
             "id": "communal"
+          },
+          {
+            "id": "western"
+          },
+          {
+            "id": "value"
+          },
+          {
+            "id": "liberal"
+          },
+          {
+            "id": "debate"
           }
         ],
         "edges": [
           {
-            "weight": 2.359280436670591,
+            "weight": 1.8484548129046001,
+            "source": "asian",
+            "target": "east"
+          },
+          {
+            "weight": 1.2141481323675885,
+            "source": "asian",
+            "target": "western"
+          },
+          {
+            "weight": 0.7498425242364906,
+            "source": "asian",
+            "target": "debate"
+          },
+          {
+            "weight": 0.8429329473025026,
+            "source": "asian",
+            "target": "value"
+          },
+          {
+            "weight": 0.056695343676545294,
+            "source": "asian",
+            "target": "society"
+          },
+          {
+            "weight": 0.3668502719803848,
+            "source": "asian",
+            "target": "practice"
+          },
+          {
+            "weight": 1.6661332561106457,
             "source": "humaneness",
             "target": "family"
           },
           {
-            "weight": 1.8484548129046001,
+            "weight": 1.155307632344655,
             "source": "humaneness",
             "target": "society"
           },
@@ -1160,109 +1215,94 @@
             "target": "value"
           },
           {
-            "weight": 2.4462918136602205,
+            "weight": 1.7531446331002754,
             "source": "humaneness",
             "target": "western"
           },
           {
-            "weight": 0.034716436957770026,
-            "source": "argue",
+            "weight": 1.3784511836588647,
+            "source": "humaneness",
+            "target": "argue"
+          },
+          {
+            "weight": 1.5119825762833874,
+            "source": "humaneness",
+            "target": "example"
+          },
+          {
+            "weight": 1.7086928705294415,
+            "source": "humaneness",
             "target": "form"
           },
           {
-            "weight": 0.07011836400868592,
-            "source": "argue",
-            "target": "life"
-          },
-          {
-            "weight": 0.5899938232945946,
-            "source": "argue",
-            "target": "practice"
-          },
-          {
-            "weight": 0.1256882151634967,
-            "source": "argue",
-            "target": "right"
-          },
-          {
-            "weight": 0.056695343676545294,
-            "source": "argue",
-            "target": "east"
-          },
-          {
-            "weight": 0.3668502719803848,
-            "source": "argue",
-            "target": "western"
-          },
-          {
-            "weight": 0.4133702876152776,
-            "source": "argue",
+            "weight": 1.446843274112426,
+            "source": "life",
             "target": "communal"
           },
           {
-            "weight": 0.5029824463049647,
-            "source": "argue",
-            "target": "family"
+            "weight": 1.188817411243533,
+            "source": "life",
+            "target": "form"
           },
           {
-            "weight": 0.3260282774601297,
-            "source": "debate",
-            "target": "practice"
-          },
-          {
-            "weight": 0.3725482930950226,
-            "source": "debate",
-            "target": "right"
-          },
-          {
-            "weight": 0.7498425242364906,
-            "source": "debate",
-            "target": "asian"
-          },
-          {
-            "weight": 0.6137103499119105,
-            "source": "debate",
-            "target": "western"
-          },
-          {
-            "weight": 0.015873349156290163,
-            "source": "debate",
-            "target": "east"
-          },
-          {
-            "weight": 0.4133702876152776,
-            "source": "right",
-            "target": "family"
-          },
-          {
-            "weight": 0.0949165564967431,
-            "source": "right",
-            "target": "western"
-          },
-          {
-            "weight": 0.5020063603319094,
-            "source": "east",
+            "weight": 0.29228582934984026,
+            "source": "life",
             "target": "value"
           },
           {
-            "weight": 1.8484548129046001,
-            "source": "east",
-            "target": "asian"
+            "weight": 0.07011836400868592,
+            "source": "life",
+            "target": "argue"
           },
           {
-            "weight": 0.8368539012261204,
-            "source": "east",
-            "target": "western"
+            "weight": 0.8278040657062025,
+            "source": "life",
+            "target": "family"
           },
           {
-            "weight": 0.056695343676545294,
-            "source": "east",
+            "weight": 0.1256882151634967,
+            "source": "example",
             "target": "society"
           },
           {
-            "weight": 0.4313887931179559,
-            "source": "east",
-            "target": "practice"
+            "weight": 0.19022673630106784,
+            "source": "example",
+            "target": "east"
+          },
+          {
+            "weight": 0.1256882151634967,
+            "source": "example",
+            "target": "moral"
+          },
+          {
+            "weight": 0.818835395723442,
+            "source": "example",
+            "target": "argue"
+          },
+          {
+            "weight": 0.1256882151634967,
+            "source": "example",
+            "target": "family"
+          },
+          {
+            "weight": 0.6163111316119679,
+            "source": "family",
+            "target": "society"
+          },
+          {
+            "weight": 0.3668502719803848,
+            "source": "family",
+            "target": "western"
+          },
+          {
+            "weight": 0.5029824463049647,
+            "source": "family",
+            "target": "argue"
+          },
+          {
+            "weight": 0.7010523600670585,
+            "source": "family",
+            "target": "communal"
           },
           {
             "weight": 0.3321073235365118,
@@ -1285,29 +1325,19 @@
             "target": "western"
           },
           {
-            "weight": 0.6163111316119679,
-            "source": "society",
-            "target": "family"
-          },
-          {
             "weight": 0.056695343676545294,
             "source": "society",
-            "target": "asian"
+            "target": "east"
           },
           {
-            "weight": 0.2551462824003836,
-            "source": "moral",
-            "target": "value"
+            "weight": 0.5899938232945946,
+            "source": "practice",
+            "target": "argue"
           },
           {
             "weight": 0.8776758957463755,
-            "source": "moral",
-            "target": "practice"
-          },
-          {
-            "weight": 0.6545323444321658,
-            "source": "moral",
-            "target": "western"
+            "source": "practice",
+            "target": "moral"
           },
           {
             "weight": 0.4240086858203334,
@@ -1325,9 +1355,14 @@
             "target": "western"
           },
           {
-            "weight": 0.3668502719803848,
+            "weight": 0.3260282774601297,
             "source": "practice",
-            "target": "asian"
+            "target": "debate"
+          },
+          {
+            "weight": 0.4313887931179559,
+            "source": "practice",
+            "target": "east"
           },
           {
             "weight": 0.5003816646049074,
@@ -1340,24 +1375,14 @@
             "target": "form"
           },
           {
-            "weight": 0.7917334659456506,
-            "source": "western",
-            "target": "liberal"
-          },
-          {
-            "weight": 0.8121612886357489,
-            "source": "western",
+            "weight": 0.2551462824003836,
+            "source": "moral",
             "target": "value"
           },
           {
-            "weight": 1.2141481323675885,
-            "source": "western",
-            "target": "asian"
-          },
-          {
-            "weight": 0.3668502719803848,
-            "source": "western",
-            "target": "family"
+            "weight": 0.6545323444321658,
+            "source": "moral",
+            "target": "western"
           },
           {
             "weight": 1.0861632571834496,
@@ -1370,39 +1395,59 @@
             "target": "communal"
           },
           {
-            "weight": 1.188817411243533,
+            "weight": 0.034716436957770026,
             "source": "form",
-            "target": "life"
+            "target": "argue"
           },
           {
-            "weight": 1.446843274112426,
-            "source": "life",
-            "target": "communal"
-          },
-          {
-            "weight": 0.29228582934984026,
-            "source": "life",
+            "weight": 0.5020063603319094,
+            "source": "east",
             "target": "value"
           },
           {
-            "weight": 0.8278040657062025,
-            "source": "life",
-            "target": "family"
+            "weight": 0.8368539012261204,
+            "source": "east",
+            "target": "western"
+          },
+          {
+            "weight": 0.056695343676545294,
+            "source": "east",
+            "target": "argue"
+          },
+          {
+            "weight": 0.015873349156290163,
+            "source": "east",
+            "target": "debate"
+          },
+          {
+            "weight": 0.3668502719803848,
+            "source": "argue",
+            "target": "western"
+          },
+          {
+            "weight": 0.4133702876152776,
+            "source": "argue",
+            "target": "communal"
           },
           {
             "weight": 0.5709992318188607,
-            "source": "value",
-            "target": "communal"
+            "source": "communal",
+            "target": "value"
           },
           {
-            "weight": 0.8429329473025026,
-            "source": "value",
-            "target": "asian"
+            "weight": 0.7917334659456506,
+            "source": "western",
+            "target": "liberal"
           },
           {
-            "weight": 0.7010523600670585,
-            "source": "family",
-            "target": "communal"
+            "weight": 0.8121612886357489,
+            "source": "western",
+            "target": "value"
+          },
+          {
+            "weight": 0.6137103499119105,
+            "source": "western",
+            "target": "debate"
           }
         ]
       }
@@ -1417,101 +1462,251 @@
         "graph": {},
         "nodes": [
           {
-            "id": "meritocratic"
-          },
-          {
-            "id": "example"
-          },
-          {
-            "id": "social"
+            "id": "merit"
           },
           {
             "id": "economic"
           },
           {
-            "id": "meritocrat"
+            "id": "contribution"
           },
           {
-            "id": "equal"
+            "id": "social"
           },
           {
-            "id": "deserve"
-          },
-          {
-            "id": "good"
-          },
-          {
-            "id": "justice"
-          },
-          {
-            "id": "people"
-          },
-          {
-            "id": "political"
-          },
-          {
-            "id": "person"
-          },
-          {
-            "id": "merit"
-          },
-          {
-            "id": "desert"
-          },
-          {
-            "id": "ground"
-          },
-          {
-            "id": "public"
-          },
-          {
-            "id": "system"
-          },
-          {
-            "id": "meritocracy"
-          },
-          {
-            "id": "base"
-          },
-          {
-            "id": "give"
-          },
-          {
-            "id": "democracy"
-          },
-          {
-            "id": "basis"
-          },
-          {
-            "id": "race"
-          },
-          {
-            "id": "citizen"
-          },
-          {
-            "id": "distribution"
+            "id": "meritocratic"
           },
           {
             "id": "vote"
           },
           {
+            "id": "desert"
+          },
+          {
+            "id": "example"
+          },
+          {
+            "id": "meritocracy"
+          },
+          {
+            "id": "democracy"
+          },
+          {
+            "id": "ground"
+          },
+          {
+            "id": "person"
+          },
+          {
+            "id": "race"
+          },
+          {
+            "id": "basis"
+          },
+          {
+            "id": "justice"
+          },
+          {
+            "id": "opportunity"
+          },
+          {
             "id": "meritorious"
           },
           {
-            "id": "contribution"
+            "id": "public"
           },
           {
             "id": "theory"
           },
           {
-            "id": "opportunity"
+            "id": "give"
+          },
+          {
+            "id": "meritocrat"
+          },
+          {
+            "id": "deserve"
+          },
+          {
+            "id": "equal"
+          },
+          {
+            "id": "people"
+          },
+          {
+            "id": "distribution"
+          },
+          {
+            "id": "system"
+          },
+          {
+            "id": "political"
+          },
+          {
+            "id": "good"
+          },
+          {
+            "id": "base"
+          },
+          {
+            "id": "citizen"
           }
         ],
         "edges": [
           {
-            "weight": 0.18859116980754997,
-            "source": "meritocratic",
+            "weight": 0.9400072584914712,
+            "source": "merit",
+            "target": "basis"
+          },
+          {
+            "weight": 0.6988452016745831,
+            "source": "merit",
+            "target": "desert"
+          },
+          {
+            "weight": 1.1143606456362487,
+            "source": "merit",
+            "target": "base"
+          },
+          {
+            "weight": 0.7525706010307461,
+            "source": "merit",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.13353139262452257,
+            "source": "merit",
+            "target": "good"
+          },
+          {
+            "weight": 0.09270939810426754,
+            "source": "merit",
             "target": "social"
+          },
+          {
+            "weight": 0.5753641449035618,
+            "source": "merit",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.19806991376209387,
+            "source": "merit",
+            "target": "give"
+          },
+          {
+            "weight": 0.23889190828234888,
+            "source": "merit",
+            "target": "people"
+          },
+          {
+            "weight": 0.4212134650763035,
+            "source": "merit",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.3389753668393314,
+            "source": "economic",
+            "target": "good"
+          },
+          {
+            "weight": 0.010471299867295437,
+            "source": "economic",
+            "target": "political"
+          },
+          {
+            "weight": 0.22119233118294795,
+            "source": "economic",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.7036184804272407,
+            "source": "economic",
+            "target": "social"
+          },
+          {
+            "weight": 1.7740598921286541,
+            "source": "economic",
+            "target": "contribution"
+          },
+          {
+            "weight": 0.05129329438755048,
+            "source": "economic",
+            "target": "theory"
+          },
+          {
+            "weight": 0.22119233118294795,
+            "source": "economic",
+            "target": "person"
+          },
+          {
+            "weight": 0.3389753668393314,
+            "source": "economic",
+            "target": "public"
+          },
+          {
+            "weight": 0.5753641449035618,
+            "source": "contribution",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.5753641449035618,
+            "source": "contribution",
+            "target": "people"
+          },
+          {
+            "weight": 0.6523251860396901,
+            "source": "contribution",
+            "target": "social"
+          },
+          {
+            "weight": 0.13353139262452257,
+            "source": "contribution",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.16989903679539742,
+            "source": "contribution",
+            "target": "person"
+          },
+          {
+            "weight": 0.18859116980754997,
+            "source": "social",
+            "target": "meritocratic"
+          },
+          {
+            "weight": 0.5833323145527387,
+            "source": "social",
+            "target": "political"
+          },
+          {
+            "weight": 0.7168637071772613,
+            "source": "social",
+            "target": "basis"
+          },
+          {
+            "weight": 1.4508328822574619,
+            "source": "social",
+            "target": "good"
+          },
+          {
+            "weight": 0.8002453161163124,
+            "source": "social",
+            "target": "ground"
+          },
+          {
+            "weight": 0.31585294941847725,
+            "source": "social",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.7576857016975165,
+            "source": "social",
+            "target": "people"
+          },
+          {
+            "weight": 0.06453852113757116,
+            "source": "social",
+            "target": "public"
           },
           {
             "weight": 0.4688931349617084,
@@ -1559,6 +1754,81 @@
             "target": "race"
           },
           {
+            "weight": 1.8364953630694465,
+            "source": "vote",
+            "target": "person"
+          },
+          {
+            "weight": 1.0892809612392254,
+            "source": "vote",
+            "target": "example"
+          },
+          {
+            "weight": 0.4502010019495558,
+            "source": "vote",
+            "target": "public"
+          },
+          {
+            "weight": 0.6325225587435105,
+            "source": "vote",
+            "target": "political"
+          },
+          {
+            "weight": 0.18357233869560735,
+            "source": "vote",
+            "target": "equal"
+          },
+          {
+            "weight": 0.5837323945740786,
+            "source": "vote",
+            "target": "system"
+          },
+          {
+            "weight": 1.0480380027051763,
+            "source": "vote",
+            "target": "citizen"
+          },
+          {
+            "weight": 0.2960503221222976,
+            "source": "vote",
+            "target": "race"
+          },
+          {
+            "weight": 0.10189430768134015,
+            "source": "vote",
+            "target": "democracy"
+          },
+          {
+            "weight": 0.814844115537465,
+            "source": "desert",
+            "target": "justice"
+          },
+          {
+            "weight": 0.7576857016975165,
+            "source": "desert",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.04800921918636066,
+            "source": "desert",
+            "target": "meritocracy"
+          },
+          {
+            "weight": 0.7168637071772613,
+            "source": "desert",
+            "target": "basis"
+          },
+          {
+            "weight": 0.6035350218702581,
+            "source": "desert",
+            "target": "race"
+          },
+          {
+            "weight": 1.1143606456362487,
+            "source": "desert",
+            "target": "base"
+          },
+          {
             "weight": 0.6266574392911123,
             "source": "example",
             "target": "person"
@@ -1599,11 +1869,6 @@
             "target": "democracy"
           },
           {
-            "weight": 1.0892809612392254,
-            "source": "example",
-            "target": "vote"
-          },
-          {
             "weight": 0.42598674382896123,
             "source": "example",
             "target": "citizen"
@@ -1614,519 +1879,29 @@
             "target": "public"
           },
           {
-            "weight": 0.5833323145527387,
-            "source": "social",
-            "target": "political"
-          },
-          {
-            "weight": 0.7168637071772613,
-            "source": "social",
-            "target": "basis"
-          },
-          {
-            "weight": 1.4508328822574619,
-            "source": "social",
-            "target": "good"
-          },
-          {
-            "weight": 0.09270939810426754,
-            "source": "social",
-            "target": "merit"
-          },
-          {
-            "weight": 0.8002453161163124,
-            "source": "social",
-            "target": "ground"
-          },
-          {
-            "weight": 0.31585294941847725,
-            "source": "social",
-            "target": "distribution"
-          },
-          {
-            "weight": 0.7576857016975165,
-            "source": "social",
-            "target": "people"
-          },
-          {
-            "weight": 0.7036184804272407,
-            "source": "social",
-            "target": "economic"
-          },
-          {
-            "weight": 0.6523251860396901,
-            "source": "social",
-            "target": "contribution"
-          },
-          {
-            "weight": 0.06453852113757116,
-            "source": "social",
-            "target": "public"
-          },
-          {
-            "weight": 0.3389753668393314,
-            "source": "economic",
-            "target": "good"
-          },
-          {
-            "weight": 0.010471299867295437,
-            "source": "economic",
-            "target": "political"
-          },
-          {
-            "weight": 0.22119233118294795,
-            "source": "economic",
-            "target": "meritocrat"
-          },
-          {
-            "weight": 1.7740598921286541,
-            "source": "economic",
-            "target": "contribution"
-          },
-          {
-            "weight": 0.05129329438755048,
-            "source": "economic",
-            "target": "theory"
-          },
-          {
-            "weight": 0.22119233118294795,
-            "source": "economic",
-            "target": "person"
-          },
-          {
-            "weight": 0.3389753668393314,
-            "source": "economic",
-            "target": "public"
-          },
-          {
-            "weight": 0.4212134650763035,
-            "source": "meritocrat",
-            "target": "merit"
-          },
-          {
-            "weight": 0.5265739807341298,
-            "source": "meritocrat",
-            "target": "base"
-          },
-          {
-            "weight": 0.43560220252840315,
-            "source": "meritocrat",
-            "target": "ground"
-          },
-          {
-            "weight": 0.27525955245322375,
-            "source": "meritocrat",
-            "target": "deserve"
-          },
-          {
-            "weight": 0.4575811092471783,
-            "source": "meritocrat",
-            "target": "give"
-          },
-          {
-            "weight": 0.4984031037674336,
-            "source": "meritocrat",
-            "target": "people"
-          },
-          {
-            "weight": 0.12110887262596541,
-            "source": "meritocrat",
-            "target": "system"
-          },
-          {
-            "weight": 0.04473589384139152,
-            "source": "meritocrat",
-            "target": "justice"
-          },
-          {
-            "weight": 0.20380058847107874,
-            "source": "meritocrat",
-            "target": "opportunity"
-          },
-          {
-            "weight": 0.5753641449035618,
-            "source": "meritocrat",
-            "target": "contribution"
-          },
-          {
-            "weight": 1.8467144301015685,
-            "source": "equal",
-            "target": "opportunity"
-          },
-          {
-            "weight": 0.30873548164961323,
-            "source": "equal",
-            "target": "give"
-          },
-          {
-            "weight": 0.0723467035853829,
-            "source": "equal",
-            "target": "meritorious"
-          },
-          {
-            "weight": 0.031103745051333856,
-            "source": "equal",
-            "target": "citizen"
-          },
-          {
-            "weight": 0.12641392485565872,
-            "source": "equal",
-            "target": "public"
-          },
-          {
-            "weight": 0.2805646046829169,
-            "source": "equal",
-            "target": "people"
-          },
-          {
-            "weight": 0.10988462290444814,
-            "source": "equal",
-            "target": "meritocracy"
-          },
-          {
-            "weight": 0.00863088919927509,
-            "source": "equal",
-            "target": "person"
-          },
-          {
-            "weight": 0.18357233869560735,
-            "source": "equal",
-            "target": "vote"
-          },
-          {
-            "weight": 1.7793369492294977,
-            "source": "deserve",
-            "target": "give"
-          },
-          {
-            "weight": 0.7378830744013368,
-            "source": "deserve",
-            "target": "justice"
-          },
-          {
-            "weight": 0.5753641449035618,
-            "source": "deserve",
-            "target": "merit"
-          },
-          {
-            "weight": 1.2403404484968108,
-            "source": "deserve",
-            "target": "people"
-          },
-          {
-            "weight": 0.7576857016975165,
-            "source": "deserve",
-            "target": "desert"
-          },
-          {
-            "weight": 0.6807246605613881,
-            "source": "deserve",
-            "target": "person"
-          },
-          {
-            "weight": 1.0453677741492975,
-            "source": "deserve",
-            "target": "basis"
-          },
-          {
-            "weight": 0.20380058847107874,
-            "source": "deserve",
-            "target": "opportunity"
-          },
-          {
             "weight": 0.01983834221966438,
-            "source": "good",
-            "target": "meritocracy"
-          },
-          {
-            "weight": 0.5753641449035618,
-            "source": "good",
-            "target": "political"
-          },
-          {
-            "weight": 0.35222059358935215,
-            "source": "good",
-            "target": "basis"
-          },
-          {
-            "weight": 0.13353139262452257,
-            "source": "good",
-            "target": "merit"
-          },
-          {
-            "weight": 0.4620354595965586,
-            "source": "good",
-            "target": "distribution"
-          },
-          {
-            "weight": 0.27525955245322375,
-            "source": "good",
-            "target": "person"
-          },
-          {
-            "weight": 0.16989903679539742,
-            "source": "good",
-            "target": "give"
-          },
-          {
-            "weight": 0.6266574392911123,
-            "source": "good",
-            "target": "meritorious"
-          },
-          {
-            "weight": 0.14792013007662227,
-            "source": "good",
-            "target": "ground"
-          },
-          {
-            "weight": 0.814844115537465,
-            "source": "justice",
-            "target": "desert"
-          },
-          {
-            "weight": 0.43367169999834526,
-            "source": "justice",
-            "target": "meritocracy"
-          },
-          {
-            "weight": 1.341173925839421,
-            "source": "justice",
-            "target": "theory"
-          },
-          {
-            "weight": 1.3256697393034558,
-            "source": "justice",
-            "target": "give"
-          },
-          {
-            "weight": 0.5837323945740786,
-            "source": "justice",
-            "target": "base"
-          },
-          {
-            "weight": 0.06453852113757116,
-            "source": "people",
-            "target": "political"
-          },
-          {
-            "weight": 1.0861897686695525,
-            "source": "people",
-            "target": "give"
-          },
-          {
-            "weight": 0.23889190828234888,
-            "source": "people",
-            "target": "merit"
-          },
-          {
-            "weight": 0.23889190828234888,
-            "source": "people",
-            "target": "system"
-          },
-          {
-            "weight": 0.14792013007662227,
-            "source": "people",
-            "target": "ground"
-          },
-          {
-            "weight": 0.20380058847107874,
-            "source": "people",
-            "target": "opportunity"
-          },
-          {
-            "weight": 0.23889190828234888,
-            "source": "people",
-            "target": "base"
-          },
-          {
-            "weight": 0.4620354595965586,
-            "source": "people",
-            "target": "distribution"
-          },
-          {
-            "weight": 0.06453852113757116,
-            "source": "people",
-            "target": "basis"
-          },
-          {
-            "weight": 0.01983834221966438,
-            "source": "people",
-            "target": "meritocracy"
-          },
-          {
-            "weight": 0.5753641449035618,
-            "source": "people",
-            "target": "contribution"
-          },
-          {
-            "weight": 1.1143606456362487,
-            "source": "political",
-            "target": "system"
-          },
-          {
-            "weight": 0.010471299867295437,
-            "source": "political",
-            "target": "meritorious"
-          },
-          {
-            "weight": 0.9247397863606825,
-            "source": "political",
-            "target": "citizen"
-          },
-          {
-            "weight": 0.47000362924573563,
-            "source": "political",
-            "target": "public"
-          },
-          {
-            "weight": 0.12169693497751977,
-            "source": "political",
-            "target": "democracy"
-          },
-          {
-            "weight": 0.16989903679539742,
-            "source": "political",
-            "target": "person"
-          },
-          {
-            "weight": 0.6325225587435105,
-            "source": "political",
-            "target": "vote"
-          },
-          {
-            "weight": 0.9143395117428933,
-            "source": "person",
-            "target": "meritorious"
-          },
-          {
-            "weight": 1.8364953630694465,
-            "source": "person",
-            "target": "vote"
-          },
-          {
-            "weight": 0.16989903679539742,
-            "source": "person",
-            "target": "contribution"
-          },
-          {
-            "weight": 0.9400072584914712,
-            "source": "merit",
-            "target": "basis"
-          },
-          {
-            "weight": 0.6988452016745831,
-            "source": "merit",
-            "target": "desert"
-          },
-          {
-            "weight": 1.1143606456362487,
-            "source": "merit",
-            "target": "base"
-          },
-          {
-            "weight": 0.7525706010307461,
-            "source": "merit",
-            "target": "distribution"
-          },
-          {
-            "weight": 0.19806991376209387,
-            "source": "merit",
-            "target": "give"
-          },
-          {
-            "weight": 0.04800921918636066,
-            "source": "desert",
-            "target": "meritocracy"
-          },
-          {
-            "weight": 0.7168637071772613,
-            "source": "desert",
-            "target": "basis"
-          },
-          {
-            "weight": 0.6035350218702581,
-            "source": "desert",
-            "target": "race"
-          },
-          {
-            "weight": 1.1143606456362487,
-            "source": "desert",
-            "target": "base"
-          },
-          {
-            "weight": 0.39923455835752825,
-            "source": "ground",
-            "target": "distribution"
-          },
-          {
-            "weight": 0.2657031657330057,
-            "source": "ground",
-            "target": "theory"
-          },
-          {
-            "weight": 0.4927606163683517,
-            "source": "ground",
-            "target": "democracy"
-          },
-          {
-            "weight": 0.6179237593223578,
-            "source": "ground",
-            "target": "give"
-          },
-          {
-            "weight": 1.1732011456591822,
-            "source": "public",
-            "target": "citizen"
-          },
-          {
-            "weight": 0.06453852113757116,
-            "source": "public",
-            "target": "basis"
-          },
-          {
-            "weight": 0.3389753668393314,
-            "source": "public",
-            "target": "meritorious"
-          },
-          {
-            "weight": 0.9320390888422941,
-            "source": "public",
-            "target": "system"
-          },
-          {
-            "weight": 0.4502010019495558,
-            "source": "public",
-            "target": "vote"
-          },
-          {
-            "weight": 0.37242330090687153,
-            "source": "system",
-            "target": "base"
-          },
-          {
-            "weight": 0.015748356968139112,
-            "source": "system",
-            "target": "give"
-          },
-          {
-            "weight": 0.32590328527197865,
-            "source": "system",
-            "target": "citizen"
-          },
-          {
-            "weight": 0.5837323945740786,
-            "source": "system",
-            "target": "vote"
-          },
-          {
-            "weight": 0.5837323945740786,
-            "source": "system",
-            "target": "democracy"
+            "source": "meritocracy",
+            "target": "good"
           },
           {
             "weight": 1.1268188805582906,
             "source": "meritocracy",
             "target": "democracy"
+          },
+          {
+            "weight": 0.43367169999834526,
+            "source": "meritocracy",
+            "target": "justice"
+          },
+          {
+            "weight": 0.10988462290444814,
+            "source": "meritocracy",
+            "target": "equal"
+          },
+          {
+            "weight": 0.01983834221966438,
+            "source": "meritocracy",
+            "target": "people"
           },
           {
             "weight": 0.3695928433138229,
@@ -2144,14 +1919,214 @@
             "target": "theory"
           },
           {
-            "weight": 1.6941791408891909,
-            "source": "base",
+            "weight": 0.12169693497751977,
+            "source": "democracy",
+            "target": "political"
+          },
+          {
+            "weight": 0.4927606163683517,
+            "source": "democracy",
+            "target": "ground"
+          },
+          {
+            "weight": 0.5837323945740786,
+            "source": "democracy",
+            "target": "system"
+          },
+          {
+            "weight": 0.14792013007662227,
+            "source": "ground",
+            "target": "people"
+          },
+          {
+            "weight": 0.39923455835752825,
+            "source": "ground",
             "target": "distribution"
           },
           {
-            "weight": 0.015748356968139112,
-            "source": "base",
+            "weight": 0.43560220252840315,
+            "source": "ground",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.14792013007662227,
+            "source": "ground",
+            "target": "good"
+          },
+          {
+            "weight": 0.2657031657330057,
+            "source": "ground",
+            "target": "theory"
+          },
+          {
+            "weight": 0.6179237593223578,
+            "source": "ground",
             "target": "give"
+          },
+          {
+            "weight": 0.27525955245322375,
+            "source": "person",
+            "target": "good"
+          },
+          {
+            "weight": 0.9143395117428933,
+            "source": "person",
+            "target": "meritorious"
+          },
+          {
+            "weight": 0.6807246605613881,
+            "source": "person",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.00863088919927509,
+            "source": "person",
+            "target": "equal"
+          },
+          {
+            "weight": 0.16989903679539742,
+            "source": "person",
+            "target": "political"
+          },
+          {
+            "weight": 1.1143606456362487,
+            "source": "race",
+            "target": "give"
+          },
+          {
+            "weight": 1.2966822024302034,
+            "source": "race",
+            "target": "basis"
+          },
+          {
+            "weight": 0.35222059358935215,
+            "source": "basis",
+            "target": "good"
+          },
+          {
+            "weight": 1.0453677741492975,
+            "source": "basis",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.06453852113757116,
+            "source": "basis",
+            "target": "people"
+          },
+          {
+            "weight": 0.06453852113757116,
+            "source": "basis",
+            "target": "public"
+          },
+          {
+            "weight": 1.341173925839421,
+            "source": "justice",
+            "target": "theory"
+          },
+          {
+            "weight": 0.7378830744013368,
+            "source": "justice",
+            "target": "deserve"
+          },
+          {
+            "weight": 1.3256697393034558,
+            "source": "justice",
+            "target": "give"
+          },
+          {
+            "weight": 0.04473589384139152,
+            "source": "justice",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.5837323945740786,
+            "source": "justice",
+            "target": "base"
+          },
+          {
+            "weight": 1.8467144301015685,
+            "source": "opportunity",
+            "target": "equal"
+          },
+          {
+            "weight": 0.20380058847107874,
+            "source": "opportunity",
+            "target": "people"
+          },
+          {
+            "weight": 0.20380058847107874,
+            "source": "opportunity",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.20380058847107874,
+            "source": "opportunity",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.1848246870120731,
+            "source": "meritorious",
+            "target": "distribution"
+          },
+          {
+            "weight": 0.010471299867295437,
+            "source": "meritorious",
+            "target": "political"
+          },
+          {
+            "weight": 0.0723467035853829,
+            "source": "meritorious",
+            "target": "equal"
+          },
+          {
+            "weight": 0.11583181552512165,
+            "source": "meritorious",
+            "target": "give"
+          },
+          {
+            "weight": 0.6266574392911123,
+            "source": "meritorious",
+            "target": "good"
+          },
+          {
+            "weight": 0.7136688162807421,
+            "source": "meritorious",
+            "target": "citizen"
+          },
+          {
+            "weight": 0.3389753668393314,
+            "source": "meritorious",
+            "target": "public"
+          },
+          {
+            "weight": 1.1732011456591822,
+            "source": "public",
+            "target": "citizen"
+          },
+          {
+            "weight": 0.12641392485565872,
+            "source": "public",
+            "target": "equal"
+          },
+          {
+            "weight": 0.47000362924573563,
+            "source": "public",
+            "target": "political"
+          },
+          {
+            "weight": 0.9320390888422941,
+            "source": "public",
+            "target": "system"
+          },
+          {
+            "weight": 1.7793369492294977,
+            "source": "give",
+            "target": "deserve"
+          },
+          {
+            "weight": 1.0861897686695525,
+            "source": "give",
+            "target": "people"
           },
           {
             "weight": 0.4212134650763035,
@@ -2159,52 +2134,126 @@
             "target": "distribution"
           },
           {
-            "weight": 0.11583181552512165,
+            "weight": 0.30873548164961323,
             "source": "give",
-            "target": "meritorious"
+            "target": "equal"
+          },
+          {
+            "weight": 0.16989903679539742,
+            "source": "give",
+            "target": "good"
+          },
+          {
+            "weight": 0.015748356968139112,
+            "source": "give",
+            "target": "base"
+          },
+          {
+            "weight": 0.4575811092471783,
+            "source": "give",
+            "target": "meritocrat"
+          },
+          {
+            "weight": 0.015748356968139112,
+            "source": "give",
+            "target": "system"
+          },
+          {
+            "weight": 0.5265739807341298,
+            "source": "meritocrat",
+            "target": "base"
+          },
+          {
+            "weight": 0.27525955245322375,
+            "source": "meritocrat",
+            "target": "deserve"
+          },
+          {
+            "weight": 0.4984031037674336,
+            "source": "meritocrat",
+            "target": "people"
+          },
+          {
+            "weight": 0.12110887262596541,
+            "source": "meritocrat",
+            "target": "system"
+          },
+          {
+            "weight": 1.2403404484968108,
+            "source": "deserve",
+            "target": "people"
+          },
+          {
+            "weight": 0.031103745051333856,
+            "source": "equal",
+            "target": "citizen"
+          },
+          {
+            "weight": 0.2805646046829169,
+            "source": "equal",
+            "target": "people"
+          },
+          {
+            "weight": 0.06453852113757116,
+            "source": "people",
+            "target": "political"
+          },
+          {
+            "weight": 0.23889190828234888,
+            "source": "people",
+            "target": "system"
+          },
+          {
+            "weight": 0.23889190828234888,
+            "source": "people",
+            "target": "base"
+          },
+          {
+            "weight": 0.4620354595965586,
+            "source": "people",
+            "target": "distribution"
+          },
+          {
+            "weight": 1.6941791408891909,
+            "source": "distribution",
+            "target": "base"
+          },
+          {
+            "weight": 0.4620354595965586,
+            "source": "distribution",
+            "target": "good"
           },
           {
             "weight": 1.1143606456362487,
-            "source": "give",
-            "target": "race"
+            "source": "system",
+            "target": "political"
           },
           {
-            "weight": 0.10189430768134015,
-            "source": "democracy",
-            "target": "vote"
+            "weight": 0.37242330090687153,
+            "source": "system",
+            "target": "base"
           },
           {
-            "weight": 1.2966822024302034,
-            "source": "basis",
-            "target": "race"
+            "weight": 0.32590328527197865,
+            "source": "system",
+            "target": "citizen"
           },
           {
-            "weight": 0.2960503221222976,
-            "source": "race",
-            "target": "vote"
+            "weight": 0.5753641449035618,
+            "source": "political",
+            "target": "good"
           },
           {
-            "weight": 0.7136688162807421,
-            "source": "citizen",
-            "target": "meritorious"
-          },
-          {
-            "weight": 1.0480380027051763,
-            "source": "citizen",
-            "target": "vote"
-          },
-          {
-            "weight": 0.1848246870120731,
-            "source": "distribution",
-            "target": "meritorious"
-          },
-          {
-            "weight": 0.13353139262452257,
-            "source": "distribution",
-            "target": "contribution"
+            "weight": 0.9247397863606825,
+            "source": "political",
+            "target": "citizen"
           }
         ]
       }
     }
+  ],
+  "stems": [
+    "humane",
+    "humaneness"
   ]
 }

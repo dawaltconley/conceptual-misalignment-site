@@ -2,7 +2,7 @@
   "term": "righteousness",
   "sources": [
     {
-      "url": "https://plato.stanford.edu/search/searcher.py?query=righteousness",
+      "url": "https://plato.stanford.edu/search/searcher.py?query=righteousness+righteous*",
       "title": "Combined",
       "description": "Results from all articles",
       "co_occurance": {
@@ -11,404 +11,454 @@
         "graph": {},
         "nodes": [
           {
-            "id": "question"
+            "id": "authority"
           },
           {
-            "id": "man"
+            "id": "matter"
           },
           {
-            "id": "fact"
-          },
-          {
-            "id": "hand"
-          },
-          {
-            "id": "salvation"
-          },
-          {
-            "id": "righteousness"
-          },
-          {
-            "id": "think"
-          },
-          {
-            "id": "change"
-          },
-          {
-            "id": "act"
-          },
-          {
-            "id": "people"
-          },
-          {
-            "id": "divine"
-          },
-          {
-            "id": "rational"
-          },
-          {
-            "id": "morality"
+            "id": "reward"
           },
           {
             "id": "come"
           },
           {
-            "id": "form"
+            "id": "divine"
           },
           {
-            "id": "reward"
+            "id": "people"
+          },
+          {
+            "id": "morality"
+          },
+          {
+            "id": "fact"
+          },
+          {
+            "id": "rule"
+          },
+          {
+            "id": "righteousness"
+          },
+          {
+            "id": "spirit"
+          },
+          {
+            "id": "act"
+          },
+          {
+            "id": "punishment"
+          },
+          {
+            "id": "grace"
+          },
+          {
+            "id": "hand"
+          },
+          {
+            "id": "think"
           }
         ],
         "edges": [
           {
-            "weight": 1.3596750748446131,
-            "source": "question",
-            "target": "think"
-          },
-          {
-            "weight": 0.5633436580494371,
-            "source": "question",
-            "target": "morality"
-          },
-          {
-            "weight": 1.162964780598559,
-            "source": "question",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.33628620741409093,
-            "source": "question",
-            "target": "act"
-          },
-          {
-            "weight": 1.2762934659055623,
-            "source": "question",
-            "target": "change"
-          },
-          {
-            "weight": 1.6817585740137264,
-            "source": "question",
-            "target": "come"
-          },
-          {
-            "weight": 0.5831462853456169,
-            "source": "question",
-            "target": "rational"
-          },
-          {
-            "weight": 0.7109796568555018,
-            "source": "question",
-            "target": "fact"
-          },
-          {
-            "weight": 0.0408219945202552,
-            "source": "question",
+            "weight": 0.9162907318741551,
+            "source": "authority",
             "target": "divine"
-          },
-          {
-            "weight": 0.8933012136494564,
-            "source": "man",
-            "target": "people"
-          },
-          {
-            "weight": 1.1164447649636662,
-            "source": "man",
-            "target": "act"
-          },
-          {
-            "weight": 0.7535392712742977,
-            "source": "man",
-            "target": "think"
-          },
-          {
-            "weight": 1.691808909867228,
-            "source": "man",
-            "target": "hand"
-          },
-          {
-            "weight": 1.4466864518342428,
-            "source": "man",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.6701576623352465,
-            "source": "man",
-            "target": "change"
-          },
-          {
-            "weight": 1.2499761575881887,
-            "source": "man",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.0558201431472314,
-            "source": "fact",
-            "target": "morality"
-          },
-          {
-            "weight": 1.363304842895192,
-            "source": "fact",
-            "target": "rational"
-          },
-          {
-            "weight": 0.127833371509885,
-            "source": "fact",
-            "target": "divine"
-          },
-          {
-            "weight": 1.5864483942094016,
-            "source": "fact",
-            "target": "people"
-          },
-          {
-            "weight": 1.2499761575881887,
-            "source": "fact",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.7535392712742977,
-            "source": "fact",
-            "target": "think"
-          },
-          {
-            "weight": 1.0216512475319812,
-            "source": "hand",
-            "target": "divine"
-          },
-          {
-            "weight": 0.8708283577973978,
-            "source": "hand",
-            "target": "reward"
-          },
-          {
-            "weight": 1.4506468530503398,
-            "source": "hand",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.8708283577973978,
-            "source": "hand",
-            "target": "form"
-          },
-          {
-            "weight": 1.6473571472963942,
-            "source": "hand",
-            "target": "salvation"
-          },
-          {
-            "weight": 1.3171154604258173,
-            "source": "hand",
-            "target": "act"
-          },
-          {
-            "weight": 1.7871190896715528,
-            "source": "hand",
-            "target": "people"
-          },
-          {
-            "weight": 0.6257058997644128,
-            "source": "salvation",
-            "target": "rational"
-          },
-          {
-            "weight": 1.7243181884325225,
-            "source": "salvation",
-            "target": "come"
-          },
-          {
-            "weight": 0.6257058997644128,
-            "source": "salvation",
-            "target": "form"
-          },
-          {
-            "weight": 1.2055243950173549,
-            "source": "salvation",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.4022346892634092,
-            "source": "salvation",
-            "target": "think"
-          },
-          {
-            "weight": 0.083381608939051,
-            "source": "salvation",
-            "target": "divine"
-          },
-          {
-            "weight": 0.37884582183288695,
-            "source": "salvation",
-            "target": "act"
-          },
-          {
-            "weight": 2.0186308906562793,
-            "source": "righteousness",
-            "target": "morality"
-          },
-          {
-            "weight": 1.2729656758128876,
-            "source": "righteousness",
-            "target": "divine"
-          },
-          {
-            "weight": 2.2207550747464135,
-            "source": "righteousness",
-            "target": "reward"
-          },
-          {
-            "weight": 1.5684298887067234,
-            "source": "righteousness",
-            "target": "act"
-          },
-          {
-            "weight": 1.122142786078304,
-            "source": "righteousness",
-            "target": "rational"
-          },
-          {
-            "weight": 1.3452863373925137,
-            "source": "righteousness",
-            "target": "people"
-          },
-          {
-            "weight": 1.8152899666382492,
-            "source": "righteousness",
-            "target": "come"
-          },
-          {
-            "weight": 1.122142786078304,
-            "source": "righteousness",
-            "target": "form"
-          },
-          {
-            "weight": 1.8986715755773,
-            "source": "righteousness",
-            "target": "think"
-          },
-          {
-            "weight": 1.122142786078304,
-            "source": "righteousness",
-            "target": "change"
-          },
-          {
-            "weight": 1.2990504530281783,
-            "source": "think",
-            "target": "morality"
-          },
-          {
-            "weight": 0.6257058997644128,
-            "source": "think",
-            "target": "rational"
-          },
-          {
-            "weight": 0.8488494510786224,
-            "source": "think",
-            "target": "people"
-          },
-          {
-            "weight": 1.318853080324358,
-            "source": "think",
-            "target": "come"
-          },
-          {
-            "weight": 0.6257058997644128,
-            "source": "think",
-            "target": "form"
-          },
-          {
-            "weight": 0.6257058997644128,
-            "source": "think",
-            "target": "reward"
-          },
-          {
-            "weight": 1.0719930023928324,
-            "source": "think",
-            "target": "act"
-          },
-          {
-            "weight": 1.235471471385307,
-            "source": "change",
-            "target": "come"
-          },
-          {
-            "weight": 1.235471471385307,
-            "source": "change",
-            "target": "form"
-          },
-          {
-            "weight": 0.9886113934537812,
-            "source": "act",
-            "target": "reward"
-          },
-          {
-            "weight": 0.9886113934537812,
-            "source": "act",
-            "target": "rational"
-          },
-          {
-            "weight": 1.211754944767991,
-            "source": "act",
-            "target": "people"
-          },
-          {
-            "weight": 0.2954642128938359,
-            "source": "act",
-            "target": "come"
-          },
-          {
-            "weight": 0.2954642128938359,
-            "source": "act",
-            "target": "form"
           },
           {
             "weight": 1.4586150226995167,
-            "source": "people",
-            "target": "rational"
+            "source": "authority",
+            "target": "come"
           },
           {
-            "weight": 1.3217558399823195,
-            "source": "people",
-            "target": "divine"
-          },
-          {
-            "weight": 0.7654678421395714,
-            "source": "people",
-            "target": "reward"
-          },
-          {
-            "weight": 1.0986122886681098,
-            "source": "divine",
-            "target": "rational"
-          },
-          {
-            "weight": 1.3862943611198906,
-            "source": "divine",
-            "target": "reward"
-          },
-          {
-            "weight": 0.9279867716373463,
-            "source": "rational",
+            "weight": 0.05251803428344644,
+            "source": "authority",
             "target": "morality"
           },
           {
-            "weight": 1.235471471385307,
-            "source": "rational",
+            "weight": 1.0939719091116076,
+            "source": "authority",
+            "target": "righteousness"
+          },
+          {
+            "weight": 1.1511303229515562,
+            "source": "authority",
+            "target": "rule"
+          },
+          {
+            "weight": 0.9886113934537812,
+            "source": "authority",
+            "target": "people"
+          },
+          {
+            "weight": 1.4720380430316573,
+            "source": "authority",
+            "target": "matter"
+          },
+          {
+            "weight": 0.5831462853456169,
+            "source": "authority",
+            "target": "punishment"
+          },
+          {
+            "weight": 0.7654678421395714,
+            "source": "authority",
             "target": "reward"
+          },
+          {
+            "weight": 0.20015403308951107,
+            "source": "authority",
+            "target": "fact"
+          },
+          {
+            "weight": 0.5186077642080457,
+            "source": "authority",
+            "target": "act"
+          },
+          {
+            "weight": 1.0939719091116076,
+            "source": "authority",
+            "target": "hand"
+          },
+          {
+            "weight": 0.20015403308951107,
+            "source": "authority",
+            "target": "spirit"
+          },
+          {
+            "weight": 0.5965693056777575,
+            "source": "matter",
+            "target": "act"
+          },
+          {
+            "weight": 1.066572934923493,
+            "source": "matter",
+            "target": "people"
+          },
+          {
+            "weight": 0.6611078268153286,
+            "source": "matter",
+            "target": "punishment"
+          },
+          {
+            "weight": 0.1502822030493379,
+            "source": "matter",
+            "target": "reward"
+          },
+          {
+            "weight": 1.1719334505813195,
+            "source": "matter",
+            "target": "righteousness"
+          },
+          {
+            "weight": 1.6199581731082797,
+            "source": "matter",
+            "target": "think"
+          },
+          {
+            "weight": 1.2488944917174476,
+            "source": "matter",
+            "target": "come"
+          },
+          {
+            "weight": 0.766468342473155,
+            "source": "matter",
+            "target": "grace"
+          },
+          {
+            "weight": 0.9712627551191682,
+            "source": "matter",
+            "target": "fact"
+          },
+          {
+            "weight": 0.4787862700213741,
+            "source": "matter",
+            "target": "hand"
+          },
+          {
+            "weight": 3.3044417131978476,
+            "source": "reward",
+            "target": "punishment"
           },
           {
             "weight": 0.9279867716373463,
-            "source": "morality",
-            "target": "reward"
+            "source": "reward",
+            "target": "morality"
+          },
+          {
+            "weight": 1.3862943611198906,
+            "source": "reward",
+            "target": "divine"
+          },
+          {
+            "weight": 0.8708283577973978,
+            "source": "reward",
+            "target": "hand"
+          },
+          {
+            "weight": 2.257122718917288,
+            "source": "reward",
+            "target": "righteousness"
+          },
+          {
+            "weight": 1.8442775035115013,
+            "source": "reward",
+            "target": "rule"
+          },
+          {
+            "weight": 0.9886113934537812,
+            "source": "reward",
+            "target": "act"
           },
           {
             "weight": 1.235471471385307,
-            "source": "come",
-            "target": "reward"
+            "source": "reward",
+            "target": "come"
           },
           {
-            "weight": 0.5423242908253617,
+            "weight": 0.7654678421395714,
+            "source": "reward",
+            "target": "people"
+          },
+          {
+            "weight": 0.6257058997644128,
+            "source": "reward",
+            "target": "think"
+          },
+          {
+            "weight": 0.4653632496892333,
+            "source": "reward",
+            "target": "grace"
+          },
+          {
+            "weight": 1.9694406464655074,
             "source": "come",
-            "target": "form"
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.9279867716373463,
+            "source": "come",
+            "target": "rule"
+          },
+          {
+            "weight": 0.2954642128938359,
+            "source": "come",
+            "target": "act"
+          },
+          {
+            "weight": 1.318853080324358,
+            "source": "come",
+            "target": "think"
+          },
+          {
+            "weight": 1.4842747694800944,
+            "source": "divine",
+            "target": "rule"
+          },
+          {
+            "weight": 1.0216512475319812,
+            "source": "divine",
+            "target": "hand"
+          },
+          {
+            "weight": 1.2039728043259361,
+            "source": "divine",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.4271163556401458,
+            "source": "divine",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.127833371509885,
+            "source": "divine",
+            "target": "fact"
+          },
+          {
+            "weight": 1.3217558399823195,
+            "source": "divine",
+            "target": "people"
+          },
+          {
+            "weight": 1.5324768712979722,
+            "source": "divine",
+            "target": "grace"
+          },
+          {
+            "weight": 0.127833371509885,
+            "source": "divine",
+            "target": "spirit"
+          },
+          {
+            "weight": 1.5864483942094016,
+            "source": "people",
+            "target": "fact"
+          },
+          {
+            "weight": 1.211754944767991,
+            "source": "people",
+            "target": "act"
+          },
+          {
+            "weight": 0.5831462853456169,
+            "source": "people",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.7871190896715528,
+            "source": "people",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.8488494510786224,
+            "source": "people",
+            "target": "think"
+          },
+          {
+            "weight": 1.1511303229515562,
+            "source": "people",
+            "target": "rule"
+          },
+          {
+            "weight": 1.7871190896715528,
+            "source": "people",
+            "target": "hand"
+          },
+          {
+            "weight": 1.2990504530281783,
+            "source": "morality",
+            "target": "think"
+          },
+          {
+            "weight": 1.9496380191693277,
+            "source": "morality",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.7456652148433918,
+            "source": "morality",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.0558201431472314,
+            "source": "morality",
+            "target": "fact"
+          },
+          {
+            "weight": 0.6205020718893857,
+            "source": "morality",
+            "target": "rule"
+          },
+          {
+            "weight": 0.9986617293072826,
+            "source": "fact",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.7535392712742977,
+            "source": "fact",
+            "target": "think"
+          },
+          {
+            "weight": 1.2564908386093825,
+            "source": "rule",
+            "target": "hand"
+          },
+          {
+            "weight": 1.6619559467175469,
+            "source": "rule",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.2564908386093825,
+            "source": "rule",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.851025730501218,
+            "source": "rule",
+            "target": "grace"
+          },
+          {
+            "weight": 0.362672962587286,
+            "source": "rule",
+            "target": "spirit"
+          },
+          {
+            "weight": 1.1993324247694337,
+            "source": "righteousness",
+            "target": "hand"
+          },
+          {
+            "weight": 1.3816539815633884,
+            "source": "righteousness",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.7225805685339817,
+            "source": "righteousness",
+            "target": "act"
+          },
+          {
+            "weight": 1.6473571472963942,
+            "source": "righteousness",
+            "target": "think"
+          },
+          {
+            "weight": 1.4870144972212147,
+            "source": "righteousness",
+            "target": "grace"
+          },
+          {
+            "weight": 0.9986617293072826,
+            "source": "righteousness",
+            "target": "spirit"
+          },
+          {
+            "weight": 0.48783610554129203,
+            "source": "spirit",
+            "target": "punishment"
+          },
+          {
+            "weight": 0.5931966211991182,
+            "source": "spirit",
+            "target": "grace"
+          },
+          {
+            "weight": 0.9986617293072826,
+            "source": "spirit",
+            "target": "hand"
+          },
+          {
+            "weight": 1.499437017219772,
+            "source": "act",
+            "target": "punishment"
+          },
+          {
+            "weight": 1.3171154604258173,
+            "source": "act",
+            "target": "grace"
+          },
+          {
+            "weight": 1.0719930023928324,
+            "source": "act",
+            "target": "think"
+          },
+          {
+            "weight": 1.3171154604258173,
+            "source": "act",
+            "target": "hand"
+          },
+          {
+            "weight": 1.3816539815633884,
+            "source": "punishment",
+            "target": "hand"
+          },
+          {
+            "weight": 0.5487448586282844,
+            "source": "grace",
+            "target": "think"
           }
         ]
       }
@@ -423,10 +473,31 @@
         "graph": {},
         "nodes": [
           {
-            "id": "work"
+            "id": "rational"
           },
           {
             "id": "god"
+          },
+          {
+            "id": "authority"
+          },
+          {
+            "id": "reason"
+          },
+          {
+            "id": "righteousness"
+          },
+          {
+            "id": "duty"
+          },
+          {
+            "id": "moral"
+          },
+          {
+            "id": "work"
+          },
+          {
+            "id": "human"
           },
           {
             "id": "rule"
@@ -435,62 +506,71 @@
             "id": "nature"
           },
           {
-            "id": "reward"
-          },
-          {
-            "id": "good"
-          },
-          {
-            "id": "sanction"
-          },
-          {
             "id": "morality"
-          },
-          {
-            "id": "righteousness"
-          },
-          {
-            "id": "moral"
-          },
-          {
-            "id": "pain"
-          },
-          {
-            "id": "rational"
-          },
-          {
-            "id": "reason"
           },
           {
             "id": "pleasure"
           },
           {
-            "id": "duty"
+            "id": "good"
           },
           {
-            "id": "human"
+            "id": "pain"
+          },
+          {
+            "id": "reward"
           }
         ],
         "edges": [
           {
-            "weight": 0.08841095734405294,
-            "source": "work",
+            "weight": 0.6703325027937739,
+            "source": "rational",
             "target": "human"
           },
           {
-            "weight": 0.22957444164450017,
-            "source": "work",
-            "target": "moral"
-          },
-          {
-            "weight": 0.3124052105385756,
-            "source": "work",
+            "weight": 0.047028895601092975,
+            "source": "rational",
             "target": "morality"
           },
           {
-            "weight": 0.13720112151348496,
-            "source": "work",
-            "target": "reason"
+            "weight": 0.17550722037422434,
+            "source": "rational",
+            "target": "moral"
+          },
+          {
+            "weight": 1.1499055830556602,
+            "source": "rational",
+            "target": "duty"
+          },
+          {
+            "weight": 0.40066893584467134,
+            "source": "rational",
+            "target": "nature"
+          },
+          {
+            "weight": 0.44718895147956417,
+            "source": "rational",
+            "target": "reward"
+          },
+          {
+            "weight": 0.19587452319865808,
+            "source": "rational",
+            "target": "rule"
+          },
+          {
+            "weight": 0.4959791156489962,
+            "source": "rational",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.057724184717840965,
+            "source": "rational",
+            "target": "pleasure"
+          },
+          {
+            "weight": 0.9146894505071812,
+            "source": "god",
+            "target": "authority"
           },
           {
             "weight": 0.36464311358790924,
@@ -515,37 +595,187 @@
           {
             "weight": 0.22154226994723591,
             "source": "god",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.22154226994723591,
+            "source": "god",
             "target": "good"
           },
           {
-            "weight": 0.6270073780554004,
-            "source": "god",
-            "target": "sanction"
-          },
-          {
-            "weight": 0.3189346159558853,
-            "source": "rule",
-            "target": "human"
-          },
-          {
-            "weight": 0.6714071939235394,
-            "source": "rule",
+            "weight": 0.12421392598667394,
+            "source": "authority",
             "target": "moral"
           },
           {
-            "weight": 0.5908683314395271,
-            "source": "rule",
+            "weight": 0.10821358464023279,
+            "source": "authority",
+            "target": "human"
+          },
+          {
+            "weight": 0.34937564145712086,
+            "source": "authority",
+            "target": "nature"
+          },
+          {
+            "weight": 0.6678293725756554,
+            "source": "authority",
             "target": "reason"
+          },
+          {
+            "weight": 0.44468582126144574,
+            "source": "authority",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.8377284093710529,
+            "source": "authority",
+            "target": "rule"
+          },
+          {
+            "weight": 0.3958956570920137,
+            "source": "authority",
+            "target": "reward"
+          },
+          {
+            "weight": 0.13720112151348496,
+            "source": "reason",
+            "target": "work"
+          },
+          {
+            "weight": 0.6190392084062235,
+            "source": "reason",
+            "target": "human"
+          },
+          {
+            "weight": 0.5908683314395271,
+            "source": "reason",
+            "target": "rule"
+          },
+          {
+            "weight": 0.5725191927713306,
+            "source": "reason",
+            "target": "nature"
+          },
+          {
+            "weight": 0.6678293725756554,
+            "source": "reason",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.33135713595444244,
+            "source": "reason",
+            "target": "reward"
+          },
+          {
+            "weight": 0.41189599843845487,
+            "source": "righteousness",
+            "target": "moral"
+          },
+          {
+            "weight": 1.3820299623334331,
+            "source": "righteousness",
+            "target": "morality"
+          },
+          {
+            "weight": 1.089042837651959,
+            "source": "righteousness",
+            "target": "reward"
+          },
+          {
+            "weight": 0.8377284093710529,
+            "source": "righteousness",
+            "target": "rule"
+          },
+          {
+            "weight": 1.089042837651959,
+            "source": "righteousness",
+            "target": "human"
+          },
+          {
+            "weight": 0.1823215567939546,
+            "source": "righteousness",
+            "target": "duty"
+          },
+          {
+            "weight": 0.006430890330290331,
+            "source": "righteousness",
+            "target": "pleasure"
+          },
+          {
+            "weight": 0.6931471805599453,
+            "source": "duty",
+            "target": "human"
+          },
+          {
+            "weight": 0.5549968420791281,
+            "source": "duty",
+            "target": "moral"
+          },
+          {
+            "weight": 0.0870113769896297,
+            "source": "duty",
+            "target": "nature"
+          },
+          {
+            "weight": 0.6603573577369545,
+            "source": "duty",
+            "target": "pleasure"
+          },
+          {
+            "weight": 0.13353139262452257,
+            "source": "duty",
+            "target": "reward"
+          },
+          {
+            "weight": 0.22957444164450017,
+            "source": "moral",
+            "target": "work"
+          },
+          {
+            "weight": 0.18078427747506812,
+            "source": "moral",
+            "target": "reward"
+          },
+          {
+            "weight": 0.6714071939235394,
+            "source": "moral",
+            "target": "rule"
+          },
+          {
+            "weight": 0.12421392598667394,
+            "source": "moral",
+            "target": "good"
+          },
+          {
+            "weight": 0.08841095734405294,
+            "source": "work",
+            "target": "human"
+          },
+          {
+            "weight": 0.3124052105385756,
+            "source": "work",
+            "target": "morality"
+          },
+          {
+            "weight": 0.45777106081010116,
+            "source": "human",
+            "target": "morality"
+          },
+          {
+            "weight": 0.3189346159558853,
+            "source": "human",
+            "target": "rule"
+          },
+          {
+            "weight": 0.9937326578476341,
+            "source": "human",
+            "target": "nature"
           },
           {
             "weight": 1.0120817965158306,
             "source": "rule",
             "target": "reward"
-          },
-          {
-            "weight": 0.36772478012531734,
-            "source": "rule",
-            "target": "righteousness"
           },
           {
             "weight": 0.049271049006782835,
@@ -558,74 +788,19 @@
             "target": "good"
           },
           {
-            "weight": 0.19587452319865808,
-            "source": "rule",
-            "target": "rational"
-          },
-          {
-            "weight": 0.1445812288111075,
-            "source": "rule",
-            "target": "sanction"
-          },
-          {
-            "weight": 0.9937326578476341,
-            "source": "nature",
-            "target": "human"
-          },
-          {
-            "weight": 0.5725191927713306,
-            "source": "nature",
-            "target": "reason"
-          },
-          {
-            "weight": 0.0870113769896297,
-            "source": "nature",
-            "target": "duty"
-          },
-          {
-            "weight": 0.40066893584467134,
-            "source": "nature",
-            "target": "rational"
-          },
-          {
-            "weight": 0.18078427747506812,
-            "source": "reward",
-            "target": "moral"
-          },
-          {
-            "weight": 0.6190392084062235,
-            "source": "reward",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.089042837651959,
-            "source": "reward",
+            "weight": 1.392725251450181,
+            "source": "pleasure",
             "target": "good"
           },
           {
-            "weight": 0.6615988228250194,
-            "source": "reward",
+            "weight": 2.2180442051186096,
+            "source": "pleasure",
             "target": "pain"
           },
           {
             "weight": 1.0562530148289682,
-            "source": "reward",
-            "target": "pleasure"
-          },
-          {
-            "weight": 0.33135713595444244,
-            "source": "reward",
-            "target": "reason"
-          },
-          {
-            "weight": 0.44718895147956417,
-            "source": "reward",
-            "target": "rational"
-          },
-          {
-            "weight": 0.13353139262452257,
-            "source": "reward",
-            "target": "duty"
+            "source": "pleasure",
+            "target": "reward"
           },
           {
             "weight": 1.557686847381655,
@@ -633,109 +808,14 @@
             "target": "pain"
           },
           {
-            "weight": 1.392725251450181,
+            "weight": 1.089042837651959,
             "source": "good",
-            "target": "pleasure"
+            "target": "reward"
           },
           {
-            "weight": 0.12421392598667394,
-            "source": "good",
-            "target": "moral"
-          },
-          {
-            "weight": 0.28341767366532333,
-            "source": "sanction",
-            "target": "morality"
-          },
-          {
-            "weight": 0.41189599843845487,
-            "source": "sanction",
-            "target": "pleasure"
-          },
-          {
-            "weight": 0.1823215567939546,
-            "source": "sanction",
-            "target": "duty"
-          },
-          {
-            "weight": 0.45777106081010116,
-            "source": "morality",
-            "target": "human"
-          },
-          {
-            "weight": 0.047028895601092975,
-            "source": "morality",
-            "target": "rational"
-          },
-          {
-            "weight": 1.4228519568536881,
-            "source": "morality",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.22957444164450017,
-            "source": "righteousness",
-            "target": "moral"
-          },
-          {
-            "weight": 0.19782574332991987,
-            "source": "righteousness",
-            "target": "reason"
-          },
-          {
-            "weight": 1.0245043165143877,
-            "source": "righteousness",
-            "target": "human"
-          },
-          {
-            "weight": 0.719122666963206,
-            "source": "righteousness",
-            "target": "rational"
-          },
-          {
-            "weight": 0.5549968420791281,
-            "source": "moral",
-            "target": "duty"
-          },
-          {
-            "weight": 0.17550722037422434,
-            "source": "moral",
-            "target": "rational"
-          },
-          {
-            "weight": 2.2180442051186096,
+            "weight": 0.6615988228250194,
             "source": "pain",
-            "target": "pleasure"
-          },
-          {
-            "weight": 0.6703325027937739,
-            "source": "rational",
-            "target": "human"
-          },
-          {
-            "weight": 1.1499055830556602,
-            "source": "rational",
-            "target": "duty"
-          },
-          {
-            "weight": 0.057724184717840965,
-            "source": "rational",
-            "target": "pleasure"
-          },
-          {
-            "weight": 0.6190392084062235,
-            "source": "reason",
-            "target": "human"
-          },
-          {
-            "weight": 0.6603573577369545,
-            "source": "pleasure",
-            "target": "duty"
-          },
-          {
-            "weight": 0.6931471805599453,
-            "source": "duty",
-            "target": "human"
+            "target": "reward"
           }
         ]
       }
@@ -750,125 +830,55 @@
         "graph": {},
         "nodes": [
           {
-            "id": "christian"
-          },
-          {
-            "id": "work"
-          },
-          {
             "id": "god"
-          },
-          {
-            "id": "argue"
-          },
-          {
-            "id": "matter"
-          },
-          {
-            "id": "good"
-          },
-          {
-            "id": "luther"
-          },
-          {
-            "id": "theology"
-          },
-          {
-            "id": "lead"
-          },
-          {
-            "id": "righteousness"
           },
           {
             "id": "law"
           },
           {
-            "id": "grace"
-          },
-          {
-            "id": "free"
-          },
-          {
             "id": "salvation"
           },
           {
-            "id": "philosophy"
+            "id": "relation"
           },
           {
-            "id": "relation"
+            "id": "authority"
+          },
+          {
+            "id": "wa"
+          },
+          {
+            "id": "christian"
+          },
+          {
+            "id": "righteousness"
+          },
+          {
+            "id": "aristotle"
+          },
+          {
+            "id": "work"
+          },
+          {
+            "id": "lw"
+          },
+          {
+            "id": "lead"
+          },
+          {
+            "id": "argue"
+          },
+          {
+            "id": "view"
+          },
+          {
+            "id": "matter"
+          },
+          {
+            "id": "grace"
           }
         ],
         "edges": [
-          {
-            "weight": 0.8236755679246984,
-            "source": "christian",
-            "target": "matter"
-          },
-          {
-            "weight": 0.07246458640999179,
-            "source": "christian",
-            "target": "work"
-          },
-          {
-            "weight": 0.5171504076714376,
-            "source": "christian",
-            "target": "good"
-          },
-          {
-            "weight": 1.1175881901271154,
-            "source": "christian",
-            "target": "law"
-          },
-          {
-            "weight": 0.4526118865338664,
-            "source": "christian",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.19197324803384508,
-            "source": "work",
-            "target": "luther"
-          },
-          {
-            "weight": 0.34871796303815,
-            "source": "work",
-            "target": "relation"
-          },
-          {
-            "weight": 0.005773211911319587,
-            "source": "work",
-            "target": "theology"
-          },
-          {
-            "weight": 0.34871796303815,
-            "source": "work",
-            "target": "lead"
-          },
-          {
-            "weight": 0.038563034734310594,
-            "source": "work",
-            "target": "free"
-          },
-          {
-            "weight": 0.5871289864831483,
-            "source": "work",
-            "target": "grace"
-          },
-          {
-            "weight": 0.4440281428424749,
-            "source": "work",
-            "target": "salvation"
-          },
-          {
-            "weight": 1.36031887471663,
-            "source": "work",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.0318148077445939,
-            "source": "work",
-            "target": "good"
-          },
           {
             "weight": 0.45953232937844013,
             "source": "god",
@@ -883,11 +893,6 @@
             "weight": 0.7472144018302211,
             "source": "god",
             "target": "salvation"
-          },
-          {
-            "weight": 0.40628781485962795,
-            "source": "god",
-            "target": "free"
           },
           {
             "weight": 0.3794896217049037,
@@ -915,224 +920,34 @@
             "target": "matter"
           },
           {
-            "weight": 0.3009272992018016,
+            "weight": 0.44183275227903923,
             "source": "god",
-            "target": "good"
+            "target": "authority"
           },
           {
-            "weight": 0.6671716941566846,
-            "source": "argue",
-            "target": "grace"
+            "weight": 1.4403615823901663,
+            "source": "law",
+            "target": "righteousness"
           },
           {
-            "weight": 0.23638877806423034,
-            "source": "argue",
+            "weight": 1.1526795099383853,
+            "source": "law",
             "target": "salvation"
           },
           {
-            "weight": 0.12891511206670814,
-            "source": "argue",
-            "target": "luther"
-          },
-          {
             "weight": 0.1410785982599056,
-            "source": "argue",
+            "source": "law",
             "target": "lead"
-          },
-          {
-            "weight": 0.4287606707116864,
-            "source": "argue",
-            "target": "relation"
-          },
-          {
-            "weight": 0.789774016249017,
-            "source": "argue",
-            "target": "matter"
-          },
-          {
-            "weight": 0.706392407309966,
-            "source": "argue",
-            "target": "good"
-          },
-          {
-            "weight": 0.2727564222351052,
-            "source": "argue",
-            "target": "free"
           },
           {
             "weight": 0.05406722127027579,
-            "source": "argue",
-            "target": "law"
-          },
-          {
-            "weight": 0.7472144018302211,
-            "source": "argue",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.1520566406284025,
-            "source": "matter",
-            "target": "luther"
-          },
-          {
-            "weight": 0.8767853932386467,
-            "source": "matter",
-            "target": "relation"
-          },
-          {
-            "weight": 0.18363821267870142,
-            "source": "matter",
-            "target": "lead"
-          },
-          {
-            "weight": 1.1952391243571814,
-            "source": "matter",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.01658412801553526,
-            "source": "matter",
-            "target": "grace"
-          },
-          {
-            "weight": 1.1952391243571814,
-            "source": "matter",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.16116535682664285,
-            "source": "matter",
-            "target": "free"
-          },
-          {
-            "weight": 0.4612699492769809,
-            "source": "matter",
-            "target": "good"
-          },
-          {
-            "weight": 1.319496880196375,
-            "source": "good",
-            "target": "grace"
-          },
-          {
-            "weight": 0.7934037842995957,
-            "source": "good",
-            "target": "relation"
-          },
-          {
-            "weight": 0.5057217118478148,
-            "source": "good",
-            "target": "lead"
-          },
-          {
-            "weight": 0.6010318916521397,
-            "source": "good",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.6373995358230146,
-            "source": "good",
-            "target": "free"
-          },
-          {
-            "weight": 0.41871033485818504,
-            "source": "good",
-            "target": "law"
-          },
-          {
-            "weight": 0.14685281275337544,
-            "source": "luther",
-            "target": "philosophy"
-          },
-          {
-            "weight": 0.07134526024523041,
-            "source": "luther",
-            "target": "relation"
-          },
-          {
-            "weight": 0.1558445239453396,
-            "source": "luther",
-            "target": "theology"
-          },
-          {
-            "weight": 0.11341092553074296,
-            "source": "luther",
-            "target": "free"
-          },
-          {
-            "weight": 0.4543375125013362,
-            "source": "luther",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.5292686945446954,
-            "source": "theology",
-            "target": "philosophy"
-          },
-          {
-            "weight": 0.5782924046826502,
-            "source": "theology",
-            "target": "relation"
-          },
-          {
-            "weight": 0.8967461358011849,
-            "source": "theology",
-            "target": "righteousness"
-          },
-          {
-            "weight": 0.1410785982599056,
-            "source": "lead",
-            "target": "law"
-          },
-          {
-            "weight": 1.0165473356138055,
-            "source": "lead",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.4665009986945335,
-            "source": "lead",
-            "target": "grace"
-          },
-          {
-            "weight": 1.2396908869280152,
-            "source": "lead",
-            "target": "righteousness"
-          },
-          {
-            "weight": 1.1526795099383853,
-            "source": "righteousness",
-            "target": "law"
-          },
-          {
-            "weight": 1.33500106673234,
-            "source": "righteousness",
-            "target": "salvation"
-          },
-          {
-            "weight": 0.5240708505160113,
-            "source": "righteousness",
-            "target": "free"
-          },
-          {
-            "weight": 1.072636802264849,
-            "source": "righteousness",
-            "target": "grace"
-          },
-          {
-            "weight": 1.2396908869280152,
-            "source": "righteousness",
-            "target": "relation"
-          },
-          {
-            "weight": 1.1526795099383853,
             "source": "law",
-            "target": "salvation"
+            "target": "argue"
           },
           {
-            "weight": 0.3417492937220567,
+            "weight": 0.9808292530117262,
             "source": "law",
-            "target": "free"
+            "target": "authority"
           },
           {
             "weight": 0.5465437063680699,
@@ -1140,29 +955,49 @@
             "target": "relation"
           },
           {
-            "weight": 0.038563034734310594,
-            "source": "grace",
-            "target": "free"
+            "weight": 0.23638877806423034,
+            "source": "law",
+            "target": "lw"
+          },
+          {
+            "weight": 0.3604414267342092,
+            "source": "law",
+            "target": "wa"
+          },
+          {
+            "weight": 1.1175881901271154,
+            "source": "law",
+            "target": "christian"
+          },
+          {
+            "weight": 0.9295359586241757,
+            "source": "salvation",
+            "target": "righteousness"
           },
           {
             "weight": 0.8494932509506393,
-            "source": "grace",
-            "target": "salvation"
+            "source": "salvation",
+            "target": "grace"
           },
           {
-            "weight": 0.9773266224605243,
-            "source": "grace",
-            "target": "relation"
+            "weight": 0.4440281428424749,
+            "source": "salvation",
+            "target": "work"
           },
           {
-            "weight": 0.706392407309966,
-            "source": "free",
-            "target": "salvation"
+            "weight": 0.23638877806423034,
+            "source": "salvation",
+            "target": "argue"
           },
           {
-            "weight": 0.20561711939747665,
-            "source": "free",
-            "target": "relation"
+            "weight": 1.0165473356138055,
+            "source": "salvation",
+            "target": "lead"
+          },
+          {
+            "weight": 1.1952391243571814,
+            "source": "salvation",
+            "target": "matter"
           },
           {
             "weight": 0.7288652631620246,
@@ -1170,9 +1005,259 @@
             "target": "relation"
           },
           {
-            "weight": 0.7090626358658448,
-            "source": "philosophy",
-            "target": "relation"
+            "weight": 0.4526118865338664,
+            "source": "salvation",
+            "target": "christian"
+          },
+          {
+            "weight": 0.34871796303815,
+            "source": "relation",
+            "target": "work"
+          },
+          {
+            "weight": 0.9773266224605243,
+            "source": "relation",
+            "target": "grace"
+          },
+          {
+            "weight": 0.8767853932386467,
+            "source": "relation",
+            "target": "matter"
+          },
+          {
+            "weight": 0.5465437063680699,
+            "source": "relation",
+            "target": "view"
+          },
+          {
+            "weight": 0.4287606707116864,
+            "source": "relation",
+            "target": "argue"
+          },
+          {
+            "weight": 0.3746934494414107,
+            "source": "relation",
+            "target": "authority"
+          },
+          {
+            "weight": 0.8342257788198509,
+            "source": "relation",
+            "target": "righteousness"
+          },
+          {
+            "weight": 1.023388867430522,
+            "source": "authority",
+            "target": "matter"
+          },
+          {
+            "weight": 0.7985076962177716,
+            "source": "authority",
+            "target": "argue"
+          },
+          {
+            "weight": 0.28768207245178085,
+            "source": "authority",
+            "target": "view"
+          },
+          {
+            "weight": 0.09844007281325251,
+            "source": "authority",
+            "target": "christian"
+          },
+          {
+            "weight": 0.9808292530117262,
+            "source": "authority",
+            "target": "righteousness"
+          },
+          {
+            "weight": 1.7467357878540999,
+            "source": "wa",
+            "target": "lw"
+          },
+          {
+            "weight": 0.46580194239203554,
+            "source": "wa",
+            "target": "argue"
+          },
+          {
+            "weight": 0.20629074690695104,
+            "source": "wa",
+            "target": "aristotle"
+          },
+          {
+            "weight": 0.6481234991859902,
+            "source": "wa",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.17811986994025458,
+            "source": "wa",
+            "target": "view"
+          },
+          {
+            "weight": 0.5579724021916928,
+            "source": "christian",
+            "target": "view"
+          },
+          {
+            "weight": 0.6269652736786441,
+            "source": "christian",
+            "target": "aristotle"
+          },
+          {
+            "weight": 0.8236755679246984,
+            "source": "christian",
+            "target": "matter"
+          },
+          {
+            "weight": 0.07246458640999179,
+            "source": "christian",
+            "target": "work"
+          },
+          {
+            "weight": 0.5579724021916928,
+            "source": "christian",
+            "target": "righteousness"
+          },
+          {
+            "weight": 0.9548537666084657,
+            "source": "righteousness",
+            "target": "work"
+          },
+          {
+            "weight": 0.5930637220029628,
+            "source": "righteousness",
+            "target": "aristotle"
+          },
+          {
+            "weight": 1.36031887471663,
+            "source": "righteousness",
+            "target": "grace"
+          },
+          {
+            "weight": 0.706392407309966,
+            "source": "righteousness",
+            "target": "lw"
+          },
+          {
+            "weight": 0.7472144018302211,
+            "source": "righteousness",
+            "target": "view"
+          },
+          {
+            "weight": 0.789774016249017,
+            "source": "righteousness",
+            "target": "matter"
+          },
+          {
+            "weight": 1.034896474282002,
+            "source": "righteousness",
+            "target": "argue"
+          },
+          {
+            "weight": 0.8342257788198509,
+            "source": "righteousness",
+            "target": "lead"
+          },
+          {
+            "weight": 0.8007030867812073,
+            "source": "aristotle",
+            "target": "work"
+          },
+          {
+            "weight": 0.26455965503092677,
+            "source": "aristotle",
+            "target": "lw"
+          },
+          {
+            "weight": 0.34794126396997777,
+            "source": "aristotle",
+            "target": "matter"
+          },
+          {
+            "weight": 0.18759861389479834,
+            "source": "aristotle",
+            "target": "argue"
+          },
+          {
+            "weight": 0.5930637220029628,
+            "source": "aristotle",
+            "target": "view"
+          },
+          {
+            "weight": 0.22533894187764542,
+            "source": "aristotle",
+            "target": "grace"
+          },
+          {
+            "weight": 0.34871796303815,
+            "source": "work",
+            "target": "lead"
+          },
+          {
+            "weight": 0.5871289864831483,
+            "source": "work",
+            "target": "grace"
+          },
+          {
+            "weight": 0.5240708505160113,
+            "source": "lw",
+            "target": "argue"
+          },
+          {
+            "weight": 0.23638877806423034,
+            "source": "lw",
+            "target": "view"
+          },
+          {
+            "weight": 0.1410785982599056,
+            "source": "lead",
+            "target": "view"
+          },
+          {
+            "weight": 0.1410785982599056,
+            "source": "lead",
+            "target": "argue"
+          },
+          {
+            "weight": 0.18363821267870142,
+            "source": "lead",
+            "target": "matter"
+          },
+          {
+            "weight": 0.4665009986945335,
+            "source": "lead",
+            "target": "grace"
+          },
+          {
+            "weight": 0.6671716941566846,
+            "source": "argue",
+            "target": "grace"
+          },
+          {
+            "weight": 0.789774016249017,
+            "source": "argue",
+            "target": "matter"
+          },
+          {
+            "weight": 0.3417492937220567,
+            "source": "argue",
+            "target": "view"
+          },
+          {
+            "weight": 0.789774016249017,
+            "source": "view",
+            "target": "matter"
+          },
+          {
+            "weight": 1.072636802264849,
+            "source": "view",
+            "target": "grace"
+          },
+          {
+            "weight": 0.01658412801553526,
+            "source": "matter",
+            "target": "grace"
           }
         ]
       }
@@ -1187,34 +1272,13 @@
         "graph": {},
         "nodes": [
           {
-            "id": "work"
-          },
-          {
-            "id": "book"
-          },
-          {
-            "id": "philosophical"
-          },
-          {
-            "id": "ibn"
-          },
-          {
-            "id": "hebrew"
+            "id": "arabic"
           },
           {
             "id": "term"
           },
           {
-            "id": "maimonides"
-          },
-          {
-            "id": "arabic"
-          },
-          {
-            "id": "tibbon"
-          },
-          {
-            "id": "translation"
+            "id": "hebrew"
           },
           {
             "id": "write"
@@ -1223,94 +1287,160 @@
             "id": "text"
           },
           {
+            "id": "philosophical"
+          },
+          {
             "id": "translate"
           },
           {
-            "id": "commentary"
-          },
-          {
-            "id": "al"
+            "id": "book"
           },
           {
             "id": "philosophy"
           },
           {
-            "id": "guide"
+            "id": "ibn"
           },
           {
             "id": "discuss"
+          },
+          {
+            "id": "maimonides"
+          },
+          {
+            "id": "work"
+          },
+          {
+            "id": "tibbon"
+          },
+          {
+            "id": "al"
+          },
+          {
+            "id": "guide"
+          },
+          {
+            "id": "translation"
+          },
+          {
+            "id": "commentary"
           }
         ],
         "edges": [
           {
-            "weight": 0.14845265871262067,
-            "source": "work",
+            "weight": 1.1982747832112983,
+            "source": "arabic",
             "target": "hebrew"
           },
           {
-            "weight": 0.5051276026513529,
-            "source": "work",
-            "target": "maimonides"
-          },
-          {
-            "weight": 0.28198405133714316,
-            "source": "work",
+            "weight": 0.841599839272566,
+            "source": "arabic",
             "target": "translate"
           },
           {
-            "weight": 0.09966249454318865,
-            "source": "work",
-            "target": "philosophy"
-          },
-          {
-            "weight": 0.31972437931999015,
-            "source": "work",
-            "target": "text"
+            "weight": 0.24561640716626829,
+            "source": "arabic",
+            "target": "translation"
           },
           {
             "weight": 0.17662353567931685,
-            "source": "work",
+            "source": "arabic",
             "target": "al"
           },
           {
-            "weight": 0.17662353567931685,
-            "source": "work",
-            "target": "commentary"
-          },
-          {
-            "weight": 0.28198405133714316,
-            "source": "work",
-            "target": "philosophical"
-          },
-          {
-            "weight": 1.2039728043259361,
-            "source": "book",
-            "target": "write"
+            "weight": 1.1982747832112983,
+            "source": "arabic",
+            "target": "term"
           },
           {
             "weight": 0.058840500022933395,
-            "source": "book",
-            "target": "arabic"
+            "source": "arabic",
+            "target": "book"
           },
           {
-            "weight": 0.15415067982725836,
-            "source": "book",
-            "target": "al"
+            "weight": 0.0408219945202552,
+            "source": "term",
+            "target": "translation"
           },
           {
-            "weight": 0.616186139423817,
-            "source": "philosophical",
-            "target": "write"
+            "weight": 0.6874491594453075,
+            "source": "term",
+            "target": "guide"
           },
           {
-            "weight": 0.40261203912575794,
-            "source": "philosophical",
-            "target": "text"
+            "weight": 0.6004377824556778,
+            "source": "term",
+            "target": "translate"
+          },
+          {
+            "weight": 0.19497267434751336,
+            "source": "hebrew",
+            "target": "maimonides"
+          },
+          {
+            "weight": 0.8881198549074587,
+            "source": "hebrew",
+            "target": "translate"
+          },
+          {
+            "weight": 0.14845265871262067,
+            "source": "hebrew",
+            "target": "work"
           },
           {
             "weight": 0.6368054266265527,
-            "source": "philosophical",
-            "target": "hebrew"
+            "source": "hebrew",
+            "target": "philosophical"
+          },
+          {
+            "weight": 0.08961215868968714,
+            "source": "hebrew",
+            "target": "al"
+          },
+          {
+            "weight": 0.0408219945202552,
+            "source": "hebrew",
+            "target": "write"
+          },
+          {
+            "weight": 1.2039728043259361,
+            "source": "write",
+            "target": "book"
+          },
+          {
+            "weight": 0.616186139423817,
+            "source": "write",
+            "target": "philosophical"
+          },
+          {
+            "weight": 0.10536051565782635,
+            "source": "write",
+            "target": "commentary"
+          },
+          {
+            "weight": 0.40261203912575794,
+            "source": "text",
+            "target": "philosophical"
+          },
+          {
+            "weight": 0.07856232250310209,
+            "source": "text",
+            "target": "translation"
+          },
+          {
+            "weight": 0.31972437931999015,
+            "source": "text",
+            "target": "work"
+          },
+          {
+            "weight": 0.5203950747821414,
+            "source": "text",
+            "target": "translate"
+          },
+          {
+            "weight": 0.009569451016150672,
+            "source": "text",
+            "target": "al"
           },
           {
             "weight": 0.2595111954850846,
@@ -1321,6 +1451,56 @@
             "weight": 0.5880152624571207,
             "source": "philosophical",
             "target": "philosophy"
+          },
+          {
+            "weight": 0.28198405133714316,
+            "source": "philosophical",
+            "target": "work"
+          },
+          {
+            "weight": 0.28198405133714316,
+            "source": "translate",
+            "target": "guide"
+          },
+          {
+            "weight": 0.7545884622829362,
+            "source": "translate",
+            "target": "maimonides"
+          },
+          {
+            "weight": 0.28198405133714316,
+            "source": "translate",
+            "target": "work"
+          },
+          {
+            "weight": 0.377294231141468,
+            "source": "translate",
+            "target": "al"
+          },
+          {
+            "weight": 0.19497267434751336,
+            "source": "translate",
+            "target": "philosophy"
+          },
+          {
+            "weight": 0.15415067982725836,
+            "source": "book",
+            "target": "al"
+          },
+          {
+            "weight": 0.09966249454318865,
+            "source": "philosophy",
+            "target": "work"
+          },
+          {
+            "weight": 0.19497267434751336,
+            "source": "philosophy",
+            "target": "maimonides"
+          },
+          {
+            "weight": 0.28198405133714316,
+            "source": "philosophy",
+            "target": "guide"
           },
           {
             "weight": 0.7095777219560413,
@@ -1343,49 +1523,19 @@
             "target": "maimonides"
           },
           {
-            "weight": 1.1982747832112983,
-            "source": "hebrew",
-            "target": "arabic"
-          },
-          {
-            "weight": 0.19497267434751336,
-            "source": "hebrew",
-            "target": "maimonides"
-          },
-          {
-            "weight": 0.8881198549074587,
-            "source": "hebrew",
-            "target": "translate"
-          },
-          {
-            "weight": 0.08961215868968714,
-            "source": "hebrew",
+            "weight": 0.15415067982725836,
+            "source": "discuss",
             "target": "al"
           },
           {
             "weight": 0.0408219945202552,
-            "source": "hebrew",
-            "target": "write"
-          },
-          {
-            "weight": 1.1982747832112983,
-            "source": "term",
-            "target": "arabic"
-          },
-          {
-            "weight": 0.0408219945202552,
-            "source": "term",
+            "source": "discuss",
             "target": "translation"
           },
           {
-            "weight": 0.6874491594453075,
-            "source": "term",
+            "weight": 0.7519876805828787,
+            "source": "discuss",
             "target": "guide"
-          },
-          {
-            "weight": 0.6004377824556778,
-            "source": "term",
-            "target": "translate"
           },
           {
             "weight": 0.28198405133714316,
@@ -1393,14 +1543,14 @@
             "target": "guide"
           },
           {
-            "weight": 0.7545884622829362,
-            "source": "maimonides",
-            "target": "translate"
-          },
-          {
             "weight": 0.26396554583446485,
             "source": "maimonides",
             "target": "translation"
+          },
+          {
+            "weight": 0.5051276026513529,
+            "source": "maimonides",
+            "target": "work"
           },
           {
             "weight": 0.08961215868968714,
@@ -1408,29 +1558,19 @@
             "target": "al"
           },
           {
-            "weight": 0.19497267434751336,
-            "source": "maimonides",
-            "target": "philosophy"
-          },
-          {
             "weight": 0.05279818556697083,
             "source": "maimonides",
             "target": "tibbon"
           },
           {
-            "weight": 0.841599839272566,
-            "source": "arabic",
-            "target": "translate"
-          },
-          {
-            "weight": 0.24561640716626829,
-            "source": "arabic",
-            "target": "translation"
+            "weight": 0.17662353567931685,
+            "source": "work",
+            "target": "al"
           },
           {
             "weight": 0.17662353567931685,
-            "source": "arabic",
-            "target": "al"
+            "source": "work",
+            "target": "commentary"
           },
           {
             "weight": 0.18632957819149354,
@@ -1443,74 +1583,19 @@
             "target": "commentary"
           },
           {
-            "weight": 0.6874491594453075,
-            "source": "translation",
-            "target": "guide"
-          },
-          {
-            "weight": 0.07856232250310209,
-            "source": "translation",
-            "target": "text"
-          },
-          {
-            "weight": 0.0408219945202552,
-            "source": "translation",
-            "target": "discuss"
-          },
-          {
             "weight": 0.08961215868968714,
-            "source": "translation",
-            "target": "al"
+            "source": "al",
+            "target": "translation"
           },
           {
-            "weight": 0.10536051565782635,
-            "source": "write",
-            "target": "commentary"
-          },
-          {
-            "weight": 0.5203950747821414,
-            "source": "text",
-            "target": "translate"
-          },
-          {
-            "weight": 0.009569451016150672,
-            "source": "text",
-            "target": "al"
-          },
-          {
-            "weight": 0.28198405133714316,
-            "source": "translate",
-            "target": "guide"
-          },
-          {
-            "weight": 0.377294231141468,
-            "source": "translate",
-            "target": "al"
-          },
-          {
-            "weight": 0.19497267434751336,
-            "source": "translate",
-            "target": "philosophy"
+            "weight": 0.6874491594453075,
+            "source": "guide",
+            "target": "translation"
           },
           {
             "weight": 0.058840500022933395,
-            "source": "commentary",
-            "target": "guide"
-          },
-          {
-            "weight": 0.15415067982725836,
-            "source": "al",
-            "target": "discuss"
-          },
-          {
-            "weight": 0.28198405133714316,
-            "source": "philosophy",
-            "target": "guide"
-          },
-          {
-            "weight": 0.7519876805828787,
             "source": "guide",
-            "target": "discuss"
+            "target": "commentary"
           }
         ]
       }
@@ -1527,5 +1612,9 @@
         "edges": []
       }
     }
+  ],
+  "stems": [
+    "righteousness",
+    "righteous"
   ]
 }
