@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, type ReactNode } from 'react'
+import { useState, useEffect, useRef, useMemo, type ReactNode } from 'react'
 import { TSNE } from '@keckelt/tsne'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
@@ -34,7 +34,6 @@ export default function EmbeddingScatter({
   const [perplexity, setPerplexity] = useState(30)
   const [tsnePoints, setTsnePoints] = useState<ScatterPoint[] | null>(null)
   const [iter, setIter] = useState(0)
-  const [runToken, setRunToken] = useState(0) // bump to restart t-SNE
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
@@ -55,12 +54,29 @@ export default function EmbeddingScatter({
   // t-SNE layout — iterative; steps a few times per animation frame so the user
   // watches it converge. Re-initialises on perplexity change or a manual re-run.
   useEffect(() => {
-    if (layout !== 'tsne' || !data) return
+    if (layout !== 'tsne') return
+    runTSNE()
+    return () => {
+      cancelTSNE()
+    }
+  }, [data])
+
+  const handleLayout = (layout: Layout): void => {
+    if (layout === 'tsne') {
+      runTSNE()
+    } else {
+      cancelTSNE()
+    }
+    setLayout(layout)
+  }
+
+  const raf = useRef(0)
+  const runTSNE = (): void => {
+    if (!data) return
     const nodes = data.nodes
     const tsne = new TSNE({ epsilon: 10, perplexity, dim: 2 })
     tsne.initDataRaw(nodes.map((n) => n.vec))
 
-    let raf = 0
     let steps = 0
     let cancelled = false
     setIter(0)
@@ -82,14 +98,13 @@ export default function EmbeddingScatter({
         })),
       )
       setIter(steps)
-      if (steps < TSNE_MAX_ITER) raf = requestAnimationFrame(tick)
+      if (steps < TSNE_MAX_ITER) raf.current = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
-    return () => {
-      cancelled = true
-      cancelAnimationFrame(raf)
-    }
-  }, [layout, perplexity, data, runToken])
+    raf.current = requestAnimationFrame(tick)
+  }
+  const cancelTSNE = (): void => {
+    cancelAnimationFrame(raf.current)
+  }
 
   if (status === 'error') {
     return (
@@ -123,12 +138,12 @@ export default function EmbeddingScatter({
           <Toggle
             label="PCA"
             active={layout === 'pca'}
-            onClick={() => setLayout('pca')}
+            onClick={() => handleLayout('pca')}
           />
           <Toggle
             label="t-SNE"
             active={layout === 'tsne'}
-            onClick={() => setLayout('tsne')}
+            onClick={() => handleLayout('tsne')}
           />
         </div>
 
@@ -147,12 +162,14 @@ export default function EmbeddingScatter({
             </label>
             <button
               className="rounded border border-gray-900 px-2 py-0.5 text-sm hover:bg-red-200"
-              onClick={() => setRunToken((t) => t + 1)}
+              onClick={runTSNE}
             >
               re-run
             </button>
-            <span className="text-sm text-gray-500 tabular-nums">
-              {converging ? `iterating… ${iter}/${TSNE_MAX_ITER}` : `done (${iter})`}
+            <span className="text-sm tabular-nums text-gray-500">
+              {converging
+                ? `iterating… ${iter}/${TSNE_MAX_ITER}`
+                : `done (${iter})`}
             </span>
           </>
         )}
