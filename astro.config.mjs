@@ -18,6 +18,11 @@ export default defineConfig({
     build: {
       emptyOutDir: false,
     },
+    server: {
+      watch: {
+        ignored: ['scripts/**/*', '.cache/**/*', '.claude/**/*'],
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {
