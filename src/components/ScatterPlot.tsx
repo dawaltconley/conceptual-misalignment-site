@@ -33,6 +33,7 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
   const paddingY = 2
   const bottomAxisHeight = 30
   const leftAxisWidth = 50
+  const rangeMultiplier = 1.05
 
   // Body origin (top-left of the plot area). The left-axis group shares this
   // origin — d3.axisLeft draws its spine at local x=0 (the body's left edge) and
@@ -62,8 +63,8 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
   // Scales map data into the body's LOCAL coordinate space, so the points (drawn
   // in the body group) and the axes (drawn in their own translated groups that
   // share the body's edges) line up exactly.
-  const xExtent = (d3.extent(points, (p) => p.x) as [number, number]) ?? [0, 1]
-  const yExtent = (d3.extent(points, (p) => p.y) as [number, number]) ?? [0, 1]
+  const xExtent = d3.extent(points, (p) => p.x * rangeMultiplier) ?? [0, 1]
+  const yExtent = d3.extent(points, (p) => p.y * rangeMultiplier) ?? [0, 1]
   const xScale = d3
     .scaleLinear()
     .domain(xExtent[0] === undefined ? [0, 1] : xExtent)
