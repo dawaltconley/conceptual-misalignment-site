@@ -1,10 +1,11 @@
 import { useRef, forwardRef, type ReactNode } from 'react'
 import * as d3 from 'd3'
+import { Position, type Point } from '@lib/graphs'
 import useSize from '@lib/browser/hooks/useSize'
 import SVGAxis from './SVGAxis'
 import SVGTranslate from './SVGTranslate'
 
-export interface ScatterPoint {
+export interface ScatterPoint extends Point {
   id: string
   x: number
   y: number
@@ -17,7 +18,6 @@ export interface ScatterPlotProps {
 }
 
 const NO_COMMUNITY_COLOR = '#cbd5e1' // grey for isolates (community -1)
-const MARGIN = 24
 
 /**
  * Pure 2-D scatter renderer (the `Network.tsx` of scatter plots): given points
@@ -29,34 +29,35 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
 
-  const paddingX = MARGIN
-  const paddingY = MARGIN
+  const paddingX = 2
+  const paddingY = 2
   const bottomAxisHeight = 30
   const leftAxisWidth = 50
-
-  // Plot body = full size minus outer padding and the axis gutters (left gutter
-  // holds the y tick labels, bottom gutter holds the x tick labels).
-  const bodyWidth = Math.max(width - leftAxisWidth - 2 * paddingX, 0)
-  const bodyHeight = Math.max(height - bottomAxisHeight - 2 * paddingY, 0)
 
   // Body origin (top-left of the plot area). The left-axis group shares this
   // origin — d3.axisLeft draws its spine at local x=0 (the body's left edge) and
   // its tick labels to the left, into the reserved gutter. The bottom-axis group
   // sits directly under the body.
-  const bodyX = paddingX + leftAxisWidth
-  const bodyY = paddingY
-  const body: Position = {
-    pos: { x: bodyX, y: bodyY },
-    size: { width: bodyWidth, height: bodyHeight },
-  }
-  const leftAxis: Position = {
-    pos: { x: bodyX, y: bodyY },
-    size: { width: leftAxisWidth, height: bodyHeight },
-  }
-  const bottomAxis: Position = {
-    pos: { x: bodyX, y: bodyY + bodyHeight },
-    size: { width: bodyWidth, height: bottomAxisHeight },
-  }
+  const body = new Position({
+    // Plot body = full size minus outer padding and the axis gutters (left gutter
+    // holds the y tick labels, bottom gutter holds the x tick labels).
+    width: Math.max(width - leftAxisWidth - 2 * paddingX, 0),
+    height: Math.max(height - bottomAxisHeight - 2 * paddingY, 0),
+    x: paddingX + leftAxisWidth,
+    y: paddingY,
+  })
+  const leftAxis = new Position({
+    width: leftAxisWidth,
+    height: body.height,
+    x: body.x,
+    y: body.y,
+  })
+  const bottomAxis = new Position({
+    x: body.x,
+    y: body.y + body.height,
+    width: body.width,
+    height: bottomAxisHeight,
+  })
 
   // Scales map data into the body's LOCAL coordinate space, so the points (drawn
   // in the body group) and the axes (drawn in their own translated groups that
@@ -66,11 +67,11 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
   const xScale = d3
     .scaleLinear()
     .domain(xExtent[0] === undefined ? [0, 1] : xExtent)
-    .range([0, bodyWidth])
+    .range([0, body.width])
   const yScale = d3
     .scaleLinear()
     .domain(yExtent[0] === undefined ? [0, 1] : yExtent)
-    .range([bodyHeight, 0])
+    .range([body.height, 0])
 
   const color = d3.scaleOrdinal<number, string>(d3.schemeTableau10)
 
@@ -78,7 +79,12 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
 
   return (
     <Wrapper ref={containerRef}>
-      <svg width={width} height={height} className="absolute inset-0">
+      <svg
+        width={width}
+        height={height}
+        className="absolute inset-0"
+        viewBox={``}
+      >
         <SVGTranslate {...body.pos}>
           {ready &&
             points.map((p) => {
@@ -145,20 +151,9 @@ export const Wrapper = forwardRef<HTMLDivElement, { children: ReactNode }>(
   ({ children }, ref) => (
     <div
       ref={ref}
-      className="relative aspect-square min-h-96 w-full overflow-hidden rounded ring-1 ring-gray-200"
+      className="relative aspect-square min-h-96 w-full overflow-hidden"
     >
       {children}
     </div>
   ),
 )
-
-interface Position {
-  pos: {
-    x: number
-    y: number
-  }
-  size: {
-    width: number
-    height: number
-  }
-}

@@ -1,18 +1,16 @@
+import type { Point, Size } from '@lib/graphs'
 import { useRef, useLayoutEffect } from 'react'
 import * as d3 from 'd3'
 
 type Orientation = 'left' | 'bottom'
 type Scale = d3.ScaleLinear<number, number, never>
 
-export interface GraphAxisProps {
+export interface GraphAxisProps extends Size {
   orientation: Orientation
   scale: Scale
   width: number
   height: number
-  position?: {
-    x?: number
-    y?: number
-  }
+  position?: Partial<Point>
 }
 
 export default function GraphAxis({

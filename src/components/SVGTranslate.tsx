@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
+import type { Point } from '@lib/graphs'
 
-export interface SVGTranslateProps {
+export interface SVGTranslateProps extends Partial<Point> {
   x?: number
   y?: number
   children: ReactNode
