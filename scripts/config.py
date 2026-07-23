@@ -24,6 +24,9 @@ CTEXT.mkdir(parents=True, exist_ok=True)
 ANALYSIS = _ROOT / "analysis"     # embedding-pipeline artifacts
 SEGPOS = _ROOT / "segpos"         # Xunzi segmentation output
 
+EMBEDDINGS = PUBLIC / "embeddings"    # client-loaded scatter datasets
+EMBEDDINGS.mkdir(parents=True, exist_ok=True)
+
 
 class Rendering:
     """One English rendering of a term: a canonical label + its word family.

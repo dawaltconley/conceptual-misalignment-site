@@ -2,6 +2,7 @@
 import Layout from '@layouts/Page.astro'
 import MultiNetwork from '@components/MultiNetwork'
 import Network from '@components/Network'
+import EmbeddingScatter from '@components/EmbeddingScatter'
 import { WeightedNodeLinkDataSchema } from '@lib/networkx'
 import { buildDictionaryFromNetworks } from '@build/cedict'
 import renPMI from '~/public/ctext/仁_pmi.json'
@@ -48,6 +49,17 @@ const yiEmbedNetwork = WeightedNodeLinkDataSchema.parse(yiEmbeds)
         data={yiEmbedNetwork}
         dictionary={yiDict}
       />
+    </div>
+    <div class="mx-auto mt-12 max-w-screen-xl">
+      <h2 class="mb-4 text-xl font-bold">Embedding spaces (PCA / t-SNE)</h2>
+      <div class="items-start justify-center gap-8 xl:flex">
+        <div class="xl:w-1/2">
+          <EmbeddingScatter client:only="react" data="/embeddings/mengzi.json" />
+        </div>
+        <div class="mt-8 xl:mt-0 xl:w-1/2">
+          <EmbeddingScatter client:only="react" data="/embeddings/sep.json" />
+        </div>
+      </div>
     </div>
   </main>
 </Layout>
