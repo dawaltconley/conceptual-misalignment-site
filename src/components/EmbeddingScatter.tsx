@@ -3,11 +3,12 @@ import { TSNE } from '@keckelt/tsne'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
-import ScatterPlot, {
+import {
   ScatterSkeleton,
   Wrapper as ScatterWrapper,
   type ScatterPoint,
 } from './ScatterPlot'
+import ScatterPlot from './CanvasScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
 import * as d3 from 'd3'
 
@@ -15,8 +16,6 @@ type Layout = 'pca' | 'tsne'
 
 const TSNE_MAX_ITER = 500
 const TSNE_STEPS_PER_FRAME = 2
-
-let instance = 0
 
 interface EmbeddingScatterProps {
   data: string
@@ -38,8 +37,7 @@ export default function EmbeddingScatter({
   const [perplexity, setPerplexity] = useState(30)
   const [tsnePoints, setTsnePoints] = useState<ScatterPoint[] | null>(null)
   const [iter, setIter] = useState(0)
-  const [highlighted, setHighlighted] = useState<string | null>(null)
-  const scatterId = useRef(`embedding-scatter-${instance++}`)
+  const [highlighted, setHighlighted] = useState<Set<number>>(new Set())
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
@@ -150,11 +148,18 @@ export default function EmbeddingScatter({
 
   return (
     <Wrapper>
-      <div id={scatterId.current}>
-        <ScatterPlot points={points} getColor={getColor} />
-      </div>
-      <div className="ml-8 columns-2">
-        <ScatterLegend labels={communityLegend} onHover={setHighlighted} />
+      <ScatterPlot
+        points={points}
+        getColor={getColor}
+        highlightedCommunities={highlighted}
+      />
+      <div className="ml-8 columns-2 text-xs">
+        <ScatterLegend
+          labels={communityLegend}
+          onHover={(id) =>
+            setHighlighted(id ? new Set([Number(id)]) : new Set())
+          }
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -198,14 +203,6 @@ export default function EmbeddingScatter({
           </>
         )}
       </div>
-      {highlighted && (
-        <style>{`
-          #${scatterId.current} svg circle[data-community="${highlighted}"] {
-            stroke: black;
-            stroke-width: 1px;
-          }
-      `}</style>
-      )}
     </Wrapper>
   )
 }
