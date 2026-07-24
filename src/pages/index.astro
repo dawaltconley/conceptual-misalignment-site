@@ -19,6 +19,7 @@ const yiEmbedNetwork = WeightedNodeLinkDataSchema.parse(yiEmbeds)
 
 <Layout>
   <main class="mx-auto w-full px-4 py-8">
+    <h2 class="mb-4 text-xl font-bold">Co-occurance networks</h2>
     <div class="items-center justify-center xl:flex">
       <div class="xl:w-1/2">
         <MultiNetwork
@@ -36,7 +37,8 @@ const yiEmbedNetwork = WeightedNodeLinkDataSchema.parse(yiEmbeds)
         />
       </div>
     </div>
-    <div class="mx-auto max-w-screen-xl">
+    <div class="mx-auto mt-12 max-w-screen-xl">
+      <h2 class="mb-4 text-xl font-bold">Cosine similarity networks</h2>
       <Network
         client:only
         centralNodeId="仁"
