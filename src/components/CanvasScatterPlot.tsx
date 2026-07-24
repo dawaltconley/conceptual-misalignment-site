@@ -1,10 +1,29 @@
-import { useRef, useLayoutEffect, memo } from 'react'
+import {
+  useState,
+  useRef,
+  useLayoutEffect,
+  memo,
+  useMemo,
+  type MouseEvent,
+} from 'react'
 import * as d3 from 'd3'
 import { Position } from '@lib/graphs'
 import useSize from '@lib/browser/hooks/useSize'
 import SVGAxis from './SVGAxis'
 import SVGTranslate from './SVGTranslate'
-import { Wrapper, type ScatterPlotProps } from './ScatterPlot'
+import {
+  Wrapper,
+  type ScatterPoint,
+  type ScatterPlotProps,
+} from './ScatterPlot'
+import { Tooltip } from 'radix-ui'
+
+// --- layout (kept identical to ScatterPlot so the two are interchangeable) ---
+const paddingX = 2
+const paddingY = 2
+const bottomAxisHeight = 30
+const leftAxisWidth = 50
+const rangeMultiplier = 1.05
 
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
   highlightedCommunities?: Set<number>
@@ -26,15 +45,9 @@ function CanvasScatterPlot({
 }: CanvasScatterPlotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const hoverCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
-
-  // --- layout (kept identical to ScatterPlot so the two are interchangeable) ---
-  const paddingX = 2
-  const paddingY = 2
-  const bottomAxisHeight = 30
-  const leftAxisWidth = 50
-  const rangeMultiplier = 1.05
 
   const body = new Position({
     width: Math.max(width - leftAxisWidth - 2 * paddingX, 0),
@@ -115,28 +128,106 @@ function CanvasScatterPlot({
     }
   }, [points, width, height, highlightedCommunities])
 
+  const delaunay = useMemo(
+    () =>
+      d3.Delaunay.from(
+        points,
+        (p) => xScale(p.x),
+        (p) => yScale(p.y),
+      ),
+    [points],
+  )
+
+  const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
+
+  const handleHover = (e: MouseEvent<HTMLCanvasElement> | null) => {
+    const canvas = hoverCanvasRef.current
+    if (!canvas || !ready) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const dpr = window.devicePixelRatio || 1
+    canvas.width = width * dpr // also resets the transform to identity
+    canvas.height = height * dpr
+    ctx.scale(dpr, dpr)
+    ctx.clearRect(0, 0, width, height)
+    ctx.translate(body.x, body.y) // draw in body-local coords (like the SVG body group)
+
+    if (!e) {
+      setTooltip(null)
+      return
+    }
+
+    let [x, y] = d3.pointer(e, canvas)
+    x -= body.x
+    y -= body.y
+
+    const index = delaunay.find(x, y)
+    const p = points[index]
+    if (p.target) return
+
+    const px = xScale(p.x)
+    const py = yScale(p.y)
+
+    const bounds = canvas.getBoundingClientRect()
+    setTooltip({
+      ...p,
+      x: px + body.x + bounds.left,
+      y: py + body.y + bounds.top,
+    })
+
+    ctx.beginPath()
+    ctx.arc(px, py, 3, 0, 2 * Math.PI)
+    ctx.lineWidth = 1
+    ctx.strokeStyle = '#000000'
+    ctx.stroke()
+  }
+
   return (
     <Wrapper ref={containerRef}>
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-        style={{ width, height }}
-      />
-      {ready && (
-        <svg
-          width={width}
-          height={height}
-          className="pointer-events-none absolute inset-0"
-          viewBox={`0 0 ${width} ${height}`}
-        >
-          <SVGTranslate {...leftAxis.pos}>
-            <SVGAxis orientation="left" scale={yScale} {...leftAxis.size} />
-          </SVGTranslate>
-          <SVGTranslate {...bottomAxis.pos}>
-            <SVGAxis orientation="bottom" scale={xScale} {...bottomAxis.size} />
-          </SVGTranslate>
-        </svg>
-      )}
+      <Tooltip.Provider>
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0"
+          style={{ width, height }}
+        />
+        <canvas
+          ref={hoverCanvasRef}
+          className="absolute inset-0"
+          style={{ width, height }}
+          onMouseMove={(e) => handleHover(e)}
+          onMouseOut={() => handleHover(null)}
+        />
+        {ready && (
+          <svg
+            width={width}
+            height={height}
+            className="pointer-events-none absolute inset-0"
+            viewBox={`0 0 ${width} ${height}`}
+          >
+            <SVGTranslate {...leftAxis.pos}>
+              <SVGAxis orientation="left" scale={yScale} {...leftAxis.size} />
+            </SVGTranslate>
+            <SVGTranslate {...bottomAxis.pos}>
+              <SVGAxis
+                orientation="bottom"
+                scale={xScale}
+                {...bottomAxis.size}
+              />
+            </SVGTranslate>
+          </svg>
+        )}
+        <Tooltip.Root open={!!tooltip}>
+          <Tooltip.Content
+            className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200"
+            style={
+              tooltip ? { top: tooltip.y - 16, left: tooltip.x } : undefined
+            }
+          >
+            {tooltip?.id}
+          </Tooltip.Content>
+        </Tooltip.Root>
+      </Tooltip.Provider>
     </Wrapper>
   )
 }

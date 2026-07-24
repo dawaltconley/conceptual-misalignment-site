@@ -16,7 +16,7 @@ export default function ScatterLegend({
   onClick,
 }: ScatterLegendProps): JSX.Element {
   return (
-    <div className="text-sm">
+    <div>
       {labels.map(({ id, color, description }) => (
         <div
           key={id}
