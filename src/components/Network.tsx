@@ -18,7 +18,7 @@ export interface NetworkProps {
 export default function Network({
   data,
   centralNodeId,
-  dictionary,
+  dictionary = {},
 }: NetworkProps): JSX.Element {
   const [nodes, setNodes] = useState<Node[]>([])
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -129,7 +129,7 @@ export default function Network({
           onPointerMove={handlePointerMove}
           onPointerUp={(e) => handlePointerUp(e, node.id)}
         >
-          {dictionary?.[String(node.id)] ? (
+          {dictionary[node.id.toString()] ? (
             <HanziNode
               id={node.id}
               entry={dictionary[String(node.id)]}

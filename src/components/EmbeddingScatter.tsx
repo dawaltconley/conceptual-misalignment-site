@@ -1,3 +1,4 @@
+import type { Dictionary } from '@lib/build/cedict'
 import { useState, useEffect, useRef, useMemo, type ReactNode } from 'react'
 import { TSNE } from '@keckelt/tsne'
 import clsx from 'clsx'
@@ -19,6 +20,7 @@ const TSNE_STEPS_PER_FRAME = 2
 
 interface EmbeddingScatterProps {
   data: string
+  dictionary?: Dictionary
 }
 
 /**
@@ -29,6 +31,7 @@ interface EmbeddingScatterProps {
  */
 export default function EmbeddingScatter({
   data: dataPath,
+  dictionary,
 }: EmbeddingScatterProps): JSX.Element {
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
@@ -152,6 +155,7 @@ export default function EmbeddingScatter({
         points={points}
         getColor={getColor}
         highlightedCommunities={highlighted}
+        dictionary={dictionary}
       />
       <div className="ml-8 columns-2 text-xs">
         <ScatterLegend

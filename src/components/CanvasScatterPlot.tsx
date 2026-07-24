@@ -1,3 +1,4 @@
+import type { Dictionary } from '@build/cedict'
 import {
   useState,
   useRef,
@@ -17,6 +18,7 @@ import {
   type ScatterPlotProps,
 } from './ScatterPlot'
 import { Tooltip } from 'radix-ui'
+import HanziDefinition from './HanziDefinition'
 
 // --- layout (kept identical to ScatterPlot so the two are interchangeable) ---
 const paddingX = 2
@@ -27,6 +29,7 @@ const rangeMultiplier = 1.05
 
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
   highlightedCommunities?: Set<number>
+  dictionary?: Dictionary
 }
 
 /**
@@ -42,6 +45,7 @@ function CanvasScatterPlot({
   points,
   getColor,
   highlightedCommunities = new Set(),
+  dictionary = {},
 }: CanvasScatterPlotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -139,6 +143,7 @@ function CanvasScatterPlot({
   )
 
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
+  const hanziDefinition = tooltip && dictionary[tooltip.id]
 
   const handleHover = (e: MouseEvent<HTMLCanvasElement> | null) => {
     const canvas = hoverCanvasRef.current
@@ -219,12 +224,18 @@ function CanvasScatterPlot({
         )}
         <Tooltip.Root open={!!tooltip}>
           <Tooltip.Content
-            className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200"
+            className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full"
             style={
               tooltip ? { top: tooltip.y - 16, left: tooltip.x } : undefined
             }
           >
-            {tooltip?.id}
+            {hanziDefinition ? (
+              <HanziDefinition entry={hanziDefinition} />
+            ) : (
+              <div className="rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200">
+                {tooltip?.id}
+              </div>
+            )}
           </Tooltip.Content>
         </Tooltip.Root>
       </Tooltip.Provider>
