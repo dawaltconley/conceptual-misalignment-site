@@ -6,7 +6,7 @@ export interface LegendLabel {
 
 export interface ScatterLegendProps {
   labels: LegendLabel[]
-  onHover?: (id: string) => void
+  onHover?: (id: string | null) => void
   onClick?: (id: string) => void
 }
 
@@ -22,6 +22,7 @@ export default function ScatterLegend({
           key={id}
           className="flex flex-row items-center gap-1"
           onMouseOver={() => onHover && onHover(id)}
+          onMouseOut={() => onHover && onHover(null)}
           onClick={() => onClick && onClick(id)}
         >
           <span
