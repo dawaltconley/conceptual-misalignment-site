@@ -139,7 +139,7 @@ function CanvasScatterPlot({
         (p) => xScale(p.x),
         (p) => yScale(p.y),
       ),
-    [points],
+    [points, width, height],
   )
 
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
