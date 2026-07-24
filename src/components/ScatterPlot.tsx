@@ -15,9 +15,8 @@ export interface ScatterPoint extends Point {
 
 export interface ScatterPlotProps {
   points: ScatterPoint[]
+  getColor: (community: number) => string
 }
-
-const NO_COMMUNITY_COLOR = '#cbd5e1' // grey for isolates (community -1)
 
 /**
  * Pure 2-D scatter renderer (the `Network.tsx` of scatter plots): given points
@@ -74,8 +73,6 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
     .domain(yExtent[0] === undefined ? [0, 1] : yExtent)
     .range([body.height, 0])
 
-  const color = d3.scaleOrdinal<number, string>(d3.schemeTableau10)
-
   const ready = width > 0 && height > 0
 
   return (
@@ -91,8 +88,7 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
             points.map((p) => {
               const cx = xScale(p.x)
               const cy = yScale(p.y)
-              const fill =
-                p.community < 0 ? NO_COMMUNITY_COLOR : color(p.community)
+              const fill = getColor(p.community)
               return (
                 <g key={p.id}>
                   <circle
@@ -103,6 +99,7 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
                     stroke={p.target ? '#111827' : 'none'}
                     strokeWidth={p.target ? 1.5 : 0}
                     opacity={p.target ? 1 : 0.7}
+                    data-community={p.community}
                   >
                     <title>{p.id}</title>
                   </circle>

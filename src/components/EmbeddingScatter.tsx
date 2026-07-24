@@ -8,6 +8,8 @@ import ScatterPlot, {
   Wrapper as ScatterWrapper,
   type ScatterPoint,
 } from './ScatterPlot'
+import ScatterLegend, { type LegendLabel } from './ScatterLegend'
+import * as d3 from 'd3'
 
 type Layout = 'pca' | 'tsne'
 
@@ -34,6 +36,7 @@ export default function EmbeddingScatter({
   const [perplexity, setPerplexity] = useState(30)
   const [tsnePoints, setTsnePoints] = useState<ScatterPoint[] | null>(null)
   const [iter, setIter] = useState(0)
+  const [highlighted, setHighlighted] = useState<string | null>(null)
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
@@ -50,6 +53,19 @@ export default function EmbeddingScatter({
         : [],
     [data],
   )
+
+  const communityLegend = useMemo<LegendLabel[]>(() => {
+    const communities: string[][] = []
+    data?.nodes.forEach((n) => {
+      communities[n.community] ??= []
+      communities[n.community].push(n.id)
+    })
+    return communities.map<LegendLabel>((terms, community) => ({
+      id: community.toString(),
+      color: getColor(community),
+      description: `C${community}: ${terms.sort().join(', ')}`,
+    }))
+  }, [data])
 
   // t-SNE layout — iterative; steps a few times per animation frame so the user
   // watches it converge. Re-initialises on perplexity change or a manual re-run.
@@ -131,7 +147,10 @@ export default function EmbeddingScatter({
 
   return (
     <Wrapper>
-      <ScatterPlot points={points} />
+      <ScatterPlot points={points} getColor={getColor} />
+      <div className="ml-8 columns-2">
+        <ScatterLegend labels={communityLegend} onHover={setHighlighted} />
+      </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <div className="flex gap-2">
@@ -174,6 +193,14 @@ export default function EmbeddingScatter({
           </>
         )}
       </div>
+      {highlighted && (
+        <style>{`
+          svg circle[data-community="${highlighted}"] {
+            stroke: black;
+            stroke-width: 1px;
+          }
+      `}</style>
+      )}
     </Wrapper>
   )
 }
@@ -200,4 +227,11 @@ function Toggle({ label, active = false, onClick }: ToggleProps): JSX.Element {
       {label}
     </button>
   )
+}
+
+const color = d3.scaleOrdinal<number, string>(d3.schemeTableau10)
+const NO_COMMUNITY_COLOR = '#cbd5e1' // grey for isolates (community -1)
+
+function getColor(community: number): string {
+  return community < 0 ? NO_COMMUNITY_COLOR : color(community)
 }
