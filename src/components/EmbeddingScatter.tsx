@@ -16,6 +16,8 @@ type Layout = 'pca' | 'tsne'
 const TSNE_MAX_ITER = 500
 const TSNE_STEPS_PER_FRAME = 2
 
+let instance = 0
+
 interface EmbeddingScatterProps {
   data: string
 }
@@ -37,6 +39,7 @@ export default function EmbeddingScatter({
   const [tsnePoints, setTsnePoints] = useState<ScatterPoint[] | null>(null)
   const [iter, setIter] = useState(0)
   const [highlighted, setHighlighted] = useState<string | null>(null)
+  const scatterId = useRef(`embedding-scatter-${instance++}`)
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
@@ -147,7 +150,9 @@ export default function EmbeddingScatter({
 
   return (
     <Wrapper>
-      <ScatterPlot points={points} getColor={getColor} />
+      <div id={scatterId.current}>
+        <ScatterPlot points={points} getColor={getColor} />
+      </div>
       <div className="ml-8 columns-2">
         <ScatterLegend labels={communityLegend} onHover={setHighlighted} />
       </div>
@@ -195,7 +200,7 @@ export default function EmbeddingScatter({
       </div>
       {highlighted && (
         <style>{`
-          svg circle[data-community="${highlighted}"] {
+          #${scatterId.current} svg circle[data-community="${highlighted}"] {
             stroke: black;
             stroke-width: 1px;
           }
