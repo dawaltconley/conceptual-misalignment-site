@@ -81,7 +81,7 @@ function ScatterPlot({ points, getColor }: ScatterPlotProps): JSX.Element {
         width={width}
         height={height}
         className="absolute inset-0"
-        viewBox={``}
+        viewBox={`0 0 ${width} ${height}`}
       >
         <SVGTranslate {...body.pos}>
           {ready &&
