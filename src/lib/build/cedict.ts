@@ -5,6 +5,7 @@ import toPinyinTones from 'pinyin-tone'
 import { TermSchema } from '@lib/networkx'
 
 export interface DictionaryEntry {
+  hanzi: string
   pinyin: string
   definitions: string[]
   altPronunciation?: string[]
@@ -45,6 +46,7 @@ export async function buildDictionary(
     const altPronRaw = defs.splice(altPronIndex, 1)[0]
 
     result[traditional] = {
+      hanzi: traditional,
       pinyin: toPinyinTones(pinyinRaw),
       definitions: defs,
     }
