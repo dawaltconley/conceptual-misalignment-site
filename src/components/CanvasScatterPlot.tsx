@@ -53,6 +53,7 @@ function CanvasScatterPlot({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const hoverCanvasRef = useRef<HTMLCanvasElement | null>(null)
+  const zoomRef = useRef<d3.ZoomBehavior<HTMLCanvasElement, unknown> | null>(null)
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
 
@@ -174,6 +175,7 @@ function CanvasScatterPlot({
       .on('zoom', (e: d3.D3ZoomEvent<HTMLCanvasElement, unknown>) =>
         setTransform(e.transform),
       )
+    zoomRef.current = zoom
 
     const selection = d3.select(canvas)
     selection.call(zoom)
@@ -186,6 +188,16 @@ function CanvasScatterPlot({
       selection.on('.zoom', null).on('dblclick', null)
     }
   }, [width, height, body.width, body.height])
+
+  // Reset zoom/pan when the point set changes (e.g. toggling PCA <-> t-SNE), so a
+  // new layout always starts fit-to-view. Resetting via zoom.transform also clears
+  // d3's internal node transform, not just our state, so the next gesture doesn't jump.
+  useLayoutEffect(() => {
+    const canvas = hoverCanvasRef.current
+    const zoom = zoomRef.current
+    if (!canvas || !zoom) return
+    d3.select(canvas).call(zoom.transform, d3.zoomIdentity)
+  }, [points])
 
   const delaunay = useMemo(
     () =>
