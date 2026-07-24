@@ -52,7 +52,7 @@ export default function MultiNetwork({
         )}
       >
         {status === 'loading'
-          ? new Array(8).fill(null).map(() => <SourceSkeleton />)
+          ? new Array(8).fill(null).map((_, i) => <SourceSkeleton key={i} />)
           : data.sources.map((s, i) => (
               <Source
                 key={s.url}
