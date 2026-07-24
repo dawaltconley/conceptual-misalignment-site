@@ -31,3 +31,9 @@ export class Position implements Point, Size {
     return { x, y }
   }
 }
+
+export function getDistSq(a: Point, b: Point): number {
+  const dx = a.x - b.x
+  const dy = a.y - b.y
+  return dx * dx + dy * dy
+}
