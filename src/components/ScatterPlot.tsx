@@ -1,4 +1,4 @@
-import { useRef, forwardRef, type ReactNode } from 'react'
+import { useRef, forwardRef, memo, type ReactNode } from 'react'
 import * as d3 from 'd3'
 import { Position, type Point } from '@lib/graphs'
 import useSize from '@lib/browser/hooks/useSize'
@@ -23,7 +23,7 @@ export interface ScatterPlotProps {
  * with fixed x/y, draws an SVG scatter coloured by community with targets
  * emphasised. No data fetching and no projection math — the wrapper owns those.
  */
-export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
+function ScatterPlot({ points, getColor }: ScatterPlotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
@@ -135,6 +135,8 @@ export default function ScatterPlot({ points }: ScatterPlotProps): JSX.Element {
     </Wrapper>
   )
 }
+
+export default memo(ScatterPlot)
 
 export const ScatterSkeleton = (): JSX.Element => (
   <Wrapper>
