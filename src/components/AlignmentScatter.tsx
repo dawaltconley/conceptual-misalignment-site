@@ -3,7 +3,7 @@ import { useState, useMemo, useId, type ReactNode } from 'react'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
 import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
-import { procrustes, applyRotation, crossCovSVD, pca2d } from '@lib/align'
+import { procrustes, applyRotation } from '@lib/align'
 import CanvasScatterPlot from './CanvasScatterPlot'
 import { ScatterSkeleton, type ScatterPoint } from './ScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
@@ -22,9 +22,6 @@ interface Anchor {
   zh: string
   en: string
 }
-
-// Which space is pinned. 'neutral' pins neither (both rotate to a shared frame).
-type Frame = 'chinese' | 'english' | 'neutral'
 
 interface AlignmentScatterProps {
   /** Path to the Chinese reduced-vector dataset (the fixed frame). */
@@ -53,7 +50,6 @@ export default function AlignmentScatter({
   const [anchors, setAnchors] = useState<Anchor[]>([])
   const [zhInput, setZhInput] = useState('')
   const [enInput, setEnInput] = useState('')
-  const [frame, setFrame] = useState<Frame>('chinese')
   const listId = useId()
 
   const chineseData = zh.status === 'success' ? zh.data : null
@@ -62,74 +58,40 @@ export default function AlignmentScatter({
   const zhVecs = useMemo(() => vecMap(chineseData), [chineseData])
   const enVecs = useMemo(() => vecMap(englishData), [englishData])
 
-  // 2-D coordinates per corpus, depending on the chosen frame:
-  //  - chinese: Chinese pinned to its PCA cols 0/1; English rotated onto it.
-  //  - english: English pinned; Chinese rotated onto it.
-  //  - neutral: send English through U and Chinese through V (the SVD middle
-  //    frame), then a joint PCA of the merged cloud → shared 2-D axes.
-  // With no anchors each side falls back to its own cols 0/1 (un-aligned).
-  const layout = useMemo<{ zh2d: number[][]; en2d: number[][] }>(() => {
-    if (!chineseData || !englishData) return { zh2d: [], en2d: [] }
-    const zhAll = chineseData.nodes.map((n) => n.vec)
-    const enAll = englishData.nodes.map((n) => n.vec)
+  // Fit Procrustes on the valid anchors and rotate every English vector into the
+  // Chinese space. With no anchors, fall back to identity (English un-aligned).
+  const alignedEnglish = useMemo<number[][]>(() => {
+    if (!englishData) return []
+    const raw = englishData.nodes.map((n) => n.vec)
     const valid = anchors.filter((a) => enVecs.has(a.en) && zhVecs.has(a.zh))
-    const enA = valid.map((a) => enVecs.get(a.en)!)
-    const zhA = valid.map((a) => zhVecs.get(a.zh)!)
-    const cols01 = (rows: number[][]) => rows.map((r) => [r[0] ?? 0, r[1] ?? 0])
-
-    if (frame === 'chinese') {
-      const en2d =
-        valid.length >= 1
-          ? cols01(applyRotation(enAll, procrustes(enA, zhA)))
-          : cols01(enAll)
-      return { zh2d: cols01(zhAll), en2d }
-    }
-    if (frame === 'english') {
-      const zh2d =
-        valid.length >= 1
-          ? cols01(applyRotation(zhAll, procrustes(zhA, enA)))
-          : cols01(zhAll)
-      return { zh2d, en2d: cols01(enAll) }
-    }
-    // neutral
-    let zhT = zhAll
-    let enT = enAll
-    if (valid.length >= 1) {
-      const { u, v } = crossCovSVD(enA, zhA)
-      enT = applyRotation(enAll, u)
-      zhT = applyRotation(zhAll, v)
-    }
-    const joint = pca2d([...zhT, ...enT])
-    return {
-      zh2d: joint.slice(0, zhAll.length),
-      en2d: joint.slice(zhAll.length),
-    }
-  }, [chineseData, englishData, anchors, enVecs, zhVecs, frame])
+    if (valid.length < 1) return raw
+    const A = valid.map((a) => enVecs.get(a.en)!)
+    const B = valid.map((a) => zhVecs.get(a.zh)!)
+    return applyRotation(raw, procrustes(A, B))
+  }, [englishData, anchors, enVecs, zhVecs])
 
   const points = useMemo<ScatterPoint[]>(() => {
     if (!chineseData || !englishData) return []
-    const zhPts = chineseData.nodes.map<ScatterPoint>((n, i) => ({
+    const zhPts = chineseData.nodes.map<ScatterPoint>((n) => ({
       id: n.id,
-      x: layout.zh2d[i]?.[0] ?? 0,
-      y: layout.zh2d[i]?.[1] ?? 0,
+      x: n.vec[0] ?? 0,
+      y: n.vec[1] ?? 0,
       community: CHINESE,
       target: n.target,
     }))
     const enPts = englishData.nodes.map<ScatterPoint>((n, i) => ({
       id: n.id,
-      x: layout.en2d[i]?.[0] ?? 0,
-      y: layout.en2d[i]?.[1] ?? 0,
+      x: alignedEnglish[i]?.[0] ?? 0,
+      y: alignedEnglish[i]?.[1] ?? 0,
       community: ENGLISH,
       target: n.target,
     }))
     return [...zhPts, ...enPts]
-  }, [chineseData, englishData, layout])
+  }, [chineseData, englishData, alignedEnglish])
 
-  const role = (side: Frame): string =>
-    frame === 'neutral' ? ' — aligned' : frame === side ? ' — fixed' : ' — aligned'
   const legend: LegendLabel[] = [
-    { id: String(CHINESE), color: getColor(CHINESE), description: `Mengzi (Chinese)${role('chinese')}` },
-    { id: String(ENGLISH), color: getColor(ENGLISH), description: `SEP (English)${role('english')}` },
+    { id: String(CHINESE), color: getColor(CHINESE), description: 'Mengzi (Chinese) — fixed frame' },
+    { id: String(ENGLISH), color: getColor(ENGLISH), description: 'SEP (English) — aligned' },
   ]
 
   if (zh.status === 'error' || en.status === 'error') {
@@ -165,22 +127,6 @@ export default function AlignmentScatter({
 
       <div className="ml-8 mt-2 text-xs">
         <ScatterLegend labels={legend} />
-      </div>
-
-      <div className="mt-3 flex items-center gap-2 text-sm">
-        <span className="text-gray-600">Frame:</span>
-        {(['chinese', 'english', 'neutral'] as Frame[]).map((f) => (
-          <button
-            key={f}
-            onClick={() => setFrame(f)}
-            className={clsx(
-              'rounded border border-gray-900 px-2 py-0.5 capitalize duration-150 hover:bg-red-200',
-              frame === f && 'border-red-500 bg-red-500 text-white',
-            )}
-          >
-            {f}
-          </button>
-        ))}
       </div>
 
       <div className="mt-4">
