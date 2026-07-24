@@ -28,6 +28,8 @@ const bottomAxisHeight = 30
 const leftAxisWidth = 50
 const rangeMultiplier = 1.05
 
+const TEXT_THRESHOLD = 4
+
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
   highlightedCommunities?: Set<number>
   dictionary?: Dictionary
@@ -115,13 +117,23 @@ function CanvasScatterPlot({
     ctx.globalAlpha = 0.7
     for (const p of points) {
       if (p.target) continue
+      const cx = zx(p.x)
+      const cy = zy(p.y)
+
       ctx.beginPath()
       ctx.fillStyle = getColor(p.community)
-      ctx.arc(zx(p.x), zy(p.y), 3, 0, 2 * Math.PI)
+      ctx.arc(cx, cy, 3, 0, 2 * Math.PI)
       ctx.fill()
       if (highlightedCommunities.has(p.community)) {
         ctx.strokeStyle = '#000000'
         ctx.stroke()
+      }
+      if (transform.k > TEXT_THRESHOLD) {
+        ctx.globalAlpha = 1
+        ctx.font = '14px sans-serif'
+        ctx.textBaseline = 'middle'
+        ctx.fillStyle = '#111827'
+        ctx.fillText(p.id, cx + 9, cy)
       }
     }
 
