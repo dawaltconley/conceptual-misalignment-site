@@ -25,8 +25,8 @@ export default function HanziDefinition({
         {definitions
           .slice(0, maxDefinitions)
           .filter((def) => !def.startsWith('CL:'))
-          .map((def) => (
-            <li>{def}</li>
+          .map((def, i) => (
+            <li key={`${def}_${i}`}>{def}</li>
           ))}
         {definitions.length > maxDefinitions && <li role="presentation">…</li>}
       </ol>
