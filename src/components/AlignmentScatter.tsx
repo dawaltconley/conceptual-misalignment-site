@@ -1,5 +1,13 @@
 import type { Dictionary } from '@lib/build/cedict'
-import { useState, useMemo, useId, type ReactNode } from 'react'
+import {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useId,
+  type ReactNode,
+} from 'react'
+import { TSNE } from '@keckelt/tsne'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
 import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
@@ -26,6 +34,12 @@ const FRAME_LABEL: Record<Frame, { zh: string; en: string }> = {
   english: { zh: 'Mengzi — aligned', en: 'SEP — fixed frame' },
   neutral: { zh: 'Mengzi — aligned', en: 'SEP — aligned' },
 }
+
+const METHODS = ['pca', 'tsne'] as const
+type Method = (typeof METHODS)[number]
+const METHOD_LABEL: Record<Method, string> = { pca: 'PCA', tsne: 't-SNE' }
+const TSNE_MAX_ITER = 500
+const TSNE_STEPS_PER_FRAME = 2
 const CORPUS_COLOR: Record<number, string> = {
   [CHINESE]: '#d62728', // red
   [ENGLISH]: '#1f77b4', // blue
@@ -66,6 +80,8 @@ export default function AlignmentScatter({
   const [zhInput, setZhInput] = useState('')
   const [enInput, setEnInput] = useState('')
   const [frame, setFrame] = useState<Frame>('chinese')
+  const [method, setMethod] = useState<Method>('pca')
+  const [perplexity, setPerplexity] = useState(30)
   const listId = useId()
 
   const chineseData = zh.status === 'success' ? zh.data : null
@@ -74,55 +90,84 @@ export default function AlignmentScatter({
   const zhVecs = useMemo(() => vecMap(chineseData), [chineseData])
   const enVecs = useMemo(() => vecMap(englishData), [englishData])
 
-  // 2-D coordinates for both corpora under the selected frame. `chinese`/`english`
-  // hold one space fixed (its PCA cols 0/1) and rotate the other onto it via
-  // one-sided Procrustes; `neutral` rotates both into a shared frame and re-projects
-  // with a joint PCA. Falls back to un-aligned cols 0/1 when there are no anchors.
-  const layout = useMemo<{ zh: number[][]; en: number[][] }>(() => {
+  // Full shared-frame vectors for both corpora — the input to *both* projections.
+  // `chinese`/`english` hold one space fixed and rotate the other onto it via
+  // one-sided Procrustes; `neutral` rotates both into the SVD's shared frame.
+  // With no anchors, vectors are left un-aligned (each in its own basis).
+  const aligned = useMemo<{ zh: number[][]; en: number[][] }>(() => {
     if (!chineseData || !englishData) return { zh: [], en: [] }
     const zhRaw = chineseData.nodes.map((n) => n.vec)
     const enRaw = englishData.nodes.map((n) => n.vec)
-    const cols01 = (v: number[]) => [v[0] ?? 0, v[1] ?? 0]
-
     const valid = anchors.filter((a) => enVecs.has(a.en) && zhVecs.has(a.zh))
+    if (!valid.length) return { zh: zhRaw, en: enRaw }
     const A = valid.map((a) => enVecs.get(a.en)!) // English anchor rows
     const B = valid.map((a) => zhVecs.get(a.zh)!) // Chinese anchor rows
-
-    if (frame === 'chinese') {
-      const en = valid.length ? applyRotation(enRaw, procrustes(A, B)) : enRaw
-      return { zh: zhRaw.map(cols01), en: en.map(cols01) }
-    }
-    if (frame === 'english') {
-      const zh = valid.length ? applyRotation(zhRaw, procrustes(B, A)) : zhRaw
-      return { zh: zh.map(cols01), en: enRaw.map(cols01) }
-    }
-    // neutral
-    if (!valid.length) return { zh: zhRaw.map(cols01), en: enRaw.map(cols01) }
+    if (frame === 'chinese')
+      return { zh: zhRaw, en: applyRotation(enRaw, procrustes(A, B)) }
+    if (frame === 'english')
+      return { zh: applyRotation(zhRaw, procrustes(B, A)), en: enRaw }
     const { left, right } = symmetricRotations(A, B)
-    const enRot = applyRotation(enRaw, left)
-    const zhRot = applyRotation(zhRaw, right)
-    const coords = pca2d([...zhRot, ...enRot])
-    return { zh: coords.slice(0, zhRaw.length), en: coords.slice(zhRaw.length) }
+    return { zh: applyRotation(zhRaw, right), en: applyRotation(enRaw, left) }
   }, [chineseData, englishData, anchors, enVecs, zhVecs, frame])
 
+  const zhCount = chineseData?.nodes.length ?? 0
+  const combined = useMemo(() => [...aligned.zh, ...aligned.en], [aligned])
+
+  // PCA projection: fixed frames read cols 0/1 (their own PCA axes); neutral needs
+  // a joint PCA since the shared singular frame isn't variance-ordered.
+  const pcaCoords = useMemo<number[][]>(
+    () =>
+      frame === 'neutral'
+        ? pca2d(combined)
+        : combined.map((v) => [v[0] ?? 0, v[1] ?? 0]),
+    [combined, frame],
+  )
+
+  // t-SNE projection: a joint embedding of the combined shared-frame vectors,
+  // recomputed from scratch whenever the alignment changes (any anchor/frame edit),
+  // so well-aligned pairs migrate together as anchors are added.
+  const [tsneCoords, setTsneCoords] = useState<number[][]>([])
+  const raf = useRef(0)
+  useEffect(() => {
+    if (method !== 'tsne' || combined.length < 2) return
+    const tsne = new TSNE({ epsilon: 10, perplexity, dim: 2 })
+    tsne.initDataRaw(combined)
+    let steps = 0
+    let cancelled = false
+    const tick = () => {
+      if (cancelled) return
+      for (let i = 0; i < TSNE_STEPS_PER_FRAME; i++) {
+        tsne.step()
+        steps++
+      }
+      // getSolution() returns the SAME internal array each step (mutated in
+      // place), so snapshot into a fresh array or React skips the re-render.
+      const sol = tsne.getSolution() as number[][]
+      setTsneCoords(sol.map((c) => [c[0], c[1]]))
+      if (steps < TSNE_MAX_ITER) raf.current = requestAnimationFrame(tick)
+    }
+    raf.current = requestAnimationFrame(tick)
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(raf.current)
+    }
+  }, [method, combined, perplexity])
+
+  const coords = method === 'pca' ? pcaCoords : tsneCoords
   const points = useMemo<ScatterPoint[]>(() => {
     if (!chineseData || !englishData) return []
-    const zhPts = chineseData.nodes.map<ScatterPoint>((n, i) => ({
-      id: n.id,
-      x: layout.zh[i]?.[0] ?? 0,
-      y: layout.zh[i]?.[1] ?? 0,
-      community: CHINESE,
-      target: n.target,
-    }))
-    const enPts = englishData.nodes.map<ScatterPoint>((n, i) => ({
-      id: n.id,
-      x: layout.en[i]?.[0] ?? 0,
-      y: layout.en[i]?.[1] ?? 0,
-      community: ENGLISH,
-      target: n.target,
-    }))
-    return [...zhPts, ...enPts]
-  }, [chineseData, englishData, layout])
+    return coords.map<ScatterPoint>((c, i) => {
+      const node =
+        i < zhCount ? chineseData.nodes[i] : englishData.nodes[i - zhCount]
+      return {
+        id: node.id,
+        x: c?.[0] ?? 0,
+        y: c?.[1] ?? 0,
+        community: i < zhCount ? CHINESE : ENGLISH,
+        target: node.target,
+      }
+    })
+  }, [chineseData, englishData, coords, zhCount])
 
   const legend: LegendLabel[] = [
     {
@@ -170,20 +215,51 @@ export default function AlignmentScatter({
         <ScatterLegend labels={legend} />
       </div>
 
-      <div className="mt-3 flex items-center gap-2 text-sm">
-        <span className="font-bold">Frame:</span>
-        {FRAMES.map((f) => (
-          <button
-            key={f}
-            onClick={() => setFrame(f)}
-            className={clsx(
-              'rounded border border-gray-900 px-2 py-0.5 capitalize duration-150 hover:bg-red-200',
-              frame === f && 'border-red-500 bg-red-500 text-white',
-            )}
-          >
-            {f}
-          </button>
-        ))}
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="font-bold">Frame:</span>
+          {FRAMES.map((f) => (
+            <button
+              key={f}
+              onClick={() => setFrame(f)}
+              className={clsx(
+                'rounded border border-gray-900 px-2 py-0.5 capitalize duration-150 hover:bg-red-200',
+                frame === f && 'border-red-500 bg-red-500 text-white',
+              )}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="font-bold">Projection:</span>
+          {METHODS.map((m) => (
+            <button
+              key={m}
+              onClick={() => setMethod(m)}
+              className={clsx(
+                'rounded border border-gray-900 px-2 py-0.5 duration-150 hover:bg-red-200',
+                method === m && 'border-red-500 bg-red-500 text-white',
+              )}
+            >
+              {METHOD_LABEL[m]}
+            </button>
+          ))}
+          {method === 'tsne' && (
+            <label className="flex items-center gap-2">
+              perplexity
+              <input
+                type="range"
+                min={5}
+                max={50}
+                value={perplexity}
+                onChange={(e) => setPerplexity(Number(e.target.value))}
+              />
+              <span className="w-6 tabular-nums">{perplexity}</span>
+            </label>
+          )}
+        </div>
       </div>
 
       <div className="mt-4">
