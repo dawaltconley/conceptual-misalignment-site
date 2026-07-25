@@ -25,7 +25,6 @@ export default function GraphAxis({
 
   useLayoutEffect(() => {
     const host = d3.select(ref.current)
-    host.select('g').remove()
     const axisGenerator = getAxis(orientation, scale)
     const [start, end] = d3.extent(scale.range())
     if (start == null || end == null) {
@@ -35,9 +34,12 @@ export default function GraphAxis({
     const tickCount = Math.ceil((end - start) / pxPerTick)
     axisGenerator.ticks(tickCount)
 
-    const group = host.append('g')
+    let group = host.select<SVGGElement>('g')
+    if (group.empty()) {
+      group = host.append('g')
+    }
     group.call(axisGenerator)
-  }, [scale, width, height])
+  }, [scale])
 
   return (
     <g
