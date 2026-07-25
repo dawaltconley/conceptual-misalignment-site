@@ -59,6 +59,8 @@ function CanvasScatterPlot({
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
 
+  const [isInteractive, setIsInteractive] = useState(true)
+
   const body = new Position({
     width: Math.max(width - leftAxisWidth - 2 * paddingX, 0),
     height: Math.max(height - bottomAxisHeight - 2 * paddingY, 0),
@@ -185,35 +187,44 @@ function CanvasScatterPlot({
     zoomRef.current = zoom
 
     const selection = d3.select(canvas)
-    selection.call(zoom)
-    // Double-click resets to fit instead of d3's default zoom-in.
-    selection.on('dblclick.zoom', null).on('dblclick', () => {
-      selection.call(zoom.transform, d3.zoomIdentity)
-    })
+    if (isInteractive) {
+      selection.call(zoom)
+      // Double-click resets to fit instead of d3's default zoom-in.
+      selection.on('dblclick.zoom', null).on('dblclick', () => {
+        selection.call(zoom.transform, d3.zoomIdentity)
+      })
+    }
 
     return () => {
       selection.on('.zoom', null).on('dblclick', null)
     }
-  }, [width, height, body.width, body.height])
+  }, [width, height, body.width, body.height, isInteractive])
 
   // Reset zoom/pan when the point set changes (e.g. toggling PCA <-> t-SNE), so a
   // new layout always starts fit-to-view. Resetting via zoom.transform also clears
   // d3's internal node transform, not just our state, so the next gesture doesn't jump.
+  const resetTimeout = useRef(0)
   useLayoutEffect(() => {
     const canvas = hoverCanvasRef.current
     const zoom = zoomRef.current
     if (!canvas || !zoom) return
     d3.select(canvas).call(zoom.transform, d3.zoomIdentity)
+
+    window.clearTimeout(resetTimeout.current)
+    setIsInteractive(false)
+    resetTimeout.current = window.setTimeout(() => setIsInteractive(true), 300)
   }, [points])
 
   const delaunay = useMemo(
     () =>
-      d3.Delaunay.from(
-        points,
-        (p) => xScale(p.x),
-        (p) => yScale(p.y),
-      ),
-    [points, xScale, yScale],
+      isInteractive
+        ? d3.Delaunay.from(
+            points,
+            (p) => xScale(p.x),
+            (p) => yScale(p.y),
+          )
+        : null,
+    [points, xScale, yScale, isInteractive],
   )
 
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
@@ -221,7 +232,7 @@ function CanvasScatterPlot({
 
   const handleHover = (e: MouseEvent<HTMLCanvasElement> | null) => {
     const canvas = hoverCanvasRef.current
-    if (!canvas || !ready) return
+    if (!canvas || !ready || !delaunay) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -289,7 +300,7 @@ function CanvasScatterPlot({
             tooltip && 'cursor-pointer',
           )}
           style={{ width, height }}
-          onMouseMove={(e) => handleHover(e)}
+          onMouseMove={(e) => isInteractive && handleHover(e)}
           onMouseOut={() => handleHover(null)}
         />
         {ready && (
