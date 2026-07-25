@@ -3,14 +3,29 @@ import { useState, useMemo, useId, type ReactNode } from 'react'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
 import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
-import { procrustes, applyRotation } from '@lib/align'
+import {
+  procrustes,
+  applyRotation,
+  symmetricRotations,
+  pca2d,
+} from '@lib/align'
 import CanvasScatterPlot from './CanvasScatterPlot'
 import { ScatterSkeleton, type ScatterPoint } from './ScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
 
-// Corpus is encoded in `community`: 0 = Chinese (fixed frame), 1 = English (aligned).
+// Corpus is encoded in `community`: 0 = Chinese, 1 = English.
 const CHINESE = 0
 const ENGLISH = 1
+
+// Which space stays fixed while the other rotates onto it. `neutral` rotates both
+// into a shared frame (symmetric Procrustes) and re-projects with a joint PCA.
+const FRAMES = ['chinese', 'english', 'neutral'] as const
+type Frame = (typeof FRAMES)[number]
+const FRAME_LABEL: Record<Frame, { zh: string; en: string }> = {
+  chinese: { zh: 'Mengzi — fixed frame', en: 'SEP — aligned' },
+  english: { zh: 'Mengzi — aligned', en: 'SEP — fixed frame' },
+  neutral: { zh: 'Mengzi — aligned', en: 'SEP — aligned' },
+}
 const CORPUS_COLOR: Record<number, string> = {
   [CHINESE]: '#d62728', // red
   [ENGLISH]: '#1f77b4', // blue
@@ -50,6 +65,7 @@ export default function AlignmentScatter({
   const [anchors, setAnchors] = useState<Anchor[]>([])
   const [zhInput, setZhInput] = useState('')
   const [enInput, setEnInput] = useState('')
+  const [frame, setFrame] = useState<Frame>('chinese')
   const listId = useId()
 
   const chineseData = zh.status === 'success' ? zh.data : null
@@ -58,40 +74,67 @@ export default function AlignmentScatter({
   const zhVecs = useMemo(() => vecMap(chineseData), [chineseData])
   const enVecs = useMemo(() => vecMap(englishData), [englishData])
 
-  // Fit Procrustes on the valid anchors and rotate every English vector into the
-  // Chinese space. With no anchors, fall back to identity (English un-aligned).
-  const alignedEnglish = useMemo<number[][]>(() => {
-    if (!englishData) return []
-    const raw = englishData.nodes.map((n) => n.vec)
+  // 2-D coordinates for both corpora under the selected frame. `chinese`/`english`
+  // hold one space fixed (its PCA cols 0/1) and rotate the other onto it via
+  // one-sided Procrustes; `neutral` rotates both into a shared frame and re-projects
+  // with a joint PCA. Falls back to un-aligned cols 0/1 when there are no anchors.
+  const layout = useMemo<{ zh: number[][]; en: number[][] }>(() => {
+    if (!chineseData || !englishData) return { zh: [], en: [] }
+    const zhRaw = chineseData.nodes.map((n) => n.vec)
+    const enRaw = englishData.nodes.map((n) => n.vec)
+    const cols01 = (v: number[]) => [v[0] ?? 0, v[1] ?? 0]
+
     const valid = anchors.filter((a) => enVecs.has(a.en) && zhVecs.has(a.zh))
-    if (valid.length < 1) return raw
-    const A = valid.map((a) => enVecs.get(a.en)!)
-    const B = valid.map((a) => zhVecs.get(a.zh)!)
-    return applyRotation(raw, procrustes(A, B))
-  }, [englishData, anchors, enVecs, zhVecs])
+    const A = valid.map((a) => enVecs.get(a.en)!) // English anchor rows
+    const B = valid.map((a) => zhVecs.get(a.zh)!) // Chinese anchor rows
+
+    if (frame === 'chinese') {
+      const en = valid.length ? applyRotation(enRaw, procrustes(A, B)) : enRaw
+      return { zh: zhRaw.map(cols01), en: en.map(cols01) }
+    }
+    if (frame === 'english') {
+      const zh = valid.length ? applyRotation(zhRaw, procrustes(B, A)) : zhRaw
+      return { zh: zh.map(cols01), en: enRaw.map(cols01) }
+    }
+    // neutral
+    if (!valid.length) return { zh: zhRaw.map(cols01), en: enRaw.map(cols01) }
+    const { left, right } = symmetricRotations(A, B)
+    const enRot = applyRotation(enRaw, left)
+    const zhRot = applyRotation(zhRaw, right)
+    const coords = pca2d([...zhRot, ...enRot])
+    return { zh: coords.slice(0, zhRaw.length), en: coords.slice(zhRaw.length) }
+  }, [chineseData, englishData, anchors, enVecs, zhVecs, frame])
 
   const points = useMemo<ScatterPoint[]>(() => {
     if (!chineseData || !englishData) return []
-    const zhPts = chineseData.nodes.map<ScatterPoint>((n) => ({
+    const zhPts = chineseData.nodes.map<ScatterPoint>((n, i) => ({
       id: n.id,
-      x: n.vec[0] ?? 0,
-      y: n.vec[1] ?? 0,
+      x: layout.zh[i]?.[0] ?? 0,
+      y: layout.zh[i]?.[1] ?? 0,
       community: CHINESE,
       target: n.target,
     }))
     const enPts = englishData.nodes.map<ScatterPoint>((n, i) => ({
       id: n.id,
-      x: alignedEnglish[i]?.[0] ?? 0,
-      y: alignedEnglish[i]?.[1] ?? 0,
+      x: layout.en[i]?.[0] ?? 0,
+      y: layout.en[i]?.[1] ?? 0,
       community: ENGLISH,
       target: n.target,
     }))
     return [...zhPts, ...enPts]
-  }, [chineseData, englishData, alignedEnglish])
+  }, [chineseData, englishData, layout])
 
   const legend: LegendLabel[] = [
-    { id: String(CHINESE), color: getColor(CHINESE), description: 'Mengzi (Chinese) — fixed frame' },
-    { id: String(ENGLISH), color: getColor(ENGLISH), description: 'SEP (English) — aligned' },
+    {
+      id: String(CHINESE),
+      color: getColor(CHINESE),
+      description: FRAME_LABEL[frame].zh,
+    },
+    {
+      id: String(ENGLISH),
+      color: getColor(ENGLISH),
+      description: FRAME_LABEL[frame].en,
+    },
   ]
 
   if (zh.status === 'error' || en.status === 'error') {
@@ -106,9 +149,7 @@ export default function AlignmentScatter({
   const zhHas = zhVecs.has(zhInput)
   const enHas = enVecs.has(enInput)
   const canAdd =
-    zhHas &&
-    enHas &&
-    !anchors.some((a) => a.zh === zhInput && a.en === enInput)
+    zhHas && enHas && !anchors.some((a) => a.zh === zhInput && a.en === enInput)
 
   const addAnchor = () => {
     if (!canAdd) return
@@ -129,6 +170,22 @@ export default function AlignmentScatter({
         <ScatterLegend labels={legend} />
       </div>
 
+      <div className="mt-3 flex items-center gap-2 text-sm">
+        <span className="font-bold">Frame:</span>
+        {FRAMES.map((f) => (
+          <button
+            key={f}
+            onClick={() => setFrame(f)}
+            className={clsx(
+              'rounded border border-gray-900 px-2 py-0.5 capitalize duration-150 hover:bg-red-200',
+              frame === f && 'border-red-500 bg-red-500 text-white',
+            )}
+          >
+            {f}
+          </button>
+        ))}
+      </div>
+
       <div className="mt-4">
         <p className="mb-1 text-sm font-bold">
           Anchor pairs{' '}
@@ -138,10 +195,20 @@ export default function AlignmentScatter({
         </p>
 
         <div className="flex flex-wrap items-end gap-2">
-          <Field label="Chinese term" value={zhInput} onChange={setZhInput}
-                 listId={`${listId}-zh`} valid={!zhInput || zhHas} />
-          <Field label="English term" value={enInput} onChange={setEnInput}
-                 listId={`${listId}-en`} valid={!enInput || enHas} />
+          <Field
+            label="Chinese term"
+            value={zhInput}
+            onChange={setZhInput}
+            listId={`${listId}-zh`}
+            valid={!zhInput || zhHas}
+          />
+          <Field
+            label="English term"
+            value={enInput}
+            onChange={setEnInput}
+            listId={`${listId}-en`}
+            valid={!enInput || enHas}
+          />
           <button
             disabled={!canAdd}
             onClick={addAnchor}
@@ -202,7 +269,13 @@ interface FieldProps {
   valid: boolean
 }
 
-function Field({ label, value, onChange, listId, valid }: FieldProps): ReactNode {
+function Field({
+  label,
+  value,
+  onChange,
+  listId,
+  valid,
+}: FieldProps): ReactNode {
   return (
     <label className="flex flex-col text-sm">
       <span className="text-gray-600">{label}</span>
