@@ -53,7 +53,9 @@ function CanvasScatterPlot({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const hoverCanvasRef = useRef<HTMLCanvasElement | null>(null)
-  const zoomRef = useRef<d3.ZoomBehavior<HTMLCanvasElement, unknown> | null>(null)
+  const zoomRef = useRef<d3.ZoomBehavior<HTMLCanvasElement, unknown> | null>(
+    null,
+  )
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
 
@@ -76,24 +78,29 @@ function CanvasScatterPlot({
     height: bottomAxisHeight,
   })
 
-  const xExtent = d3.extent(points, (p) => p.x * rangeMultiplier) ?? [0, 1]
-  const yExtent = d3.extent(points, (p) => p.y * rangeMultiplier) ?? [0, 1]
-  const xScale = d3
-    .scaleLinear()
-    .domain(xExtent[0] === undefined ? [0, 1] : xExtent)
-    .range([0, body.width])
-  const yScale = d3
-    .scaleLinear()
-    .domain(yExtent[0] === undefined ? [0, 1] : yExtent)
-    .range([body.height, 0])
+  const xScale = useMemo(() => {
+    const extent = d3.extent(points, (p) => p.x * rangeMultiplier) ?? [0, 1]
+    return d3
+      .scaleLinear()
+      .domain(extent[0] === undefined ? [0, 1] : extent)
+      .range([0, body.width])
+  }, [points, body.width])
+
+  const yScale = useMemo(() => {
+    const extent = d3.extent(points, (p) => p.y * rangeMultiplier) ?? [0, 1]
+    return d3
+      .scaleLinear()
+      .domain(extent[0] === undefined ? [0, 1] : extent)
+      .range([body.height, 0])
+  }, [points, body.height])
 
   const ready = width > 0 && height > 0
 
   // Semantic zoom: apply the pan/zoom transform to the SCALES, so point positions
   // spread/shift but marker radii stay constant. Axes and hit-testing use these.
   const [transform, setTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity)
-  const zx = transform.rescaleX(xScale)
-  const zy = transform.rescaleY(yScale)
+  const zx = useMemo(() => transform.rescaleX(xScale), [transform, xScale])
+  const zy = useMemo(() => transform.rescaleY(yScale), [transform, yScale])
   const isZoomed = transform.k > 1
 
   // --- draw the point cloud on the canvas (repaints whenever points/size/zoom change) ---
@@ -206,7 +213,7 @@ function CanvasScatterPlot({
         (p) => xScale(p.x),
         (p) => yScale(p.y),
       ),
-    [points, width, height],
+    [points, xScale, yScale],
   )
 
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)

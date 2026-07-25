@@ -1,5 +1,5 @@
 import type { Point, Size } from '@lib/graphs'
-import { useRef, useLayoutEffect } from 'react'
+import { useRef, useLayoutEffect, memo } from 'react'
 import * as d3 from 'd3'
 
 type Orientation = 'left' | 'bottom'
@@ -13,7 +13,7 @@ export interface GraphAxisProps extends Size {
   position?: Partial<Point>
 }
 
-export default function GraphAxis({
+function GraphAxis({
   orientation,
   scale,
   width,
@@ -50,6 +50,8 @@ export default function GraphAxis({
     />
   )
 }
+
+export default memo(GraphAxis)
 
 function getAxis(
   orientation: Orientation,
