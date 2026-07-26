@@ -11,6 +11,7 @@ export interface GraphAxisProps extends Size {
   width: number
   height: number
   position?: Partial<Point>
+  pxPerTick?: number
 }
 
 function GraphAxis({
@@ -19,27 +20,33 @@ function GraphAxis({
   width,
   height,
   position = {},
+  pxPerTick = 80,
 }: GraphAxisProps): JSX.Element {
   const ref = useRef<SVGGElement>(null)
+  const axisGenerator = useRef(getAxis(orientation, scale))
+  const lastOrientation = useRef(orientation)
   const { x = 0, y = 0 } = position
 
   useLayoutEffect(() => {
     const host = d3.select(ref.current)
-    const axisGenerator = getAxis(orientation, scale)
+    if (orientation !== lastOrientation.current) {
+      axisGenerator.current = getAxis(orientation, scale)
+    }
     const [start, end] = d3.extent(scale.range())
     if (start == null || end == null) {
       return
     }
-    const pxPerTick = 80
     const tickCount = Math.ceil((end - start) / pxPerTick)
-    axisGenerator.ticks(tickCount)
+
+    axisGenerator.current.scale(scale)
+    axisGenerator.current.ticks(tickCount)
 
     let group = host.select<SVGGElement>('g')
     if (group.empty()) {
       group = host.append('g')
     }
-    group.call(axisGenerator)
-  }, [scale])
+    group.call(axisGenerator.current)
+  }, [scale, orientation, pxPerTick])
 
   return (
     <g
