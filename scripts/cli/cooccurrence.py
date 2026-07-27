@@ -102,7 +102,7 @@ def main() -> None:
                 sources.append(source)
 
             print(
-                f"  [term.label] found {term_count} occurances accross {len(sep_articles) - 1} articles")
+                f"  [{term.label}] found {term_count} occurances accross {len(sep_articles) - 1} articles")
             data = TermData(term.label, stems=list(stems), sources=sources)
             data.save_json(SEP / f"{slugify(term.label)}_pmi.json")
 
