@@ -91,7 +91,7 @@ def main() -> None:
                 for i, sent in enumerate(tokens):
                     for j, t in enumerate(sent):
                         if term.matches(t):
-                            if a > 1:
+                            if a > 0:
                                 term_count += 1
                             stems.add(t)
                             tokens[i][j] = canonical
