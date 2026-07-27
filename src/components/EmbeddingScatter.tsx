@@ -1,9 +1,9 @@
 import type { Dictionary } from '@lib/build/cedict'
 import { useState, useEffect, useMemo, type ReactNode } from 'react'
-import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
+import Button from './Button'
 import {
   ScatterSkeleton,
   Wrapper as ScatterWrapper,
@@ -140,12 +140,12 @@ export default function EmbeddingScatter({
         <div className="flex gap-2">
           <Toggle
             label="PCA"
-            active={layout === 'pca'}
+            isActive={layout === 'pca'}
             onClick={() => setLayout('pca')}
           />
           <Toggle
             label="t-SNE"
-            active={layout === 'tsne'}
+            isActive={layout === 'tsne'}
             onClick={() => setLayout('tsne')}
           />
         </div>
@@ -163,8 +163,8 @@ export default function EmbeddingScatter({
               />
               <span className="w-6 tabular-nums">{perplexity}</span>
             </label>
-            <button
-              className="rounded border border-gray-900 px-2 py-0.5 text-sm hover:bg-red-200"
+            <Button
+              className="text-sm"
               onClick={() =>
                 run(
                   data.nodes.map((n) => n.vec),
@@ -173,7 +173,7 @@ export default function EmbeddingScatter({
               }
             >
               re-run
-            </button>
+            </Button>
             <span className="text-sm tabular-nums text-gray-500">
               {converging
                 ? `iterating… ${steps}/${TSNE_MAX_ITER}`
@@ -192,21 +192,19 @@ function Wrapper({ children }: { children: ReactNode }): JSX.Element {
 
 interface ToggleProps {
   label: string
-  active?: boolean
+  isActive?: boolean
   onClick: () => void
 }
 
-function Toggle({ label, active = false, onClick }: ToggleProps): JSX.Element {
+function Toggle({
+  label,
+  isActive = false,
+  onClick,
+}: ToggleProps): JSX.Element {
   return (
-    <button
-      className={clsx(
-        'rounded border border-gray-900 px-2 py-0.5 text-sm duration-150 hover:bg-red-200',
-        active && 'border-red-500 bg-red-500 text-white',
-      )}
-      onClick={onClick}
-    >
+    <Button className="text-sm" isActive={isActive} onClick={onClick}>
       {label}
-    </button>
+    </Button>
   )
 }
 

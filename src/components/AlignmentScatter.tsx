@@ -10,6 +10,7 @@ import {
   symmetricRotations,
   pca2d,
 } from '@lib/align'
+import Button from './Button'
 import CanvasScatterPlot from './CanvasScatterPlot'
 import { ScatterSkeleton, type ScatterPoint } from './ScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
@@ -193,32 +194,27 @@ export default function AlignmentScatter({
         <div className="flex items-center gap-2">
           <span className="font-bold">Frame:</span>
           {FRAMES.map((f) => (
-            <button
+            <Button
               key={f}
               onClick={() => setFrame(f)}
-              className={clsx(
-                'rounded border border-gray-900 px-2 py-0.5 capitalize duration-150 hover:bg-red-200',
-                frame === f && 'border-red-500 bg-red-500 text-white',
-              )}
+              isActive={frame === f}
+              className="capitalize"
             >
               {f}
-            </button>
+            </Button>
           ))}
         </div>
 
         <div className="flex items-center gap-2">
           <span className="font-bold">Projection:</span>
           {METHODS.map((m) => (
-            <button
+            <Button
               key={m}
               onClick={() => setMethod(m)}
-              className={clsx(
-                'rounded border border-gray-900 px-2 py-0.5 duration-150 hover:bg-red-200',
-                method === m && 'border-red-500 bg-red-500 text-white',
-              )}
+              isActive={method === m}
             >
               {METHOD_LABEL[m]}
-            </button>
+            </Button>
           ))}
           {method === 'tsne' && (
             <label className="flex items-center gap-2">
@@ -259,13 +255,13 @@ export default function AlignmentScatter({
             listId={`${listId}-en`}
             valid={!enInput || enHas}
           />
-          <button
+          <Button
             disabled={!canAdd}
             onClick={addAnchor}
-            className="rounded border border-gray-900 px-2 py-1 text-sm duration-150 enabled:hover:bg-red-200 disabled:opacity-40"
+            className="py-1 text-sm enabled:hover:bg-red-200 disabled:opacity-40"
           >
             + add
-          </button>
+          </Button>
         </div>
 
         <datalist id={`${listId}-zh`}>
