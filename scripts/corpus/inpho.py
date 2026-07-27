@@ -31,7 +31,8 @@ def _get_doc_id(sep_url: str) -> str:
 
 
 def _get_topics(doc_id: str) -> str | None:
-    r = requests.get(f"https://www.hypershelf.org/sep/100/doc_topics/{doc_id}")
+    r = requests.get(
+        f"https://www.hypershelf.org/sep/100/doc_topics/{doc_id}", timeout=30)
     if not r.from_cache:  # type: ignore
         time.sleep(random() * 2 + 1)
     if not r.ok:
