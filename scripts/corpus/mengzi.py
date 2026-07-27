@@ -21,6 +21,7 @@ Books and their ctext URNs:
 
 import requests
 import time
+from lib import Source
 from corpus import cache
 from config import MENGZI_DIR
 from typing import Literal
@@ -93,7 +94,7 @@ def _fetch_text_url(urn: str) -> str:
     return r.json().get("url", "")
 
 
-class Chapter:
+class Chapter(Source):
     id: str
     urn: str
     url: str

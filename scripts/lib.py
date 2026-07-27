@@ -19,7 +19,7 @@ class NLPSource(Source):
     description: str
     cooccurrence: object | None
 
-    def __init__(self, source: Source, /, cooccurrence: "Graph | None"):
+    def __init__(self, source: Source, /, cooccurrence: "Graph | None" = None):
         from networkx import node_link_data
         self.url = source.url
         self.title = source.title
