@@ -122,7 +122,7 @@ export default function AlignmentScatter({
   const { coords: tsneCoords, run: runTsne, stop: stopTsne } = useTsne()
   useEffect(() => {
     if (method === 'tsne' && combined.length >= 2) {
-      runTsne(combined, { perplexity, maxIter: TSNE_MAX_ITER })
+      runTsne(combined, { perplexity, maxIter: TSNE_MAX_ITER, stepsPerPost: 1 })
     } else {
       stopTsne()
     }
