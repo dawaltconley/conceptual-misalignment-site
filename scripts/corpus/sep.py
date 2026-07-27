@@ -5,7 +5,7 @@ import time
 from corpus import cache
 from dataclasses import dataclass
 from random import random
-from config import Rendering
+from lib import Rendering
 cache.install()
 
 

@@ -1,4 +1,5 @@
 from config import TERMS, DATA, SEP, CTEXT
+from lib import TermData, NLPSource
 from corpus.mengzi import fetch_mengzi_full, fetch_mengzi_chapters
 from corpus.sep import search_sep, SEP as SEPArticle
 from corpus.inpho import is_chinese_philosophy
@@ -6,11 +7,8 @@ from cooccurrence.pmi import filter_to_sent_node_lists, build_cooccurrence_netwo
 from nlp.english import tokenize_english_html
 from nlp.chinese import tokenize_classical_chinese, STOPWORDS as CHINESE_STOPWORDS
 from slugify import slugify
-from networkx import node_link_data, Graph
-from dataclasses import dataclass, asdict
+from networkx import Graph
 import json
-from pathlib import Path
-from typing import Protocol
 
 cooccurrence = []
 
@@ -18,14 +16,6 @@ print("Fetching Mengzi full text...")
 mengzi = [fetch_mengzi_full()]
 print("Fetching Mengzi chapters...")
 mengzi = mengzi + fetch_mengzi_chapters()
-
-
-def test(foo: str | list[str]) -> list[str]:
-    # if type(foo) is str:
-    if isinstance(foo, str):
-        return [foo]
-    else:
-        return foo
 
 
 def get_cooccurence_english(term: str, text: str | list[list[str]]) -> Graph:
@@ -45,42 +35,6 @@ def get_cooccurence_chinese(term: str, text: str) -> Graph:
         tokens, term, min_freq=3, stopwords=CHINESE_STOPWORDS)
     return build_cooccurrence_network(
         sent_node_lists, nodes, term, max_nodes=15)
-
-
-class Source(Protocol):
-    url: str
-    title: str
-    description: str
-
-
-@dataclass
-class NLPSource(Source):
-    url: str
-    title: str
-    description: str
-    co_occurance: object
-
-    def __init__(self, source: Source, /, co_occurance: Graph):
-        self.url = source.url
-        self.title = source.title
-        self.description = source.description
-        self.co_occurance = node_link_data(co_occurance)
-
-
-@dataclass
-class TermData:
-    term: str
-    sources: list[NLPSource]
-    stems: list[str] | None = None
-
-    def save_json(self, filepath: Path) -> None:
-        serialized = json.dumps(asdict(self), indent=2)
-        filepath.write_text(serialized, encoding="utf-8")
-
-
-def save_term_data_json(term: TermData, filepath: Path) -> None:
-    serialized = json.dumps(term, indent=2)
-    filepath.write_text(serialized, encoding="utf-8")
 
 
 def filter_chinese_philosophy(sep_url: str) -> bool:

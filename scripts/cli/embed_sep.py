@@ -19,7 +19,8 @@ from pathlib import Path
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from config import TERMS, Rendering, ANALYSIS
+from config import TERMS, ANALYSIS
+from lib import Rendering
 from embeddings import analyze, vectors
 from embeddings.model import Embedder
 from embeddings.sep_occurrences import (
