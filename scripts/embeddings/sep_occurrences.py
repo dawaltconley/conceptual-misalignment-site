@@ -21,7 +21,7 @@ from typing import Protocol
 
 from bs4 import BeautifulSoup
 
-from config import Rendering
+from lib import Rendering
 from embeddings.occurrences import Segment, Span
 from corpus.inpho import is_chinese_philosophy
 from corpus.sep import search_sep
