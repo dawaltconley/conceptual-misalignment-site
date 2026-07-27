@@ -126,6 +126,7 @@ function CanvasScatterPlot({
     // Non-targets first (behind), then targets + labels on top.
     ctx.globalAlpha = 0.7
     for (const p of points) {
+      if (!p) continue
       if (p.target) continue
       const cx = zx(p.x)
       const cy = zy(p.y)
