@@ -10,7 +10,7 @@ const dynamicViewports = {
 
 /** @type import('tailwindcss').Config */
 module.exports = {
-  content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
+  content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx}'],
   theme: {
     container: {
       padding: {
@@ -20,7 +20,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: colors.blue['700'], // or alias to a whole range
+        primary: {
+          ...colors.red,
+          DEFAULT: colors.red['500'],
+        },
       },
       fontFamily: {
         sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],

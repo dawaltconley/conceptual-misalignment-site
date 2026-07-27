@@ -10,7 +10,7 @@
     max-width: 100%;
     overflow-x: hidden;
     overflow-x: clip;
-    accent-color: theme('colors.primary');
+    accent-color: #{"theme('colors.primary')"};
     @media not (prefers-reduced-motion) {
       scroll-behavior: smooth;
     }
@@ -46,17 +46,40 @@
 
   .btn {
     display: inline-block;
-    padding: theme('spacing.4') theme('spacing.6');
-    border-radius: theme('borderRadius.full');
-    font-size: theme('fontSize.base');
-    font-weight: theme('fontWeight.medium');
+    padding: theme('spacing[0.5]') theme('spacing.2');
+    border-radius: theme('borderRadius.DEFAULT');
+    border-color: theme('colors.gray.900');
+    border-width: 1px;
+    // font-size: theme('fontSize.base');
     white-space: nowrap;
     overflow: hidden;
     overflow: clip;
     text-overflow: ellipsis;
     max-width: 100%;
-    max-width: min(100%, 24rem);
-    transition-duration: #{"theme('transitionDuration.DEFAULT')"};
+    max-width: min(100%, 24em);
+    transition-duration: #{"theme('transitionDuration.150')"};
+    background-color: theme('colors.white');
+
+    &:disabled {
+      background-color: theme('colors.gray.100');
+      border-color: theme('colors.gray.700');
+      color: theme('colors.gray.700');
+    }
+
+    &:enabled:hover {
+      background-color: theme('colors.primary.200');
+    }
+  }
+
+  .btn--active {
+    background-color: theme('colors.primary.DEFAULT');
+    border-color: theme('colors.primary.DEFAULT');
+    color: theme('colors.white');
+
+    &:enabled:hover {
+      background-color: theme('colors.primary.300');
+      border-color: theme('colors.primary.300');
+    }
   }
 
   .btn--primary {
@@ -134,7 +157,7 @@
   }
 
   .underline-fill {
-    --underline-color: theme('colors.primary');
+    --underline-color: #{"theme('colors.primary')"};
     --x-overflow: 2px;
     background: linear-gradient(
         to bottom,

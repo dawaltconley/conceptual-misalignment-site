@@ -4,6 +4,7 @@ import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
 import { TermSchema } from '@lib/networkx'
 import { useState, type ReactNode } from 'react'
+import Button from './Button'
 import clsx from 'clsx'
 
 interface MultiNetworkProps {
@@ -84,21 +85,11 @@ interface SourceProps {
   onClick: () => void
 }
 
-function Source({
-  title,
-  isActive = false,
-  onClick,
-}: SourceProps): JSX.Element {
+function Source({ title, ...props }: SourceProps): JSX.Element {
   return (
-    <button
-      className={clsx(
-        'max-w-40 overflow-hidden overflow-ellipsis whitespace-nowrap rounded border border-gray-900 p-1 duration-150 hover:bg-red-200 xl:block',
-        isActive && 'border-red-500 bg-red-500 text-white',
-      )}
-      onClick={onClick}
-    >
+    <Button className="max-w-40 p-1 xl:block" {...props}>
       {title}
-    </button>
+    </Button>
   )
 }
 
