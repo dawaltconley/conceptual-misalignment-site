@@ -1,15 +1,8 @@
 import type { Dictionary } from '@lib/build/cedict'
-import {
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  useId,
-  type ReactNode,
-} from 'react'
-import { TSNE } from '@keckelt/tsne'
+import { useState, useEffect, useMemo, useId, type ReactNode } from 'react'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
+import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
 import {
   procrustes,
@@ -39,7 +32,6 @@ const METHODS = ['pca', 'tsne'] as const
 type Method = (typeof METHODS)[number]
 const METHOD_LABEL: Record<Method, string> = { pca: 'PCA', tsne: 't-SNE' }
 const TSNE_MAX_ITER = 500
-const TSNE_STEPS_PER_FRAME = 2
 const CORPUS_COLOR: Record<number, string> = {
   [CHINESE]: '#d62728', // red
   [ENGLISH]: '#1f77b4', // blue
@@ -124,34 +116,16 @@ export default function AlignmentScatter({
   )
 
   // t-SNE projection: a joint embedding of the combined shared-frame vectors,
-  // recomputed from scratch whenever the alignment changes (any anchor/frame edit),
-  // so well-aligned pairs migrate together as anchors are added.
-  const [tsneCoords, setTsneCoords] = useState<number[][]>([])
-  const raf = useRef(0)
+  // computed in a worker and recomputed whenever the alignment changes (any
+  // anchor/frame edit), so well-aligned pairs migrate together as anchors are added.
+  const { coords: tsneCoords, run: runTsne, stop: stopTsne } = useTsne()
   useEffect(() => {
-    if (method !== 'tsne' || combined.length < 2) return
-    const tsne = new TSNE({ epsilon: 10, perplexity, dim: 2 })
-    tsne.initDataRaw(combined)
-    let steps = 0
-    let cancelled = false
-    const tick = () => {
-      if (cancelled) return
-      for (let i = 0; i < TSNE_STEPS_PER_FRAME; i++) {
-        tsne.step()
-        steps++
-      }
-      // getSolution() returns the SAME internal array each step (mutated in
-      // place), so snapshot into a fresh array or React skips the re-render.
-      const sol = tsne.getSolution() as number[][]
-      setTsneCoords(sol.map((c) => [c[0], c[1]]))
-      if (steps < TSNE_MAX_ITER) raf.current = requestAnimationFrame(tick)
+    if (method === 'tsne' && combined.length >= 2) {
+      runTsne(combined, { perplexity, maxIter: TSNE_MAX_ITER })
+    } else {
+      stopTsne()
     }
-    raf.current = requestAnimationFrame(tick)
-    return () => {
-      cancelled = true
-      cancelAnimationFrame(raf.current)
-    }
-  }, [method, combined, perplexity])
+  }, [method, combined, perplexity, runTsne, stopTsne])
 
   const coords = method === 'pca' ? pcaCoords : tsneCoords
   const points = useMemo<ScatterPoint[]>(() => {
