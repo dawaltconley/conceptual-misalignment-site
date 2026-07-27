@@ -38,7 +38,8 @@ def get_cooccurence_chinese(term: str, text: str) -> Graph | None:
 
 
 def filter_chinese_philosophy(sep_url: str) -> bool:
-    if is_chinese_philosophy(sep_url):
+    # this filters out the most obvious entries, but also some entries on indian philosophy
+    if is_chinese_philosophy(sep_url, 0.25):
         print(" " * 4 + "skipping chinese philosophy search result: " + sep_url)
         return False
     return True

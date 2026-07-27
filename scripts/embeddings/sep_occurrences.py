@@ -76,7 +76,7 @@ def fetch_corpus(
     for term in terms:
         articles = search_sep(
             term, per_term,
-            pre_filter=lambda url: not is_chinese_philosophy(url),
+            pre_filter=lambda url: not is_chinese_philosophy(url, 0.25),
         )
         for a in articles:
             if a.url not in docs:  # first term to surface an article keeps it
