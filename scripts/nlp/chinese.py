@@ -9,12 +9,20 @@ STOPWORDS: set[str] = {
     "然", "得", "能", "可", "將", "及", "皆", "未", "與",
 }
 
+_nlp = None
+
+
+def _get_nlp():
+    from cltk import NLP as CLTK_NLP
+    global _nlp
+    if _nlp is None:
+        _nlp = CLTK_NLP(language_code="lzh")
+    return _nlp
+
 
 def tokenize_classical_chinese(text: str) -> list[list[str]]:
     """Per-sentence CJK token lists via CLTK's classical Chinese (lzh) model."""
-    from cltk import NLP as CLTK_NLP
-
-    cltk_nlp = CLTK_NLP(language_code="lzh")
+    cltk_nlp = _get_nlp()
     doc = cltk_nlp.analyze(text=text)
 
     sent_tokens: dict[int, list[str]] = defaultdict(list)
