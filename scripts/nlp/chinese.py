@@ -19,7 +19,7 @@ def tokenize_classical_chinese(text: str) -> list[list[str]]:
 
     sent_tokens: dict[int, list[str]] = defaultdict(list)
     for w in doc.words:
-        if w.string and w.index_sentence and is_cjk(w.string):
+        if w.string and w.index_sentence is not None and is_cjk(w.string):
             sent_tokens[w.index_sentence].append(w.string)
 
     return [sent_tokens[i] for i in sorted(sent_tokens.keys())]
