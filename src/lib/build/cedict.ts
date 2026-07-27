@@ -40,10 +40,6 @@ export async function buildDictionary(
     const defs = defsRaw
       .split('/')
       .filter((def) => Boolean(def) && !def.startsWith('CL:'))
-    const altPronIndex = defs.findLastIndex((def) =>
-      def.startsWith('also pr. '),
-    )
-    const altPronRaw = defs.splice(altPronIndex, 1)[0]
 
     result[traditional] = {
       hanzi: traditional,
@@ -51,6 +47,12 @@ export async function buildDictionary(
       definitions: defs,
     }
 
+    const altPronIndex = defs.findLastIndex((def) =>
+      def.startsWith('also pr. '),
+    )
+    if (altPronIndex < 0) return // no alternate pronunciation, skip
+
+    const altPronRaw = defs.splice(altPronIndex, 1)[0]
     if (altPronRaw[9] === '[' && altPronRaw[altPronRaw.length - 1] === ']') {
       const altPron = altPronRaw
         .slice(10, -1)
