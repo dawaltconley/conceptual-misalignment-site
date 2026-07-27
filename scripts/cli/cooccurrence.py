@@ -18,7 +18,7 @@ print("Fetching Mengzi chapters...")
 mengzi = mengzi + fetch_mengzi_chapters()
 
 
-def get_cooccurence_english(term: str, text: str | list[list[str]]) -> Graph:
+def get_cooccurence_english(term: str, text: str | list[list[str]]) -> Graph | None:
     tokens = text if isinstance(text, list) else tokenize_english_html(text)
     sent_node_lists, nodes = filter_to_sent_node_lists(
         tokens, term, min_freq=22)
@@ -26,7 +26,7 @@ def get_cooccurence_english(term: str, text: str | list[list[str]]) -> Graph:
         sent_node_lists, nodes, term, max_nodes=15)
 
 
-def get_cooccurence_chinese(term: str, text: str) -> Graph:
+def get_cooccurence_chinese(term: str, text: str) -> Graph | None:
     print(f"  [{term}] Tokenizing classical Chinese...")
     tokens = tokenize_classical_chinese(text)
 
@@ -54,11 +54,12 @@ def main() -> None:
 
         # First run NLP for the Chinese term in the Mengzi
         term = term_pairs.hanzi
-        data = TermData(
-            term,
-            sources=[NLPSource(m, cooccurrence=get_cooccurence_chinese(term, m.text))
-                     for m in mengzi]
-        )
+        sources: list[NLPSource] = []
+        for m in mengzi:
+            cooccurrence = get_cooccurence_chinese(term, m.text)
+            sources.append(NLPSource(m, cooccurrence=cooccurrence))
+
+        data = TermData(term, sources)
         data.save_json(CTEXT / f"{term}_pmi.json")
 
         # word_stems: list[str] = [p for stem in term_pairs.renderings for p in stem.patterns]

@@ -3,6 +3,7 @@ import path from 'node:path'
 import readline from 'node:readline'
 import toPinyinTones from 'pinyin-tone'
 import { TermSchema } from '@lib/networkx'
+import { isNotEmpty } from '@lib/utils'
 
 export interface DictionaryEntry {
   hanzi: string
@@ -77,7 +78,8 @@ export async function buildDictionaryFromNetworks(
   const hanzi = data
     .map((d) => TermSchema.parse(d).sources)
     .flat()
-    .map((s) => s.cooccurrence.nodes)
+    .map((s) => s.cooccurrence?.nodes)
+    .filter(isNotEmpty)
     .flat()
     .map((n) => n.id.toString())
   return buildDictionary(hanzi)

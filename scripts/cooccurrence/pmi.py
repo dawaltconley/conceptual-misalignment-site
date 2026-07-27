@@ -155,7 +155,7 @@ def build_cooccurrence_network(
     nodes: set[str],
     term: str,
     max_nodes: int = 15,
-) -> nx.Graph:
+) -> nx.Graph | None:
     G, _, _, _ = build_pmi_graph(sent_node_lists, nodes)
     G.remove_nodes_from(list(nx.isolates(G)))
     return prune_to_neighborhood(G, term, max_nodes)
@@ -167,7 +167,7 @@ def build_similarity_network(
     term: str,
     max_nodes: int = 15,
     sim_threshold: float = 0.7,
-) -> nx.Graph:
+) -> nx.Graph | None:
     S = build_cosine_similarity_graph(
         sent_node_lists, sorted(nodes), sim_threshold)
     S.remove_nodes_from(list(nx.isolates(S)))

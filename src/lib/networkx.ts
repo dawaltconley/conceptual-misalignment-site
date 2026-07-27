@@ -24,7 +24,7 @@ const SourceSchema = z.object({
   description: z.string(),
   url: z.url(),
   // occurances: z.number(),
-  cooccurrence: WeightedNodeLinkDataSchema,
+  cooccurrence: WeightedNodeLinkDataSchema.nullish(),
 })
 
 export const TermSchema = z.object({

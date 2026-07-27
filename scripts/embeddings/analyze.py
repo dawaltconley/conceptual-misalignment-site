@@ -302,7 +302,10 @@ def build_and_save_networks(
     targets = [lbl for lbl, t in zip(labels, is_target) if t]
     for term in targets:
         pruned = prune_to_neighborhood(G, term, max_nodes)
-        save_graph_json(pruned, net_dir / f"{term}.json")
+        if pruned is None:
+            print(f"[{term}] term not found...")
+        else:
+            save_graph_json(pruned, net_dir / f"{term}.json")
     return n_comms, community_map
 
 

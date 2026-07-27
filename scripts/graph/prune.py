@@ -15,15 +15,15 @@ def proximity_score(G: nx.Graph, term: str, node: str) -> float:
     )
 
 
-def prune_to_neighborhood(G: nx.Graph, term: str, max_nodes: int) -> nx.Graph:
+def prune_to_neighborhood(G: nx.Graph, term: str, max_nodes: int) -> nx.Graph | None:
     """Return a subgraph of G containing term and its top max_nodes neighbours.
 
     1-hop neighbors (direct edges) are always prioritised by edge weight.
     Any remaining capacity is filled by the highest-scoring 2-hop neighbors.
-    If term is not in G, returns G unchanged.
+    If term is not in G, returns None.
     """
     if term not in G:
-        return G
+        return None
 
     one_hop = sorted(
         G.neighbors(term),

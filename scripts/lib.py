@@ -17,14 +17,14 @@ class NLPSource(Source):
     url: str
     title: str
     description: str
-    cooccurrence: object
+    cooccurrence: object | None
 
-    def __init__(self, source: Source, /, cooccurrence: "Graph"):
+    def __init__(self, source: Source, /, cooccurrence: "Graph | None"):
         from networkx import node_link_data
         self.url = source.url
         self.title = source.title
         self.description = source.description
-        self.cooccurrence = node_link_data(cooccurrence)
+        self.cooccurrence = cooccurrence and node_link_data(cooccurrence)
 
 
 @dataclass

@@ -7,9 +7,11 @@ import { useState, type ReactNode } from 'react'
 import Button from './Button'
 import clsx from 'clsx'
 
+type Side = 'left' | 'right'
+
 interface MultiNetworkProps {
   data: string
-  sourceAlign?: 'left' | 'right'
+  sourceAlign?: Side
   dictionary?: Dictionary
 }
 
@@ -24,53 +26,89 @@ export default function MultiNetwork({
   if (status === 'error')
     return (
       <Wrapper>
-        <NetworkWrapper>
-          <div className="absolute inset-0 flex items-center justify-center">
-            Error: {errorMessage}
-          </div>
-        </NetworkWrapper>
+        <NetworkError message={errorMessage} />
       </Wrapper>
     )
 
+  if (status === 'loading')
+    return (
+      <Wrapper>
+        <NetworkSkeleton />
+        <SourceSidebar align={sourceAlign}>
+          {new Array(8).fill(null).map((_, i) => (
+            <SourceSkeleton key={i} />
+          ))}
+        </SourceSidebar>
+      </Wrapper>
+    )
+
+  const network = data.sources[selected].cooccurrence
+
   return (
     <Wrapper>
-      {status === 'loading' ? (
-        <NetworkSkeleton />
-      ) : (
+      {network ? (
         <Network
           centralNodeId={data.term}
-          data={data.sources[selected].cooccurrence}
+          data={network}
           dictionary={dictionary}
         />
+      ) : (
+        <NetworkError message={`No occurances of ${data.term}`} />
       )}
 
-      <div
-        className={clsx(
-          'mt-4 flex shrink flex-row flex-wrap gap-2 xl:mt-0 xl:flex-col',
-          sourceAlign === 'right'
-            ? 'items-start xl:ml-2'
-            : '-order-1 items-end xl:mr-2',
-        )}
-      >
-        {status === 'loading'
-          ? new Array(8).fill(null).map((_, i) => <SourceSkeleton key={i} />)
-          : data.sources.map((s, i) => (
-              <Source
-                key={s.url}
-                title={s.title}
-                description={s.description}
-                url={new URL(s.url)}
-                isActive={i === selected}
-                onClick={() => setSelected(i)}
-              />
-            ))}
-      </div>
+      <SourceSidebar align={sourceAlign}>
+        {data.sources.map((s, i) => (
+          <Source
+            key={s.url}
+            title={s.title}
+            description={s.description}
+            url={new URL(s.url)}
+            isActive={i === selected}
+            onClick={() => setSelected(i)}
+            disabled={!s.cooccurrence}
+          />
+        ))}
+      </SourceSidebar>
     </Wrapper>
   )
 }
 
 function Wrapper({ children }: { children: ReactNode }): JSX.Element {
   return <div className="flex-row xl:flex">{children}</div>
+}
+
+interface SourceSidebarProps {
+  align: Side
+  children: ReactNode
+}
+
+function SourceSidebar({ align, children }: SourceSidebarProps): JSX.Element {
+  return (
+    <div
+      className={clsx(
+        'mt-4 flex shrink flex-row flex-wrap gap-2 xl:mt-0 xl:flex-col',
+        align === 'right'
+          ? 'items-start xl:ml-2'
+          : '-order-1 items-end xl:mr-2',
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+interface NetworkErrorProps {
+  message: string
+}
+
+function NetworkError({ message }: NetworkErrorProps): JSX.Element {
+  return (
+    <NetworkWrapper>
+      <div className="absolute inset-0 flex items-center justify-center">
+        Error: {message}
+      </div>
+    </NetworkWrapper>
+  )
 }
 
 function assertTerm(data: any): Term {
@@ -83,6 +121,7 @@ interface SourceProps {
   description: string
   isActive?: boolean
   onClick: () => void
+  disabled?: boolean
 }
 
 function Source({ title, ...props }: SourceProps): JSX.Element {
