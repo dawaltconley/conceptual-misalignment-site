@@ -103,6 +103,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def dry_run(args: argparse.Namespace, targets: list[Rendering], match_fn: MatchFn) -> None:
+    target_labels = set([t.label for t in targets])
     docs = fetch_corpus(targets, args.per_term)[: args.limit_docs]
     print(f"[dry-run] articles          : {len(docs)}")
     print(
@@ -113,8 +114,8 @@ def dry_run(args: argparse.Namespace, targets: list[Rendering], match_fn: MatchF
 
     emb = Embedder(args.model)
     print(f"[dry-run] device            : {emb.device_label}")
-    unk_check(emb, set([t.label for t in targets]))
-    segments = segment(emb, sentences, set(targets))
+    unk_check(emb, target_labels)
+    segments = segment(emb, sentences, target_labels)
     if sum(len(s.spans) for s in segments) == 0:
         print("[dry-run] no target occurrences found.")
         return
