@@ -227,12 +227,15 @@ class Mengzi(Chapter):
         raise ValueError('Bad chapter ID, none found: ' + id)
 
 
-_mengzi = Mengzi()
+_mengzi = None
 
 
 def fetch_mengzi_full() -> Mengzi:
+    global _mengzi
+    if _mengzi is None:
+        _mengzi = Mengzi()
     return _mengzi
 
 
 def fetch_mengzi_chapters() -> list[Chapter]:
-    return _mengzi.chapters
+    return fetch_mengzi_full().chapters
