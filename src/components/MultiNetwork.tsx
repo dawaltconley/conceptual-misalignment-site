@@ -39,7 +39,7 @@ export default function MultiNetwork({
       ) : (
         <Network
           centralNodeId={data.term}
-          data={data.sources[selected].co_occurance}
+          data={data.sources[selected].cooccurrence}
           dictionary={dictionary}
         />
       )}

@@ -56,7 +56,7 @@ def main() -> None:
         term = term_pairs.hanzi
         data = TermData(
             term,
-            sources=[NLPSource(m, co_occurance=get_cooccurence_chinese(term, m.text))
+            sources=[NLPSource(m, cooccurrence=get_cooccurence_chinese(term, m.text))
                      for m in mengzi]
         )
         data.save_json(CTEXT / f"{term}_pmi.json")
@@ -96,7 +96,7 @@ def main() -> None:
                             tokens[i][j] = canonical
                 source = NLPSource(
                     article,
-                    co_occurance=get_cooccurence_english(canonical, tokens)
+                    cooccurrence=get_cooccurence_english(canonical, tokens)
                 )
                 sources.append(source)
 

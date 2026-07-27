@@ -77,7 +77,7 @@ export async function buildDictionaryFromNetworks(
   const hanzi = data
     .map((d) => TermSchema.parse(d).sources)
     .flat()
-    .map((s) => s.co_occurance.nodes)
+    .map((s) => s.cooccurrence.nodes)
     .flat()
     .map((n) => n.id.toString())
   return buildDictionary(hanzi)
