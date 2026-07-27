@@ -229,8 +229,9 @@ def diff_str(a, b):
     i = 0
     while i < len(diff):
         d = diff[i]
+        i += 1
         if not d.startswith(' '):
-            j = i + 1
+            j = i
             last = d
             diff_str = last
             while j < len(diff) and not diff[j].startswith(' '):
@@ -240,12 +241,11 @@ def diff_str(a, b):
                     last = diff[j]
                     diff_str += last
                 j += 1
-            pre = [d[-1] for d in diff[max(0, i - 5): i] if d.startswith(' ')]
+            pre = [d[-1] for d in diff[max(0, i - 7): i] if d.startswith(' ')]
             post = [d[-1]
-                    for d in diff[j: min(len(diff) - 1, j + 5)] if d.startswith(' ')]
+                    for d in diff[j: min(len(diff), j + 6)] if d.startswith(' ')]
             diff_segs.append(''.join(pre + [f"({diff_str})"] + post))
             i = j
-        i += 1
     return diff_segs
 
 # --------------------------------------------------------------------------- #
