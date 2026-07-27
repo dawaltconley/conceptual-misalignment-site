@@ -1,8 +1,8 @@
 import type { Dictionary } from '@lib/build/cedict'
-import { useState, useEffect, useRef, useMemo, type ReactNode } from 'react'
-import { TSNE } from '@keckelt/tsne'
+import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import clsx from 'clsx'
 import useData from '@lib/browser/hooks/useData'
+import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
 import {
   ScatterSkeleton,
@@ -16,7 +16,6 @@ import * as d3 from 'd3'
 type Layout = 'pca' | 'tsne'
 
 const TSNE_MAX_ITER = 500
-const TSNE_STEPS_PER_FRAME = 2
 
 interface EmbeddingScatterProps {
   data: string
@@ -38,9 +37,8 @@ export default function EmbeddingScatter({
   )
   const [layout, setLayout] = useState<Layout>('pca')
   const [perplexity, setPerplexity] = useState(30)
-  const [tsnePoints, setTsnePoints] = useState<ScatterPoint[] | null>(null)
-  const [iter, setIter] = useState(0)
   const [highlighted, setHighlighted] = useState<Set<number>>(new Set())
+  const { coords, steps, done, run, stop } = useTsne()
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
@@ -71,60 +69,32 @@ export default function EmbeddingScatter({
     }))
   }, [data])
 
-  // t-SNE layout — iterative; steps a few times per animation frame so the user
-  // watches it converge. Re-initialises on perplexity change or a manual re-run.
+  // t-SNE runs in a worker: (re)start on entering t-SNE / data / perplexity
+  // change; stop on leaving. The worker streams back the evolving solution.
   useEffect(() => {
-    if (layout !== 'tsne') return
-    runTSNE()
-    return () => {
-      cancelTSNE()
-    }
-  }, [data])
-
-  const handleLayout = (layout: Layout): void => {
-    if (layout === 'tsne') {
-      runTSNE()
-    } else {
-      cancelTSNE()
-    }
-    setLayout(layout)
-  }
-
-  const raf = useRef(0)
-  const runTSNE = (): void => {
-    if (!data) return
-    const nodes = data.nodes
-    const tsne = new TSNE({ epsilon: 10, perplexity, dim: 2 })
-    tsne.initDataRaw(nodes.map((n) => n.vec))
-
-    let steps = 0
-    let cancelled = false
-    setIter(0)
-
-    const tick = () => {
-      if (cancelled) return
-      for (let i = 0; i < TSNE_STEPS_PER_FRAME; i++) {
-        tsne.step()
-        steps++
-      }
-      const Y = tsne.getSolution() as number[][]
-      setTsnePoints(
-        nodes.map((n, i) => ({
-          id: n.id,
-          community: n.community,
-          target: n.target,
-          x: Y[i][0],
-          y: Y[i][1],
-        })),
+    if (layout === 'tsne' && data) {
+      run(
+        data.nodes.map((n) => n.vec),
+        { perplexity, maxIter: TSNE_MAX_ITER },
       )
-      setIter(steps)
-      if (steps < TSNE_MAX_ITER) raf.current = requestAnimationFrame(tick)
+    } else {
+      stop()
     }
-    raf.current = requestAnimationFrame(tick)
-  }
-  const cancelTSNE = (): void => {
-    cancelAnimationFrame(raf.current)
-  }
+  }, [layout, data, perplexity, run, stop])
+
+  const tsnePoints = useMemo<ScatterPoint[]>(
+    () =>
+      data
+        ? coords.map((c, i) => ({
+            id: data.nodes[i].id,
+            community: data.nodes[i].community,
+            target: data.nodes[i].target,
+            x: c[0],
+            y: c[1],
+          }))
+        : [],
+    [data, coords],
+  )
 
   if (status === 'error') {
     return (
@@ -146,8 +116,8 @@ export default function EmbeddingScatter({
     )
   }
 
-  const points = layout === 'pca' ? pcaPoints : (tsnePoints ?? [])
-  const converging = layout === 'tsne' && iter < TSNE_MAX_ITER
+  const points = layout === 'pca' ? pcaPoints : tsnePoints
+  const converging = layout === 'tsne' && !done
 
   return (
     <Wrapper>
@@ -171,12 +141,12 @@ export default function EmbeddingScatter({
           <Toggle
             label="PCA"
             active={layout === 'pca'}
-            onClick={() => handleLayout('pca')}
+            onClick={() => setLayout('pca')}
           />
           <Toggle
             label="t-SNE"
             active={layout === 'tsne'}
-            onClick={() => handleLayout('tsne')}
+            onClick={() => setLayout('tsne')}
           />
         </div>
 
@@ -195,14 +165,19 @@ export default function EmbeddingScatter({
             </label>
             <button
               className="rounded border border-gray-900 px-2 py-0.5 text-sm hover:bg-red-200"
-              onClick={runTSNE}
+              onClick={() =>
+                run(
+                  data.nodes.map((n) => n.vec),
+                  { perplexity, maxIter: TSNE_MAX_ITER },
+                )
+              }
             >
               re-run
             </button>
             <span className="text-sm tabular-nums text-gray-500">
               {converging
-                ? `iterating… ${iter}/${TSNE_MAX_ITER}`
-                : `done (${iter})`}
+                ? `iterating… ${steps}/${TSNE_MAX_ITER}`
+                : `done (${steps})`}
             </span>
           </>
         )}
