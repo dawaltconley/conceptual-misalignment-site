@@ -23,7 +23,7 @@ class SEP:
         if not r.from_cache:  # type: ignore
             time.sleep(random() * 2 + 1)
 
-        soup = BeautifulSoup(r.text, "html.parser")
+        soup = BeautifulSoup(r.content, "html.parser", from_encoding="utf-8")
 
         title = soup.title and str(soup.title.text)
         if not title:
@@ -50,8 +50,8 @@ class SEP:
         )
 
 
-def _search(term: str, page: int = 1) -> str:
-    """Returns the HTML of a search results page on the SEP for a given search term."""
+def _search(term: str, page: int = 1) -> list[str]:
+    """Fetches and parses the HTML of a search results page on the SEP. Returns a list of the article links."""
     r = requests.get(
         "https://plato.stanford.edu/search/searcher.py",
         params={"query": term, "page": max(1, page)},
@@ -60,12 +60,7 @@ def _search(term: str, page: int = 1) -> str:
     if not r.from_cache:  # type: ignore
         time.sleep(random() * 2 + 1)
     r.raise_for_status()
-    return r.text
-
-
-def _parse_search_results(search_page: str) -> list[str]:
-    """Parses the HTML from a search results page on SEP. Returns a list of the article links on the first page."""
-    soup = BeautifulSoup(search_page, 'html.parser')
+    soup = BeautifulSoup(r.content, 'html.parser', from_encoding="utf-8")
     results = soup.find_all("div", class_="result_url")
     return [r.text.strip() for r in results]
 
@@ -81,7 +76,7 @@ def search_sep(search_term: str | Rendering, max_results: int | None = None, *, 
         search_string = ' '.join([stem for stem in search_term.patterns])
 
     while True:
-        results = _parse_search_results(_search(search_string, page))
+        results = _search(search_string, page)
         if not results:
             # empty search page, break loop
             return articles
