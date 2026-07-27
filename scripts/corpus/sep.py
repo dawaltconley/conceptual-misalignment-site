@@ -87,7 +87,7 @@ def search_sep(search_term: str | Rendering, max_results: int | None = None, *, 
             article = SEP.from_url(url)
             if filter and not filter(article):
                 continue
-            articles.append(SEP.from_url(url))
+            articles.append(article)
             if max_results and len(articles) >= max_results:
                 # got enough articles, break loop
                 return articles
