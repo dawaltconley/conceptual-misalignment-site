@@ -38,7 +38,8 @@ class SEP:
 
         description = soup.description and str(soup.description.text)
         if not description:
-            description = str(article["preamble"])[:160]
+            description = str(article["preamble"]
+                              and article["preamble"].text)[:160]
 
         return cls(
             url=url,
