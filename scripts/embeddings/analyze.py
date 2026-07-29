@@ -7,6 +7,7 @@ communities serialized in the site's node-link JSON schema.
 """
 
 from __future__ import annotations
+from typing import Literal, Callable
 from itertools import cycle
 from graph.prune import prune_to_neighborhood
 from graph.serialize import save_graph_json
@@ -23,6 +24,9 @@ import csv
 from pathlib import Path
 
 import matplotlib
+
+type Method = Literal["threshold", "knn"]
+type SimTransform = Literal["none", "neglog", "poslog"]
 
 matplotlib.use("Agg")  # headless
 
@@ -76,14 +80,14 @@ def poslog_transform(sim: np.ndarray) -> np.ndarray:
 # Backwards-compatible alias: the original single transform was ``-ln(1 - sim)``.
 log_transform = neglog_transform
 
-_SIM_TRANSFORMS = {
+_SIM_TRANSFORMS: dict[SimTransform, Callable[[np.ndarray]] | None] = {
     "none": None,
     "neglog": neglog_transform,
     "poslog": poslog_transform,
 }
 
 
-def apply_sim_transform(sim: np.ndarray, name: str) -> np.ndarray:
+def apply_sim_transform(sim: np.ndarray, name: SimTransform) -> np.ndarray:
     """Dispatch a named similarity transform; ``none`` returns ``sim`` unchanged.
 
     Both transforms are strictly monotone, so at a matched percentile the edge
@@ -270,9 +274,9 @@ def build_and_save_networks(
     threshold: float,
     out_dir: Path,
     max_nodes: int = 15,
-    method: str = "threshold",
+    method: Method = "threshold",
     knn_k: int = 8,
-    sim_transform: str = "none",
+    sim_transform: SimTransform = "none",
 ) -> tuple[int, dict[str, int]]:
     """Build the similarity network, detect communities, and serialize JSON.
 
@@ -344,9 +348,9 @@ def run_analysis(
     out_dir: Path,
     threshold: float,
     kmeans_k: int,
-    method: str = "threshold",
+    method: Method = "threshold",
     knn_k: int = 8,
-    sim_transform: str = "none",
+    sim_transform: SimTransform = "none",
     max_nodes: int = 15,
 ) -> dict:
     """Run every analysis and write artifacts; return a small summary dict."""
