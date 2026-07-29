@@ -18,14 +18,14 @@ import numpy as np
 
 
 def get_cooccurence(
-        term: str,
-        sources: list[SourceDoc],
-        min_freq: int,
-        *,
-        match_fn: MatchFn | None = None,
-        content_pos: set[str] | None = None,
-        stopwords: set[str] = set(),
-        max_nodes: int = 15
+    term: str,
+    sources: list[SourceDoc],
+    min_freq: int,
+    *,
+    match_fn: MatchFn | None = None,
+    content_pos: set[str] | None = None,
+    stopwords: set[str] = set(),
+    max_nodes: int = 15
 ) -> Graph | None:
     vocab = build_vocab(
         sources, min_freq,
@@ -48,13 +48,13 @@ def get_cooccurence(
 
 
 def run_mengzi(
-        *,
-        artifacts=config.ANALYSIS / "mengzi",
-        min_freq=5,
-        center=True,
-        content_pos: set[str] | None = None,
-        stopwords=CHINESE_STOPWORDS,
-        reduce_to_dims: int = 50
+    *,
+    artifacts=config.ANALYSIS / "mengzi",
+    min_freq=5,
+    center=True,
+    content_pos: set[str] | None = None,
+    stopwords=CHINESE_STOPWORDS,
+    reduce_to_dims: int = 50
 ) -> None:
     targets = frozenset(t.hanzi for t in TERMS)
     mengzi = build_chinese_corpus()
@@ -65,8 +65,15 @@ def run_mengzi(
     parsed = [SourceDoc(mengzi, Doc.from_docs(
         [p.doc for p in parsed]))] + parsed
 
+    term_data: list[lib.TermData] = []
+    for source_doc in parsed:
+        source, doc = source_doc
+        for target in targets:
+            target_count = Counter([t.lemma_ for t in doc])[target]
+            term_data.append(lib.TermData(target, target_count))
+
     # calculate pmi
-    cooccurrences: list[lib.Cooccurrence] = []
+    cooccurrences: list[lib.NetworkData] = []
     for source_doc in parsed:
         source, doc = source_doc
         for target in targets:
@@ -77,7 +84,7 @@ def run_mengzi(
                 target, [source_doc], min_freq, content_pos=content_pos, stopwords=stopwords)
             if cooc is None:
                 print(f"no co-occurence for {term} in {source.title}")
-            cooccurrences.append(lib.Cooccurrence(term, source, cooc))
+            cooccurrences.append(lib.NetworkData(term, source, cooc))
 
     # save pmi
     for cooc in cooccurrences:
@@ -90,29 +97,40 @@ def run_mengzi(
     mean = None
     if center:
         matrix, mean = vectors.center_matrix(matrix)
+    target_occ = occurrences(word_vectors, targets, mean)
+    is_target = np.array([lbl in targets for lbl in labels])
 
     # save vectors
     vectors.save_vectors(artifacts, labels,
                          matrix, targets, word_vectors, mean=mean)
 
-    # produce analysis artifacts
-    target_occ = occurrences(word_vectors, targets, mean)
-    is_target = np.array([lbl in targets for lbl in labels])
-
+    # # produce analysis artifacts
     # summary = analyze.run_analysis(
     #     labels, matrix, is_target, target_occ,
     #     artifacts, threshold, args.kmeans_k,
-    #     method=method, knn_k=args.knn_k, sim_transform=args.sim_transform,
+    #     method=method, knn_k=args.knn_k, sim_transform="neglog",
     #     max_nodes=max_nodes,
     # )
     # print_summary(summary, is_centered=center, out_dir=out_dir)
 
     # calculate similarity
+    sim, n_comms, community_map = analyze.build_networks(
+        labels, matrix, is_target, threshold=0.75)
+    similarity: list[NetworkData] = []
+    for target in targets:
+        target_count = Counter([t.lemma_ for t in source_docs[0].doc])[target]
+        term = lib.TermData(target, target_count)
+        # TODO add content_pos?
+        cooc = get_cooccurence(
+            target, [source_doc], min_freq, content_pos=content_pos, stopwords=stopwords)
+        if cooc is None:
+            print(f"no co-occurence for {term} in {source.title}")
+        cooccurrences.append(lib.NetworkData(term, source, cooc))
 
     # save embeddings
     reduced = reduce_vectors(matrix, dims=reduce_to_dims)
     embeddings = lib.Embeddings.from_matrix(
-        mengzi, labels, reduced, targets, communities={})
+        mengzi, labels, reduced, targets, communities=community_map)
     embeddings.save_json(EMBEDDINGS / "mengzi.json")
 
 

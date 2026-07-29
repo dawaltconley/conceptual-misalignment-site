@@ -4,16 +4,55 @@ from dataclasses import dataclass, asdict
 if TYPE_CHECKING:
     from networkx import Graph
     from pathlib import Path
+    from numpy import ndarray
+    from _typeshed import DataclassInstance
+
+
+def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
+    import json
+    with filepath.open() as file:
+        json.dump(asdict(data), file, encoding="utf-8")
+    # serialized = json.dumps(asdict(self), indent=2)
+    # filepath.write_text(serialized, encoding="utf-8")
 
 
 class Source(Protocol):
+    id: str
     url: str
     title: str
     description: str
 
 
+class SourceData(Protocol):
+    source: Source
+
+
+@dataclass
+class TermData:
+    label: str
+    occurrences: int
+    variants: list[str] = []
+
+
+@dataclass
+class NetworkData(SourceData):
+    term: TermData
+    source: Source
+    network: object | None
+
+    def __init__(self, term: TermData, source: Source, network: "Graph | None"):
+        from networkx import node_link_data
+        self.term = term
+        self.source = source
+        self.network = network and node_link_data(network)
+
+    def save_json(self, filepath: "Path") -> None:
+        _save_json(self, filepath)
+
+
 @dataclass
 class NLPSource(Source):
+    id: str
     url: str
     title: str
     description: str
@@ -21,22 +60,59 @@ class NLPSource(Source):
 
     def __init__(self, source: Source, /, cooccurrence: "Graph | None" = None):
         from networkx import node_link_data
+        self.id = source.id
         self.url = source.url
         self.title = source.title
         self.description = source.description
         self.cooccurrence = cooccurrence and node_link_data(cooccurrence)
 
 
+# @dataclass
+# class TermData:
+#     term: str
+#     sources: list[NLPSource]
+#     stems: list[str] | None = None
+#
+#     def save_json(self, filepath: "Path") -> None:
+#         _save_json(self, filepath)
+
+
 @dataclass
-class TermData:
-    term: str
-    sources: list[NLPSource]
-    stems: list[str] | None = None
+class Vector:
+    id: str
+    target: bool
+    community: int
+    vec: "ndarray"
+
+
+@dataclass
+class Embeddings(SourceData):
+    source: Source
+    dims: int
+    nodes: list[Vector]
+
+    @classmethod
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}):
+        nodes: list[Vector] = []
+        for label, row in zip(labels, matrix):
+            vector = Vector(label, label in targets,
+                            communities.get(label, -1), row)
+            nodes.append(vector)
+        return cls(source, matrix[1].shape[1], nodes)
 
     def save_json(self, filepath: "Path") -> None:
-        import json
-        serialized = json.dumps(asdict(self), indent=2)
-        filepath.write_text(serialized, encoding="utf-8")
+        _save_json(self, filepath)
+
+
+def reduce_vectors(matrix: "ndarray", dims: int) -> "ndarray":
+    """Mean-center + L2-normalize, then PCA to `dims` (variance-ordered columns)."""
+    import numpy as np
+    from sklearn.decomposition import PCA
+    centered = matrix - matrix.mean(axis=0, keepdims=True)
+    norms = np.linalg.norm(centered, axis=1, keepdims=True)
+    unit = centered / np.clip(norms, 1e-12, None)
+    n_components = min(dims, unit.shape[1], unit.shape[0])
+    return PCA(n_components=n_components, random_state=0).fit_transform(unit)
 
 
 class Rendering:

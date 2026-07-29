@@ -1,3 +1,5 @@
+from corpus.sep import SEP
+
 CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
 
 _nlp = None
@@ -29,3 +31,8 @@ def tokenize_english_html(html: str) -> list[list[str]]:
         ]
         for sent in doc.sents
     ]
+
+
+def tokenize_sep(sep: SEP):
+    nlp = _get_nlp()
+    return nlp(sep.text)

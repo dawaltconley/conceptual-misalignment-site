@@ -7,7 +7,7 @@ communities serialized in the site's node-link JSON schema.
 """
 
 from __future__ import annotations
-from typing import Literal, Callable
+from typing import overload, Literal, Callable
 from itertools import cycle
 from graph.prune import prune_to_neighborhood
 from graph.serialize import save_graph_json
@@ -337,8 +337,79 @@ def heatmap(mat: np.ndarray, labels: list[str], title: str, path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Attempted simplification of cosine similarity
+# ---------------------------------------------------------------------------
+
+
+@overload
+def build_networks(
+    labels: list[str],
+    matrix: np.ndarray,
+    is_target: np.ndarray,
+    *,
+    threshold: float,
+) -> tuple[nx.Graph, int, dict[str, int]]: pass
+
+
+@overload
+def build_networks(
+    labels: list[str],
+    matrix: np.ndarray,
+    is_target: np.ndarray,
+    *,
+    knn_k: int,
+) -> tuple[nx.Graph, int, dict[str, int]]: pass
+
+
+def build_networks(
+    labels: list[str],
+    matrix: np.ndarray,
+    is_target: np.ndarray,
+    *,
+    threshold: float | None = None,
+    knn_k: int | None = None,
+) -> tuple[nx.Graph, int, dict[str, int]]:
+    # Similarity among target terms only. cosine_targets.csv is always the raw
+    # cosine (reference); cosine_targets_log.csv is the -ln(1-s) view (kept for
+    # continuity). The heatmap uses this run's sim_transform so it shares a scale
+    # with the network edges below.
+    tgt_idx = [i for i, t in enumerate(is_target) if t]
+    tgt_vecs = matrix[tgt_idx]
+    sim = neglog_transform(cosine_similarity(tgt_vecs))
+
+    if knn_k is not None:
+        G = build_knn_graph(labels, sim, knn_k)
+    elif threshold is not None:
+        G = build_cosine_graph(labels, sim, threshold)
+    else:
+        raise ValueError(f"Must define either a threshold or a knn_k")
+
+    G.remove_nodes_from(list(nx.isolates(G)))
+    n_comms = annotate_communities(G)
+    community_map = {n: int(G.nodes[n]["community"]) for n in G}
+
+    return G, n_comms, community_map
+
+
+def save_network(
+    network: nx.Graph,
+    filepath: Path,
+    term: str | None = None,
+    max_nodes: int = 15
+) -> None:
+    output = network
+    if term is not None:
+        output = prune_to_neighborhood(network, term, max_nodes)
+        if output is None:
+            print(f"[{term}] term not found...")
+    if output is not None:
+        save_graph_json(output, filepath)
+
+
+# ---------------------------------------------------------------------------
 # Orchestration
 # ---------------------------------------------------------------------------
+
 
 def run_analysis(
     labels: list[str],
@@ -378,9 +449,20 @@ def run_analysis(
     write_rows_csv(out_dir / "cohesion_variance.csv", cv)
 
     # Network + Louvain first, so the scatter plots can color by community.
-    n_comms, community_map = build_and_save_networks(
-        labels, matrix, is_target, threshold, out_dir, max_nodes=max_nodes,
-        method=method, knn_k=knn_k, sim_transform=sim_transform)
+    if method == "threshold":
+        sim_network, n_comms, community_map = build_networks(
+            labels, matrix, is_target, threshold=threshold)
+    elif method == "knn":
+        sim_network, n_comms, community_map = build_networks(
+            labels, matrix, is_target, knn_k=knn_k)
+
+    # save the similarity networks, pruned to terms
+    net_dir = out_dir / "networks"
+    net_dir.mkdir(parents=True, exist_ok=True)
+    save_network(sim_network, net_dir / "full.json")
+    for term in target_labels:
+        save_network(sim_network, net_dir / f"{term}.json", term)
+
     communities = [community_map.get(lbl, -1) for lbl in labels]
 
     # Dimensionality-reduction plots (all nodes), colored by community.
