@@ -240,3 +240,12 @@ def fetch_mengzi_full() -> Mengzi:
 
 def fetch_mengzi_chapters() -> list[Chapter]:
     return fetch_mengzi_full().chapters
+
+# from corpus.conllu import load_conllu
+# from config import MENGZI_CONLLU
+#
+# for chapter in load_conllu(MENGZI_CONLLU):
+#     c = Chapter(
+#             title=chapter.title,
+#             text=chapter.doc.text
+#             )
