@@ -14,6 +14,8 @@ cache.install()
 _EXCLUDE = {
     'han-dynasty',
     'confucianism-modern',
+    'chinese-mind',
+    'emotions-chinese',
 }
 
 
