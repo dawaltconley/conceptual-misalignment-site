@@ -1,0 +1,478 @@
+{
+  "terms": [
+    {
+      "hanzi": "仁",
+      "renderings": [
+        "benevolence",
+        "humaneness"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/仁_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/仁_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/仁_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/仁_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/仁_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/仁_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/仁_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/仁_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/仁_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/仁_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/仁_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/仁_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/仁_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/仁_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/仁_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/仁_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "benevolence",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/benevolence_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
+              "title": "SEP search: benevolence",
+              "cooccurrence": "/sep/benevolence_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/astell/",
+              "title": "Mary Astell",
+              "cooccurrence": "/sep/benevolence_astell.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/butler-moral/",
+              "title": "Joseph Butler’s Moral Philosophy",
+              "cooccurrence": "/sep/benevolence_butler-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/edwards/",
+              "title": "Jonathan Edwards",
+              "cooccurrence": "/sep/benevolence_edwards.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/emily-elizabeth-constance-jones/",
+              "title": "Emily Elizabeth Constance Jones",
+              "cooccurrence": "/sep/benevolence_emily-elizabeth-constance-jones.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epictetus/",
+              "title": "Epictetus",
+              "cooccurrence": "/sep/benevolence_epictetus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gratitude/",
+              "title": "Gratitude",
+              "cooccurrence": "/sep/benevolence_gratitude.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hume/",
+              "title": "David Hume",
+              "cooccurrence": "/sep/benevolence_hume.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hutcheson/",
+              "title": "Francis Hutcheson",
+              "cooccurrence": "/sep/benevolence_hutcheson.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/peirce-benjamin/",
+              "title": "Benjamin Peirce",
+              "cooccurrence": "/sep/benevolence_peirce-benjamin.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/principle-beneficence/",
+              "title": "The Principle of Beneficence in Applied Ethics",
+              "cooccurrence": "/sep/benevolence_principle-beneficence.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/richard-price/",
+              "title": "Richard Price",
+              "cooccurrence": "/sep/benevolence_richard-price.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/well-being/",
+              "title": "Well-Being",
+              "cooccurrence": "/sep/benevolence_well-being.json"
+            }
+          ]
+        },
+        {
+          "label": "humaneness",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/humaneness_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
+              "title": "SEP search: humaneness",
+              "cooccurrence": "/sep/humaneness_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aesthetics-critical-theory/",
+              "title": "Aesthetics in Critical Theory",
+              "cooccurrence": "/sep/humaneness_aesthetics-critical-theory.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/africana/",
+              "title": "Africana Philosophy",
+              "cooccurrence": "/sep/humaneness_africana.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/chinese-mind/",
+              "title": "Mind (Heart-Mind) in Chinese Philosophy",
+              "cooccurrence": "/sep/humaneness_chinese-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/communitarianism/",
+              "title": "Communitarianism",
+              "cooccurrence": "/sep/humaneness_communitarianism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/emotions-chinese/",
+              "title": "The Emotions in Early Chinese Philosophy",
+              "cooccurrence": "/sep/humaneness_emotions-chinese.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meritocracy/",
+              "title": "Meritocracy",
+              "cooccurrence": "/sep/humaneness_meritocracy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/montessori-maria/",
+              "title": "Maria Montessori",
+              "cooccurrence": "/sep/humaneness_montessori-maria.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+              "title": "Nietzsche’s Moral and Political Philosophy",
+              "cooccurrence": "/sep/humaneness_nietzsche-moral-political.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/popper/",
+              "title": "Karl Popper",
+              "cooccurrence": "/sep/humaneness_popper.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ruth-barcan-marcus/",
+              "title": "Ruth Barcan Marcus",
+              "cooccurrence": "/sep/humaneness_ruth-barcan-marcus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/sidgwick/",
+              "title": "Henry Sidgwick",
+              "cooccurrence": "/sep/humaneness_sidgwick.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/sophie-de-grouchy/",
+              "title": "Sophie de Grouchy",
+              "cooccurrence": "/sep/humaneness_sophie-de-grouchy.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "義",
+      "renderings": [
+        "righteousness",
+        "justice"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/義_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/義_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/義_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/義_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/義_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/義_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/義_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/義_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/義_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/義_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/義_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/義_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/義_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/義_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/義_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/義_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "righteousness",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/righteousness_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=righteousness+righteous%2A",
+              "title": "SEP search: righteousness",
+              "cooccurrence": "/sep/righteousness_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/abner-burgos/",
+              "title": "Abner of Burgos",
+              "cooccurrence": "/sep/righteousness_abner-burgos.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/african-sage/",
+              "title": "African Sage Philosophy",
+              "cooccurrence": "/sep/righteousness_african-sage.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/chinese-mind/",
+              "title": "Mind (Heart-Mind) in Chinese Philosophy",
+              "cooccurrence": "/sep/righteousness_chinese-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/clarke/",
+              "title": "Samuel Clarke",
+              "cooccurrence": "/sep/righteousness_clarke.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/confucian-gender/",
+              "title": "Gender in Confucian Philosophy",
+              "cooccurrence": "/sep/righteousness_confucian-gender.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/conway/",
+              "title": "Lady Anne Conway",
+              "cooccurrence": "/sep/righteousness_conway.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cosmopolitanism/",
+              "title": "Cosmopolitanism",
+              "cooccurrence": "/sep/righteousness_cosmopolitanism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/emotions-chinese/",
+              "title": "The Emotions in Early Chinese Philosophy",
+              "cooccurrence": "/sep/righteousness_emotions-chinese.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kilvington/",
+              "title": "Richard Kilvington",
+              "cooccurrence": "/sep/righteousness_kilvington.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/locke-moral/",
+              "title": "Locke’s Moral Philosophy",
+              "cooccurrence": "/sep/righteousness_locke-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/luther/",
+              "title": "Martin Luther",
+              "cooccurrence": "/sep/righteousness_luther.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/tibbon/",
+              "title": "Samuel Ibn Tibbon",
+              "cooccurrence": "/sep/righteousness_tibbon.json"
+            }
+          ]
+        },
+        {
+          "label": "justice",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/justice_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
+              "title": "SEP search: justice",
+              "cooccurrence": "/sep/justice_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/disability-justice/",
+              "title": "Disability and Justice",
+              "cooccurrence": "/sep/justice_disability-justice.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/international-justice/",
+              "title": "International Distributive Justice",
+              "cooccurrence": "/sep/justice_international-justice.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-bad-luck/",
+              "title": "Justice and Bad Luck",
+              "cooccurrence": "/sep/justice_justice-bad-luck.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-climate/",
+              "title": "Climate Justice",
+              "cooccurrence": "/sep/justice_justice-climate.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-distributive/",
+              "title": "Distributive Justice",
+              "cooccurrence": "/sep/justice_justice-distributive.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-global/",
+              "title": "Global Justice",
+              "cooccurrence": "/sep/justice_justice-global.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-inequality-health/",
+              "title": "Justice, Inequality, and Health",
+              "cooccurrence": "/sep/justice_justice-inequality-health.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-intergenerational/",
+              "title": "Intergenerational Justice",
+              "cooccurrence": "/sep/justice_justice-intergenerational.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-retributive/",
+              "title": "Retributive Justice",
+              "cooccurrence": "/sep/justice_justice-retributive.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-transitional/",
+              "title": "Transitional Justice",
+              "cooccurrence": "/sep/justice_justice-transitional.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-virtue/",
+              "title": "Justice as a Virtue",
+              "cooccurrence": "/sep/justice_justice-virtue.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice/",
+              "title": "Justice",
+              "cooccurrence": "/sep/justice_justice.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
