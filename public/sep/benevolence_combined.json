@@ -1,0 +1,281 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 242,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
+    "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
+    "title": "SEP search: benevolence",
+    "description": "SEP search results benevolence benevolen*"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "delight",
+        "id": "delight"
+      },
+      {
+        "form": "deity",
+        "id": "deity"
+      },
+      {
+        "form": "holiness",
+        "id": "holiness"
+      },
+      {
+        "form": "pity",
+        "id": "pity"
+      },
+      {
+        "form": "publick",
+        "id": "publick"
+      },
+      {
+        "form": "stranger",
+        "id": "stranger"
+      },
+      {
+        "form": "universal",
+        "id": "universal"
+      },
+      {
+        "form": "genuine",
+        "id": "genuine"
+      },
+      {
+        "form": "approve",
+        "id": "approve"
+      },
+      {
+        "form": "consistent",
+        "id": "consistent"
+      },
+      {
+        "form": "malice",
+        "id": "malice"
+      },
+      {
+        "form": "private",
+        "id": "private"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "promote",
+        "id": "promote"
+      },
+      {
+        "form": "happy",
+        "id": "happy"
+      },
+      {
+        "form": "love",
+        "id": "love"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 2.060404171738775,
+        "source": "delight",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.7397779435676402,
+        "source": "delight",
+        "target": "love"
+      },
+      {
+        "weight": 2.5664565167521083,
+        "source": "delight",
+        "target": "promote"
+      },
+      {
+        "weight": 3.126072304687531,
+        "source": "delight",
+        "target": "holiness"
+      },
+      {
+        "weight": 1.8025750624366754,
+        "source": "deity",
+        "target": "benevolence"
+      },
+      {
+        "weight": 3.2130836816771606,
+        "source": "deity",
+        "target": "universal"
+      },
+      {
+        "weight": 2.910802809804227,
+        "source": "deity",
+        "target": "approve"
+      },
+      {
+        "weight": 2.868243195385431,
+        "source": "deity",
+        "target": "happy"
+      },
+      {
+        "weight": 3.407239696118118,
+        "source": "deity",
+        "target": "private"
+      },
+      {
+        "weight": 1.7155636854470455,
+        "source": "holiness",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.9894723491677463,
+        "source": "holiness",
+        "target": "love"
+      },
+      {
+        "weight": 2.3112281891500657,
+        "source": "pity",
+        "target": "love"
+      },
+      {
+        "weight": 4.167526179515692,
+        "source": "pity",
+        "target": "malice"
+      },
+      {
+        "weight": 2.12102879355521,
+        "source": "pity",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.090257134888456,
+        "source": "publick",
+        "target": "benevolence"
+      },
+      {
+        "weight": 3.001774588009954,
+        "source": "publick",
+        "target": "promote"
+      },
+      {
+        "weight": 3.8490724483971572,
+        "source": "publick",
+        "target": "malice"
+      },
+      {
+        "weight": 1.8025750624366754,
+        "source": "stranger",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.8780826149448204,
+        "source": "universal",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.9719216248602724,
+        "source": "universal",
+        "target": "private"
+      },
+      {
+        "weight": 2.4329251241275855,
+        "source": "universal",
+        "target": "happy"
+      },
+      {
+        "weight": 2.482818838160713,
+        "source": "genuine",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.7581232998658414,
+        "source": "approve",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.823791432814597,
+        "source": "approve",
+        "target": "happy"
+      },
+      {
+        "weight": 1.7251791441464874,
+        "source": "approve",
+        "target": "love"
+      },
+      {
+        "weight": 1.8780826149448204,
+        "source": "consistent",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.7397779435676402,
+        "source": "consistent",
+        "target": "love"
+      },
+      {
+        "weight": 2.4329251241275855,
+        "source": "consistent",
+        "target": "happy"
+      },
+      {
+        "weight": 2.0032457578988265,
+        "source": "malice",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.2771544216195272,
+        "source": "malice",
+        "target": "love"
+      },
+      {
+        "weight": 1.8490950780715683,
+        "source": "private",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.7606125311930656,
+        "source": "private",
+        "target": "promote"
+      },
+      {
+        "weight": 1.528468849900433,
+        "source": "private",
+        "target": "love"
+      },
+      {
+        "weight": 2.627081138568543,
+        "source": "private",
+        "target": "happy"
+      },
+      {
+        "weight": 1.8209242011048719,
+        "source": "benevolence",
+        "target": "love"
+      },
+      {
+        "weight": 1.8490950780715683,
+        "source": "benevolence",
+        "target": "promote"
+      },
+      {
+        "weight": 1.8697143652743038,
+        "source": "benevolence",
+        "target": "happy"
+      },
+      {
+        "weight": 2.039294473666424,
+        "source": "promote",
+        "target": "love"
+      },
+      {
+        "weight": 1.6826195297276916,
+        "source": "happy",
+        "target": "love"
+      }
+    ]
+  }
+}

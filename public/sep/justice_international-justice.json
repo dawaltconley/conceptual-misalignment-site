@@ -1,0 +1,331 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 170,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/international-justice/",
+    "url": "https://plato.stanford.edu/entries/international-justice/",
+    "title": "International Distributive Justice",
+    "description": "\n\nInternational distributive justice has, in the past several decades,\nbecome a prominent topic within political philosophy. Philosophers\nhave, of course, long "
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "activated",
+        "id": "activate"
+      },
+      {
+        "form": "discussion",
+        "id": "discussion"
+      },
+      {
+        "form": "likely",
+        "id": "likely"
+      },
+      {
+        "form": "demands",
+        "id": "demand"
+      },
+      {
+        "form": "continue",
+        "id": "continue"
+      },
+      {
+        "form": "use",
+        "id": "use"
+      },
+      {
+        "form": "debate",
+        "id": "debate"
+      },
+      {
+        "form": "governed",
+        "id": "govern"
+      },
+      {
+        "form": "trade",
+        "id": "trade"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "fair",
+        "id": "fair"
+      },
+      {
+        "form": "undermine",
+        "id": "undermine"
+      },
+      {
+        "form": "literature",
+        "id": "literature"
+      },
+      {
+        "form": "site",
+        "id": "site"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      },
+      {
+        "form": "live",
+        "id": "live"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.4234733643616446,
+        "source": "activate",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.8844768636289577,
+        "source": "activate",
+        "target": "justice"
+      },
+      {
+        "weight": 0.9126477405956539,
+        "source": "activate",
+        "target": "trade"
+      },
+      {
+        "weight": 1.2956399928517597,
+        "source": "discussion",
+        "target": "debate"
+      },
+      {
+        "weight": 0.9056790712795606,
+        "source": "discussion",
+        "target": "justice"
+      },
+      {
+        "weight": 0.9309968792638506,
+        "source": "discussion",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.007957920399979,
+        "source": "discussion",
+        "target": "continue"
+      },
+      {
+        "weight": 1.007957920399979,
+        "source": "discussion",
+        "target": "likely"
+      },
+      {
+        "weight": 0.6433148068120695,
+        "source": "likely",
+        "target": "justice"
+      },
+      {
+        "weight": 3.087399462079815,
+        "source": "likely",
+        "target": "continue"
+      },
+      {
+        "weight": 1.988787173411705,
+        "source": "likely",
+        "target": "debate"
+      },
+      {
+        "weight": 0.014706147389695487,
+        "source": "likely",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.6057949211555993,
+        "source": "likely",
+        "target": "literature"
+      },
+      {
+        "weight": 0.8844768636289577,
+        "source": "demand",
+        "target": "justice"
+      },
+      {
+        "weight": 0.612543148145316,
+        "source": "demand",
+        "target": "distributive"
+      },
+      {
+        "weight": 2.11662054492159,
+        "source": "demand",
+        "target": "live"
+      },
+      {
+        "weight": 0.6433148068120695,
+        "source": "continue",
+        "target": "justice"
+      },
+      {
+        "weight": 2.3942522815198695,
+        "source": "continue",
+        "target": "debate"
+      },
+      {
+        "weight": 0.4201712554978598,
+        "source": "continue",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.7011051009599243,
+        "source": "continue",
+        "target": "site"
+      },
+      {
+        "weight": 2.704407209823709,
+        "source": "continue",
+        "target": "literature"
+      },
+      {
+        "weight": 0.4201712554978598,
+        "source": "use",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.8064656166177504,
+        "source": "use",
+        "target": "govern"
+      },
+      {
+        "weight": 0.6433148068120695,
+        "source": "use",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7078533279496408,
+        "source": "debate",
+        "target": "justice"
+      },
+      {
+        "weight": 0.30238821984147646,
+        "source": "debate",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.8064656166177504,
+        "source": "govern",
+        "target": "fair"
+      },
+      {
+        "weight": 0.7486753224698959,
+        "source": "govern",
+        "target": "justice"
+      },
+      {
+        "weight": 0.5255317711556862,
+        "source": "govern",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.5743219353251181,
+        "source": "trade",
+        "target": "distributive"
+      },
+      {
+        "weight": 2.799717389628034,
+        "source": "trade",
+        "target": "fair"
+      },
+      {
+        "weight": 0.8256363636060242,
+        "source": "trade",
+        "target": "justice"
+      },
+      {
+        "weight": 0.8256363636060242,
+        "source": "trade",
+        "target": "live"
+      },
+      {
+        "weight": 1.113318436057805,
+        "source": "trade",
+        "target": "undermine"
+      },
+      {
+        "weight": 1.6057949211555993,
+        "source": "trade",
+        "target": "literature"
+      },
+      {
+        "weight": 1.007957920399979,
+        "source": "trade",
+        "target": "site"
+      },
+      {
+        "weight": 1.048779914920234,
+        "source": "justice",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.8256363636060242,
+        "source": "justice",
+        "target": "fair"
+      },
+      {
+        "weight": 0.6433148068120695,
+        "source": "justice",
+        "target": "live"
+      },
+      {
+        "weight": 0.6433148068120695,
+        "source": "justice",
+        "target": "site"
+      },
+      {
+        "weight": 0.7486753224698959,
+        "source": "justice",
+        "target": "undermine"
+      },
+      {
+        "weight": 0.7303261838016993,
+        "source": "justice",
+        "target": "literature"
+      },
+      {
+        "weight": 0.4201712554978598,
+        "source": "fair",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.8064656166177504,
+        "source": "fair",
+        "target": "undermine"
+      },
+      {
+        "weight": 1.6057949211555993,
+        "source": "fair",
+        "target": "literature"
+      },
+      {
+        "weight": 0.8132138436074671,
+        "source": "undermine",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.624144059823796,
+        "source": "undermine",
+        "target": "live"
+      },
+      {
+        "weight": 0.8356866994595256,
+        "source": "literature",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.7078533279496408,
+        "source": "site",
+        "target": "distributive"
+      }
+    ]
+  }
+}

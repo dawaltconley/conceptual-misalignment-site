@@ -1,0 +1,431 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 58,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/justice-bad-luck/",
+    "url": "https://plato.stanford.edu/entries/justice-bad-luck/",
+    "title": "Justice and Bad Luck",
+    "description": "\n\nSome people end up worse off than others partly because of their bad\nluck. For instance, some die young due to a genetic disease, whereas\nothers live long liv"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "argued",
+        "id": "argue"
+      },
+      {
+        "form": "social",
+        "id": "social"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "requires",
+        "id": "require"
+      },
+      {
+        "form": "differential",
+        "id": "differential"
+      },
+      {
+        "form": "eliminating",
+        "id": "eliminate"
+      },
+      {
+        "form": "initial",
+        "id": "initial"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "Scheffler",
+        "id": "scheffler"
+      },
+      {
+        "form": "believe",
+        "id": "believe"
+      },
+      {
+        "form": "effects",
+        "id": "effect"
+      },
+      {
+        "form": "egalitarian",
+        "id": "egalitarian"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
+      },
+      {
+        "form": "issue",
+        "id": "issue"
+      },
+      {
+        "form": "concerns",
+        "id": "concern"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.663505133704376,
+        "source": "argue",
+        "target": "differential"
+      },
+      {
+        "weight": 1.3915714182207344,
+        "source": "argue",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 2.4436636912539513,
+        "source": "argue",
+        "target": "eliminate"
+      },
+      {
+        "weight": 0.909733331327996,
+        "source": "argue",
+        "target": "justice"
+      },
+      {
+        "weight": 1.3450514025858415,
+        "source": "argue",
+        "target": "social"
+      },
+      {
+        "weight": 2.133508762950112,
+        "source": "argue",
+        "target": "scheffler"
+      },
+      {
+        "weight": 1.3450514025858415,
+        "source": "argue",
+        "target": "theory"
+      },
+      {
+        "weight": 0.5648928450362665,
+        "source": "argue",
+        "target": "require"
+      },
+      {
+        "weight": 1.2580400255962119,
+        "source": "argue",
+        "target": "effect"
+      },
+      {
+        "weight": 1.2580400255962119,
+        "source": "argue",
+        "target": "believe"
+      },
+      {
+        "weight": 1.1779973179226753,
+        "source": "argue",
+        "target": "concern"
+      },
+      {
+        "weight": 0.3642221495741153,
+        "source": "social",
+        "target": "differential"
+      },
+      {
+        "weight": 1.5963658308667477,
+        "source": "social",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.1443807071236904,
+        "source": "social",
+        "target": "eliminate"
+      },
+      {
+        "weight": 0.9967447083176257,
+        "source": "social",
+        "target": "justice"
+      },
+      {
+        "weight": 2.2429929957918002,
+        "source": "social",
+        "target": "theory"
+      },
+      {
+        "weight": 1.0573693301340605,
+        "source": "social",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9773266224605243,
+        "source": "social",
+        "target": "concern"
+      },
+      {
+        "weight": 1.2396908869280152,
+        "source": "social",
+        "target": "scheffler"
+      },
+      {
+        "weight": 1.1526795099383853,
+        "source": "question",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.8043728156701697,
+        "source": "question",
+        "target": "justice"
+      },
+      {
+        "weight": 2.790288299339182,
+        "source": "question",
+        "target": "issue"
+      },
+      {
+        "weight": 1.33500106673234,
+        "source": "question",
+        "target": "scheffler"
+      },
+      {
+        "weight": 1.7657839828247943,
+        "source": "question",
+        "target": "concern"
+      },
+      {
+        "weight": 0.5930637220029628,
+        "source": "question",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.3952411471096968,
+        "source": "require",
+        "target": "justice"
+      },
+      {
+        "weight": 0.19716806491094901,
+        "source": "require",
+        "target": "concern"
+      },
+      {
+        "weight": 1.663505133704376,
+        "source": "require",
+        "target": "believe"
+      },
+      {
+        "weight": 1.3758230612525952,
+        "source": "require",
+        "target": "differential"
+      },
+      {
+        "weight": 1.663505133704376,
+        "source": "require",
+        "target": "effect"
+      },
+      {
+        "weight": 1.8458266904983307,
+        "source": "require",
+        "target": "initial"
+      },
+      {
+        "weight": 1.0573693301340605,
+        "source": "require",
+        "target": "eliminate"
+      },
+      {
+        "weight": 0.41074216520900814,
+        "source": "differential",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 2.3101322986294286,
+        "source": "differential",
+        "target": "eliminate"
+      },
+      {
+        "weight": 1.0275163669843794,
+        "source": "differential",
+        "target": "justice"
+      },
+      {
+        "weight": 2.3566523142643216,
+        "source": "differential",
+        "target": "effect"
+      },
+      {
+        "weight": 1.3758230612525952,
+        "source": "differential",
+        "target": "believe"
+      },
+      {
+        "weight": 0.3642221495741153,
+        "source": "eliminate",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.49775354219863793,
+        "source": "eliminate",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.2198882596318354,
+        "source": "eliminate",
+        "target": "justice"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "eliminate",
+        "target": "effect"
+      },
+      {
+        "weight": 2.2512917986064953,
+        "source": "initial",
+        "target": "believe"
+      },
+      {
+        "weight": 0.5930637220029628,
+        "source": "initial",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.0920548881219507,
+        "source": "initial",
+        "target": "justice"
+      },
+      {
+        "weight": 0.909733331327996,
+        "source": "justice",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.663505133704376,
+        "source": "justice",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.448729832060683,
+        "source": "justice",
+        "target": "issue"
+      },
+      {
+        "weight": 1.3151984394361604,
+        "source": "justice",
+        "target": "scheffler"
+      },
+      {
+        "weight": 1.6898918888775711,
+        "source": "justice",
+        "target": "theory"
+      },
+      {
+        "weight": 1.235155731762624,
+        "source": "justice",
+        "target": "concern"
+      },
+      {
+        "weight": 0.909733331327996,
+        "source": "justice",
+        "target": "believe"
+      },
+      {
+        "weight": 0.909733331327996,
+        "source": "justice",
+        "target": "effect"
+      },
+      {
+        "weight": 1.1526795099383853,
+        "source": "scheffler",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.6916760106710724,
+        "source": "scheffler",
+        "target": "issue"
+      },
+      {
+        "weight": 1.286210902562908,
+        "source": "scheffler",
+        "target": "egalitarian"
+      },
+      {
+        "weight": 1.2396908869280152,
+        "source": "scheffler",
+        "target": "theory"
+      },
+      {
+        "weight": 2.4589311633847397,
+        "source": "scheffler",
+        "target": "concern"
+      },
+      {
+        "weight": 1.1526795099383853,
+        "source": "scheffler",
+        "target": "believe"
+      },
+      {
+        "weight": 2.0689702418125404,
+        "source": "believe",
+        "target": "effect"
+      },
+      {
+        "weight": 0.8903152454708944,
+        "source": "believe",
+        "target": "concern"
+      },
+      {
+        "weight": 1.1909007227585833,
+        "source": "egalitarian",
+        "target": "theory"
+      },
+      {
+        "weight": 0.8162072733171725,
+        "source": "egalitarian",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.4293117462035814,
+        "source": "egalitarian",
+        "target": "concern"
+      },
+      {
+        "weight": 0.9497386659416952,
+        "source": "egalitarian",
+        "target": "issue"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "theory",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9773266224605243,
+        "source": "theory",
+        "target": "concern"
+      },
+      {
+        "weight": 1.5093544538771178,
+        "source": "issue",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.4293117462035814,
+        "source": "issue",
+        "target": "concern"
+      },
+      {
+        "weight": 1.2957803535790589,
+        "source": "concern",
+        "target": "distributive"
+      }
+    ]
+  }
+}

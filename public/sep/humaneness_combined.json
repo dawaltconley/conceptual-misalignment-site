@@ -1,0 +1,221 @@
+{
+  "term": {
+    "label": "humaneness",
+    "occurrences": 14,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
+    "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
+    "title": "SEP search: humaneness",
+    "description": "SEP search results humaneness humane*"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "medal",
+        "id": "medal"
+      },
+      {
+        "form": "appreciation",
+        "id": "appreciation"
+      },
+      {
+        "form": "Bai",
+        "id": "bai"
+      },
+      {
+        "form": "nurtured",
+        "id": "nurture"
+      },
+      {
+        "form": "framework",
+        "id": "framework"
+      },
+      {
+        "form": "li",
+        "id": "li"
+      },
+      {
+        "form": "humaneness",
+        "id": "humaneness"
+      },
+      {
+        "form": "France",
+        "id": "france"
+      },
+      {
+        "form": "inferior",
+        "id": "inferior"
+      },
+      {
+        "form": "making",
+        "id": "making"
+      },
+      {
+        "form": "Yale",
+        "id": "yale"
+      },
+      {
+        "form": "responsible",
+        "id": "responsible"
+      },
+      {
+        "form": "Stoic",
+        "id": "stoic"
+      },
+      {
+        "form": "distorting",
+        "id": "distort"
+      },
+      {
+        "form": "Manu",
+        "id": "manu"
+      },
+      {
+        "form": "recovery",
+        "id": "recovery"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 4.0584461478090015,
+        "source": "medal",
+        "target": "france"
+      },
+      {
+        "weight": 3.8172840909921133,
+        "source": "medal",
+        "target": "humaneness"
+      },
+      {
+        "weight": 4.0584461478090015,
+        "source": "medal",
+        "target": "yale"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "appreciation",
+        "target": "distort"
+      },
+      {
+        "weight": 3.576122034175225,
+        "source": "appreciation",
+        "target": "humaneness"
+      },
+      {
+        "weight": 3.6124896783461002,
+        "source": "appreciation",
+        "target": "nurture"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "bai",
+        "target": "humaneness"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "bai",
+        "target": "li"
+      },
+      {
+        "weight": 3.255814734407368,
+        "source": "nurture",
+        "target": "distort"
+      },
+      {
+        "weight": 3.6124896783461002,
+        "source": "nurture",
+        "target": "humaneness"
+      },
+      {
+        "weight": 3.98670224295016,
+        "source": "framework",
+        "target": "recovery"
+      },
+      {
+        "weight": 3.6502300063289472,
+        "source": "framework",
+        "target": "humaneness"
+      },
+      {
+        "weight": 3.8913920631458354,
+        "source": "framework",
+        "target": "making"
+      },
+      {
+        "weight": 3.6502300063289472,
+        "source": "framework",
+        "target": "responsible"
+      },
+      {
+        "weight": 4.2692692147351705,
+        "source": "li",
+        "target": "humaneness"
+      },
+      {
+        "weight": 3.576122034175225,
+        "source": "humaneness",
+        "target": "stoic"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "humaneness",
+        "target": "recovery"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "humaneness",
+        "target": "distort"
+      },
+      {
+        "weight": 3.7302727140024836,
+        "source": "humaneness",
+        "target": "manu"
+      },
+      {
+        "weight": 3.7302727140024836,
+        "source": "humaneness",
+        "target": "inferior"
+      },
+      {
+        "weight": 3.8172840909921133,
+        "source": "humaneness",
+        "target": "making"
+      },
+      {
+        "weight": 3.576122034175225,
+        "source": "humaneness",
+        "target": "responsible"
+      },
+      {
+        "weight": 3.8172840909921133,
+        "source": "humaneness",
+        "target": "france"
+      },
+      {
+        "weight": 3.8172840909921133,
+        "source": "humaneness",
+        "target": "yale"
+      },
+      {
+        "weight": 4.0584461478090015,
+        "source": "france",
+        "target": "yale"
+      },
+      {
+        "weight": 3.8172840909921133,
+        "source": "making",
+        "target": "responsible"
+      },
+      {
+        "weight": 3.912594270796438,
+        "source": "stoic",
+        "target": "distort"
+      }
+    ]
+  }
+}

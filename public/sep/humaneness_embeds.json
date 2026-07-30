@@ -1,0 +1,266 @@
+{
+  "term": {
+    "label": "humaneness",
+    "occurrences": 15,
+    "variants": []
+  },
+  "source": {
+    "id": "sep",
+    "url": "https://plato.stanford.edu/",
+    "title": "SEP (combined)",
+    "description": "Combined SEP corpus for the English renderings of 仁 / 義"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "community": 2,
+        "id": "misguided"
+      },
+      {
+        "community": 2,
+        "id": "straightforward"
+      },
+      {
+        "community": 2,
+        "id": "nuanced"
+      },
+      {
+        "community": 2,
+        "id": "incomplete"
+      },
+      {
+        "community": 2,
+        "id": "sophisticated"
+      },
+      {
+        "community": 2,
+        "id": "robust"
+      },
+      {
+        "community": 2,
+        "id": "intriguing"
+      },
+      {
+        "community": 2,
+        "id": "humaneness"
+      },
+      {
+        "community": 2,
+        "id": "sovereign"
+      },
+      {
+        "community": 2,
+        "id": "primitive"
+      },
+      {
+        "community": 2,
+        "id": "developmental"
+      },
+      {
+        "community": 2,
+        "id": "misleading"
+      },
+      {
+        "community": 2,
+        "id": "sustained"
+      },
+      {
+        "community": 2,
+        "id": "tremendous"
+      },
+      {
+        "community": 2,
+        "id": "concrete"
+      },
+      {
+        "community": 2,
+        "id": "massive"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.5921061038970947,
+        "source": "misguided",
+        "target": "incomplete"
+      },
+      {
+        "weight": 0.7250267863273621,
+        "source": "misguided",
+        "target": "misleading"
+      },
+      {
+        "weight": 0.6974714994430542,
+        "source": "misguided",
+        "target": "nuanced"
+      },
+      {
+        "weight": 0.4140113592147827,
+        "source": "straightforward",
+        "target": "humaneness"
+      },
+      {
+        "weight": 0.5335922837257385,
+        "source": "straightforward",
+        "target": "massive"
+      },
+      {
+        "weight": 0.5512797832489014,
+        "source": "straightforward",
+        "target": "robust"
+      },
+      {
+        "weight": 0.6387470960617065,
+        "source": "straightforward",
+        "target": "intriguing"
+      },
+      {
+        "weight": 0.6240321397781372,
+        "source": "straightforward",
+        "target": "nuanced"
+      },
+      {
+        "weight": 0.5922520160675049,
+        "source": "straightforward",
+        "target": "misleading"
+      },
+      {
+        "weight": 0.5718419551849365,
+        "source": "straightforward",
+        "target": "tremendous"
+      },
+      {
+        "weight": 0.5182851552963257,
+        "source": "nuanced",
+        "target": "concrete"
+      },
+      {
+        "weight": 0.6152029633522034,
+        "source": "nuanced",
+        "target": "developmental"
+      },
+      {
+        "weight": 0.38210123777389526,
+        "source": "nuanced",
+        "target": "humaneness"
+      },
+      {
+        "weight": 0.668604850769043,
+        "source": "nuanced",
+        "target": "incomplete"
+      },
+      {
+        "weight": 0.6817852258682251,
+        "source": "nuanced",
+        "target": "intriguing"
+      },
+      {
+        "weight": 0.6896873712539673,
+        "source": "nuanced",
+        "target": "misleading"
+      },
+      {
+        "weight": 0.7162794470787048,
+        "source": "nuanced",
+        "target": "sophisticated"
+      },
+      {
+        "weight": 0.6875958442687988,
+        "source": "nuanced",
+        "target": "sustained"
+      },
+      {
+        "weight": 0.564560055732727,
+        "source": "nuanced",
+        "target": "robust"
+      },
+      {
+        "weight": 0.5701470375061035,
+        "source": "nuanced",
+        "target": "tremendous"
+      },
+      {
+        "weight": 0.6835885047912598,
+        "source": "incomplete",
+        "target": "misleading"
+      },
+      {
+        "weight": 0.6485165357589722,
+        "source": "incomplete",
+        "target": "intriguing"
+      },
+      {
+        "weight": 0.5853817462921143,
+        "source": "sophisticated",
+        "target": "sustained"
+      },
+      {
+        "weight": 0.39156022667884827,
+        "source": "robust",
+        "target": "humaneness"
+      },
+      {
+        "weight": 0.521796464920044,
+        "source": "robust",
+        "target": "intriguing"
+      },
+      {
+        "weight": 0.6625838279724121,
+        "source": "intriguing",
+        "target": "misleading"
+      },
+      {
+        "weight": 0.6161254644393921,
+        "source": "intriguing",
+        "target": "massive"
+      },
+      {
+        "weight": 0.5812243819236755,
+        "source": "intriguing",
+        "target": "tremendous"
+      },
+      {
+        "weight": 0.4218701720237732,
+        "source": "humaneness",
+        "target": "massive"
+      },
+      {
+        "weight": 0.40236538648605347,
+        "source": "humaneness",
+        "target": "developmental"
+      },
+      {
+        "weight": 0.3965499997138977,
+        "source": "humaneness",
+        "target": "primitive"
+      },
+      {
+        "weight": 0.39648956060409546,
+        "source": "humaneness",
+        "target": "sovereign"
+      },
+      {
+        "weight": 0.39059680700302124,
+        "source": "humaneness",
+        "target": "concrete"
+      },
+      {
+        "weight": 0.49363112449645996,
+        "source": "primitive",
+        "target": "developmental"
+      },
+      {
+        "weight": 0.5547091960906982,
+        "source": "misleading",
+        "target": "tremendous"
+      },
+      {
+        "weight": 0.657901406288147,
+        "source": "tremendous",
+        "target": "massive"
+      }
+    ]
+  }
+}

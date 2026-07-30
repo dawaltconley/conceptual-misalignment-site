@@ -1,0 +1,366 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 1,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/abner-burgos/",
+    "url": "https://plato.stanford.edu/entries/abner-burgos/",
+    "title": "Abner of Burgos",
+    "description": "\n\nAbner of Burgos (Alfonso de Valladolid; c. 1260–1347) was\nperhaps the most important philosopher in the stream of Jewish Spanish\nrabbi-apostates in the 14th a"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "existence",
+        "id": "existence"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "divinity",
+        "id": "divinity"
+      },
+      {
+        "form": "Christian",
+        "id": "christian"
+      },
+      {
+        "form": "wrote",
+        "id": "write"
+      },
+      {
+        "form": "debate",
+        "id": "debate"
+      },
+      {
+        "form": "Rabbi",
+        "id": "rabbi"
+      },
+      {
+        "form": "According",
+        "id": "accord"
+      },
+      {
+        "form": "book",
+        "id": "book"
+      },
+      {
+        "form": "arguments",
+        "id": "argument"
+      },
+      {
+        "form": "Abner",
+        "id": "abner"
+      },
+      {
+        "form": "philosophy",
+        "id": "philosophy"
+      },
+      {
+        "form": "original",
+        "id": "original"
+      },
+      {
+        "form": "sources",
+        "id": "source"
+      },
+      {
+        "form": "people",
+        "id": "people"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.21741287660522474,
+        "source": "existence",
+        "target": "argument"
+      },
+      {
+        "weight": 0.659245628884264,
+        "source": "existence",
+        "target": "rabbi"
+      },
+      {
+        "weight": 1.0106435157221527,
+        "source": "existence",
+        "target": "source"
+      },
+      {
+        "weight": 0.659245628884264,
+        "source": "existence",
+        "target": "book"
+      },
+      {
+        "weight": 0.659245628884264,
+        "source": "existence",
+        "target": "divinity"
+      },
+      {
+        "weight": 1.4701758451005926,
+        "source": "existence",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.371563556432483,
+        "source": "existence",
+        "target": "people"
+      },
+      {
+        "weight": 0.371563556432483,
+        "source": "existence",
+        "target": "original"
+      },
+      {
+        "weight": 0.615760516944525,
+        "source": "righteousness",
+        "target": "abner"
+      },
+      {
+        "weight": 2.268683541318364,
+        "source": "righteousness",
+        "target": "book"
+      },
+      {
+        "weight": 2.6741486494265287,
+        "source": "righteousness",
+        "target": "people"
+      },
+      {
+        "weight": 0.023256862164267183,
+        "source": "god",
+        "target": "accord"
+      },
+      {
+        "weight": 0.8217645583820389,
+        "source": "god",
+        "target": "divinity"
+      },
+      {
+        "weight": 0.9395475940384223,
+        "source": "god",
+        "target": "people"
+      },
+      {
+        "weight": 0.322773392263051,
+        "source": "divinity",
+        "target": "argument"
+      },
+      {
+        "weight": 0.07145896398214505,
+        "source": "divinity",
+        "target": "book"
+      },
+      {
+        "weight": 0.8823891801984737,
+        "source": "divinity",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.01739174271186924,
+        "source": "divinity",
+        "target": "source"
+      },
+      {
+        "weight": 1.1700712526502546,
+        "source": "divinity",
+        "target": "people"
+      },
+      {
+        "weight": 1.1647941955494108,
+        "source": "christian",
+        "target": "source"
+      },
+      {
+        "weight": 0.1849776008520709,
+        "source": "christian",
+        "target": "abner"
+      },
+      {
+        "weight": 0.6228779847133892,
+        "source": "christian",
+        "target": "argument"
+      },
+      {
+        "weight": 0.8823891801984737,
+        "source": "christian",
+        "target": "book"
+      },
+      {
+        "weight": 1.6933193964148026,
+        "source": "christian",
+        "target": "debate"
+      },
+      {
+        "weight": 1.0647107369924282,
+        "source": "christian",
+        "target": "write"
+      },
+      {
+        "weight": 0.08388148398070203,
+        "source": "christian",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.371563556432483,
+        "source": "christian",
+        "target": "people"
+      },
+      {
+        "weight": 0.4979774812881416,
+        "source": "write",
+        "target": "abner"
+      },
+      {
+        "weight": 1.1700712526502546,
+        "source": "write",
+        "target": "book"
+      },
+      {
+        "weight": 0.07145896398214505,
+        "source": "write",
+        "target": "rabbi"
+      },
+      {
+        "weight": 1.575536360758419,
+        "source": "write",
+        "target": "debate"
+      },
+      {
+        "weight": 0.47692407209030935,
+        "source": "write",
+        "target": "original"
+      },
+      {
+        "weight": 0.8823891801984737,
+        "source": "debate",
+        "target": "book"
+      },
+      {
+        "weight": 0.3280784444927442,
+        "source": "debate",
+        "target": "abner"
+      },
+      {
+        "weight": 0.18924199963852834,
+        "source": "debate",
+        "target": "rabbi"
+      },
+      {
+        "weight": 0.4405564279194345,
+        "source": "debate",
+        "target": "argument"
+      },
+      {
+        "weight": 0.13517477836825254,
+        "source": "debate",
+        "target": "source"
+      },
+      {
+        "weight": 0.5947071077466928,
+        "source": "debate",
+        "target": "original"
+      },
+      {
+        "weight": 0.29033811650989727,
+        "source": "rabbi",
+        "target": "abner"
+      },
+      {
+        "weight": 1.2878542883066382,
+        "source": "rabbi",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.9877496958563,
+        "source": "rabbi",
+        "target": "book"
+      },
+      {
+        "weight": 0.7105389232718146,
+        "source": "rabbi",
+        "target": "source"
+      },
+      {
+        "weight": 0.5104000012866988,
+        "source": "accord",
+        "target": "abner"
+      },
+      {
+        "weight": 0.21741287660522474,
+        "source": "accord",
+        "target": "argument"
+      },
+      {
+        "weight": 1.0647107369924282,
+        "source": "accord",
+        "target": "people"
+      },
+      {
+        "weight": 0.36444608866361905,
+        "source": "book",
+        "target": "abner"
+      },
+      {
+        "weight": 0.4228568508200336,
+        "source": "book",
+        "target": "source"
+      },
+      {
+        "weight": 0.47692407209030935,
+        "source": "book",
+        "target": "people"
+      },
+      {
+        "weight": 0.47692407209030935,
+        "source": "book",
+        "target": "original"
+      },
+      {
+        "weight": 0.8823891801984737,
+        "source": "book",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.6741712791009397,
+        "source": "argument",
+        "target": "source"
+      },
+      {
+        "weight": 1.13370360847938,
+        "source": "argument",
+        "target": "people"
+      },
+      {
+        "weight": 0.43343896015057054,
+        "source": "abner",
+        "target": "original"
+      },
+      {
+        "weight": 0.2362708952396214,
+        "source": "abner",
+        "target": "source"
+      },
+      {
+        "weight": 0.3280784444927442,
+        "source": "abner",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.8283219589281978,
+        "source": "philosophy",
+        "target": "source"
+      }
+    ]
+  }
+}

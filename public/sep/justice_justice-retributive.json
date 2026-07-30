@@ -1,0 +1,466 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 43,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/justice-retributive/",
+    "url": "https://plato.stanford.edu/entries/justice-retributive/",
+    "title": "Retributive Justice",
+    "description": "\n\nThe concept of retributive justice has been used in a variety of ways,\nbut it is best understood as that form of justice committed to the\nfollowing three prin"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "holds",
+        "id": "hold"
+      },
+      {
+        "form": "limits",
+        "id": "limit"
+      },
+      {
+        "form": "retributive",
+        "id": "retributive"
+      },
+      {
+        "form": "principle",
+        "id": "principle"
+      },
+      {
+        "form": "challenge",
+        "id": "challenge"
+      },
+      {
+        "form": "notion",
+        "id": "notion"
+      },
+      {
+        "form": "particular",
+        "id": "particular"
+      },
+      {
+        "form": "appeal",
+        "id": "appeal"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "idea",
+        "id": "idea"
+      },
+      {
+        "form": "criminal",
+        "id": "criminal"
+      },
+      {
+        "form": "justification",
+        "id": "justification"
+      },
+      {
+        "form": "sort",
+        "id": "sort"
+      },
+      {
+        "form": "moral",
+        "id": "moral"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
+      },
+      {
+        "form": "proportionality",
+        "id": "proportionality"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.430311246536665,
+        "source": "hold",
+        "target": "challenge"
+      },
+      {
+        "weight": 1.142629174084884,
+        "source": "hold",
+        "target": "justice"
+      },
+      {
+        "weight": 0.842524581634546,
+        "source": "hold",
+        "target": "moral"
+      },
+      {
+        "weight": 1.430311246536665,
+        "source": "hold",
+        "target": "principle"
+      },
+      {
+        "weight": 0.3829922522561057,
+        "source": "hold",
+        "target": "retributive"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "hold",
+        "target": "justification"
+      },
+      {
+        "weight": 1.256357939413227,
+        "source": "limit",
+        "target": "appeal"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "limit",
+        "target": "justice"
+      },
+      {
+        "weight": 1.0050435111323208,
+        "source": "limit",
+        "target": "moral"
+      },
+      {
+        "weight": 0.5455111817538808,
+        "source": "limit",
+        "target": "retributive"
+      },
+      {
+        "weight": 1.467667033080434,
+        "source": "limit",
+        "target": "idea"
+      },
+      {
+        "weight": 0.2065358149145493,
+        "source": "limit",
+        "target": "criminal"
+      },
+      {
+        "weight": 1.1873650679262755,
+        "source": "limit",
+        "target": "notion"
+      },
+      {
+        "weight": 2.221438835456814,
+        "source": "limit",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.5928301760344399,
+        "source": "limit",
+        "target": "sort"
+      },
+      {
+        "weight": 0.3690547444123241,
+        "source": "limit",
+        "target": "justification"
+      },
+      {
+        "weight": 1.6708465405627437,
+        "source": "retributive",
+        "target": "justice"
+      },
+      {
+        "weight": 1.6357552207514738,
+        "source": "retributive",
+        "target": "principle"
+      },
+      {
+        "weight": 0.5455111817538808,
+        "source": "retributive",
+        "target": "idea"
+      },
+      {
+        "weight": 0.9509762898620452,
+        "source": "retributive",
+        "target": "justification"
+      },
+      {
+        "weight": 1.4816045409242156,
+        "source": "retributive",
+        "target": "notion"
+      },
+      {
+        "weight": 1.4170660197866443,
+        "source": "retributive",
+        "target": "proportionality"
+      },
+      {
+        "weight": 0.9628107475090479,
+        "source": "retributive",
+        "target": "appeal"
+      },
+      {
+        "weight": 0.7114963192281419,
+        "source": "retributive",
+        "target": "moral"
+      },
+      {
+        "weight": 0.9628107475090479,
+        "source": "retributive",
+        "target": "theory"
+      },
+      {
+        "weight": 1.076139432816051,
+        "source": "retributive",
+        "target": "challenge"
+      },
+      {
+        "weight": 0.3829922522561057,
+        "source": "retributive",
+        "target": "sort"
+      },
+      {
+        "weight": 1.8357763546448294,
+        "source": "principle",
+        "target": "justice"
+      },
+      {
+        "weight": 1.093839009915452,
+        "source": "principle",
+        "target": "appeal"
+      },
+      {
+        "weight": 1.5356717621944913,
+        "source": "principle",
+        "target": "moral"
+      },
+      {
+        "weight": 1.7869861904753974,
+        "source": "principle",
+        "target": "theory"
+      },
+      {
+        "weight": 1.430311246536665,
+        "source": "principle",
+        "target": "challenge"
+      },
+      {
+        "weight": 1.7179933189884458,
+        "source": "principle",
+        "target": "notion"
+      },
+      {
+        "weight": 0.9603076172909293,
+        "source": "principle",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.5356717621944913,
+        "source": "principle",
+        "target": "particular"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "principle",
+        "target": "justification"
+      },
+      {
+        "weight": 0.7371640659767196,
+        "source": "challenge",
+        "target": "justice"
+      },
+      {
+        "weight": 1.5356717621944913,
+        "source": "challenge",
+        "target": "moral"
+      },
+      {
+        "weight": 0.7371640659767196,
+        "source": "challenge",
+        "target": "criminal"
+      },
+      {
+        "weight": 1.7179933189884458,
+        "source": "challenge",
+        "target": "notion"
+      },
+      {
+        "weight": 1.6534547978508747,
+        "source": "challenge",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.5928301760344399,
+        "source": "notion",
+        "target": "idea"
+      },
+      {
+        "weight": 0.7371640659767196,
+        "source": "notion",
+        "target": "justice"
+      },
+      {
+        "weight": 1.1873650679262755,
+        "source": "notion",
+        "target": "justification"
+      },
+      {
+        "weight": 2.500752658238078,
+        "source": "notion",
+        "target": "proportionality"
+      },
+      {
+        "weight": 0.6883739018072876,
+        "source": "notion",
+        "target": "appeal"
+      },
+      {
+        "weight": 1.1302066540863267,
+        "source": "notion",
+        "target": "moral"
+      },
+      {
+        "weight": 0.842524581634546,
+        "source": "particular",
+        "target": "justice"
+      },
+      {
+        "weight": 1.1991995255732784,
+        "source": "particular",
+        "target": "theory"
+      },
+      {
+        "weight": 1.093839009915452,
+        "source": "appeal",
+        "target": "justice"
+      },
+      {
+        "weight": 1.1991995255732784,
+        "source": "appeal",
+        "target": "moral"
+      },
+      {
+        "weight": 1.4505139538541845,
+        "source": "appeal",
+        "target": "theory"
+      },
+      {
+        "weight": 1.256357939413227,
+        "source": "appeal",
+        "target": "idea"
+      },
+      {
+        "weight": 1.256357939413227,
+        "source": "appeal",
+        "target": "justification"
+      },
+      {
+        "weight": 1.3169825612296617,
+        "source": "appeal",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.093839009915452,
+        "source": "appeal",
+        "target": "sort"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "justice",
+        "target": "idea"
+      },
+      {
+        "weight": 1.1228265467887044,
+        "source": "justice",
+        "target": "justification"
+      },
+      {
+        "weight": 1.1834511686051392,
+        "source": "justice",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.430311246536665,
+        "source": "justice",
+        "target": "criminal"
+      },
+      {
+        "weight": 0.842524581634546,
+        "source": "justice",
+        "target": "moral"
+      },
+      {
+        "weight": 1.3169825612296617,
+        "source": "justice",
+        "target": "theory"
+      },
+      {
+        "weight": 0.7371640659767196,
+        "source": "justice",
+        "target": "sort"
+      },
+      {
+        "weight": 1.0622019249722694,
+        "source": "idea",
+        "target": "justification"
+      },
+      {
+        "weight": 1.1228265467887044,
+        "source": "idea",
+        "target": "proportionality"
+      },
+      {
+        "weight": 0.2065358149145493,
+        "source": "idea",
+        "target": "criminal"
+      },
+      {
+        "weight": 0.5632107588532816,
+        "source": "idea",
+        "target": "theory"
+      },
+      {
+        "weight": 0.3118963305723756,
+        "source": "idea",
+        "target": "moral"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "criminal",
+        "target": "justification"
+      },
+      {
+        "weight": 0.7371640659767196,
+        "source": "criminal",
+        "target": "sort"
+      },
+      {
+        "weight": 1.1228265467887044,
+        "source": "justification",
+        "target": "proportionality"
+      },
+      {
+        "weight": 0.8996829954744946,
+        "source": "justification",
+        "target": "sort"
+      },
+      {
+        "weight": 1.6534547978508747,
+        "source": "sort",
+        "target": "proportionality"
+      },
+      {
+        "weight": 0.5060523450133331,
+        "source": "moral",
+        "target": "theory"
+      },
+      {
+        "weight": 0.37252095238881033,
+        "source": "moral",
+        "target": "proportionality"
+      },
+      {
+        "weight": 1.3169825612296617,
+        "source": "theory",
+        "target": "proportionality"
+      }
+    ]
+  }
+}

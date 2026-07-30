@@ -1,0 +1,266 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 1680,
+    "variants": []
+  },
+  "source": {
+    "id": "sep",
+    "url": "https://plato.stanford.edu/",
+    "title": "SEP (combined)",
+    "description": "Combined SEP corpus for the English renderings of 仁 / 義"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "community": 6,
+        "id": "history"
+      },
+      {
+        "community": 6,
+        "id": "way"
+      },
+      {
+        "community": 6,
+        "id": "thing"
+      },
+      {
+        "community": 6,
+        "id": "injustice"
+      },
+      {
+        "community": 6,
+        "id": "freedom"
+      },
+      {
+        "community": 6,
+        "id": "power"
+      },
+      {
+        "community": 6,
+        "id": "harm"
+      },
+      {
+        "community": 6,
+        "id": "right"
+      },
+      {
+        "community": 6,
+        "id": "government"
+      },
+      {
+        "community": 6,
+        "id": "justice"
+      },
+      {
+        "community": 6,
+        "id": "state"
+      },
+      {
+        "community": 6,
+        "id": "philosophy"
+      },
+      {
+        "community": 6,
+        "id": "responsibility"
+      },
+      {
+        "community": 3,
+        "id": "moral"
+      },
+      {
+        "community": 6,
+        "id": "good"
+      },
+      {
+        "community": 6,
+        "id": "people"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.7059912085533142,
+        "source": "history",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7043263912200928,
+        "source": "history",
+        "target": "right"
+      },
+      {
+        "weight": 0.8446875810623169,
+        "source": "way",
+        "target": "good"
+      },
+      {
+        "weight": 0.7345031499862671,
+        "source": "way",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7659451961517334,
+        "source": "way",
+        "target": "power"
+      },
+      {
+        "weight": 0.7921630144119263,
+        "source": "way",
+        "target": "right"
+      },
+      {
+        "weight": 0.8359403610229492,
+        "source": "way",
+        "target": "thing"
+      },
+      {
+        "weight": 0.8322407007217407,
+        "source": "thing",
+        "target": "good"
+      },
+      {
+        "weight": 0.7320684194564819,
+        "source": "thing",
+        "target": "justice"
+      },
+      {
+        "weight": 0.8445670008659363,
+        "source": "thing",
+        "target": "people"
+      },
+      {
+        "weight": 0.7534655332565308,
+        "source": "thing",
+        "target": "power"
+      },
+      {
+        "weight": 0.8031394481658936,
+        "source": "thing",
+        "target": "state"
+      },
+      {
+        "weight": 0.6736181378364563,
+        "source": "injustice",
+        "target": "justice"
+      },
+      {
+        "weight": 0.692695140838623,
+        "source": "freedom",
+        "target": "justice"
+      },
+      {
+        "weight": 0.6899557709693909,
+        "source": "freedom",
+        "target": "people"
+      },
+      {
+        "weight": 0.7578796148300171,
+        "source": "power",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7815207242965698,
+        "source": "power",
+        "target": "right"
+      },
+      {
+        "weight": 0.7746859788894653,
+        "source": "power",
+        "target": "good"
+      },
+      {
+        "weight": 0.7556763291358948,
+        "source": "harm",
+        "target": "good"
+      },
+      {
+        "weight": 0.7066372632980347,
+        "source": "harm",
+        "target": "justice"
+      },
+      {
+        "weight": 0.8165103197097778,
+        "source": "right",
+        "target": "good"
+      },
+      {
+        "weight": 0.7739410996437073,
+        "source": "right",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7104549407958984,
+        "source": "government",
+        "target": "people"
+      },
+      {
+        "weight": 0.7046797275543213,
+        "source": "government",
+        "target": "state"
+      },
+      {
+        "weight": 0.684585690498352,
+        "source": "government",
+        "target": "justice"
+      },
+      {
+        "weight": 0.7916589975357056,
+        "source": "justice",
+        "target": "good"
+      },
+      {
+        "weight": 0.7401459217071533,
+        "source": "justice",
+        "target": "people"
+      },
+      {
+        "weight": 0.730781078338623,
+        "source": "justice",
+        "target": "state"
+      },
+      {
+        "weight": 0.730769157409668,
+        "source": "justice",
+        "target": "moral"
+      },
+      {
+        "weight": 0.6914569139480591,
+        "source": "justice",
+        "target": "philosophy"
+      },
+      {
+        "weight": 0.6749898791313171,
+        "source": "justice",
+        "target": "responsibility"
+      },
+      {
+        "weight": 0.8103439211845398,
+        "source": "state",
+        "target": "good"
+      },
+      {
+        "weight": 0.7372145652770996,
+        "source": "state",
+        "target": "moral"
+      },
+      {
+        "weight": 0.8177553415298462,
+        "source": "state",
+        "target": "people"
+      },
+      {
+        "weight": 0.7380709648132324,
+        "source": "moral",
+        "target": "good"
+      },
+      {
+        "weight": 0.7326691150665283,
+        "source": "moral",
+        "target": "people"
+      }
+    ]
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 4,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/well-being/",
+    "url": "https://plato.stanford.edu/entries/well-being/",
+    "title": "Well-Being",
+    "description": "\n\nThe concept of well-being is most commonly used in philosophy to\ndescribe what is non-instrumentally or ultimately good for a\nperson – what it is in their lif"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "called",
+        "id": "call"
+      },
+      {
+        "form": "pain",
+        "id": "pain"
+      },
+      {
+        "form": "satisfaction",
+        "id": "satisfaction"
+      },
+      {
+        "form": "way",
+        "id": "way"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "great",
+        "id": "great"
+      },
+      {
+        "form": "notion",
+        "id": "notion"
+      },
+      {
+        "form": "think",
+        "id": "think"
+      },
+      {
+        "form": "pleasure",
+        "id": "pleasure"
+      },
+      {
+        "form": "account",
+        "id": "account"
+      },
+      {
+        "form": "benefit",
+        "id": "benefit"
+      },
+      {
+        "form": "hedonist",
+        "id": "hedonist"
+      },
+      {
+        "form": "Scanlon",
+        "id": "scanlon"
+      },
+      {
+        "form": "different",
+        "id": "different"
+      },
+      {
+        "form": "consists",
+        "id": "consist"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.9042181506398859,
+        "source": "call",
+        "target": "notion"
+      },
+      {
+        "weight": 0.808907970835561,
+        "source": "call",
+        "target": "scanlon"
+      },
+      {
+        "weight": 1.0095786662977122,
+        "source": "call",
+        "target": "benefit"
+      },
+      {
+        "weight": 1.33500106673234,
+        "source": "call",
+        "target": "hedonist"
+      },
+      {
+        "weight": 0.7218965938459311,
+        "source": "call",
+        "target": "consist"
+      },
+      {
+        "weight": 0.8272571095037575,
+        "source": "pain",
+        "target": "account"
+      },
+      {
+        "weight": 1.1149391819555385,
+        "source": "pain",
+        "target": "benefit"
+      },
+      {
+        "weight": 2.6190165787318125,
+        "source": "pain",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.9142684864933872,
+        "source": "pain",
+        "target": "scanlon"
+      },
+      {
+        "weight": 1.0095786662977122,
+        "source": "pain",
+        "target": "way"
+      },
+      {
+        "weight": 1.925869398171867,
+        "source": "pain",
+        "target": "great"
+      },
+      {
+        "weight": 1.8568765266849157,
+        "source": "pain",
+        "target": "pleasure"
+      },
+      {
+        "weight": 1.4403615823901663,
+        "source": "pain",
+        "target": "think"
+      },
+      {
+        "weight": 1.925869398171867,
+        "source": "pain",
+        "target": "consist"
+      },
+      {
+        "weight": 1.8458266904983307,
+        "source": "pain",
+        "target": "hedonist"
+      },
+      {
+        "weight": 1.3662536102364444,
+        "source": "pain",
+        "target": "question"
+      },
+      {
+        "weight": 0.3164314857377668,
+        "source": "pain",
+        "target": "notion"
+      },
+      {
+        "weight": 1.1149391819555385,
+        "source": "pain",
+        "target": "different"
+      },
+      {
+        "weight": 1.3197335946015516,
+        "source": "satisfaction",
+        "target": "consist"
+      },
+      {
+        "weight": 1.6074156670533326,
+        "source": "satisfaction",
+        "target": "benefit"
+      },
+      {
+        "weight": 1.3197335946015516,
+        "source": "satisfaction",
+        "target": "account"
+      },
+      {
+        "weight": 0.808907970835561,
+        "source": "satisfaction",
+        "target": "way"
+      },
+      {
+        "weight": 0.5465437063680699,
+        "source": "satisfaction",
+        "target": "hedonist"
+      },
+      {
+        "weight": 0.2110709700799406,
+        "source": "way",
+        "target": "notion"
+      },
+      {
+        "weight": 1.4150437744058764,
+        "source": "way",
+        "target": "account"
+      },
+      {
+        "weight": 1.0095786662977122,
+        "source": "way",
+        "target": "benefit"
+      },
+      {
+        "weight": 2.513656063073986,
+        "source": "way",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.808907970835561,
+        "source": "way",
+        "target": "scanlon"
+      },
+      {
+        "weight": 0.6418538861723947,
+        "source": "way",
+        "target": "think"
+      },
+      {
+        "weight": 0.7218965938459311,
+        "source": "way",
+        "target": "consist"
+      },
+      {
+        "weight": 1.0095786662977122,
+        "source": "way",
+        "target": "different"
+      },
+      {
+        "weight": 0.7218965938459311,
+        "source": "way",
+        "target": "great"
+      },
+      {
+        "weight": 1.484036645892828,
+        "source": "question",
+        "target": "consist"
+      },
+      {
+        "weight": 1.0785715377846636,
+        "source": "question",
+        "target": "great"
+      },
+      {
+        "weight": 0.9985288301111273,
+        "source": "question",
+        "target": "hedonist"
+      },
+      {
+        "weight": 0.16228080591050856,
+        "source": "question",
+        "target": "pleasure"
+      },
+      {
+        "weight": 0.3053816495511819,
+        "source": "question",
+        "target": "think"
+      },
+      {
+        "weight": 0.38542435722471835,
+        "source": "question",
+        "target": "account"
+      },
+      {
+        "weight": 1.925869398171867,
+        "source": "great",
+        "target": "consist"
+      },
+      {
+        "weight": 0.7218965938459311,
+        "source": "great",
+        "target": "pleasure"
+      },
+      {
+        "weight": 1.55814461804655,
+        "source": "great",
+        "target": "think"
+      },
+      {
+        "weight": 0.45953232937844013,
+        "source": "great",
+        "target": "hedonist"
+      },
+      {
+        "weight": 1.520404290063703,
+        "source": "great",
+        "target": "different"
+      },
+      {
+        "weight": 1.9075202595036707,
+        "source": "notion",
+        "target": "scanlon"
+      },
+      {
+        "weight": 0.9295359586241757,
+        "source": "think",
+        "target": "pleasure"
+      },
+      {
+        "weight": 1.4150437744058764,
+        "source": "pleasure",
+        "target": "consist"
+      },
+      {
+        "weight": 0.6041135581895478,
+        "source": "pleasure",
+        "target": "different"
+      },
+      {
+        "weight": 1.1526795099383853,
+        "source": "pleasure",
+        "target": "hedonist"
+      },
+      {
+        "weight": 1.3197335946015516,
+        "source": "account",
+        "target": "scanlon"
+      },
+      {
+        "weight": 1.520404290063703,
+        "source": "account",
+        "target": "benefit"
+      },
+      {
+        "weight": 2.3313345062800317,
+        "source": "account",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.45953232937844013,
+        "source": "account",
+        "target": "hedonist"
+      },
+      {
+        "weight": 3.312163759291758,
+        "source": "benefit",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.9142684864933872,
+        "source": "benefit",
+        "target": "scanlon"
+      },
+      {
+        "weight": 1.1526795099383853,
+        "source": "hedonist",
+        "target": "consist"
+      },
+      {
+        "weight": 1.6074156670533326,
+        "source": "scanlon",
+        "target": "different"
+      },
+      {
+        "weight": 2.4183458832696614,
+        "source": "scanlon",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.8272571095037575,
+        "source": "different",
+        "target": "consist"
+      }
+    ]
+  }
+}

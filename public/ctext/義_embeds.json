@@ -16,175 +16,75 @@
     "graph": {},
     "nodes": [
       {
-        "community": 4,
-        "id": "見"
-      },
-      {
-        "community": 4,
+        "community": 0,
         "id": "下"
       },
       {
-        "community": 4,
-        "id": "言"
-      },
-      {
-        "community": 4,
-        "id": "事"
-      },
-      {
-        "community": 4,
-        "id": "臣"
-      },
-      {
-        "community": 4,
-        "id": "天"
-      },
-      {
-        "community": 4,
-        "id": "大"
-      },
-      {
-        "community": 4,
+        "community": 0,
         "id": "禮"
       },
       {
-        "community": 4,
+        "community": 0,
+        "id": "孝"
+      },
+      {
+        "community": 0,
         "id": "義"
       },
       {
-        "community": 4,
+        "community": 0,
         "id": "人"
       },
       {
-        "community": 4,
-        "id": "道"
-      },
-      {
-        "community": 4,
-        "id": "善"
-      },
-      {
-        "community": 4,
-        "id": "知"
-      },
-      {
-        "community": 4,
-        "id": "仁"
-      },
-      {
-        "community": 4,
+        "community": 0,
         "id": "子"
       },
       {
-        "community": 4,
-        "id": "心"
+        "community": 0,
+        "id": "弟"
+      },
+      {
+        "community": 0,
+        "id": "事"
+      },
+      {
+        "community": 0,
+        "id": "道"
+      },
+      {
+        "community": 0,
+        "id": "智"
+      },
+      {
+        "community": 0,
+        "id": "敬"
+      },
+      {
+        "community": 0,
+        "id": "利"
+      },
+      {
+        "community": 0,
+        "id": "志"
+      },
+      {
+        "community": 0,
+        "id": "信"
+      },
+      {
+        "community": 0,
+        "id": "仁"
+      },
+      {
+        "community": 0,
+        "id": "天"
       }
     ],
     "edges": [
       {
-        "weight": 0.5023033618927002,
-        "source": "見",
-        "target": "下"
-      },
-      {
-        "weight": 0.49753469228744507,
-        "source": "見",
-        "target": "事"
-      },
-      {
-        "weight": 0.5404725074768066,
-        "source": "見",
-        "target": "人"
-      },
-      {
-        "weight": 0.4307786822319031,
-        "source": "見",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5192154049873352,
-        "source": "見",
-        "target": "善"
-      },
-      {
-        "weight": 0.511417031288147,
-        "source": "見",
-        "target": "大"
-      },
-      {
-        "weight": 0.49883317947387695,
-        "source": "見",
-        "target": "天"
-      },
-      {
-        "weight": 0.49831271171569824,
-        "source": "見",
-        "target": "子"
-      },
-      {
-        "weight": 0.43160563707351685,
-        "source": "見",
-        "target": "心"
-      },
-      {
-        "weight": 0.5713832974433899,
-        "source": "見",
-        "target": "知"
-      },
-      {
-        "weight": 0.34651756286621094,
-        "source": "見",
-        "target": "禮"
-      },
-      {
-        "weight": 0.42954355478286743,
-        "source": "見",
-        "target": "義"
-      },
-      {
-        "weight": 0.4495052695274353,
-        "source": "見",
-        "target": "臣"
-      },
-      {
-        "weight": 0.5243796706199646,
-        "source": "見",
-        "target": "言"
-      },
-      {
-        "weight": 0.4218493700027466,
-        "source": "見",
-        "target": "道"
-      },
-      {
-        "weight": 0.4813941717147827,
-        "source": "下",
-        "target": "事"
-      },
-      {
         "weight": 0.6251212358474731,
         "source": "下",
         "target": "人"
-      },
-      {
-        "weight": 0.40507227182388306,
-        "source": "下",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5087019801139832,
-        "source": "下",
-        "target": "善"
-      },
-      {
-        "weight": 0.5371404886245728,
-        "source": "下",
-        "target": "大"
-      },
-      {
-        "weight": 0.5756628513336182,
-        "source": "下",
-        "target": "天"
       },
       {
         "weight": 0.6040854454040527,
@@ -192,19 +92,9 @@
         "target": "子"
       },
       {
-        "weight": 0.49423086643218994,
+        "weight": 0.5756628513336182,
         "source": "下",
-        "target": "心"
-      },
-      {
-        "weight": 0.5274050831794739,
-        "source": "下",
-        "target": "知"
-      },
-      {
-        "weight": 0.3902756869792938,
-        "source": "下",
-        "target": "禮"
+        "target": "天"
       },
       {
         "weight": 0.42993757128715515,
@@ -212,293 +102,33 @@
         "target": "義"
       },
       {
-        "weight": 0.45030754804611206,
-        "source": "下",
-        "target": "臣"
+        "weight": 0.27934300899505615,
+        "source": "禮",
+        "target": "孝"
       },
       {
-        "weight": 0.4785920977592468,
-        "source": "下",
-        "target": "言"
+        "weight": 0.40309447050094604,
+        "source": "禮",
+        "target": "敬"
       },
       {
-        "weight": 0.4661858081817627,
-        "source": "下",
-        "target": "道"
-      },
-      {
-        "weight": 0.5065449476242065,
-        "source": "言",
-        "target": "事"
-      },
-      {
-        "weight": 0.5881767868995667,
-        "source": "言",
-        "target": "人"
-      },
-      {
-        "weight": 0.41675901412963867,
-        "source": "言",
-        "target": "仁"
-      },
-      {
-        "weight": 0.553053617477417,
-        "source": "言",
-        "target": "善"
-      },
-      {
-        "weight": 0.47893619537353516,
-        "source": "言",
-        "target": "大"
-      },
-      {
-        "weight": 0.48679161071777344,
-        "source": "言",
-        "target": "天"
-      },
-      {
-        "weight": 0.5370942950248718,
-        "source": "言",
-        "target": "子"
-      },
-      {
-        "weight": 0.4978216588497162,
-        "source": "言",
-        "target": "心"
-      },
-      {
-        "weight": 0.5302098393440247,
-        "source": "言",
-        "target": "知"
-      },
-      {
-        "weight": 0.3927868604660034,
-        "source": "言",
-        "target": "禮"
-      },
-      {
-        "weight": 0.4232484698295593,
-        "source": "言",
+        "weight": 0.4917839765548706,
+        "source": "禮",
         "target": "義"
       },
       {
-        "weight": 0.4040895104408264,
-        "source": "言",
-        "target": "臣"
-      },
-      {
-        "weight": 0.5096811056137085,
-        "source": "言",
-        "target": "道"
-      },
-      {
-        "weight": 0.5442243814468384,
-        "source": "事",
-        "target": "人"
-      },
-      {
-        "weight": 0.5020845532417297,
-        "source": "事",
+        "weight": 0.47800004482269287,
+        "source": "禮",
         "target": "仁"
-      },
-      {
-        "weight": 0.48756876587867737,
-        "source": "事",
-        "target": "善"
-      },
-      {
-        "weight": 0.501324474811554,
-        "source": "事",
-        "target": "大"
-      },
-      {
-        "weight": 0.4641062021255493,
-        "source": "事",
-        "target": "天"
-      },
-      {
-        "weight": 0.5162997245788574,
-        "source": "事",
-        "target": "子"
-      },
-      {
-        "weight": 0.4891572594642639,
-        "source": "事",
-        "target": "心"
-      },
-      {
-        "weight": 0.5057674646377563,
-        "source": "事",
-        "target": "知"
       },
       {
         "weight": 0.43335771560668945,
-        "source": "事",
-        "target": "禮"
+        "source": "禮",
+        "target": "事"
       },
       {
-        "weight": 0.4485870599746704,
-        "source": "事",
-        "target": "義"
-      },
-      {
-        "weight": 0.47516265511512756,
-        "source": "事",
-        "target": "臣"
-      },
-      {
-        "weight": 0.493943989276886,
-        "source": "事",
-        "target": "道"
-      },
-      {
-        "weight": 0.4777631163597107,
-        "source": "臣",
-        "target": "人"
-      },
-      {
-        "weight": 0.4187049865722656,
-        "source": "臣",
-        "target": "仁"
-      },
-      {
-        "weight": 0.40019065141677856,
-        "source": "臣",
-        "target": "善"
-      },
-      {
-        "weight": 0.4146815538406372,
-        "source": "臣",
-        "target": "大"
-      },
-      {
-        "weight": 0.4526158571243286,
-        "source": "臣",
-        "target": "天"
-      },
-      {
-        "weight": 0.5234920978546143,
-        "source": "臣",
-        "target": "子"
-      },
-      {
-        "weight": 0.43248289823532104,
-        "source": "臣",
-        "target": "心"
-      },
-      {
-        "weight": 0.40638267993927,
-        "source": "臣",
-        "target": "知"
-      },
-      {
-        "weight": 0.35619738698005676,
-        "source": "臣",
-        "target": "禮"
-      },
-      {
-        "weight": 0.4222404658794403,
-        "source": "臣",
-        "target": "義"
-      },
-      {
-        "weight": 0.3848680853843689,
-        "source": "臣",
-        "target": "道"
-      },
-      {
-        "weight": 0.6250370740890503,
-        "source": "天",
-        "target": "人"
-      },
-      {
-        "weight": 0.47476962208747864,
-        "source": "天",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5246409177780151,
-        "source": "天",
-        "target": "善"
-      },
-      {
-        "weight": 0.6121146082878113,
-        "source": "天",
-        "target": "大"
-      },
-      {
-        "weight": 0.5838649272918701,
-        "source": "天",
-        "target": "子"
-      },
-      {
-        "weight": 0.5244863033294678,
-        "source": "天",
-        "target": "心"
-      },
-      {
-        "weight": 0.5205110311508179,
-        "source": "天",
-        "target": "知"
-      },
-      {
-        "weight": 0.3674730360507965,
-        "source": "天",
-        "target": "禮"
-      },
-      {
-        "weight": 0.4345991015434265,
-        "source": "天",
-        "target": "義"
-      },
-      {
-        "weight": 0.493042916059494,
-        "source": "天",
-        "target": "道"
-      },
-      {
-        "weight": 0.618998110294342,
-        "source": "大",
-        "target": "人"
-      },
-      {
-        "weight": 0.5293126106262207,
-        "source": "大",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5539122819900513,
-        "source": "大",
-        "target": "善"
-      },
-      {
-        "weight": 0.5585873126983643,
-        "source": "大",
-        "target": "子"
-      },
-      {
-        "weight": 0.4940815567970276,
-        "source": "大",
-        "target": "心"
-      },
-      {
-        "weight": 0.5144219398498535,
-        "source": "大",
-        "target": "知"
-      },
-      {
-        "weight": 0.39623749256134033,
-        "source": "大",
-        "target": "禮"
-      },
-      {
-        "weight": 0.42719292640686035,
-        "source": "大",
-        "target": "義"
-      },
-      {
-        "weight": 0.4717246890068054,
-        "source": "大",
+        "weight": 0.41361260414123535,
+        "source": "禮",
         "target": "道"
       },
       {
@@ -507,44 +137,24 @@
         "target": "人"
       },
       {
-        "weight": 0.47800004482269287,
-        "source": "禮",
-        "target": "仁"
-      },
-      {
-        "weight": 0.3432544469833374,
-        "source": "禮",
-        "target": "善"
-      },
-      {
         "weight": 0.4108801484107971,
         "source": "禮",
         "target": "子"
       },
       {
-        "weight": 0.38423222303390503,
-        "source": "禮",
-        "target": "心"
+        "weight": 0.3567483723163605,
+        "source": "孝",
+        "target": "敬"
       },
       {
-        "weight": 0.38775622844696045,
-        "source": "禮",
-        "target": "知"
+        "weight": 0.34780430793762207,
+        "source": "孝",
+        "target": "仁"
       },
       {
-        "weight": 0.4917839765548706,
-        "source": "禮",
+        "weight": 0.31410884857177734,
+        "source": "孝",
         "target": "義"
-      },
-      {
-        "weight": 0.41361260414123535,
-        "source": "禮",
-        "target": "道"
-      },
-      {
-        "weight": 0.45855599641799927,
-        "source": "義",
-        "target": "人"
       },
       {
         "weight": 0.5353542566299438,
@@ -552,9 +162,39 @@
         "target": "仁"
       },
       {
-        "weight": 0.42899298667907715,
+        "weight": 0.3701561689376831,
         "source": "義",
-        "target": "善"
+        "target": "信"
+      },
+      {
+        "weight": 0.33634379506111145,
+        "source": "義",
+        "target": "利"
+      },
+      {
+        "weight": 0.3038198947906494,
+        "source": "義",
+        "target": "弟"
+      },
+      {
+        "weight": 0.3803577423095703,
+        "source": "義",
+        "target": "志"
+      },
+      {
+        "weight": 0.37709158658981323,
+        "source": "義",
+        "target": "敬"
+      },
+      {
+        "weight": 0.315574049949646,
+        "source": "義",
+        "target": "智"
+      },
+      {
+        "weight": 0.45855599641799927,
+        "source": "義",
+        "target": "人"
       },
       {
         "weight": 0.45605918765068054,
@@ -562,14 +202,9 @@
         "target": "子"
       },
       {
-        "weight": 0.42519962787628174,
+        "weight": 0.4485870599746704,
         "source": "義",
-        "target": "心"
-      },
-      {
-        "weight": 0.42846786975860596,
-        "source": "義",
-        "target": "知"
+        "target": "事"
       },
       {
         "weight": 0.4366041421890259,
@@ -577,14 +212,14 @@
         "target": "道"
       },
       {
-        "weight": 0.49957579374313354,
-        "source": "人",
-        "target": "仁"
+        "weight": 0.4345991015434265,
+        "source": "義",
+        "target": "天"
       },
       {
-        "weight": 0.5870602130889893,
+        "weight": 0.5442243814468384,
         "source": "人",
-        "target": "善"
+        "target": "事"
       },
       {
         "weight": 0.659090518951416,
@@ -592,14 +227,9 @@
         "target": "子"
       },
       {
-        "weight": 0.5502501130104065,
+        "weight": 0.6250370740890503,
         "source": "人",
-        "target": "心"
-      },
-      {
-        "weight": 0.6024323105812073,
-        "source": "人",
-        "target": "知"
+        "target": "天"
       },
       {
         "weight": 0.5192790031433105,
@@ -607,79 +237,64 @@
         "target": "道"
       },
       {
-        "weight": 0.4611448049545288,
-        "source": "道",
-        "target": "仁"
+        "weight": 0.5162997245788574,
+        "source": "子",
+        "target": "事"
       },
       {
-        "weight": 0.4474506974220276,
-        "source": "道",
-        "target": "善"
+        "weight": 0.5838649272918701,
+        "source": "子",
+        "target": "天"
+      },
+      {
+        "weight": 0.2957230508327484,
+        "source": "子",
+        "target": "弟"
+      },
+      {
+        "weight": 0.3611510097980499,
+        "source": "子",
+        "target": "志"
       },
       {
         "weight": 0.49112722277641296,
-        "source": "道",
-        "target": "子"
-      },
-      {
-        "weight": 0.4982154667377472,
-        "source": "道",
-        "target": "心"
-      },
-      {
-        "weight": 0.5208405256271362,
-        "source": "道",
-        "target": "知"
-      },
-      {
-        "weight": 0.5196754932403564,
-        "source": "善",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5348789691925049,
-        "source": "善",
-        "target": "子"
-      },
-      {
-        "weight": 0.4829857349395752,
-        "source": "善",
-        "target": "心"
-      },
-      {
-        "weight": 0.5724798440933228,
-        "source": "善",
-        "target": "知"
-      },
-      {
-        "weight": 0.5142550468444824,
-        "source": "知",
-        "target": "仁"
-      },
-      {
-        "weight": 0.5352272391319275,
-        "source": "知",
-        "target": "子"
-      },
-      {
-        "weight": 0.4898183345794678,
-        "source": "知",
-        "target": "心"
-      },
-      {
-        "weight": 0.48969000577926636,
-        "source": "仁",
-        "target": "子"
-      },
-      {
-        "weight": 0.4951336085796356,
-        "source": "仁",
-        "target": "心"
-      },
-      {
-        "weight": 0.5256067514419556,
         "source": "子",
-        "target": "心"
+        "target": "道"
+      },
+      {
+        "weight": 0.295084685087204,
+        "source": "弟",
+        "target": "仁"
+      },
+      {
+        "weight": 0.37958598136901855,
+        "source": "事",
+        "target": "敬"
+      },
+      {
+        "weight": 0.493943989276886,
+        "source": "事",
+        "target": "道"
+      },
+      {
+        "weight": 0.493042916059494,
+        "source": "道",
+        "target": "天"
+      },
+      {
+        "weight": 0.35427454113960266,
+        "source": "智",
+        "target": "仁"
+      },
+      {
+        "weight": 0.35682225227355957,
+        "source": "敬",
+        "target": "仁"
+      },
+      {
+        "weight": 0.3268335461616516,
+        "source": "利",
+        "target": "仁"
       }
     ]
   }

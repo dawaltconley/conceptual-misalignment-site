@@ -1,0 +1,336 @@
+{
+  "term": {
+    "label": "humaneness",
+    "occurrences": 1,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/sidgwick/",
+    "url": "https://plato.stanford.edu/entries/sidgwick/",
+    "title": "Henry Sidgwick",
+    "description": "\n\nHenry Sidgwick was one of the most influential ethical philosophers of\nthe Victorian era, and his work continues to exert a powerful\ninfluence on Anglo-Americ"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "general",
+        "id": "general"
+      },
+      {
+        "form": "principles",
+        "id": "principle"
+      },
+      {
+        "form": "suggest",
+        "id": "suggest"
+      },
+      {
+        "form": "possible",
+        "id": "possible"
+      },
+      {
+        "form": "Moore",
+        "id": "moore"
+      },
+      {
+        "form": "problem",
+        "id": "problem"
+      },
+      {
+        "form": "involved",
+        "id": "involve"
+      },
+      {
+        "form": "believe",
+        "id": "believe"
+      },
+      {
+        "form": "humane",
+        "id": "humaneness"
+      },
+      {
+        "form": "come",
+        "id": "come"
+      },
+      {
+        "form": "point",
+        "id": "point"
+      },
+      {
+        "form": "Kantian",
+        "id": "kantian"
+      },
+      {
+        "form": "eds",
+        "id": "ed"
+      },
+      {
+        "form": "people",
+        "id": "people"
+      },
+      {
+        "form": "case",
+        "id": "case"
+      },
+      {
+        "form": "fundamental",
+        "id": "fundamental"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.7147984280919266,
+        "source": "general",
+        "target": "case"
+      },
+      {
+        "weight": 0.8675005677047231,
+        "source": "general",
+        "target": "come"
+      },
+      {
+        "weight": 0.9675840262617057,
+        "source": "general",
+        "target": "principle"
+      },
+      {
+        "weight": 0.8675005677047231,
+        "source": "general",
+        "target": "fundamental"
+      },
+      {
+        "weight": 0.9038682118755978,
+        "source": "general",
+        "target": "problem"
+      },
+      {
+        "weight": 1.2039728043259361,
+        "source": "general",
+        "target": "people"
+      },
+      {
+        "weight": 1.5271998141971284,
+        "source": "principle",
+        "target": "case"
+      },
+      {
+        "weight": 0.9675840262617057,
+        "source": "principle",
+        "target": "kantian"
+      },
+      {
+        "weight": 1.0365768977486571,
+        "source": "principle",
+        "target": "point"
+      },
+      {
+        "weight": 0.12028616587450203,
+        "source": "principle",
+        "target": "come"
+      },
+      {
+        "weight": 1.7297240783086023,
+        "source": "principle",
+        "target": "fundamental"
+      },
+      {
+        "weight": 0.12028616587450203,
+        "source": "principle",
+        "target": "possible"
+      },
+      {
+        "weight": 0.7444404749474958,
+        "source": "principle",
+        "target": "involve"
+      },
+      {
+        "weight": 0.4567584024957149,
+        "source": "principle",
+        "target": "believe"
+      },
+      {
+        "weight": 1.0545954032513354,
+        "source": "principle",
+        "target": "suggest"
+      },
+      {
+        "weight": 0.5621189181535412,
+        "source": "principle",
+        "target": "problem"
+      },
+      {
+        "weight": 2.7593434954897607,
+        "source": "principle",
+        "target": "humaneness"
+      },
+      {
+        "weight": 1.5141277326297755,
+        "source": "suggest",
+        "target": "kantian"
+      },
+      {
+        "weight": 1.7654421609106816,
+        "source": "suggest",
+        "target": "point"
+      },
+      {
+        "weight": 1.2909841813155658,
+        "source": "suggest",
+        "target": "involve"
+      },
+      {
+        "weight": 1.5141277326297755,
+        "source": "suggest",
+        "target": "case"
+      },
+      {
+        "weight": 1.69644928942373,
+        "source": "suggest",
+        "target": "believe"
+      },
+      {
+        "weight": 1.3599770528025172,
+        "source": "suggest",
+        "target": "come"
+      },
+      {
+        "weight": 1.8119621765455745,
+        "source": "possible",
+        "target": "point"
+      },
+      {
+        "weight": 0.4620354595965586,
+        "source": "possible",
+        "target": "problem"
+      },
+      {
+        "weight": 1.118814995985629,
+        "source": "possible",
+        "target": "come"
+      },
+      {
+        "weight": 1.742969305058623,
+        "source": "moore",
+        "target": "involve"
+      },
+      {
+        "weight": 1.8483298207164491,
+        "source": "moore",
+        "target": "problem"
+      },
+      {
+        "weight": 0.616186139423817,
+        "source": "problem",
+        "target": "kantian"
+      },
+      {
+        "weight": 2.0714733720306593,
+        "source": "problem",
+        "target": "fundamental"
+      },
+      {
+        "weight": 0.4620354595965586,
+        "source": "problem",
+        "target": "point"
+      },
+      {
+        "weight": 1.0216512475319812,
+        "source": "problem",
+        "target": "case"
+      },
+      {
+        "weight": 1.0861897686695525,
+        "source": "problem",
+        "target": "involve"
+      },
+      {
+        "weight": 3.101092789211817,
+        "source": "problem",
+        "target": "humaneness"
+      },
+      {
+        "weight": 0.3566749439387324,
+        "source": "involve",
+        "target": "point"
+      },
+      {
+        "weight": 1.742969305058623,
+        "source": "involve",
+        "target": "fundamental"
+      },
+      {
+        "weight": 1.6094379124341003,
+        "source": "involve",
+        "target": "case"
+      },
+      {
+        "weight": 2.0149030205422647,
+        "source": "believe",
+        "target": "case"
+      },
+      {
+        "weight": 1.455287232606842,
+        "source": "believe",
+        "target": "point"
+      },
+      {
+        "weight": 3.2188758248682006,
+        "source": "humaneness",
+        "target": "case"
+      },
+      {
+        "weight": 3.0647251450409425,
+        "source": "humaneness",
+        "target": "point"
+      },
+      {
+        "weight": 1.118814995985629,
+        "source": "come",
+        "target": "fundamental"
+      },
+      {
+        "weight": 1.6784307839210517,
+        "source": "come",
+        "target": "case"
+      },
+      {
+        "weight": 0.42566781542568377,
+        "source": "come",
+        "target": "point"
+      },
+      {
+        "weight": 1.6784307839210517,
+        "source": "point",
+        "target": "kantian"
+      },
+      {
+        "weight": 1.8119621765455745,
+        "source": "point",
+        "target": "ed"
+      },
+      {
+        "weight": 0.5798184952529422,
+        "source": "point",
+        "target": "case"
+      },
+      {
+        "weight": 1.2729656758128876,
+        "source": "kantian",
+        "target": "fundamental"
+      },
+      {
+        "weight": 1.6094379124341003,
+        "source": "people",
+        "target": "case"
+      },
+      {
+        "weight": 1.2729656758128876,
+        "source": "case",
+        "target": "fundamental"
+      }
+    ]
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 86,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/justice-distributive/",
+    "url": "https://plato.stanford.edu/entries/justice-distributive/",
+    "title": "Distributive Justice",
+    "description": "\n\nThe economic, political, and social frameworks that each society \nhas—its laws, institutions, policies, etc.—result in\ndifferent distributions of benefits and"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "holdings",
+        "id": "holding"
+      },
+      {
+        "form": "called",
+        "id": "call"
+      },
+      {
+        "form": "ideal",
+        "id": "ideal"
+      },
+      {
+        "form": "practical",
+        "id": "practical"
+      },
+      {
+        "form": "role",
+        "id": "role"
+      },
+      {
+        "form": "government",
+        "id": "government"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "considered",
+        "id": "consider"
+      },
+      {
+        "form": "arguments",
+        "id": "argument"
+      },
+      {
+        "form": "believe",
+        "id": "believe"
+      },
+      {
+        "form": "guidance",
+        "id": "guidance"
+      },
+      {
+        "form": "acquisition",
+        "id": "acquisition"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
+      },
+      {
+        "form": "population",
+        "id": "population"
+      },
+      {
+        "form": "entitled",
+        "id": "entitle"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.990398704027877,
+        "source": "holding",
+        "target": "justice"
+      },
+      {
+        "weight": 2.061982320308067,
+        "source": "holding",
+        "target": "acquisition"
+      },
+      {
+        "weight": 3.111804444806745,
+        "source": "holding",
+        "target": "entitle"
+      },
+      {
+        "weight": 1.4741956554059483,
+        "source": "holding",
+        "target": "guidance"
+      },
+      {
+        "weight": 1.0545860399116191,
+        "source": "call",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "call",
+        "target": "justice"
+      },
+      {
+        "weight": 1.2947271675944,
+        "source": "call",
+        "target": "role"
+      },
+      {
+        "weight": 2.4674474284162318,
+        "source": "call",
+        "target": "government"
+      },
+      {
+        "weight": 1.2257342961074487,
+        "source": "call",
+        "target": "argument"
+      },
+      {
+        "weight": 0.8735137025180967,
+        "source": "call",
+        "target": "theory"
+      },
+      {
+        "weight": 1.631199404215613,
+        "source": "call",
+        "target": "practical"
+      },
+      {
+        "weight": 1.2369075967055738,
+        "source": "ideal",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.5358892244112883,
+        "source": "ideal",
+        "target": "consider"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "ideal",
+        "target": "justice"
+      },
+      {
+        "weight": 1.4488778474216586,
+        "source": "ideal",
+        "target": "believe"
+      },
+      {
+        "weight": 1.1611957749698776,
+        "source": "ideal",
+        "target": "theory"
+      },
+      {
+        "weight": 1.7365599198734394,
+        "source": "ideal",
+        "target": "guidance"
+      },
+      {
+        "weight": 1.2947271675944,
+        "source": "ideal",
+        "target": "role"
+      },
+      {
+        "weight": 0.8314424885974095,
+        "source": "practical",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.7365599198734394,
+        "source": "practical",
+        "target": "guidance"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "practical",
+        "target": "justice"
+      },
+      {
+        "weight": 1.566660883078042,
+        "source": "practical",
+        "target": "theory"
+      },
+      {
+        "weight": 1.5358892244112883,
+        "source": "practical",
+        "target": "consider"
+      },
+      {
+        "weight": 1.368835139748122,
+        "source": "practical",
+        "target": "government"
+      },
+      {
+        "weight": 1.2947271675944,
+        "source": "practical",
+        "target": "role"
+      },
+      {
+        "weight": 1.3059004681925253,
+        "source": "role",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9162907318741551,
+        "source": "role",
+        "target": "justice"
+      },
+      {
+        "weight": 0.8892620594862357,
+        "source": "role",
+        "target": "argument"
+      },
+      {
+        "weight": 1.7255100836868542,
+        "source": "role",
+        "target": "government"
+      },
+      {
+        "weight": 1.8055527913603908,
+        "source": "role",
+        "target": "believe"
+      },
+      {
+        "weight": 0.13157635778871926,
+        "source": "role",
+        "target": "theory"
+      },
+      {
+        "weight": 0.7922217754441282,
+        "source": "government",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.990398704027877,
+        "source": "government",
+        "target": "justice"
+      },
+      {
+        "weight": 0.9633700316399576,
+        "source": "government",
+        "target": "argument"
+      },
+      {
+        "weight": 2.1673428359658935,
+        "source": "government",
+        "target": "population"
+      },
+      {
+        "weight": 0.20568432994244112,
+        "source": "government",
+        "target": "theory"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "justice",
+        "target": "argument"
+      },
+      {
+        "weight": 1.446257825887448,
+        "source": "justice",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9343092373768334,
+        "source": "justice",
+        "target": "consider"
+      },
+      {
+        "weight": 1.3581234841531944,
+        "source": "justice",
+        "target": "guidance"
+      },
+      {
+        "weight": 0.8472978603872037,
+        "source": "justice",
+        "target": "believe"
+      },
+      {
+        "weight": 0.8780695190539572,
+        "source": "justice",
+        "target": "theory"
+      },
+      {
+        "weight": 1.1349799328389845,
+        "source": "justice",
+        "target": "population"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "justice",
+        "target": "acquisition"
+      },
+      {
+        "weight": 1.0986122886681098,
+        "source": "justice",
+        "target": "entitle"
+      },
+      {
+        "weight": 0.9592758601072945,
+        "source": "consider",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.6412497400691146,
+        "source": "consider",
+        "target": "guidance"
+      },
+      {
+        "weight": 0.42597738048924516,
+        "source": "argument",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.331094811765275,
+        "source": "argument",
+        "target": "guidance"
+      },
+      {
+        "weight": 1.331094811765275,
+        "source": "argument",
+        "target": "population"
+      },
+      {
+        "weight": 0.3614388593516739,
+        "source": "believe",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.2857270376159776,
+        "source": "believe",
+        "target": "theory"
+      },
+      {
+        "weight": 1.5542383630794847,
+        "source": "believe",
+        "target": "population"
+      },
+      {
+        "weight": 1.3422681123634002,
+        "source": "guidance",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9788742181759229,
+        "source": "guidance",
+        "target": "theory"
+      },
+      {
+        "weight": 1.9878743481543455,
+        "source": "acquisition",
+        "target": "entitle"
+      },
+      {
+        "weight": 0.46804859440993224,
+        "source": "acquisition",
+        "target": "theory"
+      },
+      {
+        "weight": 0.3614388593516739,
+        "source": "theory",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.9368030042552359,
+        "source": "population",
+        "target": "distributive"
+      }
+    ]
+  }
+}

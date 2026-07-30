@@ -1,0 +1,271 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 270,
+    "variants": []
+  },
+  "source": {
+    "id": "sep",
+    "url": "https://plato.stanford.edu/",
+    "title": "SEP (combined)",
+    "description": "Combined SEP corpus for the English renderings of 仁 / 義"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "community": 4,
+        "id": "beneficence"
+      },
+      {
+        "community": 6,
+        "id": "harm"
+      },
+      {
+        "community": 6,
+        "id": "principle"
+      },
+      {
+        "community": 6,
+        "id": "virtue"
+      },
+      {
+        "community": 6,
+        "id": "duty"
+      },
+      {
+        "community": 6,
+        "id": "bad"
+      },
+      {
+        "community": 6,
+        "id": "beneficiary"
+      },
+      {
+        "community": 6,
+        "id": "benefit"
+      },
+      {
+        "community": 0,
+        "id": "flourish"
+      },
+      {
+        "community": 6,
+        "id": "morality"
+      },
+      {
+        "community": 6,
+        "id": "human"
+      },
+      {
+        "community": 3,
+        "id": "moral"
+      },
+      {
+        "community": 6,
+        "id": "theory"
+      },
+      {
+        "community": 6,
+        "id": "virtuous"
+      },
+      {
+        "community": 6,
+        "id": "good"
+      },
+      {
+        "community": 6,
+        "id": "benevolence"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.3700372576713562,
+        "source": "beneficence",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.4909011125564575,
+        "source": "harm",
+        "target": "beneficiary"
+      },
+      {
+        "weight": 0.7472677230834961,
+        "source": "harm",
+        "target": "benefit"
+      },
+      {
+        "weight": 0.5331627726554871,
+        "source": "harm",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7556763291358948,
+        "source": "harm",
+        "target": "good"
+      },
+      {
+        "weight": 0.7032318115234375,
+        "source": "harm",
+        "target": "principle"
+      },
+      {
+        "weight": 0.7224685549736023,
+        "source": "principle",
+        "target": "benefit"
+      },
+      {
+        "weight": 0.5132628083229065,
+        "source": "principle",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7229240536689758,
+        "source": "principle",
+        "target": "duty"
+      },
+      {
+        "weight": 0.7696545720100403,
+        "source": "principle",
+        "target": "moral"
+      },
+      {
+        "weight": 0.6731772422790527,
+        "source": "principle",
+        "target": "morality"
+      },
+      {
+        "weight": 0.8140465021133423,
+        "source": "principle",
+        "target": "theory"
+      },
+      {
+        "weight": 0.7869100570678711,
+        "source": "principle",
+        "target": "virtue"
+      },
+      {
+        "weight": 0.521765947341919,
+        "source": "virtue",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7287455797195435,
+        "source": "virtue",
+        "target": "duty"
+      },
+      {
+        "weight": 0.6353282928466797,
+        "source": "virtue",
+        "target": "morality"
+      },
+      {
+        "weight": 0.7823576927185059,
+        "source": "virtue",
+        "target": "good"
+      },
+      {
+        "weight": 0.6234450340270996,
+        "source": "virtue",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.5043132305145264,
+        "source": "duty",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7232750058174133,
+        "source": "duty",
+        "target": "good"
+      },
+      {
+        "weight": 0.6105559468269348,
+        "source": "duty",
+        "target": "morality"
+      },
+      {
+        "weight": 0.5522068738937378,
+        "source": "duty",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.7996031641960144,
+        "source": "bad",
+        "target": "good"
+      },
+      {
+        "weight": 0.5139321088790894,
+        "source": "bad",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.5804883241653442,
+        "source": "beneficiary",
+        "target": "benefit"
+      },
+      {
+        "weight": 0.49115490913391113,
+        "source": "beneficiary",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7035509347915649,
+        "source": "benefit",
+        "target": "good"
+      },
+      {
+        "weight": 0.5185420513153076,
+        "source": "benefit",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.296813428401947,
+        "source": "flourish",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7765703201293945,
+        "source": "morality",
+        "target": "moral"
+      },
+      {
+        "weight": 0.6459015607833862,
+        "source": "morality",
+        "target": "theory"
+      },
+      {
+        "weight": 0.749532163143158,
+        "source": "human",
+        "target": "good"
+      },
+      {
+        "weight": 0.7433937191963196,
+        "source": "human",
+        "target": "moral"
+      },
+      {
+        "weight": 0.5482974052429199,
+        "source": "moral",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7380709648132324,
+        "source": "moral",
+        "target": "good"
+      },
+      {
+        "weight": 0.5355639457702637,
+        "source": "moral",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.5197712182998657,
+        "source": "virtuous",
+        "target": "benevolence"
+      }
+    ]
+  }
+}

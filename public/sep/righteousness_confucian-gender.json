@@ -1,0 +1,486 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 4,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/confucian-gender/",
+    "url": "https://plato.stanford.edu/entries/confucian-gender/",
+    "title": "Gender in Confucian Philosophy",
+    "description": "\n\nThe study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. In"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "follow",
+        "id": "follow"
+      },
+      {
+        "form": "way",
+        "id": "way"
+      },
+      {
+        "form": "nei",
+        "id": "nei"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "son",
+        "id": "son"
+      },
+      {
+        "form": "husband",
+        "id": "husband"
+      },
+      {
+        "form": "great",
+        "id": "great"
+      },
+      {
+        "form": "women",
+        "id": "woman"
+      },
+      {
+        "form": "men",
+        "id": "man"
+      },
+      {
+        "form": "father",
+        "id": "father"
+      },
+      {
+        "form": "wife",
+        "id": "wife"
+      },
+      {
+        "form": "wai",
+        "id": "wai"
+      },
+      {
+        "form": "texts",
+        "id": "text"
+      },
+      {
+        "form": "world",
+        "id": "world"
+      },
+      {
+        "form": "family",
+        "id": "family"
+      },
+      {
+        "form": "chapter",
+        "id": "chapter"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.05500662951221158,
+        "source": "follow",
+        "target": "nei"
+      },
+      {
+        "weight": 0.2626459942904561,
+        "source": "follow",
+        "target": "wai"
+      },
+      {
+        "weight": 2.4221302436438283,
+        "source": "follow",
+        "target": "husband"
+      },
+      {
+        "weight": 1.2871503108048439,
+        "source": "follow",
+        "target": "wife"
+      },
+      {
+        "weight": 0.11954515064978273,
+        "source": "follow",
+        "target": "man"
+      },
+      {
+        "weight": 0.1121650433521602,
+        "source": "follow",
+        "target": "woman"
+      },
+      {
+        "weight": 2.316769727986002,
+        "source": "follow",
+        "target": "father"
+      },
+      {
+        "weight": 2.5399132793002117,
+        "source": "follow",
+        "target": "son"
+      },
+      {
+        "weight": 0.21962860920676536,
+        "source": "way",
+        "target": "man"
+      },
+      {
+        "weight": 0.4129191973712939,
+        "source": "way",
+        "target": "woman"
+      },
+      {
+        "weight": 0.2535301608824467,
+        "source": "way",
+        "target": "family"
+      },
+      {
+        "weight": 0.6250937173149297,
+        "source": "way",
+        "target": "father"
+      },
+      {
+        "weight": 1.318240897874875,
+        "source": "way",
+        "target": "great"
+      },
+      {
+        "weight": 0.03730705241281061,
+        "source": "way",
+        "target": "husband"
+      },
+      {
+        "weight": 1.541384449189085,
+        "source": "way",
+        "target": "righteousness"
+      },
+      {
+        "weight": 0.44277216052097507,
+        "source": "way",
+        "target": "son"
+      },
+      {
+        "weight": 0.6250937173149297,
+        "source": "way",
+        "target": "world"
+      },
+      {
+        "weight": 0.3627294528474385,
+        "source": "way",
+        "target": "text"
+      },
+      {
+        "weight": 0.49683938179125087,
+        "source": "nei",
+        "target": "man"
+      },
+      {
+        "weight": 1.8338626939043587,
+        "source": "nei",
+        "target": "wai"
+      },
+      {
+        "weight": 0.22375610876062252,
+        "source": "nei",
+        "target": "woman"
+      },
+      {
+        "weight": 0.05500662951221158,
+        "source": "nei",
+        "target": "wife"
+      },
+      {
+        "weight": 0.39147886613342453,
+        "source": "nei",
+        "target": "great"
+      },
+      {
+        "weight": 0.6146224174476342,
+        "source": "nei",
+        "target": "righteousness"
+      },
+      {
+        "weight": 0.20915730933946983,
+        "source": "nei",
+        "target": "son"
+      },
+      {
+        "weight": 2.69406395912747,
+        "source": "righteousness",
+        "target": "husband"
+      },
+      {
+        "weight": 1.3723081191451507,
+        "source": "righteousness",
+        "target": "man"
+      },
+      {
+        "weight": 2.252231206848431,
+        "source": "righteousness",
+        "target": "wife"
+      },
+      {
+        "weight": 0.2663157231794185,
+        "source": "righteousness",
+        "target": "woman"
+      },
+      {
+        "weight": 2.8763855159214247,
+        "source": "righteousness",
+        "target": "father"
+      },
+      {
+        "weight": 2.69406395912747,
+        "source": "righteousness",
+        "target": "son"
+      },
+      {
+        "weight": 1.1185275983690512,
+        "source": "righteousness",
+        "target": "family"
+      },
+      {
+        "weight": 2.8763855159214247,
+        "source": "righteousness",
+        "target": "great"
+      },
+      {
+        "weight": 0.8222617822258788,
+        "source": "righteousness",
+        "target": "wai"
+      },
+      {
+        "weight": 1.08462604669337,
+        "source": "righteousness",
+        "target": "world"
+      },
+      {
+        "weight": 1.541384449189085,
+        "source": "righteousness",
+        "target": "chapter"
+      },
+      {
+        "weight": 1.227726890334043,
+        "source": "righteousness",
+        "target": "text"
+      },
+      {
+        "weight": 3.164067588373206,
+        "source": "son",
+        "target": "father"
+      },
+      {
+        "weight": 0.6791609385852054,
+        "source": "son",
+        "target": "man"
+      },
+      {
+        "weight": 0.2663157231794185,
+        "source": "son",
+        "target": "woman"
+      },
+      {
+        "weight": 2.106277294225351,
+        "source": "son",
+        "target": "husband"
+      },
+      {
+        "weight": 1.1536189181803214,
+        "source": "son",
+        "target": "wife"
+      },
+      {
+        "weight": 1.1185275983690512,
+        "source": "son",
+        "target": "family"
+      },
+      {
+        "weight": 2.4709204078132605,
+        "source": "son",
+        "target": "great"
+      },
+      {
+        "weight": 0.4167966741177143,
+        "source": "son",
+        "target": "wai"
+      },
+      {
+        "weight": 0.1291146016659334,
+        "source": "son",
+        "target": "text"
+      },
+      {
+        "weight": 0.3075973821527223,
+        "source": "husband",
+        "target": "family"
+      },
+      {
+        "weight": 0.1485326875230351,
+        "source": "husband",
+        "target": "woman"
+      },
+      {
+        "weight": 0.561377902928822,
+        "source": "husband",
+        "target": "man"
+      },
+      {
+        "weight": 2.1344481711920475,
+        "source": "husband",
+        "target": "wife"
+      },
+      {
+        "weight": 2.2885988510193056,
+        "source": "husband",
+        "target": "father"
+      },
+      {
+        "weight": 1.3723081191451507,
+        "source": "husband",
+        "target": "great"
+      },
+      {
+        "weight": 0.2736958304770411,
+        "source": "husband",
+        "target": "world"
+      },
+      {
+        "weight": 0.03730705241281061,
+        "source": "husband",
+        "target": "chapter"
+      },
+      {
+        "weight": 1.993996335722951,
+        "source": "great",
+        "target": "family"
+      },
+      {
+        "weight": 2.653241964607215,
+        "source": "great",
+        "target": "father"
+      },
+      {
+        "weight": 0.4560173872709956,
+        "source": "great",
+        "target": "man"
+      },
+      {
+        "weight": 0.5991182309116689,
+        "source": "great",
+        "target": "wai"
+      },
+      {
+        "weight": 0.9304753668661114,
+        "source": "great",
+        "target": "wife"
+      },
+      {
+        "weight": 1.5546296759391054,
+        "source": "great",
+        "target": "world"
+      },
+      {
+        "weight": 1.318240897874875,
+        "source": "great",
+        "target": "chapter"
+      },
+      {
+        "weight": 0.8663724806733518,
+        "source": "woman",
+        "target": "man"
+      },
+      {
+        "weight": 0.1291146016659334,
+        "source": "woman",
+        "target": "wai"
+      },
+      {
+        "weight": 0.5917381236140464,
+        "source": "woman",
+        "target": "text"
+      },
+      {
+        "weight": 0.3308542443169896,
+        "source": "woman",
+        "target": "world"
+      },
+      {
+        "weight": 0.04317217186520878,
+        "source": "woman",
+        "target": "father"
+      },
+      {
+        "weight": 0.7997889263738202,
+        "source": "man",
+        "target": "wai"
+      },
+      {
+        "weight": 0.5250102587579472,
+        "source": "man",
+        "target": "wife"
+      },
+      {
+        "weight": 0.4560173872709956,
+        "source": "man",
+        "target": "father"
+      },
+      {
+        "weight": 1.3359404749742758,
+        "source": "father",
+        "target": "wife"
+      },
+      {
+        "weight": 0.8953840470548413,
+        "source": "father",
+        "target": "family"
+      },
+      {
+        "weight": 0.16833531481921474,
+        "source": "father",
+        "target": "world"
+      },
+      {
+        "weight": 1.2520589909935738,
+        "source": "wife",
+        "target": "family"
+      },
+      {
+        "weight": 0.23732818630616614,
+        "source": "wife",
+        "target": "world"
+      },
+      {
+        "weight": 0.6940865888018812,
+        "source": "wife",
+        "target": "chapter"
+      },
+      {
+        "weight": 0.34533771013556946,
+        "source": "text",
+        "target": "family"
+      },
+      {
+        "weight": 0.7681945609556031,
+        "source": "text",
+        "target": "chapter"
+      },
+      {
+        "weight": 1.3008491551630057,
+        "source": "world",
+        "target": "family"
+      },
+      {
+        "weight": 0.21962860920676536,
+        "source": "world",
+        "target": "chapter"
+      },
+      {
+        "weight": 0.2535301608824467,
+        "source": "family",
+        "target": "chapter"
+      }
+    ]
+  }
+}
