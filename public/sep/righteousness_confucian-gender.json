@@ -16,12 +16,32 @@
     "graph": {},
     "nodes": [
       {
+        "form": "chapter",
+        "id": "chapter"
+      },
+      {
+        "form": "family",
+        "id": "family"
+      },
+      {
+        "form": "father",
+        "id": "father"
+      },
+      {
         "form": "follow",
         "id": "follow"
       },
       {
-        "form": "way",
-        "id": "way"
+        "form": "great",
+        "id": "great"
+      },
+      {
+        "form": "husband",
+        "id": "husband"
+      },
+      {
+        "form": "men",
+        "id": "man"
       },
       {
         "form": "nei",
@@ -36,48 +56,28 @@
         "id": "son"
       },
       {
-        "form": "husband",
-        "id": "husband"
-      },
-      {
-        "form": "great",
-        "id": "great"
-      },
-      {
-        "form": "women",
-        "id": "woman"
-      },
-      {
-        "form": "men",
-        "id": "man"
-      },
-      {
-        "form": "father",
-        "id": "father"
-      },
-      {
-        "form": "wife",
-        "id": "wife"
+        "form": "texts",
+        "id": "text"
       },
       {
         "form": "wai",
         "id": "wai"
       },
       {
-        "form": "texts",
-        "id": "text"
+        "form": "way",
+        "id": "way"
+      },
+      {
+        "form": "wife",
+        "id": "wife"
+      },
+      {
+        "form": "women",
+        "id": "woman"
       },
       {
         "form": "world",
         "id": "world"
-      },
-      {
-        "form": "family",
-        "id": "family"
-      },
-      {
-        "form": "chapter",
-        "id": "chapter"
       }
     ],
     "edges": [

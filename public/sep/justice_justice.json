@@ -16,44 +16,28 @@
     "graph": {},
     "nodes": [
       {
-        "form": "ideal",
-        "id": "ideal"
-      },
-      {
-        "form": "matter",
-        "id": "matter"
-      },
-      {
-        "form": "scope",
-        "id": "scope"
-      },
-      {
-        "form": "demands",
-        "id": "demand"
-      },
-      {
-        "form": "Hume",
-        "id": "hume"
-      },
-      {
-        "form": "virtue",
-        "id": "virtue"
-      },
-      {
-        "form": "large",
-        "id": "large"
-      },
-      {
-        "form": "understood",
-        "id": "understand"
+        "form": "Alice",
+        "id": "alice"
       },
       {
         "form": "behaviour",
         "id": "behaviour"
       },
       {
-        "form": "justice",
-        "id": "justice"
+        "form": "contrast",
+        "id": "contrast"
+      },
+      {
+        "form": "corrective",
+        "id": "corrective"
+      },
+      {
+        "form": "demands",
+        "id": "demand"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
       },
       {
         "form": "existing",
@@ -64,20 +48,36 @@
         "id": "hand"
       },
       {
-        "form": "Alice",
-        "id": "alice"
+        "form": "Hume",
+        "id": "hume"
       },
       {
-        "form": "corrective",
-        "id": "corrective"
+        "form": "ideal",
+        "id": "ideal"
       },
       {
-        "form": "contrast",
-        "id": "contrast"
+        "form": "justice",
+        "id": "justice"
       },
       {
-        "form": "distributive",
-        "id": "distributive"
+        "form": "large",
+        "id": "large"
+      },
+      {
+        "form": "matter",
+        "id": "matter"
+      },
+      {
+        "form": "scope",
+        "id": "scope"
+      },
+      {
+        "form": "understood",
+        "id": "understand"
+      },
+      {
+        "form": "virtue",
+        "id": "virtue"
       }
     ],
     "edges": [

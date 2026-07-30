@@ -16,28 +16,12 @@
     "graph": {},
     "nodes": [
       {
-        "community": 4,
-        "id": "beneficence"
-      },
-      {
-        "community": 6,
-        "id": "harm"
-      },
-      {
-        "community": 6,
-        "id": "principle"
-      },
-      {
-        "community": 6,
-        "id": "virtue"
-      },
-      {
-        "community": 6,
-        "id": "duty"
-      },
-      {
         "community": 6,
         "id": "bad"
+      },
+      {
+        "community": 4,
+        "id": "beneficence"
       },
       {
         "community": 6,
@@ -48,12 +32,24 @@
         "id": "benefit"
       },
       {
+        "community": 6,
+        "id": "benevolence"
+      },
+      {
+        "community": 6,
+        "id": "duty"
+      },
+      {
         "community": 0,
         "id": "flourish"
       },
       {
         "community": 6,
-        "id": "morality"
+        "id": "good"
+      },
+      {
+        "community": 6,
+        "id": "harm"
       },
       {
         "community": 6,
@@ -65,19 +61,23 @@
       },
       {
         "community": 6,
+        "id": "morality"
+      },
+      {
+        "community": 6,
+        "id": "principle"
+      },
+      {
+        "community": 6,
         "id": "theory"
       },
       {
         "community": 6,
+        "id": "virtue"
+      },
+      {
+        "community": 6,
         "id": "virtuous"
-      },
-      {
-        "community": 6,
-        "id": "good"
-      },
-      {
-        "community": 6,
-        "id": "benevolence"
       }
     ],
     "edges": [

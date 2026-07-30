@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "demands",
-        "id": "demand"
-      },
-      {
-        "form": "question",
-        "id": "question"
+        "form": "account",
+        "id": "account"
       },
       {
         "form": "case",
         "id": "case"
       },
       {
-        "form": "problem",
-        "id": "problem"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "account",
-        "id": "account"
-      },
-      {
         "form": "central",
         "id": "central"
-      },
-      {
-        "form": "inequalities",
-        "id": "inequality"
-      },
-      {
-        "form": "failure",
-        "id": "failure"
-      },
-      {
-        "form": "context",
-        "id": "context"
-      },
-      {
-        "form": "theories",
-        "id": "theory"
-      },
-      {
-        "form": "opportunities",
-        "id": "opportunity"
       },
       {
         "form": "claims",
         "id": "claim"
       },
       {
-        "form": "entry",
-        "id": "entry"
+        "form": "context",
+        "id": "context"
+      },
+      {
+        "form": "demands",
+        "id": "demand"
       },
       {
         "form": "distributive",
         "id": "distributive"
       },
       {
+        "form": "entry",
+        "id": "entry"
+      },
+      {
+        "form": "failure",
+        "id": "failure"
+      },
+      {
         "form": "forms",
         "id": "form"
+      },
+      {
+        "form": "inequalities",
+        "id": "inequality"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "opportunities",
+        "id": "opportunity"
+      },
+      {
+        "form": "problem",
+        "id": "problem"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "theories",
+        "id": "theory"
       }
     ],
     "edges": [

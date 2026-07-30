@@ -21,15 +21,7 @@
       },
       {
         "community": 0,
-        "id": "禮"
-      },
-      {
-        "community": 0,
-        "id": "孝"
-      },
-      {
-        "community": 0,
-        "id": "義"
+        "id": "事"
       },
       {
         "community": 0,
@@ -37,35 +29,7 @@
       },
       {
         "community": 0,
-        "id": "子"
-      },
-      {
-        "community": 0,
-        "id": "弟"
-      },
-      {
-        "community": 0,
-        "id": "事"
-      },
-      {
-        "community": 0,
-        "id": "道"
-      },
-      {
-        "community": 0,
-        "id": "智"
-      },
-      {
-        "community": 0,
-        "id": "敬"
-      },
-      {
-        "community": 0,
-        "id": "利"
-      },
-      {
-        "community": 0,
-        "id": "志"
+        "id": "仁"
       },
       {
         "community": 0,
@@ -73,11 +37,47 @@
       },
       {
         "community": 0,
-        "id": "仁"
+        "id": "利"
       },
       {
         "community": 0,
         "id": "天"
+      },
+      {
+        "community": 0,
+        "id": "子"
+      },
+      {
+        "community": 0,
+        "id": "孝"
+      },
+      {
+        "community": 0,
+        "id": "弟"
+      },
+      {
+        "community": 0,
+        "id": "志"
+      },
+      {
+        "community": 0,
+        "id": "敬"
+      },
+      {
+        "community": 0,
+        "id": "智"
+      },
+      {
+        "community": 0,
+        "id": "禮"
+      },
+      {
+        "community": 0,
+        "id": "義"
+      },
+      {
+        "community": 0,
+        "id": "道"
       }
     ],
     "edges": [

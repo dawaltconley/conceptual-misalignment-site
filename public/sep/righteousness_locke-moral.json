@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "degree",
-        "id": "degree"
+        "form": "acting",
+        "id": "act"
       },
       {
-        "form": "righteousness",
-        "id": "righteousness"
+        "form": "degree",
+        "id": "degree"
       },
       {
         "form": "distinct",
         "id": "distinct"
       },
       {
-        "form": "understood",
-        "id": "understand"
-      },
-      {
-        "form": "hedonistic",
-        "id": "hedonistic"
-      },
-      {
         "form": "divine",
         "id": "divine"
-      },
-      {
-        "form": "rewards",
-        "id": "reward"
-      },
-      {
-        "form": "motivated",
-        "id": "motivate"
-      },
-      {
-        "form": "morality",
-        "id": "morality"
-      },
-      {
-        "form": "acting",
-        "id": "act"
-      },
-      {
-        "form": "human",
-        "id": "human"
-      },
-      {
-        "form": "philosophy",
-        "id": "philosophy"
       },
       {
         "form": "fact",
         "id": "fact"
       },
       {
+        "form": "hedonistic",
+        "id": "hedonistic"
+      },
+      {
+        "form": "human",
+        "id": "human"
+      },
+      {
+        "form": "morality",
+        "id": "morality"
+      },
+      {
+        "form": "motivated",
+        "id": "motivate"
+      },
+      {
+        "form": "motivation",
+        "id": "motivation"
+      },
+      {
         "form": "people",
         "id": "people"
+      },
+      {
+        "form": "philosophy",
+        "id": "philosophy"
       },
       {
         "form": "punishments",
         "id": "punishment"
       },
       {
-        "form": "motivation",
-        "id": "motivation"
+        "form": "rewards",
+        "id": "reward"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "understood",
+        "id": "understand"
       }
     ],
     "edges": [

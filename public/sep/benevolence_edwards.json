@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "general",
-        "id": "general"
-      },
-      {
-        "form": "true",
-        "id": "true"
-      },
-      {
-        "form": "delight",
-        "id": "delight"
-      },
-      {
-        "form": "things",
-        "id": "thing"
-      },
-      {
-        "form": "holiness",
-        "id": "holiness"
-      },
-      {
-        "form": "Virtue",
-        "id": "virtue"
-      },
-      {
         "form": "beauty",
         "id": "beauty"
-      },
-      {
-        "form": "spiritual",
-        "id": "spiritual"
-      },
-      {
-        "form": "ideas",
-        "id": "idea"
-      },
-      {
-        "form": "nature",
-        "id": "nature"
       },
       {
         "form": "benevolence",
         "id": "benevolence"
       },
       {
-        "form": "properties",
-        "id": "property"
-      },
-      {
         "form": "consists",
         "id": "consist"
+      },
+      {
+        "form": "delight",
+        "id": "delight"
+      },
+      {
+        "form": "general",
+        "id": "general"
       },
       {
         "form": "best",
         "id": "good"
       },
       {
-        "form": "self",
-        "id": "self"
+        "form": "holiness",
+        "id": "holiness"
+      },
+      {
+        "form": "ideas",
+        "id": "idea"
       },
       {
         "form": "love",
         "id": "love"
+      },
+      {
+        "form": "nature",
+        "id": "nature"
+      },
+      {
+        "form": "properties",
+        "id": "property"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "spiritual",
+        "id": "spiritual"
+      },
+      {
+        "form": "things",
+        "id": "thing"
+      },
+      {
+        "form": "true",
+        "id": "true"
+      },
+      {
+        "form": "Virtue",
+        "id": "virtue"
       }
     ],
     "edges": [

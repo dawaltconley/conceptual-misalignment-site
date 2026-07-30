@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "pain",
-        "id": "pain"
-      },
-      {
-        "form": "feel",
-        "id": "feel"
-      },
-      {
-        "form": "indirect",
-        "id": "indirect"
-      },
-      {
-        "form": "desire",
-        "id": "desire"
-      },
-      {
-        "form": "situation",
-        "id": "situation"
-      },
-      {
-        "form": "direct",
-        "id": "direct"
-      },
-      {
         "form": "act",
         "id": "act"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
       },
       {
         "form": "concerning",
         "id": "concern"
       },
       {
+        "form": "desire",
+        "id": "desire"
+      },
+      {
+        "form": "direct",
+        "id": "direct"
+      },
+      {
         "form": "distinctions",
         "id": "distinction"
       },
       {
-        "form": "Philo",
-        "id": "philo"
+        "form": "feel",
+        "id": "feel"
       },
       {
         "form": "given",
         "id": "give"
       },
       {
-        "form": "instincts",
-        "id": "instinct"
-      },
-      {
         "form": "hatred",
         "id": "hatred"
       },
       {
-        "form": "sympathy",
-        "id": "sympathy"
+        "form": "indirect",
+        "id": "indirect"
+      },
+      {
+        "form": "instincts",
+        "id": "instinct"
+      },
+      {
+        "form": "pain",
+        "id": "pain"
       },
       {
         "form": "person",
         "id": "person"
       },
       {
-        "form": "benevolence",
-        "id": "benevolence"
+        "form": "Philo",
+        "id": "philo"
+      },
+      {
+        "form": "situation",
+        "id": "situation"
+      },
+      {
+        "form": "sympathy",
+        "id": "sympathy"
       }
     ],
     "edges": [

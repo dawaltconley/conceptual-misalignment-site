@@ -16,16 +16,16 @@
     "graph": {},
     "nodes": [
       {
-        "form": "remains",
-        "id": "remain"
+        "form": "Aristotelian",
+        "id": "aristotelian"
       },
       {
-        "form": "righteous",
-        "id": "righteousness"
+        "form": "comes",
+        "id": "come"
       },
       {
-        "form": "neighbour",
-        "id": "neighbour"
+        "form": "conception",
+        "id": "conception"
       },
       {
         "form": "continued",
@@ -36,48 +36,48 @@
         "id": "disputation"
       },
       {
-        "form": "think",
-        "id": "think"
+        "form": "goes",
+        "id": "go"
       },
       {
         "form": "government",
         "id": "government"
       },
       {
-        "form": "goes",
-        "id": "go"
-      },
-      {
-        "form": "comes",
-        "id": "come"
-      },
-      {
         "form": "justification",
         "id": "justification"
       },
       {
-        "form": "Aristotelian",
-        "id": "aristotelian"
+        "form": "love",
+        "id": "love"
       },
       {
-        "form": "conception",
-        "id": "conception"
+        "form": "neighbour",
+        "id": "neighbour"
       },
       {
-        "form": "temporal",
-        "id": "temporal"
+        "form": "remains",
+        "id": "remain"
       },
       {
-        "form": "world",
-        "id": "world"
+        "form": "righteous",
+        "id": "righteousness"
       },
       {
         "form": "set",
         "id": "set"
       },
       {
-        "form": "love",
-        "id": "love"
+        "form": "temporal",
+        "id": "temporal"
+      },
+      {
+        "form": "think",
+        "id": "think"
+      },
+      {
+        "form": "world",
+        "id": "world"
       }
     ],
     "edges": [

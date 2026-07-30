@@ -16,56 +16,28 @@
     "graph": {},
     "nodes": [
       {
-        "form": "following",
-        "id": "follow"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "virtues",
-        "id": "virtue"
-      },
-      {
-        "form": "ren",
-        "id": "ren"
-      },
-      {
-        "form": "times",
-        "id": "time"
-      },
-      {
-        "form": "emotional",
-        "id": "emotional"
+        "form": "Analects",
+        "id": "analects"
       },
       {
         "form": "Confucian",
         "id": "confucian"
       },
       {
-        "form": "form",
-        "id": "form"
-      },
-      {
-        "form": "ritual",
-        "id": "ritual"
-      },
-      {
-        "form": "nature",
-        "id": "nature"
-      },
-      {
-        "form": "means",
-        "id": "mean"
+        "form": "emotional",
+        "id": "emotional"
       },
       {
         "form": "essence",
         "id": "essence"
       },
       {
-        "form": "zhi",
-        "id": "zhi"
+        "form": "following",
+        "id": "follow"
+      },
+      {
+        "form": "form",
+        "id": "form"
       },
       {
         "form": "genuineness",
@@ -76,8 +48,36 @@
         "id": "joy"
       },
       {
-        "form": "Analects",
-        "id": "analects"
+        "form": "means",
+        "id": "mean"
+      },
+      {
+        "form": "nature",
+        "id": "nature"
+      },
+      {
+        "form": "ren",
+        "id": "ren"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "ritual",
+        "id": "ritual"
+      },
+      {
+        "form": "times",
+        "id": "time"
+      },
+      {
+        "form": "virtues",
+        "id": "virtue"
+      },
+      {
+        "form": "zhi",
+        "id": "zhi"
       }
     ],
     "edges": [

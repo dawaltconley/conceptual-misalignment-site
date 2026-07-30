@@ -16,24 +16,40 @@
     "graph": {},
     "nodes": [
       {
+        "form": "appeal",
+        "id": "appeal"
+      },
+      {
+        "form": "challenge",
+        "id": "challenge"
+      },
+      {
+        "form": "criminal",
+        "id": "criminal"
+      },
+      {
         "form": "holds",
         "id": "hold"
+      },
+      {
+        "form": "idea",
+        "id": "idea"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "justification",
+        "id": "justification"
       },
       {
         "form": "limits",
         "id": "limit"
       },
       {
-        "form": "retributive",
-        "id": "retributive"
-      },
-      {
-        "form": "principle",
-        "id": "principle"
-      },
-      {
-        "form": "challenge",
-        "id": "challenge"
+        "form": "moral",
+        "id": "moral"
       },
       {
         "form": "notion",
@@ -44,40 +60,24 @@
         "id": "particular"
       },
       {
-        "form": "appeal",
-        "id": "appeal"
+        "form": "principle",
+        "id": "principle"
       },
       {
-        "form": "justice",
-        "id": "justice"
+        "form": "proportionality",
+        "id": "proportionality"
       },
       {
-        "form": "idea",
-        "id": "idea"
-      },
-      {
-        "form": "criminal",
-        "id": "criminal"
-      },
-      {
-        "form": "justification",
-        "id": "justification"
+        "form": "retributive",
+        "id": "retributive"
       },
       {
         "form": "sort",
         "id": "sort"
       },
       {
-        "form": "moral",
-        "id": "moral"
-      },
-      {
         "form": "theory",
         "id": "theory"
-      },
-      {
-        "form": "proportionality",
-        "id": "proportionality"
       }
     ],
     "edges": [

@@ -16,8 +16,8 @@
     "graph": {},
     "nodes": [
       {
-        "form": "suffrage",
-        "id": "suffrage"
+        "form": "argues",
+        "id": "argue"
       },
       {
         "form": "children",
@@ -28,56 +28,56 @@
         "id": "common"
       },
       {
-        "form": "argues",
-        "id": "argue"
-      },
-      {
-        "form": "power",
-        "id": "power"
-      },
-      {
-        "form": "virtue",
-        "id": "virtue"
-      },
-      {
         "form": "example",
         "id": "example"
-      },
-      {
-        "form": "humaneness",
-        "id": "humaneness"
-      },
-      {
-        "form": "terms",
-        "id": "term"
-      },
-      {
-        "form": "justification",
-        "id": "justification"
-      },
-      {
-        "form": "include",
-        "id": "include"
-      },
-      {
-        "form": "natural",
-        "id": "natural"
       },
       {
         "form": "high",
         "id": "high"
       },
       {
-        "form": "produce",
-        "id": "produce"
+        "form": "humaneness",
+        "id": "humaneness"
+      },
+      {
+        "form": "include",
+        "id": "include"
       },
       {
         "form": "income",
         "id": "income"
       },
       {
+        "form": "justification",
+        "id": "justification"
+      },
+      {
+        "form": "natural",
+        "id": "natural"
+      },
+      {
         "form": "plural",
         "id": "plural"
+      },
+      {
+        "form": "power",
+        "id": "power"
+      },
+      {
+        "form": "produce",
+        "id": "produce"
+      },
+      {
+        "form": "suffrage",
+        "id": "suffrage"
+      },
+      {
+        "form": "terms",
+        "id": "term"
+      },
+      {
+        "form": "virtue",
+        "id": "virtue"
       }
     ],
     "edges": [

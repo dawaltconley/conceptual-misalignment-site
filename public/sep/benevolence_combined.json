@@ -16,20 +16,56 @@
     "graph": {},
     "nodes": [
       {
-        "form": "delight",
-        "id": "delight"
+        "form": "approve",
+        "id": "approve"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "consistent",
+        "id": "consistent"
       },
       {
         "form": "deity",
         "id": "deity"
       },
       {
+        "form": "delight",
+        "id": "delight"
+      },
+      {
+        "form": "genuine",
+        "id": "genuine"
+      },
+      {
+        "form": "happy",
+        "id": "happy"
+      },
+      {
         "form": "holiness",
         "id": "holiness"
       },
       {
+        "form": "love",
+        "id": "love"
+      },
+      {
+        "form": "malice",
+        "id": "malice"
+      },
+      {
         "form": "pity",
         "id": "pity"
+      },
+      {
+        "form": "private",
+        "id": "private"
+      },
+      {
+        "form": "promote",
+        "id": "promote"
       },
       {
         "form": "publick",
@@ -42,42 +78,6 @@
       {
         "form": "universal",
         "id": "universal"
-      },
-      {
-        "form": "genuine",
-        "id": "genuine"
-      },
-      {
-        "form": "approve",
-        "id": "approve"
-      },
-      {
-        "form": "consistent",
-        "id": "consistent"
-      },
-      {
-        "form": "malice",
-        "id": "malice"
-      },
-      {
-        "form": "private",
-        "id": "private"
-      },
-      {
-        "form": "benevolence",
-        "id": "benevolence"
-      },
-      {
-        "form": "promote",
-        "id": "promote"
-      },
-      {
-        "form": "happy",
-        "id": "happy"
-      },
-      {
-        "form": "love",
-        "id": "love"
       }
     ],
     "edges": [

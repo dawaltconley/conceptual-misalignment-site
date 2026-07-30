@@ -20,8 +20,8 @@
         "id": "caring"
       },
       {
-        "form": "essential",
-        "id": "essential"
+        "form": "chapters",
+        "id": "chapter"
       },
       {
         "form": "common",
@@ -32,52 +32,52 @@
         "id": "confucius"
       },
       {
-        "form": "virtues",
-        "id": "virtue"
+        "form": "cultivation",
+        "id": "cultivation"
       },
       {
-        "form": "chapters",
-        "id": "chapter"
+        "form": "elements",
+        "id": "element"
       },
       {
         "form": "emotional",
         "id": "emotional"
       },
       {
-        "form": "regard",
-        "id": "regard"
-      },
-      {
-        "form": "humaneness",
-        "id": "humaneness"
-      },
-      {
-        "form": "cultivation",
-        "id": "cultivation"
-      },
-      {
-        "form": "ritual",
-        "id": "ritual"
-      },
-      {
-        "form": "jian",
-        "id": "jian"
-      },
-      {
-        "form": "reality",
-        "id": "reality"
-      },
-      {
-        "form": "moral",
-        "id": "moral"
+        "form": "essential",
+        "id": "essential"
       },
       {
         "form": "focuses",
         "id": "focus"
       },
       {
-        "form": "elements",
-        "id": "element"
+        "form": "humaneness",
+        "id": "humaneness"
+      },
+      {
+        "form": "jian",
+        "id": "jian"
+      },
+      {
+        "form": "moral",
+        "id": "moral"
+      },
+      {
+        "form": "reality",
+        "id": "reality"
+      },
+      {
+        "form": "regard",
+        "id": "regard"
+      },
+      {
+        "form": "ritual",
+        "id": "ritual"
+      },
+      {
+        "form": "virtues",
+        "id": "virtue"
       }
     ],
     "edges": [

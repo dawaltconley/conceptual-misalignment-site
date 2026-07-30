@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "standpoint",
-        "id": "standpoint"
-      },
-      {
-        "form": "victors",
-        "id": "victor"
-      },
-      {
-        "form": "topic",
-        "id": "topic"
-      },
-      {
-        "form": "relevance",
-        "id": "relevance"
-      },
-      {
-        "form": "domains",
-        "id": "domain"
-      },
-      {
-        "form": "procedural",
-        "id": "procedural"
-      },
-      {
-        "form": "Plato",
-        "id": "plato"
-      },
-      {
-        "form": "computer",
-        "id": "computer"
-      },
-      {
-        "form": "theorizing",
-        "id": "theorizing"
+        "form": "Alice",
+        "id": "alice"
       },
       {
         "form": "behaviour",
         "id": "behaviour"
       },
       {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "currency",
-        "id": "currency"
-      },
-      {
-        "form": "Alice",
-        "id": "alice"
+        "form": "computer",
+        "id": "computer"
       },
       {
         "form": "corrective",
         "id": "corrective"
       },
       {
-        "form": "thinking",
-        "id": "thinking"
+        "form": "currency",
+        "id": "currency"
       },
       {
         "form": "distributive",
         "id": "distributive"
+      },
+      {
+        "form": "domains",
+        "id": "domain"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "Plato",
+        "id": "plato"
+      },
+      {
+        "form": "procedural",
+        "id": "procedural"
+      },
+      {
+        "form": "relevance",
+        "id": "relevance"
+      },
+      {
+        "form": "standpoint",
+        "id": "standpoint"
+      },
+      {
+        "form": "theorizing",
+        "id": "theorizing"
+      },
+      {
+        "form": "thinking",
+        "id": "thinking"
+      },
+      {
+        "form": "topic",
+        "id": "topic"
+      },
+      {
+        "form": "victors",
+        "id": "victor"
       }
     ],
     "edges": [

@@ -16,28 +16,56 @@
     "graph": {},
     "nodes": [
       {
+        "form": "compassion",
+        "id": "compassion"
+      },
+      {
+        "form": "develop",
+        "id": "develop"
+      },
+      {
+        "form": "different",
+        "id": "different"
+      },
+      {
         "form": "ethical",
         "id": "ethical"
-      },
-      {
-        "form": "follow",
-        "id": "follow"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
       },
       {
         "form": "excellence",
         "id": "excellence"
       },
       {
+        "form": "fei",
+        "id": "fei"
+      },
+      {
+        "form": "follow",
+        "id": "follow"
+      },
+      {
+        "form": "good",
+        "id": "good"
+      },
+      {
+        "form": "human",
+        "id": "human"
+      },
+      {
+        "form": "identifies",
+        "id": "identify"
+      },
+      {
         "form": "ren",
         "id": "ren"
       },
       {
-        "form": "develop",
-        "id": "develop"
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "ritual",
+        "id": "ritual"
       },
       {
         "form": "shi",
@@ -48,36 +76,8 @@
         "id": "wisdom"
       },
       {
-        "form": "ritual",
-        "id": "ritual"
-      },
-      {
-        "form": "human",
-        "id": "human"
-      },
-      {
         "form": "yi",
         "id": "yi"
-      },
-      {
-        "form": "different",
-        "id": "different"
-      },
-      {
-        "form": "fei",
-        "id": "fei"
-      },
-      {
-        "form": "good",
-        "id": "good"
-      },
-      {
-        "form": "compassion",
-        "id": "compassion"
-      },
-      {
-        "form": "identifies",
-        "id": "identify"
       }
     ],
     "edges": [

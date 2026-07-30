@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "nurtured",
-        "id": "nurture"
+        "form": "aided",
+        "id": "aid"
       },
       {
         "form": "appropriate",
         "id": "appropriate"
       },
       {
-        "form": "understood",
-        "id": "understand"
-      },
-      {
-        "form": "resources",
-        "id": "resource"
-      },
-      {
-        "form": "find",
-        "id": "find"
-      },
-      {
-        "form": "endeavors",
-        "id": "endeavor"
-      },
-      {
-        "form": "thoughtful",
-        "id": "thoughtful"
-      },
-      {
-        "form": "humaneness",
-        "id": "humaneness"
+        "form": "claims",
+        "id": "claim"
       },
       {
         "form": "conditions",
         "id": "condition"
       },
       {
-        "form": "aided",
-        "id": "aid"
-      },
-      {
-        "form": "significance",
-        "id": "significance"
-      },
-      {
         "form": "creations",
         "id": "creation"
-      },
-      {
-        "form": "claims",
-        "id": "claim"
-      },
-      {
-        "form": "soul",
-        "id": "soul"
       },
       {
         "form": "early",
         "id": "early"
       },
       {
+        "form": "endeavors",
+        "id": "endeavor"
+      },
+      {
+        "form": "find",
+        "id": "find"
+      },
+      {
+        "form": "humaneness",
+        "id": "humaneness"
+      },
+      {
         "form": "lived",
         "id": "live"
+      },
+      {
+        "form": "nurtured",
+        "id": "nurture"
+      },
+      {
+        "form": "resources",
+        "id": "resource"
+      },
+      {
+        "form": "significance",
+        "id": "significance"
+      },
+      {
+        "form": "soul",
+        "id": "soul"
+      },
+      {
+        "form": "thoughtful",
+        "id": "thoughtful"
+      },
+      {
+        "form": "understood",
+        "id": "understand"
       }
     ],
     "edges": [

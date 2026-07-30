@@ -16,10 +16,6 @@
     "graph": {},
     "nodes": [
       {
-        "form": "medal",
-        "id": "medal"
-      },
-      {
         "form": "appreciation",
         "id": "appreciation"
       },
@@ -28,36 +24,48 @@
         "id": "bai"
       },
       {
-        "form": "nurtured",
-        "id": "nurture"
+        "form": "distorting",
+        "id": "distort"
       },
       {
         "form": "framework",
         "id": "framework"
       },
       {
-        "form": "li",
-        "id": "li"
+        "form": "France",
+        "id": "france"
       },
       {
         "form": "humaneness",
         "id": "humaneness"
       },
       {
-        "form": "France",
-        "id": "france"
-      },
-      {
         "form": "inferior",
         "id": "inferior"
+      },
+      {
+        "form": "li",
+        "id": "li"
       },
       {
         "form": "making",
         "id": "making"
       },
       {
-        "form": "Yale",
-        "id": "yale"
+        "form": "Manu",
+        "id": "manu"
+      },
+      {
+        "form": "medal",
+        "id": "medal"
+      },
+      {
+        "form": "nurtured",
+        "id": "nurture"
+      },
+      {
+        "form": "recovery",
+        "id": "recovery"
       },
       {
         "form": "responsible",
@@ -68,16 +76,8 @@
         "id": "stoic"
       },
       {
-        "form": "distorting",
-        "id": "distort"
-      },
-      {
-        "form": "Manu",
-        "id": "manu"
-      },
-      {
-        "form": "recovery",
-        "id": "recovery"
+        "form": "Yale",
+        "id": "yale"
       }
     ],
     "edges": [

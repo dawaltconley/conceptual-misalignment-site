@@ -43,6 +43,16 @@ def _source_ref(source: object) -> dict | None:
     }
 
 
+def _sorted_node_link(data: dict | None) -> dict | None:
+    """Sort a node-link graph's node array by id, so the serialized JSON lists
+    nodes in a readable, stable order (ordering only, not data). Edge order is left
+    as-is — the graphs are not made fully reproducible across runs."""
+    if not data:
+        return data
+    data["nodes"].sort(key=lambda n: str(n.get("id")))
+    return data
+
+
 def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
     import json
     with filepath.open("w", encoding="utf-8") as file:
@@ -78,7 +88,8 @@ class NetworkData:
         from networkx import node_link_data
         self.term = term
         self.source = _source_ref(source)
-        self.network = network and node_link_data(network)
+        self.network = _sorted_node_link(
+            node_link_data(network) if network is not None else None)
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)

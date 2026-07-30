@@ -16,48 +16,48 @@
     "graph": {},
     "nodes": [
       {
-        "form": "taken",
-        "id": "take"
-      },
-      {
         "form": "holds",
         "id": "hold"
-      },
-      {
-        "form": "time",
-        "id": "time"
-      },
-      {
-        "form": "Marcus",
-        "id": "marcus"
-      },
-      {
-        "form": "work",
-        "id": "work"
-      },
-      {
-        "form": "University",
-        "id": "university"
       },
       {
         "form": "humane",
         "id": "humaneness"
       },
       {
-        "form": "terms",
-        "id": "term"
+        "form": "Marcus",
+        "id": "marcus"
       },
       {
-        "form": "quantification",
-        "id": "quantification"
+        "form": "modalities",
+        "id": "modality"
       },
       {
         "form": "philosophy",
         "id": "philosophy"
       },
       {
-        "form": "modalities",
-        "id": "modality"
+        "form": "quantification",
+        "id": "quantification"
+      },
+      {
+        "form": "taken",
+        "id": "take"
+      },
+      {
+        "form": "terms",
+        "id": "term"
+      },
+      {
+        "form": "time",
+        "id": "time"
+      },
+      {
+        "form": "University",
+        "id": "university"
+      },
+      {
+        "form": "work",
+        "id": "work"
       },
       {
         "form": "years",

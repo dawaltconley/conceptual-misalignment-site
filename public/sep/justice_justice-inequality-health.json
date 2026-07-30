@@ -16,16 +16,16 @@
     "graph": {},
     "nodes": [
       {
-        "form": "global",
-        "id": "global"
+        "form": "account",
+        "id": "account"
       },
       {
-        "form": "principle",
-        "id": "principle"
+        "form": "approaches",
+        "id": "approach"
       },
       {
-        "form": "develops",
-        "id": "develop"
+        "form": "claim",
+        "id": "claim"
       },
       {
         "form": "Daniels",
@@ -36,48 +36,48 @@
         "id": "debate"
       },
       {
-        "form": "approaches",
-        "id": "approach"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "account",
-        "id": "account"
-      },
-      {
-        "form": "relevant",
-        "id": "relevant"
-      },
-      {
-        "form": "healthy",
-        "id": "healthy"
-      },
-      {
-        "form": "position",
-        "id": "position"
-      },
-      {
-        "form": "given",
-        "id": "give"
-      },
-      {
-        "form": "Segall",
-        "id": "segall"
+        "form": "develops",
+        "id": "develop"
       },
       {
         "form": "distribution",
         "id": "distribution"
       },
       {
+        "form": "given",
+        "id": "give"
+      },
+      {
+        "form": "global",
+        "id": "global"
+      },
+      {
+        "form": "healthy",
+        "id": "healthy"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
         "form": "national",
         "id": "national"
       },
       {
-        "form": "claim",
-        "id": "claim"
+        "form": "position",
+        "id": "position"
+      },
+      {
+        "form": "principle",
+        "id": "principle"
+      },
+      {
+        "form": "relevant",
+        "id": "relevant"
+      },
+      {
+        "form": "Segall",
+        "id": "segall"
       }
     ],
     "edges": [

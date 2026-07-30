@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "occupy",
-        "id": "occupy"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "inherent",
-        "id": "inherent"
-      },
-      {
         "form": "acknowledge",
         "id": "acknowledge"
-      },
-      {
-        "form": "propriety",
-        "id": "propriety"
-      },
-      {
-        "form": "husband",
-        "id": "husband"
-      },
-      {
-        "form": "yi",
-        "id": "yi"
-      },
-      {
-        "form": "brothers",
-        "id": "brother"
-      },
-      {
-        "form": "li",
-        "id": "li"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "wisdom",
-        "id": "wisdom"
-      },
-      {
-        "form": "let",
-        "id": "let"
-      },
-      {
-        "form": "compassion",
-        "id": "compassion"
-      },
-      {
-        "form": "exercise",
-        "id": "exercise"
       },
       {
         "form": "benevolence",
         "id": "benevolence"
       },
       {
+        "form": "brothers",
+        "id": "brother"
+      },
+      {
+        "form": "compassion",
+        "id": "compassion"
+      },
+      {
         "form": "deeds",
         "id": "deed"
+      },
+      {
+        "form": "exercise",
+        "id": "exercise"
+      },
+      {
+        "form": "husband",
+        "id": "husband"
+      },
+      {
+        "form": "inherent",
+        "id": "inherent"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "let",
+        "id": "let"
+      },
+      {
+        "form": "li",
+        "id": "li"
+      },
+      {
+        "form": "occupy",
+        "id": "occupy"
+      },
+      {
+        "form": "propriety",
+        "id": "propriety"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "wisdom",
+        "id": "wisdom"
+      },
+      {
+        "form": "yi",
+        "id": "yi"
       }
     ],
     "edges": [

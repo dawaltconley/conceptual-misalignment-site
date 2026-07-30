@@ -17,59 +17,7 @@
     "nodes": [
       {
         "community": 6,
-        "id": "history"
-      },
-      {
-        "community": 6,
-        "id": "way"
-      },
-      {
-        "community": 6,
-        "id": "thing"
-      },
-      {
-        "community": 6,
-        "id": "injustice"
-      },
-      {
-        "community": 6,
         "id": "freedom"
-      },
-      {
-        "community": 6,
-        "id": "power"
-      },
-      {
-        "community": 6,
-        "id": "harm"
-      },
-      {
-        "community": 6,
-        "id": "right"
-      },
-      {
-        "community": 6,
-        "id": "government"
-      },
-      {
-        "community": 6,
-        "id": "justice"
-      },
-      {
-        "community": 6,
-        "id": "state"
-      },
-      {
-        "community": 6,
-        "id": "philosophy"
-      },
-      {
-        "community": 6,
-        "id": "responsibility"
-      },
-      {
-        "community": 3,
-        "id": "moral"
       },
       {
         "community": 6,
@@ -77,7 +25,59 @@
       },
       {
         "community": 6,
+        "id": "government"
+      },
+      {
+        "community": 6,
+        "id": "harm"
+      },
+      {
+        "community": 6,
+        "id": "history"
+      },
+      {
+        "community": 6,
+        "id": "injustice"
+      },
+      {
+        "community": 6,
+        "id": "justice"
+      },
+      {
+        "community": 3,
+        "id": "moral"
+      },
+      {
+        "community": 6,
         "id": "people"
+      },
+      {
+        "community": 6,
+        "id": "philosophy"
+      },
+      {
+        "community": 6,
+        "id": "power"
+      },
+      {
+        "community": 6,
+        "id": "responsibility"
+      },
+      {
+        "community": 6,
+        "id": "right"
+      },
+      {
+        "community": 6,
+        "id": "state"
+      },
+      {
+        "community": 6,
+        "id": "thing"
+      },
+      {
+        "community": 6,
+        "id": "way"
       }
     ],
     "edges": [

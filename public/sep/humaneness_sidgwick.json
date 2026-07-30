@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "general",
-        "id": "general"
-      },
-      {
-        "form": "principles",
-        "id": "principle"
-      },
-      {
-        "form": "suggest",
-        "id": "suggest"
-      },
-      {
-        "form": "possible",
-        "id": "possible"
-      },
-      {
-        "form": "Moore",
-        "id": "moore"
-      },
-      {
-        "form": "problem",
-        "id": "problem"
-      },
-      {
-        "form": "involved",
-        "id": "involve"
-      },
-      {
         "form": "believe",
         "id": "believe"
-      },
-      {
-        "form": "humane",
-        "id": "humaneness"
-      },
-      {
-        "form": "come",
-        "id": "come"
-      },
-      {
-        "form": "point",
-        "id": "point"
-      },
-      {
-        "form": "Kantian",
-        "id": "kantian"
-      },
-      {
-        "form": "eds",
-        "id": "ed"
-      },
-      {
-        "form": "people",
-        "id": "people"
       },
       {
         "form": "case",
         "id": "case"
       },
       {
+        "form": "come",
+        "id": "come"
+      },
+      {
+        "form": "eds",
+        "id": "ed"
+      },
+      {
         "form": "fundamental",
         "id": "fundamental"
+      },
+      {
+        "form": "general",
+        "id": "general"
+      },
+      {
+        "form": "humane",
+        "id": "humaneness"
+      },
+      {
+        "form": "involved",
+        "id": "involve"
+      },
+      {
+        "form": "Kantian",
+        "id": "kantian"
+      },
+      {
+        "form": "Moore",
+        "id": "moore"
+      },
+      {
+        "form": "people",
+        "id": "people"
+      },
+      {
+        "form": "point",
+        "id": "point"
+      },
+      {
+        "form": "possible",
+        "id": "possible"
+      },
+      {
+        "form": "principles",
+        "id": "principle"
+      },
+      {
+        "form": "problem",
+        "id": "problem"
+      },
+      {
+        "form": "suggest",
+        "id": "suggest"
       }
     ],
     "edges": [

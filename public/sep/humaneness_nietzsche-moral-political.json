@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "Nietzsche",
-        "id": "nietzsche"
-      },
-      {
-        "form": "remain",
-        "id": "remain"
-      },
-      {
-        "form": "passage",
-        "id": "passage"
-      },
-      {
-        "form": "laws",
-        "id": "law"
-      },
-      {
-        "form": "possible",
-        "id": "possible"
-      },
-      {
-        "form": "GM",
-        "id": "gm"
-      },
-      {
-        "form": "TI",
-        "id": "ti"
-      },
-      {
         "form": "Christian",
         "id": "christian"
-      },
-      {
-        "form": "humane",
-        "id": "humaneness"
-      },
-      {
-        "form": "Goethe",
-        "id": "goethe"
-      },
-      {
-        "form": "respect",
-        "id": "respect"
-      },
-      {
-        "form": "order",
-        "id": "order"
-      },
-      {
-        "form": "higher",
-        "id": "high"
-      },
-      {
-        "form": "strong",
-        "id": "strong"
       },
       {
         "form": "concern",
         "id": "concern"
       },
       {
+        "form": "GM",
+        "id": "gm"
+      },
+      {
+        "form": "Goethe",
+        "id": "goethe"
+      },
+      {
+        "form": "higher",
+        "id": "high"
+      },
+      {
+        "form": "humane",
+        "id": "humaneness"
+      },
+      {
+        "form": "laws",
+        "id": "law"
+      },
+      {
         "form": "Manu",
         "id": "manu"
+      },
+      {
+        "form": "Nietzsche",
+        "id": "nietzsche"
+      },
+      {
+        "form": "order",
+        "id": "order"
+      },
+      {
+        "form": "passage",
+        "id": "passage"
+      },
+      {
+        "form": "possible",
+        "id": "possible"
+      },
+      {
+        "form": "remain",
+        "id": "remain"
+      },
+      {
+        "form": "respect",
+        "id": "respect"
+      },
+      {
+        "form": "strong",
+        "id": "strong"
+      },
+      {
+        "form": "TI",
+        "id": "ti"
       }
     ],
     "edges": [

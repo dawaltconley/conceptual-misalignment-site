@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "existence",
-        "id": "existence"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "divinity",
-        "id": "divinity"
-      },
-      {
-        "form": "Christian",
-        "id": "christian"
-      },
-      {
-        "form": "wrote",
-        "id": "write"
-      },
-      {
-        "form": "debate",
-        "id": "debate"
-      },
-      {
-        "form": "Rabbi",
-        "id": "rabbi"
+        "form": "Abner",
+        "id": "abner"
       },
       {
         "form": "According",
         "id": "accord"
       },
       {
-        "form": "book",
-        "id": "book"
-      },
-      {
         "form": "arguments",
         "id": "argument"
       },
       {
-        "form": "Abner",
-        "id": "abner"
+        "form": "book",
+        "id": "book"
       },
       {
-        "form": "philosophy",
-        "id": "philosophy"
+        "form": "Christian",
+        "id": "christian"
+      },
+      {
+        "form": "debate",
+        "id": "debate"
+      },
+      {
+        "form": "divinity",
+        "id": "divinity"
+      },
+      {
+        "form": "existence",
+        "id": "existence"
+      },
+      {
+        "form": "God",
+        "id": "god"
       },
       {
         "form": "original",
         "id": "original"
       },
       {
+        "form": "people",
+        "id": "people"
+      },
+      {
+        "form": "philosophy",
+        "id": "philosophy"
+      },
+      {
+        "form": "Rabbi",
+        "id": "rabbi"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
         "form": "sources",
         "id": "source"
       },
       {
-        "form": "people",
-        "id": "people"
+        "form": "wrote",
+        "id": "write"
       }
     ],
     "edges": [

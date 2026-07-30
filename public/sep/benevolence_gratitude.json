@@ -16,52 +16,44 @@
     "graph": {},
     "nodes": [
       {
-        "form": "return",
-        "id": "return"
-      },
-      {
-        "form": "performing",
-        "id": "perform"
+        "form": "act",
+        "id": "act"
       },
       {
         "form": "attempt",
         "id": "attempt"
       },
       {
-        "form": "find",
-        "id": "find"
-      },
-      {
         "form": "benefactor",
         "id": "benefactor"
       },
       {
-        "form": "feelings",
-        "id": "feeling"
-      },
-      {
-        "form": "friendship",
-        "id": "friendship"
-      },
-      {
-        "form": "relationship",
-        "id": "relationship"
-      },
-      {
-        "form": "act",
-        "id": "act"
-      },
-      {
-        "form": "gift",
-        "id": "gift"
+        "form": "benevolence",
+        "id": "benevolence"
       },
       {
         "form": "fact",
         "id": "fact"
       },
       {
-        "form": "worthy",
-        "id": "worthy"
+        "form": "feelings",
+        "id": "feeling"
+      },
+      {
+        "form": "find",
+        "id": "find"
+      },
+      {
+        "form": "form",
+        "id": "form"
+      },
+      {
+        "form": "friendship",
+        "id": "friendship"
+      },
+      {
+        "form": "gift",
+        "id": "gift"
       },
       {
         "form": "intention",
@@ -72,12 +64,20 @@
         "id": "interest"
       },
       {
-        "form": "benevolence",
-        "id": "benevolence"
+        "form": "performing",
+        "id": "perform"
       },
       {
-        "form": "form",
-        "id": "form"
+        "form": "relationship",
+        "id": "relationship"
+      },
+      {
+        "form": "return",
+        "id": "return"
+      },
+      {
+        "form": "worthy",
+        "id": "worthy"
       }
     ],
     "edges": [

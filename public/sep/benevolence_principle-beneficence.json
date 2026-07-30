@@ -16,6 +16,10 @@
     "graph": {},
     "nodes": [
       {
+        "form": "acts",
+        "id": "act"
+      },
+      {
         "form": "action",
         "id": "action"
       },
@@ -24,60 +28,56 @@
         "id": "argue"
       },
       {
-        "form": "continuum",
-        "id": "continuum"
-      },
-      {
-        "form": "Hume",
-        "id": "hume"
-      },
-      {
-        "form": "business",
-        "id": "business"
-      },
-      {
-        "form": "duty",
-        "id": "duty"
-      },
-      {
-        "form": "view",
-        "id": "view"
-      },
-      {
-        "form": "acts",
-        "id": "act"
-      },
-      {
-        "form": "nature",
-        "id": "nature"
-      },
-      {
-        "form": "human",
-        "id": "human"
-      },
-      {
-        "form": "place",
-        "id": "place"
-      },
-      {
-        "form": "moral",
-        "id": "moral"
-      },
-      {
         "form": "beneficent",
         "id": "beneficent"
-      },
-      {
-        "form": "interests",
-        "id": "interest"
       },
       {
         "form": "benevolence",
         "id": "benevolence"
       },
       {
+        "form": "business",
+        "id": "business"
+      },
+      {
+        "form": "continuum",
+        "id": "continuum"
+      },
+      {
+        "form": "duty",
+        "id": "duty"
+      },
+      {
+        "form": "human",
+        "id": "human"
+      },
+      {
+        "form": "Hume",
+        "id": "hume"
+      },
+      {
+        "form": "interests",
+        "id": "interest"
+      },
+      {
+        "form": "moral",
+        "id": "moral"
+      },
+      {
+        "form": "nature",
+        "id": "nature"
+      },
+      {
+        "form": "place",
+        "id": "place"
+      },
+      {
         "form": "society",
         "id": "society"
+      },
+      {
+        "form": "view",
+        "id": "view"
       }
     ],
     "edges": [
