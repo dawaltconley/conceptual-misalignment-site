@@ -20,6 +20,7 @@ Optional ``analysis/`` artifacts (PNGs/CSVs) are decoupled behind ``--artifacts`
 from __future__ import annotations
 
 import argparse
+import json
 import re
 from collections import Counter
 from types import SimpleNamespace
@@ -388,6 +389,86 @@ def run_artifacts(labels, matrix, targets, word_vectors, mean, out_dir,
 
 
 # ---------------------------------------------------------------------------
+# Master index (scans the written files so paths reflect what's on disk)
+# ---------------------------------------------------------------------------
+
+def _scan_networks(out_dir, web_prefix: str) -> dict[str, dict]:
+    """Group a directory's NetworkData files by term label into
+    ``{label: {"sources": [{id,title,cooccurrence}], "similarity": path|None}}``.
+    Co-occurrence files are ``{label}_{source.id}.json``; similarity is
+    ``{label}_embeds.json``. Legacy/unrelated JSON (no ``term``/``source`` dict)
+    is skipped."""
+    by_term: dict[str, dict] = {}
+    for path in sorted(out_dir.glob("*.json")):
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        term = obj.get("term") if isinstance(obj, dict) else None
+        if not (isinstance(term, dict) and isinstance(obj.get("source"), dict)):
+            continue
+        label = term["label"]
+        entry = by_term.setdefault(label, {"sources": [], "similarity": None})
+        web = f"{web_prefix}/{path.name}"
+        if path.name == f"{label}_embeds.json":
+            entry["similarity"] = web
+        else:
+            src = obj["source"]
+            entry["sources"].append(
+                {"id": src.get("id"), "title": src.get("title"),
+                 "cooccurrence": web})
+    return by_term
+
+
+def _full_first(sources: list[dict]) -> list[dict]:
+    """Order sources with the whole-corpus one first (identified by its file name,
+    ``*_mengzi.json`` / ``*_combined.json`` — its source.id may be a URL)."""
+    def is_full(s: dict) -> bool:
+        p = s.get("cooccurrence", "")
+        return p.endswith("_mengzi.json") or p.endswith("_combined.json")
+    return sorted(sources, key=lambda s: (not is_full(s), str(s.get("id"))))
+
+
+def build_master(out_path=None) -> dict:
+    """Assemble the master index over whatever the pipeline has written: per term,
+    the Chinese (Mengzi) side and its English renderings, each with its source
+    file paths, similarity network, and corpus embedding. Scans the output dirs so
+    paths mirror what is actually on disk."""
+    out_path = out_path or (config.DATA / "terms.json")
+    ctext = _scan_networks(CTEXT, "/ctext")
+    sep = _scan_networks(SEP, "/sep")
+
+    def side(entry, corpus, embeddings):
+        return {
+            "corpus": corpus,
+            "embeddings": embeddings,
+            "similarity": entry["similarity"],
+            "sources": _full_first(entry["sources"]),
+        }
+
+    empty = {"sources": [], "similarity": None}
+    terms = []
+    for term in TERMS:
+        english = [
+            {"label": r.label,
+             **side(sep.get(r.label, empty), "sep", "/embeddings/sep.json")}
+            for r in term.renderings
+        ]
+        terms.append({
+            "hanzi": term.hanzi,
+            "renderings": list(term.english),
+            "chinese": side(ctext.get(term.hanzi, empty),
+                            "mengzi", "/embeddings/mengzi.json"),
+            "english": english,
+        })
+
+    master = {"terms": terms}
+    out_path.write_text(json.dumps(master, ensure_ascii=False, indent=2),
+                        encoding="utf-8")
+    n_src = sum(len(t["chinese"]["sources"])
+                + sum(len(e["sources"]) for e in t["english"]) for t in terms)
+    print(f"master     : {len(terms)} terms, {n_src} source files -> {out_path}")
+    return master
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -406,21 +487,27 @@ def parse_args() -> argparse.Namespace:
                    help="Cosine edge threshold when --network threshold.")
     p.add_argument("--min-freq", type=int, default=None)
     p.add_argument("--max-nodes", type=int, default=15)
+    p.add_argument("--master-only", action="store_true",
+                   help="Skip the corpora; just rebuild the master index from the "
+                        "files already on disk.")
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    center = not args.no_center
-    common = dict(center=center, network=args.network, threshold=args.threshold,
-                  knn_k=args.knn_k, max_nodes=args.max_nodes,
-                  artifacts=args.artifacts)
-    if args.corpus in ("mengzi", "all"):
-        print("\n=== Mengzi ===")
-        run_mengzi(min_freq=args.min_freq or 5, **common)
-    if args.corpus in ("sep", "all"):
-        print("\n=== SEP ===")
-        run_sep(min_freq=args.min_freq or 10, **common)
+    if not args.master_only:
+        center = not args.no_center
+        common = dict(center=center, network=args.network,
+                      threshold=args.threshold, knn_k=args.knn_k,
+                      max_nodes=args.max_nodes, artifacts=args.artifacts)
+        if args.corpus in ("mengzi", "all"):
+            print("\n=== Mengzi ===")
+            run_mengzi(min_freq=args.min_freq or 5, **common)
+        if args.corpus in ("sep", "all"):
+            print("\n=== SEP ===")
+            run_sep(min_freq=args.min_freq or 10, **common)
+    print("\n=== Master index ===")
+    build_master()
 
 
 if __name__ == "__main__":
