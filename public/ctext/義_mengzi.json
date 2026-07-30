@@ -1,0 +1,201 @@
+{
+  "term": {
+    "label": "義",
+    "occurrences": 108,
+    "variants": []
+  },
+  "source": {
+    "id": "mengzi",
+    "url": "https://ctext.org/mengzi",
+    "title": "孟子",
+    "description": "Full text of the Mengzi"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "丘",
+        "id": "丘"
+      },
+      {
+        "form": "羞",
+        "id": "羞"
+      },
+      {
+        "form": "役",
+        "id": "役"
+      },
+      {
+        "form": "塞",
+        "id": "塞"
+      },
+      {
+        "form": "棬",
+        "id": "棬"
+      },
+      {
+        "form": "義",
+        "id": "義"
+      },
+      {
+        "form": "懷",
+        "id": "懷"
+      },
+      {
+        "form": "通",
+        "id": "通"
+      },
+      {
+        "form": "集",
+        "id": "集"
+      },
+      {
+        "form": "竊",
+        "id": "竊"
+      },
+      {
+        "form": "告子",
+        "id": "吿子"
+      },
+      {
+        "form": "仁",
+        "id": "仁"
+      },
+      {
+        "form": "暇",
+        "id": "暇"
+      },
+      {
+        "form": "桮",
+        "id": "桮"
+      },
+      {
+        "form": "殘",
+        "id": "殘"
+      },
+      {
+        "form": "悌",
+        "id": "悌"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 5.777032936395794,
+        "source": "丘",
+        "target": "竊"
+      },
+      {
+        "weight": 2.822122657362058,
+        "source": "丘",
+        "target": "義"
+      },
+      {
+        "weight": 2.534440584910277,
+        "source": "羞",
+        "target": "義"
+      },
+      {
+        "weight": 1.2266709869026975,
+        "source": "役",
+        "target": "仁"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "役",
+        "target": "義"
+      },
+      {
+        "weight": 2.612965348022588,
+        "source": "塞",
+        "target": "仁"
+      },
+      {
+        "weight": 3.0044442141560124,
+        "source": "塞",
+        "target": "義"
+      },
+      {
+        "weight": 6.875645225063903,
+        "source": "棬",
+        "target": "桮"
+      },
+      {
+        "weight": 3.0044442141560124,
+        "source": "棬",
+        "target": "義"
+      },
+      {
+        "weight": 1.9198181674626427,
+        "source": "棬",
+        "target": "仁"
+      },
+      {
+        "weight": 2.4306437912286336,
+        "source": "義",
+        "target": "仁"
+      },
+      {
+        "weight": 2.822122657362058,
+        "source": "義",
+        "target": "悌"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "義",
+        "target": "暇"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "義",
+        "target": "殘"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "義",
+        "target": "集"
+      },
+      {
+        "weight": 2.822122657362058,
+        "source": "義",
+        "target": "吿子"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "義",
+        "target": "通"
+      },
+      {
+        "weight": 2.3112970335960674,
+        "source": "義",
+        "target": "竊"
+      },
+      {
+        "weight": 3.0044442141560124,
+        "source": "義",
+        "target": "桮"
+      },
+      {
+        "weight": 3.227587765470222,
+        "source": "義",
+        "target": "懷"
+      },
+      {
+        "weight": 2.8361088993367978,
+        "source": "懷",
+        "target": "仁"
+      },
+      {
+        "weight": 1.9198181674626427,
+        "source": "仁",
+        "target": "桮"
+      },
+      {
+        "weight": 5.083885755835849,
+        "source": "暇",
+        "target": "悌"
+      }
+    ]
+  }
+}

@@ -1,583 +1,686 @@
 {
-  "directed": false,
-  "multigraph": false,
-  "graph": {},
-  "nodes": [
-    {
-      "community": 2,
-      "id": "\u6a02"
-    },
-    {
-      "community": 2,
-      "id": "\u98df"
-    },
-    {
-      "community": 2,
-      "id": "\u53d6"
-    },
-    {
-      "community": 2,
-      "id": "\u5584"
-    },
-    {
-      "community": 2,
-      "id": "\u4fe1"
-    },
-    {
-      "community": 2,
-      "id": "\u611b"
-    },
-    {
-      "community": 2,
-      "id": "\u4ec1"
-    },
-    {
-      "community": 1,
-      "id": "\u5bcc"
-    },
-    {
-      "community": 2,
-      "id": "\u7fa9"
-    },
-    {
-      "community": 2,
-      "id": "\u9577"
-    },
-    {
-      "community": 2,
-      "id": "\u5fb7"
-    },
-    {
-      "community": 2,
-      "id": "\u4eba"
-    },
-    {
-      "community": 2,
-      "id": "\u89aa"
-    },
-    {
-      "community": 2,
-      "id": "\u653e"
-    },
-    {
-      "community": 0,
-      "id": "\u767e"
-    },
-    {
-      "community": 2,
-      "id": "\u79ae"
-    },
-    {
-      "community": 2,
-      "id": "\u582f"
-    },
-    {
-      "community": 2,
-      "id": "\u5927"
-    },
-    {
-      "community": 2,
-      "id": "\u7236"
-    },
-    {
-      "community": 2,
-      "id": "\u6c11"
-    },
-    {
-      "community": 2,
-      "id": "\u8ce2"
-    },
-    {
-      "community": 2,
-      "id": "\u77e5"
-    },
-    {
-      "community": 2,
-      "id": "\u541b"
-    },
-    {
-      "community": 2,
-      "id": "\u884c"
-    },
-    {
-      "community": 2,
-      "id": "\u56db"
-    },
-    {
-      "community": 2,
-      "id": "\u821c"
-    }
-  ],
-  "edges": [
-    {
-      "weight": 0.33385980129241943,
-      "source": "\u6a02",
-      "target": "\u5bcc"
-    },
-    {
-      "weight": 0.36966806650161743,
-      "source": "\u6a02",
-      "target": "\u611b"
-    },
-    {
-      "weight": 0.4815675914287567,
-      "source": "\u6a02",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.4767334461212158,
-      "source": "\u6a02",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.4638768434524536,
-      "source": "\u6a02",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.4616749584674835,
-      "source": "\u6a02",
-      "target": "\u5584"
-    },
-    {
-      "weight": 0.4610733687877655,
-      "source": "\u6a02",
-      "target": "\u7fa9"
-    },
-    {
-      "weight": 0.4605005979537964,
-      "source": "\u6a02",
-      "target": "\u98df"
-    },
-    {
-      "weight": 0.4066721200942993,
-      "source": "\u98df",
-      "target": "\u4fe1"
-    },
-    {
-      "weight": 0.5244387984275818,
-      "source": "\u98df",
-      "target": "\u53d6"
-    },
-    {
-      "weight": 0.47594499588012695,
-      "source": "\u98df",
-      "target": "\u767e"
-    },
-    {
-      "weight": 0.5484785437583923,
-      "source": "\u98df",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.5357542037963867,
-      "source": "\u98df",
-      "target": "\u4eba"
-    },
-    {
-      "weight": 0.5315742492675781,
-      "source": "\u98df",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.5179765224456787,
-      "source": "\u98df",
-      "target": "\u5927"
-    },
-    {
-      "weight": 0.512589156627655,
-      "source": "\u98df",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.4910396933555603,
-      "source": "\u53d6",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.4909071922302246,
-      "source": "\u53d6",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.37663835287094116,
-      "source": "\u53d6",
-      "target": "\u653e"
-    },
-    {
-      "weight": 0.5905954837799072,
-      "source": "\u5584",
-      "target": "\u4eba"
-    },
-    {
-      "weight": 0.552549421787262,
-      "source": "\u5584",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.4224764108657837,
-      "source": "\u5584",
-      "target": "\u4fe1"
-    },
-    {
-      "weight": 0.5642657279968262,
-      "source": "\u5584",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.5398820638656616,
-      "source": "\u5584",
-      "target": "\u8ce2"
-    },
-    {
-      "weight": 0.36368638277053833,
-      "source": "\u5584",
-      "target": "\u56db"
-    },
-    {
-      "weight": 0.5301014184951782,
-      "source": "\u5584",
-      "target": "\u5927"
-    },
-    {
-      "weight": 0.2974013388156891,
-      "source": "\u5584",
-      "target": "\u5fb7"
-    },
-    {
-      "weight": 0.36538979411125183,
-      "source": "\u5584",
-      "target": "\u611b"
-    },
-    {
-      "weight": 0.4952299892902374,
-      "source": "\u5584",
-      "target": "\u7fa9"
-    },
-    {
-      "weight": 0.4471076726913452,
-      "source": "\u4fe1",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.4213135242462158,
-      "source": "\u4fe1",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.4092574715614319,
-      "source": "\u4fe1",
-      "target": "\u7fa9"
-    },
-    {
-      "weight": 0.3948023319244385,
-      "source": "\u4fe1",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.39951905608177185,
-      "source": "\u611b",
-      "target": "\u89aa"
-    },
-    {
-      "weight": 0.3787529766559601,
-      "source": "\u611b",
-      "target": "\u4ec1"
-    },
-    {
-      "weight": 0.5668120384216309,
-      "source": "\u4ec1",
-      "target": "\u7fa9"
-    },
-    {
-      "weight": 0.5416570901870728,
-      "source": "\u4ec1",
-      "target": "\u6c11"
-    },
-    {
-      "weight": 0.5394006371498108,
-      "source": "\u4ec1",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.5346731543540955,
-      "source": "\u4ec1",
-      "target": "\u5927"
-    },
-    {
-      "weight": 0.5345616340637207,
-      "source": "\u4ec1",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.5246875286102295,
-      "source": "\u4ec1",
-      "target": "\u4eba"
-    },
-    {
-      "weight": 0.5187172293663025,
-      "source": "\u4ec1",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.38403379917144775,
-      "source": "\u4ec1",
-      "target": "\u56db"
-    },
-    {
-      "weight": 0.37150412797927856,
-      "source": "\u4ec1",
-      "target": "\u582f"
-    },
-    {
-      "weight": 0.37763452529907227,
-      "source": "\u4ec1",
-      "target": "\u5bcc"
-    },
-    {
-      "weight": 0.342070072889328,
-      "source": "\u4ec1",
-      "target": "\u5fb7"
-    },
-    {
-      "weight": 0.37043190002441406,
-      "source": "\u4ec1",
-      "target": "\u653e"
-    },
-    {
-      "weight": 0.3617939054965973,
-      "source": "\u4ec1",
-      "target": "\u7236"
-    },
-    {
-      "weight": 0.4435396194458008,
-      "source": "\u4ec1",
-      "target": "\u767e"
-    },
-    {
-      "weight": 0.4914957284927368,
-      "source": "\u4ec1",
-      "target": "\u79ae"
-    },
-    {
-      "weight": 0.4112262427806854,
-      "source": "\u4ec1",
-      "target": "\u821c"
-    },
-    {
-      "weight": 0.4962400794029236,
-      "source": "\u4ec1",
-      "target": "\u89aa"
-    },
-    {
-      "weight": 0.4651956558227539,
-      "source": "\u4ec1",
-      "target": "\u8ce2"
-    },
-    {
-      "weight": 0.37743330001831055,
-      "source": "\u4ec1",
-      "target": "\u9577"
-    },
-    {
-      "weight": 0.4990684390068054,
-      "source": "\u7fa9",
-      "target": "\u79ae"
-    },
-    {
-      "weight": 0.4913467764854431,
-      "source": "\u7fa9",
-      "target": "\u4eba"
-    },
-    {
-      "weight": 0.3734755218029022,
-      "source": "\u9577",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.3724980354309082,
-      "source": "\u9577",
-      "target": "\u4eba"
-    },
-    {
-      "weight": 0.35973820090293884,
-      "source": "\u9577",
-      "target": "\u89aa"
-    },
-    {
-      "weight": 0.32120323181152344,
-      "source": "\u5fb7",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.28300097584724426,
-      "source": "\u5fb7",
-      "target": "\u5927"
-    },
-    {
-      "weight": 0.2627319097518921,
-      "source": "\u5fb7",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.6280331611633301,
-      "source": "\u4eba",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.6120069622993469,
-      "source": "\u4eba",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.6052159070968628,
-      "source": "\u4eba",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.591941237449646,
-      "source": "\u4eba",
-      "target": "\u6c11"
-    },
-    {
-      "weight": 0.39612430334091187,
-      "source": "\u4eba",
-      "target": "\u56db"
-    },
-    {
-      "weight": 0.5650066137313843,
-      "source": "\u4eba",
-      "target": "\u5927"
-    },
-    {
-      "weight": 0.4838508069515228,
-      "source": "\u4eba",
-      "target": "\u767e"
-    },
-    {
-      "weight": 0.3826313316822052,
-      "source": "\u4eba",
-      "target": "\u79ae"
-    },
-    {
-      "weight": 0.4325985312461853,
-      "source": "\u4eba",
-      "target": "\u821c"
-    },
-    {
-      "weight": 0.48489516973495483,
-      "source": "\u4eba",
-      "target": "\u89aa"
-    },
-    {
-      "weight": 0.46664959192276,
-      "source": "\u4eba",
-      "target": "\u8ce2"
-    },
-    {
-      "weight": 0.44305968284606934,
-      "source": "\u89aa",
-      "target": "\u7236"
-    },
-    {
-      "weight": 0.45987239480018616,
-      "source": "\u89aa",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.444001704454422,
-      "source": "\u89aa",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.435282826423645,
-      "source": "\u89aa",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.3814362585544586,
-      "source": "\u653e",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.43443331122398376,
-      "source": "\u767e",
-      "target": "\u56db"
-    },
-    {
-      "weight": 0.3584434390068054,
-      "source": "\u767e",
-      "target": "\u7236"
-    },
-    {
-      "weight": 0.4337849020957947,
-      "source": "\u767e",
-      "target": "\u77e5"
-    },
-    {
-      "weight": 0.6104081869125366,
-      "source": "\u582f",
-      "target": "\u821c"
-    },
-    {
-      "weight": 0.33404356241226196,
-      "source": "\u582f",
-      "target": "\u7236"
-    },
-    {
-      "weight": 0.5326887369155884,
-      "source": "\u5927",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.5258969664573669,
-      "source": "\u5927",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.4866486191749573,
-      "source": "\u5927",
-      "target": "\u6c11"
-    },
-    {
-      "weight": 0.45044127106666565,
-      "source": "\u5927",
-      "target": "\u8ce2"
-    },
-    {
-      "weight": 0.40841144323349,
-      "source": "\u7236",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.36093518137931824,
-      "source": "\u7236",
-      "target": "\u6c11"
-    },
-    {
-      "weight": 0.5861624479293823,
-      "source": "\u6c11",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.4048521816730499,
-      "source": "\u6c11",
-      "target": "\u821c"
-    },
-    {
-      "weight": 0.48648977279663086,
-      "source": "\u8ce2",
-      "target": "\u541b"
-    },
-    {
-      "weight": 0.5783392190933228,
-      "source": "\u77e5",
-      "target": "\u884c"
-    },
-    {
-      "weight": 0.42853257060050964,
-      "source": "\u541b",
-      "target": "\u821c"
-    }
-  ]
+  "term": {
+    "label": "仁",
+    "occurrences": 158,
+    "variants": []
+  },
+  "source": {
+    "id": "mengzi",
+    "url": "https://ctext.org/mengzi",
+    "title": "孟子",
+    "description": "Full text of the Mengzi"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "community": 4,
+        "id": "仁"
+      },
+      {
+        "community": 4,
+        "id": "民"
+      },
+      {
+        "community": 4,
+        "id": "事"
+      },
+      {
+        "community": 4,
+        "id": "大"
+      },
+      {
+        "community": 4,
+        "id": "食"
+      },
+      {
+        "community": 4,
+        "id": "禮"
+      },
+      {
+        "community": 4,
+        "id": "義"
+      },
+      {
+        "community": 4,
+        "id": "王"
+      },
+      {
+        "community": 4,
+        "id": "人"
+      },
+      {
+        "community": 4,
+        "id": "君"
+      },
+      {
+        "community": 4,
+        "id": "善"
+      },
+      {
+        "community": 4,
+        "id": "行"
+      },
+      {
+        "community": 4,
+        "id": "親"
+      },
+      {
+        "community": 4,
+        "id": "知"
+      },
+      {
+        "community": 4,
+        "id": "子"
+      },
+      {
+        "community": 4,
+        "id": "心"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.5020845532417297,
+        "source": "仁",
+        "target": "事"
+      },
+      {
+        "weight": 0.49957579374313354,
+        "source": "仁",
+        "target": "人"
+      },
+      {
+        "weight": 0.5214425325393677,
+        "source": "仁",
+        "target": "君"
+      },
+      {
+        "weight": 0.5196754932403564,
+        "source": "仁",
+        "target": "善"
+      },
+      {
+        "weight": 0.5293126106262207,
+        "source": "仁",
+        "target": "大"
+      },
+      {
+        "weight": 0.48969000577926636,
+        "source": "仁",
+        "target": "子"
+      },
+      {
+        "weight": 0.4951336085796356,
+        "source": "仁",
+        "target": "心"
+      },
+      {
+        "weight": 0.5143724679946899,
+        "source": "仁",
+        "target": "民"
+      },
+      {
+        "weight": 0.5042716264724731,
+        "source": "仁",
+        "target": "王"
+      },
+      {
+        "weight": 0.5142550468444824,
+        "source": "仁",
+        "target": "知"
+      },
+      {
+        "weight": 0.47800004482269287,
+        "source": "仁",
+        "target": "禮"
+      },
+      {
+        "weight": 0.5353542566299438,
+        "source": "仁",
+        "target": "義"
+      },
+      {
+        "weight": 0.506639838218689,
+        "source": "仁",
+        "target": "行"
+      },
+      {
+        "weight": 0.48081642389297485,
+        "source": "仁",
+        "target": "親"
+      },
+      {
+        "weight": 0.48221486806869507,
+        "source": "仁",
+        "target": "食"
+      },
+      {
+        "weight": 0.45464038848876953,
+        "source": "民",
+        "target": "事"
+      },
+      {
+        "weight": 0.5906702876091003,
+        "source": "民",
+        "target": "人"
+      },
+      {
+        "weight": 0.553589940071106,
+        "source": "民",
+        "target": "君"
+      },
+      {
+        "weight": 0.43218785524368286,
+        "source": "民",
+        "target": "善"
+      },
+      {
+        "weight": 0.4959653317928314,
+        "source": "民",
+        "target": "大"
+      },
+      {
+        "weight": 0.5143038034439087,
+        "source": "民",
+        "target": "子"
+      },
+      {
+        "weight": 0.4838224947452545,
+        "source": "民",
+        "target": "心"
+      },
+      {
+        "weight": 0.5747250914573669,
+        "source": "民",
+        "target": "王"
+      },
+      {
+        "weight": 0.4524313807487488,
+        "source": "民",
+        "target": "知"
+      },
+      {
+        "weight": 0.3372320830821991,
+        "source": "民",
+        "target": "禮"
+      },
+      {
+        "weight": 0.359072208404541,
+        "source": "民",
+        "target": "義"
+      },
+      {
+        "weight": 0.4451870918273926,
+        "source": "民",
+        "target": "行"
+      },
+      {
+        "weight": 0.4116118550300598,
+        "source": "民",
+        "target": "親"
+      },
+      {
+        "weight": 0.44844210147857666,
+        "source": "民",
+        "target": "食"
+      },
+      {
+        "weight": 0.5442243814468384,
+        "source": "事",
+        "target": "人"
+      },
+      {
+        "weight": 0.524649977684021,
+        "source": "事",
+        "target": "君"
+      },
+      {
+        "weight": 0.48756876587867737,
+        "source": "事",
+        "target": "善"
+      },
+      {
+        "weight": 0.501324474811554,
+        "source": "事",
+        "target": "大"
+      },
+      {
+        "weight": 0.5162997245788574,
+        "source": "事",
+        "target": "子"
+      },
+      {
+        "weight": 0.4891572594642639,
+        "source": "事",
+        "target": "心"
+      },
+      {
+        "weight": 0.4816666841506958,
+        "source": "事",
+        "target": "王"
+      },
+      {
+        "weight": 0.5057674646377563,
+        "source": "事",
+        "target": "知"
+      },
+      {
+        "weight": 0.43335771560668945,
+        "source": "事",
+        "target": "禮"
+      },
+      {
+        "weight": 0.4485870599746704,
+        "source": "事",
+        "target": "義"
+      },
+      {
+        "weight": 0.5267419815063477,
+        "source": "事",
+        "target": "行"
+      },
+      {
+        "weight": 0.41595563292503357,
+        "source": "事",
+        "target": "親"
+      },
+      {
+        "weight": 0.4700252413749695,
+        "source": "事",
+        "target": "食"
+      },
+      {
+        "weight": 0.618998110294342,
+        "source": "大",
+        "target": "人"
+      },
+      {
+        "weight": 0.574001669883728,
+        "source": "大",
+        "target": "君"
+      },
+      {
+        "weight": 0.5539122819900513,
+        "source": "大",
+        "target": "善"
+      },
+      {
+        "weight": 0.5585873126983643,
+        "source": "大",
+        "target": "子"
+      },
+      {
+        "weight": 0.4940815567970276,
+        "source": "大",
+        "target": "心"
+      },
+      {
+        "weight": 0.571557879447937,
+        "source": "大",
+        "target": "王"
+      },
+      {
+        "weight": 0.5144219398498535,
+        "source": "大",
+        "target": "知"
+      },
+      {
+        "weight": 0.39623749256134033,
+        "source": "大",
+        "target": "禮"
+      },
+      {
+        "weight": 0.42719292640686035,
+        "source": "大",
+        "target": "義"
+      },
+      {
+        "weight": 0.5126101970672607,
+        "source": "大",
+        "target": "行"
+      },
+      {
+        "weight": 0.4119426906108856,
+        "source": "大",
+        "target": "親"
+      },
+      {
+        "weight": 0.5216092467308044,
+        "source": "大",
+        "target": "食"
+      },
+      {
+        "weight": 0.525662899017334,
+        "source": "食",
+        "target": "人"
+      },
+      {
+        "weight": 0.49776405096054077,
+        "source": "食",
+        "target": "君"
+      },
+      {
+        "weight": 0.4696342945098877,
+        "source": "食",
+        "target": "善"
+      },
+      {
+        "weight": 0.5293571949005127,
+        "source": "食",
+        "target": "子"
+      },
+      {
+        "weight": 0.42899173498153687,
+        "source": "食",
+        "target": "心"
+      },
+      {
+        "weight": 0.48962023854255676,
+        "source": "食",
+        "target": "王"
+      },
+      {
+        "weight": 0.5000897645950317,
+        "source": "食",
+        "target": "知"
+      },
+      {
+        "weight": 0.37158483266830444,
+        "source": "食",
+        "target": "禮"
+      },
+      {
+        "weight": 0.3643898069858551,
+        "source": "食",
+        "target": "義"
+      },
+      {
+        "weight": 0.5253006219863892,
+        "source": "食",
+        "target": "行"
+      },
+      {
+        "weight": 0.3807657063007355,
+        "source": "食",
+        "target": "親"
+      },
+      {
+        "weight": 0.4110010862350464,
+        "source": "禮",
+        "target": "人"
+      },
+      {
+        "weight": 0.3809124827384949,
+        "source": "禮",
+        "target": "君"
+      },
+      {
+        "weight": 0.3432544469833374,
+        "source": "禮",
+        "target": "善"
+      },
+      {
+        "weight": 0.4108801484107971,
+        "source": "禮",
+        "target": "子"
+      },
+      {
+        "weight": 0.38423222303390503,
+        "source": "禮",
+        "target": "心"
+      },
+      {
+        "weight": 0.3917347490787506,
+        "source": "禮",
+        "target": "王"
+      },
+      {
+        "weight": 0.38775622844696045,
+        "source": "禮",
+        "target": "知"
+      },
+      {
+        "weight": 0.4917839765548706,
+        "source": "禮",
+        "target": "義"
+      },
+      {
+        "weight": 0.371644526720047,
+        "source": "禮",
+        "target": "行"
+      },
+      {
+        "weight": 0.35739511251449585,
+        "source": "禮",
+        "target": "親"
+      },
+      {
+        "weight": 0.45855599641799927,
+        "source": "義",
+        "target": "人"
+      },
+      {
+        "weight": 0.4151458144187927,
+        "source": "義",
+        "target": "君"
+      },
+      {
+        "weight": 0.42899298667907715,
+        "source": "義",
+        "target": "善"
+      },
+      {
+        "weight": 0.45605918765068054,
+        "source": "義",
+        "target": "子"
+      },
+      {
+        "weight": 0.42519962787628174,
+        "source": "義",
+        "target": "心"
+      },
+      {
+        "weight": 0.3919271230697632,
+        "source": "義",
+        "target": "王"
+      },
+      {
+        "weight": 0.42846786975860596,
+        "source": "義",
+        "target": "知"
+      },
+      {
+        "weight": 0.4002418518066406,
+        "source": "義",
+        "target": "行"
+      },
+      {
+        "weight": 0.3471672236919403,
+        "source": "義",
+        "target": "親"
+      },
+      {
+        "weight": 0.630594789981842,
+        "source": "王",
+        "target": "人"
+      },
+      {
+        "weight": 0.6473783850669861,
+        "source": "王",
+        "target": "君"
+      },
+      {
+        "weight": 0.5288692712783813,
+        "source": "王",
+        "target": "善"
+      },
+      {
+        "weight": 0.612160325050354,
+        "source": "王",
+        "target": "子"
+      },
+      {
+        "weight": 0.4400859475135803,
+        "source": "王",
+        "target": "心"
+      },
+      {
+        "weight": 0.5403631925582886,
+        "source": "王",
+        "target": "知"
+      },
+      {
+        "weight": 0.4955139756202698,
+        "source": "王",
+        "target": "行"
+      },
+      {
+        "weight": 0.42103680968284607,
+        "source": "王",
+        "target": "親"
+      },
+      {
+        "weight": 0.5922908782958984,
+        "source": "人",
+        "target": "君"
+      },
+      {
+        "weight": 0.5870602130889893,
+        "source": "人",
+        "target": "善"
+      },
+      {
+        "weight": 0.659090518951416,
+        "source": "人",
+        "target": "子"
+      },
+      {
+        "weight": 0.5502501130104065,
+        "source": "人",
+        "target": "心"
+      },
+      {
+        "weight": 0.6024323105812073,
+        "source": "人",
+        "target": "知"
+      },
+      {
+        "weight": 0.5859731435775757,
+        "source": "人",
+        "target": "行"
+      },
+      {
+        "weight": 0.482043981552124,
+        "source": "人",
+        "target": "親"
+      },
+      {
+        "weight": 0.4669397175312042,
+        "source": "君",
+        "target": "善"
+      },
+      {
+        "weight": 0.59059077501297,
+        "source": "君",
+        "target": "子"
+      },
+      {
+        "weight": 0.48528850078582764,
+        "source": "君",
+        "target": "心"
+      },
+      {
+        "weight": 0.4859716296195984,
+        "source": "君",
+        "target": "知"
+      },
+      {
+        "weight": 0.496686190366745,
+        "source": "君",
+        "target": "行"
+      },
+      {
+        "weight": 0.45122990012168884,
+        "source": "君",
+        "target": "親"
+      },
+      {
+        "weight": 0.5348789691925049,
+        "source": "善",
+        "target": "子"
+      },
+      {
+        "weight": 0.4829857349395752,
+        "source": "善",
+        "target": "心"
+      },
+      {
+        "weight": 0.5724798440933228,
+        "source": "善",
+        "target": "知"
+      },
+      {
+        "weight": 0.5115448832511902,
+        "source": "善",
+        "target": "行"
+      },
+      {
+        "weight": 0.3783125877380371,
+        "source": "善",
+        "target": "親"
+      },
+      {
+        "weight": 0.5428380966186523,
+        "source": "行",
+        "target": "子"
+      },
+      {
+        "weight": 0.49813762307167053,
+        "source": "行",
+        "target": "心"
+      },
+      {
+        "weight": 0.5356717109680176,
+        "source": "行",
+        "target": "知"
+      },
+      {
+        "weight": 0.4088537096977234,
+        "source": "行",
+        "target": "親"
+      },
+      {
+        "weight": 0.45260632038116455,
+        "source": "親",
+        "target": "子"
+      },
+      {
+        "weight": 0.41784822940826416,
+        "source": "親",
+        "target": "心"
+      },
+      {
+        "weight": 0.39531052112579346,
+        "source": "親",
+        "target": "知"
+      },
+      {
+        "weight": 0.5352272391319275,
+        "source": "知",
+        "target": "子"
+      },
+      {
+        "weight": 0.4898183345794678,
+        "source": "知",
+        "target": "心"
+      },
+      {
+        "weight": 0.5256067514419556,
+        "source": "子",
+        "target": "心"
+      }
+    ]
+  }
 }

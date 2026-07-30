@@ -212,6 +212,7 @@ class Mengzi(Chapter):
     ]
 
     def __init__(self):
+        self.id = 'mengzi'
         self.urn = 'ctp:mengzi'
         self.url = _fetch_text_url(self.urn)
         self.title = '孟子'
