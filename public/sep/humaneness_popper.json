@@ -16,48 +16,44 @@
     "graph": {},
     "nodes": [
       {
-        "form": "falsifiability",
-        "id": "falsifiability"
+        "form": "accept",
+        "id": "accept"
+      },
+      {
+        "form": "acceptance",
+        "id": "acceptance"
+      },
+      {
+        "form": "based",
+        "id": "base"
       },
       {
         "form": "basic",
         "id": "basic"
       },
       {
-        "form": "way",
-        "id": "way"
-      },
-      {
-        "form": "accept",
-        "id": "accept"
-      },
-      {
-        "form": "work",
-        "id": "work"
-      },
-      {
-        "form": "life",
-        "id": "life"
-      },
-      {
-        "form": "theoretical",
-        "id": "theoretical"
-      },
-      {
-        "form": "humane",
-        "id": "humaneness"
-      },
-      {
-        "form": "Freud",
-        "id": "freud"
+        "form": "decision",
+        "id": "decision"
       },
       {
         "form": "experience",
         "id": "experience"
       },
       {
-        "form": "statements",
-        "id": "statement"
+        "form": "falsifiability",
+        "id": "falsifiability"
+      },
+      {
+        "form": "Freud",
+        "id": "freud"
+      },
+      {
+        "form": "humane",
+        "id": "humaneness"
+      },
+      {
+        "form": "life",
+        "id": "life"
       },
       {
         "form": "philosophy",
@@ -68,16 +64,20 @@
         "id": "point"
       },
       {
-        "form": "based",
-        "id": "base"
+        "form": "statements",
+        "id": "statement"
       },
       {
-        "form": "acceptance",
-        "id": "acceptance"
+        "form": "theoretical",
+        "id": "theoretical"
       },
       {
-        "form": "decision",
-        "id": "decision"
+        "form": "way",
+        "id": "way"
+      },
+      {
+        "form": "work",
+        "id": "work"
       }
     ],
     "edges": [

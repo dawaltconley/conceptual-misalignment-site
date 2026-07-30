@@ -16,48 +16,20 @@
     "graph": {},
     "nodes": [
       {
-        "community": 6,
-        "id": "injustice"
-      },
-      {
-        "community": 6,
-        "id": "standard"
-      },
-      {
-        "community": 6,
-        "id": "excellence"
-      },
-      {
-        "community": 6,
-        "id": "righteousness"
-      },
-      {
-        "community": 6,
-        "id": "rationality"
-      },
-      {
-        "community": 6,
-        "id": "virtue"
+        "community": 3,
+        "id": "divine"
       },
       {
         "community": 6,
         "id": "duty"
       },
       {
-        "community": 3,
-        "id": "divine"
-      },
-      {
         "community": 6,
-        "id": "wisdom"
+        "id": "excellence"
       },
       {
         "community": 4,
         "id": "fairness"
-      },
-      {
-        "community": 6,
-        "id": "inferior"
       },
       {
         "community": 0,
@@ -68,8 +40,36 @@
         "id": "goodness"
       },
       {
+        "community": 6,
+        "id": "inferior"
+      },
+      {
+        "community": 6,
+        "id": "injustice"
+      },
+      {
         "community": 3,
         "id": "productive"
+      },
+      {
+        "community": 6,
+        "id": "rationality"
+      },
+      {
+        "community": 6,
+        "id": "righteousness"
+      },
+      {
+        "community": 6,
+        "id": "sake"
+      },
+      {
+        "community": 6,
+        "id": "standard"
+      },
+      {
+        "community": 6,
+        "id": "virtue"
       },
       {
         "community": 6,
@@ -77,7 +77,7 @@
       },
       {
         "community": 6,
-        "id": "sake"
+        "id": "wisdom"
       }
     ],
     "edges": [

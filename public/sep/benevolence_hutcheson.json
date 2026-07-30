@@ -16,16 +16,16 @@
     "graph": {},
     "nodes": [
       {
-        "form": "true",
-        "id": "true"
+        "form": "Actions",
+        "id": "actions"
       },
       {
-        "form": "holds",
-        "id": "hold"
+        "form": "Agent",
+        "id": "agent"
       },
       {
-        "form": "way",
-        "id": "way"
+        "form": "Beauty",
+        "id": "beauty"
       },
       {
         "form": "Benevolence",
@@ -36,48 +36,48 @@
         "id": "evil"
       },
       {
+        "form": "Good",
+        "id": "good"
+      },
+      {
         "form": "greatest",
         "id": "great"
       },
       {
-        "form": "publick",
-        "id": "publick"
-      },
-      {
-        "form": "Beauty",
-        "id": "beauty"
-      },
-      {
-        "form": "kind",
-        "id": "kind"
-      },
-      {
-        "form": "Agent",
-        "id": "agent"
-      },
-      {
-        "form": "motivated",
-        "id": "motivate"
-      },
-      {
-        "form": "Actions",
-        "id": "actions"
+        "form": "holds",
+        "id": "hold"
       },
       {
         "form": "interest",
         "id": "interest"
       },
       {
-        "form": "virtuous",
-        "id": "virtuous"
+        "form": "kind",
+        "id": "kind"
       },
       {
-        "form": "Good",
-        "id": "good"
+        "form": "motivated",
+        "id": "motivate"
+      },
+      {
+        "form": "publick",
+        "id": "publick"
       },
       {
         "form": "self",
         "id": "self"
+      },
+      {
+        "form": "true",
+        "id": "true"
+      },
+      {
+        "form": "virtuous",
+        "id": "virtuous"
+      },
+      {
+        "form": "way",
+        "id": "way"
       }
     ],
     "edges": [

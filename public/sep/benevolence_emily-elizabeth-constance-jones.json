@@ -16,16 +16,36 @@
     "graph": {},
     "nodes": [
       {
+        "form": "argues",
+        "id": "argue"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "claim",
+        "id": "claim"
+      },
+      {
+        "form": "concern",
+        "id": "concern"
+      },
+      {
+        "form": "dualism",
+        "id": "dualism"
+      },
+      {
         "form": "happiness",
         "id": "happiness"
       },
       {
-        "form": "true",
-        "id": "true"
+        "form": "love",
+        "id": "love"
       },
       {
-        "form": "argues",
-        "id": "argue"
+        "form": "point",
+        "id": "point"
       },
       {
         "form": "practical",
@@ -40,44 +60,24 @@
         "id": "rule"
       },
       {
-        "form": "state",
-        "id": "state"
+        "form": "self",
+        "id": "self"
       },
       {
-        "form": "view",
-        "id": "view"
+        "form": "state",
+        "id": "state"
       },
       {
         "form": "thought",
         "id": "thought"
       },
       {
-        "form": "point",
-        "id": "point"
+        "form": "true",
+        "id": "true"
       },
       {
-        "form": "dualism",
-        "id": "dualism"
-      },
-      {
-        "form": "concern",
-        "id": "concern"
-      },
-      {
-        "form": "self",
-        "id": "self"
-      },
-      {
-        "form": "benevolence",
-        "id": "benevolence"
-      },
-      {
-        "form": "claim",
-        "id": "claim"
-      },
-      {
-        "form": "love",
-        "id": "love"
+        "form": "view",
+        "id": "view"
       }
     ],
     "edges": [

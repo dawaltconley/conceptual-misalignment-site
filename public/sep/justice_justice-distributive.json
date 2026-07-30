@@ -16,36 +16,8 @@
     "graph": {},
     "nodes": [
       {
-        "form": "holdings",
-        "id": "holding"
-      },
-      {
-        "form": "called",
-        "id": "call"
-      },
-      {
-        "form": "ideal",
-        "id": "ideal"
-      },
-      {
-        "form": "practical",
-        "id": "practical"
-      },
-      {
-        "form": "role",
-        "id": "role"
-      },
-      {
-        "form": "government",
-        "id": "government"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "considered",
-        "id": "consider"
+        "form": "acquisition",
+        "id": "acquisition"
       },
       {
         "form": "arguments",
@@ -56,28 +28,56 @@
         "id": "believe"
       },
       {
-        "form": "guidance",
-        "id": "guidance"
+        "form": "called",
+        "id": "call"
       },
       {
-        "form": "acquisition",
-        "id": "acquisition"
+        "form": "considered",
+        "id": "consider"
       },
       {
-        "form": "theory",
-        "id": "theory"
-      },
-      {
-        "form": "population",
-        "id": "population"
+        "form": "distributive",
+        "id": "distributive"
       },
       {
         "form": "entitled",
         "id": "entitle"
       },
       {
-        "form": "distributive",
-        "id": "distributive"
+        "form": "government",
+        "id": "government"
+      },
+      {
+        "form": "guidance",
+        "id": "guidance"
+      },
+      {
+        "form": "holdings",
+        "id": "holding"
+      },
+      {
+        "form": "ideal",
+        "id": "ideal"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "population",
+        "id": "population"
+      },
+      {
+        "form": "practical",
+        "id": "practical"
+      },
+      {
+        "form": "role",
+        "id": "role"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
       }
     ],
     "edges": [

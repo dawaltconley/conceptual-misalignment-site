@@ -16,40 +16,36 @@
     "graph": {},
     "nodes": [
       {
-        "form": "Epictetus",
-        "id": "epictetus"
-      },
-      {
-        "form": "self",
-        "id": "self"
-      },
-      {
-        "form": "good",
-        "id": "good"
-      },
-      {
-        "form": "use",
-        "id": "use"
+        "form": "benevolence",
+        "id": "benevolence"
       },
       {
         "form": "body",
         "id": "body"
       },
       {
-        "form": "life",
-        "id": "life"
+        "form": "Epictetus",
+        "id": "epictetus"
       },
       {
-        "form": "benevolence",
-        "id": "benevolence"
+        "form": "external",
+        "id": "external"
       },
       {
         "form": "god",
         "id": "god"
       },
       {
-        "form": "study",
-        "id": "study"
+        "form": "good",
+        "id": "good"
+      },
+      {
+        "form": "life",
+        "id": "life"
+      },
+      {
+        "form": "mind",
+        "id": "mind"
       },
       {
         "form": "nature",
@@ -60,24 +56,28 @@
         "id": "person"
       },
       {
-        "form": "volition",
-        "id": "volition"
-      },
-      {
         "form": "rational",
         "id": "rational"
       },
       {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "study",
+        "id": "study"
+      },
+      {
+        "form": "use",
+        "id": "use"
+      },
+      {
+        "form": "volition",
+        "id": "volition"
+      },
+      {
         "form": "works",
         "id": "work"
-      },
-      {
-        "form": "external",
-        "id": "external"
-      },
-      {
-        "form": "mind",
-        "id": "mind"
       }
     ],
     "edges": [

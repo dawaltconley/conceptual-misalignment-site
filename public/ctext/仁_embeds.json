@@ -17,23 +17,15 @@
     "nodes": [
       {
         "community": 0,
+        "id": "仁"
+      },
+      {
+        "community": 0,
+        "id": "取"
+      },
+      {
+        "community": 0,
         "id": "君"
-      },
-      {
-        "community": 0,
-        "id": "禮"
-      },
-      {
-        "community": 0,
-        "id": "義"
-      },
-      {
-        "community": 0,
-        "id": "賢"
-      },
-      {
-        "community": 0,
-        "id": "樂"
       },
       {
         "community": 0,
@@ -45,15 +37,11 @@
       },
       {
         "community": 0,
-        "id": "取"
+        "id": "心"
       },
       {
         "community": 0,
-        "id": "親"
-      },
-      {
-        "community": 0,
-        "id": "行"
+        "id": "樂"
       },
       {
         "community": 0,
@@ -65,19 +53,31 @@
       },
       {
         "community": 0,
-        "id": "知"
-      },
-      {
-        "community": 0,
         "id": "王"
       },
       {
         "community": 0,
-        "id": "仁"
+        "id": "知"
       },
       {
         "community": 0,
-        "id": "心"
+        "id": "禮"
+      },
+      {
+        "community": 0,
+        "id": "義"
+      },
+      {
+        "community": 0,
+        "id": "行"
+      },
+      {
+        "community": 0,
+        "id": "親"
+      },
+      {
+        "community": 0,
+        "id": "賢"
       }
     ],
     "edges": [

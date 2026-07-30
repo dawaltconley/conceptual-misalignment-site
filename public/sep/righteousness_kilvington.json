@@ -16,52 +16,8 @@
     "graph": {},
     "nodes": [
       {
-        "form": "free",
-        "id": "free"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "Michałowska",
-        "id": "michałowska"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "ordained",
-        "id": "ordain"
-      },
-      {
-        "form": "questions",
-        "id": "question"
-      },
-      {
-        "form": "Physics",
-        "id": "physics"
-      },
-      {
-        "form": "Jung",
-        "id": "jung"
-      },
-      {
         "form": "absolute",
         "id": "absolute"
-      },
-      {
-        "form": "logic",
-        "id": "logic"
-      },
-      {
-        "form": "view",
-        "id": "view"
-      },
-      {
-        "form": "mathematical",
-        "id": "mathematical"
       },
       {
         "form": "acts",
@@ -72,12 +28,56 @@
         "id": "choice"
       },
       {
-        "form": "moral",
-        "id": "moral"
+        "form": "free",
+        "id": "free"
+      },
+      {
+        "form": "God",
+        "id": "god"
       },
       {
         "form": "good",
         "id": "good"
+      },
+      {
+        "form": "Jung",
+        "id": "jung"
+      },
+      {
+        "form": "logic",
+        "id": "logic"
+      },
+      {
+        "form": "mathematical",
+        "id": "mathematical"
+      },
+      {
+        "form": "Michałowska",
+        "id": "michałowska"
+      },
+      {
+        "form": "moral",
+        "id": "moral"
+      },
+      {
+        "form": "ordained",
+        "id": "ordain"
+      },
+      {
+        "form": "Physics",
+        "id": "physics"
+      },
+      {
+        "form": "questions",
+        "id": "question"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "view",
+        "id": "view"
       }
     ],
     "edges": [

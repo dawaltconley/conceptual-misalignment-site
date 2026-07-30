@@ -16,46 +16,6 @@
     "graph": {},
     "nodes": [
       {
-        "form": "individual",
-        "id": "individual"
-      },
-      {
-        "form": "sense",
-        "id": "sense"
-      },
-      {
-        "form": "norms",
-        "id": "norm"
-      },
-      {
-        "form": "social",
-        "id": "social"
-      },
-      {
-        "form": "Plato",
-        "id": "plato"
-      },
-      {
-        "form": "virtue",
-        "id": "virtue"
-      },
-      {
-        "form": "requires",
-        "id": "require"
-      },
-      {
-        "form": "particular",
-        "id": "particular"
-      },
-      {
-        "form": "Rawls",
-        "id": "rawls"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
         "form": "account",
         "id": "account"
       },
@@ -64,20 +24,60 @@
         "id": "conception"
       },
       {
+        "form": "concern",
+        "id": "concern"
+      },
+      {
+        "form": "individual",
+        "id": "individual"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "norms",
+        "id": "norm"
+      },
+      {
         "form": "offers",
         "id": "offer"
+      },
+      {
+        "form": "particular",
+        "id": "particular"
+      },
+      {
+        "form": "Plato",
+        "id": "plato"
       },
       {
         "form": "property",
         "id": "property"
       },
       {
-        "form": "concern",
-        "id": "concern"
+        "form": "Rawls",
+        "id": "rawls"
+      },
+      {
+        "form": "requires",
+        "id": "require"
       },
       {
         "form": "self",
         "id": "self"
+      },
+      {
+        "form": "sense",
+        "id": "sense"
+      },
+      {
+        "form": "social",
+        "id": "social"
+      },
+      {
+        "form": "virtue",
+        "id": "virtue"
       }
     ],
     "edges": [

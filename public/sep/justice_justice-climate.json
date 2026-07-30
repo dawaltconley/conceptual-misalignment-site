@@ -16,6 +16,30 @@
     "graph": {},
     "nodes": [
       {
+        "form": "account",
+        "id": "account"
+      },
+      {
+        "form": "apply",
+        "id": "apply"
+      },
+      {
+        "form": "budget",
+        "id": "budget"
+      },
+      {
+        "form": "different",
+        "id": "different"
+      },
+      {
+        "form": "distribution",
+        "id": "distribution"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      },
+      {
         "form": "global",
         "id": "global"
       },
@@ -24,60 +48,36 @@
         "id": "intergenerational"
       },
       {
-        "form": "principles",
-        "id": "principle"
-      },
-      {
-        "form": "apply",
-        "id": "apply"
+        "form": "issues",
+        "id": "issue"
       },
       {
         "form": "justice",
         "id": "justice"
       },
       {
+        "form": "persons",
+        "id": "person"
+      },
+      {
+        "form": "principles",
+        "id": "principle"
+      },
+      {
         "form": "share",
         "id": "share"
-      },
-      {
-        "form": "worth",
-        "id": "worth"
-      },
-      {
-        "form": "account",
-        "id": "account"
-      },
-      {
-        "form": "budget",
-        "id": "budget"
-      },
-      {
-        "form": "world",
-        "id": "world"
-      },
-      {
-        "form": "distribution",
-        "id": "distribution"
       },
       {
         "form": "theory",
         "id": "theory"
       },
       {
-        "form": "issues",
-        "id": "issue"
+        "form": "world",
+        "id": "world"
       },
       {
-        "form": "different",
-        "id": "different"
-      },
-      {
-        "form": "persons",
-        "id": "person"
-      },
-      {
-        "form": "distributive",
-        "id": "distributive"
+        "form": "worth",
+        "id": "worth"
       }
     ],
     "edges": [

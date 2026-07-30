@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "method",
-        "id": "method"
-      },
-      {
-        "form": "translator",
-        "id": "translator"
-      },
-      {
-        "form": "word",
-        "id": "word"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "things",
-        "id": "thing"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "writings",
-        "id": "writing"
-      },
-      {
-        "form": "explains",
-        "id": "explain"
-      },
-      {
-        "form": "example",
-        "id": "example"
-      },
-      {
-        "form": "science",
-        "id": "science"
-      },
-      {
-        "form": "man",
-        "id": "man"
-      },
-      {
-        "form": "verses",
-        "id": "verse"
-      },
-      {
         "form": "biblical",
         "id": "biblical"
-      },
-      {
-        "form": "final",
-        "id": "final"
       },
       {
         "form": "discussed",
         "id": "discuss"
       },
       {
+        "form": "example",
+        "id": "example"
+      },
+      {
+        "form": "explains",
+        "id": "explain"
+      },
+      {
+        "form": "final",
+        "id": "final"
+      },
+      {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "man",
+        "id": "man"
+      },
+      {
+        "form": "method",
+        "id": "method"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "science",
+        "id": "science"
+      },
+      {
         "form": "single",
         "id": "single"
+      },
+      {
+        "form": "things",
+        "id": "thing"
+      },
+      {
+        "form": "translator",
+        "id": "translator"
+      },
+      {
+        "form": "verses",
+        "id": "verse"
+      },
+      {
+        "form": "word",
+        "id": "word"
+      },
+      {
+        "form": "writings",
+        "id": "writing"
       }
     ],
     "edges": [

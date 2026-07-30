@@ -16,28 +16,36 @@
     "graph": {},
     "nodes": [
       {
-        "form": "basic",
-        "id": "basic"
-      },
-      {
-        "form": "intergenerational",
-        "id": "intergenerational"
-      },
-      {
-        "form": "understood",
-        "id": "understand"
-      },
-      {
-        "form": "sufficiency",
-        "id": "sufficiency"
-      },
-      {
         "form": "apply",
         "id": "apply"
       },
       {
+        "form": "based",
+        "id": "base"
+      },
+      {
+        "form": "basic",
+        "id": "basic"
+      },
+      {
+        "form": "contemporaries",
+        "id": "contemporary"
+      },
+      {
+        "form": "currency",
+        "id": "currency"
+      },
+      {
         "form": "duties",
         "id": "duty"
+      },
+      {
+        "form": "element",
+        "id": "element"
+      },
+      {
+        "form": "intergenerational",
+        "id": "intergenerational"
       },
       {
         "form": "interpret",
@@ -48,24 +56,16 @@
         "id": "justice"
       },
       {
-        "form": "contemporaries",
-        "id": "contemporary"
-      },
-      {
-        "form": "sufficientarian",
-        "id": "sufficientarian"
-      },
-      {
-        "form": "currency",
-        "id": "currency"
-      },
-      {
         "form": "relations",
         "id": "relation"
       },
       {
-        "form": "based",
-        "id": "base"
+        "form": "sufficiency",
+        "id": "sufficiency"
+      },
+      {
+        "form": "sufficientarian",
+        "id": "sufficientarian"
       },
       {
         "form": "theory",
@@ -76,8 +76,8 @@
         "id": "thesis"
       },
       {
-        "form": "element",
-        "id": "element"
+        "form": "understood",
+        "id": "understand"
       }
     ],
     "edges": [

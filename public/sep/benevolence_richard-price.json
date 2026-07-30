@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "sense",
-        "id": "sense"
-      },
-      {
-        "form": "holds",
-        "id": "hold"
-      },
-      {
-        "form": "second",
-        "id": "second"
-      },
-      {
-        "form": "power",
-        "id": "power"
-      },
-      {
-        "form": "virtue",
-        "id": "virtue"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "necessary",
-        "id": "necessary"
-      },
-      {
-        "form": "principles",
-        "id": "principle"
-      },
-      {
-        "form": "obligation",
-        "id": "obligation"
+        "form": "benevolence",
+        "id": "benevolence"
       },
       {
         "form": "duty",
         "id": "duty"
       },
       {
-        "form": "ideas",
-        "id": "idea"
+        "form": "God",
+        "id": "god"
       },
       {
-        "form": "know",
-        "id": "know"
+        "form": "holds",
+        "id": "hold"
+      },
+      {
+        "form": "ideas",
+        "id": "idea"
       },
       {
         "form": "including",
         "id": "include"
       },
       {
-        "form": "suppose",
-        "id": "suppose"
+        "form": "know",
+        "id": "know"
       },
       {
         "form": "mind",
         "id": "mind"
       },
       {
-        "form": "benevolence",
-        "id": "benevolence"
+        "form": "necessary",
+        "id": "necessary"
+      },
+      {
+        "form": "obligation",
+        "id": "obligation"
+      },
+      {
+        "form": "power",
+        "id": "power"
+      },
+      {
+        "form": "principles",
+        "id": "principle"
+      },
+      {
+        "form": "second",
+        "id": "second"
+      },
+      {
+        "form": "sense",
+        "id": "sense"
+      },
+      {
+        "form": "suppose",
+        "id": "suppose"
+      },
+      {
+        "form": "virtue",
+        "id": "virtue"
       }
     ],
     "edges": [

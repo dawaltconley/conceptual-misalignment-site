@@ -16,64 +16,64 @@
     "graph": {},
     "nodes": [
       {
-        "form": "individuals",
-        "id": "individual"
+        "form": "citizens",
+        "id": "citizen"
       },
       {
         "form": "city",
         "id": "city"
       },
       {
-        "form": "citizens",
-        "id": "citizen"
-      },
-      {
-        "form": "righteousness",
-        "id": "righteousness"
-      },
-      {
-        "form": "law",
-        "id": "law"
-      },
-      {
-        "form": "help",
-        "id": "help"
-      },
-      {
-        "form": "required",
-        "id": "require"
+        "form": "concerns",
+        "id": "concern"
       },
       {
         "form": "duty",
         "id": "duty"
       },
       {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "local",
-        "id": "local"
-      },
-      {
-        "form": "human",
-        "id": "human"
+        "form": "focus",
+        "id": "focus"
       },
       {
         "form": "good",
         "id": "good"
       },
       {
-        "form": "focus",
-        "id": "focus"
+        "form": "help",
+        "id": "help"
       },
       {
-        "form": "concerns",
-        "id": "concern"
+        "form": "human",
+        "id": "human"
+      },
+      {
+        "form": "individuals",
+        "id": "individual"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "law",
+        "id": "law"
       },
       {
         "form": "life",
         "id": "life"
+      },
+      {
+        "form": "local",
+        "id": "local"
+      },
+      {
+        "form": "required",
+        "id": "require"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
       },
       {
         "form": "sovereignty",

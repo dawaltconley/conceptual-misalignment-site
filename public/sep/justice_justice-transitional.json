@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "victors",
-        "id": "victor"
-      },
-      {
-        "form": "peace",
-        "id": "peace"
+        "form": "accountability",
+        "id": "accountability"
       },
       {
         "form": "demands",
         "id": "demand"
       },
       {
-        "form": "justify",
-        "id": "justify"
-      },
-      {
-        "form": "tension",
-        "id": "tension"
-      },
-      {
-        "form": "stability",
-        "id": "stability"
-      },
-      {
-        "form": "retributive",
-        "id": "retributive"
-      },
-      {
-        "form": "question",
-        "id": "question"
-      },
-      {
-        "form": "makes",
-        "id": "make"
-      },
-      {
-        "form": "kind",
-        "id": "kind"
+        "form": "institutions",
+        "id": "institution"
       },
       {
         "form": "justice",
         "id": "justice"
       },
       {
+        "form": "justify",
+        "id": "justify"
+      },
+      {
+        "form": "kind",
+        "id": "kind"
+      },
+      {
+        "form": "makes",
+        "id": "make"
+      },
+      {
+        "form": "peace",
+        "id": "peace"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "retributive",
+        "id": "retributive"
+      },
+      {
         "form": "specific",
         "id": "specific"
       },
       {
-        "form": "accountability",
-        "id": "accountability"
+        "form": "stability",
+        "id": "stability"
       },
       {
-        "form": "institutions",
-        "id": "institution"
+        "form": "system",
+        "id": "system"
+      },
+      {
+        "form": "tension",
+        "id": "tension"
       },
       {
         "form": "transitional",
         "id": "transitional"
       },
       {
-        "form": "system",
-        "id": "system"
+        "form": "victors",
+        "id": "victor"
       }
     ],
     "edges": [

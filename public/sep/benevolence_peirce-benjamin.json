@@ -16,16 +16,16 @@
     "graph": {},
     "nodes": [
       {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
         "form": "mathematics",
         "id": "mathematic"
       },
       {
         "form": "Peirce",
         "id": "peirce"
-      },
-      {
-        "form": "benevolence",
-        "id": "benevolence"
       }
     ],
     "edges": [

@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "histories",
-        "id": "history"
-      },
-      {
-        "form": "discussion",
-        "id": "discussion"
-      },
-      {
-        "form": "theorists",
-        "id": "theorist"
-      },
-      {
-        "form": "matters",
-        "id": "matter"
-      },
-      {
-        "form": "global",
-        "id": "global"
-      },
-      {
-        "form": "seeking",
-        "id": "seek"
-      },
-      {
-        "form": "debates",
-        "id": "debate"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
         "form": "account",
         "id": "account"
-      },
-      {
-        "form": "new",
-        "id": "new"
-      },
-      {
-        "form": "theory",
-        "id": "theory"
-      },
-      {
-        "form": "prominent",
-        "id": "prominent"
       },
       {
         "form": "current",
         "id": "current"
       },
       {
-        "form": "issues",
-        "id": "issue"
+        "form": "debates",
+        "id": "debate"
+      },
+      {
+        "form": "discussion",
+        "id": "discussion"
       },
       {
         "form": "entry",
         "id": "entry"
       },
       {
+        "form": "global",
+        "id": "global"
+      },
+      {
+        "form": "histories",
+        "id": "history"
+      },
+      {
+        "form": "issues",
+        "id": "issue"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "matters",
+        "id": "matter"
+      },
+      {
+        "form": "new",
+        "id": "new"
+      },
+      {
+        "form": "prominent",
+        "id": "prominent"
+      },
+      {
         "form": "range",
         "id": "range"
+      },
+      {
+        "form": "seeking",
+        "id": "seek"
+      },
+      {
+        "form": "theorists",
+        "id": "theorist"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
       }
     ],
     "edges": [

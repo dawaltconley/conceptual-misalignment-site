@@ -20,40 +20,20 @@
         "id": "argue"
       },
       {
-        "form": "social",
-        "id": "social"
+        "form": "believe",
+        "id": "believe"
       },
       {
-        "form": "question",
-        "id": "question"
-      },
-      {
-        "form": "requires",
-        "id": "require"
+        "form": "concerns",
+        "id": "concern"
       },
       {
         "form": "differential",
         "id": "differential"
       },
       {
-        "form": "eliminating",
-        "id": "eliminate"
-      },
-      {
-        "form": "initial",
-        "id": "initial"
-      },
-      {
-        "form": "justice",
-        "id": "justice"
-      },
-      {
-        "form": "Scheffler",
-        "id": "scheffler"
-      },
-      {
-        "form": "believe",
-        "id": "believe"
+        "form": "distributive",
+        "id": "distributive"
       },
       {
         "form": "effects",
@@ -64,20 +44,40 @@
         "id": "egalitarian"
       },
       {
-        "form": "theory",
-        "id": "theory"
+        "form": "eliminating",
+        "id": "eliminate"
+      },
+      {
+        "form": "initial",
+        "id": "initial"
       },
       {
         "form": "issue",
         "id": "issue"
       },
       {
-        "form": "concerns",
-        "id": "concern"
+        "form": "justice",
+        "id": "justice"
       },
       {
-        "form": "distributive",
-        "id": "distributive"
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "requires",
+        "id": "require"
+      },
+      {
+        "form": "Scheffler",
+        "id": "scheffler"
+      },
+      {
+        "form": "social",
+        "id": "social"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
       }
     ],
     "edges": [

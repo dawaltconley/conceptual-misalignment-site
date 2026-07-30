@@ -16,44 +16,8 @@
     "graph": {},
     "nodes": [
       {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "virtue",
-        "id": "virtue"
-      },
-      {
-        "form": "understood",
-        "id": "understand"
-      },
-      {
-        "form": "particular",
-        "id": "particular"
-      },
-      {
         "form": "beings",
         "id": "being"
-      },
-      {
-        "form": "pleasure",
-        "id": "pleasure"
-      },
-      {
-        "form": "love",
-        "id": "love"
-      },
-      {
-        "form": "virtuous",
-        "id": "virtuous"
-      },
-      {
-        "form": "passions",
-        "id": "passion"
-      },
-      {
-        "form": "happy",
-        "id": "happy"
       },
       {
         "form": "benevolence",
@@ -64,20 +28,56 @@
         "id": "compassion"
       },
       {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "happy",
+        "id": "happy"
+      },
+      {
         "form": "important",
         "id": "important"
       },
       {
-        "form": "self",
-        "id": "self"
+        "form": "love",
+        "id": "love"
+      },
+      {
+        "form": "motivations",
+        "id": "motivation"
       },
       {
         "form": "partiality",
         "id": "partiality"
       },
       {
-        "form": "motivations",
-        "id": "motivation"
+        "form": "particular",
+        "id": "particular"
+      },
+      {
+        "form": "passions",
+        "id": "passion"
+      },
+      {
+        "form": "pleasure",
+        "id": "pleasure"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "understood",
+        "id": "understand"
+      },
+      {
+        "form": "virtue",
+        "id": "virtue"
+      },
+      {
+        "form": "virtuous",
+        "id": "virtuous"
       }
     ],
     "edges": [

@@ -16,52 +16,52 @@
     "graph": {},
     "nodes": [
       {
-        "form": "pain",
-        "id": "pain"
-      },
-      {
-        "form": "Letters",
-        "id": "letters"
+        "form": "arguments",
+        "id": "argument"
       },
       {
         "form": "Cabanis",
         "id": "cabanis"
       },
       {
-        "form": "pleasure",
-        "id": "pleasure"
-      },
-      {
-        "form": "humaneness",
-        "id": "humaneness"
-      },
-      {
         "form": "development",
         "id": "development"
-      },
-      {
-        "form": "arguments",
-        "id": "argument"
-      },
-      {
-        "form": "morality",
-        "id": "morality"
-      },
-      {
-        "form": "philosophy",
-        "id": "philosophy"
       },
       {
         "form": "human",
         "id": "human"
       },
       {
-        "form": "Stoic",
-        "id": "stoic"
+        "form": "humaneness",
+        "id": "humaneness"
+      },
+      {
+        "form": "Letters",
+        "id": "letters"
+      },
+      {
+        "form": "morality",
+        "id": "morality"
       },
       {
         "form": "offer",
         "id": "offer"
+      },
+      {
+        "form": "pain",
+        "id": "pain"
+      },
+      {
+        "form": "philosophy",
+        "id": "philosophy"
+      },
+      {
+        "form": "pleasure",
+        "id": "pleasure"
+      },
+      {
+        "form": "Stoic",
+        "id": "stoic"
       }
     ],
     "edges": [

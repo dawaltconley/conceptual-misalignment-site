@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "holds",
-        "id": "hold"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "understand",
-        "id": "understand"
-      },
-      {
-        "form": "kind",
-        "id": "kind"
-      },
-      {
-        "form": "need",
-        "id": "need"
-      },
-      {
         "form": "ability",
         "id": "ability"
-      },
-      {
-        "form": "described",
-        "id": "describe"
-      },
-      {
-        "form": "view",
-        "id": "view"
-      },
-      {
-        "form": "lack",
-        "id": "lack"
-      },
-      {
-        "form": "humans",
-        "id": "human"
       },
       {
         "form": "benevolence",
         "id": "benevolence"
       },
       {
-        "form": "issues",
-        "id": "issue"
+        "form": "described",
+        "id": "describe"
       },
       {
-        "form": "offers",
-        "id": "offer"
+        "form": "God",
+        "id": "god"
       },
       {
         "form": "good",
         "id": "good"
       },
       {
-        "form": "self",
-        "id": "self"
+        "form": "holds",
+        "id": "hold"
+      },
+      {
+        "form": "humans",
+        "id": "human"
+      },
+      {
+        "form": "issues",
+        "id": "issue"
+      },
+      {
+        "form": "kind",
+        "id": "kind"
+      },
+      {
+        "form": "lack",
+        "id": "lack"
       },
       {
         "form": "love",
         "id": "love"
+      },
+      {
+        "form": "need",
+        "id": "need"
+      },
+      {
+        "form": "offers",
+        "id": "offer"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "understand",
+        "id": "understand"
+      },
+      {
+        "form": "view",
+        "id": "view"
       }
     ],
     "edges": [

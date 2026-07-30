@@ -16,68 +16,68 @@
     "graph": {},
     "nodes": [
       {
-        "form": "matter",
-        "id": "matter"
-      },
-      {
-        "form": "called",
-        "id": "call"
-      },
-      {
-        "form": "righteous",
-        "id": "righteousness"
-      },
-      {
-        "form": "religion",
-        "id": "religion"
-      },
-      {
-        "form": "God",
-        "id": "god"
-      },
-      {
-        "form": "truths",
-        "id": "truth"
-      },
-      {
-        "form": "law",
-        "id": "law"
+        "form": "according",
+        "id": "accord"
       },
       {
         "form": "beings",
         "id": "being"
       },
       {
-        "form": "W",
-        "id": "w"
+        "form": "called",
+        "id": "call"
+      },
+      {
+        "form": "eternal",
+        "id": "eternal"
       },
       {
         "form": "Father",
         "id": "father"
       },
       {
-        "form": "according",
-        "id": "accord"
-      },
-      {
-        "form": "relations",
-        "id": "relation"
-      },
-      {
-        "form": "human",
-        "id": "human"
-      },
-      {
-        "form": "person",
-        "id": "person"
+        "form": "God",
+        "id": "god"
       },
       {
         "form": "best",
         "id": "good"
       },
       {
-        "form": "eternal",
-        "id": "eternal"
+        "form": "human",
+        "id": "human"
+      },
+      {
+        "form": "law",
+        "id": "law"
+      },
+      {
+        "form": "matter",
+        "id": "matter"
+      },
+      {
+        "form": "person",
+        "id": "person"
+      },
+      {
+        "form": "relations",
+        "id": "relation"
+      },
+      {
+        "form": "religion",
+        "id": "religion"
+      },
+      {
+        "form": "righteous",
+        "id": "righteousness"
+      },
+      {
+        "form": "truths",
+        "id": "truth"
+      },
+      {
+        "form": "W",
+        "id": "w"
       }
     ],
     "edges": [

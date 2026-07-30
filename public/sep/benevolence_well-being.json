@@ -16,42 +16,6 @@
     "graph": {},
     "nodes": [
       {
-        "form": "called",
-        "id": "call"
-      },
-      {
-        "form": "pain",
-        "id": "pain"
-      },
-      {
-        "form": "satisfaction",
-        "id": "satisfaction"
-      },
-      {
-        "form": "way",
-        "id": "way"
-      },
-      {
-        "form": "question",
-        "id": "question"
-      },
-      {
-        "form": "great",
-        "id": "great"
-      },
-      {
-        "form": "notion",
-        "id": "notion"
-      },
-      {
-        "form": "think",
-        "id": "think"
-      },
-      {
-        "form": "pleasure",
-        "id": "pleasure"
-      },
-      {
         "form": "account",
         "id": "account"
       },
@@ -60,24 +24,60 @@
         "id": "benefit"
       },
       {
-        "form": "hedonist",
-        "id": "hedonist"
+        "form": "benevolence",
+        "id": "benevolence"
       },
       {
-        "form": "Scanlon",
-        "id": "scanlon"
-      },
-      {
-        "form": "different",
-        "id": "different"
+        "form": "called",
+        "id": "call"
       },
       {
         "form": "consists",
         "id": "consist"
       },
       {
-        "form": "benevolence",
-        "id": "benevolence"
+        "form": "different",
+        "id": "different"
+      },
+      {
+        "form": "great",
+        "id": "great"
+      },
+      {
+        "form": "hedonist",
+        "id": "hedonist"
+      },
+      {
+        "form": "notion",
+        "id": "notion"
+      },
+      {
+        "form": "pain",
+        "id": "pain"
+      },
+      {
+        "form": "pleasure",
+        "id": "pleasure"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "satisfaction",
+        "id": "satisfaction"
+      },
+      {
+        "form": "Scanlon",
+        "id": "scanlon"
+      },
+      {
+        "form": "think",
+        "id": "think"
+      },
+      {
+        "form": "way",
+        "id": "way"
       }
     ],
     "edges": [
