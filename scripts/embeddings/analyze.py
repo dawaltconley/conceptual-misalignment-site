@@ -459,9 +459,10 @@ def run_analysis(
     # save the similarity networks, pruned to terms
     net_dir = out_dir / "networks"
     net_dir.mkdir(parents=True, exist_ok=True)
-    save_network(sim_network, net_dir / "full.json")
+    save_network(sim_network, net_dir / "full.json", max_nodes=max_nodes)
     for term in target_labels:
-        save_network(sim_network, net_dir / f"{term}.json", term)
+        save_network(sim_network, net_dir /
+                     f"{term}.json", term, max_nodes=max_nodes)
 
     communities = [community_map.get(lbl, -1) for lbl in labels]
 
