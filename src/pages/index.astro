@@ -4,6 +4,8 @@ import TermNetwork from '@components/TermNetwork'
 import { buildDictionaryFromFiles } from '@build/cedict'
 import { MasterSchema } from '@lib/terms'
 import termsJson from '@data/terms.json'
+import EmbeddingScatter from '@components/EmbeddingScatter'
+import AlignmentScatter from '@components/AlignmentScatter'
 
 const master = MasterSchema.parse(termsJson)
 
@@ -34,10 +36,31 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
       dictionary={dictionary}
     />
 
-    {/*
-      TODO: rewire to the new pipeline output shapes. The embedding datasets now
-      use `source` instead of `corpus`, so the embedding-space and cross-lingual
-      alignment sections were removed until they're updated to the new formats.
-    */}
+    <div class="mx-auto mt-12 max-w-screen-xl">
+      <h2 class="mb-4 text-xl font-bold">Embedding spaces (PCA / t-SNE)</h2>
+      <div class="items-start justify-center gap-8 xl:flex">
+        <div class="xl:w-1/2">
+          <EmbeddingScatter
+            client:only="react"
+            data="/embeddings/mengzi.json"
+            dictionary={dictionary}
+          />
+        </div>
+        <div class="mt-8 xl:mt-0 xl:w-1/2">
+          <EmbeddingScatter client:only="react" data="/embeddings/sep.json" />
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-12 max-w-screen-xl">
+      <h2 class="mb-4 text-xl font-bold">Cross-lingual alignment</h2>
+      <div class="mx-auto max-w-2xl">
+        <AlignmentScatter
+          client:only="react"
+          chinese="/embeddings/mengzi.json"
+          english="/embeddings/sep.json"
+          dictionary={dictionary}
+        />
+      </div>
+    </div>
   </main>
 </Layout>

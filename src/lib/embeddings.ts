@@ -12,8 +12,16 @@ export const EmbeddingNodeSchema = z.object({
   vec: z.array(z.number()),
 })
 
+/** The corpus this dataset came from (the pipeline's reduced `lib.Source`). */
+const SourceRefSchema = z.object({
+  id: z.string().nullable(),
+  url: z.string().nullable(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
+})
+
 export const EmbeddingDatasetSchema = z.object({
-  corpus: z.string(),
+  source: SourceRefSchema.nullable(),
   dims: z.number(),
   nodes: z.array(EmbeddingNodeSchema),
 })
