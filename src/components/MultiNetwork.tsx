@@ -1,8 +1,9 @@
-import type { Term } from '@lib/networkx'
 import type { Dictionary } from '@build/cedict'
+import type { MasterSource } from '@lib/terms'
+import type { NetworkData } from '@lib/networkx'
 import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
-import { TermSchema } from '@lib/networkx'
+import { NetworkDataSchema } from '@lib/networkx'
 import { useState, type ReactNode } from 'react'
 import Button from './Button'
 import clsx from 'clsx'
@@ -10,62 +11,56 @@ import clsx from 'clsx'
 type Side = 'left' | 'right'
 
 interface MultiNetworkProps {
-  data: string
+  /** The term's sources (from the master index); the sidebar switches between them. */
+  sources: MasterSource[]
+  /** The node held at the centre of the graph (the term / rendering label). */
+  centralNodeId: string
   sourceAlign?: Side
   dictionary?: Dictionary
 }
 
+/**
+ * A co-occurrence network with a sidebar to switch between the term's sources.
+ * Each source's graph lives in its own file (`MasterSource.cooccurrence`), loaded
+ * on demand when selected. Reset `selected` by remounting (a `key` on the term).
+ */
 export default function MultiNetwork({
-  data: dataPath,
+  sources,
+  centralNodeId,
   sourceAlign = 'right',
   dictionary,
 }: MultiNetworkProps): JSX.Element {
   const [selected, setSelected] = useState(0)
-  const { status, data, errorMessage } = useData(dataPath, assertTerm)
-
-  if (status === 'error')
-    return (
-      <Wrapper>
-        <NetworkError message={errorMessage} />
-      </Wrapper>
-    )
-
-  if (status === 'loading')
-    return (
-      <Wrapper>
-        <NetworkSkeleton />
-        <SourceSidebar align={sourceAlign}>
-          {new Array(8).fill(null).map((_, i) => (
-            <SourceSkeleton key={i} />
-          ))}
-        </SourceSidebar>
-      </Wrapper>
-    )
-
-  const network = data.sources[selected].cooccurrence
+  const active = sources[selected]
+  const { status, data, errorMessage } = useData(
+    active?.cooccurrence ?? '',
+    assertNetworkData,
+  )
+  const network = data?.network ?? null
 
   return (
     <Wrapper>
-      {network ? (
+      {status === 'loading' ? (
+        <NetworkSkeleton />
+      ) : status === 'error' ? (
+        <NetworkError message={errorMessage} />
+      ) : network ? (
         <Network
-          centralNodeId={data.term}
+          centralNodeId={centralNodeId}
           data={network}
           dictionary={dictionary}
         />
       ) : (
-        <NetworkError message={`No occurances of ${data.term}`} />
+        <NetworkError message={`No occurrences of ${centralNodeId}`} />
       )}
 
       <SourceSidebar align={sourceAlign}>
-        {data.sources.map((s, i) => (
+        {sources.map((s, i) => (
           <Source
-            key={s.url}
+            key={s.id}
             title={s.title}
-            description={s.description}
-            url={new URL(s.url)}
             isActive={i === selected}
             onClick={() => setSelected(i)}
-            disabled={!s.cooccurrence}
           />
         ))}
       </SourceSidebar>
@@ -98,40 +93,37 @@ function SourceSidebar({ align, children }: SourceSidebarProps): JSX.Element {
 }
 
 interface NetworkErrorProps {
-  message: string
+  message?: string
 }
 
 function NetworkError({ message }: NetworkErrorProps): JSX.Element {
   return (
     <NetworkWrapper>
       <div className="absolute inset-0 flex items-center justify-center">
-        Error: {message}
+        {message ?? 'Error'}
       </div>
     </NetworkWrapper>
   )
 }
 
-function assertTerm(data: any): Term {
-  return TermSchema.parse(data)
+function assertNetworkData(data: unknown): NetworkData {
+  return NetworkDataSchema.parse(data)
 }
 
 interface SourceProps {
-  url: URL
   title: string
-  description: string
   isActive?: boolean
   onClick: () => void
-  disabled?: boolean
 }
 
-function Source({ title, ...props }: SourceProps): JSX.Element {
+function Source({ title, isActive, onClick }: SourceProps): JSX.Element {
   return (
-    <Button className="max-w-40 p-1 xl:block" {...props}>
+    <Button
+      className="max-w-40 p-1 xl:block"
+      isActive={isActive}
+      onClick={onClick}
+    >
       {title}
     </Button>
   )
 }
-
-const SourceSkeleton = (): JSX.Element => (
-  <div className="skeleton inline-block h-[34px] w-24 rounded xl:block" />
-)

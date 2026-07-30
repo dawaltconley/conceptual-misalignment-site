@@ -33,3 +33,29 @@ export const TermSchema = z.object({
 })
 
 export type Term = z.infer<typeof TermSchema>
+
+/**
+ * A single per-(term, source) network file emitted by the pipeline's
+ * `lib.NetworkData`: the term, the source it belongs to, and the graph itself
+ * (null when the term never occurs in that source).
+ */
+const TermDataSchema = z.object({
+  label: z.string(),
+  occurrences: z.number(),
+  variants: z.array(z.string()).default([]),
+})
+
+const SourceRefSchema = z.object({
+  id: z.string().nullable(),
+  url: z.string().nullable(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
+})
+
+export const NetworkDataSchema = z.object({
+  term: TermDataSchema,
+  source: SourceRefSchema.nullable(),
+  network: WeightedNodeLinkDataSchema.nullable(),
+})
+
+export type NetworkData = z.infer<typeof NetworkDataSchema>

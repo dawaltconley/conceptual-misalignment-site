@@ -84,3 +84,28 @@ export async function buildDictionaryFromNetworks(
     .map((n) => n.id.toString())
   return buildDictionary(hanzi)
 }
+
+/**
+ * Build a dictionary over every node id in a set of per-source NetworkData files,
+ * given their web paths (e.g. from the master term index). Read at build time
+ * from `publicDir`; missing/unreadable files are skipped.
+ */
+export async function buildDictionaryFromFiles(
+  webPaths: Iterable<string>,
+  publicDir = 'public',
+): Promise<Dictionary> {
+  const hanzi: string[] = []
+  for (const webPath of webPaths) {
+    const file = path.join(publicDir, webPath)
+    if (!fs.existsSync(file)) continue
+    try {
+      const data = JSON.parse(fs.readFileSync(file, 'utf8'))
+      for (const node of data?.network?.nodes ?? []) {
+        hanzi.push(String(node.id))
+      }
+    } catch {
+      // skip malformed file
+    }
+  }
+  return buildDictionary(hanzi)
+}

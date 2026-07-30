@@ -1,83 +1,30 @@
 ---
 import Layout from '@layouts/Page.astro'
-import MultiNetwork from '@components/MultiNetwork'
-import Network from '@components/Network'
-import EmbeddingScatter from '@components/EmbeddingScatter'
-import AlignmentScatter from '@components/AlignmentScatter'
-import { WeightedNodeLinkDataSchema } from '@lib/networkx'
-import { buildDictionaryFromNetworks } from '@build/cedict'
-import renPMI from '~/public/ctext/仁_pmi.json'
-import yiPMI from '~/public/ctext/義_pmi.json'
-import renEmbeds from '~/public/ctext/仁_embeds.json'
-import yiEmbeds from '~/public/ctext/義_embeds.json'
+import TermNetwork from '@components/TermNetwork'
+import { buildDictionaryFromFiles } from '@build/cedict'
+import { MasterSchema } from '@lib/terms'
+import termsJson from '@data/terms.json'
 
-const renDict = await buildDictionaryFromNetworks(renPMI)
-const yiDict = await buildDictionaryFromNetworks(yiPMI)
+const master = MasterSchema.parse(termsJson)
 
-const renEmbedNetwork = WeightedNodeLinkDataSchema.parse(renEmbeds)
-const yiEmbedNetwork = WeightedNodeLinkDataSchema.parse(yiEmbeds)
+// Dictionary over every hanzi in the Chinese co-occurrence networks (build time).
+const chinesePaths = master.terms.flatMap((t) =>
+  t.chinese.sources.map((s) => s.cooccurrence),
+)
+const dictionary = await buildDictionaryFromFiles(chinesePaths)
 ---
 
 <Layout>
   <main class="mx-auto w-full px-4 py-8">
-    <h2 class="mb-4 text-xl font-bold">Co-occurance networks</h2>
-    <div class="items-center justify-center xl:flex">
-      <div class="xl:w-1/2">
-        <MultiNetwork
-          client:load
-          data="/ctext/仁_pmi.json"
-          sourceAlign="left"
-          dictionary={renDict}
-        />
-      </div>
-      <div class="mt-8 xl:mt-0 xl:w-1/2">
-        <MultiNetwork
-          client:load
-          data="/sep/benevolence_pmi.json"
-          sourceAlign="right"
-        />
-      </div>
-    </div>
-    <div class="mx-auto mt-12 max-w-screen-xl">
-      <h2 class="mb-4 text-xl font-bold">Cosine similarity networks</h2>
-      <Network
-        client:only
-        centralNodeId="仁"
-        data={renEmbedNetwork}
-        dictionary={renDict}
-      />
-      <Network
-        client:only
-        centralNodeId="義"
-        data={yiEmbedNetwork}
-        dictionary={yiDict}
-      />
-    </div>
-    <div class="mx-auto mt-12 max-w-screen-xl">
-      <h2 class="mb-4 text-xl font-bold">Embedding spaces (PCA / t-SNE)</h2>
-      <div class="items-start justify-center gap-8 xl:flex">
-        <div class="xl:w-1/2">
-          <EmbeddingScatter
-            client:only="react"
-            data="/embeddings/mengzi.json"
-            dictionary={{ ...renDict, ...yiDict }}
-          />
-        </div>
-        <div class="mt-8 xl:mt-0 xl:w-1/2">
-          <EmbeddingScatter client:only="react" data="/embeddings/sep.json" />
-        </div>
-      </div>
-    </div>
-    <div class="mx-auto mt-12 max-w-screen-xl">
-      <h2 class="mb-4 text-xl font-bold">Cross-lingual alignment</h2>
-      <div class="mx-auto max-w-2xl">
-        <AlignmentScatter
-          client:only="react"
-          chinese="/embeddings/mengzi.json"
-          english="/embeddings/sep.json"
-          dictionary={{ ...renDict, ...yiDict }}
-        />
-      </div>
-    </div>
+    <h2 class="mb-4 text-xl font-bold">Co-occurrence networks</h2>
+    <TermNetwork client:load data={master} dictionary={dictionary} />
+
+    {/*
+      TODO: rewire to the new pipeline output shapes.
+      The similarity networks (_embeds.json) are now NetworkData, and the
+      embedding datasets use `source` instead of `corpus`, so the cosine
+      similarity, embedding-space, and cross-lingual alignment sections below
+      were removed until they're updated to the new formats + master index.
+    */}
   </main>
 </Layout>
