@@ -29,13 +29,72 @@ EMBEDDINGS = PUBLIC / "embeddings"    # client-loaded scatter datasets
 EMBEDDINGS.mkdir(parents=True, exist_ok=True)
 
 
+# Renderings match a single lowercased token lemma (fnmatch globs). Within/across
+# terms, two renderings must not match the same token — the first wins and the
+# second becomes a dead node — so patterns are kept disjoint. Multi-word concepts
+# match on their head token (e.g. "social norms" -> norm*). Two of the user's
+# suggestions were dropped to avoid collisions: 性 "human nature" (collides with
+# nature) and 親 "love" (collides with 愛's love).
 TERMS: list[Term] = [
     Term('仁', (
         Rendering('benevolence', 'benevolen*'),
         Rendering('humaneness', 'humane*'),
+        Rendering('humanity', 'humanit*'),
     )),
     Term('義', (
         Rendering('righteousness', 'righteous*'),
         Rendering('justice', 'justness'),
+        Rendering('meaning', 'meaning*'),
+        Rendering('morality', 'moral*'),
+    )),
+    Term('禮', (
+        Rendering('ritual', 'ritual*'),
+        Rendering('propriety', 'propriet*'),
+        Rendering('etiquette', 'etiquette*'),
+        Rendering('social norms', 'norm*'),
+    )),
+    Term('智', (
+        Rendering('knowledge', 'knowledge*'),
+        Rendering('wisdom', 'wisdom*', 'wise*'),
+    )),
+    Term('信', (
+        Rendering('trustworthiness', 'trustworth*'),
+        Rendering('faith', 'faith*'),
+        Rendering('sincerity', 'sincer*'),
+    )),
+    Term('性', (
+        Rendering('nature', 'nature*', 'human nature'),
+        Rendering('character', 'character*'),
+        Rendering('predisposition', 'predispos*'),
+    )),
+    Term('心', (
+        Rendering('heart', 'heart', 'hearts', 'heartfelt'),
+        Rendering('mind', 'mind', 'minds', 'mindful*'),
+        Rendering('heartmind', 'heartmind*', 'heart-mind'),
+        Rendering('feeling', 'feeling*'),
+    )),
+    Term('親', (
+        Rendering('parents', 'parent*'),
+        Rendering('kin', 'kin', 'kinship*'),
+        Rendering('intimates', 'intimate*', 'intimacy'),
+        Rendering('affection', 'affection*'),
+    )),
+    Term('愛', (
+        Rendering('care for', 'care*'),
+        Rendering('cherish', 'cherish*'),
+        Rendering('love', 'love*'),
+        Rendering('pity', 'pity', 'piti*'),
+    )),
+    Term('道', (
+        Rendering('way', 'way', 'ways'),
+        Rendering('doctrine', 'doctrine*'),
+        Rendering('method', 'method*'),
+        Rendering('road', 'road*'),
+        Rendering('to speak', 'speak*'),
+    )),
+    Term('德', (
+        Rendering('virtue', 'virtue*'),
+        Rendering('power', 'power*'),
+        Rendering('charisma', 'charisma*'),
     )),
 ]
