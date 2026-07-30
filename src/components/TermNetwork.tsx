@@ -1,22 +1,48 @@
-import type { Master } from '@lib/terms'
+import type { Master, CorpusSide } from '@lib/terms'
 import type { Dictionary } from '@build/cedict'
 import { useState } from 'react'
-import MultiNetwork from './MultiNetwork'
+import MultiNetwork, { type NetworkRef } from './MultiNetwork'
+
+type NetworkKind = 'cooccurrence' | 'similarity'
 
 interface TermNetworkProps {
   /** The master term index (passed from Astro, not fetched). */
   data: Master
+  /**
+   * Which networks to show: per-source co-occurrence (a sidebar of sources) or
+   * the single whole-corpus similarity network (no sidebar). Default co-occurrence.
+   */
+  kind?: NetworkKind
   /** Dictionary for the Chinese hanzi nodes (pinyin + definitions). */
   dictionary?: Dictionary
 }
 
+/** The networks to feed one MultiNetwork for a corpus side, per kind. */
+function refsFor(
+  side: CorpusSide,
+  kind: NetworkKind,
+  label: string,
+): NetworkRef[] {
+  if (kind === 'similarity') {
+    return side.similarity
+      ? [{ id: 'similarity', title: label, path: side.similarity }]
+      : []
+  }
+  return side.sources.map((s) => ({
+    id: s.id,
+    title: s.title,
+    path: s.cooccurrence,
+  }))
+}
+
 /**
- * Side-by-side co-occurrence networks: a Chinese term and one of its English
- * renderings. Two dropdowns pick the term (the English options repopulate when
- * the Chinese term changes); each graph switches its own source via MultiNetwork.
+ * Side-by-side networks for a Chinese term and one of its English renderings.
+ * Two dropdowns pick the term (the English options repopulate when the Chinese
+ * term changes); `kind` selects co-occurrence (per-source) or similarity (single).
  */
 export default function TermNetwork({
   data,
+  kind = 'cooccurrence',
   dictionary,
 }: TermNetworkProps): JSX.Element {
   const terms = data.terms
@@ -47,8 +73,8 @@ export default function TermNetwork({
           onChange={selectHanzi}
         />
         <MultiNetwork
-          key={term.hanzi}
-          sources={term.chinese.sources}
+          key={`${kind}:${term.hanzi}`}
+          sources={refsFor(term.chinese, kind, term.hanzi)}
           centralNodeId={term.hanzi}
           dictionary={dictionary}
           sourceAlign="left"
@@ -62,8 +88,8 @@ export default function TermNetwork({
           onChange={setRenderingLabel}
         />
         <MultiNetwork
-          key={`${term.hanzi}:${english.label}`}
-          sources={english.sources}
+          key={`${kind}:${term.hanzi}:${english.label}`}
+          sources={refsFor(english, kind, english.label)}
           centralNodeId={english.label}
           sourceAlign="right"
         />

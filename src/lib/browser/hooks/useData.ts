@@ -26,6 +26,7 @@ export default function useData<T>(
   const [errorMessage, setErrorMessage] = useState<string>()
 
   useEffect(() => {
+    if (!path) return
     fetch(path)
       .then(async (res) => {
         const data = await res.json()

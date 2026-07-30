@@ -1,5 +1,4 @@
 import type { Dictionary } from '@build/cedict'
-import type { MasterSource } from '@lib/terms'
 import type { NetworkData } from '@lib/networkx'
 import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
@@ -10,9 +9,17 @@ import clsx from 'clsx'
 
 type Side = 'left' | 'right'
 
+/** One selectable network: a label plus the path to its NetworkData JSON. */
+export interface NetworkRef {
+  id: string
+  title: string
+  /** Web path to a NetworkData JSON (co-occurrence or similarity — agnostic). */
+  path: string
+}
+
 interface MultiNetworkProps {
-  /** The term's sources (from the master index); the sidebar switches between them. */
-  sources: MasterSource[]
+  /** The networks to switch between. A single entry hides the sidebar. */
+  sources: NetworkRef[]
   /** The node held at the centre of the graph (the term / rendering label). */
   centralNodeId: string
   sourceAlign?: Side
@@ -20,9 +27,10 @@ interface MultiNetworkProps {
 }
 
 /**
- * A co-occurrence network with a sidebar to switch between the term's sources.
- * Each source's graph lives in its own file (`MasterSource.cooccurrence`), loaded
- * on demand when selected. Reset `selected` by remounting (a `key` on the term).
+ * Displays a NetworkData graph, agnostic to its kind (co-occurrence or
+ * similarity). Each source's graph lives in its own file, loaded on demand when
+ * selected; with more than one source a sidebar switches between them (a single
+ * source shows just the graph). Reset `selected` by remounting (a `key`).
  */
 export default function MultiNetwork({
   sources,
@@ -33,14 +41,16 @@ export default function MultiNetwork({
   const [selected, setSelected] = useState(0)
   const active = sources[selected]
   const { status, data, errorMessage } = useData(
-    active?.cooccurrence ?? '',
+    active?.path ?? '',
     assertNetworkData,
   )
   const network = data?.network ?? null
 
   return (
     <Wrapper>
-      {status === 'loading' ? (
+      {sources.length === 0 ? (
+        <NetworkError message={`No network for ${centralNodeId}`} />
+      ) : status === 'loading' ? (
         <NetworkSkeleton />
       ) : status === 'error' ? (
         <NetworkError message={errorMessage} />
@@ -54,16 +64,18 @@ export default function MultiNetwork({
         <NetworkError message={`No occurrences of ${centralNodeId}`} />
       )}
 
-      <SourceSidebar align={sourceAlign}>
-        {sources.map((s, i) => (
-          <Source
-            key={s.id}
-            title={s.title}
-            isActive={i === selected}
-            onClick={() => setSelected(i)}
-          />
-        ))}
-      </SourceSidebar>
+      {sources.length > 1 && (
+        <SourceSidebar align={sourceAlign}>
+          {sources.map((s, i) => (
+            <Source
+              key={s.id}
+              title={s.title}
+              isActive={i === selected}
+              onClick={() => setSelected(i)}
+            />
+          ))}
+        </SourceSidebar>
+      )}
     </Wrapper>
   )
 }

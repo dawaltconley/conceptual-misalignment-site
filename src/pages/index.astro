@@ -7,24 +7,37 @@ import termsJson from '@data/terms.json'
 
 const master = MasterSchema.parse(termsJson)
 
-// Dictionary over every hanzi in the Chinese co-occurrence networks (build time).
-const chinesePaths = master.terms.flatMap((t) =>
-  t.chinese.sources.map((s) => s.cooccurrence),
-)
+// Dictionary over every hanzi in the Chinese networks — co-occurrence and
+// similarity — read at build time.
+const chinesePaths = master.terms.flatMap((t) => [
+  ...t.chinese.sources.map((s) => s.cooccurrence),
+  ...(t.chinese.similarity ? [t.chinese.similarity] : []),
+])
 const dictionary = await buildDictionaryFromFiles(chinesePaths)
 ---
 
 <Layout>
   <main class="mx-auto w-full px-4 py-8">
     <h2 class="mb-4 text-xl font-bold">Co-occurrence networks</h2>
-    <TermNetwork client:load data={master} dictionary={dictionary} />
+    <TermNetwork
+      client:load
+      kind="cooccurrence"
+      data={master}
+      dictionary={dictionary}
+    />
+
+    <h2 class="mb-4 mt-12 text-xl font-bold">Similarity networks</h2>
+    <TermNetwork
+      client:load
+      kind="similarity"
+      data={master}
+      dictionary={dictionary}
+    />
 
     {/*
-      TODO: rewire to the new pipeline output shapes.
-      The similarity networks (_embeds.json) are now NetworkData, and the
-      embedding datasets use `source` instead of `corpus`, so the cosine
-      similarity, embedding-space, and cross-lingual alignment sections below
-      were removed until they're updated to the new formats + master index.
+      TODO: rewire to the new pipeline output shapes. The embedding datasets now
+      use `source` instead of `corpus`, so the embedding-space and cross-lingual
+      alignment sections were removed until they're updated to the new formats.
     */}
   </main>
 </Layout>
