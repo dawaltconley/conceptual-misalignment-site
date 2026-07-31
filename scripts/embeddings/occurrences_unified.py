@@ -69,7 +69,7 @@ class Segment:
 
 def content_key(
     token: Token,
-    match_fn: MatchFn,
+    match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> str | None:
@@ -80,7 +80,7 @@ def content_key(
     it is skipped (stopword, punctuation, non-content POS).
     """
     lemma = token.lemma_.lower()
-    label = match_fn(lemma, token.pos_)
+    label = match_fn(lemma, token.pos_) if match_fn else None
     if label is not None:
         return label
     is_content = (
@@ -96,30 +96,28 @@ def content_key(
 
 def build_vocab(
     sources: Iterable[SourceDoc],
-    match_fn: MatchFn,
-    targets: Iterable[str],
     min_freq: int,
+    match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> set[str]:
-    """Content-word vocabulary: keys occurring >= ``min_freq``, plus the targets."""
+    """Content-word vocabulary: keys occurring >= ``min_freq``."""
     freq: Counter[str] = Counter()
     for source in sources:
         for token in source.doc:
             key = content_key(token, match_fn, content_pos, stopwords)
             if key is not None:
                 freq[key] += 1
-    vocab = {k for k, c in freq.items() if c >= min_freq}
-    vocab |= set(targets)
-    return vocab
+    return {k for k, c in freq.items() if c >= min_freq}
 
 
 def build_segments(
     sources: Sequence[SourceDoc],
     words_of_interest: set[str],
-    match_fn: MatchFn,
+    *,
     sent_len_fn: Callable[[list[str]], list[int]],
     max_tokens: int,
+    match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> list[Segment]:
@@ -161,7 +159,7 @@ def build_segments(
 def _segment(
     src: SourceDoc,
     sents: list,
-    match_fn: MatchFn,
+    match_fn: MatchFn | None,
     content_pos: set[str] | None,
     stopwords: frozenset[str] | set[str],
     words_of_interest: set[str],
