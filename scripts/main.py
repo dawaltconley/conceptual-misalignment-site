@@ -21,22 +21,20 @@ import argparse
 import json
 from collections import Counter
 from types import SimpleNamespace
-from typing import Any
 
 import numpy as np
 from numpy import ndarray
 from networkx import Graph
 from spacy.tokens import Doc
 
-from config import TERMS, CTEXT, SEP, EMBEDDINGS, DATA, ANALYSIS, CHINESE_STOPWORDS
-from models import TermData, NetworkData, Embeddings
+from config import TERMS, CTEXT, SEP, EMBEDDINGS, DATA, ANALYSIS
+from models import Pipeline, Source, TermData, NetworkData, Embeddings
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter
 from embeddings import analyze, vectors
-from embeddings.analyze import Method as SimMethod, SimTransform
+from embeddings.analyze import Method as SimMethod
 from embeddings.model import Embedder
 from embeddings.occurrences import (
-    CONTENT_POS,
     MatchFn,
     Segment,
     SourceDoc,
@@ -54,21 +52,24 @@ SEP_MODEL = "roberta-base"
 # Co-occurrence (one NetworkData per (term, source))
 # ---------------------------------------------------------------------------
 
+def _to_set(frz: frozenset | None) -> set | None:
+    return None if frz is None else set(frz)
+
+
 def get_cooccurrence(
+    p: Pipeline,
     term: str,
     sources: list[SourceDoc],
-    min_freq: int,
     *,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = None,
-    stopwords: set[str] | frozenset[str] = frozenset(),
-    max_nodes: int = 15,
 ) -> Graph | None:
     """The term's PMI co-occurrence neighborhood over ``sources`` (spaCy Docs)."""
     return pmi_spacy.build_cooccurrence_network(
-        sources, term, min_freq,
-        max_nodes=max_nodes, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords,
+        sources, term, p.min_freq,
+        max_nodes=p.max_network_nodes,
+        match_fn=match_fn,
+        content_pos=_to_set(p.content_pos),
+        stopwords=p.stopwords or set(),
     )
 
 
@@ -81,22 +82,19 @@ def count_occurrences(doc, label: str, match_fn: MatchFn | None) -> int:
 
 
 def save_cooccurrence(
-    label: str, network_sources: list[SourceDoc], meta_source, file_id: str,
-    out_dir, *, min_freq: int, match_fn: MatchFn | None,
-    content_pos: set[str] | None, stopwords, max_nodes: int,
+    p: Pipeline, label: str, network_sources: list[SourceDoc], meta_source: Source, file_id: str,
+    *, match_fn: MatchFn | None,
 ) -> None:
     """Build ``label``'s PMI network over ``network_sources`` and write it as one
     ``NetworkData`` file ``{label}_{file_id}.json`` (``meta_source`` is the source
     recorded in the file — a chapter, an article, or a whole-corpus stand-in)."""
-    net = get_cooccurrence(
-        label, network_sources, min_freq, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords, max_nodes=max_nodes)
+    net = get_cooccurrence(p, label, network_sources, match_fn=match_fn)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn)
               for s in network_sources)
     NetworkData(TermData(label, occ), meta_source, net).save_json(
-        out_dir / f"{label}_{file_id}.json")
+        p.out_dir / f"{label}_{file_id}.json")
 
 
 # ---------------------------------------------------------------------------
@@ -104,39 +102,25 @@ def save_cooccurrence(
 # ---------------------------------------------------------------------------
 
 def save_similarity(
-    targets, corpus_source, G: Graph, out_dir, *,
-    max_nodes: int, occ_counts: Counter,
+    p: Pipeline, targets: set[str] | frozenset[str], corpus_source: Source, G: Graph,
+    *, occ_counts: Counter,
 ) -> None:
     """Write one ``NetworkData`` file per term: its pruned cosine neighborhood."""
     for target in targets:
-        pruned = prune_to_neighborhood(G, target, max_nodes)
+        pruned = prune_to_neighborhood(G, target, p.max_network_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
         term = TermData(target, int(occ_counts.get(target, 0)))
         NetworkData(term, corpus_source, pruned).save_json(
-            out_dir / f"{target}_embeds.json")
+            p.out_dir / f"{target}_embeds.json")
 
 
 # ---------------------------------------------------------------------------
 # Corpus runners
 # ---------------------------------------------------------------------------
 
-def run_mengzi(
-    *,
-    min_freq: int = 5,
-    center: bool = True,
-    network: SimMethod = "knn",
-    threshold: float = 0.3,
-    knn_k: int = 8,
-    sim_transform: SimTransform = "neglog",
-    reduce_to_dims: int = 50,
-    max_nodes: int = 15,
-    batch_size: int = 32,
-    artifacts: bool = False,
-) -> None:
+def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     targets = frozenset(t.hanzi for t in TERMS)
-    content_pos = None                 # classical Chinese: keep all POS
-    stopwords = CHINESE_STOPWORDS
 
     mengzi = build_chinese_corpus()
     chapters = [SourceDoc(c, parse_mengzi_chapter(c)) for c in mengzi.chapters]
@@ -145,48 +129,40 @@ def run_mengzi(
 
     # --- co-occurrence: full corpus + each chapter, per target ---
     for target in targets:
-        save_cooccurrence(target, [full], mengzi, "mengzi", CTEXT,
-                          min_freq=min_freq, match_fn=None,
-                          content_pos=content_pos, stopwords=stopwords,
-                          max_nodes=max_nodes)
+        save_cooccurrence(p, target, [full], mengzi, "mengzi", match_fn=None)
         for ch in chapters:
-            save_cooccurrence(target, [ch], ch.source, ch.source.id, CTEXT,
-                              min_freq=min_freq, match_fn=None,
-                              content_pos=content_pos, stopwords=stopwords,
-                              max_nodes=max_nodes)
+            save_cooccurrence(
+                p, target, [ch], ch.source, ch.source.id, match_fn=None)
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
-    embedder = Embedder(MENGZI_MODEL)
+    embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler = embed(
-        embedder, chapters, targets, min_freq=min_freq,
-        content_pos=content_pos, stopwords=stopwords, batch_size=batch_size,
-        keep=targets if artifacts else frozenset())
+    pooler = embed(p, embedder, chapters, targets,
+                   keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
     mean = None
-    if center:
+    if p.center:
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
     G, _, community_map = analyze.build_networks(
-        labels, matrix, method=network, threshold=threshold, knn_k=knn_k,
-        sim_transform=sim_transform)
+        labels, matrix, method=p.sim_network, threshold=p.threshold, knn_k=p.knn_k,
+        sim_transform=p.sim_transform)
 
     occ_counts = Counter(
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
-    save_similarity(targets, mengzi, G, CTEXT,
-                    max_nodes=max_nodes, occ_counts=occ_counts)
+    save_similarity(p, targets, mengzi, G, occ_counts=occ_counts)
 
-    reduced = vectors.reduce_vectors(matrix, reduce_to_dims)
+    reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
 
     if artifacts:
         run_artifacts(labels, matrix, targets, pooler, mean,
-                      ANALYSIS / "mengzi", network, threshold, knn_k,
-                      sim_transform, max_nodes)
+                      ANALYSIS / "mengzi", p.sim_network, p.threshold, p.knn_k,
+                      p.sim_transform, p.max_network_nodes)
 
 
 SEP_CORPUS = SimpleNamespace(
@@ -195,20 +171,7 @@ SEP_CORPUS = SimpleNamespace(
     description="Combined SEP corpus for the English renderings of 仁 / 義")
 
 
-def run_sep(
-    *,
-    per_term: int = 12,
-    min_freq: int = 10,
-    center: bool = True,
-    network: SimMethod = "knn",
-    threshold: float = 0.3,
-    knn_k: int = 8,
-    sim_transform: SimTransform = "neglog",
-    reduce_to_dims: int = 50,
-    max_nodes: int = 15,
-    batch_size: int = 16,
-    artifacts: bool = False,
-) -> None:
+def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
     renderings = [r for term in TERMS for r in term.renderings]
     labels_by_target = frozenset(r.label for r in renderings)
 
@@ -232,50 +195,44 @@ def run_sep(
     for ts in searches:
         label, articles = ts.term.label, ts.search.articles
         adocs = [source_doc(a) for a in articles]
-        save_cooccurrence(label, adocs, ts.search, "combined", SEP,
-                          min_freq=min_freq, match_fn=match_fn,
-                          content_pos=CONTENT_POS, stopwords=frozenset(),
-                          max_nodes=max_nodes)
+        save_cooccurrence(p, label, adocs, ts.search,
+                          "combined", match_fn=match_fn)
         for sd in adocs:
-            save_cooccurrence(label, [sd], sd.source, sd.source.id, SEP,
-                              min_freq=min_freq, match_fn=match_fn,
-                              content_pos=CONTENT_POS, stopwords=frozenset(),
-                              max_nodes=max_nodes)
+            save_cooccurrence(
+                p, label, [sd], sd.source, sd.source.id, match_fn=match_fn)
 
     # --- one combined embedding space over every (deduped) article ---
     combined = list(doc_cache.values())
     print(f"parsed     : {len(combined)} SEP articles")
-    embedder = Embedder(SEP_MODEL)
+    embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler = embed(
-        embedder, combined, labels_by_target, min_freq=min_freq,
-        match_fn=match_fn, content_pos=CONTENT_POS, batch_size=batch_size,
-        keep=labels_by_target if artifacts else frozenset())
+    pooler = embed(p, embedder, combined, labels_by_target,
+                   match_fn=match_fn,
+                   keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
     mean = None
-    if center:
+    if p.center:
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
     G, _, community_map = analyze.build_networks(
-        labels, matrix, method=network, threshold=threshold, knn_k=knn_k,
-        sim_transform=sim_transform)
+        labels, matrix, method=p.sim_network, threshold=p.threshold, knn_k=p.knn_k,
+        sim_transform=p.sim_transform)
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
-    save_similarity(labels_by_target, SEP_CORPUS, G, SEP,
-                    max_nodes=max_nodes, occ_counts=occ_counts)
+    save_similarity(p, labels_by_target, SEP_CORPUS, G, occ_counts=occ_counts)
 
-    reduced = vectors.reduce_vectors(matrix, reduce_to_dims)
+    reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                            community_map).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
 
     if artifacts:
         run_artifacts(labels, matrix, labels_by_target, pooler, mean,
-                      ANALYSIS / "sep", network, threshold, knn_k,
-                      sim_transform, max_nodes)
+                      ANALYSIS / "sep", p.sim_network, p.threshold, p.knn_k,
+                      p.sim_transform, p.max_network_nodes)
 
 
 # ---------------------------------------------------------------------------
@@ -283,15 +240,12 @@ def run_sep(
 # ---------------------------------------------------------------------------
 
 def embed(
+    p: Pipeline,
     emb: Embedder,
     sources: list[SourceDoc],
     target_labels: frozenset[str],
     *,
     match_fn: MatchFn | None = None,
-    min_freq: int = 10,
-    content_pos: set[str] | None = CONTENT_POS,
-    stopwords: set[str] | frozenset[str] = frozenset(),
-    batch_size: int = 32,
     keep: set[str] | frozenset[str] = frozenset(),
 ) -> vectors.Pooler:
     """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
@@ -301,29 +255,32 @@ def embed(
     resident at once (the memory that OOM'd on the large SEP corpus). ``keep``
     words additionally retain their full occurrence stacks (for cohesion under
     ``--artifacts``); pass none to keep only the running maxes."""
-    vocab = build_vocab(sources, min_freq, match_fn,
-                        content_pos=content_pos, stopwords=stopwords)
+    vocab = build_vocab(
+        sources, p.min_freq, match_fn,
+        content_pos=_to_set(p.content_pos),
+        stopwords=p.stopwords or set()
+    )
     vocab |= set(target_labels)
     unk_check(emb, target_labels)
-    segments = segment(emb, sources, vocab, match_fn,
-                       content_pos=content_pos, stopwords=stopwords)
+    segments = segment(p, emb, sources, vocab, match_fn)
     pooler = vectors.Pooler(keep=set(keep))
-    for word, vec in emb.embed(segments, batch_size):
+    for word, vec in emb.embed(segments, p.batch_size):
         pooler.add(word, vec)
     return pooler
 
 
 def segment(
-    emb: Embedder, sources: list[SourceDoc], woi: set[str],
-    match_fn: MatchFn | None, *,
-    content_pos: set[str] | None = CONTENT_POS,
-    stopwords: set[str] | frozenset[str] = frozenset(),
+    p: Pipeline,
+    emb: Embedder,
+    sources: list[SourceDoc],
+    woi: set[str],
+    match_fn: MatchFn | None,
 ) -> list[Segment]:
     """Split each source into sentences and greedily pack under the token cap."""
     segments = build_segments(
         sources, woi, match_fn=match_fn,
         sent_len_fn=emb.token_lengths, max_tokens=emb.max_length,
-        content_pos=content_pos, stopwords=stopwords)
+        content_pos=_to_set(p.content_pos), stopwords=p.stopwords)
     n_occ = sum(len(s.spans) for s in segments)
     n_tok = sum(len(s.doc) for s in sources)
     n_src = len({s.source.id for s in sources})
@@ -454,23 +411,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--corpus", choices=["mengzi", "sep", "all"], default="all")
     p.add_argument("--artifacts", action="store_true",
                    help="Also write analysis/ PNG+CSV artifacts (decoupled).")
-    p.add_argument("--no-center", action="store_true")
-    p.add_argument("--network", choices=["knn", "threshold"], default="knn",
-                   help="Similarity graph: relative kNN neighborhoods (default) "
-                        "or an absolute cosine threshold.")
-    p.add_argument("--knn-k", type=int, default=8,
-                   help="Neighbors per node when --network knn.")
-    p.add_argument("--threshold", type=float, default=0.3,
-                   help="Cosine edge threshold when --network threshold.")
-    p.add_argument("--sim-transform", choices=["none", "neglog", "poslog"],
-                   default="neglog", dest="sim_transform",
-                   help="Reweight cosine before the similarity graph: neglog "
-                        "expands high similarities, poslog compresses them.")
     p.add_argument("--per-term", type=int, default=12, dest="per_term",
                    help="SEP articles fetched per English rendering (caps corpus "
                         "size / embedding memory).")
-    p.add_argument("--min-freq", type=int, default=None)
-    p.add_argument("--max-nodes", type=int, default=15)
     p.add_argument("--master-only", action="store_true",
                    help="Skip the corpora; just rebuild the master index from the "
                         "files already on disk.")
@@ -478,20 +421,16 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
+    from config import MENGZI_PIPELINE, SEP_PIPELINE
     args = parse_args()
     if not args.master_only:
-        center = not args.no_center
-        common = dict[str, Any](center=center, network=args.network,
-                                threshold=args.threshold, knn_k=args.knn_k,
-                                sim_transform=args.sim_transform,
-                                max_nodes=args.max_nodes, artifacts=args.artifacts)
         if args.corpus in ("mengzi", "all"):
             print("\n=== Mengzi ===")
-            run_mengzi(min_freq=args.min_freq or 5, **common)
+            run_mengzi(MENGZI_PIPELINE, artifacts=args.artifacts)
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
-            run_sep(min_freq=args.min_freq or 10,
-                    per_term=args.per_term, **common)
+            run_sep(SEP_PIPELINE, per_term=args.per_term,
+                    artifacts=args.artifacts)
     print("\n=== Master index ===")
     build_master()
 

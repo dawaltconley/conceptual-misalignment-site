@@ -1,5 +1,5 @@
 from pathlib import Path
-from models import Term, Rendering
+from models import Term, Rendering, Pipeline
 
 # Absolute anchors so the pipelines no longer depend on the current working
 # directory. Everything is resolved relative to this file's location.
@@ -106,3 +106,17 @@ CHINESE_STOPWORDS: set[str] = {
     "有", "無", "為", "曰", "謂", "不", "非", "所", "者", "於", "豈",
     "然", "得", "能", "可", "將", "及", "皆", "未", "與",
 }
+
+MENGZI_PIPELINE = Pipeline(
+    model="hsc748NLP/GujiRoBERTa_fan",
+    out_dir=CTEXT,
+    min_freq=5,
+    stopwords=frozenset(CHINESE_STOPWORDS),
+)
+
+SEP_PIPELINE = Pipeline(
+    model="roberta-base",
+    out_dir=SEP,
+    min_freq=10,
+    content_pos=frozenset({"NOUN", "VERB", "ADJ", "PROPN"})
+)

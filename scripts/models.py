@@ -6,6 +6,7 @@ if TYPE_CHECKING:
     from pathlib import Path
     from numpy import ndarray
     from _typeshed import DataclassInstance
+    from embeddings.analyze import Method as SimMethod, SimTransform
 
 
 def _json_default(o: object):
@@ -158,3 +159,53 @@ class Term:
     def english(self) -> tuple[str, ...]:
         """Rendering labels only (backward-compatible with the old tuple API)."""
         return tuple(r.label for r in self.renderings)
+
+
+@dataclass(kw_only=True)
+class Pipeline:
+    min_freq: int = 5
+    """Minimum frequency at which terms must occur in order to be included in
+    the vocab."""
+
+    center: bool = True
+    """Whether to center embeddings by subtracting their centroid. Used to fix
+    anisotropy."""
+
+    sim_network: "SimMethod" = "knn"
+    """The kind of similarity network produced: either cosine (threshold) or
+    relative neighborhoods (knn)."""
+
+    threshold: float = 0.3
+    """Minimum weight of cosine similarity to include in similarity graphs."""
+
+    knn_k: int = 8
+    """K-nearest-neighbors for a knn graph: keep each node's `k` most-similar
+    neighbors by rank (union kNN: an edge if *either* endpoint ranks the other
+    in its top-k)."""
+
+    sim_transform: "SimTransform" = "neglog"
+    """The type of log transform to apply to cosine similarity values.
+    See notes/anisotropy-and-network-construction.md"""
+
+    reduce_to_dims: int = 50
+    """Number of dimensions to keep when serializing vectors to json. Affects
+    the size of the export."""
+
+    max_network_nodes: int = 15
+    """Cap on the number of nodes included in the similarity and co-occurrence
+    networks."""
+
+    model: str
+    """The LLM used for calculating embeddings."""
+
+    batch_size: int = 32
+    """Number of embeddings to calcualte at a given time; affects memory and
+    speed of the pipeline."""
+
+    content_pos: frozenset[str] | None = None
+    """Parts-of-speech to include. If None, POS is not filtered."""
+
+    stopwords: frozenset[str] = frozenset()
+    """Words to exclude from results."""
+
+    out_dir: "Path"
