@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from collections import Counter
 from types import SimpleNamespace
 from typing import Any
@@ -196,13 +195,6 @@ SEP_CORPUS = SimpleNamespace(
     description="Combined SEP corpus for the English renderings of 仁 / 義")
 
 
-def _sep_slug(source) -> str:
-    """Filesystem-safe id for a SEP article (its ``.../entries/<slug>/`` name)."""
-    parts = [p for p in str(getattr(source, "url", "") or "").split("/") if p]
-    slug = parts[-1] if parts else str(getattr(source, "id", "article"))
-    return re.sub(r"[^\w-]+", "-", slug).strip("-") or "article"
-
-
 def run_sep(
     *,
     per_term: int = 12,
@@ -245,7 +237,7 @@ def run_sep(
                           content_pos=CONTENT_POS, stopwords=frozenset(),
                           max_nodes=max_nodes)
         for sd in adocs:
-            save_cooccurrence(label, [sd], sd.source, _sep_slug(sd.source), SEP,
+            save_cooccurrence(label, [sd], sd.source, sd.source.id, SEP,
                               min_freq=min_freq, match_fn=match_fn,
                               content_pos=CONTENT_POS, stopwords=frozenset(),
                               max_nodes=max_nodes)

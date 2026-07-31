@@ -1,8 +1,8 @@
 import requests
 from corpus import cache
+from corpus.sep import get_doc_id
 import time
 import csv
-from urllib.parse import urlparse
 from random import random
 from io import StringIO
 cache.install()
@@ -17,19 +17,6 @@ _EXCLUDE = {
     'chinese-mind',
     'emotions-chinese',
 }
-
-
-def _get_doc_id(sep_url: str) -> str:
-    err = ValueError(f"Bad SEP entry url: {sep_url}")
-    paths = urlparse(sep_url).path.split("/")
-    try:
-        e = paths.index("entries")
-        doc_id = paths[e + 1]
-    except (IndexError, ValueError):
-        raise err
-    if not doc_id:
-        raise err
-    return doc_id
 
 
 def _get_topics(doc_id: str) -> str | None:
@@ -71,7 +58,7 @@ def _is_mostly_chinese_philosophy(topics: str) -> bool:
 
 def is_chinese_philosophy(sep_url: str, threshold: float | None = None) -> bool:
     """Checks whether the dominant topic for an SEP article is Chinese philosophy. If threshold is provided, it instead checks whether the article's topics include a percentage of Chinese philosophy above the threshold."""
-    doc_id = _get_doc_id(sep_url)
+    doc_id = get_doc_id(sep_url)
     if doc_id in _EXCLUDE:
         return True
     topics = _get_topics(doc_id)

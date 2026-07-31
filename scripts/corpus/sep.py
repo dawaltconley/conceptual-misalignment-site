@@ -6,6 +6,7 @@ import time
 import re
 from corpus import cache
 from dataclasses import dataclass
+from urllib.parse import urlparse
 from random import random
 from models import Source, Rendering
 cache.install()
@@ -20,9 +21,12 @@ class SEP(Source):
     description: str
     text: str
 
-    @property
-    def id(self) -> str:
-        return self.url
+    def __init__(self, *, url: str, title: str, description: str | None = None, text: str):
+        self.id = get_doc_id(url)
+        self.url = url
+        self.title = title
+        self.description = description or text[:160]
+        self.text = text
 
     @classmethod
     def from_url(cls, url: str):
@@ -69,15 +73,12 @@ _cached_articles: dict[str, SEP] = {}
 
 @dataclass
 class SEPSearch(Source):
+    id: str
     url: str
     title: str
     description: str
     articles: list[SEP]
     total_articles: int
-
-    @property
-    def id(self) -> str:
-        return self.url
 
     @property
     def text(self) -> str:
@@ -104,6 +105,7 @@ class SEPSearch(Source):
             results, total_results = _parse_search_results(search)
             if sep is None:
                 sep = cls(
+                    id=f"{search_term}_combined",
                     url=search.url,
                     title=f"SEP search: {search_term}",
                     description=f"SEP search results {search_string}",
@@ -129,6 +131,19 @@ class SEPSearch(Source):
 
 
 _cached_searches: dict[str, SEPSearch] = {}
+
+
+def get_doc_id(sep_url: str) -> str:
+    err = ValueError(f"Bad SEP entry url: {sep_url}")
+    paths = urlparse(sep_url).path.split("/")
+    try:
+        e = paths.index("entries")
+        doc_id = paths[e + 1]
+    except (IndexError, ValueError):
+        raise err
+    if not doc_id:
+        raise err
+    return doc_id
 
 
 def _search(term: str, page: int = 1) -> _Response:
