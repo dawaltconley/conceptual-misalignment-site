@@ -53,8 +53,6 @@ from graph.prune import prune_to_neighborhood
 MENGZI_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 SEP_MODEL = "roberta-base"
 
-type WordVectors = dict[str, list[ndarray]]
-
 
 # ---------------------------------------------------------------------------
 # Co-occurrence (one NetworkData per (term, source))
@@ -193,10 +191,10 @@ def run_mengzi(
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
     embedder = Embedder(MENGZI_MODEL)
     print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    word_vectors = embed(
+    pooler = embed(
         embedder, chapters, targets, min_freq=min_freq,
         content_pos=content_pos, stopwords=stopwords, batch_size=batch_size)
-    labels, matrix = pool(word_vectors, targets)
+    labels, matrix = pool(pooler, targets)
     mean = None
     if center:
         matrix, mean = vectors.center_matrix(matrix)
@@ -215,7 +213,7 @@ def run_mengzi(
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
 
     if artifacts:
-        run_artifacts(labels, matrix, targets, word_vectors, mean,
+        run_artifacts(labels, matrix, targets, pooler, mean,
                       config.ANALYSIS / "mengzi", network, threshold, knn_k,
                       sim_transform, max_nodes)
 
@@ -285,10 +283,10 @@ def run_sep(
     print(f"parsed     : {len(combined)} SEP articles")
     embedder = Embedder(SEP_MODEL)
     print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    word_vectors = embed(
+    pooler = embed(
         embedder, combined, labels_by_target, min_freq=min_freq,
         match_fn=match_fn, content_pos=CONTENT_POS, batch_size=batch_size)
-    labels, matrix = pool(word_vectors, labels_by_target)
+    labels, matrix = pool(pooler, labels_by_target)
     mean = None
     if center:
         matrix, mean = vectors.center_matrix(matrix)
@@ -308,7 +306,7 @@ def run_sep(
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
 
     if artifacts:
-        run_artifacts(labels, matrix, labels_by_target, word_vectors, mean,
+        run_artifacts(labels, matrix, labels_by_target, pooler, mean,
                       config.ANALYSIS / "sep", network, threshold, knn_k,
                       sim_transform, max_nodes)
 
@@ -327,15 +325,22 @@ def embed(
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: set[str] | frozenset[str] = frozenset(),
     batch_size: int = 32,
-) -> WordVectors:
-    """Vocab -> segments -> per-occurrence span vectors, for the whole corpus."""
+) -> vectors.Pooler:
+    """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
+
+    The embedder yields occurrences one batch at a time; we fold each into a
+    running max-pool here, so the whole corpus's occurrence vectors are never all
+    resident at once (the memory that OOM'd on the large SEP corpus)."""
     vocab = build_vocab(sources, min_freq, match_fn,
                         content_pos=content_pos, stopwords=stopwords)
     vocab |= set(target_labels)
     unk_check(emb, target_labels)
     segments = segment(emb, sources, vocab, match_fn,
                        content_pos=content_pos, stopwords=stopwords)
-    return emb.embed(segments, batch_size)
+    pooler = vectors.Pooler(keep=set(target_labels))
+    for word, vec in emb.embed(segments, batch_size):
+        pooler.add(word, vec)
+    return pooler
 
 
 def segment(
@@ -357,20 +362,11 @@ def segment(
     return segments
 
 
-def pool(word_vectors: WordVectors, target_labels) -> tuple[list[str], ndarray]:
-    labels, matrix = vectors.max_pool(word_vectors)
+def pool(pooler: vectors.Pooler, target_labels) -> tuple[list[str], ndarray]:
+    labels, matrix = pooler.matrix()
     n_tgt = sum(1 for l in labels if l in target_labels)
     print(f"pooled     : {len(labels)} words ({n_tgt} targets)")
     return labels, matrix
-
-
-def occurrences(word_vectors: WordVectors, targets, mean: ndarray | None = None):
-    """Per-target stacked occurrence vectors (centered with the pooled ``mean``)."""
-    return {
-        w: (s if mean is None else s - mean)
-        for w in targets
-        if (s := (np.stack(word_vectors[w]) if word_vectors.get(w) else None)) is not None
-    }
 
 
 def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
@@ -384,12 +380,13 @@ def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
         print(f"UNK check  : OK — all {len(words)} words in-vocab")
 
 
-def run_artifacts(labels, matrix, targets, word_vectors, mean, out_dir,
+def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, out_dir,
                   network: str, threshold: float, knn_k: int,
                   sim_transform: analyze.SimTransform, max_nodes: int) -> None:
     """Opt-in: the heavy PNG/CSV analysis dump, decoupled from the JSON outputs."""
     is_target = np.array([l in targets for l in labels])
-    target_occ = occurrences(word_vectors, targets, mean)
+    target_occ = {w: (s if mean is None else s - mean)
+                  for w, s in pooler.stacks().items()}
     summary = analyze.run_analysis(
         labels, matrix, is_target, target_occ, out_dir, threshold, kmeans_k=4,
         method=network, knn_k=knn_k, sim_transform=sim_transform, max_nodes=max_nodes)

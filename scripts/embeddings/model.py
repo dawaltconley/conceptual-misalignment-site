@@ -8,7 +8,7 @@ mean logic keeps this correct for multi-char neighbors or any subword splitting.
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 
 import numpy as np
 import torch
@@ -79,23 +79,22 @@ class Embedder:
         self,
         segments: list[Segment],
         batch_size: int = 32,
-    ) -> dict[str, list[np.ndarray]]:
-        """Return ``{word: [occurrence_vector, ...]}`` across all segments.
+    ) -> Iterator[tuple[str, np.ndarray]]:
+        """Stream ``(word, occurrence_vector)`` for every word-of-interest span.
 
-        Each occurrence vector is the mean of the final-layer hidden states of
-        the tokens overlapping that occurrence's character span.
+        Each occurrence vector is the mean of the final-layer hidden states of the
+        tokens overlapping that occurrence's character span. Only one batch's
+        hidden states live in memory at a time — this yields the occurrences and
+        holds nothing, so the caller decides how to fold them (e.g. a streaming
+        max-pool) rather than accumulating every vector here.
         """
-        by_word: dict[str, list[np.ndarray]] = {}
         for start in range(0, len(segments), batch_size):
-            batch = segments[start: start + batch_size]
-            self._embed_batch(batch, by_word)
-        return by_word
+            yield from self._embed_batch(segments[start: start + batch_size])
 
     def _embed_batch(
         self,
         batch: list[Segment],
-        by_word: dict[str, list[np.ndarray]],
-    ) -> None:
+    ) -> Iterator[tuple[str, np.ndarray]]:
         enc = self.tokenizer(
             [r.text for r in batch],
             padding=True,
@@ -118,5 +117,4 @@ class Embedder:
                 ]
                 if not tok_idx:
                     continue  # span fell outside the 512-token truncation window
-                vec = hidden[i, tok_idx].mean(axis=0)
-                by_word.setdefault(span.word, []).append(vec)
+                yield span.word, hidden[i, tok_idx].mean(axis=0)
