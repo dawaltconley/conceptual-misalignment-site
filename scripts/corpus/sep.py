@@ -120,7 +120,9 @@ class SEPSearch(Source):
                     continue
                 sep.articles.append(article)
                 if max_results and len(sep.articles) >= max_results:
-                    break  # got enough articles, break loop
+                    break  # got enough articles, break inner loop
+            if max_results and len(sep.articles) >= max_results:
+                break  # ...and stop paging (the for-break alone kept looping)
             page += 1
 
         return sep
