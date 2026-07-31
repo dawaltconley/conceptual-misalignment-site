@@ -159,7 +159,7 @@ def _search(term: str, page: int = 1) -> _Response:
     return r
 
 
-class ParsedSearchPage(NamedTuple):
+class _ParsedSearchPage(NamedTuple):
     results: list[str]
     total: int
 
@@ -168,7 +168,7 @@ SEARCH_TOTAL_RE = re.compile(
     r"\d+[-–—]\d+ of (?P<total_docs>\d+) documents found")
 
 
-def _parse_search_results(r: _Response) -> ParsedSearchPage:
+def _parse_search_results(r: _Response) -> _ParsedSearchPage:
     soup = BeautifulSoup(r.content, 'html.parser', from_encoding="utf-8")
     result_links = soup.find_all("div", class_="result_url")
     total_results = len(result_links)
@@ -184,7 +184,7 @@ def _parse_search_results(r: _Response) -> ParsedSearchPage:
         else:
             print(
                 f"Couldn't find total documents in SEP search results page: {r.url}")
-    return ParsedSearchPage([r.text.strip() for r in result_links], total_results)
+    return _ParsedSearchPage([r.text.strip() for r in result_links], total_results)
 
 
 def search_sep(search_term: str | Rendering, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
@@ -213,3 +213,11 @@ def search_sep(search_term: str | Rendering, max_results: int | None = None, *, 
                 # got enough articles, break loop
                 return articles
         page += 1
+
+
+SEP_CORPUS = Source(
+    id="sep",
+    url="https://plato.stanford.edu/",
+    title="SEP (combined)",
+    description="Combined SEP corpus for the English renderings of 仁 / 義"
+)

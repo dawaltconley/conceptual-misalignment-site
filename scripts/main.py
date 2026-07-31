@@ -28,6 +28,7 @@ from spacy.tokens import Doc
 
 from config import TERMS, CTEXT, SEP, EMBEDDINGS, DATA, ANALYSIS
 from models import Pipeline, Source, TermData, NetworkData, Embeddings
+from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter
 from embeddings import analyze, vectors
@@ -162,14 +163,6 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
         run_artifacts(labels, matrix, targets, pooler, mean,
                       ANALYSIS / "mengzi", p.sim_network, p.threshold, p.knn_k,
                       p.sim_transform, p.max_network_nodes)
-
-
-SEP_CORPUS = Source(
-    id="sep",
-    url="https://plato.stanford.edu/",
-    title="SEP (combined)",
-    description="Combined SEP corpus for the English renderings of 仁 / 義"
-)
 
 
 def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
