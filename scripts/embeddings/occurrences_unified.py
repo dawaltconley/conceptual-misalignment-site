@@ -26,18 +26,19 @@ from __future__ import annotations
 from collections import Counter
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass, field
-from typing import Protocol
+from typing import Protocol, NamedTuple
+from lib import Source
 
 from spacy.tokens import Doc, Token
 
 CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
 
 
-class SourceDoc(Protocol):
+class SourceDoc(NamedTuple):
     """A source unit: a stable id + its parsed Doc. (``corpus.conllu.ChapterDoc``
     and any ``(id, doc)`` wrapper for a SEP article both satisfy this.)"""
 
-    id: str
+    source: Source
     doc: Doc
 
 
@@ -175,4 +176,4 @@ def _segment(
             if key is not None and key in words_of_interest:
                 a = token.idx - start
                 spans.append(Span(key, a, a + len(token.text)))
-    return Segment(text=text, source_id=src.id, spans=spans)
+    return Segment(text=text, source_id=src.source.id, spans=spans)
