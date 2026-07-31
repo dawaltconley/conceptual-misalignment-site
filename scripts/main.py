@@ -193,7 +193,8 @@ def run_mengzi(
     print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler = embed(
         embedder, chapters, targets, min_freq=min_freq,
-        content_pos=content_pos, stopwords=stopwords, batch_size=batch_size)
+        content_pos=content_pos, stopwords=stopwords, batch_size=batch_size,
+        keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
     mean = None
     if center:
@@ -285,7 +286,8 @@ def run_sep(
     print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler = embed(
         embedder, combined, labels_by_target, min_freq=min_freq,
-        match_fn=match_fn, content_pos=CONTENT_POS, batch_size=batch_size)
+        match_fn=match_fn, content_pos=CONTENT_POS, batch_size=batch_size,
+        keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
     mean = None
     if center:
@@ -325,19 +327,22 @@ def embed(
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: set[str] | frozenset[str] = frozenset(),
     batch_size: int = 32,
+    keep: set[str] | frozenset[str] = frozenset(),
 ) -> vectors.Pooler:
     """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
 
     The embedder yields occurrences one batch at a time; we fold each into a
     running max-pool here, so the whole corpus's occurrence vectors are never all
-    resident at once (the memory that OOM'd on the large SEP corpus)."""
+    resident at once (the memory that OOM'd on the large SEP corpus). ``keep``
+    words additionally retain their full occurrence stacks (for cohesion under
+    ``--artifacts``); pass none to keep only the running maxes."""
     vocab = build_vocab(sources, min_freq, match_fn,
                         content_pos=content_pos, stopwords=stopwords)
     vocab |= set(target_labels)
     unk_check(emb, target_labels)
     segments = segment(emb, sources, vocab, match_fn,
                        content_pos=content_pos, stopwords=stopwords)
-    pooler = vectors.Pooler(keep=set(target_labels))
+    pooler = vectors.Pooler(keep=set(keep))
     for word, vec in emb.embed(segments, batch_size):
         pooler.add(word, vec)
     return pooler
