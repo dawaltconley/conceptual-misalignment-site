@@ -7,7 +7,7 @@ communities serialized in the site's node-link JSON schema.
 """
 
 from __future__ import annotations
-from typing import overload, Literal, Callable
+from typing import Literal, Callable
 from itertools import cycle
 from graph.prune import prune_to_neighborhood
 from graph.serialize import save_graph_json
@@ -291,57 +291,40 @@ def heatmap(mat: np.ndarray, labels: list[str], title: str, path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Attempted simplification of cosine similarity
+# Similarity network + Louvain communities (build; caller saves via save_network)
 # ---------------------------------------------------------------------------
 
 
-@overload
 def build_networks(
     labels: list[str],
     matrix: np.ndarray,
-    is_target: np.ndarray,
     *,
-    threshold: float,
-) -> tuple[nx.Graph, int, dict[str, int]]: pass
-
-
-@overload
-def build_networks(
-    labels: list[str],
-    matrix: np.ndarray,
-    is_target: np.ndarray,
-    *,
-    knn_k: int,
-) -> tuple[nx.Graph, int, dict[str, int]]: pass
-
-
-def build_networks(
-    labels: list[str],
-    matrix: np.ndarray,
-    is_target: np.ndarray,
-    *,
-    threshold: float | None = None,
-    knn_k: int | None = None,
+    method: Method = "threshold",
+    threshold: float = 0.75,
+    knn_k: int = 8,
+    sim_transform: SimTransform = "none",
 ) -> tuple[nx.Graph, int, dict[str, int]]:
-    # Similarity among target terms only. cosine_targets.csv is always the raw
-    # cosine (reference); cosine_targets_log.csv is the -ln(1-s) view (kept for
-    # continuity). The heatmap uses this run's sim_transform so it shares a scale
-    # with the network edges below.
-    tgt_idx = [i for i, t in enumerate(is_target) if t]
-    tgt_vecs = matrix[tgt_idx]
-    sim = neglog_transform(cosine_similarity(tgt_vecs))
+    """Build the similarity graph over the **full** vocab + detect communities.
 
-    if knn_k is not None:
+    Returns ``(G, n_communities, community_map)``; the caller serializes it (see
+    :func:`save_network`). ``method`` selects edge construction ("knn" top-``knn_k``
+    neighbors vs "threshold" cutoff); ``sim_transform`` optionally reweights the
+    cosine matrix first. Re-implements the graph-building half of the former
+    ``build_and_save_networks`` — over all ``labels``, not just the targets (the
+    target-only sim was an ``n×n`` matrix indexed with the full label list → the
+    IndexError in :func:`build_knn_graph`).
+    """
+    sim = apply_sim_transform(cosine_similarity(matrix), sim_transform)
+    if method == "knn":
         G = build_knn_graph(labels, sim, knn_k)
-    elif threshold is not None:
+    elif method == "threshold":
         G = build_cosine_graph(labels, sim, threshold)
     else:
-        raise ValueError(f"Must define either a threshold or a knn_k")
+        raise ValueError(f"unknown network method {method!r}")
 
     G.remove_nodes_from(list(nx.isolates(G)))
     n_comms = annotate_communities(G)
     community_map = {n: int(G.nodes[n]["community"]) for n in G}
-
     return G, n_comms, community_map
 
 
@@ -403,12 +386,9 @@ def run_analysis(
     write_rows_csv(out_dir / "cohesion_variance.csv", cv)
 
     # Network + Louvain first, so the scatter plots can color by community.
-    if method == "threshold":
-        sim_network, n_comms, community_map = build_networks(
-            labels, matrix, is_target, threshold=threshold)
-    elif method == "knn":
-        sim_network, n_comms, community_map = build_networks(
-            labels, matrix, is_target, knn_k=knn_k)
+    sim_network, n_comms, community_map = build_networks(
+        labels, matrix, method=method, threshold=threshold, knn_k=knn_k,
+        sim_transform=sim_transform)
 
     # save the similarity networks, pruned to terms
     net_dir = out_dir / "networks"
