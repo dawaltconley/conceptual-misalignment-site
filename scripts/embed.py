@@ -348,13 +348,17 @@ def pool(word_vectors: WordVectors, target_labels) -> tuple[list[str], ndarray]:
     return labels, matrix
 
 
-def occurrences(word_vectors: WordVectors, targets, mean: ndarray | None = None):
+def occurrences(word_vectors: WordVectors, targets: frozenset[str], mean: ndarray | None = None):
     """Per-target stacked occurrence vectors (centered with the pooled ``mean``)."""
-    return {
-        w: (s if mean is None else s - mean)
-        for w in targets
-        if (s := (np.stack(word_vectors[w]) if word_vectors.get(w) else None)) is not None
-    }
+    occ: dict[str, ndarray] = {}
+    for w in targets:
+        if not word_vectors.get(w):
+            continue
+        stack = np.stack(word_vectors[w])
+        if mean is not None:
+            stack -= mean
+        occ[w] = stack
+    return occ
 
 
 def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
