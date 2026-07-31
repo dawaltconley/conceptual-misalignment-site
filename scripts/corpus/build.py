@@ -1,6 +1,6 @@
 from typing import NamedTuple
 from config import TERMS
-from lib import Rendering
+from models import Rendering
 from corpus.mengzi import Mengzi, fetch_mengzi_full
 from corpus.sep import SEPSearch
 from corpus.inpho import is_chinese_philosophy

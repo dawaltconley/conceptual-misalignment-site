@@ -5,7 +5,7 @@ virtues from GujiRoBERTa final-layer embeddings, using per-occurrence mean over
 subwords then max-pooling across occurrences.
 
 Library modules only (``model``, ``vectors``, ``analyze``,
-``occurrences_unified``); the pipeline entrypoint is ``embed.py``. Run with
+``occurrences``); the pipeline entrypoint is ``main.py``. Run with
 ``scripts/`` as the working directory so the sibling packages (``config``,
-``graph``, ``nlp``, ``corpus``) resolve on ``sys.path``.
+``graph``, ``text``, ``corpus``) resolve on ``sys.path``.
 """

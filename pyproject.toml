@@ -49,6 +49,6 @@ packages = [
     "corpus",
     "embeddings",
     "graph",
-    "nlp",
+    "text",
     "segmentation",
 ]

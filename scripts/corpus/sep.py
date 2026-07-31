@@ -7,7 +7,7 @@ import re
 from corpus import cache
 from dataclasses import dataclass
 from random import random
-from lib import Source, Rendering
+from models import Source, Rendering
 cache.install()
 
 _Response = requests.Response

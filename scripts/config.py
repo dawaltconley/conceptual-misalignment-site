@@ -1,5 +1,5 @@
 from pathlib import Path
-from lib import Term, Rendering
+from models import Term, Rendering
 
 # Absolute anchors so the pipelines no longer depend on the current working
 # directory. Everything is resolved relative to this file's location.

@@ -1,10 +1,10 @@
-"""PMI / co-occurrence networks over spaCy Docs (the ``occurrences_unified`` path).
+"""PMI / co-occurrence networks over spaCy Docs (the ``occurrences`` path).
 
 A spaCy-native re-expression of :mod:`cooccurrence.pmi`. The original works on
 pre-tokenized ``list[list[str]]`` sentences; here the input is the same
 ``SourceDoc``s the embedding pipeline already builds, so node selection reuses
-:func:`~embeddings.occurrences_unified.content_key` and
-:func:`~embeddings.occurrences_unified.build_vocab` — one definition of "what is a
+:func:`~embeddings.occurrences.content_key` and
+:func:`~embeddings.occurrences.build_vocab` — one definition of "what is a
 node, and under what key" for both pipelines.
 
 Two things are carried over unchanged from the string pipeline by *reusing* the
@@ -41,7 +41,7 @@ from cooccurrence.pmi import (
     build_pmi_graph as _build_pmi_graph,
     build_similarity_network as _build_similarity_network,
 )
-from embeddings.occurrences_unified import (
+from embeddings.occurrences import (
     CONTENT_POS,
     MatchFn,
     SourceDoc,

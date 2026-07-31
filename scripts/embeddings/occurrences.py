@@ -27,7 +27,7 @@ from collections import Counter
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass, field
 from typing import Protocol, NamedTuple
-from lib import Source
+from models import Source
 
 from spacy.tokens import Doc, Token
 

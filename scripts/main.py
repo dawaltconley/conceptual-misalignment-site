@@ -2,7 +2,7 @@
 
 Temporary scratch module (badly named, badly organized on purpose) — the plan is
 to get one corpus working end-to-end here for a clean diff, then split into
-``cli/main.py`` + shared modules. Outputs are shaped by the ``lib.py`` dataclasses
+``cli/main.py`` + shared modules. Outputs are shaped by the ``models.py`` dataclasses
 (``NetworkData`` / ``Embeddings``), NOT the current frontend Zod schemas; the site
 is rewired to match in a later step.
 
@@ -32,14 +32,14 @@ from networkx import Graph
 from spacy.tokens import Doc
 
 import config
-import lib
+import models
 from config import TERMS, CTEXT, SEP, EMBEDDINGS
-from nlp.chinese import STOPWORDS as CHINESE_STOPWORDS
+from text.chinese import STOPWORDS as CHINESE_STOPWORDS
 from corpus.build import build_chinese_corpus, build_english_corpus
-from parse import parse_sep_article, parse_mengzi_chapter
+from corpus.parse import parse_sep_article, parse_mengzi_chapter
 from embeddings import analyze, vectors
 from embeddings.model import Embedder
-from embeddings.occurrences_unified import (
+from embeddings.occurrences import (
     CONTENT_POS,
     MatchFn,
     Segment,
@@ -100,7 +100,7 @@ def save_cooccurrence(
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn) for s in network_sources)
-    lib.NetworkData(lib.TermData(label, occ), meta_source, net).save_json(
+    models.NetworkData(models.TermData(label, occ), meta_source, net).save_json(
         out_dir / f"{label}_{file_id}.json")
 
 
@@ -147,8 +147,8 @@ def save_similarity(
         pruned = prune_to_neighborhood(G, target, max_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
-        term = lib.TermData(target, int(occ_counts.get(target, 0)))
-        lib.NetworkData(term, corpus_source, pruned).save_json(
+        term = models.TermData(target, int(occ_counts.get(target, 0)))
+        models.NetworkData(term, corpus_source, pruned).save_json(
             out_dir / f"{target}_embeds.json")
 
 
@@ -209,8 +209,8 @@ def run_mengzi(
     save_similarity(targets, mengzi, G, CTEXT,
                     max_nodes=max_nodes, occ_counts=occ_counts)
 
-    reduced = lib.reduce_vectors(matrix, reduce_to_dims)
-    lib.Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
+    reduced = models.reduce_vectors(matrix, reduce_to_dims)
+    models.Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
 
@@ -302,8 +302,8 @@ def run_sep(
     save_similarity(labels_by_target, SEP_CORPUS, G, SEP,
                     max_nodes=max_nodes, occ_counts=occ_counts)
 
-    reduced = lib.reduce_vectors(matrix, reduce_to_dims)
-    lib.Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
+    reduced = models.reduce_vectors(matrix, reduce_to_dims)
+    models.Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
 

@@ -21,7 +21,7 @@ Books and their ctext URNs:
 
 import requests
 import time
-from lib import Source
+from models import Source
 from corpus import cache
 from config import MENGZI_DIR
 from typing import Literal
