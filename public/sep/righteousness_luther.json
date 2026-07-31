@@ -1,0 +1,386 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 9,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/luther/",
+    "url": "https://plato.stanford.edu/entries/luther/",
+    "title": "Martin Luther",
+    "description": "\n\nMartin Luther (1483–1546) is the central figure of the\nProtestant Reformation. Whilst he is primarily seen as a theologian,\nthe philosophical interest and imp"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "remains",
+        "id": "remain"
+      },
+      {
+        "form": "righteous",
+        "id": "righteousness"
+      },
+      {
+        "form": "neighbour",
+        "id": "neighbour"
+      },
+      {
+        "form": "continued",
+        "id": "continue"
+      },
+      {
+        "form": "Disputation",
+        "id": "disputation"
+      },
+      {
+        "form": "think",
+        "id": "think"
+      },
+      {
+        "form": "government",
+        "id": "government"
+      },
+      {
+        "form": "goes",
+        "id": "go"
+      },
+      {
+        "form": "comes",
+        "id": "come"
+      },
+      {
+        "form": "justification",
+        "id": "justification"
+      },
+      {
+        "form": "Aristotelian",
+        "id": "aristotelian"
+      },
+      {
+        "form": "conception",
+        "id": "conception"
+      },
+      {
+        "form": "temporal",
+        "id": "temporal"
+      },
+      {
+        "form": "world",
+        "id": "world"
+      },
+      {
+        "form": "set",
+        "id": "set"
+      },
+      {
+        "form": "love",
+        "id": "love"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.8898206824042698,
+        "source": "remain",
+        "target": "continue"
+      },
+      {
+        "weight": 1.5533484457830569,
+        "source": "remain",
+        "target": "conception"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "remain",
+        "target": "righteousness"
+      },
+      {
+        "weight": 0.9343092373768334,
+        "source": "remain",
+        "target": "think"
+      },
+      {
+        "weight": 1.1966735018443244,
+        "source": "remain",
+        "target": "justification"
+      },
+      {
+        "weight": 1.1013633220399996,
+        "source": "remain",
+        "target": "love"
+      },
+      {
+        "weight": 1.01435194505037,
+        "source": "remain",
+        "target": "neighbour"
+      },
+      {
+        "weight": 1.3020340175021508,
+        "source": "remain",
+        "target": "temporal"
+      },
+      {
+        "weight": 1.1013633220399996,
+        "source": "remain",
+        "target": "world"
+      },
+      {
+        "weight": 2.02595285672885,
+        "source": "righteousness",
+        "target": "come"
+      },
+      {
+        "weight": 1.80280930541464,
+        "source": "righteousness",
+        "target": "justification"
+      },
+      {
+        "weight": 2.2335922215070942,
+        "source": "righteousness",
+        "target": "think"
+      },
+      {
+        "weight": 1.80280930541464,
+        "source": "righteousness",
+        "target": "continue"
+      },
+      {
+        "weight": 1.80280930541464,
+        "source": "righteousness",
+        "target": "disputation"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "righteousness",
+        "target": "aristotelian"
+      },
+      {
+        "weight": 1.6204877486206852,
+        "source": "righteousness",
+        "target": "set"
+      },
+      {
+        "weight": 2.159484249353372,
+        "source": "righteousness",
+        "target": "conception"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "righteousness",
+        "target": "go"
+      },
+      {
+        "weight": 1.9081698210724662,
+        "source": "righteousness",
+        "target": "government"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "righteousness",
+        "target": "love"
+      },
+      {
+        "weight": 1.6204877486206852,
+        "source": "righteousness",
+        "target": "neighbour"
+      },
+      {
+        "weight": 1.9081698210724662,
+        "source": "righteousness",
+        "target": "temporal"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "righteousness",
+        "target": "world"
+      },
+      {
+        "weight": 3.211576522386589,
+        "source": "neighbour",
+        "target": "love"
+      },
+      {
+        "weight": 1.9459101490553132,
+        "source": "neighbour",
+        "target": "think"
+      },
+      {
+        "weight": 2.2082744135228043,
+        "source": "neighbour",
+        "target": "justification"
+      },
+      {
+        "weight": 1.01435194505037,
+        "source": "neighbour",
+        "target": "aristotelian"
+      },
+      {
+        "weight": 1.2150226405125208,
+        "source": "neighbour",
+        "target": "government"
+      },
+      {
+        "weight": 1.2150226405125208,
+        "source": "neighbour",
+        "target": "temporal"
+      },
+      {
+        "weight": 1.7074991256103151,
+        "source": "neighbour",
+        "target": "world"
+      },
+      {
+        "weight": 0.598836501088704,
+        "source": "continue",
+        "target": "disputation"
+      },
+      {
+        "weight": 0.12883287184296838,
+        "source": "disputation",
+        "target": "come"
+      },
+      {
+        "weight": 1.5151272329628591,
+        "source": "disputation",
+        "target": "set"
+      },
+      {
+        "weight": 1.1966735018443244,
+        "source": "disputation",
+        "target": "aristotelian"
+      },
+      {
+        "weight": 0.5035263212843791,
+        "source": "disputation",
+        "target": "go"
+      },
+      {
+        "weight": 1.252762968495368,
+        "source": "think",
+        "target": "come"
+      },
+      {
+        "weight": 1.0296194171811581,
+        "source": "think",
+        "target": "justification"
+      },
+      {
+        "weight": 0.9343092373768334,
+        "source": "think",
+        "target": "go"
+      },
+      {
+        "weight": 2.032921526044943,
+        "source": "think",
+        "target": "love"
+      },
+      {
+        "weight": 0.9343092373768334,
+        "source": "think",
+        "target": "aristotelian"
+      },
+      {
+        "weight": 0.9343092373768334,
+        "source": "think",
+        "target": "world"
+      },
+      {
+        "weight": 2.8889990740841927,
+        "source": "government",
+        "target": "temporal"
+      },
+      {
+        "weight": 2.4006463061702603,
+        "source": "government",
+        "target": "world"
+      },
+      {
+        "weight": 1.3020340175021508,
+        "source": "government",
+        "target": "love"
+      },
+      {
+        "weight": 1.1013633220399996,
+        "source": "go",
+        "target": "world"
+      },
+      {
+        "weight": 0.726669872598589,
+        "source": "go",
+        "target": "come"
+      },
+      {
+        "weight": 0.639658495608959,
+        "source": "come",
+        "target": "set"
+      },
+      {
+        "weight": 0.8219800524029137,
+        "source": "come",
+        "target": "justification"
+      },
+      {
+        "weight": 2.295285790512434,
+        "source": "justification",
+        "target": "aristotelian"
+      },
+      {
+        "weight": 2.341805806147327,
+        "source": "justification",
+        "target": "conception"
+      },
+      {
+        "weight": 2.295285790512434,
+        "source": "justification",
+        "target": "love"
+      },
+      {
+        "weight": 1.5533484457830569,
+        "source": "aristotelian",
+        "target": "conception"
+      },
+      {
+        "weight": 1.01435194505037,
+        "source": "aristotelian",
+        "target": "set"
+      },
+      {
+        "weight": 1.1013633220399996,
+        "source": "aristotelian",
+        "target": "love"
+      },
+      {
+        "weight": 1.9951811980620962,
+        "source": "temporal",
+        "target": "love"
+      },
+      {
+        "weight": 1.2150226405125208,
+        "source": "temporal",
+        "target": "set"
+      },
+      {
+        "weight": 2.6883283786220415,
+        "source": "temporal",
+        "target": "world"
+      },
+      {
+        "weight": 2.199975610708109,
+        "source": "world",
+        "target": "love"
+      },
+      {
+        "weight": 1.01435194505037,
+        "source": "world",
+        "target": "set"
+      },
+      {
+        "weight": 1.01435194505037,
+        "source": "set",
+        "target": "love"
+      }
+    ]
+  }
+}

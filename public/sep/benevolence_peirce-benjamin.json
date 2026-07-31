@@ -1,0 +1,44 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 1,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/peirce-benjamin/",
+    "url": "https://plato.stanford.edu/entries/peirce-benjamin/",
+    "title": "Benjamin Peirce",
+    "description": "\n\n\nBenjamin Peirce  (b. April 4, 1809, d. October 6, 1880) was a professor\nat Harvard with interests in celestial mechanics, applications of plane\nand spherical"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "mathematics",
+        "id": "mathematic"
+      },
+      {
+        "form": "Peirce",
+        "id": "peirce"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.1941560144409574,
+        "source": "mathematic",
+        "target": "peirce"
+      },
+      {
+        "weight": 0.1941560144409574,
+        "source": "peirce",
+        "target": "benevolence"
+      }
+    ]
+  }
+}

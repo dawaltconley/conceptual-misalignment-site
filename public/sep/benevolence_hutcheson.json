@@ -1,0 +1,471 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 33,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/hutcheson/",
+    "url": "https://plato.stanford.edu/entries/hutcheson/",
+    "title": "Francis Hutcheson",
+    "description": "\n\nFrancis Hutcheson (1694–1746) was an influential British\nmoralist, an advocate of moral sentimentalism, and a key figure of the\nScottish Enlightenment. While "
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "true",
+        "id": "true"
+      },
+      {
+        "form": "holds",
+        "id": "hold"
+      },
+      {
+        "form": "way",
+        "id": "way"
+      },
+      {
+        "form": "Benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "Evil",
+        "id": "evil"
+      },
+      {
+        "form": "greatest",
+        "id": "great"
+      },
+      {
+        "form": "publick",
+        "id": "publick"
+      },
+      {
+        "form": "Beauty",
+        "id": "beauty"
+      },
+      {
+        "form": "kind",
+        "id": "kind"
+      },
+      {
+        "form": "Agent",
+        "id": "agent"
+      },
+      {
+        "form": "motivated",
+        "id": "motivate"
+      },
+      {
+        "form": "Actions",
+        "id": "actions"
+      },
+      {
+        "form": "interest",
+        "id": "interest"
+      },
+      {
+        "form": "virtuous",
+        "id": "virtuous"
+      },
+      {
+        "form": "Good",
+        "id": "good"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.4469189829363254,
+        "source": "true",
+        "target": "way"
+      },
+      {
+        "weight": 1.5522794985941517,
+        "source": "true",
+        "target": "evil"
+      },
+      {
+        "weight": 0.8968726460170535,
+        "source": "true",
+        "target": "good"
+      },
+      {
+        "weight": 1.1104467463151124,
+        "source": "true",
+        "target": "agent"
+      },
+      {
+        "weight": 1.1468143904859875,
+        "source": "true",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.3822082459438971,
+        "source": "true",
+        "target": "interest"
+      },
+      {
+        "weight": 0.9162907318741551,
+        "source": "true",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.8591323180342064,
+        "source": "true",
+        "target": "actions"
+      },
+      {
+        "weight": 1.3516088031320006,
+        "source": "true",
+        "target": "publick"
+      },
+      {
+        "weight": 0.12850204421952058,
+        "source": "hold",
+        "target": "good"
+      },
+      {
+        "weight": 1.0070524481108287,
+        "source": "hold",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.29555612888268684,
+        "source": "hold",
+        "target": "beauty"
+      },
+      {
+        "weight": 0.019302752254528675,
+        "source": "hold",
+        "target": "interest"
+      },
+      {
+        "weight": 1.3071570405611668,
+        "source": "hold",
+        "target": "motivate"
+      },
+      {
+        "weight": 0.958850346292951,
+        "source": "hold",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.29555612888268684,
+        "source": "hold",
+        "target": "publick"
+      },
+      {
+        "weight": 0.054394072065798764,
+        "source": "hold",
+        "target": "agent"
+      },
+      {
+        "weight": 1.3941684175507965,
+        "source": "hold",
+        "target": "great"
+      },
+      {
+        "weight": 0.3908663086870116,
+        "source": "hold",
+        "target": "way"
+      },
+      {
+        "weight": 0.12850204421952058,
+        "source": "hold",
+        "target": "kind"
+      },
+      {
+        "weight": 0.9236708391717776,
+        "source": "way",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.128465251817791,
+        "source": "way",
+        "target": "great"
+      },
+      {
+        "weight": 1.1117230706747172,
+        "source": "benevolence",
+        "target": "interest"
+      },
+      {
+        "weight": 0.8283606593674526,
+        "source": "benevolence",
+        "target": "self"
+      },
+      {
+        "weight": 1.657640014251978,
+        "source": "benevolence",
+        "target": "motivate"
+      },
+      {
+        "weight": 1.029031354829604,
+        "source": "benevolence",
+        "target": "actions"
+      },
+      {
+        "weight": 0.8844501260184964,
+        "source": "benevolence",
+        "target": "good"
+      },
+      {
+        "weight": 1.066771682812451,
+        "source": "benevolence",
+        "target": "kind"
+      },
+      {
+        "weight": 1.2338257674756172,
+        "source": "benevolence",
+        "target": "beauty"
+      },
+      {
+        "weight": 1.521507839927398,
+        "source": "benevolence",
+        "target": "publick"
+      },
+      {
+        "weight": 0.9926637106587292,
+        "source": "benevolence",
+        "target": "agent"
+      },
+      {
+        "weight": 1.029031354829604,
+        "source": "benevolence",
+        "target": "evil"
+      },
+      {
+        "weight": 1.0861897686695525,
+        "source": "benevolence",
+        "target": "virtuous"
+      },
+      {
+        "weight": 1.2338257674756172,
+        "source": "benevolence",
+        "target": "great"
+      },
+      {
+        "weight": 1.7599188633723963,
+        "source": "evil",
+        "target": "good"
+      },
+      {
+        "weight": 1.8399615710459327,
+        "source": "evil",
+        "target": "actions"
+      },
+      {
+        "weight": 0.3736245022525056,
+        "source": "evil",
+        "target": "kind"
+      },
+      {
+        "weight": 0.2995165300987838,
+        "source": "evil",
+        "target": "agent"
+      },
+      {
+        "weight": 1.2338257674756172,
+        "source": "evil",
+        "target": "publick"
+      },
+      {
+        "weight": 1.2338257674756172,
+        "source": "evil",
+        "target": "great"
+      },
+      {
+        "weight": 0.5406785869156718,
+        "source": "evil",
+        "target": "beauty"
+      },
+      {
+        "weight": 1.2715660954584642,
+        "source": "great",
+        "target": "good"
+      },
+      {
+        "weight": 1.8906053038646877,
+        "source": "great",
+        "target": "agent"
+      },
+      {
+        "weight": 1.033155072013466,
+        "source": "great",
+        "target": "publick"
+      },
+      {
+        "weight": 0.8661009873502997,
+        "source": "great",
+        "target": "kind"
+      },
+      {
+        "weight": 0.9461436950238362,
+        "source": "great",
+        "target": "motivate"
+      },
+      {
+        "weight": 1.2909841813155658,
+        "source": "great",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.5406785869156718,
+        "source": "great",
+        "target": "actions"
+      },
+      {
+        "weight": 1.6392908755837814,
+        "source": "publick",
+        "target": "actions"
+      },
+      {
+        "weight": 1.7263022525734113,
+        "source": "publick",
+        "target": "beauty"
+      },
+      {
+        "weight": 1.559248167910245,
+        "source": "publick",
+        "target": "good"
+      },
+      {
+        "weight": 0.8661009873502997,
+        "source": "publick",
+        "target": "kind"
+      },
+      {
+        "weight": 1.4851401957565233,
+        "source": "publick",
+        "target": "agent"
+      },
+      {
+        "weight": 0.8661009873502997,
+        "source": "beauty",
+        "target": "good"
+      },
+      {
+        "weight": 1.2338257674756172,
+        "source": "beauty",
+        "target": "actions"
+      },
+      {
+        "weight": 0.8661009873502997,
+        "source": "beauty",
+        "target": "kind"
+      },
+      {
+        "weight": 0.9221904540013435,
+        "source": "kind",
+        "target": "good"
+      },
+      {
+        "weight": 1.066771682812451,
+        "source": "kind",
+        "target": "actions"
+      },
+      {
+        "weight": 0.6249389305334118,
+        "source": "kind",
+        "target": "agent"
+      },
+      {
+        "weight": 0.7790896103606699,
+        "source": "kind",
+        "target": "motivate"
+      },
+      {
+        "weight": 0.43078291609245434,
+        "source": "kind",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.2995165300987838,
+        "source": "agent",
+        "target": "actions"
+      },
+      {
+        "weight": 0.7919930151965779,
+        "source": "agent",
+        "target": "self"
+      },
+      {
+        "weight": 0.921204746676584,
+        "source": "agent",
+        "target": "interest"
+      },
+      {
+        "weight": 1.3981288187668934,
+        "source": "agent",
+        "target": "motivate"
+      },
+      {
+        "weight": 0.8480824818476216,
+        "source": "agent",
+        "target": "good"
+      },
+      {
+        "weight": 1.742969305058623,
+        "source": "agent",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.7790896103606699,
+        "source": "motivate",
+        "target": "good"
+      },
+      {
+        "weight": 1.586181050269833,
+        "source": "motivate",
+        "target": "interest"
+      },
+      {
+        "weight": 1.6392908755837814,
+        "source": "motivate",
+        "target": "self"
+      },
+      {
+        "weight": 1.8971199848858813,
+        "source": "motivate",
+        "target": "virtuous"
+      },
+      {
+        "weight": 1.2899152341266606,
+        "source": "actions",
+        "target": "good"
+      },
+      {
+        "weight": 0.8283606593674526,
+        "source": "actions",
+        "target": "self"
+      },
+      {
+        "weight": 2.1431960565051984,
+        "source": "interest",
+        "target": "self"
+      },
+      {
+        "weight": 1.4201959127955721,
+        "source": "interest",
+        "target": "virtuous"
+      },
+      {
+        "weight": 0.5978370007556204,
+        "source": "virtuous",
+        "target": "self"
+      },
+      {
+        "weight": 0.14310084364067324,
+        "source": "virtuous",
+        "target": "good"
+      }
+    ]
+  }
+}

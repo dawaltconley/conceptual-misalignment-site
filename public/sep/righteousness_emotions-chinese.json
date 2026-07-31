@@ -1,0 +1,496 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 4,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/emotions-chinese/",
+    "url": "https://plato.stanford.edu/entries/emotions-chinese/",
+    "title": "The Emotions in Early Chinese Philosophy",
+    "description": "\n\nIn many schools of Western philosophy and psychology, emotions are\nunderstood as inner subjective feelings that are sharply contrasted\nwith the intellectual f"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "following",
+        "id": "follow"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "virtues",
+        "id": "virtue"
+      },
+      {
+        "form": "ren",
+        "id": "ren"
+      },
+      {
+        "form": "times",
+        "id": "time"
+      },
+      {
+        "form": "emotional",
+        "id": "emotional"
+      },
+      {
+        "form": "Confucian",
+        "id": "confucian"
+      },
+      {
+        "form": "form",
+        "id": "form"
+      },
+      {
+        "form": "ritual",
+        "id": "ritual"
+      },
+      {
+        "form": "nature",
+        "id": "nature"
+      },
+      {
+        "form": "means",
+        "id": "mean"
+      },
+      {
+        "form": "essence",
+        "id": "essence"
+      },
+      {
+        "form": "zhi",
+        "id": "zhi"
+      },
+      {
+        "form": "genuineness",
+        "id": "genuineness"
+      },
+      {
+        "form": "joy",
+        "id": "joy"
+      },
+      {
+        "form": "Analects",
+        "id": "analects"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.5338908966969867,
+        "source": "follow",
+        "target": "analects"
+      },
+      {
+        "weight": 1.5371930055607717,
+        "source": "follow",
+        "target": "ritual"
+      },
+      {
+        "weight": 0.10644688187004721,
+        "source": "follow",
+        "target": "confucian"
+      },
+      {
+        "weight": 0.7995940624299925,
+        "source": "follow",
+        "target": "essence"
+      },
+      {
+        "weight": 1.162499556119361,
+        "source": "follow",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.24620882424520577,
+        "source": "follow",
+        "target": "nature"
+      },
+      {
+        "weight": 1.450181628571142,
+        "source": "follow",
+        "target": "time"
+      },
+      {
+        "weight": 0.6769917403376601,
+        "source": "follow",
+        "target": "form"
+      },
+      {
+        "weight": 1.8556467366793061,
+        "source": "follow",
+        "target": "righteousness"
+      },
+      {
+        "weight": 1.6325031853650964,
+        "source": "righteousness",
+        "target": "analects"
+      },
+      {
+        "weight": 1.7378637010229228,
+        "source": "righteousness",
+        "target": "joy"
+      },
+      {
+        "weight": 2.5487939172392515,
+        "source": "righteousness",
+        "target": "time"
+      },
+      {
+        "weight": 2.5913535316580476,
+        "source": "righteousness",
+        "target": "confucian"
+      },
+      {
+        "weight": 2.037968293473261,
+        "source": "righteousness",
+        "target": "emotional"
+      },
+      {
+        "weight": 1.8982063510981022,
+        "source": "righteousness",
+        "target": "essence"
+      },
+      {
+        "weight": 2.2611118447874707,
+        "source": "righteousness",
+        "target": "genuineness"
+      },
+      {
+        "weight": 1.3448211129133154,
+        "source": "righteousness",
+        "target": "nature"
+      },
+      {
+        "weight": 3.4242626545931514,
+        "source": "righteousness",
+        "target": "ren"
+      },
+      {
+        "weight": 2.635805294228881,
+        "source": "righteousness",
+        "target": "ritual"
+      },
+      {
+        "weight": 2.325650365925042,
+        "source": "righteousness",
+        "target": "virtue"
+      },
+      {
+        "weight": 2.731115474033206,
+        "source": "righteousness",
+        "target": "zhi"
+      },
+      {
+        "weight": 2.468751209565715,
+        "source": "righteousness",
+        "target": "form"
+      },
+      {
+        "weight": 1.4227826543830273,
+        "source": "righteousness",
+        "target": "mean"
+      },
+      {
+        "weight": 1.0038945259427223,
+        "source": "virtue",
+        "target": "analects"
+      },
+      {
+        "weight": 2.5079719227189963,
+        "source": "virtue",
+        "target": "ren"
+      },
+      {
+        "weight": 0.24620882424520577,
+        "source": "virtue",
+        "target": "nature"
+      },
+      {
+        "weight": 2.2811986033542078,
+        "source": "virtue",
+        "target": "confucian"
+      },
+      {
+        "weight": 0.5764505111157827,
+        "source": "virtue",
+        "target": "essence"
+      },
+      {
+        "weight": 1.6325031853650964,
+        "source": "virtue",
+        "target": "genuineness"
+      },
+      {
+        "weight": 1.814824742159051,
+        "source": "virtue",
+        "target": "emotional"
+      },
+      {
+        "weight": 1.314049454246562,
+        "source": "virtue",
+        "target": "ritual"
+      },
+      {
+        "weight": 0.7162124534909415,
+        "source": "virtue",
+        "target": "zhi"
+      },
+      {
+        "weight": 1.4093596340508867,
+        "source": "ren",
+        "target": "analects"
+      },
+      {
+        "weight": 2.368209980343838,
+        "source": "ren",
+        "target": "confucian"
+      },
+      {
+        "weight": 1.814824742159051,
+        "source": "ren",
+        "target": "emotional"
+      },
+      {
+        "weight": 2.4126617429146715,
+        "source": "ren",
+        "target": "ritual"
+      },
+      {
+        "weight": 0.8339954891473249,
+        "source": "ren",
+        "target": "nature"
+      },
+      {
+        "weight": 0.9819156192239471,
+        "source": "ren",
+        "target": "essence"
+      },
+      {
+        "weight": 1.3448211129133154,
+        "source": "ren",
+        "target": "genuineness"
+      },
+      {
+        "weight": 2.913437030827161,
+        "source": "ren",
+        "target": "zhi"
+      },
+      {
+        "weight": 0.5064919225088723,
+        "source": "ren",
+        "target": "mean"
+      },
+      {
+        "weight": 0.7995940624299925,
+        "source": "time",
+        "target": "confucian"
+      },
+      {
+        "weight": 0.939356004805151,
+        "source": "time",
+        "target": "nature"
+      },
+      {
+        "weight": 0.5338908966969867,
+        "source": "time",
+        "target": "analects"
+      },
+      {
+        "weight": 1.3323985929147584,
+        "source": "time",
+        "target": "joy"
+      },
+      {
+        "weight": 0.7995940624299925,
+        "source": "time",
+        "target": "essence"
+      },
+      {
+        "weight": 0.32417036571491775,
+        "source": "time",
+        "target": "mean"
+      },
+      {
+        "weight": 0.9819156192239471,
+        "source": "emotional",
+        "target": "essence"
+      },
+      {
+        "weight": 1.7502862210214798,
+        "source": "emotional",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.5064919225088723,
+        "source": "emotional",
+        "target": "mean"
+      },
+      {
+        "weight": 0.14084830858737965,
+        "source": "emotional",
+        "target": "nature"
+      },
+      {
+        "weight": 0.9819156192239471,
+        "source": "emotional",
+        "target": "confucian"
+      },
+      {
+        "weight": 2.1249796704628907,
+        "source": "emotional",
+        "target": "ritual"
+      },
+      {
+        "weight": 1.1216775615991057,
+        "source": "emotional",
+        "target": "zhi"
+      },
+      {
+        "weight": 0.8593132971316148,
+        "source": "emotional",
+        "target": "form"
+      },
+      {
+        "weight": 1.2476187849569527,
+        "source": "confucian",
+        "target": "essence"
+      },
+      {
+        "weight": 1.6105242786463212,
+        "source": "confucian",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.8483842265994245,
+        "source": "confucian",
+        "target": "nature"
+      },
+      {
+        "weight": 1.5797526199795677,
+        "source": "confucian",
+        "target": "ritual"
+      },
+      {
+        "weight": 0.9819156192239471,
+        "source": "confucian",
+        "target": "zhi"
+      },
+      {
+        "weight": 0.4538481890234503,
+        "source": "form",
+        "target": "analects"
+      },
+      {
+        "weight": 0.8593132971316148,
+        "source": "form",
+        "target": "nature"
+      },
+      {
+        "weight": 0.9372748386013265,
+        "source": "form",
+        "target": "mean"
+      },
+      {
+        "weight": 1.55246047769156,
+        "source": "form",
+        "target": "zhi"
+      },
+      {
+        "weight": 0.6209022736866165,
+        "source": "ritual",
+        "target": "analects"
+      },
+      {
+        "weight": 0.8866054394196223,
+        "source": "ritual",
+        "target": "essence"
+      },
+      {
+        "weight": 1.942658113668936,
+        "source": "ritual",
+        "target": "genuineness"
+      },
+      {
+        "weight": 1.7195145623547263,
+        "source": "ritual",
+        "target": "zhi"
+      },
+      {
+        "weight": 1.1043289232644928,
+        "source": "ritual",
+        "target": "mean"
+      },
+      {
+        "weight": 1.6750627997838925,
+        "source": "nature",
+        "target": "essence"
+      },
+      {
+        "weight": 1.211289720288793,
+        "source": "nature",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.3729605298843497,
+        "source": "nature",
+        "target": "mean"
+      },
+      {
+        "weight": 0.8339954891473249,
+        "source": "nature",
+        "target": "zhi"
+      },
+      {
+        "weight": 1.4653422688018232,
+        "source": "mean",
+        "target": "essence"
+      },
+      {
+        "weight": 1.645926205697237,
+        "source": "mean",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.5064919225088723,
+        "source": "mean",
+        "target": "zhi"
+      },
+      {
+        "weight": 2.5913535316580476,
+        "source": "essence",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.9819156192239471,
+        "source": "essence",
+        "target": "zhi"
+      },
+      {
+        "weight": 0.8215729691487678,
+        "source": "zhi",
+        "target": "joy"
+      },
+      {
+        "weight": 1.3448211129133154,
+        "source": "zhi",
+        "target": "genuineness"
+      },
+      {
+        "weight": 0.24620882424520577,
+        "source": "genuineness",
+        "target": "analects"
+      },
+      {
+        "weight": 0.41610786104060327,
+        "source": "joy",
+        "target": "analects"
+      }
+    ]
+  }
+}

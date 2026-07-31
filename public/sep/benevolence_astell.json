@@ -1,0 +1,476 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 6,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/astell/",
+    "url": "https://plato.stanford.edu/entries/astell/",
+    "title": "Mary Astell",
+    "description": "\n\nMary Astell (1666–1731) was an English philosopher. She was born\nin Newcastle, and lived her adult life in London. Her patrons were\nLady Ann Coventry, Lady El"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "holds",
+        "id": "hold"
+      },
+      {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "understand",
+        "id": "understand"
+      },
+      {
+        "form": "kind",
+        "id": "kind"
+      },
+      {
+        "form": "need",
+        "id": "need"
+      },
+      {
+        "form": "ability",
+        "id": "ability"
+      },
+      {
+        "form": "described",
+        "id": "describe"
+      },
+      {
+        "form": "view",
+        "id": "view"
+      },
+      {
+        "form": "lack",
+        "id": "lack"
+      },
+      {
+        "form": "humans",
+        "id": "human"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "issues",
+        "id": "issue"
+      },
+      {
+        "form": "offers",
+        "id": "offer"
+      },
+      {
+        "form": "good",
+        "id": "good"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "love",
+        "id": "love"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.3293267737234996,
+        "source": "hold",
+        "target": "god"
+      },
+      {
+        "weight": 0.674893740250595,
+        "source": "hold",
+        "target": "human"
+      },
+      {
+        "weight": 0.2464391139177318,
+        "source": "hold",
+        "target": "kind"
+      },
+      {
+        "weight": 0.909733331327996,
+        "source": "hold",
+        "target": "view"
+      },
+      {
+        "weight": 0.2464391139177318,
+        "source": "hold",
+        "target": "self"
+      },
+      {
+        "weight": 0.8525749174880475,
+        "source": "hold",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.15942773692810217,
+        "source": "hold",
+        "target": "offer"
+      },
+      {
+        "weight": 0.2464391139177318,
+        "source": "hold",
+        "target": "lack"
+      },
+      {
+        "weight": 0.15942773692810217,
+        "source": "hold",
+        "target": "describe"
+      },
+      {
+        "weight": 0.005277057100843819,
+        "source": "hold",
+        "target": "issue"
+      },
+      {
+        "weight": 1.1402569899398283,
+        "source": "god",
+        "target": "love"
+      },
+      {
+        "weight": 1.003397807222631,
+        "source": "god",
+        "target": "human"
+      },
+      {
+        "weight": 0.2464391139177318,
+        "source": "god",
+        "target": "self"
+      },
+      {
+        "weight": 0.5341211863695128,
+        "source": "god",
+        "target": "understand"
+      },
+      {
+        "weight": 0.5341211863695128,
+        "source": "god",
+        "target": "good"
+      },
+      {
+        "weight": 0.2464391139177318,
+        "source": "god",
+        "target": "lack"
+      },
+      {
+        "weight": 0.005277057100843819,
+        "source": "god",
+        "target": "issue"
+      },
+      {
+        "weight": 0.6702533606940928,
+        "source": "god",
+        "target": "offer"
+      },
+      {
+        "weight": 1.1402569899398283,
+        "source": "god",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.1443807071236904,
+        "source": "understand",
+        "target": "self"
+      },
+      {
+        "weight": 1.5273729593797962,
+        "source": "understand",
+        "target": "ability"
+      },
+      {
+        "weight": 0.4742230447884438,
+        "source": "understand",
+        "target": "human"
+      },
+      {
+        "weight": 1.8375278876836358,
+        "source": "understand",
+        "target": "lack"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "understand",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.1443807071236904,
+        "source": "understand",
+        "target": "good"
+      },
+      {
+        "weight": 0.3642221495741153,
+        "source": "understand",
+        "target": "love"
+      },
+      {
+        "weight": 1.5273729593797962,
+        "source": "understand",
+        "target": "need"
+      },
+      {
+        "weight": 0.18654097233666295,
+        "source": "kind",
+        "target": "human"
+      },
+      {
+        "weight": 0.8342257788198509,
+        "source": "kind",
+        "target": "ability"
+      },
+      {
+        "weight": 1.462834438242225,
+        "source": "kind",
+        "target": "describe"
+      },
+      {
+        "weight": 0.7090626358658448,
+        "source": "kind",
+        "target": "view"
+      },
+      {
+        "weight": 0.7696872576822797,
+        "source": "kind",
+        "target": "love"
+      },
+      {
+        "weight": 0.8342257788198509,
+        "source": "kind",
+        "target": "need"
+      },
+      {
+        "weight": 1.1443807071236904,
+        "source": "kind",
+        "target": "good"
+      },
+      {
+        "weight": 0.9032186503068024,
+        "source": "kind",
+        "target": "issue"
+      },
+      {
+        "weight": 1.0573693301340605,
+        "source": "kind",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7472144018302211,
+        "source": "need",
+        "target": "love"
+      },
+      {
+        "weight": 2.133508762950112,
+        "source": "need",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.5273729593797962,
+        "source": "need",
+        "target": "good"
+      },
+      {
+        "weight": 0.16406811648460434,
+        "source": "need",
+        "target": "human"
+      },
+      {
+        "weight": 1.5273729593797962,
+        "source": "need",
+        "target": "lack"
+      },
+      {
+        "weight": 0.7472144018302211,
+        "source": "need",
+        "target": "offer"
+      },
+      {
+        "weight": 1.2396908869280152,
+        "source": "need",
+        "target": "self"
+      },
+      {
+        "weight": 1.0803588483587594,
+        "source": "ability",
+        "target": "human"
+      },
+      {
+        "weight": 0.7472144018302211,
+        "source": "ability",
+        "target": "describe"
+      },
+      {
+        "weight": 1.0920548881219507,
+        "source": "ability",
+        "target": "view"
+      },
+      {
+        "weight": 1.4403615823901663,
+        "source": "ability",
+        "target": "offer"
+      },
+      {
+        "weight": 0.8342257788198509,
+        "source": "ability",
+        "target": "lack"
+      },
+      {
+        "weight": 0.05406722127027579,
+        "source": "ability",
+        "target": "love"
+      },
+      {
+        "weight": 1.4403615823901663,
+        "source": "ability",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.1410785982599056,
+        "source": "ability",
+        "target": "self"
+      },
+      {
+        "weight": 0.622051258876215,
+        "source": "describe",
+        "target": "view"
+      },
+      {
+        "weight": 1.5093544538771178,
+        "source": "describe",
+        "target": "issue"
+      },
+      {
+        "weight": 1.663505133704376,
+        "source": "describe",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.2772107725844855,
+        "source": "describe",
+        "target": "love"
+      },
+      {
+        "weight": 0.4679005790489568,
+        "source": "view",
+        "target": "issue"
+      },
+      {
+        "weight": 1.3151984394361604,
+        "source": "view",
+        "target": "offer"
+      },
+      {
+        "weight": 0.015915455305899582,
+        "source": "view",
+        "target": "self"
+      },
+      {
+        "weight": 0.622051258876215,
+        "source": "view",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.4742230447884438,
+        "source": "lack",
+        "target": "human"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "lack",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.0573693301340605,
+        "source": "lack",
+        "target": "offer"
+      },
+      {
+        "weight": 1.1443807071236904,
+        "source": "lack",
+        "target": "good"
+      },
+      {
+        "weight": 0.4742230447884438,
+        "source": "human",
+        "target": "good"
+      },
+      {
+        "weight": 1.0803588483587594,
+        "source": "human",
+        "target": "love"
+      },
+      {
+        "weight": 0.6385260960797201,
+        "source": "human",
+        "target": "issue"
+      },
+      {
+        "weight": 0.7926767759069784,
+        "source": "human",
+        "target": "offer"
+      },
+      {
+        "weight": 1.0803588483587594,
+        "source": "human",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.762117422372486,
+        "source": "benevolence",
+        "target": "offer"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "benevolence",
+        "target": "good"
+      },
+      {
+        "weight": 1.663505133704376,
+        "source": "benevolence",
+        "target": "love"
+      },
+      {
+        "weight": 1.750516510694006,
+        "source": "benevolence",
+        "target": "self"
+      },
+      {
+        "weight": 1.5093544538771178,
+        "source": "benevolence",
+        "target": "issue"
+      },
+      {
+        "weight": 0.8162072733171725,
+        "source": "issue",
+        "target": "offer"
+      },
+      {
+        "weight": 0.8162072733171725,
+        "source": "issue",
+        "target": "love"
+      },
+      {
+        "weight": 0.9032186503068024,
+        "source": "issue",
+        "target": "good"
+      },
+      {
+        "weight": 1.0573693301340605,
+        "source": "offer",
+        "target": "self"
+      },
+      {
+        "weight": 1.462834438242225,
+        "source": "good",
+        "target": "love"
+      }
+    ]
+  }
+}

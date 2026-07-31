@@ -1,0 +1,411 @@
+{
+  "term": {
+    "label": "humaneness",
+    "occurrences": 1,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+    "url": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+    "title": "Nietzsche’s Moral and Political Philosophy",
+    "description": "\n\nNietzsche’s moral philosophy is primarily critical in\norientation: he attacks morality both for its commitment to untenable\ndescriptive (metaphysical and empi"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "Nietzsche",
+        "id": "nietzsche"
+      },
+      {
+        "form": "remain",
+        "id": "remain"
+      },
+      {
+        "form": "passage",
+        "id": "passage"
+      },
+      {
+        "form": "laws",
+        "id": "law"
+      },
+      {
+        "form": "possible",
+        "id": "possible"
+      },
+      {
+        "form": "GM",
+        "id": "gm"
+      },
+      {
+        "form": "TI",
+        "id": "ti"
+      },
+      {
+        "form": "Christian",
+        "id": "christian"
+      },
+      {
+        "form": "humane",
+        "id": "humaneness"
+      },
+      {
+        "form": "Goethe",
+        "id": "goethe"
+      },
+      {
+        "form": "respect",
+        "id": "respect"
+      },
+      {
+        "form": "order",
+        "id": "order"
+      },
+      {
+        "form": "higher",
+        "id": "high"
+      },
+      {
+        "form": "strong",
+        "id": "strong"
+      },
+      {
+        "form": "concern",
+        "id": "concern"
+      },
+      {
+        "form": "Manu",
+        "id": "manu"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.1154965967546734,
+        "source": "nietzsche",
+        "target": "high"
+      },
+      {
+        "weight": 0.16629349003994826,
+        "source": "nietzsche",
+        "target": "gm"
+      },
+      {
+        "weight": 0.2463361977134847,
+        "source": "nietzsche",
+        "target": "remain"
+      },
+      {
+        "weight": 0.05102744539271887,
+        "source": "nietzsche",
+        "target": "strong"
+      },
+      {
+        "weight": 0.36411923336986807,
+        "source": "nietzsche",
+        "target": "possible"
+      },
+      {
+        "weight": 0.19981618207859178,
+        "source": "nietzsche",
+        "target": "respect"
+      },
+      {
+        "weight": 0.18179767657591356,
+        "source": "nietzsche",
+        "target": "law"
+      },
+      {
+        "weight": 0.023192646399274926,
+        "source": "nietzsche",
+        "target": "goethe"
+      },
+      {
+        "weight": 0.36411923336986807,
+        "source": "nietzsche",
+        "target": "manu"
+      },
+      {
+        "weight": 0.651801305821649,
+        "source": "nietzsche",
+        "target": "humaneness"
+      },
+      {
+        "weight": 2.2556681732062938,
+        "source": "remain",
+        "target": "law"
+      },
+      {
+        "weight": 2.1378851375499104,
+        "source": "remain",
+        "target": "order"
+      },
+      {
+        "weight": 1.9372144420877595,
+        "source": "remain",
+        "target": "respect"
+      },
+      {
+        "weight": 0.9011225104009837,
+        "source": "remain",
+        "target": "strong"
+      },
+      {
+        "weight": 1.7701603574245932,
+        "source": "remain",
+        "target": "concern"
+      },
+      {
+        "weight": 0.5661875530986572,
+        "source": "passage",
+        "target": "gm"
+      },
+      {
+        "weight": 1.339377441332139,
+        "source": "passage",
+        "target": "possible"
+      },
+      {
+        "weight": 0.7957619947431575,
+        "source": "passage",
+        "target": "strong"
+      },
+      {
+        "weight": 0.5661875530986572,
+        "source": "passage",
+        "target": "concern"
+      },
+      {
+        "weight": 3.131136910560194,
+        "source": "passage",
+        "target": "humaneness"
+      },
+      {
+        "weight": 0.3585481883204127,
+        "source": "passage",
+        "target": "law"
+      },
+      {
+        "weight": 1.339377441332139,
+        "source": "passage",
+        "target": "manu"
+      },
+      {
+        "weight": 1.4571604769885225,
+        "source": "law",
+        "target": "ti"
+      },
+      {
+        "weight": 2.2556681732062938,
+        "source": "law",
+        "target": "order"
+      },
+      {
+        "weight": 2.0549974777441427,
+        "source": "law",
+        "target": "respect"
+      },
+      {
+        "weight": 1.4243706541655317,
+        "source": "law",
+        "target": "strong"
+      },
+      {
+        "weight": 3.3542804618744038,
+        "source": "law",
+        "target": "manu"
+      },
+      {
+        "weight": 0.19491876453861057,
+        "source": "law",
+        "target": "high"
+      },
+      {
+        "weight": 3.759745569982568,
+        "source": "law",
+        "target": "humaneness"
+      },
+      {
+        "weight": 1.9679861007545132,
+        "source": "law",
+        "target": "possible"
+      },
+      {
+        "weight": 1.8879433930809766,
+        "source": "law",
+        "target": "concern"
+      },
+      {
+        "weight": 1.051695368880358,
+        "source": "law",
+        "target": "goethe"
+      },
+      {
+        "weight": 1.4634300900021178,
+        "source": "possible",
+        "target": "high"
+      },
+      {
+        "weight": 2.581090573640922,
+        "source": "possible",
+        "target": "gm"
+      },
+      {
+        "weight": 2.0325246218920845,
+        "source": "possible",
+        "target": "goethe"
+      },
+      {
+        "weight": 2.4379897300002487,
+        "source": "possible",
+        "target": "ti"
+      },
+      {
+        "weight": 4.047427642434349,
+        "source": "possible",
+        "target": "humaneness"
+      },
+      {
+        "weight": 2.2556681732062938,
+        "source": "possible",
+        "target": "manu"
+      },
+      {
+        "weight": 0.6134404379492028,
+        "source": "possible",
+        "target": "strong"
+      },
+      {
+        "weight": 1.4824782849728124,
+        "source": "possible",
+        "target": "concern"
+      },
+      {
+        "weight": 2.3579470223267123,
+        "source": "gm",
+        "target": "ti"
+      },
+      {
+        "weight": 0.4025581293168552,
+        "source": "gm",
+        "target": "high"
+      },
+      {
+        "weight": 2.8687726460927028,
+        "source": "gm",
+        "target": "order"
+      },
+      {
+        "weight": 0.5333977302756664,
+        "source": "gm",
+        "target": "strong"
+      },
+      {
+        "weight": 2.214846178686039,
+        "source": "ti",
+        "target": "goethe"
+      },
+      {
+        "weight": 0.7957619947431575,
+        "source": "ti",
+        "target": "strong"
+      },
+      {
+        "weight": 1.2593347336586025,
+        "source": "christian",
+        "target": "concern"
+      },
+      {
+        "weight": 2.0325246218920845,
+        "source": "christian",
+        "target": "manu"
+      },
+      {
+        "weight": 1.8688951981102822,
+        "source": "humaneness",
+        "target": "high"
+      },
+      {
+        "weight": 4.047427642434349,
+        "source": "humaneness",
+        "target": "manu"
+      },
+      {
+        "weight": 3.0983470877372032,
+        "source": "humaneness",
+        "target": "strong"
+      },
+      {
+        "weight": 1.240286538687908,
+        "source": "goethe",
+        "target": "high"
+      },
+      {
+        "weight": 1.2593347336586025,
+        "source": "goethe",
+        "target": "concern"
+      },
+      {
+        "weight": 1.339377441332139,
+        "source": "goethe",
+        "target": "manu"
+      },
+      {
+        "weight": 1.569489661962442,
+        "source": "respect",
+        "target": "concern"
+      },
+      {
+        "weight": 2.6303616226477047,
+        "source": "respect",
+        "target": "order"
+      },
+      {
+        "weight": 1.3935989954987777,
+        "source": "respect",
+        "target": "strong"
+      },
+      {
+        "weight": 1.6495323696359785,
+        "source": "respect",
+        "target": "manu"
+      },
+      {
+        "weight": 1.9997347990690935,
+        "source": "order",
+        "target": "strong"
+      },
+      {
+        "weight": 1.8502030650981296,
+        "source": "order",
+        "target": "manu"
+      },
+      {
+        "weight": 0.04434590605923641,
+        "source": "high",
+        "target": "strong"
+      },
+      {
+        "weight": 0.4025581293168552,
+        "source": "high",
+        "target": "concern"
+      },
+      {
+        "weight": 0.4826008369903915,
+        "source": "high",
+        "target": "manu"
+      },
+      {
+        "weight": 1.306587618509148,
+        "source": "strong",
+        "target": "manu"
+      },
+      {
+        "weight": 2.175625465532758,
+        "source": "concern",
+        "target": "manu"
+      }
+    ]
+  }
+}

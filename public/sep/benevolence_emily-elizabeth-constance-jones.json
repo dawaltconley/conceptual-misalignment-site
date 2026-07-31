@@ -1,0 +1,406 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 22,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/emily-elizabeth-constance-jones/",
+    "url": "https://plato.stanford.edu/entries/emily-elizabeth-constance-jones/",
+    "title": "Emily Elizabeth Constance Jones",
+    "description": "\n\nEmily Elizabeth Constance Jones (1848–1922), a contemporary of\nBertrand Russell and G. E. Moore at Cambridge University, worked\nprimarily in philosophical log"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "happiness",
+        "id": "happiness"
+      },
+      {
+        "form": "true",
+        "id": "true"
+      },
+      {
+        "form": "argues",
+        "id": "argue"
+      },
+      {
+        "form": "practical",
+        "id": "practical"
+      },
+      {
+        "form": "principle",
+        "id": "principle"
+      },
+      {
+        "form": "rule",
+        "id": "rule"
+      },
+      {
+        "form": "state",
+        "id": "state"
+      },
+      {
+        "form": "view",
+        "id": "view"
+      },
+      {
+        "form": "thought",
+        "id": "thought"
+      },
+      {
+        "form": "point",
+        "id": "point"
+      },
+      {
+        "form": "dualism",
+        "id": "dualism"
+      },
+      {
+        "form": "concern",
+        "id": "concern"
+      },
+      {
+        "form": "self",
+        "id": "self"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      },
+      {
+        "form": "claim",
+        "id": "claim"
+      },
+      {
+        "form": "love",
+        "id": "love"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.9513896148199388,
+        "source": "happiness",
+        "target": "argue"
+      },
+      {
+        "weight": 2.031432322493475,
+        "source": "happiness",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.8527773261518292,
+        "source": "happiness",
+        "target": "principle"
+      },
+      {
+        "weight": 1.33828514193353,
+        "source": "happiness",
+        "target": "rule"
+      },
+      {
+        "weight": 1.6259672143853108,
+        "source": "happiness",
+        "target": "self"
+      },
+      {
+        "weight": 1.4718165345580525,
+        "source": "happiness",
+        "target": "love"
+      },
+      {
+        "weight": 1.0198314108149955,
+        "source": "happiness",
+        "target": "thought"
+      },
+      {
+        "weight": 1.0198314108149955,
+        "source": "happiness",
+        "target": "dualism"
+      },
+      {
+        "weight": 1.0198314108149955,
+        "source": "happiness",
+        "target": "practical"
+      },
+      {
+        "weight": 1.1151415906193203,
+        "source": "true",
+        "target": "state"
+      },
+      {
+        "weight": 1.5206066987274847,
+        "source": "true",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.6541380913520072,
+        "source": "true",
+        "target": "love"
+      },
+      {
+        "weight": 1.035098882945784,
+        "source": "true",
+        "target": "principle"
+      },
+      {
+        "weight": 1.402823663071101,
+        "source": "true",
+        "target": "self"
+      },
+      {
+        "weight": 1.2582424342599936,
+        "source": "argue",
+        "target": "concern"
+      },
+      {
+        "weight": 1.1404593986036102,
+        "source": "argue",
+        "target": "claim"
+      },
+      {
+        "weight": 0.5650952537000482,
+        "source": "argue",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.939788703141459,
+        "source": "argue",
+        "target": "dualism"
+      },
+      {
+        "weight": 0.939788703141459,
+        "source": "argue",
+        "target": "practical"
+      },
+      {
+        "weight": 3.186284329484461,
+        "source": "practical",
+        "target": "dualism"
+      },
+      {
+        "weight": 1.7129785913749407,
+        "source": "practical",
+        "target": "state"
+      },
+      {
+        "weight": 2.5239088075912695,
+        "source": "practical",
+        "target": "rule"
+      },
+      {
+        "weight": 0.7321493383632145,
+        "source": "practical",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.865680730987737,
+        "source": "practical",
+        "target": "love"
+      },
+      {
+        "weight": 0.614366302706831,
+        "source": "practical",
+        "target": "self"
+      },
+      {
+        "weight": 1.663707542368158,
+        "source": "principle",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.2582424342599936,
+        "source": "principle",
+        "target": "rule"
+      },
+      {
+        "weight": 1.5459245067117746,
+        "source": "principle",
+        "target": "self"
+      },
+      {
+        "weight": 0.939788703141459,
+        "source": "principle",
+        "target": "dualism"
+      },
+      {
+        "weight": 1.3917738268845161,
+        "source": "principle",
+        "target": "love"
+      },
+      {
+        "weight": 0.5044706318836134,
+        "source": "principle",
+        "target": "point"
+      },
+      {
+        "weight": 1.2582424342599936,
+        "source": "principle",
+        "target": "concern"
+      },
+      {
+        "weight": 2.2827467507743813,
+        "source": "rule",
+        "target": "love"
+      },
+      {
+        "weight": 2.3191143949452564,
+        "source": "rule",
+        "target": "self"
+      },
+      {
+        "weight": 2.149215358149859,
+        "source": "rule",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.1184436994831053,
+        "source": "rule",
+        "target": "dualism"
+      },
+      {
+        "weight": 1.33828514193353,
+        "source": "rule",
+        "target": "state"
+      },
+      {
+        "weight": 1.7129785913749407,
+        "source": "state",
+        "target": "dualism"
+      },
+      {
+        "weight": 0.6451379613735847,
+        "source": "state",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7786693539981072,
+        "source": "state",
+        "target": "love"
+      },
+      {
+        "weight": 0.5273549257172012,
+        "source": "state",
+        "target": "self"
+      },
+      {
+        "weight": 1.1151415906193203,
+        "source": "view",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.30421137440299156,
+        "source": "view",
+        "target": "self"
+      },
+      {
+        "weight": 0.7321493383632145,
+        "source": "thought",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.865680730987737,
+        "source": "thought",
+        "target": "love"
+      },
+      {
+        "weight": 0.614366302706831,
+        "source": "thought",
+        "target": "self"
+      },
+      {
+        "weight": 0.8721954120089308,
+        "source": "point",
+        "target": "claim"
+      },
+      {
+        "weight": 0.9899784476653143,
+        "source": "point",
+        "target": "concern"
+      },
+      {
+        "weight": 0.9899784476653143,
+        "source": "point",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.43036265972989163,
+        "source": "point",
+        "target": "love"
+      },
+      {
+        "weight": 0.17904823144898546,
+        "source": "point",
+        "target": "self"
+      },
+      {
+        "weight": 0.7321493383632145,
+        "source": "dualism",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.865680730987737,
+        "source": "dualism",
+        "target": "love"
+      },
+      {
+        "weight": 0.614366302706831,
+        "source": "dualism",
+        "target": "self"
+      },
+      {
+        "weight": 1.6259672143853108,
+        "source": "concern",
+        "target": "claim"
+      },
+      {
+        "weight": 1.050603069481749,
+        "source": "concern",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.1841344621062717,
+        "source": "concern",
+        "target": "love"
+      },
+      {
+        "weight": 0.9328200338253656,
+        "source": "concern",
+        "target": "self"
+      },
+      {
+        "weight": 3.0122615755052013,
+        "source": "self",
+        "target": "love"
+      },
+      {
+        "weight": 2.804622210726957,
+        "source": "self",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.5081841787289274,
+        "source": "self",
+        "target": "claim"
+      },
+      {
+        "weight": 2.888882554344697,
+        "source": "benevolence",
+        "target": "love"
+      },
+      {
+        "weight": 1.6259672143853108,
+        "source": "benevolence",
+        "target": "claim"
+      },
+      {
+        "weight": 1.7594986070098335,
+        "source": "claim",
+        "target": "love"
+      }
+    ]
+  }
+}

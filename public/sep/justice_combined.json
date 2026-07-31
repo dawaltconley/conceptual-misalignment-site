@@ -1,0 +1,251 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 1460,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
+    "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
+    "title": "SEP search: justice",
+    "description": "SEP search results justice justness"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "standpoint",
+        "id": "standpoint"
+      },
+      {
+        "form": "victors",
+        "id": "victor"
+      },
+      {
+        "form": "topic",
+        "id": "topic"
+      },
+      {
+        "form": "relevance",
+        "id": "relevance"
+      },
+      {
+        "form": "domains",
+        "id": "domain"
+      },
+      {
+        "form": "procedural",
+        "id": "procedural"
+      },
+      {
+        "form": "Plato",
+        "id": "plato"
+      },
+      {
+        "form": "computer",
+        "id": "computer"
+      },
+      {
+        "form": "theorizing",
+        "id": "theorizing"
+      },
+      {
+        "form": "behaviour",
+        "id": "behaviour"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "currency",
+        "id": "currency"
+      },
+      {
+        "form": "Alice",
+        "id": "alice"
+      },
+      {
+        "form": "corrective",
+        "id": "corrective"
+      },
+      {
+        "form": "thinking",
+        "id": "thinking"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.2656259426810073,
+        "source": "standpoint",
+        "target": "justice"
+      },
+      {
+        "weight": 1.2656259426810073,
+        "source": "victor",
+        "target": "justice"
+      },
+      {
+        "weight": 1.2593953929303712,
+        "source": "topic",
+        "target": "justice"
+      },
+      {
+        "weight": 3.096134866827345,
+        "source": "topic",
+        "target": "theorizing"
+      },
+      {
+        "weight": 1.933635310707984,
+        "source": "topic",
+        "target": "distributive"
+      },
+      {
+        "weight": 2.17984413495319,
+        "source": "topic",
+        "target": "plato"
+      },
+      {
+        "weight": 1.3811388298028515,
+        "source": "relevance",
+        "target": "justice"
+      },
+      {
+        "weight": 1.4492429440101489,
+        "source": "relevance",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.216835778511575,
+        "source": "domain",
+        "target": "justice"
+      },
+      {
+        "weight": 0.974784964415033,
+        "source": "domain",
+        "target": "distributive"
+      },
+      {
+        "weight": 3.2358968092025036,
+        "source": "procedural",
+        "target": "corrective"
+      },
+      {
+        "weight": 1.6033936238374071,
+        "source": "procedural",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.216835778511575,
+        "source": "procedural",
+        "target": "justice"
+      },
+      {
+        "weight": 1.3991573353055298,
+        "source": "plato",
+        "target": "justice"
+      },
+      {
+        "weight": 6.519311155208276,
+        "source": "computer",
+        "target": "alice"
+      },
+      {
+        "weight": 1.3709864583388336,
+        "source": "computer",
+        "target": "justice"
+      },
+      {
+        "weight": 5.31533835088234,
+        "source": "computer",
+        "target": "corrective"
+      },
+      {
+        "weight": 1.8910756962891881,
+        "source": "computer",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.216835778511575,
+        "source": "theorizing",
+        "target": "justice"
+      },
+      {
+        "weight": 1.1979285157292427,
+        "source": "theorizing",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.3709864583388336,
+        "source": "behaviour",
+        "target": "justice"
+      },
+      {
+        "weight": 4.909873242774175,
+        "source": "behaviour",
+        "target": "corrective"
+      },
+      {
+        "weight": 0.7924634076210785,
+        "source": "behaviour",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.571007592232189,
+        "source": "justice",
+        "target": "corrective"
+      },
+      {
+        "weight": 1.275350492573002,
+        "source": "justice",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.216835778511575,
+        "source": "justice",
+        "target": "currency"
+      },
+      {
+        "weight": 1.4681502067924812,
+        "source": "justice",
+        "target": "alice"
+      },
+      {
+        "weight": 1.5269907068154147,
+        "source": "justice",
+        "target": "thinking"
+      },
+      {
+        "weight": 1.0437778359019845,
+        "source": "currency",
+        "target": "distributive"
+      },
+      {
+        "weight": 5.384331222369291,
+        "source": "alice",
+        "target": "corrective"
+      },
+      {
+        "weight": 2.142390124570094,
+        "source": "alice",
+        "target": "distributive"
+      },
+      {
+        "weight": 2.191180288739526,
+        "source": "corrective",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.2849398927188724,
+        "source": "thinking",
+        "target": "distributive"
+      }
+    ]
+  }
+}

@@ -1,0 +1,466 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 131,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/justice-global/",
+    "url": "https://plato.stanford.edu/entries/justice-global/",
+    "title": "Global Justice",
+    "description": "\n\nOn common accounts, we have a state of justice when everyone has their\ndue. The study of justice has been concerned with what we owe one\nanother, what obligat"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "histories",
+        "id": "history"
+      },
+      {
+        "form": "discussion",
+        "id": "discussion"
+      },
+      {
+        "form": "theorists",
+        "id": "theorist"
+      },
+      {
+        "form": "matters",
+        "id": "matter"
+      },
+      {
+        "form": "global",
+        "id": "global"
+      },
+      {
+        "form": "seeking",
+        "id": "seek"
+      },
+      {
+        "form": "debates",
+        "id": "debate"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "account",
+        "id": "account"
+      },
+      {
+        "form": "new",
+        "id": "new"
+      },
+      {
+        "form": "theory",
+        "id": "theory"
+      },
+      {
+        "form": "prominent",
+        "id": "prominent"
+      },
+      {
+        "form": "current",
+        "id": "current"
+      },
+      {
+        "form": "issues",
+        "id": "issue"
+      },
+      {
+        "form": "entry",
+        "id": "entry"
+      },
+      {
+        "form": "range",
+        "id": "range"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.7602864833975739,
+        "source": "history",
+        "target": "global"
+      },
+      {
+        "weight": 0.8870381890367176,
+        "source": "history",
+        "target": "issue"
+      },
+      {
+        "weight": 0.8343944555512957,
+        "source": "history",
+        "target": "justice"
+      },
+      {
+        "weight": 0.9144371632248322,
+        "source": "history",
+        "target": "theorist"
+      },
+      {
+        "weight": 2.1953710086868963,
+        "source": "history",
+        "target": "current"
+      },
+      {
+        "weight": 0.5467123830995149,
+        "source": "history",
+        "target": "discussion"
+      },
+      {
+        "weight": 1.4069136483226263,
+        "source": "history",
+        "target": "prominent"
+      },
+      {
+        "weight": 1.0967587200187867,
+        "source": "history",
+        "target": "account"
+      },
+      {
+        "weight": 0.7602864833975739,
+        "source": "history",
+        "target": "debate"
+      },
+      {
+        "weight": 1.7323360487572543,
+        "source": "discussion",
+        "target": "prominent"
+      },
+      {
+        "weight": 0.7629354915691507,
+        "source": "discussion",
+        "target": "entry"
+      },
+      {
+        "weight": 0.9085024277050175,
+        "source": "discussion",
+        "target": "justice"
+      },
+      {
+        "weight": 0.32356883178530504,
+        "source": "discussion",
+        "target": "account"
+      },
+      {
+        "weight": 0.7492366472109889,
+        "source": "discussion",
+        "target": "global"
+      },
+      {
+        "weight": 0.5467123830995149,
+        "source": "discussion",
+        "target": "theory"
+      },
+      {
+        "weight": 1.0857088838322018,
+        "source": "discussion",
+        "target": "debate"
+      },
+      {
+        "weight": 0.5193134089114004,
+        "source": "discussion",
+        "target": "issue"
+      },
+      {
+        "weight": 0.5467123830995149,
+        "source": "discussion",
+        "target": "matter"
+      },
+      {
+        "weight": 0.7290339398934695,
+        "source": "discussion",
+        "target": "current"
+      },
+      {
+        "weight": 0.14124727499135034,
+        "source": "discussion",
+        "target": "theorist"
+      },
+      {
+        "weight": 0.5467123830995149,
+        "source": "discussion",
+        "target": "range"
+      },
+      {
+        "weight": 0.3548213752894094,
+        "source": "theorist",
+        "target": "global"
+      },
+      {
+        "weight": 0.7166114198949124,
+        "source": "theorist",
+        "target": "justice"
+      },
+      {
+        "weight": 1.6075843437847774,
+        "source": "theorist",
+        "target": "range"
+      },
+      {
+        "weight": 1.7899059005787321,
+        "source": "theorist",
+        "target": "seek"
+      },
+      {
+        "weight": 0.9144371632248322,
+        "source": "theorist",
+        "target": "matter"
+      },
+      {
+        "weight": 0.3548213752894094,
+        "source": "theorist",
+        "target": "debate"
+      },
+      {
+        "weight": 0.8870381890367176,
+        "source": "theorist",
+        "target": "issue"
+      },
+      {
+        "weight": 0.6912936119106223,
+        "source": "theorist",
+        "target": "account"
+      },
+      {
+        "weight": 0.9144371632248322,
+        "source": "theorist",
+        "target": "theory"
+      },
+      {
+        "weight": 1.0967587200187867,
+        "source": "theorist",
+        "target": "current"
+      },
+      {
+        "weight": 0.6520728987573411,
+        "source": "matter",
+        "target": "justice"
+      },
+      {
+        "weight": 1.3199022713329964,
+        "source": "matter",
+        "target": "range"
+      },
+      {
+        "weight": 1.1306602716944683,
+        "source": "matter",
+        "target": "entry"
+      },
+      {
+        "weight": 1.0967587200187867,
+        "source": "matter",
+        "target": "account"
+      },
+      {
+        "weight": 0.7602864833975739,
+        "source": "matter",
+        "target": "debate"
+      },
+      {
+        "weight": 0.19389100847677235,
+        "source": "matter",
+        "target": "issue"
+      },
+      {
+        "weight": 0.9065569017995262,
+        "source": "global",
+        "target": "justice"
+      },
+      {
+        "weight": 0.33420208808667373,
+        "source": "global",
+        "target": "debate"
+      },
+      {
+        "weight": 0.7884573603642703,
+        "source": "global",
+        "target": "current"
+      },
+      {
+        "weight": 0.46095379372581763,
+        "source": "global",
+        "target": "issue"
+      },
+      {
+        "weight": 0.42381424677636087,
+        "source": "global",
+        "target": "range"
+      },
+      {
+        "weight": 0.42381424677636087,
+        "source": "global",
+        "target": "theory"
+      },
+      {
+        "weight": 0.3829922522561057,
+        "source": "global",
+        "target": "seek"
+      },
+      {
+        "weight": 0.20067069546215124,
+        "source": "global",
+        "target": "account"
+      },
+      {
+        "weight": 0.5108256237659907,
+        "source": "global",
+        "target": "prominent"
+      },
+      {
+        "weight": 0.09531017980432493,
+        "source": "global",
+        "target": "new"
+      },
+      {
+        "weight": 1.1708666921725086,
+        "source": "seek",
+        "target": "justice"
+      },
+      {
+        "weight": 1.2790802768127414,
+        "source": "seek",
+        "target": "account"
+      },
+      {
+        "weight": 0.37621256527072705,
+        "source": "seek",
+        "target": "issue"
+      },
+      {
+        "weight": 1.589235205116581,
+        "source": "seek",
+        "target": "prominent"
+      },
+      {
+        "weight": 1.6845453849209058,
+        "source": "seek",
+        "target": "new"
+      },
+      {
+        "weight": 0.562460740067654,
+        "source": "debate",
+        "target": "justice"
+      },
+      {
+        "weight": 1.0205695816612403,
+        "source": "debate",
+        "target": "issue"
+      },
+      {
+        "weight": 1.6357552207514738,
+        "source": "debate",
+        "target": "account"
+      },
+      {
+        "weight": 0.8472978603872037,
+        "source": "debate",
+        "target": "prominent"
+      },
+      {
+        "weight": 0.7602864833975739,
+        "source": "debate",
+        "target": "theory"
+      },
+      {
+        "weight": 0.611250904237086,
+        "source": "justice",
+        "target": "account"
+      },
+      {
+        "weight": 0.6520728987573411,
+        "source": "justice",
+        "target": "range"
+      },
+      {
+        "weight": 0.6246739245692267,
+        "source": "justice",
+        "target": "issue"
+      },
+      {
+        "weight": 0.6520728987573411,
+        "source": "justice",
+        "target": "theory"
+      },
+      {
+        "weight": 0.6451524559127674,
+        "source": "justice",
+        "target": "entry"
+      },
+      {
+        "weight": 0.7390842757469709,
+        "source": "justice",
+        "target": "prominent"
+      },
+      {
+        "weight": 0.611250904237086,
+        "source": "justice",
+        "target": "current"
+      },
+      {
+        "weight": 0.611250904237086,
+        "source": "justice",
+        "target": "new"
+      },
+      {
+        "weight": 1.7899059005787321,
+        "source": "account",
+        "target": "theory"
+      },
+      {
+        "weight": 1.1837700970084166,
+        "source": "account",
+        "target": "prominent"
+      },
+      {
+        "weight": 0.37621256527072705,
+        "source": "new",
+        "target": "issue"
+      },
+      {
+        "weight": 1.589235205116581,
+        "source": "new",
+        "target": "prominent"
+      },
+      {
+        "weight": 1.502223828126951,
+        "source": "new",
+        "target": "theory"
+      },
+      {
+        "weight": 0.43751309113452286,
+        "source": "theory",
+        "target": "entry"
+      },
+      {
+        "weight": 1.379514674134512,
+        "source": "prominent",
+        "target": "issue"
+      },
+      {
+        "weight": 1.589235205116581,
+        "source": "prominent",
+        "target": "current"
+      },
+      {
+        "weight": 0.37621256527072705,
+        "source": "current",
+        "target": "issue"
+      },
+      {
+        "weight": 1.1032612975063536,
+        "source": "issue",
+        "target": "entry"
+      },
+      {
+        "weight": 1.2925032971448822,
+        "source": "issue",
+        "target": "range"
+      }
+    ]
+  }
+}

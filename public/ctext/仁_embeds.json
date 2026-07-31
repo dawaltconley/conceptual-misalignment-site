@@ -16,590 +16,100 @@
     "graph": {},
     "nodes": [
       {
-        "community": 4,
-        "id": "仁"
-      },
-      {
-        "community": 4,
-        "id": "民"
-      },
-      {
-        "community": 4,
-        "id": "事"
-      },
-      {
-        "community": 4,
-        "id": "大"
-      },
-      {
-        "community": 4,
-        "id": "食"
-      },
-      {
-        "community": 4,
-        "id": "禮"
-      },
-      {
-        "community": 4,
-        "id": "義"
-      },
-      {
-        "community": 4,
-        "id": "王"
-      },
-      {
-        "community": 4,
-        "id": "人"
-      },
-      {
-        "community": 4,
+        "community": 0,
         "id": "君"
       },
       {
-        "community": 4,
+        "community": 0,
+        "id": "禮"
+      },
+      {
+        "community": 0,
+        "id": "義"
+      },
+      {
+        "community": 0,
+        "id": "賢"
+      },
+      {
+        "community": 0,
+        "id": "樂"
+      },
+      {
+        "community": 0,
         "id": "善"
       },
       {
-        "community": 4,
-        "id": "行"
+        "community": 0,
+        "id": "大"
       },
       {
-        "community": 4,
+        "community": 0,
+        "id": "取"
+      },
+      {
+        "community": 0,
         "id": "親"
       },
       {
-        "community": 4,
+        "community": 0,
+        "id": "行"
+      },
+      {
+        "community": 0,
+        "id": "民"
+      },
+      {
+        "community": 0,
+        "id": "父"
+      },
+      {
+        "community": 0,
         "id": "知"
       },
       {
-        "community": 4,
-        "id": "子"
+        "community": 0,
+        "id": "王"
       },
       {
-        "community": 4,
+        "community": 0,
+        "id": "仁"
+      },
+      {
+        "community": 0,
         "id": "心"
       }
     ],
     "edges": [
       {
-        "weight": 0.5020845532417297,
-        "source": "仁",
-        "target": "事"
-      },
-      {
-        "weight": 0.49957579374313354,
-        "source": "仁",
-        "target": "人"
-      },
-      {
         "weight": 0.5214425325393677,
-        "source": "仁",
-        "target": "君"
-      },
-      {
-        "weight": 0.5196754932403564,
-        "source": "仁",
-        "target": "善"
-      },
-      {
-        "weight": 0.5293126106262207,
-        "source": "仁",
-        "target": "大"
-      },
-      {
-        "weight": 0.48969000577926636,
-        "source": "仁",
-        "target": "子"
-      },
-      {
-        "weight": 0.4951336085796356,
-        "source": "仁",
-        "target": "心"
-      },
-      {
-        "weight": 0.5143724679946899,
-        "source": "仁",
-        "target": "民"
-      },
-      {
-        "weight": 0.5042716264724731,
-        "source": "仁",
-        "target": "王"
-      },
-      {
-        "weight": 0.5142550468444824,
-        "source": "仁",
-        "target": "知"
-      },
-      {
-        "weight": 0.47800004482269287,
-        "source": "仁",
-        "target": "禮"
-      },
-      {
-        "weight": 0.5353542566299438,
-        "source": "仁",
-        "target": "義"
-      },
-      {
-        "weight": 0.506639838218689,
-        "source": "仁",
-        "target": "行"
-      },
-      {
-        "weight": 0.48081642389297485,
-        "source": "仁",
-        "target": "親"
-      },
-      {
-        "weight": 0.48221486806869507,
-        "source": "仁",
-        "target": "食"
-      },
-      {
-        "weight": 0.45464038848876953,
-        "source": "民",
-        "target": "事"
-      },
-      {
-        "weight": 0.5906702876091003,
-        "source": "民",
-        "target": "人"
-      },
-      {
-        "weight": 0.553589940071106,
-        "source": "民",
-        "target": "君"
-      },
-      {
-        "weight": 0.43218785524368286,
-        "source": "民",
-        "target": "善"
-      },
-      {
-        "weight": 0.4959653317928314,
-        "source": "民",
-        "target": "大"
-      },
-      {
-        "weight": 0.5143038034439087,
-        "source": "民",
-        "target": "子"
-      },
-      {
-        "weight": 0.4838224947452545,
-        "source": "民",
-        "target": "心"
-      },
-      {
-        "weight": 0.5747250914573669,
-        "source": "民",
-        "target": "王"
-      },
-      {
-        "weight": 0.4524313807487488,
-        "source": "民",
-        "target": "知"
-      },
-      {
-        "weight": 0.3372320830821991,
-        "source": "民",
-        "target": "禮"
-      },
-      {
-        "weight": 0.359072208404541,
-        "source": "民",
-        "target": "義"
-      },
-      {
-        "weight": 0.4451870918273926,
-        "source": "民",
-        "target": "行"
-      },
-      {
-        "weight": 0.4116118550300598,
-        "source": "民",
-        "target": "親"
-      },
-      {
-        "weight": 0.44844210147857666,
-        "source": "民",
-        "target": "食"
-      },
-      {
-        "weight": 0.5442243814468384,
-        "source": "事",
-        "target": "人"
-      },
-      {
-        "weight": 0.524649977684021,
-        "source": "事",
-        "target": "君"
-      },
-      {
-        "weight": 0.48756876587867737,
-        "source": "事",
-        "target": "善"
-      },
-      {
-        "weight": 0.501324474811554,
-        "source": "事",
-        "target": "大"
-      },
-      {
-        "weight": 0.5162997245788574,
-        "source": "事",
-        "target": "子"
-      },
-      {
-        "weight": 0.4891572594642639,
-        "source": "事",
-        "target": "心"
-      },
-      {
-        "weight": 0.4816666841506958,
-        "source": "事",
-        "target": "王"
-      },
-      {
-        "weight": 0.5057674646377563,
-        "source": "事",
-        "target": "知"
-      },
-      {
-        "weight": 0.43335771560668945,
-        "source": "事",
-        "target": "禮"
-      },
-      {
-        "weight": 0.4485870599746704,
-        "source": "事",
-        "target": "義"
-      },
-      {
-        "weight": 0.5267419815063477,
-        "source": "事",
-        "target": "行"
-      },
-      {
-        "weight": 0.41595563292503357,
-        "source": "事",
-        "target": "親"
-      },
-      {
-        "weight": 0.4700252413749695,
-        "source": "事",
-        "target": "食"
-      },
-      {
-        "weight": 0.618998110294342,
-        "source": "大",
-        "target": "人"
-      },
-      {
-        "weight": 0.574001669883728,
-        "source": "大",
-        "target": "君"
-      },
-      {
-        "weight": 0.5539122819900513,
-        "source": "大",
-        "target": "善"
-      },
-      {
-        "weight": 0.5585873126983643,
-        "source": "大",
-        "target": "子"
-      },
-      {
-        "weight": 0.4940815567970276,
-        "source": "大",
-        "target": "心"
-      },
-      {
-        "weight": 0.571557879447937,
-        "source": "大",
-        "target": "王"
-      },
-      {
-        "weight": 0.5144219398498535,
-        "source": "大",
-        "target": "知"
-      },
-      {
-        "weight": 0.39623749256134033,
-        "source": "大",
-        "target": "禮"
-      },
-      {
-        "weight": 0.42719292640686035,
-        "source": "大",
-        "target": "義"
-      },
-      {
-        "weight": 0.5126101970672607,
-        "source": "大",
-        "target": "行"
-      },
-      {
-        "weight": 0.4119426906108856,
-        "source": "大",
-        "target": "親"
-      },
-      {
-        "weight": 0.5216092467308044,
-        "source": "大",
-        "target": "食"
-      },
-      {
-        "weight": 0.525662899017334,
-        "source": "食",
-        "target": "人"
-      },
-      {
-        "weight": 0.49776405096054077,
-        "source": "食",
-        "target": "君"
-      },
-      {
-        "weight": 0.4696342945098877,
-        "source": "食",
-        "target": "善"
-      },
-      {
-        "weight": 0.5293571949005127,
-        "source": "食",
-        "target": "子"
-      },
-      {
-        "weight": 0.42899173498153687,
-        "source": "食",
-        "target": "心"
-      },
-      {
-        "weight": 0.48962023854255676,
-        "source": "食",
-        "target": "王"
-      },
-      {
-        "weight": 0.5000897645950317,
-        "source": "食",
-        "target": "知"
-      },
-      {
-        "weight": 0.37158483266830444,
-        "source": "食",
-        "target": "禮"
-      },
-      {
-        "weight": 0.3643898069858551,
-        "source": "食",
-        "target": "義"
-      },
-      {
-        "weight": 0.5253006219863892,
-        "source": "食",
-        "target": "行"
-      },
-      {
-        "weight": 0.3807657063007355,
-        "source": "食",
-        "target": "親"
-      },
-      {
-        "weight": 0.4110010862350464,
-        "source": "禮",
-        "target": "人"
-      },
-      {
-        "weight": 0.3809124827384949,
-        "source": "禮",
-        "target": "君"
-      },
-      {
-        "weight": 0.3432544469833374,
-        "source": "禮",
-        "target": "善"
-      },
-      {
-        "weight": 0.4108801484107971,
-        "source": "禮",
-        "target": "子"
-      },
-      {
-        "weight": 0.38423222303390503,
-        "source": "禮",
-        "target": "心"
-      },
-      {
-        "weight": 0.3917347490787506,
-        "source": "禮",
-        "target": "王"
-      },
-      {
-        "weight": 0.38775622844696045,
-        "source": "禮",
-        "target": "知"
-      },
-      {
-        "weight": 0.4917839765548706,
-        "source": "禮",
-        "target": "義"
-      },
-      {
-        "weight": 0.371644526720047,
-        "source": "禮",
-        "target": "行"
-      },
-      {
-        "weight": 0.35739511251449585,
-        "source": "禮",
-        "target": "親"
-      },
-      {
-        "weight": 0.45855599641799927,
-        "source": "義",
-        "target": "人"
-      },
-      {
-        "weight": 0.4151458144187927,
-        "source": "義",
-        "target": "君"
-      },
-      {
-        "weight": 0.42899298667907715,
-        "source": "義",
-        "target": "善"
-      },
-      {
-        "weight": 0.45605918765068054,
-        "source": "義",
-        "target": "子"
-      },
-      {
-        "weight": 0.42519962787628174,
-        "source": "義",
-        "target": "心"
-      },
-      {
-        "weight": 0.3919271230697632,
-        "source": "義",
-        "target": "王"
-      },
-      {
-        "weight": 0.42846786975860596,
-        "source": "義",
-        "target": "知"
-      },
-      {
-        "weight": 0.4002418518066406,
-        "source": "義",
-        "target": "行"
-      },
-      {
-        "weight": 0.3471672236919403,
-        "source": "義",
-        "target": "親"
-      },
-      {
-        "weight": 0.630594789981842,
-        "source": "王",
-        "target": "人"
+        "source": "君",
+        "target": "仁"
       },
       {
         "weight": 0.6473783850669861,
-        "source": "王",
-        "target": "君"
-      },
-      {
-        "weight": 0.5288692712783813,
-        "source": "王",
-        "target": "善"
-      },
-      {
-        "weight": 0.612160325050354,
-        "source": "王",
-        "target": "子"
-      },
-      {
-        "weight": 0.4400859475135803,
-        "source": "王",
-        "target": "心"
-      },
-      {
-        "weight": 0.5403631925582886,
-        "source": "王",
-        "target": "知"
-      },
-      {
-        "weight": 0.4955139756202698,
-        "source": "王",
-        "target": "行"
-      },
-      {
-        "weight": 0.42103680968284607,
-        "source": "王",
-        "target": "親"
-      },
-      {
-        "weight": 0.5922908782958984,
-        "source": "人",
-        "target": "君"
-      },
-      {
-        "weight": 0.5870602130889893,
-        "source": "人",
-        "target": "善"
-      },
-      {
-        "weight": 0.659090518951416,
-        "source": "人",
-        "target": "子"
-      },
-      {
-        "weight": 0.5502501130104065,
-        "source": "人",
-        "target": "心"
-      },
-      {
-        "weight": 0.6024323105812073,
-        "source": "人",
-        "target": "知"
-      },
-      {
-        "weight": 0.5859731435775757,
-        "source": "人",
-        "target": "行"
-      },
-      {
-        "weight": 0.482043981552124,
-        "source": "人",
-        "target": "親"
-      },
-      {
-        "weight": 0.4669397175312042,
         "source": "君",
-        "target": "善"
+        "target": "王"
       },
       {
-        "weight": 0.59059077501297,
+        "weight": 0.574001669883728,
         "source": "君",
-        "target": "子"
+        "target": "大"
       },
       {
-        "weight": 0.48528850078582764,
+        "weight": 0.553589940071106,
         "source": "君",
-        "target": "心"
+        "target": "民"
       },
       {
-        "weight": 0.4859716296195984,
+        "weight": 0.4373443126678467,
         "source": "君",
-        "target": "知"
+        "target": "樂"
       },
       {
-        "weight": 0.496686190366745,
+        "weight": 0.4605110287666321,
         "source": "君",
-        "target": "行"
+        "target": "父"
       },
       {
         "weight": 0.45122990012168884,
@@ -607,14 +117,74 @@
         "target": "親"
       },
       {
-        "weight": 0.5348789691925049,
-        "source": "善",
-        "target": "子"
+        "weight": 0.5130801796913147,
+        "source": "君",
+        "target": "賢"
       },
       {
-        "weight": 0.4829857349395752,
+        "weight": 0.4917839765548706,
+        "source": "禮",
+        "target": "義"
+      },
+      {
+        "weight": 0.47800004482269287,
+        "source": "禮",
+        "target": "仁"
+      },
+      {
+        "weight": 0.39623749256134033,
+        "source": "禮",
+        "target": "大"
+      },
+      {
+        "weight": 0.5353542566299438,
+        "source": "義",
+        "target": "仁"
+      },
+      {
+        "weight": 0.5175514817237854,
+        "source": "賢",
+        "target": "善"
+      },
+      {
+        "weight": 0.4750062823295593,
+        "source": "賢",
+        "target": "仁"
+      },
+      {
+        "weight": 0.46604830026626587,
+        "source": "賢",
+        "target": "王"
+      },
+      {
+        "weight": 0.45177626609802246,
+        "source": "賢",
+        "target": "大"
+      },
+      {
+        "weight": 0.47129565477371216,
+        "source": "樂",
+        "target": "王"
+      },
+      {
+        "weight": 0.45073002576828003,
+        "source": "樂",
+        "target": "仁"
+      },
+      {
+        "weight": 0.441959947347641,
+        "source": "樂",
+        "target": "善"
+      },
+      {
+        "weight": 0.4387386441230774,
+        "source": "樂",
+        "target": "知"
+      },
+      {
+        "weight": 0.5196754932403564,
         "source": "善",
-        "target": "心"
+        "target": "仁"
       },
       {
         "weight": 0.5724798440933228,
@@ -622,19 +192,64 @@
         "target": "知"
       },
       {
-        "weight": 0.5115448832511902,
+        "weight": 0.5539122819900513,
         "source": "善",
-        "target": "行"
+        "target": "大"
       },
       {
-        "weight": 0.3783125877380371,
+        "weight": 0.5288692712783813,
         "source": "善",
-        "target": "親"
+        "target": "王"
       },
       {
-        "weight": 0.5428380966186523,
+        "weight": 0.5293126106262207,
+        "source": "大",
+        "target": "仁"
+      },
+      {
+        "weight": 0.571557879447937,
+        "source": "大",
+        "target": "王"
+      },
+      {
+        "weight": 0.4959653317928314,
+        "source": "大",
+        "target": "民"
+      },
+      {
+        "weight": 0.42129549384117126,
+        "source": "大",
+        "target": "父"
+      },
+      {
+        "weight": 0.4589642882347107,
+        "source": "取",
+        "target": "知"
+      },
+      {
+        "weight": 0.4523833394050598,
+        "source": "取",
+        "target": "仁"
+      },
+      {
+        "weight": 0.5112943053245544,
+        "source": "親",
+        "target": "父"
+      },
+      {
+        "weight": 0.48081642389297485,
+        "source": "親",
+        "target": "仁"
+      },
+      {
+        "weight": 0.42103680968284607,
+        "source": "親",
+        "target": "王"
+      },
+      {
+        "weight": 0.506639838218689,
         "source": "行",
-        "target": "子"
+        "target": "仁"
       },
       {
         "weight": 0.49813762307167053,
@@ -647,38 +262,38 @@
         "target": "知"
       },
       {
-        "weight": 0.4088537096977234,
-        "source": "行",
-        "target": "親"
+        "weight": 0.5143724679946899,
+        "source": "民",
+        "target": "仁"
       },
       {
-        "weight": 0.45260632038116455,
-        "source": "親",
-        "target": "子"
+        "weight": 0.5747250914573669,
+        "source": "民",
+        "target": "王"
       },
       {
-        "weight": 0.41784822940826416,
-        "source": "親",
-        "target": "心"
+        "weight": 0.43080469965934753,
+        "source": "父",
+        "target": "仁"
       },
       {
-        "weight": 0.39531052112579346,
-        "source": "親",
-        "target": "知"
-      },
-      {
-        "weight": 0.5352272391319275,
+        "weight": 0.5142550468444824,
         "source": "知",
-        "target": "子"
+        "target": "仁"
       },
       {
-        "weight": 0.4898183345794678,
+        "weight": 0.5403631925582886,
         "source": "知",
-        "target": "心"
+        "target": "王"
       },
       {
-        "weight": 0.5256067514419556,
-        "source": "子",
+        "weight": 0.5042716264724731,
+        "source": "王",
+        "target": "仁"
+      },
+      {
+        "weight": 0.4951336085796356,
+        "source": "仁",
         "target": "心"
       }
     ]

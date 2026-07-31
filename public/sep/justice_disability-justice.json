@@ -1,0 +1,406 @@
+{
+  "term": {
+    "label": "justice",
+    "occurrences": 81,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/disability-justice/",
+    "url": "https://plato.stanford.edu/entries/disability-justice/",
+    "title": "Disability and Justice",
+    "description": "\n\nAmong the topics in philosophy and disability, the relationship\nbetween disability and justice has received the lion’s share of\nattention. No doubt this is in"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "demands",
+        "id": "demand"
+      },
+      {
+        "form": "question",
+        "id": "question"
+      },
+      {
+        "form": "case",
+        "id": "case"
+      },
+      {
+        "form": "problem",
+        "id": "problem"
+      },
+      {
+        "form": "justice",
+        "id": "justice"
+      },
+      {
+        "form": "account",
+        "id": "account"
+      },
+      {
+        "form": "central",
+        "id": "central"
+      },
+      {
+        "form": "inequalities",
+        "id": "inequality"
+      },
+      {
+        "form": "failure",
+        "id": "failure"
+      },
+      {
+        "form": "context",
+        "id": "context"
+      },
+      {
+        "form": "theories",
+        "id": "theory"
+      },
+      {
+        "form": "opportunities",
+        "id": "opportunity"
+      },
+      {
+        "form": "claims",
+        "id": "claim"
+      },
+      {
+        "form": "entry",
+        "id": "entry"
+      },
+      {
+        "form": "distributive",
+        "id": "distributive"
+      },
+      {
+        "form": "forms",
+        "id": "form"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.8219157871157864,
+        "source": "demand",
+        "target": "account"
+      },
+      {
+        "weight": 1.2814481164942266,
+        "source": "demand",
+        "target": "entry"
+      },
+      {
+        "weight": 1.3534216161193158,
+        "source": "demand",
+        "target": "justice"
+      },
+      {
+        "weight": 0.8759830083860622,
+        "source": "demand",
+        "target": "failure"
+      },
+      {
+        "weight": 1.39923115215061,
+        "source": "demand",
+        "target": "opportunity"
+      },
+      {
+        "weight": 1.3684594934838563,
+        "source": "demand",
+        "target": "question"
+      },
+      {
+        "weight": 0.36515738462007147,
+        "source": "demand",
+        "target": "central"
+      },
+      {
+        "weight": 0.30061886348250033,
+        "source": "demand",
+        "target": "form"
+      },
+      {
+        "weight": 0.5883009359342812,
+        "source": "demand",
+        "target": "inequality"
+      },
+      {
+        "weight": 0.7706224927282359,
+        "source": "demand",
+        "target": "problem"
+      },
+      {
+        "weight": 0.7472858125490004,
+        "source": "question",
+        "target": "justice"
+      },
+      {
+        "weight": 1.0807774210320753,
+        "source": "question",
+        "target": "inequality"
+      },
+      {
+        "weight": 0.7930953485802946,
+        "source": "question",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.9529440495221905,
+        "source": "case",
+        "target": "central"
+      },
+      {
+        "weight": 2.4082312821290324,
+        "source": "case",
+        "target": "context"
+      },
+      {
+        "weight": 0.8425959923533253,
+        "source": "case",
+        "target": "justice"
+      },
+      {
+        "weight": 1.3923107093060363,
+        "source": "case",
+        "target": "theory"
+      },
+      {
+        "weight": 1.358409157630355,
+        "source": "case",
+        "target": "problem"
+      },
+      {
+        "weight": 0.40289771260291857,
+        "source": "case",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.7150841015690872,
+        "source": "problem",
+        "target": "context"
+      },
+      {
+        "weight": 0.8425959923533253,
+        "source": "problem",
+        "target": "justice"
+      },
+      {
+        "weight": 0.2936984206379265,
+        "source": "problem",
+        "target": "theory"
+      },
+      {
+        "weight": 0.7165552714579602,
+        "source": "problem",
+        "target": "account"
+      },
+      {
+        "weight": 1.1760876008364003,
+        "source": "problem",
+        "target": "inequality"
+      },
+      {
+        "weight": 0.9967466721805834,
+        "source": "justice",
+        "target": "central"
+      },
+      {
+        "weight": 0.7292673070463219,
+        "source": "justice",
+        "target": "context"
+      },
+      {
+        "weight": 0.9565402517025429,
+        "source": "justice",
+        "target": "theory"
+      },
+      {
+        "weight": 1.065739543667535,
+        "source": "justice",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.5957359144217994,
+        "source": "justice",
+        "target": "form"
+      },
+      {
+        "weight": 0.6062072142890947,
+        "source": "justice",
+        "target": "account"
+      },
+      {
+        "weight": 0.6602744355593705,
+        "source": "justice",
+        "target": "entry"
+      },
+      {
+        "weight": 0.7028340499781666,
+        "source": "justice",
+        "target": "claim"
+      },
+      {
+        "weight": 0.6602744355593705,
+        "source": "justice",
+        "target": "failure"
+      },
+      {
+        "weight": 0.8834179868735803,
+        "source": "justice",
+        "target": "inequality"
+      },
+      {
+        "weight": 0.5957359144217994,
+        "source": "justice",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.24655164221222456,
+        "source": "account",
+        "target": "form"
+      },
+      {
+        "weight": 1.2612824468996322,
+        "source": "account",
+        "target": "theory"
+      },
+      {
+        "weight": 1.6328460033321153,
+        "source": "account",
+        "target": "entry"
+      },
+      {
+        "weight": 1.5150629676757317,
+        "source": "account",
+        "target": "failure"
+      },
+      {
+        "weight": 0.5342337146640056,
+        "source": "account",
+        "target": "inequality"
+      },
+      {
+        "weight": 0.9396988227721699,
+        "source": "account",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.38008303483674716,
+        "source": "account",
+        "target": "context"
+      },
+      {
+        "weight": 1.0042373439097412,
+        "source": "account",
+        "target": "central"
+      },
+      {
+        "weight": 0.6164718129009776,
+        "source": "central",
+        "target": "context"
+      },
+      {
+        "weight": 0.9868456011978718,
+        "source": "central",
+        "target": "theory"
+      },
+      {
+        "weight": 1.096044893162864,
+        "source": "central",
+        "target": "distributive"
+      },
+      {
+        "weight": 1.1760876008364003,
+        "source": "central",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.7060839715906647,
+        "source": "inequality",
+        "target": "form"
+      },
+      {
+        "weight": 0.8045240444039172,
+        "source": "inequality",
+        "target": "theory"
+      },
+      {
+        "weight": 1.0363256584612417,
+        "source": "inequality",
+        "target": "claim"
+      },
+      {
+        "weight": 0.6308605503530772,
+        "source": "failure",
+        "target": "claim"
+      },
+      {
+        "weight": 0.508258228260745,
+        "source": "failure",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.39905893629575284,
+        "source": "failure",
+        "target": "theory"
+      },
+      {
+        "weight": 0.9937660440424456,
+        "source": "failure",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.650373364576659,
+        "source": "context",
+        "target": "theory"
+      },
+      {
+        "weight": 0.5519332917634064,
+        "source": "context",
+        "target": "opportunity"
+      },
+      {
+        "weight": 0.759572656541651,
+        "source": "context",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.8821749786339833,
+        "source": "context",
+        "target": "claim"
+      },
+      {
+        "weight": 1.5354115529467096,
+        "source": "theory",
+        "target": "distributive"
+      },
+      {
+        "weight": 0.8045240444039172,
+        "source": "theory",
+        "target": "entry"
+      },
+      {
+        "weight": 0.4184018991388838,
+        "source": "opportunity",
+        "target": "form"
+      },
+      {
+        "weight": 1.0363256584612417,
+        "source": "claim",
+        "target": "entry"
+      },
+      {
+        "weight": 0.055496405449515444,
+        "source": "claim",
+        "target": "form"
+      },
+      {
+        "weight": 0.9137233363689092,
+        "source": "entry",
+        "target": "distributive"
+      }
+    ]
+  }
+}

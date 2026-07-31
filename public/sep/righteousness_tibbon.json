@@ -1,0 +1,316 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 2,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/tibbon/",
+    "url": "https://plato.stanford.edu/entries/tibbon/",
+    "title": "Samuel Ibn Tibbon",
+    "description": "\n\nSamuel Ibn Tibbon (c. 1165–1232) was a translator, philosopher,\nand philosophical commentator on the Bible. He is most famous for his\ntranslation of Maimonide"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "method",
+        "id": "method"
+      },
+      {
+        "form": "translator",
+        "id": "translator"
+      },
+      {
+        "form": "word",
+        "id": "word"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "things",
+        "id": "thing"
+      },
+      {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "writings",
+        "id": "writing"
+      },
+      {
+        "form": "explains",
+        "id": "explain"
+      },
+      {
+        "form": "example",
+        "id": "example"
+      },
+      {
+        "form": "science",
+        "id": "science"
+      },
+      {
+        "form": "man",
+        "id": "man"
+      },
+      {
+        "form": "verses",
+        "id": "verse"
+      },
+      {
+        "form": "biblical",
+        "id": "biblical"
+      },
+      {
+        "form": "final",
+        "id": "final"
+      },
+      {
+        "form": "discussed",
+        "id": "discuss"
+      },
+      {
+        "form": "single",
+        "id": "single"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.5040773967762742,
+        "source": "method",
+        "target": "explain"
+      },
+      {
+        "weight": 1.5730702682632254,
+        "source": "method",
+        "target": "man"
+      },
+      {
+        "weight": 0.8109302162163288,
+        "source": "method",
+        "target": "biblical"
+      },
+      {
+        "weight": 0.6286086594223741,
+        "source": "method",
+        "target": "discuss"
+      },
+      {
+        "weight": 1.0340737675305385,
+        "source": "method",
+        "target": "verse"
+      },
+      {
+        "weight": 1.3217558399823195,
+        "source": "translator",
+        "target": "single"
+      },
+      {
+        "weight": 1.3862943611198906,
+        "source": "translator",
+        "target": "biblical"
+      },
+      {
+        "weight": 0.8979415932059586,
+        "source": "word",
+        "target": "god"
+      },
+      {
+        "weight": 0.49247648509779424,
+        "source": "word",
+        "target": "explain"
+      },
+      {
+        "weight": 0.31015492830383945,
+        "source": "word",
+        "target": "discuss"
+      },
+      {
+        "weight": 1.1210851445201684,
+        "source": "word",
+        "target": "single"
+      },
+      {
+        "weight": 1.254616537144691,
+        "source": "word",
+        "target": "man"
+      },
+      {
+        "weight": 0.8979415932059586,
+        "source": "word",
+        "target": "thing"
+      },
+      {
+        "weight": 2.959364629383116,
+        "source": "righteousness",
+        "target": "man"
+      },
+      {
+        "weight": 2.6026896854443837,
+        "source": "righteousness",
+        "target": "thing"
+      },
+      {
+        "weight": 2.8258332367585934,
+        "source": "righteousness",
+        "target": "single"
+      },
+      {
+        "weight": 0.5232481437645479,
+        "source": "thing",
+        "target": "example"
+      },
+      {
+        "weight": 2.043073897508961,
+        "source": "thing",
+        "target": "man"
+      },
+      {
+        "weight": 1.791759469228055,
+        "source": "thing",
+        "target": "science"
+      },
+      {
+        "weight": 1.791759469228055,
+        "source": "thing",
+        "target": "discuss"
+      },
+      {
+        "weight": 1.2809338454620642,
+        "source": "god",
+        "target": "explain"
+      },
+      {
+        "weight": 2.4849066497880004,
+        "source": "god",
+        "target": "final"
+      },
+      {
+        "weight": 2.043073897508961,
+        "source": "god",
+        "target": "man"
+      },
+      {
+        "weight": 1.5040773967762742,
+        "source": "god",
+        "target": "verse"
+      },
+      {
+        "weight": 0.7463916950787576,
+        "source": "writing",
+        "target": "example"
+      },
+      {
+        "weight": 2.0149030205422647,
+        "source": "writing",
+        "target": "final"
+      },
+      {
+        "weight": 1.4395388756387029,
+        "source": "writing",
+        "target": "single"
+      },
+      {
+        "weight": 1.6376087894007967,
+        "source": "explain",
+        "target": "man"
+      },
+      {
+        "weight": 0.6931471805599453,
+        "source": "explain",
+        "target": "final"
+      },
+      {
+        "weight": 1.791759469228055,
+        "source": "explain",
+        "target": "verse"
+      },
+      {
+        "weight": 0.6286086594223741,
+        "source": "example",
+        "target": "discuss"
+      },
+      {
+        "weight": 0.8799230877032802,
+        "source": "example",
+        "target": "man"
+      },
+      {
+        "weight": 0.6286086594223741,
+        "source": "example",
+        "target": "final"
+      },
+      {
+        "weight": 1.4395388756387029,
+        "source": "example",
+        "target": "single"
+      },
+      {
+        "weight": 0.3409265869705932,
+        "source": "example",
+        "target": "verse"
+      },
+      {
+        "weight": 0.11778303565638346,
+        "source": "example",
+        "target": "biblical"
+      },
+      {
+        "weight": 1.2039728043259361,
+        "source": "science",
+        "target": "final"
+      },
+      {
+        "weight": 0.5108256237659907,
+        "source": "science",
+        "target": "discuss"
+      },
+      {
+        "weight": 2.1484344131667874,
+        "source": "man",
+        "target": "final"
+      },
+      {
+        "weight": 1.8607523407150064,
+        "source": "man",
+        "target": "verse"
+      },
+      {
+        "weight": 1.0986122886681098,
+        "source": "verse",
+        "target": "biblical"
+      },
+      {
+        "weight": 0.9162907318741551,
+        "source": "verse",
+        "target": "discuss"
+      },
+      {
+        "weight": 1.6094379124341003,
+        "source": "verse",
+        "target": "final"
+      },
+      {
+        "weight": 1.9095425048844386,
+        "source": "biblical",
+        "target": "single"
+      },
+      {
+        "weight": 0.6931471805599453,
+        "source": "biblical",
+        "target": "final"
+      },
+      {
+        "weight": 1.3217558399823195,
+        "source": "final",
+        "target": "single"
+      }
+    ]
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "term": {
+    "label": "righteousness",
+    "occurrences": 2,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/kilvington/",
+    "url": "https://plato.stanford.edu/entries/kilvington/",
+    "title": "Richard Kilvington",
+    "description": "\n\nRichard Kilvington (ca. 1302–1361), Master of Arts and Doctor of\nTheology at Oxford, member of the household of Richard de Bury, then\nArchdeacon of London, an"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "free",
+        "id": "free"
+      },
+      {
+        "form": "righteousness",
+        "id": "righteousness"
+      },
+      {
+        "form": "Michałowska",
+        "id": "michałowska"
+      },
+      {
+        "form": "God",
+        "id": "god"
+      },
+      {
+        "form": "ordained",
+        "id": "ordain"
+      },
+      {
+        "form": "questions",
+        "id": "question"
+      },
+      {
+        "form": "Physics",
+        "id": "physics"
+      },
+      {
+        "form": "Jung",
+        "id": "jung"
+      },
+      {
+        "form": "absolute",
+        "id": "absolute"
+      },
+      {
+        "form": "logic",
+        "id": "logic"
+      },
+      {
+        "form": "view",
+        "id": "view"
+      },
+      {
+        "form": "mathematical",
+        "id": "mathematical"
+      },
+      {
+        "form": "acts",
+        "id": "act"
+      },
+      {
+        "form": "choices",
+        "id": "choice"
+      },
+      {
+        "form": "moral",
+        "id": "moral"
+      },
+      {
+        "form": "good",
+        "id": "good"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 1.136210702225117,
+        "source": "free",
+        "target": "act"
+      },
+      {
+        "weight": 1.9232897026192661,
+        "source": "free",
+        "target": "choice"
+      },
+      {
+        "weight": 1.3254527018636455,
+        "source": "free",
+        "target": "michałowska"
+      },
+      {
+        "weight": 0.8659203724852055,
+        "source": "free",
+        "target": "absolute"
+      },
+      {
+        "weight": 0.8022045580990976,
+        "source": "free",
+        "target": "god"
+      },
+      {
+        "weight": 0.6323055213037002,
+        "source": "free",
+        "target": "logic"
+      },
+      {
+        "weight": 1.2648280800472107,
+        "source": "free",
+        "target": "ordain"
+      },
+      {
+        "weight": 0.6323055213037002,
+        "source": "free",
+        "target": "jung"
+      },
+      {
+        "weight": 1.4308132175214718,
+        "source": "free",
+        "target": "good"
+      },
+      {
+        "weight": 1.5416758103332815,
+        "source": "righteousness",
+        "target": "act"
+      },
+      {
+        "weight": 1.6131347743154265,
+        "source": "righteousness",
+        "target": "god"
+      },
+      {
+        "weight": 2.1363829180799745,
+        "source": "righteousness",
+        "target": "jung"
+      },
+      {
+        "weight": 2.4240649905317553,
+        "source": "righteousness",
+        "target": "michałowska"
+      },
+      {
+        "weight": 1.3826111157035943,
+        "source": "michałowska",
+        "target": "question"
+      },
+      {
+        "weight": 1.0377706294118647,
+        "source": "michałowska",
+        "target": "logic"
+      },
+      {
+        "weight": 0.9199875937554811,
+        "source": "michałowska",
+        "target": "mathematical"
+      },
+      {
+        "weight": 1.5077742586576002,
+        "source": "michałowska",
+        "target": "physics"
+      },
+      {
+        "weight": 1.3254527018636455,
+        "source": "michałowska",
+        "target": "good"
+      },
+      {
+        "weight": 1.2713854805933698,
+        "source": "michałowska",
+        "target": "moral"
+      },
+      {
+        "weight": 1.9540613612860198,
+        "source": "michałowska",
+        "target": "jung"
+      },
+      {
+        "weight": 1.8179291869614398,
+        "source": "michałowska",
+        "target": "choice"
+      },
+      {
+        "weight": 0.8146270780976549,
+        "source": "michałowska",
+        "target": "view"
+      },
+      {
+        "weight": 0.28399882703548446,
+        "source": "michałowska",
+        "target": "ordain"
+      },
+      {
+        "weight": 1.376745996251196,
+        "source": "god",
+        "target": "absolute"
+      },
+      {
+        "weight": 1.4879716313614206,
+        "source": "god",
+        "target": "ordain"
+      },
+      {
+        "weight": 0.4430635216651719,
+        "source": "god",
+        "target": "act"
+      },
+      {
+        "weight": 0.3138517901851657,
+        "source": "god",
+        "target": "choice"
+      },
+      {
+        "weight": 0.10905737753915237,
+        "source": "god",
+        "target": "good"
+      },
+      {
+        "weight": 2.0216910749932637,
+        "source": "ordain",
+        "target": "absolute"
+      },
+      {
+        "weight": 0.6894639351436489,
+        "source": "ordain",
+        "target": "logic"
+      },
+      {
+        "weight": 0.5002219355051205,
+        "source": "ordain",
+        "target": "act"
+      },
+      {
+        "weight": 2.0757582962635395,
+        "source": "question",
+        "target": "physics"
+      },
+      {
+        "weight": 1.3826111157035943,
+        "source": "question",
+        "target": "jung"
+      },
+      {
+        "weight": 0.6894639351436489,
+        "source": "question",
+        "target": "logic"
+      },
+      {
+        "weight": 0.4663203838294392,
+        "source": "question",
+        "target": "view"
+      },
+      {
+        "weight": 2.318704474873929,
+        "source": "physics",
+        "target": "logic"
+      },
+      {
+        "weight": 1.7954563311093812,
+        "source": "physics",
+        "target": "mathematical"
+      },
+      {
+        "weight": 0.526945005645874,
+        "source": "physics",
+        "target": "jung"
+      },
+      {
+        "weight": 0.4091619699894905,
+        "source": "physics",
+        "target": "good"
+      },
+      {
+        "weight": 0.7500885569600837,
+        "source": "jung",
+        "target": "logic"
+      },
+      {
+        "weight": 1.2200921862058194,
+        "source": "jung",
+        "target": "view"
+      },
+      {
+        "weight": 0.6323055213037002,
+        "source": "jung",
+        "target": "mathematical"
+      },
+      {
+        "weight": 0.4316348258415491,
+        "source": "jung",
+        "target": "choice"
+      },
+      {
+        "weight": 0.5782383000334246,
+        "source": "absolute",
+        "target": "logic"
+      },
+      {
+        "weight": 2.0185998824235907,
+        "source": "logic",
+        "target": "mathematical"
+      },
+      {
+        "weight": 0.6323055213037002,
+        "source": "logic",
+        "target": "good"
+      },
+      {
+        "weight": 0.03759841355700759,
+        "source": "mathematical",
+        "target": "act"
+      },
+      {
+        "weight": 0.8998219241608868,
+        "source": "act",
+        "target": "moral"
+      },
+      {
+        "weight": 0.730745594116953,
+        "source": "act",
+        "target": "good"
+      },
+      {
+        "weight": 0.5300748986548016,
+        "source": "act",
+        "target": "choice"
+      },
+      {
+        "weight": 0.9529317494748352,
+        "source": "choice",
+        "target": "moral"
+      },
+      {
+        "weight": 1.7001461513050564,
+        "source": "choice",
+        "target": "good"
+      },
+      {
+        "weight": 1.5590675530451508,
+        "source": "moral",
+        "target": "good"
+      }
+    ]
+  }
+}

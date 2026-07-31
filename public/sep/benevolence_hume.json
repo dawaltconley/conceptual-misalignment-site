@@ -1,0 +1,446 @@
+{
+  "term": {
+    "label": "benevolence",
+    "occurrences": 12,
+    "variants": []
+  },
+  "source": {
+    "id": "https://plato.stanford.edu/entries/hume/",
+    "url": "https://plato.stanford.edu/entries/hume/",
+    "title": "David Hume",
+    "description": "\n\n\n[Editor’s Note: The following new entry by Hsueh Qu and\nElizabeth S. Radcliffe replaces the\n former entry\n on this topic by the previous authors.]\n\n\nDavid Hu"
+  },
+  "network": {
+    "directed": false,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "form": "pain",
+        "id": "pain"
+      },
+      {
+        "form": "feel",
+        "id": "feel"
+      },
+      {
+        "form": "indirect",
+        "id": "indirect"
+      },
+      {
+        "form": "desire",
+        "id": "desire"
+      },
+      {
+        "form": "situation",
+        "id": "situation"
+      },
+      {
+        "form": "direct",
+        "id": "direct"
+      },
+      {
+        "form": "act",
+        "id": "act"
+      },
+      {
+        "form": "concerning",
+        "id": "concern"
+      },
+      {
+        "form": "distinctions",
+        "id": "distinction"
+      },
+      {
+        "form": "Philo",
+        "id": "philo"
+      },
+      {
+        "form": "given",
+        "id": "give"
+      },
+      {
+        "form": "instincts",
+        "id": "instinct"
+      },
+      {
+        "form": "hatred",
+        "id": "hatred"
+      },
+      {
+        "form": "sympathy",
+        "id": "sympathy"
+      },
+      {
+        "form": "person",
+        "id": "person"
+      },
+      {
+        "form": "benevolence",
+        "id": "benevolence"
+      }
+    ],
+    "edges": [
+      {
+        "weight": 0.6732370206006155,
+        "source": "pain",
+        "target": "concern"
+      },
+      {
+        "weight": 2.1613140760304486,
+        "source": "pain",
+        "target": "direct"
+      },
+      {
+        "weight": 2.027782683405926,
+        "source": "pain",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7060268434236066,
+        "source": "pain",
+        "target": "distinction"
+      },
+      {
+        "weight": 0.7750197149105579,
+        "source": "pain",
+        "target": "indirect"
+      },
+      {
+        "weight": 1.7093289522873913,
+        "source": "pain",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.9717300091566122,
+        "source": "pain",
+        "target": "person"
+      },
+      {
+        "weight": 0.6414883222860353,
+        "source": "pain",
+        "target": "feel"
+      },
+      {
+        "weight": 1.8046391320917161,
+        "source": "pain",
+        "target": "hatred"
+      },
+      {
+        "weight": 1.216852467189597,
+        "source": "pain",
+        "target": "situation"
+      },
+      {
+        "weight": 0.9291703947378163,
+        "source": "pain",
+        "target": "sympathy"
+      },
+      {
+        "weight": 0.7060268434236066,
+        "source": "pain",
+        "target": "desire"
+      },
+      {
+        "weight": 0.5237052866296518,
+        "source": "pain",
+        "target": "give"
+      },
+      {
+        "weight": 1.740100610954145,
+        "source": "feel",
+        "target": "sympathy"
+      },
+      {
+        "weight": 1.7826602253729409,
+        "source": "feel",
+        "target": "person"
+      },
+      {
+        "weight": 2.145565719062309,
+        "source": "feel",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.791020056256999,
+        "source": "feel",
+        "target": "concern"
+      },
+      {
+        "weight": 1.2292749871881543,
+        "source": "feel",
+        "target": "hatred"
+      },
+      {
+        "weight": 2.027782683405926,
+        "source": "feel",
+        "target": "situation"
+      },
+      {
+        "weight": 1.0469534303941996,
+        "source": "feel",
+        "target": "act"
+      },
+      {
+        "weight": 2.4614186684807864,
+        "source": "indirect",
+        "target": "hatred"
+      },
+      {
+        "weight": 2.279097111686832,
+        "source": "indirect",
+        "target": "benevolence"
+      },
+      {
+        "weight": 2.6357720556255644,
+        "source": "indirect",
+        "target": "direct"
+      },
+      {
+        "weight": 0.9573412717045126,
+        "source": "indirect",
+        "target": "distinction"
+      },
+      {
+        "weight": 2.3661084886764616,
+        "source": "indirect",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.2314042683215763,
+        "source": "indirect",
+        "target": "concern"
+      },
+      {
+        "weight": 0.7750197149105579,
+        "source": "indirect",
+        "target": "give"
+      },
+      {
+        "weight": 0.487337642458777,
+        "source": "indirect",
+        "target": "sympathy"
+      },
+      {
+        "weight": 0.9573412717045126,
+        "source": "indirect",
+        "target": "desire"
+      },
+      {
+        "weight": 2.807941240955501,
+        "source": "desire",
+        "target": "instinct"
+      },
+      {
+        "weight": 1.6504884522644578,
+        "source": "desire",
+        "target": "direct"
+      },
+      {
+        "weight": 1.8046391320917161,
+        "source": "desire",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.4183447709718255,
+        "source": "desire",
+        "target": "sympathy"
+      },
+      {
+        "weight": 0.888348400217561,
+        "source": "desire",
+        "target": "distinction"
+      },
+      {
+        "weight": 1.399174023983552,
+        "source": "desire",
+        "target": "situation"
+      },
+      {
+        "weight": 2.3154647558577066,
+        "source": "situation",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.6732370206006155,
+        "source": "situation",
+        "target": "concern"
+      },
+      {
+        "weight": 1.8046391320917161,
+        "source": "situation",
+        "target": "hatred"
+      },
+      {
+        "weight": 2.3580243702765027,
+        "source": "situation",
+        "target": "person"
+      },
+      {
+        "weight": 2.027782683405926,
+        "source": "situation",
+        "target": "sympathy"
+      },
+      {
+        "weight": 1.399174023983552,
+        "source": "situation",
+        "target": "distinction"
+      },
+      {
+        "weight": 1.216852467189597,
+        "source": "situation",
+        "target": "give"
+      },
+      {
+        "weight": 1.8736320035786675,
+        "source": "direct",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.9573412717045126,
+        "source": "direct",
+        "target": "distinction"
+      },
+      {
+        "weight": 2.653790561128243,
+        "source": "direct",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.7750197149105579,
+        "source": "direct",
+        "target": "give"
+      },
+      {
+        "weight": 1.3628063798126768,
+        "source": "direct",
+        "target": "philo"
+      },
+      {
+        "weight": 2.027782683405926,
+        "source": "act",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.6840479367048312,
+        "source": "act",
+        "target": "person"
+      },
+      {
+        "weight": 0.3855549481488347,
+        "source": "act",
+        "target": "concern"
+      },
+      {
+        "weight": 1.7718493092687253,
+        "source": "concern",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.791020056256999,
+        "source": "concern",
+        "target": "sympathy"
+      },
+      {
+        "weight": 0.5678765049427892,
+        "source": "concern",
+        "target": "hatred"
+      },
+      {
+        "weight": 0.47256632513846436,
+        "source": "concern",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.16241139683462483,
+        "source": "concern",
+        "target": "distinction"
+      },
+      {
+        "weight": 1.8046391320917161,
+        "source": "distinction",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.8916505090813458,
+        "source": "distinction",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.4183447709718255,
+        "source": "distinction",
+        "target": "sympathy"
+      },
+      {
+        "weight": 1.5169570596399353,
+        "source": "philo",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.1114919515317707,
+        "source": "philo",
+        "target": "give"
+      },
+      {
+        "weight": 1.6223175752977614,
+        "source": "give",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.016181771727446,
+        "source": "give",
+        "target": "instinct"
+      },
+      {
+        "weight": 0.2360232141778709,
+        "source": "give",
+        "target": "sympathy"
+      },
+      {
+        "weight": 1.1114919515317707,
+        "source": "give",
+        "target": "hatred"
+      },
+      {
+        "weight": 2.52025916850372,
+        "source": "instinct",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.7284996992756649,
+        "source": "instinct",
+        "target": "sympathy"
+      },
+      {
+        "weight": 1.5169570596399353,
+        "source": "hatred",
+        "target": "benevolence"
+      },
+      {
+        "weight": 0.8663694934987858,
+        "source": "hatred",
+        "target": "person"
+      },
+      {
+        "weight": 1.5169570596399353,
+        "source": "hatred",
+        "target": "sympathy"
+      },
+      {
+        "weight": 2.4332477915140904,
+        "source": "sympathy",
+        "target": "benevolence"
+      },
+      {
+        "weight": 1.7826602253729409,
+        "source": "sympathy",
+        "target": "person"
+      },
+      {
+        "weight": 1.7826602253729409,
+        "source": "person",
+        "target": "benevolence"
+      }
+    ]
+  }
+}
