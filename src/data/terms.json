@@ -4,7 +4,8 @@
       "hanzi": "仁",
       "renderings": [
         "benevolence",
-        "humaneness"
+        "humaneness",
+        "humanity"
       ],
       "chinese": {
         "corpus": "mengzi",
@@ -199,6 +200,16 @@
               "cooccurrence": "/sep/humaneness_emotions-chinese.json"
             },
             {
+              "id": "https://plato.stanford.edu/entries/geometry-19th/",
+              "title": "Nineteenth Century Geometry",
+              "cooccurrence": "/sep/humaneness_geometry-19th.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justus-lipsius/",
+              "title": "Justus Lipsius",
+              "cooccurrence": "/sep/humaneness_justus-lipsius.json"
+            },
+            {
               "id": "https://plato.stanford.edu/entries/meritocracy/",
               "title": "Meritocracy",
               "cooccurrence": "/sep/humaneness_meritocracy.json"
@@ -234,6 +245,79 @@
               "cooccurrence": "/sep/humaneness_sophie-de-grouchy.json"
             }
           ]
+        },
+        {
+          "label": "humanity",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/humanity_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=humanity+humanit%2A",
+              "title": "SEP search: humanity",
+              "cooccurrence": "/sep/humanity_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/african-ethics/",
+              "title": "African Ethics",
+              "cooccurrence": "/sep/humanity_african-ethics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/al-farabi-soc-rel/",
+              "title": "al-Farabi’s Philosophy of Society and Religion",
+              "cooccurrence": "/sep/humanity_al-farabi-soc-rel.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cognitive-disability/",
+              "title": "Cognitive Disability and Moral Status",
+              "cooccurrence": "/sep/humanity_cognitive-disability.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cohen/",
+              "title": "Hermann Cohen",
+              "cooccurrence": "/sep/humanity_cohen.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/comte/",
+              "title": "Auguste Comte",
+              "cooccurrence": "/sep/humanity_comte.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dehumanization/",
+              "title": "Dehumanization",
+              "cooccurrence": "/sep/humanity_dehumanization.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/enlightenment/",
+              "title": "Enlightenment",
+              "cooccurrence": "/sep/humanity_enlightenment.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-objectification/",
+              "title": "Feminist Perspectives on Objectification",
+              "cooccurrence": "/sep/humanity_feminism-objectification.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/heidegger-aesthetics/",
+              "title": "Heidegger’s Aesthetics",
+              "cooccurrence": "/sep/humanity_heidegger-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-moral/",
+              "title": "Kant’s Moral Philosophy",
+              "cooccurrence": "/sep/humanity_kant-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/penbygull/",
+              "title": "William Penbygull",
+              "cooccurrence": "/sep/humanity_penbygull.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/schiller/",
+              "title": "Friedrich Schiller",
+              "cooccurrence": "/sep/humanity_schiller.json"
+            }
+          ]
         }
       ]
     },
@@ -241,7 +325,9 @@
       "hanzi": "義",
       "renderings": [
         "righteousness",
-        "justice"
+        "justice",
+        "meaning",
+        "morality"
       ],
       "chinese": {
         "corpus": "mengzi",
@@ -378,9 +464,19 @@
               "cooccurrence": "/sep/righteousness_emotions-chinese.json"
             },
             {
+              "id": "https://plato.stanford.edu/entries/epistemology-india/",
+              "title": "Epistemology in Classical Indian Philosophy",
+              "cooccurrence": "/sep/righteousness_epistemology-india.json"
+            },
+            {
               "id": "https://plato.stanford.edu/entries/kilvington/",
               "title": "Richard Kilvington",
               "cooccurrence": "/sep/righteousness_kilvington.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/korean-confucianism/",
+              "title": "Korean Confucianism",
+              "cooccurrence": "/sep/righteousness_korean-confucianism.json"
             },
             {
               "id": "https://plato.stanford.edu/entries/locke-moral/",
@@ -469,6 +565,3321 @@
               "id": "https://plato.stanford.edu/entries/justice/",
               "title": "Justice",
               "cooccurrence": "/sep/justice_justice.json"
+            }
+          ]
+        },
+        {
+          "label": "meaning",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/meaning_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=meaning+meaning%2A",
+              "title": "SEP search: meaning",
+              "cooccurrence": "/sep/meaning_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/compositionality/",
+              "title": "Compositionality",
+              "cooccurrence": "/sep/meaning_compositionality.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/grice/",
+              "title": "Paul Grice",
+              "cooccurrence": "/sep/meaning_grice.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/language-india/",
+              "title": "Language and Testimony in Classical Indian Philosophy",
+              "cooccurrence": "/sep/meaning_language-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/legal-interpretation/",
+              "title": "Legal Interpretation",
+              "cooccurrence": "/sep/meaning_legal-interpretation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/life-meaning/",
+              "title": "The Meaning of Life",
+              "cooccurrence": "/sep/meaning_life-meaning.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/literal-nonliteral-india/",
+              "title": "The Literal-Nonliteral Distinction in Classical Indian Philosophy",
+              "cooccurrence": "/sep/meaning_literal-nonliteral-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meaning-holism/",
+              "title": "Meaning Holism",
+              "cooccurrence": "/sep/meaning_meaning-holism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meaning-normativity/",
+              "title": "The Normativity of Meaning and Content",
+              "cooccurrence": "/sep/meaning_meaning-normativity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meaning/",
+              "title": "Theories of Meaning",
+              "cooccurrence": "/sep/meaning_meaning.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/names/",
+              "title": "Names",
+              "cooccurrence": "/sep/meaning_names.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/rule-following/",
+              "title": "Rule-Following and Intentionality",
+              "cooccurrence": "/sep/meaning_rule-following.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/word-meaning/",
+              "title": "Word Meaning",
+              "cooccurrence": "/sep/meaning_word-meaning.json"
+            }
+          ]
+        },
+        {
+          "label": "morality",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/morality_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=morality+moral%2A",
+              "title": "SEP search: morality",
+              "cooccurrence": "/sep/morality_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/bradley-moral/",
+              "title": "Bradley’s Moral Philosophy",
+              "cooccurrence": "/sep/morality_bradley-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-hume-morality/",
+              "title": "Kant and Hume on Morality",
+              "cooccurrence": "/sep/morality_kant-hume-morality.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/locke-moral/",
+              "title": "Locke’s Moral Philosophy",
+              "cooccurrence": "/sep/morality_locke-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-anti-realism/",
+              "title": "Moral Anti-Realism",
+              "cooccurrence": "/sep/morality_moral-anti-realism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-arguments-god/",
+              "title": "Moral Arguments for the Existence of God",
+              "cooccurrence": "/sep/morality_moral-arguments-god.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-conventional/",
+              "title": "The Moral/Conventional Distinction",
+              "cooccurrence": "/sep/morality_moral-conventional.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-relativism/",
+              "title": "Moral Relativism",
+              "cooccurrence": "/sep/morality_moral-relativism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-theory/",
+              "title": "Moral Theory",
+              "cooccurrence": "/sep/morality_moral-theory.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/morality-biology/",
+              "title": "Morality and Evolutionary Biology",
+              "cooccurrence": "/sep/morality_morality-biology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/morality-definition/",
+              "title": "The Definition of Morality",
+              "cooccurrence": "/sep/morality_morality-definition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+              "title": "Nietzsche’s Moral and Political Philosophy",
+              "cooccurrence": "/sep/morality_nietzsche-moral-political.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religion-morality/",
+              "title": "Religion and Morality in Western Philosophy",
+              "cooccurrence": "/sep/morality_religion-morality.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "禮",
+      "renderings": [
+        "ritual",
+        "propriety",
+        "etiquette",
+        "social norms"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/禮_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/禮_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/禮_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/禮_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/禮_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/禮_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/禮_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/禮_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/禮_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/禮_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/禮_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/禮_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/禮_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/禮_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/禮_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/禮_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "ritual",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/ritual_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=ritual+ritual%2A",
+              "title": "SEP search: ritual",
+              "cooccurrence": "/sep/ritual_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/confucian-gender/",
+              "title": "Gender in Confucian Philosophy",
+              "cooccurrence": "/sep/ritual_confucian-gender.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/david/",
+              "title": "David",
+              "cooccurrence": "/sep/ritual_david.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/empedocles/",
+              "title": "Empedocles",
+              "cooccurrence": "/sep/ritual_empedocles.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/korean-confucianism/",
+              "title": "Korean Confucianism",
+              "cooccurrence": "/sep/ritual_korean-confucianism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kumaarila/",
+              "title": "Kumārila",
+              "cooccurrence": "/sep/ritual_kumaarila.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/langer/",
+              "title": "Susanne Langer",
+              "cooccurrence": "/sep/ritual_langer.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/language-india/",
+              "title": "Language and Testimony in Classical Indian Philosophy",
+              "cooccurrence": "/sep/ritual_language-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/literal-nonliteral-india/",
+              "title": "The Literal-Nonliteral Distinction in Classical Indian Philosophy",
+              "cooccurrence": "/sep/ritual_literal-nonliteral-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/postmodernism/",
+              "title": "Postmodernism",
+              "cooccurrence": "/sep/ritual_postmodernism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/pythagoras/",
+              "title": "Pythagoras",
+              "cooccurrence": "/sep/ritual_pythagoras.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/shankara/",
+              "title": "Śaṅkara",
+              "cooccurrence": "/sep/ritual_shankara.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-procedures/",
+              "title": "Formal Approaches to Social Procedures",
+              "cooccurrence": "/sep/ritual_social-procedures.json"
+            }
+          ]
+        },
+        {
+          "label": "propriety",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/propriety_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=propriety+propriet%2A",
+              "title": "SEP search: propriety",
+              "cooccurrence": "/sep/propriety_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/assertion/",
+              "title": "Assertion",
+              "cooccurrence": "/sep/propriety_assertion.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/confucian-gender/",
+              "title": "Gender in Confucian Philosophy",
+              "cooccurrence": "/sep/propriety_confucian-gender.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dai-zhen/",
+              "title": "Dai Zhen",
+              "cooccurrence": "/sep/propriety_dai-zhen.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epistemic-utility/",
+              "title": "Epistemic Utility Arguments for Epistemic Norms",
+              "cooccurrence": "/sep/propriety_epistemic-utility.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fiction-emotion-response/",
+              "title": "Emotional Responses to Fiction",
+              "cooccurrence": "/sep/propriety_fiction-emotion-response.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-retributive/",
+              "title": "Retributive Justice",
+              "cooccurrence": "/sep/propriety_justice-retributive.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/korean-confucianism/",
+              "title": "Korean Confucianism",
+              "cooccurrence": "/sep/propriety_korean-confucianism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-sentimentalism/",
+              "title": "Moral Sentimentalism",
+              "cooccurrence": "/sep/propriety_moral-sentimentalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scottish-18th/",
+              "title": "Scottish Philosophy in the 18th Century",
+              "cooccurrence": "/sep/propriety_scottish-18th.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/sellars/",
+              "title": "Wilfrid Sellars",
+              "cooccurrence": "/sep/propriety_sellars.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/smith-moral-political/",
+              "title": "Adam Smith’s Moral and Political Philosophy",
+              "cooccurrence": "/sep/propriety_smith-moral-political.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/truthlikeness/",
+              "title": "Truthlikeness",
+              "cooccurrence": "/sep/propriety_truthlikeness.json"
+            }
+          ]
+        },
+        {
+          "label": "etiquette",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/etiquette_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=etiquette+etiquette%2A",
+              "title": "SEP search: etiquette",
+              "cooccurrence": "/sep/etiquette_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arabic-islamic-language/",
+              "title": "Arabic and Islamic Philosophy of Language and Logic",
+              "cooccurrence": "/sep/etiquette_arabic-islamic-language.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/convention/",
+              "title": "Convention",
+              "cooccurrence": "/sep/etiquette_convention.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-argumentation/",
+              "title": "Feminist Perspectives on Argumentation",
+              "cooccurrence": "/sep/etiquette_feminism-argumentation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/madeleine-scudery/",
+              "title": "Madeleine de Scudéry",
+              "cooccurrence": "/sep/etiquette_madeleine-scudery.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meaning-normativity/",
+              "title": "The Normativity of Meaning and Content",
+              "cooccurrence": "/sep/etiquette_meaning-normativity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/meaning/",
+              "title": "Theories of Meaning",
+              "cooccurrence": "/sep/etiquette_meaning.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-arguments-god/",
+              "title": "Moral Arguments for the Existence of God",
+              "cooccurrence": "/sep/etiquette_moral-arguments-god.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-conventional/",
+              "title": "The Moral/Conventional Distinction",
+              "cooccurrence": "/sep/etiquette_moral-conventional.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/philippa-foot/",
+              "title": "Philippa Foot",
+              "cooccurrence": "/sep/etiquette_philippa-foot.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/privacy-medicine/",
+              "title": "Privacy and Medicine",
+              "cooccurrence": "/sep/etiquette_privacy-medicine.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/psychology-normative-cognition/",
+              "title": "The Psychology of Normative Cognition",
+              "cooccurrence": "/sep/etiquette_psychology-normative-cognition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/shantideva/",
+              "title": "Śāntideva",
+              "cooccurrence": "/sep/etiquette_shantideva.json"
+            }
+          ]
+        },
+        {
+          "label": "social norms",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/social norms_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=social+norms+norm%2A",
+              "title": "SEP search: social norms",
+              "cooccurrence": "/sep/social norms_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/animal-social-cognition/",
+              "title": "Animal Social Cognition",
+              "cooccurrence": "/sep/social norms_animal-social-cognition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/contractarianism-contemporary/",
+              "title": "Contemporary Approaches to the Social Contract",
+              "cooccurrence": "/sep/social norms_contractarianism-contemporary.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epistemic-utility/",
+              "title": "Epistemic Utility Arguments for Epistemic Norms",
+              "cooccurrence": "/sep/social norms_epistemic-utility.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epistemology-social/",
+              "title": "Social Epistemology",
+              "cooccurrence": "/sep/social norms_epistemology-social.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-social-networking/",
+              "title": "Social Networking and Ethics",
+              "cooccurrence": "/sep/social norms_ethics-social-networking.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminist-social-epistemology/",
+              "title": "Feminist Social Epistemology",
+              "cooccurrence": "/sep/social norms_feminist-social-epistemology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-construction-naturalistic/",
+              "title": "Naturalistic Approaches to Social Construction",
+              "cooccurrence": "/sep/social norms_social-construction-naturalistic.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-institutions/",
+              "title": "Social Institutions",
+              "cooccurrence": "/sep/social norms_social-institutions.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-minimum/",
+              "title": "Social Minimum",
+              "cooccurrence": "/sep/social norms_social-minimum.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-norms/",
+              "title": "Social Norms",
+              "cooccurrence": "/sep/social norms_social-norms.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-ontology/",
+              "title": "Social Ontology",
+              "cooccurrence": "/sep/social norms_social-ontology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/social-procedures/",
+              "title": "Formal Approaches to Social Procedures",
+              "cooccurrence": "/sep/social norms_social-procedures.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "智",
+      "renderings": [
+        "knowledge",
+        "wisdom"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/智_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/智_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/智_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/智_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/智_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/智_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/智_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/智_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/智_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/智_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/智_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/智_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/智_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/智_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/智_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/智_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "knowledge",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/knowledge_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=knowledge+knowledge%2A",
+              "title": "SEP search: knowledge",
+              "cooccurrence": "/sep/knowledge_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/apriori/",
+              "title": "A Priori Justification and Knowledge",
+              "cooccurrence": "/sep/knowledge_apriori.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/common-knowledge/",
+              "title": "Common Knowledge",
+              "cooccurrence": "/sep/knowledge_common-knowledge.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/knowledge-acquaindescrip/",
+              "title": "Knowledge by Acquaintance vs. Description",
+              "cooccurrence": "/sep/knowledge_knowledge-acquaindescrip.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/knowledge-analysis/",
+              "title": "The Analysis of Knowledge",
+              "cooccurrence": "/sep/knowledge_knowledge-analysis.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/knowledge-how/",
+              "title": "Knowledge How",
+              "cooccurrence": "/sep/knowledge_knowledge-how.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/knowledge-value/",
+              "title": "The Value of Knowledge",
+              "cooccurrence": "/sep/knowledge_knowledge-value.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-theaetetus/",
+              "title": "Plato on Knowledge in the Theaetetus",
+              "cooccurrence": "/sep/knowledge_plato-theaetetus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/qualia-knowledge/",
+              "title": "Qualia: The Knowledge Argument",
+              "cooccurrence": "/sep/knowledge_qualia-knowledge.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/rationalism-empiricism/",
+              "title": "Rationalism vs. Empiricism",
+              "cooccurrence": "/sep/knowledge_rationalism-empiricism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scientific-knowledge-social/",
+              "title": "The Social Dimensions of Scientific Knowledge",
+              "cooccurrence": "/sep/knowledge_scientific-knowledge-social.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/self-knowledge-externalism/",
+              "title": "Externalism and Self-Knowledge",
+              "cooccurrence": "/sep/knowledge_self-knowledge-externalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/self-knowledge/",
+              "title": "Self-Knowledge",
+              "cooccurrence": "/sep/knowledge_self-knowledge.json"
+            }
+          ]
+        },
+        {
+          "label": "wisdom",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/wisdom_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=wisdom+wisdom%2A+wise%2A",
+              "title": "SEP search: wisdom",
+              "cooccurrence": "/sep/wisdom_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arabic-islamic-mysticism/",
+              "title": "Mysticism in Arabic and Islamic Philosophy",
+              "cooccurrence": "/sep/wisdom_arabic-islamic-mysticism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aristotle-ethics/",
+              "title": "Aristotle’s Ethics",
+              "cooccurrence": "/sep/wisdom_aristotle-ethics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arnauld/",
+              "title": "Antoine Arnauld",
+              "cooccurrence": "/sep/wisdom_arnauld.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/divine-simplicity/",
+              "title": "Divine Simplicity",
+              "cooccurrence": "/sep/wisdom_divine-simplicity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-ancient/",
+              "title": "Ancient Ethical Theory",
+              "cooccurrence": "/sep/wisdom_ethics-ancient.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-virtue/",
+              "title": "Virtue Ethics",
+              "cooccurrence": "/sep/wisdom_ethics-virtue.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ibn-gabirol/",
+              "title": "Solomon Ibn Gabirol [Avicebron]",
+              "cooccurrence": "/sep/wisdom_ibn-gabirol.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/madhyamaka/",
+              "title": "Madhyamaka",
+              "cooccurrence": "/sep/wisdom_madhyamaka.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-ethics-shorter/",
+              "title": "Plato’s Shorter Ethical Works",
+              "cooccurrence": "/sep/wisdom_plato-ethics-shorter.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-friendship/",
+              "title": "Plato on Friendship and Eros",
+              "cooccurrence": "/sep/wisdom_plato-friendship.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/vico/",
+              "title": "Giambattista Vico",
+              "cooccurrence": "/sep/wisdom_vico.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/wisdom-analytic/",
+              "title": "Wisdom in Contemporary Analytic Philosophy",
+              "cooccurrence": "/sep/wisdom_wisdom-analytic.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "信",
+      "renderings": [
+        "trustworthiness",
+        "faith",
+        "sincerity"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/信_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/信_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/信_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/信_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/信_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/信_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/信_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/信_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/信_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/信_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/信_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/信_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/信_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/信_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/信_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/信_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "trustworthiness",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/trustworthiness_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=trustworthiness+trustworth%2A",
+              "title": "SEP search: trustworthiness",
+              "cooccurrence": "/sep/trustworthiness_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/divine-revelation/",
+              "title": "Divine Revelation",
+              "cooccurrence": "/sep/trustworthiness_divine-revelation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/faith/",
+              "title": "Faith",
+              "cooccurrence": "/sep/trustworthiness_faith.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/femapproach-analytic/",
+              "title": "Analytic Feminism",
+              "cooccurrence": "/sep/trustworthiness_femapproach-analytic.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminist-social-epistemology/",
+              "title": "Feminist Social Epistemology",
+              "cooccurrence": "/sep/trustworthiness_feminist-social-epistemology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/john-italos/",
+              "title": "John Italos",
+              "cooccurrence": "/sep/trustworthiness_john-italos.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justep-foundational/",
+              "title": "Foundationalist Theories of Epistemic Justification",
+              "cooccurrence": "/sep/trustworthiness_justep-foundational.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/loyalty/",
+              "title": "Loyalty",
+              "cooccurrence": "/sep/trustworthiness_loyalty.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/memory-episprob/",
+              "title": "Epistemological Problems of Memory",
+              "cooccurrence": "/sep/trustworthiness_memory-episprob.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/parmenides/",
+              "title": "Parmenides",
+              "cooccurrence": "/sep/trustworthiness_parmenides.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/pyrrho/",
+              "title": "Pyrrho",
+              "cooccurrence": "/sep/trustworthiness_pyrrho.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/richard-price/",
+              "title": "Richard Price",
+              "cooccurrence": "/sep/trustworthiness_richard-price.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/trust/",
+              "title": "Trust",
+              "cooccurrence": "/sep/trustworthiness_trust.json"
+            }
+          ]
+        },
+        {
+          "label": "faith",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/faith_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=faith+faith%2A",
+              "title": "SEP search: faith",
+              "cooccurrence": "/sep/faith_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/astell/",
+              "title": "Mary Astell",
+              "cooccurrence": "/sep/faith_astell.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dewey/",
+              "title": "John Dewey",
+              "cooccurrence": "/sep/faith_dewey.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/divine-hiddenness/",
+              "title": "Hiddenness of God",
+              "cooccurrence": "/sep/faith_divine-hiddenness.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/divine-revelation/",
+              "title": "Divine Revelation",
+              "cooccurrence": "/sep/faith_divine-revelation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/faith/",
+              "title": "Faith",
+              "cooccurrence": "/sep/faith_faith.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fideism/",
+              "title": "Fideism",
+              "cooccurrence": "/sep/faith_fideism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/free-will-foreknowledge/",
+              "title": "Foreknowledge and Free Will",
+              "cooccurrence": "/sep/faith_free-will-foreknowledge.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kierkegaard/",
+              "title": "Søren Kierkegaard",
+              "cooccurrence": "/sep/faith_kierkegaard.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/leibowitz-yeshayahu/",
+              "title": "Yeshayahu Leibowitz",
+              "cooccurrence": "/sep/faith_leibowitz-yeshayahu.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religion-epistemology/",
+              "title": "The Epistemology of Religion",
+              "cooccurrence": "/sep/faith_religion-epistemology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religious-language/",
+              "title": "Religious Language",
+              "cooccurrence": "/sep/faith_religious-language.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/toleration/",
+              "title": "Toleration",
+              "cooccurrence": "/sep/faith_toleration.json"
+            }
+          ]
+        },
+        {
+          "label": "sincerity",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/sincerity_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=sincerity+sincer%2A",
+              "title": "SEP search: sincerity",
+              "cooccurrence": "/sep/sincerity_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/assertion/",
+              "title": "Assertion",
+              "cooccurrence": "/sep/sincerity_assertion.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/authenticity/",
+              "title": "Authenticity",
+              "cooccurrence": "/sep/sincerity_authenticity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/category-mistakes/",
+              "title": "Category Mistakes",
+              "cooccurrence": "/sep/sincerity_category-mistakes.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/civil-disobedience/",
+              "title": "Civil Disobedience",
+              "cooccurrence": "/sep/sincerity_civil-disobedience.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hobbes-moral/",
+              "title": "Hobbes’s Moral and Political Philosophy",
+              "cooccurrence": "/sep/sincerity_hobbes-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/loyalty/",
+              "title": "Loyalty",
+              "cooccurrence": "/sep/sincerity_loyalty.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/lying-definition/",
+              "title": "The Definition of Lying and Deception",
+              "cooccurrence": "/sep/sincerity_lying-definition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mandeville/",
+              "title": "Bernard Mandeville",
+              "cooccurrence": "/sep/sincerity_mandeville.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/montaigne/",
+              "title": "Michel de Montaigne",
+              "cooccurrence": "/sep/sincerity_montaigne.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/public-reason/",
+              "title": "Public Reason",
+              "cooccurrence": "/sep/sincerity_public-reason.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/publicity/",
+              "title": "Publicity",
+              "cooccurrence": "/sep/sincerity_publicity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/speech-acts/",
+              "title": "Speech Acts",
+              "cooccurrence": "/sep/sincerity_speech-acts.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "性",
+      "renderings": [
+        "nature",
+        "character",
+        "predisposition"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/性_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/性_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/性_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/性_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/性_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/性_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/性_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/性_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/性_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/性_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/性_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/性_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/性_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/性_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/性_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/性_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "nature",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/nature_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=nature+nature%2A+human+nature",
+              "title": "SEP search: nature",
+              "cooccurrence": "/sep/nature_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/chimeras/",
+              "title": "Human/Non-Human Chimeras",
+              "cooccurrence": "/sep/nature_chimeras.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/enhancement/",
+              "title": "Human Enhancement",
+              "cooccurrence": "/sep/nature_enhancement.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-environmental/",
+              "title": "Feminist Environmental Philosophy",
+              "cooccurrence": "/sep/nature_feminism-environmental.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gametes-donation-sale/",
+              "title": "The Donation and Sale of Human Eggs and Sperm",
+              "cooccurrence": "/sep/nature_gametes-donation-sale.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/human-genome/",
+              "title": "The Human Genome Project",
+              "cooccurrence": "/sep/nature_human-genome.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/human-nature/",
+              "title": "Human Nature",
+              "cooccurrence": "/sep/nature_human-nature.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/lawphil-nature/",
+              "title": "The Nature of Law",
+              "cooccurrence": "/sep/nature_lawphil-nature.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/laws-of-nature/",
+              "title": "Laws of Nature",
+              "cooccurrence": "/sep/nature_laws-of-nature.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/organ-donation/",
+              "title": "The Donation of Human Organs",
+              "cooccurrence": "/sep/nature_organ-donation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/organs-sale/",
+              "title": "The Sale of Human Organs",
+              "cooccurrence": "/sep/nature_organs-sale.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/rights-human/",
+              "title": "Human Rights",
+              "cooccurrence": "/sep/nature_rights-human.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scottus-eriugena/",
+              "title": "John Scottus Eriugena",
+              "cooccurrence": "/sep/nature_scottus-eriugena.json"
+            }
+          ]
+        },
+        {
+          "label": "character",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/character_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=character+character%2A",
+              "title": "SEP search: character",
+              "cooccurrence": "/sep/character_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/african-ethics/",
+              "title": "African Ethics",
+              "cooccurrence": "/sep/character_african-ethics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/civic-education/",
+              "title": "Civic Education",
+              "cooccurrence": "/sep/character_civic-education.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gadamer/",
+              "title": "Hans-Georg Gadamer",
+              "cooccurrence": "/sep/character_gadamer.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hedonism/",
+              "title": "Hedonism",
+              "cooccurrence": "/sep/character_hedonism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hume-freewill/",
+              "title": "Hume on Free Will",
+              "cooccurrence": "/sep/character_hume-freewill.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/innate-acquired/",
+              "title": "The Distinction Between Innate and Acquired Characteristics",
+              "cooccurrence": "/sep/character_innate-acquired.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-character-empirical/",
+              "title": "Empirical Approaches to Moral Character",
+              "cooccurrence": "/sep/character_moral-character-empirical.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-character/",
+              "title": "Moral Character",
+              "cooccurrence": "/sep/character_moral-character.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-psych-emp/",
+              "title": "Moral Psychology: Empirical Approaches",
+              "cooccurrence": "/sep/character_moral-psych-emp.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/perception-disjunctive/",
+              "title": "The Disjunctive Theory of Perception",
+              "cooccurrence": "/sep/character_perception-disjunctive.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/perception-problem/",
+              "title": "The Problem of Perception",
+              "cooccurrence": "/sep/character_perception-problem.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/qualia/",
+              "title": "Qualia",
+              "cooccurrence": "/sep/character_qualia.json"
+            }
+          ]
+        },
+        {
+          "label": "predisposition",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/predisposition_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=predisposition+predispos%2A",
+              "title": "SEP search: predisposition",
+              "cooccurrence": "/sep/predisposition_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arendt/",
+              "title": "Hannah Arendt",
+              "cooccurrence": "/sep/predisposition_arendt.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/creativity/",
+              "title": "Creativity",
+              "cooccurrence": "/sep/predisposition_creativity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dewey/",
+              "title": "John Dewey",
+              "cooccurrence": "/sep/predisposition_dewey.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/equal-opportunity/",
+              "title": "Equality of Opportunity",
+              "cooccurrence": "/sep/predisposition_equal-opportunity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/femapproach-prag-cont/",
+              "title": "Intersections Between Pragmatist and Continental Feminism",
+              "cooccurrence": "/sep/predisposition_femapproach-prag-cont.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hermann-lotze/",
+              "title": "Hermann Lotze",
+              "cooccurrence": "/sep/predisposition_hermann-lotze.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/human-genome/",
+              "title": "The Human Genome Project",
+              "cooccurrence": "/sep/predisposition_human-genome.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ibn-sina/",
+              "title": "Ibn Sina [Avicenna]",
+              "cooccurrence": "/sep/predisposition_ibn-sina.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/max-stirner/",
+              "title": "Max Stirner",
+              "cooccurrence": "/sep/predisposition_max-stirner.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/protagoras/",
+              "title": "Protagoras",
+              "cooccurrence": "/sep/predisposition_protagoras.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religion-morality/",
+              "title": "Religion and Morality in Western Philosophy",
+              "cooccurrence": "/sep/predisposition_religion-morality.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/schlegel-aw/",
+              "title": "August Wilhelm von Schlegel",
+              "cooccurrence": "/sep/predisposition_schlegel-aw.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "心",
+      "renderings": [
+        "heart",
+        "mind",
+        "heartmind",
+        "feeling"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/心_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/心_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/心_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/心_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/心_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/心_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/心_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/心_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/心_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/心_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/心_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/心_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/心_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/心_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/心_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/心_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "heart",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/heart_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=heart+heart+hearts+heartfelt",
+              "title": "SEP search: heart",
+              "cooccurrence": "/sep/heart_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/berlin/",
+              "title": "Isaiah Berlin",
+              "cooccurrence": "/sep/heart_berlin.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/biology-developmental/",
+              "title": "Developmental Biology",
+              "cooccurrence": "/sep/heart_biology-developmental.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/chinese-painting-calligraphy/",
+              "title": "Aesthetics in Chinese Philosophy: Painting and Calligraphy",
+              "cooccurrence": "/sep/heart_chinese-painting-calligraphy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/conscience-medieval/",
+              "title": "Medieval Theories of Conscience",
+              "cooccurrence": "/sep/heart_conscience-medieval.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dai-zhen/",
+              "title": "Dai Zhen",
+              "cooccurrence": "/sep/heart_dai-zhen.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/edwards/",
+              "title": "Jonathan Edwards",
+              "cooccurrence": "/sep/heart_edwards.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/friedrich-hayek/",
+              "title": "Friedrich Hayek",
+              "cooccurrence": "/sep/heart_friedrich-hayek.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gratitude/",
+              "title": "Gratitude",
+              "cooccurrence": "/sep/heart_gratitude.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hume/",
+              "title": "David Hume",
+              "cooccurrence": "/sep/heart_hume.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/liberalism-latin-america/",
+              "title": "Liberalism in Latin America",
+              "cooccurrence": "/sep/heart_liberalism-latin-america.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/science-theory-observation/",
+              "title": "Theory and Observation in Science",
+              "cooccurrence": "/sep/heart_science-theory-observation.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/tibbon/",
+              "title": "Samuel Ibn Tibbon",
+              "cooccurrence": "/sep/heart_tibbon.json"
+            }
+          ]
+        },
+        {
+          "label": "mind",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/mind_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=mind+mind+minds+mindful%2A",
+              "title": "SEP search: mind",
+              "cooccurrence": "/sep/mind_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arabic-islamic-mind/",
+              "title": "Arabic and Islamic Psychology and Philosophy of Mind",
+              "cooccurrence": "/sep/mind_arabic-islamic-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/computational-mind/",
+              "title": "The Computational Theory of Mind",
+              "cooccurrence": "/sep/mind_computational-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/content-externalism/",
+              "title": "Externalism About the Mind",
+              "cooccurrence": "/sep/mind_content-externalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/descartes-modal/",
+              "title": "Descartes’ Modal Metaphysics",
+              "cooccurrence": "/sep/mind_descartes-modal.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-mind/",
+              "title": "Kant’s View of the Mind and Consciousness of Self",
+              "cooccurrence": "/sep/mind_kant-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/korean-philosophy/",
+              "title": "Korean Philosophy",
+              "cooccurrence": "/sep/mind_korean-philosophy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/leibniz-mind/",
+              "title": "Leibniz’s Philosophy of Mind",
+              "cooccurrence": "/sep/mind_leibniz-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mind-identity/",
+              "title": "The Mind/Brain Identity Theory",
+              "cooccurrence": "/sep/mind_mind-identity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mind-indian-buddhism/",
+              "title": "Mind in Indian Buddhist Philosophy",
+              "cooccurrence": "/sep/mind_mind-indian-buddhism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/modularity-mind/",
+              "title": "Modularity of Mind",
+              "cooccurrence": "/sep/mind_modularity-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/other-minds/",
+              "title": "Other Minds",
+              "cooccurrence": "/sep/mind_other-minds.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/spinoza-epistemology-mind/",
+              "title": "Spinoza’s Epistemology and Philosophy of Mind",
+              "cooccurrence": "/sep/mind_spinoza-epistemology-mind.json"
+            }
+          ]
+        },
+        {
+          "label": "heartmind",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/heartmind_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=heartmind+heartmind%2A+heart-mind",
+              "title": "SEP search: heartmind",
+              "cooccurrence": "/sep/heartmind_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/al-qudat/",
+              "title": "ʿAyn al-Qudat",
+              "cooccurrence": "/sep/heartmind_al-qudat.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arabic-islamic-mind/",
+              "title": "Arabic and Islamic Psychology and Philosophy of Mind",
+              "cooccurrence": "/sep/heartmind_arabic-islamic-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/computational-mind/",
+              "title": "The Computational Theory of Mind",
+              "cooccurrence": "/sep/heartmind_computational-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/content-externalism/",
+              "title": "Externalism About the Mind",
+              "cooccurrence": "/sep/heartmind_content-externalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dai-zhen/",
+              "title": "Dai Zhen",
+              "cooccurrence": "/sep/heartmind_dai-zhen.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-mind/",
+              "title": "Kant’s View of the Mind and Consciousness of Self",
+              "cooccurrence": "/sep/heartmind_kant-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/korean-philosophy/",
+              "title": "Korean Philosophy",
+              "cooccurrence": "/sep/heartmind_korean-philosophy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/leibniz-mind/",
+              "title": "Leibniz’s Philosophy of Mind",
+              "cooccurrence": "/sep/heartmind_leibniz-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mind-identity/",
+              "title": "The Mind/Brain Identity Theory",
+              "cooccurrence": "/sep/heartmind_mind-identity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mind-indian-buddhism/",
+              "title": "Mind in Indian Buddhist Philosophy",
+              "cooccurrence": "/sep/heartmind_mind-indian-buddhism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/modularity-mind/",
+              "title": "Modularity of Mind",
+              "cooccurrence": "/sep/heartmind_modularity-mind.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/spinoza-epistemology-mind/",
+              "title": "Spinoza’s Epistemology and Philosophy of Mind",
+              "cooccurrence": "/sep/heartmind_spinoza-epistemology-mind.json"
+            }
+          ]
+        },
+        {
+          "label": "feeling",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/feeling_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=feeling+feeling%2A",
+              "title": "SEP search: feeling",
+              "cooccurrence": "/sep/feeling_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aesthetic-experience/",
+              "title": "Aesthetic Experience",
+              "cooccurrence": "/sep/feeling_aesthetic-experience.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aesthetics-19th-romantic/",
+              "title": "19th Century Romantic Aesthetics",
+              "cooccurrence": "/sep/feeling_aesthetics-19th-romantic.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/concept-emotion-india/",
+              "title": "The Concept of Emotion in Classical Indian Philosophy",
+              "cooccurrence": "/sep/feeling_concept-emotion-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/croce-aesthetics/",
+              "title": "Croce’s Aesthetics",
+              "cooccurrence": "/sep/feeling_croce-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/emotion-Christian-tradition/",
+              "title": "Emotions in the Christian Tradition",
+              "cooccurrence": "/sep/feeling_emotion-Christian-tradition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-aesthetics/",
+              "title": "Kant’s Aesthetics and Teleology",
+              "cooccurrence": "/sep/feeling_kant-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/langer/",
+              "title": "Susanne Langer",
+              "cooccurrence": "/sep/feeling_langer.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/phenomenology-religion/",
+              "title": "Phenomenology of Religion",
+              "cooccurrence": "/sep/feeling_phenomenology-religion.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/pleasure/",
+              "title": "Pleasure",
+              "cooccurrence": "/sep/feeling_pleasure.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scheler/",
+              "title": "Max Scheler",
+              "cooccurrence": "/sep/feeling_scheler.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/schopenhauer-aesthetics/",
+              "title": "Schopenhauer’s Aesthetics",
+              "cooccurrence": "/sep/feeling_schopenhauer-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/yorck/",
+              "title": "Count Paul Yorck von Wartenburg",
+              "cooccurrence": "/sep/feeling_yorck.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "親",
+      "renderings": [
+        "parents",
+        "kin",
+        "intimates",
+        "affection"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/親_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/親_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/親_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/親_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/親_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/親_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/親_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/親_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/親_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/親_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/親_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/親_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/親_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/親_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/親_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/親_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "parents",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/parents_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=parents+parent%2A",
+              "title": "SEP search: parents",
+              "cooccurrence": "/sep/parents_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/childhood/",
+              "title": "The Philosophy of Childhood",
+              "cooccurrence": "/sep/parents_childhood.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/civic-education/",
+              "title": "Civic Education",
+              "cooccurrence": "/sep/parents_civic-education.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cloning/",
+              "title": "Cloning",
+              "cooccurrence": "/sep/parents_cloning.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/equal-ed-opportunity/",
+              "title": "Equality of Educational Opportunity",
+              "cooccurrence": "/sep/parents_equal-ed-opportunity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/eugenics/",
+              "title": "Eugenics",
+              "cooccurrence": "/sep/parents_eugenics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-family/",
+              "title": "Feminist Perspectives on Reproduction and the Family",
+              "cooccurrence": "/sep/parents_feminism-family.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/freedom-association/",
+              "title": "Freedom of Association",
+              "cooccurrence": "/sep/parents_freedom-association.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gametes-donation-sale/",
+              "title": "The Donation and Sale of Human Eggs and Sperm",
+              "cooccurrence": "/sep/parents_gametes-donation-sale.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/genetics/",
+              "title": "Genetics",
+              "cooccurrence": "/sep/parents_genetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/parenthood/",
+              "title": "Parenthood and Procreation",
+              "cooccurrence": "/sep/parents_parenthood.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/personal-relationship-goods/",
+              "title": "Personal Relationship Goods",
+              "cooccurrence": "/sep/parents_personal-relationship-goods.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/special-obligations/",
+              "title": "Special Obligations",
+              "cooccurrence": "/sep/parents_special-obligations.json"
+            }
+          ]
+        },
+        {
+          "label": "kin",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/kin_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=kin+kin+kinship%2A",
+              "title": "SEP search: kin",
+              "cooccurrence": "/sep/kin_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/altruism-biological/",
+              "title": "Biological Altruism",
+              "cooccurrence": "/sep/kin_altruism-biological.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cognitive-disability/",
+              "title": "Cognitive Disability and Moral Status",
+              "cooccurrence": "/sep/kin_cognitive-disability.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/confucian-gender/",
+              "title": "Gender in Confucian Philosophy",
+              "cooccurrence": "/sep/kin_confucian-gender.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/culture-cogsci/",
+              "title": "Culture and Cognitive Science",
+              "cooccurrence": "/sep/kin_culture-cogsci.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/egoism/",
+              "title": "Egoism",
+              "cooccurrence": "/sep/kin_egoism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-class/",
+              "title": "Feminist Perspectives on Class and Work",
+              "cooccurrence": "/sep/kin_feminism-class.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-moral-psych/",
+              "title": "Distributive Justice and Empirical Moral Psychology",
+              "cooccurrence": "/sep/kin_justice-moral-psych.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/microbiology/",
+              "title": "Philosophy of Microbiology",
+              "cooccurrence": "/sep/kin_microbiology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/privacy-medicine/",
+              "title": "Privacy and Medicine",
+              "cooccurrence": "/sep/kin_privacy-medicine.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/psychology-normative-cognition/",
+              "title": "The Psychology of Normative Cognition",
+              "cooccurrence": "/sep/kin_psychology-normative-cognition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/selection-units/",
+              "title": "Units and Levels of Selection",
+              "cooccurrence": "/sep/kin_selection-units.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/substance/",
+              "title": "Substance",
+              "cooccurrence": "/sep/kin_substance.json"
+            }
+          ]
+        },
+        {
+          "label": "intimates",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/intimates_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=intimates+intimate%2A+intimacy",
+              "title": "SEP search: intimates",
+              "cooccurrence": "/sep/intimates_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/elisabeth-bohemia/",
+              "title": "Elisabeth, Princess of Bohemia",
+              "cooccurrence": "/sep/intimates_elisabeth-bohemia.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-family/",
+              "title": "Feminist Perspectives on Reproduction and the Family",
+              "cooccurrence": "/sep/intimates_feminism-family.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminism-moralpsych/",
+              "title": "Feminist Moral Psychology",
+              "cooccurrence": "/sep/intimates_feminism-moralpsych.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/friendship/",
+              "title": "Friendship",
+              "cooccurrence": "/sep/intimates_friendship.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/james/",
+              "title": "William James",
+              "cooccurrence": "/sep/intimates_james.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/love/",
+              "title": "Love",
+              "cooccurrence": "/sep/intimates_love.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/marriage/",
+              "title": "Marriage and Domestic Partnership",
+              "cooccurrence": "/sep/intimates_marriage.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/personal-relationship-goods/",
+              "title": "Personal Relationship Goods",
+              "cooccurrence": "/sep/intimates_personal-relationship-goods.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/privacy-medicine/",
+              "title": "Privacy and Medicine",
+              "cooccurrence": "/sep/intimates_privacy-medicine.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/privacy/",
+              "title": "Privacy",
+              "cooccurrence": "/sep/intimates_privacy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/special-obligations/",
+              "title": "Special Obligations",
+              "cooccurrence": "/sep/intimates_special-obligations.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/transcendentalism/",
+              "title": "Transcendentalism",
+              "cooccurrence": "/sep/intimates_transcendentalism.json"
+            }
+          ]
+        },
+        {
+          "label": "affection",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/affection_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=affection+affection%2A",
+              "title": "SEP search: affection",
+              "cooccurrence": "/sep/affection_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cockburn/",
+              "title": "Catharine Trotter Cockburn",
+              "cooccurrence": "/sep/affection_cockburn.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/confucian-gender/",
+              "title": "Gender in Confucian Philosophy",
+              "cooccurrence": "/sep/affection_confucian-gender.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/derrida/",
+              "title": "Jacques Derrida",
+              "cooccurrence": "/sep/affection_derrida.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kant-transcendental-idealism/",
+              "title": "Kant’s Transcendental Idealism",
+              "cooccurrence": "/sep/affection_kant-transcendental-idealism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/love/",
+              "title": "Love",
+              "cooccurrence": "/sep/affection_love.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/madeleine-scudery/",
+              "title": "Madeleine de Scudéry",
+              "cooccurrence": "/sep/affection_madeleine-scudery.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/marriage/",
+              "title": "Marriage and Domestic Partnership",
+              "cooccurrence": "/sep/affection_marriage.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/michel-henry/",
+              "title": "Michel Henry",
+              "cooccurrence": "/sep/affection_michel-henry.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/personal-relationship-goods/",
+              "title": "Personal Relationship Goods",
+              "cooccurrence": "/sep/affection_personal-relationship-goods.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/reid-ethics/",
+              "title": "Reid’s Ethics",
+              "cooccurrence": "/sep/affection_reid-ethics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scottish-18th/",
+              "title": "Scottish Philosophy in the 18th Century",
+              "cooccurrence": "/sep/affection_scottish-18th.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/shaftesbury/",
+              "title": "Lord Shaftesbury [Anthony Ashley Cooper, 3rd Earl of Shaftesbury]",
+              "cooccurrence": "/sep/affection_shaftesbury.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "愛",
+      "renderings": [
+        "care for",
+        "cherish",
+        "love",
+        "pity"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/愛_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/愛_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/愛_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/愛_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/愛_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/愛_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/愛_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/愛_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/愛_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/愛_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/愛_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/愛_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/愛_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/愛_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/愛_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/愛_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "care for",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/care for_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=care+for+care%2A",
+              "title": "SEP search: care for",
+              "cooccurrence": "/sep/care for_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/children/",
+              "title": "Philosophy for Children",
+              "cooccurrence": "/sep/care for_children.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/disability-care-rationing/",
+              "title": "Disability and Health Care Rationing",
+              "cooccurrence": "/sep/care for_disability-care-rationing.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epistemic-utility/",
+              "title": "Epistemic Utility Arguments for Epistemic Norms",
+              "cooccurrence": "/sep/care for_epistemic-utility.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/frege-theorem/",
+              "title": "Frege’s Theorem and Foundations for Arithmetic",
+              "cooccurrence": "/sep/care for_frege-theorem.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/incompatibilism-arguments/",
+              "title": "Arguments for Incompatibilism",
+              "cooccurrence": "/sep/care for_incompatibilism-arguments.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-healthcareaccess/",
+              "title": "Justice and Access to Health Care",
+              "cooccurrence": "/sep/care for_justice-healthcareaccess.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/logics-for-games/",
+              "title": "Logics for Analyzing Games",
+              "cooccurrence": "/sep/care for_logics-for-games.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-arguments-god/",
+              "title": "Moral Arguments for the Existence of God",
+              "cooccurrence": "/sep/care for_moral-arguments-god.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-responsibility-epistemic/",
+              "title": "The Epistemic Condition for Moral Responsibility",
+              "cooccurrence": "/sep/care for_moral-responsibility-epistemic.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/reasons-agent/",
+              "title": "Reasons for Action: Agent-Neutral vs. Agent-Relative",
+              "cooccurrence": "/sep/care for_reasons-agent.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/reasons-internal-external/",
+              "title": "Reasons for Action: Internal vs. External",
+              "cooccurrence": "/sep/care for_reasons-internal-external.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/teleological-arguments/",
+              "title": "Teleological Arguments for God’s Existence",
+              "cooccurrence": "/sep/care for_teleological-arguments.json"
+            }
+          ]
+        },
+        {
+          "label": "cherish",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/cherish_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=cherish+cherish%2A",
+              "title": "SEP search: cherish",
+              "cooccurrence": "/sep/cherish_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ambiguity/",
+              "title": "Ambiguity",
+              "cooccurrence": "/sep/cherish_ambiguity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aristotle-rhetoric/",
+              "title": "Aristotle’s Rhetoric",
+              "cooccurrence": "/sep/cherish_aristotle-rhetoric.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/dewey-moral/",
+              "title": "Dewey’s Moral Philosophy",
+              "cooccurrence": "/sep/cherish_dewey-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/emerson/",
+              "title": "Ralph Waldo Emerson",
+              "cooccurrence": "/sep/cherish_emerson.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/love/",
+              "title": "Love",
+              "cooccurrence": "/sep/cherish_love.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/phenomenology-religion/",
+              "title": "Phenomenology of Religion",
+              "cooccurrence": "/sep/cherish_phenomenology-religion.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-ethics/",
+              "title": "Plato’s Ethics: An Overview",
+              "cooccurrence": "/sep/cherish_plato-ethics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/rights-human/",
+              "title": "Human Rights",
+              "cooccurrence": "/sep/cherish_rights-human.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/schiller/",
+              "title": "Friedrich Schiller",
+              "cooccurrence": "/sep/cherish_schiller.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/stevenson/",
+              "title": "Charles Leslie Stevenson",
+              "cooccurrence": "/sep/cherish_stevenson.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/thoreau/",
+              "title": "Henry David Thoreau",
+              "cooccurrence": "/sep/cherish_thoreau.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/williams-bernard/",
+              "title": "Bernard Williams",
+              "cooccurrence": "/sep/cherish_williams-bernard.json"
+            }
+          ]
+        },
+        {
+          "label": "love",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/love_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=love+love%2A",
+              "title": "SEP search: love",
+              "cooccurrence": "/sep/love_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/abrabanel/",
+              "title": "Judah Abrabanel",
+              "cooccurrence": "/sep/love_abrabanel.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/butler-moral/",
+              "title": "Joseph Butler’s Moral Philosophy",
+              "cooccurrence": "/sep/love_butler-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/concept-emotion-india/",
+              "title": "The Concept of Emotion in Classical Indian Philosophy",
+              "cooccurrence": "/sep/love_concept-emotion-india.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/empedocles/",
+              "title": "Empedocles",
+              "cooccurrence": "/sep/love_empedocles.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/friendship/",
+              "title": "Friendship",
+              "cooccurrence": "/sep/love_friendship.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kierkegaard/",
+              "title": "Søren Kierkegaard",
+              "cooccurrence": "/sep/love_kierkegaard.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/lady-masham/",
+              "title": "Lady Damaris Masham",
+              "cooccurrence": "/sep/love_lady-masham.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/love/",
+              "title": "Love",
+              "cooccurrence": "/sep/love_love.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/marriage/",
+              "title": "Marriage and Domestic Partnership",
+              "cooccurrence": "/sep/love_marriage.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/personal-relationship-goods/",
+              "title": "Personal Relationship Goods",
+              "cooccurrence": "/sep/love_personal-relationship-goods.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-friendship/",
+              "title": "Plato on Friendship and Eros",
+              "cooccurrence": "/sep/love_plato-friendship.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/susman-margarete/",
+              "title": "Margarete Susman",
+              "cooccurrence": "/sep/love_susman-margarete.json"
+            }
+          ]
+        },
+        {
+          "label": "pity",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/pity_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=pity+pity+piti%2A",
+              "title": "SEP search: pity",
+              "cooccurrence": "/sep/pity_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ancient-soul/",
+              "title": "Ancient Theories of Soul",
+              "cooccurrence": "/sep/pity_ancient-soul.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/aristotle-aesthetics/",
+              "title": "Aristotle’s Aesthetics",
+              "cooccurrence": "/sep/pity_aristotle-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/black-reparations/",
+              "title": "Black Reparations",
+              "cooccurrence": "/sep/pity_black-reparations.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/double-consciousness/",
+              "title": "Double Consciousness",
+              "cooccurrence": "/sep/pity_double-consciousness.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/edwards/",
+              "title": "Jonathan Edwards",
+              "cooccurrence": "/sep/pity_edwards.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fiction/",
+              "title": "Fiction",
+              "cooccurrence": "/sep/pity_fiction.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/happiness/",
+              "title": "Happiness",
+              "cooccurrence": "/sep/pity_happiness.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/hume/",
+              "title": "David Hume",
+              "cooccurrence": "/sep/pity_hume.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/medieval-emotions/",
+              "title": "Medieval Theories of the Emotions",
+              "cooccurrence": "/sep/pity_medieval-emotions.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/nietzsche-aesthetics/",
+              "title": "Nietzsche’s Aesthetics",
+              "cooccurrence": "/sep/pity_nietzsche-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/paradox-of-tragedy/",
+              "title": "Paradox of Tragedy",
+              "cooccurrence": "/sep/pity_paradox-of-tragedy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/spinoza/",
+              "title": "Baruch Spinoza",
+              "cooccurrence": "/sep/pity_spinoza.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "道",
+      "renderings": [
+        "way",
+        "doctrine",
+        "method",
+        "road",
+        "to speak"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/道_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/道_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/道_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/道_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/道_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/道_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/道_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/道_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/道_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/道_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/道_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/道_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/道_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/道_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/道_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/道_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "way",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/way_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=way+way+ways",
+              "title": "SEP search: way",
+              "cooccurrence": "/sep/way_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/divine-freedom/",
+              "title": "Divine Freedom",
+              "cooccurrence": "/sep/way_divine-freedom.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-it-phenomenology/",
+              "title": "Phenomenological Approaches to Ethics and Information Technology",
+              "cooccurrence": "/sep/way_ethics-it-phenomenology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gelukpa/",
+              "title": "Gelukpa [dge lugs pa]",
+              "cooccurrence": "/sep/way_gelukpa.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gorampa/",
+              "title": "Gorampa [go rams pa]",
+              "cooccurrence": "/sep/way_gorampa.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/heidegger-aesthetics/",
+              "title": "Heidegger’s Aesthetics",
+              "cooccurrence": "/sep/way_heidegger-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/logic-informal/",
+              "title": "Informal Logic",
+              "cooccurrence": "/sep/way_logic-informal.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-particularism/",
+              "title": "Moral Particularism",
+              "cooccurrence": "/sep/way_moral-particularism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/parmenides/",
+              "title": "Parmenides",
+              "cooccurrence": "/sep/way_parmenides.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religious-commitment-reason/",
+              "title": "Reason and Religious Commitment",
+              "cooccurrence": "/sep/way_religious-commitment-reason.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/thick-ethical-concepts/",
+              "title": "Thick Ethical Concepts",
+              "cooccurrence": "/sep/way_thick-ethical-concepts.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/transformative-experience/",
+              "title": "Transformative Experience",
+              "cooccurrence": "/sep/way_transformative-experience.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/truth-pluralist/",
+              "title": "Pluralist Theories of Truth",
+              "cooccurrence": "/sep/way_truth-pluralist.json"
+            }
+          ]
+        },
+        {
+          "label": "doctrine",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/doctrine_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=doctrine+doctrine%2A",
+              "title": "SEP search: doctrine",
+              "cooccurrence": "/sep/doctrine_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/arabic-islamic-mysticism/",
+              "title": "Mysticism in Arabic and Islamic Philosophy",
+              "cooccurrence": "/sep/doctrine_arabic-islamic-mysticism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/desgabets/",
+              "title": "Robert Desgabets",
+              "cooccurrence": "/sep/doctrine_desgabets.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/double-effect/",
+              "title": "Doctrine of Double Effect",
+              "cooccurrence": "/sep/doctrine_double-effect.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/kumaarila/",
+              "title": "Kumārila",
+              "cooccurrence": "/sep/doctrine_kumaarila.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/leucippus/",
+              "title": "Leucippus",
+              "cooccurrence": "/sep/doctrine_leucippus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/malebranche-ideas/",
+              "title": "Malebranche’s Theory of Ideas and Vision in God",
+              "cooccurrence": "/sep/doctrine_malebranche-ideas.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mulla-sadra/",
+              "title": "Mulla Sadra",
+              "cooccurrence": "/sep/doctrine_mulla-sadra.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/publicity/",
+              "title": "Publicity",
+              "cooccurrence": "/sep/doctrine_publicity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/square/",
+              "title": "The Traditional Square of Opposition",
+              "cooccurrence": "/sep/doctrine_square.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/transcendentals-medieval/",
+              "title": "Medieval Theories of Transcendentals",
+              "cooccurrence": "/sep/doctrine_transcendentals-medieval.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/trinity/",
+              "title": "Trinity",
+              "cooccurrence": "/sep/doctrine_trinity.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/yogacara/",
+              "title": "Yogācāra",
+              "cooccurrence": "/sep/doctrine_yogacara.json"
+            }
+          ]
+        },
+        {
+          "label": "method",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/method_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=method+method%2A",
+              "title": "SEP search: method",
+              "cooccurrence": "/sep/method_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/comparative-cognition/",
+              "title": "Methods in Comparative Cognition",
+              "cooccurrence": "/sep/method_comparative-cognition.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/cosmology-30s/",
+              "title": "Cosmology: Methodological Debates in the 1930s and 1940s",
+              "cooccurrence": "/sep/method_cosmology-30s.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/descartes-method/",
+              "title": "Descartes’ Method",
+              "cooccurrence": "/sep/method_descartes-method.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/holism-social/",
+              "title": "Methodological Holism in the Social Sciences",
+              "cooccurrence": "/sep/method_holism-social.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/learning-formal/",
+              "title": "Formal Learning Theory",
+              "cooccurrence": "/sep/method_learning-formal.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mathematics-nondeductive/",
+              "title": "Non-Deductive Methods in Mathematics",
+              "cooccurrence": "/sep/method_mathematics-nondeductive.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/methodological-individualism/",
+              "title": "Methodological Individualism",
+              "cooccurrence": "/sep/method_methodological-individualism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/neo-kantianism/",
+              "title": "Neo-Kantianism",
+              "cooccurrence": "/sep/method_neo-kantianism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-sophstate/",
+              "title": "Method and Metaphysics in Plato’s Sophist and Statesman",
+              "cooccurrence": "/sep/method_plato-sophstate.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/reflective-equilibrium/",
+              "title": "Reflective Equilibrium",
+              "cooccurrence": "/sep/method_reflective-equilibrium.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scientific-method/",
+              "title": "Scientific Method",
+              "cooccurrence": "/sep/method_scientific-method.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/voting-methods/",
+              "title": "Voting Methods",
+              "cooccurrence": "/sep/method_voting-methods.json"
+            }
+          ]
+        },
+        {
+          "label": "road",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/road_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=road+road%2A",
+              "title": "SEP search: road",
+              "cooccurrence": "/sep/road_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/computing-history/",
+              "title": "The Modern History of Computing",
+              "cooccurrence": "/sep/road_computing-history.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fictionalism-mathematics/",
+              "title": "Fictionalism in the Philosophy of Mathematics",
+              "cooccurrence": "/sep/road_fictionalism-mathematics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/heraclitus/",
+              "title": "Heraclitus",
+              "cooccurrence": "/sep/road_heraclitus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/incommensurability/",
+              "title": "The Incommensurability of Scientific Theories",
+              "cooccurrence": "/sep/road_incommensurability.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/incompatibilism-arguments/",
+              "title": "Arguments for Incompatibilism",
+              "cooccurrence": "/sep/road_incompatibilism-arguments.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/law-language/",
+              "title": "Law and Language",
+              "cooccurrence": "/sep/road_law-language.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mathphil-indis/",
+              "title": "Indispensability Arguments in the Philosophy of Mathematics",
+              "cooccurrence": "/sep/road_mathphil-indis.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/neoliberalism/",
+              "title": "Neoliberalism",
+              "cooccurrence": "/sep/road_neoliberalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/nothingness/",
+              "title": "Nothingness",
+              "cooccurrence": "/sep/road_nothingness.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-friendship/",
+              "title": "Plato on Friendship and Eros",
+              "cooccurrence": "/sep/road_plato-friendship.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/representation-medieval/",
+              "title": "Mental Representation in Medieval Philosophy",
+              "cooccurrence": "/sep/road_representation-medieval.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/skepticism/",
+              "title": "Skepticism",
+              "cooccurrence": "/sep/road_skepticism.json"
+            }
+          ]
+        },
+        {
+          "label": "to speak",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/to speak_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=to+speak+speak%2A",
+              "title": "SEP search: to speak",
+              "cooccurrence": "/sep/to speak_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/altruism-empirical/",
+              "title": "Empirical Approaches to Altruism",
+              "cooccurrence": "/sep/to speak_altruism-empirical.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/causal-explanation-science/",
+              "title": "Causal Approaches to Scientific Explanation",
+              "cooccurrence": "/sep/to speak_causal-explanation-science.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-it-phenomenology/",
+              "title": "Phenomenological Approaches to Ethics and Information Technology",
+              "cooccurrence": "/sep/to speak_ethics-it-phenomenology.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fiction-emotion-response/",
+              "title": "Emotional Responses to Fiction",
+              "cooccurrence": "/sep/to speak_fiction-emotion-response.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-healthcareaccess/",
+              "title": "Justice and Access to Health Care",
+              "cooccurrence": "/sep/to speak_justice-healthcareaccess.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-character-empirical/",
+              "title": "Empirical Approaches to Moral Character",
+              "cooccurrence": "/sep/to speak_moral-character-empirical.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/qt-consciousness/",
+              "title": "Quantum Approaches to Consciousness",
+              "cooccurrence": "/sep/to speak_qt-consciousness.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/realism-sem-challenge/",
+              "title": "Challenges to Metaphysical Realism",
+              "cooccurrence": "/sep/to speak_realism-sem-challenge.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/religion-evolutionary/",
+              "title": "Evolutionary Approaches to Religion",
+              "cooccurrence": "/sep/to speak_religion-evolutionary.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/self-consciousness-phenomenological/",
+              "title": "Phenomenological Approaches to Self-Consciousness",
+              "cooccurrence": "/sep/to speak_self-consciousness-phenomenological.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/self-obligations/",
+              "title": "Obligations to Oneself",
+              "cooccurrence": "/sep/to speak_self-obligations.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/work-labor/",
+              "title": "Philosophical Approaches to Work and Labor",
+              "cooccurrence": "/sep/to speak_work-labor.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hanzi": "德",
+      "renderings": [
+        "virtue",
+        "power",
+        "charisma"
+      ],
+      "chinese": {
+        "corpus": "mengzi",
+        "embeddings": "/embeddings/mengzi.json",
+        "similarity": "/ctext/德_embeds.json",
+        "sources": [
+          {
+            "id": "mengzi",
+            "title": "孟子",
+            "cooccurrence": "/ctext/德_mengzi.json"
+          },
+          {
+            "id": "1A",
+            "title": "梁惠王上",
+            "cooccurrence": "/ctext/德_1A.json"
+          },
+          {
+            "id": "1B",
+            "title": "梁惠王下",
+            "cooccurrence": "/ctext/德_1B.json"
+          },
+          {
+            "id": "2A",
+            "title": "公孫丑上",
+            "cooccurrence": "/ctext/德_2A.json"
+          },
+          {
+            "id": "2B",
+            "title": "公孫丑下",
+            "cooccurrence": "/ctext/德_2B.json"
+          },
+          {
+            "id": "3A",
+            "title": "滕文公上",
+            "cooccurrence": "/ctext/德_3A.json"
+          },
+          {
+            "id": "3B",
+            "title": "滕文公下",
+            "cooccurrence": "/ctext/德_3B.json"
+          },
+          {
+            "id": "4A",
+            "title": "離婁上",
+            "cooccurrence": "/ctext/德_4A.json"
+          },
+          {
+            "id": "4B",
+            "title": "離婁下",
+            "cooccurrence": "/ctext/德_4B.json"
+          },
+          {
+            "id": "5A",
+            "title": "萬章上",
+            "cooccurrence": "/ctext/德_5A.json"
+          },
+          {
+            "id": "5B",
+            "title": "萬章下",
+            "cooccurrence": "/ctext/德_5B.json"
+          },
+          {
+            "id": "6A",
+            "title": "告子上",
+            "cooccurrence": "/ctext/德_6A.json"
+          },
+          {
+            "id": "6B",
+            "title": "告子下",
+            "cooccurrence": "/ctext/德_6B.json"
+          },
+          {
+            "id": "7A",
+            "title": "盡心上",
+            "cooccurrence": "/ctext/德_7A.json"
+          },
+          {
+            "id": "7B",
+            "title": "盡心下",
+            "cooccurrence": "/ctext/德_7B.json"
+          }
+        ]
+      },
+      "english": [
+        {
+          "label": "virtue",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/virtue_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=virtue+virtue%2A",
+              "title": "SEP search: virtue",
+              "cooccurrence": "/sep/virtue_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/butler-moral/",
+              "title": "Joseph Butler’s Moral Philosophy",
+              "cooccurrence": "/sep/virtue_butler-moral.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/epistemology-virtue/",
+              "title": "Virtue Epistemology",
+              "cooccurrence": "/sep/virtue_epistemology-virtue.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-ancient/",
+              "title": "Ancient Ethical Theory",
+              "cooccurrence": "/sep/virtue_ethics-ancient.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/ethics-virtue/",
+              "title": "Virtue Ethics",
+              "cooccurrence": "/sep/virtue_ethics-virtue.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/justice-virtue/",
+              "title": "Justice as a Virtue",
+              "cooccurrence": "/sep/virtue_justice-virtue.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/mandeville/",
+              "title": "Bernard Mandeville",
+              "cooccurrence": "/sep/virtue_mandeville.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/modesty-humility/",
+              "title": "Modesty and Humility",
+              "cooccurrence": "/sep/virtue_modesty-humility.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-character-empirical/",
+              "title": "Empirical Approaches to Moral Character",
+              "cooccurrence": "/sep/virtue_moral-character-empirical.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/moral-character/",
+              "title": "Moral Character",
+              "cooccurrence": "/sep/virtue_moral-character.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-ethics-shorter/",
+              "title": "Plato’s Shorter Ethical Works",
+              "cooccurrence": "/sep/virtue_plato-ethics-shorter.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/shaftesbury/",
+              "title": "Lord Shaftesbury [Anthony Ashley Cooper, 3rd Earl of Shaftesbury]",
+              "cooccurrence": "/sep/virtue_shaftesbury.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/wisdom-analytic/",
+              "title": "Wisdom in Contemporary Analytic Philosophy",
+              "cooccurrence": "/sep/virtue_wisdom-analytic.json"
+            }
+          ]
+        },
+        {
+          "label": "power",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/power_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=power+power%2A",
+              "title": "SEP search: power",
+              "cooccurrence": "/sep/power_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/domination/",
+              "title": "Domination",
+              "cooccurrence": "/sep/power_domination.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/fatalism/",
+              "title": "Fatalism",
+              "cooccurrence": "/sep/power_fatalism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/femapproach-analy-cont/",
+              "title": "Intersections Between Analytic and Continental Feminism",
+              "cooccurrence": "/sep/power_femapproach-analy-cont.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feminist-power/",
+              "title": "Feminist Perspectives on Power",
+              "cooccurrence": "/sep/power_feminist-power.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/foucault/",
+              "title": "Michel Foucault",
+              "cooccurrence": "/sep/power_foucault.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/locke-freedom/",
+              "title": "Locke On Freedom",
+              "cooccurrence": "/sep/power_locke-freedom.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/locke-political/",
+              "title": "Locke’s Political Philosophy",
+              "cooccurrence": "/sep/power_locke-political.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/logic-power-games/",
+              "title": "Reasoning About Power in Games",
+              "cooccurrence": "/sep/power_logic-power-games.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/omnipotence/",
+              "title": "Omnipotence",
+              "cooccurrence": "/sep/power_omnipotence.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/omnipresence/",
+              "title": "Omnipresence",
+              "cooccurrence": "/sep/power_omnipresence.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/personal-autonomy/",
+              "title": "Personal Autonomy",
+              "cooccurrence": "/sep/power_personal-autonomy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/realism-intl-relations/",
+              "title": "Political Realism in International Relations",
+              "cooccurrence": "/sep/power_realism-intl-relations.json"
+            }
+          ]
+        },
+        {
+          "label": "charisma",
+          "corpus": "sep",
+          "embeddings": "/embeddings/sep.json",
+          "similarity": "/sep/charisma_embeds.json",
+          "sources": [
+            {
+              "id": "https://plato.stanford.edu/search/searcher.py?page=1&query=charisma+charisma%2A",
+              "title": "SEP search: charisma",
+              "cooccurrence": "/sep/charisma_combined.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/erasmus/",
+              "title": "Desiderius Erasmus",
+              "cooccurrence": "/sep/charisma_erasmus.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/feyerabend/",
+              "title": "Paul Feyerabend",
+              "cooccurrence": "/sep/charisma_feyerabend.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/gianfrancesco-pico/",
+              "title": "Giovanni Francesco [Gianfrancesco] Pico della Mirandola",
+              "cooccurrence": "/sep/charisma_gianfrancesco-pico.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/landmann-kalischer/",
+              "title": "Edith Landmann-Kalischer",
+              "cooccurrence": "/sep/charisma_landmann-kalischer.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/legitimacy/",
+              "title": "Political Legitimacy",
+              "cooccurrence": "/sep/charisma_legitimacy.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/natural-law-theories/",
+              "title": "Natural Law Theories",
+              "cooccurrence": "/sep/charisma_natural-law-theories.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/phylogenetic-inference/",
+              "title": "Phylogenetic Inference",
+              "cooccurrence": "/sep/charisma_phylogenetic-inference.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/plato-aesthetics/",
+              "title": "Plato’s Aesthetics",
+              "cooccurrence": "/sep/charisma_plato-aesthetics.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/pythagoreanism/",
+              "title": "Pythagoreanism",
+              "cooccurrence": "/sep/charisma_pythagoreanism.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/roger-bacon/",
+              "title": "Roger Bacon",
+              "cooccurrence": "/sep/charisma_roger-bacon.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/scottish-19th/",
+              "title": "Scottish Philosophy in the 19th Century",
+              "cooccurrence": "/sep/charisma_scottish-19th.json"
+            },
+            {
+              "id": "https://plato.stanford.edu/entries/weber/",
+              "title": "Max Weber",
+              "cooccurrence": "/sep/charisma_weber.json"
             }
           ]
         }
