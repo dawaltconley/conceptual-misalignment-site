@@ -219,16 +219,31 @@ def kmeans_assignments(vectors, labels, is_target, k: int) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def build_cosine_graph(
-    labels: list[str], sim: np.ndarray, threshold: float
+    labels: list[str], sim: np.ndarray, quantile: float
 ) -> nx.Graph:
-    """Nodes = words; edges where the (possibly transformed) similarity >= threshold."""
+    """Nodes = words; keep the edges whose similarity is in the top ``1 - quantile``.
+
+    ``quantile`` is a percentile cutoff in ``[0, 1)`` over the *distribution* of
+    off-diagonal similarities, not an absolute cosine value: ``0.9`` keeps the
+    strongest 10% of pairwise edges. Being rank-defined, the surviving edge set is
+    invariant to any monotone ``sim_transform`` (an absolute cutoff is not — see
+    :func:`apply_sim_transform`) and immune to the anisotropy offset that makes a
+    fixed cosine threshold meaningless. Raise it to sparsify the graph (more nodes
+    fall out as isolates); lower it to densify.
+    """
     G = nx.Graph()
     G.add_nodes_from(labels)
     n = len(labels)
+    upper = sim[np.triu_indices(n, k=1)]
+    upper = upper[np.isfinite(upper)]
+    if upper.size == 0:
+        return G
+    cutoff = float(np.quantile(upper, quantile))
     for i in range(n):
         for j in range(i + 1, n):
-            if sim[i, j] >= threshold:
-                G.add_edge(labels[i], labels[j], weight=float(sim[i, j]))
+            w = sim[i, j]
+            if np.isfinite(w) and w >= cutoff:
+                G.add_edge(labels[i], labels[j], weight=float(w))
     return G
 
 
@@ -300,7 +315,7 @@ def build_networks(
     matrix: np.ndarray,
     *,
     method: Method = "knn",
-    threshold: float = 0.3,
+    quantile: float = 0.9,
     knn_k: int = 8,
     sim_transform: SimTransform = "none",
 ) -> tuple[nx.Graph, int, dict[str, int]]:
@@ -309,25 +324,26 @@ def build_networks(
     The single cosine-graph builder for both the JSON pipeline (``main`` reads
     ``(G, community_map)``) and the ``--artifacts`` dump (``run_analysis`` also
     uses ``n_communities`` and serializes via :func:`save_network`).
-    ``method`` selects edge construction ("knn" top-``knn_k`` neighbors — robust to
-    the anisotropy offset that makes an absolute cutoff meaningless — vs "threshold"
-    cutoff); ``sim_transform`` optionally reweights the cosine matrix first (monotone,
-    so under kNN it changes edge weights + communities, not which neighbors appear).
-    Returns ``(G, n_communities, community_map)``; isolated nodes are dropped (absent
-    from the map, treated as community ``-1``).
+    ``method`` selects edge construction ("knn" top-``knn_k`` neighbors, vs
+    "threshold" keeping edges above the ``quantile`` of the similarity distribution
+    — both rank-defined and so robust to the anisotropy offset that makes an
+    absolute cosine cutoff meaningless); ``sim_transform`` optionally reweights the
+    cosine matrix first (monotone, so it changes edge weights + communities, not
+    which edges appear). Returns ``(G, n_communities, community_map)``; isolated
+    nodes are dropped (absent from the map, treated as community ``-1``).
     """
     sim = apply_sim_transform(cosine_similarity(matrix), sim_transform)
     if method == "knn":
         G = build_knn_graph(labels, sim, knn_k)
     elif method == "threshold":
-        G = build_cosine_graph(labels, sim, threshold)
+        G = build_cosine_graph(labels, sim, quantile)
     else:
         raise ValueError(f"unknown network method {method!r}")
 
     G.remove_nodes_from(list(nx.isolates(G)))
     n_comms = annotate_communities(G)
     community_map = {n: int(G.nodes[n]["community"]) for n in G}
-    edge = f"knn k={knn_k}" if method == "knn" else f">= {threshold}"
+    edge = f"knn k={knn_k}" if method == "knn" else f"top {1 - quantile:.0%} (q={quantile})"
     tr = "" if sim_transform == "none" else f", {sim_transform}"
     print(f"cosine     : {G.number_of_nodes()} nodes, "
           f"{G.number_of_edges()} edges ({edge}{tr})")
@@ -360,7 +376,7 @@ def run_analysis(
     is_target: np.ndarray,
     target_occ: dict[str, np.ndarray],
     out_dir: Path,
-    threshold: float,
+    quantile: float,
     kmeans_k: int,
     method: Method = "threshold",
     knn_k: int = 8,
@@ -393,7 +409,7 @@ def run_analysis(
 
     # Network + Louvain first, so the scatter plots can color by community.
     sim_network, n_comms, community_map = build_networks(
-        labels, matrix, method=method, threshold=threshold, knn_k=knn_k,
+        labels, matrix, method=method, quantile=quantile, knn_k=knn_k,
         sim_transform=sim_transform)
 
     # save the similarity networks, pruned to terms
@@ -421,7 +437,7 @@ def run_analysis(
         "targets": target_labels,
         "cohesion_variance": cv,
         "louvain_communities": n_comms,
-        "threshold": threshold,
+        "quantile": quantile,
         "method": method,
         "knn_k": knn_k,
         "sim_transform": sim_transform,

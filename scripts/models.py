@@ -157,11 +157,14 @@ class Pipeline:
     anisotropy."""
 
     sim_network: "SimMethod" = "knn"
-    """The kind of similarity network produced: either cosine (threshold) or
-    relative neighborhoods (knn)."""
+    """The kind of similarity network produced: a global quantile threshold
+    (threshold) or relative neighborhoods (knn)."""
 
-    threshold: float = 0.3
-    """Minimum weight of cosine similarity to include in similarity graphs."""
+    quantile: float = 0.9
+    """For sim_network="threshold": the percentile cutoff in [0, 1) on the
+    similarity distribution — 0.9 keeps the strongest 10% of edges. Rank-defined,
+    so it is invariant to sim_transform and robust to anisotropy (unlike an
+    absolute cosine cutoff). Raise it to sparsify the graph / drop more nodes."""
 
     knn_k: int = 8
     """K-nearest-neighbors for a knn graph: keep each node's `k` most-similar
