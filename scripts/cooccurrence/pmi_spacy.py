@@ -88,7 +88,7 @@ def collect_node_sentences(
     stopwords: frozenset[str] | set[str] = frozenset(),
     min_sent_nodes: int = 2,
 ) -> tuple[list[list[str]], set[str], dict[str, str]]:
-    """spaCy replacement for :func:`cooccurrence.pmi.filter_to_sent_node_lists`.
+    """Reduce spaCy Docs to frequency-filtered node-key sentences for PMI.
 
     Returns ``(sent_node_lists, nodes, forms)``:
 

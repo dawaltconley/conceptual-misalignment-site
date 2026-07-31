@@ -96,33 +96,6 @@ class NetworkData:
 
 
 @dataclass
-class NLPSource(Source):
-    id: str
-    url: str
-    title: str
-    description: str
-    cooccurrence: object | None
-
-    def __init__(self, source: Source, /, cooccurrence: "Graph | None" = None):
-        from networkx import node_link_data
-        self.id = source.id
-        self.url = source.url
-        self.title = source.title
-        self.description = source.description
-        self.cooccurrence = cooccurrence and node_link_data(cooccurrence)
-
-
-# @dataclass
-# class TermData:
-#     term: str
-#     sources: list[NLPSource]
-#     stems: list[str] | None = None
-#
-#     def save_json(self, filepath: "Path") -> None:
-#         _save_json(self, filepath)
-
-
-@dataclass
 class Vector:
     id: str
     target: bool

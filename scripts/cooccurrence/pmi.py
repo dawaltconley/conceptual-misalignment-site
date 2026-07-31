@@ -122,31 +122,6 @@ def build_cosine_similarity_graph(
 
 
 # ---------------------------------------------------------------------------
-# Filter sentence nodes
-# ---------------------------------------------------------------------------
-
-def filter_to_sent_node_lists(
-    sent_token_lists: list[list[str]],
-    term: str,
-    min_freq: int,
-    stopwords: set[str] | frozenset[str] = frozenset(),
-) -> tuple[list[list[str]], set[str]]:
-    """Frequency-filter a token vocabulary, then return sentences restricted to that vocab."""
-    freq = Counter(tok for sent in sent_token_lists for tok in sent)
-    nodes: set[str] = {
-        t for t, c in freq.items()
-        if c >= min_freq and t not in stopwords
-    }
-    nodes.add(term)
-
-    sent_node_lists = [
-        [t for t in sent if t in nodes]
-        for sent in sent_token_lists
-    ]
-    return [s for s in sent_node_lists if len(s) >= 2], nodes
-
-
-# ---------------------------------------------------------------------------
 # Build networks
 # ---------------------------------------------------------------------------
 

@@ -267,52 +267,6 @@ def annotate_communities(G: nx.Graph) -> int:
     return len(communities)
 
 
-def build_and_save_networks(
-    labels: list[str],
-    vectors: np.ndarray,
-    is_target: np.ndarray,
-    threshold: float,
-    out_dir: Path,
-    max_nodes: int = 15,
-    method: Method = "threshold",
-    knn_k: int = 8,
-    sim_transform: SimTransform = "none",
-) -> tuple[int, dict[str, int]]:
-    """Build the similarity network, detect communities, and serialize JSON.
-
-    ``method`` selects edge construction: ``"threshold"`` keeps pairs with
-    similarity >= ``threshold``; ``"knn"`` keeps each node's top-``knn_k``
-    neighbors (relative neighborhoods). ``sim_transform`` optionally reweights
-    the cosine matrix first (see :func:`apply_sim_transform`). Writes the full
-    network plus one pruned neighborhood per target term. Returns
-    ``(n_communities, {node: community_id})``; isolated nodes dropped from the
-    graph are absent from the map (callers treat them as community ``-1``).
-    """
-    sim = apply_sim_transform(cosine_similarity(vectors), sim_transform)
-    if method == "knn":
-        G = build_knn_graph(labels, sim, knn_k)
-    elif method == "threshold":
-        G = build_cosine_graph(labels, sim, threshold)
-    else:
-        raise ValueError(f"unknown network method {method!r}")
-    G.remove_nodes_from(list(nx.isolates(G)))
-    n_comms = annotate_communities(G)
-    community_map = {n: int(G.nodes[n]["community"]) for n in G}
-
-    net_dir = out_dir / "networks"
-    net_dir.mkdir(parents=True, exist_ok=True)
-    save_graph_json(G, net_dir / "full.json")
-
-    targets = [lbl for lbl, t in zip(labels, is_target) if t]
-    for term in targets:
-        pruned = prune_to_neighborhood(G, term, max_nodes)
-        if pruned is None:
-            print(f"[{term}] term not found...")
-        else:
-            save_graph_json(pruned, net_dir / f"{term}.json")
-    return n_comms, community_map
-
-
 # ---------------------------------------------------------------------------
 # Heatmap
 # ---------------------------------------------------------------------------
