@@ -1,10 +1,8 @@
-"""WIP single pipeline: emit every JSON file the website needs, from one place.
+"""The pipeline entrypoint: emit every JSON file the website needs, from one place.
 
-Temporary scratch module (badly named, badly organized on purpose) — the plan is
-to get one corpus working end-to-end here for a clean diff, then split into
-``cli/main.py`` + shared modules. Outputs are shaped by the ``models.py`` dataclasses
-(``NetworkData`` / ``Embeddings``), NOT the current frontend Zod schemas; the site
-is rewired to match in a later step.
+Run from ``scripts/`` as ``python -m main`` (see ``--help`` for flags). Outputs are
+shaped by the ``models.py`` dataclasses (``NetworkData`` / ``Embeddings``), and the
+frontend Zod schemas are kept in sync with them.
 
 Per corpus it writes three kinds of JSON:
 

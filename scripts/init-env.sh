@@ -34,7 +34,7 @@ echo "==> Installing the project (editable) + dependencies..."
 echo ""
 pip install -e "..[dev]"
 
-# spaCy English pipeline loaded by nlp/english.py (spacy.load("en_core_web_sm"))
+# spaCy English pipeline loaded by corpus/parse.py (spacy.load("en_core_web_sm"))
 echo ""
 echo "==> Downloading spaCy en_core_web_sm model..."
 echo ""
