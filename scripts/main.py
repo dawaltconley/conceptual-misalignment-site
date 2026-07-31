@@ -22,19 +22,19 @@ import json
 import re
 from collections import Counter
 from types import SimpleNamespace
+from typing import Any
 
 import numpy as np
 from numpy import ndarray
 from networkx import Graph
 from spacy.tokens import Doc
 
-import config
-import models
-from config import TERMS, CTEXT, SEP, EMBEDDINGS
-from text.chinese import STOPWORDS as CHINESE_STOPWORDS
+from config import TERMS, CTEXT, SEP, EMBEDDINGS, DATA, ANALYSIS, CHINESE_STOPWORDS
+from models import TermData, NetworkData, Embeddings
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter
 from embeddings import analyze, vectors
+from embeddings.analyze import Method as SimMethod, SimTransform
 from embeddings.model import Embedder
 from embeddings.occurrences import (
     CONTENT_POS,
@@ -94,8 +94,9 @@ def save_cooccurrence(
         content_pos=content_pos, stopwords=stopwords, max_nodes=max_nodes)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
-    occ = sum(count_occurrences(s.doc, label, match_fn) for s in network_sources)
-    models.NetworkData(models.TermData(label, occ), meta_source, net).save_json(
+    occ = sum(count_occurrences(s.doc, label, match_fn)
+              for s in network_sources)
+    NetworkData(TermData(label, occ), meta_source, net).save_json(
         out_dir / f"{label}_{file_id}.json")
 
 
@@ -112,8 +113,8 @@ def save_similarity(
         pruned = prune_to_neighborhood(G, target, max_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
-        term = models.TermData(target, int(occ_counts.get(target, 0)))
-        models.NetworkData(term, corpus_source, pruned).save_json(
+        term = TermData(target, int(occ_counts.get(target, 0)))
+        NetworkData(term, corpus_source, pruned).save_json(
             out_dir / f"{target}_embeds.json")
 
 
@@ -125,10 +126,10 @@ def run_mengzi(
     *,
     min_freq: int = 5,
     center: bool = True,
-    network: str = "knn",
+    network: SimMethod = "knn",
     threshold: float = 0.3,
     knn_k: int = 8,
-    sim_transform: analyze.SimTransform = "neglog",
+    sim_transform: SimTransform = "neglog",
     reduce_to_dims: int = 50,
     max_nodes: int = 15,
     batch_size: int = 32,
@@ -157,7 +158,8 @@ def run_mengzi(
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
     embedder = Embedder(MENGZI_MODEL)
-    print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
+    print(
+        f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler = embed(
         embedder, chapters, targets, min_freq=min_freq,
         content_pos=content_pos, stopwords=stopwords, batch_size=batch_size,
@@ -177,14 +179,14 @@ def run_mengzi(
     save_similarity(targets, mengzi, G, CTEXT,
                     max_nodes=max_nodes, occ_counts=occ_counts)
 
-    reduced = models.reduce_vectors(matrix, reduce_to_dims)
-    models.Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
+    reduced = vectors.reduce_vectors(matrix, reduce_to_dims)
+    Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
 
     if artifacts:
         run_artifacts(labels, matrix, targets, pooler, mean,
-                      config.ANALYSIS / "mengzi", network, threshold, knn_k,
+                      ANALYSIS / "mengzi", network, threshold, knn_k,
                       sim_transform, max_nodes)
 
 
@@ -206,10 +208,10 @@ def run_sep(
     per_term: int = 12,
     min_freq: int = 10,
     center: bool = True,
-    network: str = "knn",
+    network: SimMethod = "knn",
     threshold: float = 0.3,
     knn_k: int = 8,
-    sim_transform: analyze.SimTransform = "neglog",
+    sim_transform: SimTransform = "neglog",
     reduce_to_dims: int = 50,
     max_nodes: int = 15,
     batch_size: int = 16,
@@ -252,7 +254,8 @@ def run_sep(
     combined = list(doc_cache.values())
     print(f"parsed     : {len(combined)} SEP articles")
     embedder = Embedder(SEP_MODEL)
-    print(f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
+    print(
+        f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler = embed(
         embedder, combined, labels_by_target, min_freq=min_freq,
         match_fn=match_fn, content_pos=CONTENT_POS, batch_size=batch_size,
@@ -272,14 +275,14 @@ def run_sep(
     save_similarity(labels_by_target, SEP_CORPUS, G, SEP,
                     max_nodes=max_nodes, occ_counts=occ_counts)
 
-    reduced = models.reduce_vectors(matrix, reduce_to_dims)
-    models.Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
-                               community_map).save_json(EMBEDDINGS / "sep.json")
+    reduced = vectors.reduce_vectors(matrix, reduce_to_dims)
+    Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
+                           community_map).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
 
     if artifacts:
         run_artifacts(labels, matrix, labels_by_target, pooler, mean,
-                      config.ANALYSIS / "sep", network, threshold, knn_k,
+                      ANALYSIS / "sep", network, threshold, knn_k,
                       sim_transform, max_nodes)
 
 
@@ -356,7 +359,7 @@ def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
 
 
 def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, out_dir,
-                  network: str, threshold: float, knn_k: int,
+                  network: SimMethod, threshold: float, knn_k: int,
                   sim_transform: analyze.SimTransform, max_nodes: int) -> None:
     """Opt-in: the heavy PNG/CSV analysis dump, decoupled from the JSON outputs."""
     is_target = np.array([l in targets for l in labels])
@@ -412,7 +415,7 @@ def build_master(out_path=None) -> dict:
     the Chinese (Mengzi) side and its English renderings, each with its source
     file paths, similarity network, and corpus embedding. Scans the output dirs so
     paths mirror what is actually on disk."""
-    out_path = out_path or (config.DATA / "terms.json")
+    out_path = out_path or (DATA / "terms.json")
     ctext = _scan_networks(CTEXT, "/ctext")
     sep = _scan_networks(SEP, "/sep")
 
@@ -445,7 +448,8 @@ def build_master(out_path=None) -> dict:
                         encoding="utf-8")
     n_src = sum(len(t["chinese"]["sources"])
                 + sum(len(e["sources"]) for e in t["english"]) for t in terms)
-    print(f"master     : {len(terms)} terms, {n_src} source files -> {out_path}")
+    print(
+        f"master     : {len(terms)} terms, {n_src} source files -> {out_path}")
     return master
 
 
@@ -485,16 +489,17 @@ def main() -> None:
     args = parse_args()
     if not args.master_only:
         center = not args.no_center
-        common = dict(center=center, network=args.network,
-                      threshold=args.threshold, knn_k=args.knn_k,
-                      sim_transform=args.sim_transform,
-                      max_nodes=args.max_nodes, artifacts=args.artifacts)
+        common = dict[str, Any](center=center, network=args.network,
+                                threshold=args.threshold, knn_k=args.knn_k,
+                                sim_transform=args.sim_transform,
+                                max_nodes=args.max_nodes, artifacts=args.artifacts)
         if args.corpus in ("mengzi", "all"):
             print("\n=== Mengzi ===")
             run_mengzi(min_freq=args.min_freq or 5, **common)
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
-            run_sep(min_freq=args.min_freq or 10, per_term=args.per_term, **common)
+            run_sep(min_freq=args.min_freq or 10,
+                    per_term=args.per_term, **common)
     print("\n=== Master index ===")
     build_master()
 

@@ -24,7 +24,8 @@ def _json_default(o: object):
             "title": getattr(o, "title", None),
             "description": getattr(o, "description", None),
         }
-    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+    raise TypeError(
+        f"Object of type {type(o).__name__} is not JSON serializable")
 
 
 def _source_ref(source: object) -> dict | None:
@@ -120,17 +121,6 @@ class Embeddings:
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)
-
-
-def reduce_vectors(matrix: "ndarray", dims: int) -> "ndarray":
-    """Mean-center + L2-normalize, then PCA to `dims` (variance-ordered columns)."""
-    import numpy as np
-    from sklearn.decomposition import PCA
-    centered = matrix - matrix.mean(axis=0, keepdims=True)
-    norms = np.linalg.norm(centered, axis=1, keepdims=True)
-    unit = centered / np.clip(norms, 1e-12, None)
-    n_components = min(dims, unit.shape[1], unit.shape[0])
-    return PCA(n_components=n_components, random_state=0).fit_transform(unit)
 
 
 class Rendering:

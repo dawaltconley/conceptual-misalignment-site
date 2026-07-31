@@ -58,3 +58,13 @@ def center_matrix(
     if mean is None:
         mean = matrix.mean(axis=0)
     return matrix - mean, mean  # pyright:ignore -- bad typing
+
+
+def reduce_vectors(matrix: np.ndarray, dims: int) -> np.ndarray:
+    """Mean-center + L2-normalize, then PCA to `dims` (variance-ordered columns)."""
+    from sklearn.decomposition import PCA
+    centered = matrix - matrix.mean(axis=0, keepdims=True)
+    norms = np.linalg.norm(centered, axis=1, keepdims=True)
+    unit = centered / np.clip(norms, 1e-12, None)
+    n_components = min(dims, unit.shape[1], unit.shape[0])
+    return PCA(n_components=n_components, random_state=0).fit_transform(unit)
