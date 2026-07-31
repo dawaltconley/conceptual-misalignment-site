@@ -299,20 +299,22 @@ def build_networks(
     labels: list[str],
     matrix: np.ndarray,
     *,
-    method: Method = "threshold",
-    threshold: float = 0.75,
+    method: Method = "knn",
+    threshold: float = 0.3,
     knn_k: int = 8,
     sim_transform: SimTransform = "none",
 ) -> tuple[nx.Graph, int, dict[str, int]]:
-    """Build the similarity graph over the **full** vocab + detect communities.
+    """Build the similarity graph over the full vocab + detect communities.
 
-    Returns ``(G, n_communities, community_map)``; the caller serializes it (see
-    :func:`save_network`). ``method`` selects edge construction ("knn" top-``knn_k``
-    neighbors vs "threshold" cutoff); ``sim_transform`` optionally reweights the
-    cosine matrix first. Re-implements the graph-building half of the former
-    ``build_and_save_networks`` — over all ``labels``, not just the targets (the
-    target-only sim was an ``n×n`` matrix indexed with the full label list → the
-    IndexError in :func:`build_knn_graph`).
+    The single cosine-graph builder for both the JSON pipeline (``main`` reads
+    ``(G, community_map)``) and the ``--artifacts`` dump (``run_analysis`` also
+    uses ``n_communities`` and serializes via :func:`save_network`).
+    ``method`` selects edge construction ("knn" top-``knn_k`` neighbors — robust to
+    the anisotropy offset that makes an absolute cutoff meaningless — vs "threshold"
+    cutoff); ``sim_transform`` optionally reweights the cosine matrix first (monotone,
+    so under kNN it changes edge weights + communities, not which neighbors appear).
+    Returns ``(G, n_communities, community_map)``; isolated nodes are dropped (absent
+    from the map, treated as community ``-1``).
     """
     sim = apply_sim_transform(cosine_similarity(matrix), sim_transform)
     if method == "knn":
@@ -325,6 +327,10 @@ def build_networks(
     G.remove_nodes_from(list(nx.isolates(G)))
     n_comms = annotate_communities(G)
     community_map = {n: int(G.nodes[n]["community"]) for n in G}
+    edge = f"knn k={knn_k}" if method == "knn" else f">= {threshold}"
+    tr = "" if sim_transform == "none" else f", {sim_transform}"
+    print(f"cosine     : {G.number_of_nodes()} nodes, "
+          f"{G.number_of_edges()} edges ({edge}{tr})")
     return G, n_comms, community_map
 
 

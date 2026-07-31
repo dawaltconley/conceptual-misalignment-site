@@ -26,7 +26,6 @@ from collections import Counter
 from types import SimpleNamespace
 
 import numpy as np
-import networkx as nx
 from numpy import ndarray
 from networkx import Graph
 from spacy.tokens import Doc
@@ -106,36 +105,6 @@ def save_cooccurrence(
 # Embeddings + similarity (share one cosine graph over the whole corpus)
 # ---------------------------------------------------------------------------
 
-def cosine_graph(
-    labels: list[str], matrix: ndarray, *,
-    transform: analyze.SimTransform = "none",
-    network: str = "knn", threshold: float = 0.3, knn_k: int = 8,
-) -> tuple[Graph, dict[str, int]]:
-    """Cosine-similarity graph over the vocab, with Louvain communities.
-
-    ``transform`` optionally reweights the cosine matrix first (``neglog`` expands
-    the high-similarity range, ``poslog`` compresses it — monotone, so under kNN
-    it changes edge weights + communities, not which neighbors appear).
-    ``network="knn"`` keeps each node's ``knn_k`` nearest neighbors (relative
-    neighborhoods — robust to the anisotropy offset that makes an absolute cutoff
-    meaningless, and bounded in size for either corpus); ``"threshold"`` keeps all
-    pairs with cosine >= ``threshold``. Returns ``(G, community_map)``; isolated
-    nodes are dropped (absent from the map, treated as community ``-1``)."""
-    sim = analyze.apply_sim_transform(analyze.cosine_matrix(matrix), transform)
-    if network == "knn":
-        G = analyze.build_knn_graph(labels, sim, knn_k)
-    else:
-        G = analyze.build_cosine_graph(labels, sim, threshold)
-    G.remove_nodes_from(list(nx.isolates(G)))
-    analyze.annotate_communities(G)
-    community_map = {n: int(G.nodes[n]["community"]) for n in G}
-    edge = f"knn k={knn_k}" if network == "knn" else f">= {threshold}"
-    tr = "" if transform == "none" else f", {transform}"
-    print(f"cosine     : {G.number_of_nodes()} nodes, "
-          f"{G.number_of_edges()} edges ({edge}{tr})")
-    return G, community_map
-
-
 def save_similarity(
     targets, corpus_source, G: Graph, out_dir, *,
     max_nodes: int, occ_counts: Counter,
@@ -201,8 +170,9 @@ def run_mengzi(
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
-    G, community_map = cosine_graph(labels, matrix, transform=sim_transform,
-                                    network=network, threshold=threshold, knn_k=knn_k)
+    G, _, community_map = analyze.build_networks(
+        labels, matrix, method=network, threshold=threshold, knn_k=knn_k,
+        sim_transform=sim_transform)
 
     occ_counts = Counter(t.lemma_ for t in full.doc)
     save_similarity(targets, mengzi, G, CTEXT,
@@ -294,8 +264,9 @@ def run_sep(
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
-    G, community_map = cosine_graph(labels, matrix, transform=sim_transform,
-                                    network=network, threshold=threshold, knn_k=knn_k)
+    G, _, community_map = analyze.build_networks(
+        labels, matrix, method=network, threshold=threshold, knn_k=knn_k,
+        sim_transform=sim_transform)
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
