@@ -57,7 +57,7 @@ def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
     import json
     with filepath.open("w", encoding="utf-8") as file:
         json.dump(asdict(data), file, ensure_ascii=False,
-                  indent=2, default=_json_default)
+                  default=_json_default)
 
 
 class Source(Protocol):
