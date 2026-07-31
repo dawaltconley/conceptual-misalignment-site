@@ -8,6 +8,7 @@ _ROOT = _SCRIPTS.parent                       # repo root
 
 # --- Inputs (live inside scripts/) ---
 MENGZI_DIR = _SCRIPTS / "data" / "mengzi"     # per-chapter Mengzi source .txt
+MENGZI_CONLLU = _SCRIPTS / "data" / "mengzi.conllu"
 
 # --- Outputs (live at the repo root) ---
 DATA = _ROOT / "src" / "data"
