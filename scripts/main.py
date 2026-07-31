@@ -174,7 +174,8 @@ def run_mengzi(
         labels, matrix, method=network, threshold=threshold, knn_k=knn_k,
         sim_transform=sim_transform)
 
-    occ_counts = Counter(t.lemma_ for t in full.doc)
+    occ_counts = Counter(
+        t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
     save_similarity(targets, mengzi, G, CTEXT,
                     max_nodes=max_nodes, occ_counts=occ_counts)
 
