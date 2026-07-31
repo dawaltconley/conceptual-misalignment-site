@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING, Self
 from dataclasses import dataclass, asdict, field
 
 if TYPE_CHECKING:
@@ -29,22 +29,6 @@ def _json_default(o: object):
         f"Object of type {type(o).__name__} is not JSON serializable")
 
 
-def _source_ref(source: object) -> dict | None:
-    """Reduce any ``Source`` to a small, JSON-safe subset. Done at construction
-    time (not via ``asdict``/``_json_default``) so it is uniform whether the source
-    is a plain class (``Chapter``) or a dataclass (``SEP``/``SEPSearch``) — for the
-    latter ``asdict`` would otherwise recurse into every field (dumping ``.text`` /
-    ``.articles``) and skip the ``id``/``text`` *properties*."""
-    if source is None:
-        return None
-    return {
-        "id": getattr(source, "id", None),
-        "url": getattr(source, "url", None),
-        "title": getattr(source, "title", None),
-        "description": getattr(source, "description", None),
-    }
-
-
 def _sorted_node_link(data: dict | None) -> dict | None:
     """Sort a node-link graph's node array by id, so the serialized JSON lists
     nodes in a readable, stable order (ordering only, not data). Edge order is left
@@ -62,15 +46,16 @@ def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
                   default=_json_default)
 
 
-class Source(Protocol):
+@dataclass
+class Source:
     id: str
     url: str
     title: str
     description: str
 
-
-class SourceData(Protocol):
-    source: Source
+    @classmethod
+    def from_sourcelike(cls, s: Self) -> Self:
+        return cls(s.id, s.url, s.title, s.description)
 
 
 @dataclass
@@ -83,13 +68,13 @@ class TermData:
 @dataclass
 class NetworkData:
     term: TermData
-    source: dict | None  # reduced via _source_ref at construction
+    source: Source
     network: object | None
 
     def __init__(self, term: TermData, source: Source, network: "Graph | None"):
         from networkx import node_link_data
         self.term = term
-        self.source = _source_ref(source)
+        self.source = Source.from_sourcelike(source)
         self.network = _sorted_node_link(
             node_link_data(network) if network is not None else None)
 
@@ -107,7 +92,7 @@ class Vector:
 
 @dataclass
 class Embeddings:
-    source: dict | None  # reduced via _source_ref at construction
+    source: Source
     dims: int
     nodes: list[Vector]
 
@@ -118,7 +103,7 @@ class Embeddings:
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row)
             nodes.append(vector)
-        return cls(_source_ref(source), int(matrix.shape[1]), nodes)
+        return cls(Source.from_sourcelike(source), int(matrix.shape[1]), nodes)
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)

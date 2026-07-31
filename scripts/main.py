@@ -20,7 +20,6 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter
-from types import SimpleNamespace
 
 import numpy as np
 from numpy import ndarray
@@ -165,10 +164,12 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
                       p.sim_transform, p.max_network_nodes)
 
 
-SEP_CORPUS = SimpleNamespace(
-    id="sep", url="https://plato.stanford.edu/",
+SEP_CORPUS = Source(
+    id="sep",
+    url="https://plato.stanford.edu/",
     title="SEP (combined)",
-    description="Combined SEP corpus for the English renderings of 仁 / 義")
+    description="Combined SEP corpus for the English renderings of 仁 / 義"
+)
 
 
 def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
