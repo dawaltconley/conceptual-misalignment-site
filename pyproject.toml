@@ -37,17 +37,18 @@ dev = [
 # install it after this project with:  python -m spacy download en_core_web_sm
 
 # Treat scripts/ as the source root (src-layout), so the existing top-level
-# imports (`from config import ...`, `from corpus.x import ...`) keep working and
-# resolve from any working directory once installed with `pip install -e .`.
+# imports (`from config import ...`, `from models import ...`, `from corpus.x
+# import ...`) keep working and resolve from any working directory once installed
+# with `pip install -e .`. Every top-level scripts/*.py must be listed in
+# py-modules (config/models are imported by the packages; main is the entrypoint).
 [tool.setuptools]
 package-dir = { "" = "scripts" }
-py-modules = ["config"]
+py-modules = ["config", "models", "main"]
 packages = [
     "cli",
     "cooccurrence",
     "corpus",
     "embeddings",
     "graph",
-    "text",
     "segmentation",
 ]

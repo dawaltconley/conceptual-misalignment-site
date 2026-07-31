@@ -20,11 +20,20 @@ place regardless.
 .venv/bin/python -m main --master-only
 ```
 
-Useful flags: `--network {knn,threshold}` (default `knn`), `--knn-k`, `--threshold`;
-`--sim-transform {none,neglog,poslog}` (default `neglog` — reweights cosine before
-the similarity graph); `--per-term N` (SEP articles per rendering — caps corpus
-size / embedding memory); `--min-freq`, `--max-nodes`, `--no-center`; `--artifacts`
-(also dump the PNG/CSV analysis into `analysis/`).
+The CLI is deliberately small — it only chooses *what* to run:
+
+- `--corpus {mengzi,sep,all}` — which corpus (default `all`).
+- `--per-term N` — SEP articles fetched per English rendering (default 12; caps
+  corpus size / embedding memory).
+- `--artifacts` — also dump the PNG/CSV analysis into `analysis/`.
+- `--master-only` — just rebuild `src/data/terms.json` from files already on disk.
+
+Everything about *how* each corpus is processed lives in `config.py`, as the
+`MENGZI_PIPELINE` / `SEP_PIPELINE` `Pipeline` objects: `model`, `min_freq`,
+similarity-graph method (`sim_network` = `knn`/`threshold`) with its `knn_k` /
+`threshold`, `sim_transform` (default `neglog`), `center`, `reduce_to_dims`,
+`max_network_nodes`, `batch_size`, `content_pos`, `stopwords`, and the output
+directory. Change a run's behavior by editing those, not by passing flags.
 
 ### Outputs (all consumed by the site; paths from `config.py`)
 
@@ -40,9 +49,9 @@ size / embedding memory); `--min-freq`, `--max-nodes`, `--no-center`; `--artifac
 ## Layout
 
 ```
-config.py            Term / Rendering taxonomy + all absolute path constants
+config.py            Term/Rendering taxonomy, MENGZI_PIPELINE/SEP_PIPELINE configs, stopwords, absolute path constants
 main.py              the pipeline entrypoint (run_mengzi / run_sep / build_master + CLI)
-models.py            Source/Rendering/Term + NetworkData/Embeddings/Vector + JSON serialization
+models.py            Source/Rendering/Term + Pipeline config + NetworkData/Embeddings/Vector + JSON serialization
 
 data/                inputs, no code
   mengzi.conllu      UD Kyoto treebank (gold tokens/lemmas/POS) — the Chinese source of record
@@ -60,7 +69,7 @@ corpus/              "get the source text" layer (the only code that hits the ne
 embeddings/          the transformer semantic space
   occurrences.py     content_key / build_vocab / build_segments over spaCy Docs (both corpora)
   model.py           Embedder — final-layer per-occurrence span vectors
-  vectors.py         max-pool across occurrences + mean-center
+  vectors.py         max-pool across occurrences + mean-center + PCA reduce for export
   analyze.py         cosine / kNN graph, Louvain communities, sim transforms, --artifacts dump
 
 cooccurrence/        PMI co-occurrence networks
@@ -70,9 +79,6 @@ cooccurrence/        PMI co-occurrence networks
 graph/               shared graph utilities
   prune.py           prune_to_neighborhood, proximity_score
   serialize.py       save_graph_json
-
-text/                language primitives
-  chinese.py         classical-Chinese function-word STOPWORDS
 
 segmentation/        preprocessing: Mengzi → segpos/  (XunziALLM) — separate from the main pipeline
   seg.py segpos.py utils.py seg_data.json
@@ -85,9 +91,11 @@ cli/                 auxiliary runnable tools
 ## Auxiliary tools
 
 ```bash
-# Segment Mengzi chapters with XunziALLM (feeds segmentation/ → segpos/)
-.venv/bin/python -m cli.segment seg --input data/mengzi/1A.txt \
-    --output ../segpos/chapters/1A.jsonl --unit line --arch api
+# Segment + POS-tag the full Mengzi with XunziALLM (feeds segmentation/ → segpos/).
+# Positional: `seg` = segmentation only, `segpos` also tags POS. Always processes
+# the whole corpus (no --input); --arch api needs an OpenAI-compatible server up.
+# See `-m cli.segment --help` for --model / --api-base / --grammar / --limit.
+.venv/bin/python -m cli.segment seg --output ../segpos/mengzi.jsonl --arch api
 
 # One-off — inventory punctuation in a text file
 .venv/bin/python -m cli.find_punctuation <path>
