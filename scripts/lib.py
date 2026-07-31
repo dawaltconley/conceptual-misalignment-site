@@ -7,6 +7,7 @@ if TYPE_CHECKING:
 
 
 class Source(Protocol):
+    id: str
     url: str
     title: str
     description: str
@@ -14,6 +15,7 @@ class Source(Protocol):
 
 @dataclass
 class NLPSource(Source):
+    id: str
     url: str
     title: str
     description: str
@@ -21,6 +23,7 @@ class NLPSource(Source):
 
     def __init__(self, source: Source, /, cooccurrence: "Graph | None" = None):
         from networkx import node_link_data
+        self.id = source.id
         self.url = source.url
         self.title = source.title
         self.description = source.description

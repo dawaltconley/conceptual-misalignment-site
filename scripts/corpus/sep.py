@@ -20,6 +20,10 @@ class SEP(Source):
     description: str
     text: str
 
+    @property
+    def id(self) -> str:
+        return self.url
+
     @classmethod
     def from_url(cls, url: str):
         if url in _cached_articles:
@@ -70,6 +74,10 @@ class SEPSearch(Source):
     description: str
     articles: list[SEP]
     total_articles: int
+
+    @property
+    def id(self) -> str:
+        return self.url
 
     @property
     def text(self) -> str:
