@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING
 from dataclasses import dataclass, asdict, field
 
 if TYPE_CHECKING:
@@ -24,7 +24,8 @@ def _json_default(o: object):
             "title": getattr(o, "title", None),
             "description": getattr(o, "description", None),
         }
-    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+    raise TypeError(
+        f"Object of type {type(o).__name__} is not JSON serializable")
 
 
 def _source_ref(source: object) -> dict | None:
@@ -60,14 +61,15 @@ def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
                   indent=2, default=_json_default)
 
 
-class Source(Protocol):
+@dataclass
+class Source:
     id: str
     url: str
     title: str
     description: str
 
 
-class SourceData(Protocol):
+class SourceData:
     source: Source
 
 

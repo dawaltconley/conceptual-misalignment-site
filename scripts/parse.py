@@ -19,9 +19,16 @@ def _get_en_nlp():
     return _nlp
 
 
+_sep_article_docs: dict[str, "Doc"] = {}
+
+
 def parse_sep_article(sep: "SEP") -> "Doc":
+    global _sep_article_docs
+    if sep.id in _sep_article_docs:
+        return _sep_article_docs[sep.id]
     nlp = _get_en_nlp()
-    return nlp(sep.text)
+    _sep_article_docs[sep.id] = nlp(sep.text)
+    return _sep_article_docs[sep.id]
 
 
 _mengzi_chapter_docs: dict[str, "Doc"] = {}

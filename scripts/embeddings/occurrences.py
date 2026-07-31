@@ -153,7 +153,8 @@ def build_segments(
             offset = 0
             for tok in sent_toks:
                 if tok in words_of_interest:
-                    cur.spans.append(Span(tok, base + offset, base + offset + len(tok)))
+                    cur.spans.append(
+                        Span(tok, base + offset, base + offset + len(tok)))
                 offset += len(tok)
             cur.text += "".join(sent_toks)
             cur_len += slen

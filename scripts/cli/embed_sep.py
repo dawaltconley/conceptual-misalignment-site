@@ -65,6 +65,7 @@ def segment(emb, sentences, woi):
     return segments
 
 
+# TODO identical to definition in embed_mengzi.py
 def unk_check(emb: Embedder, words: set[str]):
     unk = emb.unk_words(sorted(words))
     if unk:

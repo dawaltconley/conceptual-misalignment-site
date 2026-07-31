@@ -39,7 +39,8 @@ def community_map(analysis_dir: Path) -> dict[str, int]:
     Nodes absent from the network (isolates dropped during graph build) are not
     present here; callers default them to -1 (grey), matching the analysis PNGs.
     """
-    net = json.loads((analysis_dir / "networks" / "full.json").read_text("utf-8"))
+    net = json.loads((analysis_dir / "networks" /
+                     "full.json").read_text("utf-8"))
     return {str(n["id"]): int(n["community"]) for n in net["nodes"]}
 
 
@@ -69,7 +70,8 @@ def export_corpus(name: str, analysis_dir: Path, dims: int, out_dir: Path) -> Pa
     payload = {"corpus": name, "dims": reduced.shape[1], "nodes": nodes}
 
     out_path = out_dir / f"{name}.json"
-    out_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    out_path.write_text(json.dumps(
+        payload, ensure_ascii=False), encoding="utf-8")
     n_targets = sum(n["target"] for n in nodes)
     print(f"{name:7s}: {len(nodes)} nodes ({n_targets} targets), "
           f"dims={reduced.shape[1]} -> {out_path} "
