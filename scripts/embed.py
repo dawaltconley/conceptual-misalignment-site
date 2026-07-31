@@ -110,16 +110,20 @@ def save_cooccurrence(
 
 def cosine_graph(
     labels: list[str], matrix: ndarray, *,
+    transform: analyze.SimTransform = "none",
     network: str = "knn", threshold: float = 0.3, knn_k: int = 8,
 ) -> tuple[Graph, dict[str, int]]:
     """Cosine-similarity graph over the vocab, with Louvain communities.
 
+    ``transform`` optionally reweights the cosine matrix first (``neglog`` expands
+    the high-similarity range, ``poslog`` compresses it — monotone, so under kNN
+    it changes edge weights + communities, not which neighbors appear).
     ``network="knn"`` keeps each node's ``knn_k`` nearest neighbors (relative
     neighborhoods — robust to the anisotropy offset that makes an absolute cutoff
     meaningless, and bounded in size for either corpus); ``"threshold"`` keeps all
     pairs with cosine >= ``threshold``. Returns ``(G, community_map)``; isolated
     nodes are dropped (absent from the map, treated as community ``-1``)."""
-    sim = analyze.cosine_matrix(matrix)
+    sim = analyze.apply_sim_transform(analyze.cosine_matrix(matrix), transform)
     if network == "knn":
         G = analyze.build_knn_graph(labels, sim, knn_k)
     else:
@@ -127,9 +131,10 @@ def cosine_graph(
     G.remove_nodes_from(list(nx.isolates(G)))
     analyze.annotate_communities(G)
     community_map = {n: int(G.nodes[n]["community"]) for n in G}
-    desc = f"knn k={knn_k}" if network == "knn" else f">= {threshold}"
+    edge = f"knn k={knn_k}" if network == "knn" else f">= {threshold}"
+    tr = "" if transform == "none" else f", {transform}"
     print(f"cosine     : {G.number_of_nodes()} nodes, "
-          f"{G.number_of_edges()} edges ({desc})")
+          f"{G.number_of_edges()} edges ({edge}{tr})")
     return G, community_map
 
 
@@ -158,6 +163,7 @@ def run_mengzi(
     network: str = "knn",
     threshold: float = 0.3,
     knn_k: int = 8,
+    sim_transform: analyze.SimTransform = "neglog",
     reduce_to_dims: int = 50,
     max_nodes: int = 15,
     batch_size: int = 32,
@@ -196,8 +202,8 @@ def run_mengzi(
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
-    G, community_map = cosine_graph(labels, matrix, network=network,
-                                    threshold=threshold, knn_k=knn_k)
+    G, community_map = cosine_graph(labels, matrix, transform=sim_transform,
+                                    network=network, threshold=threshold, knn_k=knn_k)
 
     occ_counts = Counter(t.lemma_ for t in full.doc)
     save_similarity(targets, mengzi, G, CTEXT,
@@ -210,7 +216,8 @@ def run_mengzi(
 
     if artifacts:
         run_artifacts(labels, matrix, targets, word_vectors, mean,
-                      config.ANALYSIS / "mengzi", network, threshold, knn_k, max_nodes)
+                      config.ANALYSIS / "mengzi", network, threshold, knn_k,
+                      sim_transform, max_nodes)
 
 
 SEP_CORPUS = SimpleNamespace(
@@ -234,6 +241,7 @@ def run_sep(
     network: str = "knn",
     threshold: float = 0.3,
     knn_k: int = 8,
+    sim_transform: analyze.SimTransform = "neglog",
     reduce_to_dims: int = 50,
     max_nodes: int = 15,
     batch_size: int = 16,
@@ -286,8 +294,8 @@ def run_sep(
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
 
-    G, community_map = cosine_graph(labels, matrix, network=network,
-                                    threshold=threshold, knn_k=knn_k)
+    G, community_map = cosine_graph(labels, matrix, transform=sim_transform,
+                                    network=network, threshold=threshold, knn_k=knn_k)
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
@@ -301,7 +309,8 @@ def run_sep(
 
     if artifacts:
         run_artifacts(labels, matrix, labels_by_target, word_vectors, mean,
-                      config.ANALYSIS / "sep", network, threshold, knn_k, max_nodes)
+                      config.ANALYSIS / "sep", network, threshold, knn_k,
+                      sim_transform, max_nodes)
 
 
 # ---------------------------------------------------------------------------
@@ -377,13 +386,13 @@ def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
 
 def run_artifacts(labels, matrix, targets, word_vectors, mean, out_dir,
                   network: str, threshold: float, knn_k: int,
-                  max_nodes: int) -> None:
+                  sim_transform: analyze.SimTransform, max_nodes: int) -> None:
     """Opt-in: the heavy PNG/CSV analysis dump, decoupled from the JSON outputs."""
     is_target = np.array([l in targets for l in labels])
     target_occ = occurrences(word_vectors, targets, mean)
     summary = analyze.run_analysis(
-        labels, matrix, is_target, target_occ, out_dir,
-        threshold, kmeans_k=4, method=network, knn_k=knn_k, max_nodes=max_nodes)
+        labels, matrix, is_target, target_occ, out_dir, threshold, kmeans_k=4,
+        method=network, knn_k=knn_k, sim_transform=sim_transform, max_nodes=max_nodes)
     print(f"artifacts  : {summary['louvain_communities']} communities -> "
           f"{out_dir.resolve()}")
 
@@ -485,6 +494,13 @@ def parse_args() -> argparse.Namespace:
                    help="Neighbors per node when --network knn.")
     p.add_argument("--threshold", type=float, default=0.3,
                    help="Cosine edge threshold when --network threshold.")
+    p.add_argument("--sim-transform", choices=["none", "neglog", "poslog"],
+                   default="neglog", dest="sim_transform",
+                   help="Reweight cosine before the similarity graph: neglog "
+                        "expands high similarities, poslog compresses them.")
+    p.add_argument("--per-term", type=int, default=12, dest="per_term",
+                   help="SEP articles fetched per English rendering (caps corpus "
+                        "size / embedding memory).")
     p.add_argument("--min-freq", type=int, default=None)
     p.add_argument("--max-nodes", type=int, default=15)
     p.add_argument("--master-only", action="store_true",
@@ -499,13 +515,14 @@ def main() -> None:
         center = not args.no_center
         common = dict(center=center, network=args.network,
                       threshold=args.threshold, knn_k=args.knn_k,
+                      sim_transform=args.sim_transform,
                       max_nodes=args.max_nodes, artifacts=args.artifacts)
         if args.corpus in ("mengzi", "all"):
             print("\n=== Mengzi ===")
             run_mengzi(min_freq=args.min_freq or 5, **common)
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
-            run_sep(min_freq=args.min_freq or 10, **common)
+            run_sep(min_freq=args.min_freq or 10, per_term=args.per_term, **common)
     print("\n=== Master index ===")
     build_master()
 
