@@ -70,10 +70,18 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        // A third-width bar sweeping the track, for an indeterminate Progress.
+        // Animated transforms beat the inline transform ui/progress sets.
+        'progress-indeterminate': {
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(300%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'progress-indeterminate':
+          'progress-indeterminate 1.4s ease-in-out infinite',
       },
       fontFamily: {
         sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
