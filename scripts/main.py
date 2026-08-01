@@ -186,7 +186,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
 
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
-                           doc_freq=doc_freq, documents=n_docs) \
+                           doc_freq=doc_freq, documents=n_docs, graph=G) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
     sw.lap("similarity+export")
@@ -262,8 +262,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
 
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
-                           community_map, doc_freq=doc_freq,
-                           documents=n_docs).save_json(EMBEDDINGS / "sep.json")
+                           community_map, doc_freq=doc_freq, documents=n_docs,
+                           graph=G).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
     sw.lap("similarity+export")
 

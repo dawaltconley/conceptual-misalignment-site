@@ -101,6 +101,16 @@ class Vector:
     vec: "ndarray"
     doc_freq: int = 0
     """How many documents (sources) in the corpus this word appears in."""
+    strength: float = 0.0
+    """Weighted degree in the similarity graph (sum of incident edge weights);
+    high = a dense/tight region of the space. 0 for nodes absent from the graph."""
+
+
+def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
+    """Per-node sum of incident edge weights (0 for graph-absent nodes)."""
+    if graph is None:
+        return {}
+    return {n: float(d) for n, d in graph.degree(weight="weight")}
 
 
 @dataclass
@@ -112,12 +122,14 @@ class Embeddings:
     nodes: list[Vector]
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None):
+        strength = _weighted_degree(graph)
         nodes: list[Vector] = []
         for label, row in zip(labels, matrix):
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row,
-                            doc_freq.get(label, 0))
+                            doc_freq.get(label, 0),
+                            strength.get(label, 0.0))
             nodes.append(vector)
         return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
                    documents, nodes)
