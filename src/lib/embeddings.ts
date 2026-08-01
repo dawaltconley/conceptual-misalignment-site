@@ -15,6 +15,8 @@ export const EmbeddingNodeSchema = z.object({
   doc_freq: z.number().default(0),
   /** Weighted degree in the similarity graph (sum of incident edge weights). */
   strength: z.number().default(0),
+  /** PageRank on the weighted similarity graph (global importance). */
+  pagerank: z.number().default(0),
 })
 
 export const EmbeddingDatasetSchema = z.object({
