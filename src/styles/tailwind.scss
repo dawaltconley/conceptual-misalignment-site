@@ -95,6 +95,68 @@
     }
   }
 
+  // Base UI floating panel: Select and Combobox popups. The custom properties
+  // come from Base UI's positioner; the [data-starting-style]/[data-ending-style]
+  // attributes are how it exposes enter/exit for CSS transitions.
+  .popup {
+    background-color: theme('colors.white');
+    border: 1px solid theme('colors.gray.300');
+    border-radius: theme('borderRadius.md');
+    box-shadow: theme('boxShadow.lg');
+    overflow: hidden;
+    overflow: clip;
+    transform-origin: var(--transform-origin);
+    transition:
+      opacity theme('transitionDuration.100'),
+      transform theme('transitionDuration.100');
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+
+  .listbox {
+    max-height: min(20rem, var(--available-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: theme('spacing.1') 0;
+    outline: none;
+  }
+
+  .option {
+    display: grid;
+    grid-template-columns: 1rem 1fr auto;
+    align-items: center;
+    gap: theme('spacing.2');
+    padding: theme('spacing[1.5]') theme('spacing.3');
+    cursor: default;
+    user-select: none;
+    outline: none;
+
+    // Base UI highlights on both keyboard and pointer, so one rule covers hover.
+    &[data-highlighted] {
+      background-color: theme('colors.primary.DEFAULT');
+      color: theme('colors.white');
+    }
+
+    &[data-disabled] {
+      color: theme('colors.gray.400');
+    }
+  }
+
+  .option__note {
+    grid-column: 3;
+    font-size: theme('fontSize.xs');
+    color: theme('colors.gray.500');
+    text-align: right;
+
+    .option[data-highlighted] & {
+      color: theme('colors.primary.100');
+    }
+  }
+
   .card {
     @apply overflow-hidden rounded-sm bg-white shadow;
 
