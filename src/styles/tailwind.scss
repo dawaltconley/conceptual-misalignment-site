@@ -38,6 +38,15 @@
   }
 }
 
+@keyframes progress-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
 @layer components {
   .layer-children {
     position: relative;
@@ -157,6 +166,27 @@
 
     .option[data-highlighted] & {
       color: theme('colors.primary.100');
+    }
+  }
+
+  .progress__track {
+    height: theme('spacing.2');
+    background-color: theme('colors.gray.200');
+    border-radius: theme('borderRadius.full');
+    overflow: hidden;
+    overflow: clip;
+  }
+
+  .progress__indicator {
+    height: 100%;
+    background-color: theme('colors.primary.DEFAULT');
+    transition: width theme('transitionDuration.200') ease-out;
+
+    // Base UI leaves the indicator's width unset when indeterminate, so the
+    // sweep is pure CSS with nothing inline to fight.
+    &[data-indeterminate] {
+      width: 33%;
+      animation: progress-sweep 1.4s ease-in-out infinite;
     }
   }
 
