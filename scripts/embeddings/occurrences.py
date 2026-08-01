@@ -112,6 +112,25 @@ def build_vocab(
     return {k for k, c in freq.items() if c >= min_freq}
 
 
+def document_frequencies(
+    sources: Iterable[SourceDoc],
+    match_fn: MatchFn | None = None,
+    content_pos: set[str] | None = CONTENT_POS,
+    stopwords: frozenset[str] | set[str] = frozenset(),
+) -> Counter[str]:
+    """Document frequency per content key: how many distinct sources (documents)
+    each key appears in (each source counted once, regardless of within-doc count)."""
+    df: Counter[str] = Counter()
+    for source in sources:
+        keys = {
+            key for token in source.doc
+            if (key := content_key(token, match_fn, content_pos, stopwords))
+            is not None
+        }
+        df.update(keys)
+    return df
+
+
 def build_segments(
     sources: Sequence[SourceDoc],
     words_of_interest: set[str],
