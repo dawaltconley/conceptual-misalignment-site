@@ -1,5 +1,9 @@
 import { z } from 'zod'
 import type { WeightedNodeLinkData } from '~/types/networkx'
+import {
+  TermSchema as TermDataSchema,
+  SourceSchema as SourceRefSchema,
+} from './terms'
 
 const NodeId = z.union([z.string(), z.number()])
 
@@ -23,7 +27,6 @@ const SourceSchema = z.object({
   title: z.string(),
   description: z.string(),
   url: z.url(),
-  // occurances: z.number(),
   cooccurrence: WeightedNodeLinkDataSchema.nullish(),
 })
 
@@ -39,22 +42,10 @@ export type Term = z.infer<typeof TermSchema>
  * `lib.NetworkData`: the term, the source it belongs to, and the graph itself
  * (null when the term never occurs in that source).
  */
-const TermDataSchema = z.object({
-  label: z.string(),
-  occurrences: z.number(),
-  variants: z.array(z.string()).default([]),
-})
-
-const SourceRefSchema = z.object({
-  id: z.string().nullable(),
-  url: z.string().nullable(),
-  title: z.string().nullable(),
-  description: z.string().nullable(),
-})
 
 export const NetworkDataSchema = z.object({
   term: TermDataSchema,
-  source: SourceRefSchema.nullable(),
+  source: SourceRefSchema,
   network: WeightedNodeLinkDataSchema.nullable(),
 })
 

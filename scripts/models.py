@@ -50,20 +50,28 @@ def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
 
 @dataclass
 class Source:
+    """A source (chapter / article / whole corpus / corpus stand-in). ``occurrences``
+    (the term's count in this source) and ``data`` (web path to this source's dataset)
+    are context-dependent: unset on the per-corpus embedding source and on a per-file
+    ``NetworkData.source``; the master index fills both in."""
     id: str
     url: str
     title: str
-    description: str
+    description: str | None
+    # kw_only so subclasses (corpus.sep.SEP*) can add positional fields after these
+    occurrences: int | None = field(default=None, kw_only=True)
+    data: str | None = field(default=None, kw_only=True)
 
     @classmethod
-    def from_sourcelike(cls, s: Self) -> Self:
-        return cls(s.id, s.url, s.title, s.description)
+    def from_sourcelike(cls, s: Self, *, occurrences: int | None = None,
+                        data: str | None = None) -> Self:
+        return cls(s.id, s.url, s.title, s.description,
+                   occurrences=occurrences, data=data)
 
 
 @dataclass
 class TermData:
     label: str
-    occurrences: int
     variants: list[str] = field(default_factory=list)
 
 
@@ -73,10 +81,11 @@ class NetworkData:
     source: Source
     network: object | None
 
-    def __init__(self, term: TermData, source: Source, network: "Graph | None"):
+    def __init__(self, term: TermData, source: Source, network: "Graph | None",
+                 *, occurrences: int = 0):
         from networkx import node_link_data
         self.term = term
-        self.source = Source.from_sourcelike(source)
+        self.source = Source.from_sourcelike(source, occurrences=occurrences)
         self.network = _sorted_node_link(
             node_link_data(network) if network is not None else None)
 

@@ -7,41 +7,56 @@ import { z } from 'zod'
  * co-occurrence component (not fetched at runtime).
  */
 
-/** One source of a term's corpus: a chapter, an article, or the whole corpus. */
-const MasterSourceSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  /** Web path to this source's co-occurrence NetworkData JSON. */
-  cooccurrence: z.string(),
+export const TermSchema = z.object({
+  label: z.string(),
+  variants: z.array(z.string()).default([]),
 })
+
+/**
+ * One source: a chapter, an article, the whole corpus, or a corpus stand-in.
+ * `occurrences` and `data` are nullish because they don't apply in every context
+ * — the per-corpus embedding source has no term `occurrences`, and a per-file
+ * `NetworkData.source` has no `data` path to itself; only the master index sets both.
+ */
+export const SourceSchema = z.object({
+  id: z.string(),
+  url: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
+  /** Term occurrences in this source (absent on the corpus embedding source). */
+  occurrences: z.number().nullish(),
+  /** Web path to this source's dataset (set only in the master index). */
+  data: z.string().nullish(),
+})
+
+const CorporaSchema = z.literal(['mengzi', 'sep'])
+export type Corpora = z.infer<typeof CorporaSchema>
 
 const CorpusSideSchema = z.object({
-  corpus: z.string(),
-  /** Web path to the corpus embedding dataset. */
-  embeddings: z.string(),
-  /** Web path to the term's similarity NetworkData JSON (or null). */
-  similarity: z.string().nullable(),
-  sources: MasterSourceSchema.array(),
-})
-
-/** An English rendering of a term (its own SEP sub-corpus). */
-const EnglishRenderingSchema = CorpusSideSchema.extend({
-  label: z.string(),
+  corpus: CorporaSchema,
+  term: TermSchema,
+  /** term occurrences across the whole corpora */
+  occurrences: z.number(),
+  /** Each source's `data` returns an embedding dataset (usually one, per corpus). */
+  embeddings: SourceSchema.array(),
+  /** Each source's `data` returns a similarity NetworkData JSON. */
+  similarity: SourceSchema.array(),
+  /** Each source's `data` returns a co-occurrence NetworkData JSON (one per source). */
+  cooccurrence: SourceSchema.array(),
 })
 
 export const MasterTermSchema = z.object({
   hanzi: z.string(),
   renderings: z.string().array(),
   chinese: CorpusSideSchema,
-  english: EnglishRenderingSchema.array(),
+  english: CorpusSideSchema.array(),
 })
 
 export const MasterSchema = z.object({
   terms: MasterTermSchema.array(),
 })
 
-export type MasterSource = z.infer<typeof MasterSourceSchema>
+export type MasterSource = z.infer<typeof SourceSchema>
 export type CorpusSide = z.infer<typeof CorpusSideSchema>
-export type EnglishRendering = z.infer<typeof EnglishRenderingSchema>
 export type MasterTerm = z.infer<typeof MasterTermSchema>
 export type Master = z.infer<typeof MasterSchema>
