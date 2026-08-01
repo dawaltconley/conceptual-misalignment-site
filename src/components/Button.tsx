@@ -1,7 +1,11 @@
-import type { ReactNode, ComponentPropsWithoutRef } from 'react'
+import type { ReactNode } from 'react'
+import {
+  Button as BaseButton,
+  type ButtonProps as BaseButtonProps,
+} from '@base-ui/react/button'
 import clsx from 'clsx'
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
+interface ButtonProps extends BaseButtonProps {
   isPrimary?: boolean
   isActive?: boolean
   children: ReactNode
@@ -15,7 +19,7 @@ export default function Button({
   ...props
 }: ButtonProps): JSX.Element {
   return (
-    <button
+    <BaseButton
       className={clsx(
         'btn',
         isActive && 'btn--active',
@@ -25,6 +29,6 @@ export default function Button({
       {...props}
     >
       {children}
-    </button>
+    </BaseButton>
   )
 }
