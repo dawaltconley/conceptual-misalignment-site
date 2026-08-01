@@ -148,7 +148,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
 
     G, _, community_map = analyze.build_networks(
         labels, matrix, method=p.sim_network, quantile=p.quantile, knn_k=p.knn_k,
-        sim_transform=p.sim_transform)
+        sim_transform=p.sim_transform, resolution=p.resolution)
 
     occ_counts = Counter(
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
@@ -162,7 +162,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     if artifacts:
         run_artifacts(labels, matrix, targets, pooler, mean,
                       ANALYSIS / "mengzi", p.sim_network, p.quantile, p.knn_k,
-                      p.sim_transform, p.max_network_nodes)
+                      p.sim_transform, p.resolution, p.max_network_nodes)
 
 
 def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
@@ -212,7 +212,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
 
     G, _, community_map = analyze.build_networks(
         labels, matrix, method=p.sim_network, quantile=p.quantile, knn_k=p.knn_k,
-        sim_transform=p.sim_transform)
+        sim_transform=p.sim_transform, resolution=p.resolution)
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
@@ -226,7 +226,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     if artifacts:
         run_artifacts(labels, matrix, labels_by_target, pooler, mean,
                       ANALYSIS / "sep", p.sim_network, p.quantile, p.knn_k,
-                      p.sim_transform, p.max_network_nodes)
+                      p.sim_transform, p.resolution, p.max_network_nodes)
 
 
 # ---------------------------------------------------------------------------
@@ -303,14 +303,16 @@ def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
 
 def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, out_dir,
                   network: SimMethod, quantile: float, knn_k: int,
-                  sim_transform: analyze.SimTransform, max_nodes: int) -> None:
+                  sim_transform: analyze.SimTransform, resolution: float,
+                  max_nodes: int) -> None:
     """Opt-in: the heavy PNG/CSV analysis dump, decoupled from the JSON outputs."""
     is_target = np.array([l in targets for l in labels])
     target_occ = {w: (s if mean is None else s - mean)
                   for w, s in pooler.stacks().items()}
     summary = analyze.run_analysis(
         labels, matrix, is_target, target_occ, out_dir, quantile, kmeans_k=4,
-        method=network, knn_k=knn_k, sim_transform=sim_transform, max_nodes=max_nodes)
+        method=network, knn_k=knn_k, sim_transform=sim_transform,
+        resolution=resolution, max_nodes=max_nodes)
     print(f"artifacts  : {summary['louvain_communities']} communities -> "
           f"{out_dir.resolve()}")
 

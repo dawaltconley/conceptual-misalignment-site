@@ -269,13 +269,17 @@ def build_knn_graph(labels: list[str], sim: np.ndarray, k: int) -> nx.Graph:
     return G
 
 
-def annotate_communities(G: nx.Graph) -> int:
-    """Run Louvain and store each node's community id as a ``community`` attr."""
+def annotate_communities(G: nx.Graph, resolution: float = 1.0) -> int:
+    """Run Louvain and store each node's community id as a ``community`` attr.
+
+    ``resolution`` > 1 favors more, smaller communities (splits the frequency/
+    register hub); < 1 favors fewer, larger ones."""
     if G.number_of_edges() == 0:
         for node in G:
             G.nodes[node]["community"] = 0
         return 1
-    communities = nx.community.louvain_communities(G, weight="weight", seed=0)
+    communities = nx.community.louvain_communities(
+        G, weight="weight", seed=0, resolution=resolution)
     for cid, comm in enumerate(communities):
         for node in comm:
             G.nodes[node]["community"] = cid
@@ -318,6 +322,7 @@ def build_networks(
     quantile: float = 0.9,
     knn_k: int = 8,
     sim_transform: SimTransform = "none",
+    resolution: float = 1.0,
 ) -> tuple[nx.Graph, int, dict[str, int]]:
     """Build the similarity graph over the full vocab + detect communities.
 
@@ -341,12 +346,13 @@ def build_networks(
         raise ValueError(f"unknown network method {method!r}")
 
     G.remove_nodes_from(list(nx.isolates(G)))
-    n_comms = annotate_communities(G)
+    n_comms = annotate_communities(G, resolution)
     community_map = {n: int(G.nodes[n]["community"]) for n in G}
     edge = f"knn k={knn_k}" if method == "knn" else f"top {1 - quantile:.0%} (q={quantile})"
     tr = "" if sim_transform == "none" else f", {sim_transform}"
+    res = "" if resolution == 1.0 else f", res={resolution}"
     print(f"cosine     : {G.number_of_nodes()} nodes, "
-          f"{G.number_of_edges()} edges ({edge}{tr})")
+          f"{G.number_of_edges()} edges ({edge}{tr}); {n_comms} communities{res}")
     return G, n_comms, community_map
 
 
@@ -381,6 +387,7 @@ def run_analysis(
     method: Method = "threshold",
     knn_k: int = 8,
     sim_transform: SimTransform = "none",
+    resolution: float = 1.0,
     max_nodes: int = 15,
 ) -> dict:
     """Run every analysis and write artifacts; return a small summary dict."""
@@ -410,7 +417,7 @@ def run_analysis(
     # Network + Louvain first, so the scatter plots can color by community.
     sim_network, n_comms, community_map = build_networks(
         labels, matrix, method=method, quantile=quantile, knn_k=knn_k,
-        sim_transform=sim_transform)
+        sim_transform=sim_transform, resolution=resolution)
 
     # save the similarity networks, pruned to terms
     net_dir = out_dir / "networks"
@@ -438,6 +445,7 @@ def run_analysis(
         "cohesion_variance": cv,
         "louvain_communities": n_comms,
         "quantile": quantile,
+        "resolution": resolution,
         "method": method,
         "knn_k": knn_k,
         "sim_transform": sim_transform,

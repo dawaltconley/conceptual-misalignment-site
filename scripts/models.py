@@ -175,6 +175,11 @@ class Pipeline:
     """The type of log transform to apply to cosine similarity values.
     See notes/anisotropy-and-network-construction.md"""
 
+    resolution: float = 1.0
+    """Louvain resolution for community detection. >1 yields more, smaller/narrower
+    communities (splits the frequency/register hub that otherwise absorbs most
+    target terms); <1 yields fewer, larger ones."""
+
     reduce_to_dims: int = 50
     """Number of dimensions to keep when serializing vectors to json. Affects
     the size of the export."""

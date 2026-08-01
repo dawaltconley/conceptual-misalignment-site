@@ -89,7 +89,7 @@ def content_key(
         and not token.is_punct
         and not token.is_space
         and not token.is_stop
-        and token.text not in stopwords
+        and lemma not in stopwords
         and (content_pos is None or token.pos_ in content_pos)
     )
     return lemma if is_content else None
