@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
-import Button from './Button'
+import { Button } from './ui/button'
 import {
   ScatterSkeleton,
   Wrapper as ScatterWrapper,
@@ -164,7 +164,8 @@ export default function EmbeddingScatter({
               <span className="w-6 tabular-nums">{perplexity}</span>
             </label>
             <Button
-              className="text-sm"
+              variant="outline"
+              size="sm"
               onClick={() =>
                 run(
                   data.nodes.map((n) => n.vec),
@@ -202,7 +203,11 @@ function Toggle({
   onClick,
 }: ToggleProps): JSX.Element {
   return (
-    <Button className="text-sm" isActive={isActive} onClick={onClick}>
+    <Button
+      variant={isActive ? 'default' : 'outline'}
+      size="sm"
+      onClick={onClick}
+    >
       {label}
     </Button>
   )

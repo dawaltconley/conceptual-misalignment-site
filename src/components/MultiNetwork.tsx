@@ -4,7 +4,7 @@ import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
 import { NetworkDataSchema } from '@lib/networkx'
 import { useState, type ReactNode } from 'react'
-import Button from './Button'
+import { Button } from './ui/button'
 import clsx from 'clsx'
 
 type Side = 'left' | 'right'
@@ -131,8 +131,9 @@ interface SourceProps {
 function Source({ title, isActive, onClick }: SourceProps): JSX.Element {
   return (
     <Button
-      className="max-w-40 p-1 xl:block"
-      isActive={isActive}
+      variant={isActive ? 'default' : 'outline'}
+      size="sm"
+      className="max-w-40 overflow-hidden text-ellipsis"
       onClick={onClick}
     >
       {title}

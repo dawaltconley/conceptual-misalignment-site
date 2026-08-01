@@ -10,7 +10,7 @@ import {
   symmetricRotations,
   pca2d,
 } from '@lib/align'
-import Button from './Button'
+import { Button } from './ui/button'
 import CanvasScatterPlot from './CanvasScatterPlot'
 import { ScatterSkeleton, type ScatterPoint } from './ScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
@@ -197,7 +197,8 @@ export default function AlignmentScatter({
             <Button
               key={f}
               onClick={() => setFrame(f)}
-              isActive={frame === f}
+              variant={frame === f ? 'default' : 'outline'}
+              size="sm"
               className="capitalize"
             >
               {f}
@@ -211,7 +212,8 @@ export default function AlignmentScatter({
             <Button
               key={m}
               onClick={() => setMethod(m)}
-              isActive={method === m}
+              variant={method === m ? 'default' : 'outline'}
+              size="sm"
             >
               {METHOD_LABEL[m]}
             </Button>
@@ -258,7 +260,8 @@ export default function AlignmentScatter({
           <Button
             disabled={!canAdd}
             onClick={addAnchor}
-            className="py-1 text-sm enabled:hover:bg-red-200 disabled:opacity-40"
+            variant="outline"
+            size="sm"
           >
             + add
           </Button>
