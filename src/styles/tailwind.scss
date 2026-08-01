@@ -4,7 +4,69 @@
 @tailwind components;
 @tailwind utilities;
 
+// shadcn/ui design tokens (Tailwind v3 flavor), `gray` base color with two
+// deliberate deviations: `--primary` is the site's red rather than near-black,
+// and `--foreground` is gray-900 so body text is unchanged from before shadcn.
+// Dark values are opt-in under `.dark` only — the site has no dark design yet,
+// so they are deliberately not wired to `prefers-color-scheme`.
+@mixin shadcn-light {
+  --background: 0 0% 100%;
+  --foreground: 220.9 39.3% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 220.9 39.3% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220.9 39.3% 11%;
+  --primary: 0 84.2% 60.2%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220.9 39.3% 11%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 0 84.2% 60.2%;
+  --radius: 0.5rem;
+}
+
+@mixin shadcn-dark {
+  --background: 224 71.4% 4.1%;
+  --foreground: 210 20% 98%;
+  --card: 224 71.4% 4.1%;
+  --card-foreground: 210 20% 98%;
+  --popover: 224 71.4% 4.1%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 0 84.2% 60.2%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 215 27.9% 16.9%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 215 27.9% 16.9%;
+  --muted-foreground: 217.9 10.6% 64.9%;
+  --accent: 215 27.9% 16.9%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 215 27.9% 16.9%;
+  --input: 215 27.9% 16.9%;
+  --ring: 0 84.2% 60.2%;
+}
+
 @layer base {
+  :root {
+    @include shadcn-light;
+  }
+
+  .dark {
+    @include shadcn-dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
   html,
   body {
     max-width: 100%;
@@ -17,7 +79,7 @@
   }
 
   body {
-    color: theme('colors.gray.900');
+    @apply bg-background text-foreground;
   }
 
   body,
