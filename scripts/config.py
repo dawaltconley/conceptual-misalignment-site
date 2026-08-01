@@ -107,22 +107,12 @@ CHINESE_STOPWORDS: set[str] = {
     "然", "得", "能", "可", "將", "及", "皆", "未", "與",
 }
 
-# Matched against a token's lowercased LEMMA (like the node key), so list lemmas,
-# lowercase, singular/base form (e.g. "thing" catches Thing/things). spaCy's is_stop
-# already removes function words; this is for generic *content* words that survive
-# POS filtering yet dominate the frequency/register hub — light verbs and empty
-# abstraction nouns. STUB: seeded from the hub audit; curate to taste.
-ENGLISH_STOPWORDS: set[str] = {
-    "passim", "ibid", "cf", "op", "cit", "viz", "et", "al", "vv",
-    # # empty abstraction nouns
-    # "thing", "object", "term", "process", "property", "kind", "case", "way",
-    # "sense", "form", "part", "aspect", "feature", "notion", "idea", "view",
-    # "account", "example", "instance", "point", "matter", "fact", "sort", "type",
-    # # light / generic verbs
-    # "be", "have", "do", "make", "take", "give", "get", "go", "come", "bear",
-    # "follow", "provide", "consider", "include", "require", "determine", "involve",
-    # "concern", "regard", "hold", "call", "mean", "use", "seem", "become",
-}
+with open(_SCRIPTS / "stopwords" / "english.conf", "r") as file:
+    ENGLISH_STOPWORDS = set[str]()
+    for line in file:
+        line = line.strip()
+        if line and not line.startswith('#'):
+            ENGLISH_STOPWORDS.add(line)
 
 MENGZI_PIPELINE = Pipeline(
     model="hsc748NLP/GujiRoBERTa_fan",
