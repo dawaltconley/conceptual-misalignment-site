@@ -11,12 +11,16 @@ export const EmbeddingNodeSchema = z.object({
   target: z.boolean(),
   community: z.number(),
   vec: z.array(z.number()),
+  /** How many documents (sources) in the corpus this word appears in. */
+  doc_freq: z.number().default(0),
 })
 
 export const EmbeddingDatasetSchema = z.object({
   /** The corpus this dataset came from (the pipeline's reduced `lib.Source`). */
   source: SourceSchema.nullable(),
   dims: z.number(),
+  /** Total documents (sources) in the corpus, for relative doc-freq. */
+  documents: z.number().default(0),
   nodes: z.array(EmbeddingNodeSchema),
 })
 
