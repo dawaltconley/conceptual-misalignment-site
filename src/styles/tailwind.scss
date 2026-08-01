@@ -212,6 +212,37 @@
     }
   }
 
+  // Selected tags inside an `.input-group`. Base UI highlights a chip with
+  // [data-highlighted] when it's the Backspace/arrow-key target.
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: theme('spacing.1');
+    padding: 0 theme('spacing.1') 0 theme('spacing.2');
+    border-radius: theme('borderRadius.DEFAULT');
+    background-color: theme('colors.gray.100');
+    font-size: theme('fontSize.sm');
+    line-height: theme('lineHeight.6');
+    cursor: default;
+    outline: none;
+
+    &[data-highlighted] {
+      background-color: theme('colors.primary.DEFAULT');
+      color: theme('colors.white');
+    }
+  }
+
+  .chip__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   .progress__track {
     height: theme('spacing.2');
     background-color: theme('colors.gray.200');
