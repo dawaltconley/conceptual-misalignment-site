@@ -67,6 +67,7 @@ class SEP(Source):
         for tag in article.values():
             if tag is not None:
                 text += tag.get_text()  # Just text, strip html
+        text = _strip_citations(text).strip()
 
         sep = cls(
             url=url,
@@ -195,6 +196,32 @@ def _parse_search_results(r: _Response) -> _ParsedSearchPage:
             print(
                 f"Couldn't find total documents in SEP search results page: {r.url}")
     return _ParsedSearchPage([r.text.strip() for r in result_links], total_results)
+
+
+_PARENS_RE = re.compile(r"\((.*?)[\(\)]", re.DOTALL)
+_CITATION_RE = re.compile(
+    r"[^();.]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—0-9]+)?[^();.]*", re.DOTALL)
+
+
+def _strip_citations(text: str) -> str:
+    stripped = text
+    citation_spans: list[tuple[int, int]] = []
+    for parens in _PARENS_RE.finditer(text):
+        inner = parens.group(1)
+        for match in _CITATION_RE.finditer(inner):
+            start = parens.start() + match.start() + 1
+            end = parens.start() + match.end() + 1
+            match_text = match.group(0)
+            if match_text != text[start:end]:
+                print("MISMATCH: couldn't strip citations, aborting")
+                print("  text:  " + text[start:end].replace("\n", " "))
+                print("  match: " + match_text.replace("\n", " "))
+                return text
+            citation_spans.append((start, end))
+    citation_spans.reverse()
+    for start, end in citation_spans:
+        stripped = stripped[:start] + stripped[end:]
+    return stripped
 
 
 def search_sep(search_term: str | Rendering, max_results: int | None = None, *, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None) -> list[SEP]:
