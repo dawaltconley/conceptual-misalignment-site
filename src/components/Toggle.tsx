@@ -11,7 +11,7 @@ export interface ToggleProps extends Omit<BaseToggle.Props, 'className'> {
 /**
  * A two-state button over Base UI's Toggle, sharing `Button`'s `.btn` styles so
  * the two read as one control in a row. Base UI marks the on state with
- * `[data-pressed]`, which `.btn--active` hangs off (see `tailwind.scss`).
+ * `[data-pressed]`, which `.btn[data-pressed]` styles (see `tailwind.scss`).
  *
  * Controlled via `pressed` / `onPressedChange`; `defaultPressed` for the
  * uncontrolled case.

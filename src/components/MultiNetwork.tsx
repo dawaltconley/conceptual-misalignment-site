@@ -4,7 +4,7 @@ import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
 import { NetworkDataSchema } from '@lib/networkx'
 import { useState, type ReactNode } from 'react'
-import Button from './Button'
+import Toggle from './Toggle'
 import clsx from 'clsx'
 
 type Side = 'left' | 'right'
@@ -130,12 +130,13 @@ interface SourceProps {
 
 function Source({ title, isActive, onClick }: SourceProps): JSX.Element {
   return (
-    <Button
+    // Radio-like: pressing the selected source keeps it selected.
+    <Toggle
       className="max-w-40 p-1 xl:block"
-      isActive={isActive}
-      onClick={onClick}
+      pressed={isActive}
+      onPressedChange={onClick}
     >
       {title}
-    </Button>
+    </Toggle>
   )
 }
