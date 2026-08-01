@@ -41,6 +41,7 @@ from embeddings.occurrences import (
     SourceDoc,
     build_segments,
     build_vocab,
+    document_frequencies,
 )
 from cooccurrence import pmi_spacy
 from graph.prune import prune_to_neighborhood
@@ -165,8 +166,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler = embed(p, embedder, chapters, targets,
-                   keep=targets if artifacts else frozenset())
+    pooler, doc_freq, n_docs = embed(p, embedder, chapters, targets,
+                                     keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
     mean = None
     if p.center:
@@ -184,7 +185,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     save_similarity(p, targets, mengzi, G, occ_counts=occ_counts)
 
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
-    Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
+    Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
+                           doc_freq=doc_freq, documents=n_docs) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
     sw.lap("similarity+export")
@@ -238,9 +240,9 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler = embed(p, embedder, combined, labels_by_target,
-                   match_fn=match_fn,
-                   keep=labels_by_target if artifacts else frozenset())
+    pooler, doc_freq, n_docs = embed(
+        p, embedder, combined, labels_by_target, match_fn=match_fn,
+        keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
     mean = None
     if p.center:
@@ -260,7 +262,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
 
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
-                           community_map).save_json(EMBEDDINGS / "sep.json")
+                           community_map, doc_freq=doc_freq,
+                           documents=n_docs).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
     sw.lap("similarity+export")
 
@@ -285,27 +288,35 @@ def embed(
     *,
     match_fn: MatchFn | None = None,
     keep: set[str] | frozenset[str] = frozenset(),
-) -> vectors.Pooler:
+) -> tuple[vectors.Pooler, Counter, int]:
     """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
 
-    The embedder yields occurrences one batch at a time; we fold each into a
-    running max-pool here, so the whole corpus's occurrence vectors are never all
-    resident at once (the memory that OOM'd on the large SEP corpus). ``keep``
-    words additionally retain their full occurrence stacks (for cohesion under
-    ``--artifacts``); pass none to keep only the running maxes."""
-    vocab = build_vocab(
-        sources, p.min_freq, match_fn,
-        content_pos=_to_set(p.content_pos),
-        stopwords=p.stopwords or set()
-    )
-    vocab |= set(target_labels)
+    Returns ``(pooler, doc_freq, n_documents)`` — the pooled vectors plus the
+    per-word document frequency and the corpus document count (for the scatter's
+    doc-freq fields and the ``max_doc_freq`` cap). The embedder yields occurrences
+    one batch at a time; we fold each into a running max-pool here, so the whole
+    corpus's occurrence vectors are never all resident at once. ``keep`` words
+    additionally retain their full occurrence stacks (cohesion under ``--artifacts``)."""
+    pos, stop = _to_set(p.content_pos), p.stopwords or set()
+    vocab = build_vocab(sources, p.min_freq, match_fn, content_pos=pos, stopwords=stop)
+    doc_freq = document_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
+    n_docs = len(sources)
+
+    if p.max_doc_freq is not None:
+        cap = p.max_doc_freq if p.max_doc_freq > 1 else p.max_doc_freq * n_docs
+        before = len(vocab)
+        vocab = {w for w in vocab if doc_freq.get(w, 0) <= cap}
+        print(f"doc-freq   : cap {cap:.0f}/{n_docs} docs -> dropped "
+              f"{before - len(vocab)} of {before} vocab words")
+
+    vocab |= set(target_labels)     # targets always kept, regardless of the cap
     unk_check(emb, target_labels)
     segments = segment(p, emb, sources, vocab, match_fn)
     pooler = vectors.Pooler(mode=p.occurrence_pooling, keep=set(keep))
     for word, vec in emb.embed(segments, p.batch_size,
                                subword_pooling=p.subword_pooling):
         pooler.add(word, vec)
-    return pooler
+    return pooler, doc_freq, n_docs
 
 
 def segment(

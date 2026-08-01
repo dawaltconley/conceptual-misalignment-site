@@ -99,22 +99,28 @@ class Vector:
     target: bool
     community: int
     vec: "ndarray"
+    doc_freq: int = 0
+    """How many documents (sources) in the corpus this word appears in."""
 
 
 @dataclass
 class Embeddings:
     source: Source
     dims: int
+    documents: int
+    """Total number of documents (sources) in the corpus, for relative doc-freq."""
     nodes: list[Vector]
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0):
         nodes: list[Vector] = []
         for label, row in zip(labels, matrix):
             vector = Vector(label, label in targets,
-                            communities.get(label, -1), row)
+                            communities.get(label, -1), row,
+                            doc_freq.get(label, 0))
             nodes.append(vector)
-        return cls(Source.from_sourcelike(source), int(matrix.shape[1]), nodes)
+        return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
+                   documents, nodes)
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)
@@ -169,6 +175,12 @@ class Pipeline:
     PER SOURCE — a single article or chapter — so it must stay low; reusing the
     (whole-corpus) min_freq here starves per-article graphs to null. Kept separate
     for that reason."""
+
+    max_doc_freq: float | None = None
+    """Document-frequency cap on the embedding vocabulary (drops ubiquitous, generic
+    words that a frequency floor keeps). sklearn ``max_df`` convention: <= 1.0 is a
+    fraction of the corpus's documents, > 1 an absolute document count; None disables
+    it. Targets are always kept regardless."""
 
     center: bool = True
     """Whether to center embeddings by subtracting their centroid. Used to fix
