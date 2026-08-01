@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from collections import Counter
 
 import numpy as np
@@ -46,6 +47,29 @@ from graph.prune import prune_to_neighborhood
 
 MENGZI_MODEL = "hsc748NLP/GujiRoBERTa_fan"
 SEP_MODEL = "roberta-base"
+
+
+class Stopwatch:
+    """Record named phase durations and print a per-run timing summary.
+
+    Call :meth:`lap` at each phase boundary (it measures the time since the
+    previous lap), then :meth:`summary` at the end for a breakdown + total.
+    """
+
+    def __init__(self) -> None:
+        self._start = self._last = time.perf_counter()
+        self._laps: list[tuple[str, float]] = []
+
+    def lap(self, label: str) -> None:
+        now = time.perf_counter()
+        self._laps.append((label, now - self._last))
+        self._last = now
+
+    def summary(self, title: str) -> None:
+        total = time.perf_counter() - self._start
+        print(f"timing [{title}] : {total:.1f}s total")
+        for label, dt in self._laps:
+            print(f"  {label:<16} {dt:7.1f}s  {dt / total:4.0%}")
 
 
 # ---------------------------------------------------------------------------
@@ -120,12 +144,14 @@ def save_similarity(
 # ---------------------------------------------------------------------------
 
 def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
+    sw = Stopwatch()
     targets = frozenset(t.hanzi for t in TERMS)
 
     mengzi = build_chinese_corpus()
     chapters = [SourceDoc(c, parse_mengzi_chapter(c)) for c in mengzi.chapters]
     full = SourceDoc(mengzi, Doc.from_docs([c.doc for c in chapters]))
     print(f"parsed     : {len(chapters)} chapters + full corpus")
+    sw.lap("parse")
 
     # --- co-occurrence: full corpus + each chapter, per target ---
     for target in targets:
@@ -133,6 +159,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
         for ch in chapters:
             save_cooccurrence(
                 p, target, [ch], ch.source, ch.source.id, match_fn=None)
+    sw.lap("co-occurrence")
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
     embedder = Embedder(p.model)
@@ -145,10 +172,12 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     if p.center:
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
+    sw.lap("embedding")
 
     G, _, community_map = analyze.build_networks(
         labels, matrix, method=p.sim_network, quantile=p.quantile, knn_k=p.knn_k,
         sim_transform=p.sim_transform, resolution=p.resolution)
+    sw.lap("networks")
 
     occ_counts = Counter(
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
@@ -158,14 +187,19 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
+    sw.lap("similarity+export")
 
     if artifacts:
         run_artifacts(labels, matrix, targets, pooler, mean,
                       ANALYSIS / "mengzi", p.sim_network, p.quantile, p.knn_k,
                       p.sim_transform, p.resolution, p.max_network_nodes)
+        sw.lap("artifacts")
+
+    sw.summary("mengzi")
 
 
 def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
+    sw = Stopwatch()
     renderings = [r for term in TERMS for r in term.renderings]
     labels_by_target = frozenset(r.label for r in renderings)
 
@@ -184,8 +218,10 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
         return doc_cache[a.url]
 
     searches = build_english_corpus(per_term)
+    sw.lap("fetch+search")
 
     # --- co-occurrence: each rendering over its combined search + each article ---
+    # (also parses + caches every article, reused for the embedding space below)
     for ts in searches:
         label, articles = ts.term.label, ts.search.articles
         adocs = [source_doc(a) for a in articles]
@@ -194,6 +230,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
         for sd in adocs:
             save_cooccurrence(
                 p, label, [sd], sd.source, sd.source.id, match_fn=match_fn)
+    sw.lap("parse+co-occurrence")
 
     # --- one combined embedding space over every (deduped) article ---
     combined = list(doc_cache.values())
@@ -209,10 +246,13 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     if p.center:
         matrix, mean = vectors.center_matrix(matrix)
         print("centered   : subtracted vocab centroid (anisotropy fix)")
+    sw.lap("embedding")
 
     G, _, community_map = analyze.build_networks(
         labels, matrix, method=p.sim_network, quantile=p.quantile, knn_k=p.knn_k,
         sim_transform=p.sim_transform, resolution=p.resolution)
+    sw.lap("networks")
+
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
@@ -222,11 +262,15 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                            community_map).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
+    sw.lap("similarity+export")
 
     if artifacts:
         run_artifacts(labels, matrix, labels_by_target, pooler, mean,
                       ANALYSIS / "sep", p.sim_network, p.quantile, p.knn_k,
                       p.sim_transform, p.resolution, p.max_network_nodes)
+        sw.lap("artifacts")
+
+    sw.summary("sep")
 
 
 # ---------------------------------------------------------------------------
@@ -419,16 +463,22 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     from config import MENGZI_PIPELINE, SEP_PIPELINE
     args = parse_args()
+    sw = Stopwatch()
     if not args.master_only:
         if args.corpus in ("mengzi", "all"):
             print("\n=== Mengzi ===")
             run_mengzi(MENGZI_PIPELINE, artifacts=args.artifacts)
+            sw.lap("mengzi")
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
             run_sep(SEP_PIPELINE, per_term=args.per_term,
                     artifacts=args.artifacts)
+            sw.lap("sep")
     print("\n=== Master index ===")
     build_master()
+    sw.lap("master")
+    print()
+    sw.summary("total")
 
 
 if __name__ == "__main__":
