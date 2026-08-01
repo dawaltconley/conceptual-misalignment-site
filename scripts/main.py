@@ -89,7 +89,7 @@ def get_cooccurrence(
 ) -> Graph | None:
     """The term's PMI co-occurrence neighborhood over ``sources`` (spaCy Docs)."""
     return pmi_spacy.build_cooccurrence_network(
-        sources, term, p.min_freq,
+        sources, term, p.cooccurrence_min_freq,
         max_nodes=p.max_network_nodes,
         match_fn=match_fn,
         content_pos=_to_set(p.content_pos),

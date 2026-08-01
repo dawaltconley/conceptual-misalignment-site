@@ -151,8 +151,15 @@ class Term:
 @dataclass(kw_only=True)
 class Pipeline:
     min_freq: int = 5
-    """Minimum frequency at which terms must occur in order to be included in
-    the vocab."""
+    """Minimum corpus frequency for a word to enter the *embedding* vocabulary
+    (governs the scatter/similarity vocab and vector stability). Applied over the
+    whole corpus, so it can be moderately high."""
+
+    cooccurrence_min_freq: int = 3
+    """Minimum frequency for a word to enter a *co-occurrence* network. Applied
+    PER SOURCE — a single article or chapter — so it must stay low; reusing the
+    (whole-corpus) min_freq here starves per-article graphs to null. Kept separate
+    for that reason."""
 
     center: bool = True
     """Whether to center embeddings by subtracting their centroid. Used to fix

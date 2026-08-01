@@ -118,13 +118,15 @@ MENGZI_PIPELINE = Pipeline(
     model="hsc748NLP/GujiRoBERTa_fan",
     out_dir=CTEXT,
     min_freq=5,
+    cooccurrence_min_freq=3,
     stopwords=frozenset(CHINESE_STOPWORDS),
 )
 
 SEP_PIPELINE = Pipeline(
     model="roberta-base",
     out_dir=SEP,
-    min_freq=75,
+    min_freq=20,
+    cooccurrence_min_freq=10,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
     # narrower communities (splits the register hub); tune to taste
