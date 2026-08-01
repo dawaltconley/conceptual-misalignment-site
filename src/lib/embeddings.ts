@@ -13,6 +13,8 @@ export const EmbeddingNodeSchema = z.object({
   vec: z.array(z.number()),
   /** How many documents (sources) in the corpus this word appears in. */
   doc_freq: z.number().default(0),
+  /** Weighted degree in the similarity graph (sum of incident edge weights). */
+  strength: z.number().default(0),
 })
 
 export const EmbeddingDatasetSchema = z.object({
