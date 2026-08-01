@@ -169,6 +169,49 @@
     }
   }
 
+  // The bordered control around a Combobox input, and the tag chips that share
+  // it in multi-select. Sized to match `.btn` so the two line up in a row.
+  .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: theme('spacing.1');
+    padding: theme('spacing[0.5]') theme('spacing.2');
+    border: 1px solid theme('colors.gray.900');
+    border-radius: theme('borderRadius.DEFAULT');
+    background-color: theme('colors.white');
+    cursor: text;
+
+    &:focus-within {
+      outline: 2px solid theme('colors.primary.DEFAULT');
+      outline-offset: -1px;
+    }
+
+    &[data-disabled] {
+      background-color: theme('colors.gray.100');
+      border-color: theme('colors.gray.400');
+      color: theme('colors.gray.400');
+    }
+  }
+
+  .input-group__input {
+    flex: 1 1 6rem;
+    min-width: 0;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .input-group__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: theme('colors.gray.500');
+
+    &:hover {
+      color: theme('colors.gray.900');
+    }
+  }
+
   .progress__track {
     height: theme('spacing.2');
     background-color: theme('colors.gray.200');
