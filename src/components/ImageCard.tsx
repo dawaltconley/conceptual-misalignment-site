@@ -56,7 +56,7 @@ export default function ImageCard({
       <div className="flex h-full w-full flex-col items-stretch overflow-hidden @2xl:flex-row">
         <div
           className={clsx(
-            'overlay-before overlay-after grow-0 overflow-hidden bg-amber-300 transition-none duration-500 after:z-20 after:bg-amber-300/5 after:duration-[inherit] @2xl:w-1/2',
+            'overlay-before overlay-after grow-0 overflow-hidden bg-amber-300 transition-none duration-500 after:z-20 after:bg-amber-300/5 after:[transition-duration:inherit] @2xl:w-1/2',
             imageSize === 'contain'
               ? 'bg-img-card'
               : 'before:vignette before:z-10',
@@ -76,12 +76,12 @@ export default function ImageCard({
           }
         >
           <Image
-            className="duration-[inherit]"
+            className="[transition-duration:inherit]"
             src={image}
             alt={alt}
             imgProps={{
               className: clsx(
-                'h-full w-full duration-[inherit]',
+                'h-full w-full [transition-duration:inherit]',
                 aspectRatio === 'square' ? 'aspect-square' : 'aspect-og',
                 imageSize === 'cover'
                   ? 'object-cover'
