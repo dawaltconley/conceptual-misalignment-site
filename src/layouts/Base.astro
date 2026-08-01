@@ -75,6 +75,8 @@ const twitterHandle = SOCIALS?.map((s) => toUrl(s || ''))
     />
   </head>
   <body class={className}>
-    <slot />
+    <div class="root">
+      <slot />
+    </div>
   </body>
 </html>
