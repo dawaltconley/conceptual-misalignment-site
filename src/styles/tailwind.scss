@@ -139,7 +139,7 @@
 
   .option {
     display: grid;
-    grid-template-columns: 1rem 1fr auto;
+    grid-template-columns: 1fr 1rem;
     align-items: center;
     gap: theme('spacing.2');
     padding: theme('spacing[1.5]') theme('spacing.3');

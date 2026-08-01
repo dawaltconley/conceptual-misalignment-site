@@ -89,12 +89,12 @@ export default function Select({
                   disabled={o.disabled}
                   className="option"
                 >
+                  <BaseSelect.ItemText className="min-w-6">
+                    {o.label ?? o.value}
+                  </BaseSelect.ItemText>
                   <BaseSelect.ItemIndicator>
                     <Icon icon={faCheck} width="0.75em" height="0.75em" />
                   </BaseSelect.ItemIndicator>
-                  <BaseSelect.ItemText>
-                    {o.label ?? o.value}
-                  </BaseSelect.ItemText>
                   {o.note !== undefined && (
                     <span className="option__note">{o.note}</span>
                   )}
