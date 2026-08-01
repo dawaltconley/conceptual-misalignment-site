@@ -124,9 +124,9 @@ MENGZI_PIPELINE = Pipeline(
 SEP_PIPELINE = Pipeline(
     model="roberta-base",
     out_dir=SEP,
-    min_freq=20,
+    min_freq=75,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
     # narrower communities (splits the register hub); tune to taste
-    resolution=2.0,
+    resolution=4.0,
 )

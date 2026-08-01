@@ -1,1 +1,196 @@
-{"term":{"label":"愛","occurrences":40,"variants":[]},"source":{"id":"mengzi","url":"https://ctext.org/mengzi","title":"孟子","description":"Full text of the Mengzi"},"network":{"directed":false,"multigraph":false,"graph":{},"nodes":[{"form":"兼","id":"兼"},{"form":"厥","id":"厥"},{"form":"太","id":"太"},{"form":"姓","id":"姓"},{"form":"寸","id":"寸"},{"form":"尺","id":"尺"},{"form":"弟","id":"弟"},{"form":"恆","id":"恆"},{"form":"愛","id":"愛"},{"form":"桐","id":"桐"},{"form":"梓","id":"梓"},{"form":"氏","id":"氏"},{"form":"等","id":"等"},{"form":"膚","id":"膚"},{"form":"財","id":"財"},{"form":"驅","id":"驅"}],"edges":[{"weight":5.52757207676421,"source":"尺","target":"寸"},{"weight":2.503668926243523,"source":"尺","target":"愛"},{"weight":5.3940406841396875,"source":"尺","target":"膚"},{"weight":2.4166575492538938,"source":"恆","target":"愛"},{"weight":3.889963287363414,"source":"兼","target":"愛"},{"weight":4.14127771564432,"source":"兼","target":"氏"},{"weight":3.292126286607793,"source":"等","target":"愛"},{"weight":4.747413519214636,"source":"厥","target":"太"},{"weight":3.1098047298138387,"source":"厥","target":"愛"},{"weight":5.777032936395794,"source":"桐","target":"梓"},{"weight":3.292126286607793,"source":"桐","target":"愛"},{"weight":2.9556540499865807,"source":"太","target":"愛"},{"weight":3.1051857839575443,"source":"驅","target":"弟"},{"weight":2.9556540499865807,"source":"驅","target":"愛"},{"weight":2.864682271780854,"source":"姓","target":"愛"},{"weight":2.5661892832248574,"source":"弟","target":"愛"},{"weight":5.846025807882745,"source":"膚","target":"寸"},{"weight":3.1098047298138387,"source":"膚","target":"愛"},{"weight":3.1098047298138387,"source":"梓","target":"愛"},{"weight":2.822122657362058,"source":"財","target":"愛"},{"weight":2.9556540499865807,"source":"寸","target":"愛"},{"weight":2.9556540499865807,"source":"愛","target":"氏"}]}}
+{
+    "term": {
+        "label": "\u611b",
+        "occurrences": 40,
+        "variants": []
+    },
+    "source": {
+        "id": "mengzi",
+        "url": "https://ctext.org/mengzi",
+        "title": "\u5b5f\u5b50",
+        "description": "Full text of the Mengzi"
+    },
+    "network": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+            {
+                "form": "\u517c",
+                "id": "\u517c"
+            },
+            {
+                "form": "\u53a5",
+                "id": "\u53a5"
+            },
+            {
+                "form": "\u592a",
+                "id": "\u592a"
+            },
+            {
+                "form": "\u59d3",
+                "id": "\u59d3"
+            },
+            {
+                "form": "\u5bf8",
+                "id": "\u5bf8"
+            },
+            {
+                "form": "\u5c3a",
+                "id": "\u5c3a"
+            },
+            {
+                "form": "\u5f1f",
+                "id": "\u5f1f"
+            },
+            {
+                "form": "\u6046",
+                "id": "\u6046"
+            },
+            {
+                "form": "\u611b",
+                "id": "\u611b"
+            },
+            {
+                "form": "\u6850",
+                "id": "\u6850"
+            },
+            {
+                "form": "\u6893",
+                "id": "\u6893"
+            },
+            {
+                "form": "\u6c0f",
+                "id": "\u6c0f"
+            },
+            {
+                "form": "\u7b49",
+                "id": "\u7b49"
+            },
+            {
+                "form": "\u819a",
+                "id": "\u819a"
+            },
+            {
+                "form": "\u8ca1",
+                "id": "\u8ca1"
+            },
+            {
+                "form": "\u9a45",
+                "id": "\u9a45"
+            }
+        ],
+        "edges": [
+            {
+                "weight": 2.864682271780854,
+                "source": "\u611b",
+                "target": "\u59d3"
+            },
+            {
+                "weight": 2.822122657362058,
+                "source": "\u611b",
+                "target": "\u8ca1"
+            },
+            {
+                "weight": 3.1098047298138387,
+                "source": "\u611b",
+                "target": "\u53a5"
+            },
+            {
+                "weight": 2.9556540499865807,
+                "source": "\u611b",
+                "target": "\u592a"
+            },
+            {
+                "weight": 3.292126286607793,
+                "source": "\u611b",
+                "target": "\u7b49"
+            },
+            {
+                "weight": 3.889963287363414,
+                "source": "\u611b",
+                "target": "\u517c"
+            },
+            {
+                "weight": 2.9556540499865807,
+                "source": "\u611b",
+                "target": "\u6c0f"
+            },
+            {
+                "weight": 2.4166575492538938,
+                "source": "\u611b",
+                "target": "\u6046"
+            },
+            {
+                "weight": 2.5661892832248574,
+                "source": "\u611b",
+                "target": "\u5f1f"
+            },
+            {
+                "weight": 3.292126286607793,
+                "source": "\u611b",
+                "target": "\u6850"
+            },
+            {
+                "weight": 3.1098047298138387,
+                "source": "\u611b",
+                "target": "\u6893"
+            },
+            {
+                "weight": 2.9556540499865807,
+                "source": "\u611b",
+                "target": "\u5bf8"
+            },
+            {
+                "weight": 2.503668926243523,
+                "source": "\u611b",
+                "target": "\u5c3a"
+            },
+            {
+                "weight": 3.1098047298138387,
+                "source": "\u611b",
+                "target": "\u819a"
+            },
+            {
+                "weight": 2.9556540499865807,
+                "source": "\u611b",
+                "target": "\u9a45"
+            },
+            {
+                "weight": 5.846025807882745,
+                "source": "\u819a",
+                "target": "\u5bf8"
+            },
+            {
+                "weight": 5.3940406841396875,
+                "source": "\u819a",
+                "target": "\u5c3a"
+            },
+            {
+                "weight": 4.14127771564432,
+                "source": "\u6c0f",
+                "target": "\u517c"
+            },
+            {
+                "weight": 4.747413519214636,
+                "source": "\u592a",
+                "target": "\u53a5"
+            },
+            {
+                "weight": 5.777032936395794,
+                "source": "\u6850",
+                "target": "\u6893"
+            },
+            {
+                "weight": 5.52757207676421,
+                "source": "\u5bf8",
+                "target": "\u5c3a"
+            },
+            {
+                "weight": 3.1051857839575443,
+                "source": "\u5f1f",
+                "target": "\u9a45"
+            }
+        ]
+    }
+}
