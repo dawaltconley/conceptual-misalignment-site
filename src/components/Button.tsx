@@ -7,25 +7,22 @@ import clsx from 'clsx'
 
 interface ButtonProps extends BaseButtonProps {
   isPrimary?: boolean
-  isActive?: boolean
   children: ReactNode
 }
 
+/**
+ * A plain button. For a two-state button, use `Toggle` — it shares these
+ * styles and carries the pressed state.
+ */
 export default function Button({
   children,
   className,
   isPrimary,
-  isActive,
   ...props
 }: ButtonProps): JSX.Element {
   return (
     <BaseButton
-      className={clsx(
-        'btn',
-        isActive && 'btn--active',
-        isPrimary && 'btn--primary',
-        className,
-      )}
+      className={clsx('btn', isPrimary && 'btn--primary', className)}
       {...props}
     >
       {children}

@@ -1,6 +1,5 @@
 import type { Dictionary } from '@lib/build/cedict'
-import { useState, useEffect, useMemo, useId, type ReactNode } from 'react'
-import clsx from 'clsx'
+import { useState, useEffect, useMemo } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
@@ -10,7 +9,12 @@ import {
   symmetricRotations,
   pca2d,
 } from '@lib/align'
+import { pinyinKeywords } from '@lib/pinyin'
 import Button from './Button'
+import Toggle from './Toggle'
+import Combobox, { type ComboboxOption } from './Combobox'
+import Icon from './Icon'
+import { faXmark } from '@fortawesome/pro-regular-svg-icons/faXmark'
 import CanvasScatterPlot from './CanvasScatterPlot'
 import { ScatterSkeleton, type ScatterPoint } from './ScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
@@ -70,15 +74,33 @@ export default function AlignmentScatter({
   const en = useData(englishPath, (d) => EmbeddingDatasetSchema.parse(d))
 
   const [anchors, setAnchors] = useState<Anchor[]>([])
-  const [zhInput, setZhInput] = useState('')
-  const [enInput, setEnInput] = useState('')
+  const [zhInput, setZhInput] = useState<string | null>(null)
+  const [enInput, setEnInput] = useState<string | null>(null)
   const [frame, setFrame] = useState<Frame>('chinese')
   const [method, setMethod] = useState<Method>('pca')
   const [perplexity, setPerplexity] = useState(30)
-  const listId = useId()
 
   const chineseData = zh.status === 'success' ? zh.data : null
   const englishData = en.status === 'success' ? en.data : null
+
+  // Anchor options. The Chinese side carries pinyin so the whole vocabulary is
+  // reachable from a plain keyboard — `ren2`, `ren` and `rén` all find 仁.
+  const zhOptions = useMemo<ComboboxOption[]>(
+    () =>
+      (chineseData?.nodes ?? []).map((n) => {
+        const entry = dictionary?.[n.id]
+        return {
+          value: n.id,
+          keywords: entry && pinyinKeywords(entry.pinyin),
+          note: entry?.pinyin,
+        }
+      }),
+    [chineseData, dictionary],
+  )
+  const enOptions = useMemo<ComboboxOption[]>(
+    () => (englishData?.nodes ?? []).map((n) => ({ value: n.id })),
+    [englishData],
+  )
 
   const zhVecs = useMemo(() => vecMap(chineseData), [chineseData])
   const enVecs = useMemo(() => vecMap(englishData), [englishData])
@@ -166,16 +188,18 @@ export default function AlignmentScatter({
   }
   if (!chineseData || !englishData) return <ScatterSkeleton />
 
-  const zhHas = zhVecs.has(zhInput)
-  const enHas = enVecs.has(enInput)
+  // The comboboxes only emit values that exist in their lists, so the pair is
+  // valid as soon as both sides are set.
   const canAdd =
-    zhHas && enHas && !anchors.some((a) => a.zh === zhInput && a.en === enInput)
+    zhInput !== null &&
+    enInput !== null &&
+    !anchors.some((a) => a.zh === zhInput && a.en === enInput)
 
   const addAnchor = () => {
     if (!canAdd) return
     setAnchors((a) => [...a, { zh: zhInput, en: enInput }])
-    setZhInput('')
-    setEnInput('')
+    setZhInput(null)
+    setEnInput(null)
   }
 
   return (
@@ -194,27 +218,27 @@ export default function AlignmentScatter({
         <div className="flex items-center gap-2">
           <span className="font-bold">Frame:</span>
           {FRAMES.map((f) => (
-            <Button
+            <Toggle
               key={f}
-              onClick={() => setFrame(f)}
-              isActive={frame === f}
+              pressed={frame === f}
+              onPressedChange={() => setFrame(f)}
               className="capitalize"
             >
               {f}
-            </Button>
+            </Toggle>
           ))}
         </div>
 
         <div className="flex items-center gap-2">
           <span className="font-bold">Projection:</span>
           {METHODS.map((m) => (
-            <Button
+            <Toggle
               key={m}
-              onClick={() => setMethod(m)}
-              isActive={method === m}
+              pressed={method === m}
+              onPressedChange={() => setMethod(m)}
             >
               {METHOD_LABEL[m]}
-            </Button>
+            </Toggle>
           ))}
           {method === 'tsne' && (
             <label className="flex items-center gap-2">
@@ -240,59 +264,43 @@ export default function AlignmentScatter({
           </span>
         </p>
 
-        <div className="flex flex-wrap items-end gap-2">
-          <Field
+        <div className="flex flex-wrap items-center gap-2">
+          <Combobox
             label="Chinese term"
             value={zhInput}
+            options={zhOptions}
             onChange={setZhInput}
-            listId={`${listId}-zh`}
-            valid={!zhInput || zhHas}
+            placeholder="hanzi or pinyin…"
+            controlClassName="w-52"
           />
-          <Field
+          <Combobox
             label="English term"
             value={enInput}
+            options={enOptions}
             onChange={setEnInput}
-            listId={`${listId}-en`}
-            valid={!enInput || enHas}
+            placeholder="term…"
+            controlClassName="w-52"
           />
-          <Button
-            disabled={!canAdd}
-            onClick={addAnchor}
-            className="py-1 text-sm enabled:hover:bg-red-200 disabled:opacity-40"
-          >
+          <Button disabled={!canAdd} onClick={addAnchor} className="text-sm">
             + add
           </Button>
         </div>
 
-        <datalist id={`${listId}-zh`}>
-          {chineseData.nodes.map((n) => (
-            <option key={n.id} value={n.id} />
-          ))}
-        </datalist>
-        <datalist id={`${listId}-en`}>
-          {englishData.nodes.map((n) => (
-            <option key={n.id} value={n.id} />
-          ))}
-        </datalist>
-
         {anchors.length > 0 && (
           <ul className="mt-3 flex flex-wrap gap-2">
             {anchors.map((a, i) => (
-              <li
-                key={`${a.zh}-${a.en}`}
-                className="flex items-center gap-1 rounded bg-gray-100 px-2 py-0.5 text-sm ring-1 ring-gray-300"
-              >
+              <li key={`${a.zh}-${a.en}`} className="chip">
                 <span>
                   {a.zh} ↔ {a.en}
                 </span>
                 <button
-                  aria-label={`remove ${a.zh} ↔ ${a.en}`}
-                  className="text-gray-500 hover:text-red-600"
+                  aria-label={`Remove ${a.zh} ↔ ${a.en}`}
+                  className="chip__remove"
                   onClick={() =>
                     setAnchors((prev) => prev.filter((_, j) => j !== i))
                   }
                 >
-                  ×
+                  <Icon icon={faXmark} width="0.75em" height="0.75em" />
                 </button>
               </li>
             ))}
@@ -305,36 +313,4 @@ export default function AlignmentScatter({
 
 function vecMap(data: EmbeddingDataset | null): Map<string, number[]> {
   return new Map(data ? data.nodes.map((n) => [n.id, n.vec]) : [])
-}
-
-interface FieldProps {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  listId: string
-  valid: boolean
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  listId,
-  valid,
-}: FieldProps): ReactNode {
-  return (
-    <label className="flex flex-col text-sm">
-      <span className="text-gray-600">{label}</span>
-      <input
-        type="text"
-        list={listId}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={clsx(
-          'rounded border px-2 py-1',
-          valid ? 'border-gray-900' : 'border-red-500 bg-red-50',
-        )}
-      />
-    </label>
-  )
 }

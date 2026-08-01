@@ -85,9 +85,7 @@
     }
   }
 
-  // `.btn--active` is set by Button's `isActive`; `[data-pressed]` is how Base
-  // UI's Toggle marks its on state, so both get the same treatment.
-  .btn--active,
+  // `[data-pressed]` is how Base UI's Toggle marks its on state.
   .btn[data-pressed] {
     background-color: theme('colors.primary.DEFAULT');
     border-color: theme('colors.primary.DEFAULT');
