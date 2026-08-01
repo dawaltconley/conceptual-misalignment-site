@@ -104,6 +104,9 @@ class Vector:
     strength: float = 0.0
     """Weighted degree in the similarity graph (sum of incident edge weights);
     high = a dense/tight region of the space. 0 for nodes absent from the graph."""
+    pagerank: float = 0.0
+    """PageRank on the weighted similarity graph — global importance/centrality.
+    0 for nodes absent from the graph."""
 
 
 def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
@@ -111,6 +114,14 @@ def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
     if graph is None:
         return {}
     return {n: float(d) for n, d in graph.degree(weight="weight")}
+
+
+def _pagerank(graph: "Graph | None") -> dict[str, float]:
+    """PageRank per node on the weighted graph (0 for graph-absent nodes)."""
+    if graph is None or graph.number_of_edges() == 0:
+        return {}
+    import networkx as nx
+    return {n: float(v) for n, v in nx.pagerank(graph, weight="weight").items()}
 
 
 @dataclass
@@ -124,12 +135,14 @@ class Embeddings:
     @classmethod
     def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None):
         strength = _weighted_degree(graph)
+        pagerank = _pagerank(graph)
         nodes: list[Vector] = []
         for label, row in zip(labels, matrix):
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row,
                             doc_freq.get(label, 0),
-                            strength.get(label, 0.0))
+                            strength.get(label, 0.0),
+                            pagerank.get(label, 0.0))
             nodes.append(vector)
         return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
                    documents, nodes)
