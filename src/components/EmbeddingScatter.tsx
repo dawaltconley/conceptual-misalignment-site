@@ -4,6 +4,7 @@ import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
 import Button from './Button'
+import Toggle from './Toggle'
 import {
   ScatterSkeleton,
   Wrapper as ScatterWrapper,
@@ -139,15 +140,19 @@ export default function EmbeddingScatter({
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <div className="flex gap-2">
           <Toggle
-            label="PCA"
-            isActive={layout === 'pca'}
-            onClick={() => setLayout('pca')}
-          />
+            className="text-sm"
+            pressed={layout === 'pca'}
+            onPressedChange={() => setLayout('pca')}
+          >
+            PCA
+          </Toggle>
           <Toggle
-            label="t-SNE"
-            isActive={layout === 'tsne'}
-            onClick={() => setLayout('tsne')}
-          />
+            className="text-sm"
+            pressed={layout === 'tsne'}
+            onPressedChange={() => setLayout('tsne')}
+          >
+            t-SNE
+          </Toggle>
         </div>
 
         {layout === 'tsne' && (
@@ -188,24 +193,6 @@ export default function EmbeddingScatter({
 
 function Wrapper({ children }: { children: ReactNode }): JSX.Element {
   return <div className="w-full">{children}</div>
-}
-
-interface ToggleProps {
-  label: string
-  isActive?: boolean
-  onClick: () => void
-}
-
-function Toggle({
-  label,
-  isActive = false,
-  onClick,
-}: ToggleProps): JSX.Element {
-  return (
-    <Button className="text-sm" isActive={isActive} onClick={onClick}>
-      {label}
-    </Button>
-  )
 }
 
 const color = d3.scaleOrdinal<number, string>(d3.schemeTableau10)
