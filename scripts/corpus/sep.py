@@ -40,14 +40,16 @@ class SEP(Source):
 
         soup = BeautifulSoup(r.content, "html.parser", from_encoding="utf-8")
 
-        title = soup.title and str(soup.title.text)
-        if not title:
-            h1 = soup.find("h1")
-            title = str(h1.text) if h1 else "UNTITLED"
+        title = soup.title or soup.find("h1")
+        if title:
+            title = title.get_text().strip().replace(
+                " (Stanford Encyclopedia of Philosophy)", "")
+        else:
+            title = "UNTITLED"
 
         article = {
             "preamble": soup.find("div", id="preamble"),
-            "toc": soup.find("div", id="toc"),
+            # "toc": soup.find("div", id="toc"),
             "main-text": soup.find("div", id="main-text"),
         }
 
@@ -58,17 +60,19 @@ class SEP(Source):
                     tag.decompose()
 
         description = soup.description and str(soup.description.text).strip()
-        if not description:
-            description = str(article["preamble"] and article["preamble"].text)
-            description = description.strip()[:160]
+        if not description and article["preamble"]:
+            description = article["preamble"].text.strip()[:160]
+
+        text = ""
+        for tag in article.values():
+            if tag is not None:
+                text += tag.get_text()  # Just text, strip html
 
         sep = cls(
             url=url,
-            title=str(title).strip().replace(
-                " (Stanford Encyclopedia of Philosophy)", ""),
+            title=title,
             description=str(description),
-            text=str(article["preamble"]) +
-            str(article["toc"]) + str(article["main-text"])
+            text=text
         )
         _cached_articles[url] = sep
         return sep

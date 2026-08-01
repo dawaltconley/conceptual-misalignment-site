@@ -11,11 +11,9 @@ _nlp = None
 
 def _get_en_nlp():
     import spacy
-    from spacy_html_tokenizer import create_html_tokenizer
     global _nlp
     if _nlp is None:
         _nlp = spacy.load("en_core_web_sm")
-        _nlp.tokenizer = create_html_tokenizer()(_nlp)
     return _nlp
 
 
