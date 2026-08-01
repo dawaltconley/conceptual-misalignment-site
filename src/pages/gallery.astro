@@ -1,0 +1,47 @@
+---
+// Dev-only gallery for the shared controls. Not linked from anywhere; delete
+// this and `@components/ComponentGallery` once they're wired into real views.
+import Layout from '@layouts/Page.astro'
+import ComponentGallery from '@components/ComponentGallery'
+import type { ComboboxOption } from '@components/Combobox'
+import { buildDictionaryFromFiles } from '@build/cedict'
+import { pinyinKeywords } from '@lib/pinyin'
+import { MasterSchema } from '@lib/terms'
+import termsJson from '@data/terms.json'
+
+const master = MasterSchema.parse(termsJson)
+
+// The same dictionary index.astro builds, reused here so the comboboxes are
+// searched against real hanzi and real CC-CEDICT readings.
+const chinesePaths = master.terms.flatMap((t) => [
+  ...t.chinese.sources.map((s) => s.cooccurrence),
+  ...(t.chinese.similarity ? [t.chinese.similarity] : []),
+])
+const dictionary = await buildDictionaryFromFiles(chinesePaths)
+
+const hanzi: ComboboxOption[] = Object.values(dictionary)
+  .map((entry) => ({
+    value: entry.hanzi,
+    keywords: pinyinKeywords(entry.pinyin),
+    note: [entry.pinyin, entry.definitions[0]].filter(Boolean).join(' · '),
+  }))
+  .sort((a, b) => a.value.localeCompare(b.value))
+
+const terms = master.terms.map((t) => t.hanzi)
+const renderings = [...new Set(master.terms.flatMap((t) => t.renderings))]
+---
+
+<Layout title="Components">
+  <main class="mx-auto w-full max-w-screen-md px-4 py-8">
+    <h1 class="mb-2 text-2xl font-bold">Components</h1>
+    <p class="mb-8 text-sm text-gray-500">
+      Scratch page for the shared controls, wired to real corpus data.
+    </p>
+    <ComponentGallery
+      client:only="react"
+      hanzi={hanzi}
+      terms={terms}
+      renderings={renderings}
+    />
+  </main>
+</Layout>
