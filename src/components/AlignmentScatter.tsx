@@ -95,7 +95,8 @@ export default function AlignmentScatter({
         const entry = dictionary?.[n.id]
         return {
           value: n.id,
-          keywords: entry && pinyinKeywords(entry.pinyin),
+          // Every reading, so 中 is reachable by both zhong1 and zhong4.
+          keywords: entry?.readings.flatMap((r) => pinyinKeywords(r.pinyin)),
           note: entry?.pinyin,
         }
       }),

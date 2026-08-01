@@ -22,8 +22,11 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
 const hanzi: ComboboxOption[] = Object.values(dictionary)
   .map((entry) => ({
     value: entry.hanzi,
-    keywords: pinyinKeywords(entry.pinyin),
-    note: [entry.pinyin, entry.definitions[0]].filter(Boolean).join(' · '),
+    // Every reading, so 中 is reachable by both zhong1 and zhong4.
+    keywords: entry.readings.flatMap((r) => pinyinKeywords(r.pinyin)),
+    note: [entry.pinyin, entry.readings[0].definitions[0]]
+      .filter(Boolean)
+      .join(' · '),
   }))
   .sort((a, b) => a.value.localeCompare(b.value))
 
