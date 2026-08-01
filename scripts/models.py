@@ -203,6 +203,11 @@ class Pipeline:
     which pools a word family like symbol/symbolic/symbolize). Mostly relevant in
     English; GujiRoBERTa tokens are single characters, so it rarely applies there."""
 
+    occurrence_pooling: "Pooling" = "max"
+    """How to combine a word's per-occurrence vectors into its single type vector:
+    max (default, per Wu & Wang), mean (smoother, less swayed by outlier contexts),
+    or none (the first occurrence only). All fold online, so memory stays O(vocab)."""
+
     content_pos: frozenset[str] | None = None
     """Parts-of-speech to include. If None, POS is not filtered."""
 

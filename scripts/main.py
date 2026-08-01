@@ -301,7 +301,7 @@ def embed(
     vocab |= set(target_labels)
     unk_check(emb, target_labels)
     segments = segment(p, emb, sources, vocab, match_fn)
-    pooler = vectors.Pooler(keep=set(keep))
+    pooler = vectors.Pooler(mode=p.occurrence_pooling, keep=set(keep))
     for word, vec in emb.embed(segments, p.batch_size,
                                subword_pooling=p.subword_pooling):
         pooler.add(word, vec)

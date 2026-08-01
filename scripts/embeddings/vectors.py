@@ -1,41 +1,62 @@
-"""Streaming max-pool of per-occurrence vectors into one vector per word.
+"""Streaming pool of per-occurrence vectors into one vector per word.
 
-Pooling follows Wu & Wang: mean over subwords *within* an occurrence (model.py),
-then element-wise **max** *across* occurrences of the word. Element-wise max is an
-associative reduction, so it is folded **online** (a running max per word) as the
-embedder streams occurrences — peak memory is O(vocab), not O(occurrences).
+Default follows Wu & Wang: mean over subwords *within* an occurrence (model.py),
+then element-wise **max** *across* occurrences of the word. The cross-occurrence
+reduction is configurable (``mean``/``max``/``none``) and every mode folds
+**online** as the embedder streams occurrences — peak memory is O(vocab), not
+O(occurrences). (``max`` is an associative running max; ``mean`` a running
+sum+count; ``none`` keeps the first occurrence.)
 """
 
 from __future__ import annotations
 
+from typing import Literal
+
 import numpy as np
+
+Pooling = Literal["mean", "max", "none"]
 
 
 class Pooler:
-    """Fold streamed ``(word, occurrence_vector)`` events into a max-pooled matrix.
+    """Fold streamed ``(word, occurrence_vector)`` events into a pooled matrix.
 
-    Keeps a running element-wise max per word (O(vocab)); additionally retains the
-    full occurrence stacks for the small ``keep`` set (the target terms) so their
+    ``mode`` sets the cross-occurrence reduction (``max``/``mean``/``none``), kept
+    as a running accumulator per word (O(vocab)). Additionally retains the full
+    occurrence stacks for the small ``keep`` set (the target terms) so their
     cohesion / variance can still be measured. Feed it with :meth:`add`, then read
     :meth:`matrix` / :meth:`stacks`.
     """
 
-    def __init__(self, keep: set[str] | frozenset[str] = frozenset()):
-        self._max: dict[str, np.ndarray] = {}
+    def __init__(self, mode: Pooling = "max",
+                 keep: set[str] | frozenset[str] = frozenset()):
+        self._mode = mode
+        self._acc: dict[str, np.ndarray] = {}   # running max / sum / first-seen
+        self._count: dict[str, int] = {}        # occurrence count (for mean)
         self._keep = set(keep)
         self._stacks: dict[str, list[np.ndarray]] = {}
 
     def add(self, word: str, vec: np.ndarray) -> None:
-        cur = self._max.get(word)
-        self._max[word] = vec if cur is None else np.maximum(cur, vec)
+        cur = self._acc.get(word)
+        if cur is None:
+            # float64 accumulator for mean so a long running sum doesn't lose precision
+            self._acc[word] = vec.astype(np.float64) if self._mode == "mean" else vec
+            self._count[word] = 1
+        elif self._mode == "max":
+            self._acc[word] = np.maximum(cur, vec)
+        elif self._mode == "mean":
+            self._acc[word] = cur + vec
+            self._count[word] += 1
+        # "none": the first occurrence wins — nothing to fold.
         if word in self._keep:
             self._stacks.setdefault(word, []).append(vec)
 
     def matrix(self) -> tuple[list[str], np.ndarray]:
         """``(labels, matrix)`` where ``matrix[i]`` is the pooled vector for
         ``labels[i]``. Words are sorted for stable ordering."""
-        labels = sorted(self._max)
-        return labels, np.stack([self._max[w] for w in labels])
+        labels = sorted(self._acc)
+        rows = [self._acc[w] / self._count[w] if self._mode == "mean" else self._acc[w]
+                for w in labels]
+        return labels, np.stack(rows)
 
     def stacks(self) -> dict[str, np.ndarray]:
         """Per-``keep`` word: its stacked ``(n_occurrences x H)`` occurrence
