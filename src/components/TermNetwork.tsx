@@ -2,6 +2,7 @@ import type { Master, CorpusSide } from '@lib/terms'
 import type { Dictionary } from '@build/cedict'
 import { useState } from 'react'
 import MultiNetwork, { type NetworkRef } from './MultiNetwork'
+import Select from './Select'
 
 type NetworkKind = 'cooccurrence' | 'similarity'
 
@@ -66,11 +67,13 @@ export default function TermNetwork({
   return (
     <div className="items-start justify-center xl:flex xl:gap-6">
       <div className="xl:w-1/2">
-        <TermSelect
+        <Select
           label="Chinese term"
           value={term.hanzi}
           options={terms.map((t) => t.hanzi)}
           onChange={selectHanzi}
+          className="mb-3"
+          triggerClassName="text-lg"
         />
         <MultiNetwork
           key={`${kind}:${term.hanzi}`}
@@ -81,11 +84,13 @@ export default function TermNetwork({
         />
       </div>
       <div className="mt-8 xl:mt-0 xl:w-1/2">
-        <TermSelect
+        <Select
           label="English rendering"
           value={english.label}
           options={term.renderings}
           onChange={setRenderingLabel}
+          className="mb-3"
+          triggerClassName="text-lg"
         />
         <MultiNetwork
           key={`${kind}:${term.hanzi}:${english.label}`}
@@ -95,36 +100,5 @@ export default function TermNetwork({
         />
       </div>
     </div>
-  )
-}
-
-interface TermSelectProps {
-  label: string
-  value: string
-  options: string[]
-  onChange: (value: string) => void
-}
-
-function TermSelect({
-  label,
-  value,
-  options,
-  onChange,
-}: TermSelectProps): JSX.Element {
-  return (
-    <label className="mb-3 flex items-center gap-2">
-      <span className="text-sm text-gray-500">{label}</span>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="rounded border border-gray-300 bg-white px-3 py-1.5 text-lg"
-      >
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
-    </label>
   )
 }
