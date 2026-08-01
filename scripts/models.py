@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Self
+from typing import TYPE_CHECKING, Literal, Self
 from dataclasses import dataclass, asdict, field
 
 if TYPE_CHECKING:
@@ -7,6 +7,8 @@ if TYPE_CHECKING:
     from numpy import ndarray
     from _typeshed import DataclassInstance
     from embeddings.analyze import Method as SimMethod, SimTransform
+
+Pooling = Literal["mean", "max", "none"]
 
 
 def _json_default(o: object):
@@ -194,6 +196,12 @@ class Pipeline:
     batch_size: int = 32
     """Number of embeddings to calcualte at a given time; affects memory and
     speed of the pipeline."""
+
+    subword_pooling: "Pooling" = "mean"
+    """How to combine an occurrence's subword-token vectors into one occurrence
+    vector: mean, max, or none (the first / word-initial piece — the BPE root,
+    which pools a word family like symbol/symbolic/symbolize). Mostly relevant in
+    English; GujiRoBERTa tokens are single characters, so it rarely applies there."""
 
     content_pos: frozenset[str] | None = None
     """Parts-of-speech to include. If None, POS is not filtered."""

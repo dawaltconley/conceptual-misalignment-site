@@ -1,14 +1,19 @@
-"""GujiRoBERTa embedding: final-layer, per-occurrence mean over subword tokens.
+"""Final-layer contextual embedding: one vector per word-of-interest occurrence.
 
 For each passage we take the model's final hidden states and, for every
-word-of-interest span in that passage, average the hidden vectors of the tokens
-overlapping the span. A single hanzi is normally one token, but the overlap +
-mean logic keeps this correct for multi-char neighbors or any subword splitting.
+word-of-interest span in that passage, pool the hidden vectors of the tokens
+overlapping the span (``subword_pooling``: mean/max/none). A single hanzi is
+normally one token, but the overlap + pooling logic keeps this correct for
+multi-char neighbors or any subword splitting. In English, where BPE routinely
+splits a word into several pieces, the pooling mode matters: ``none`` takes the
+first (word-initial) piece, which carries the shared BPE root across a word
+family (symbol / symbolic / symbolize).
 """
 
 from __future__ import annotations
 
 from collections.abc import Iterable, Iterator
+from typing import Literal
 
 import numpy as np
 import torch
@@ -17,6 +22,17 @@ from transformers import AutoModel, AutoTokenizer
 from embeddings.occurrences import Segment
 
 DEFAULT_MODEL = "hsc748NLP/GujiRoBERTa_fan"
+
+Pooling = Literal["mean", "max", "none"]
+
+
+def _pool(vecs: np.ndarray, mode: Pooling) -> np.ndarray:
+    """Reduce a ``(n_tokens, H)`` block of subword vectors to one ``(H,)`` vector."""
+    if mode == "mean":
+        return vecs.mean(axis=0)
+    if mode == "max":
+        return vecs.max(axis=0)
+    return vecs[0]  # "none": the first (word-initial) subword — the BPE root piece
 
 
 def pick_device() -> str:
@@ -79,21 +95,24 @@ class Embedder:
         self,
         segments: list[Segment],
         batch_size: int = 32,
+        subword_pooling: Pooling = "mean",
     ) -> Iterator[tuple[str, np.ndarray]]:
         """Stream ``(word, occurrence_vector)`` for every word-of-interest span.
 
-        Each occurrence vector is the mean of the final-layer hidden states of the
-        tokens overlapping that occurrence's character span. Only one batch's
-        hidden states live in memory at a time — this yields the occurrences and
-        holds nothing, so the caller decides how to fold them (e.g. a streaming
-        max-pool) rather than accumulating every vector here.
+        Each occurrence vector pools (``subword_pooling``) the final-layer hidden
+        states of the tokens overlapping that occurrence's character span. Only one
+        batch's hidden states live in memory at a time — this yields the occurrences
+        and holds nothing, so the caller decides how to fold them across occurrences
+        (e.g. a streaming max-pool) rather than accumulating every vector here.
         """
         for start in range(0, len(segments), batch_size):
-            yield from self._embed_batch(segments[start: start + batch_size])
+            yield from self._embed_batch(
+                segments[start: start + batch_size], subword_pooling)
 
     def _embed_batch(
         self,
         batch: list[Segment],
+        subword_pooling: Pooling = "mean",
     ) -> Iterator[tuple[str, np.ndarray]]:
         enc = self.tokenizer(
             [r.text for r in batch],
@@ -117,4 +136,4 @@ class Embedder:
                 ]
                 if not tok_idx:
                     continue  # span fell outside the 512-token truncation window
-                yield span.word, hidden[i, tok_idx].mean(axis=0)
+                yield span.word, _pool(hidden[i, tok_idx], subword_pooling)
