@@ -17,6 +17,8 @@ export const EmbeddingNodeSchema = z.object({
   strength: z.number().default(0),
   /** PageRank on the weighted similarity graph (global importance). */
   pagerank: z.number().default(0),
+  /** Eigenvector centrality on the weighted similarity graph. */
+  eigenvector: z.number().default(0),
 })
 
 export const EmbeddingDatasetSchema = z.object({

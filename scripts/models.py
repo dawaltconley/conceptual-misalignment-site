@@ -107,6 +107,9 @@ class Vector:
     pagerank: float = 0.0
     """PageRank on the weighted similarity graph — global importance/centrality.
     0 for nodes absent from the graph."""
+    eigenvector: float = 0.0
+    """Eigenvector centrality on the weighted similarity graph — importance weighted
+    by neighbors' importance. 0 for graph-absent nodes (or if it fails to converge)."""
 
 
 def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
@@ -124,6 +127,18 @@ def _pagerank(graph: "Graph | None") -> dict[str, float]:
     return {n: float(v) for n, v in nx.pagerank(graph, weight="weight").items()}
 
 
+def _eigenvector(graph: "Graph | None") -> dict[str, float]:
+    """Eigenvector centrality per node (0 for graph-absent nodes; empty on failure)."""
+    if graph is None or graph.number_of_edges() == 0:
+        return {}
+    import networkx as nx
+    try:
+        cent = nx.eigenvector_centrality_numpy(graph, weight="weight")
+    except Exception:  # convergence failure / disconnected components
+        return {}
+    return {n: float(v) for n, v in cent.items()}
+
+
 @dataclass
 class Embeddings:
     source: Source
@@ -136,13 +151,15 @@ class Embeddings:
     def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None):
         strength = _weighted_degree(graph)
         pagerank = _pagerank(graph)
+        eigenvector = _eigenvector(graph)
         nodes: list[Vector] = []
         for label, row in zip(labels, matrix):
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row,
                             doc_freq.get(label, 0),
                             strength.get(label, 0.0),
-                            pagerank.get(label, 0.0))
+                            pagerank.get(label, 0.0),
+                            eigenvector.get(label, 0.0))
             nodes.append(vector)
         return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
                    documents, nodes)
