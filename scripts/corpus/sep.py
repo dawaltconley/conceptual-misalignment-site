@@ -51,10 +51,16 @@ class SEP(Source):
             "main-text": soup.find("div", id="main-text"),
         }
 
-        description = soup.description and str(soup.description.text)
+        if article["main-text"] is not None:
+            for id in ("bibliography", "academic-tools", "other-internet-resources", "related-entries"):
+                tag = article["main-text"].find(id)
+                if tag:
+                    tag.decompose()
+
+        description = soup.description and str(soup.description.text).strip()
         if not description:
-            description = str(article["preamble"]
-                              and article["preamble"].text)[:160]
+            description = str(article["preamble"] and article["preamble"].text)
+            description = description.strip()[:160]
 
         sep = cls(
             url=url,
