@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { SourceSchema } from './terms'
 
 /**
  * One node in a per-corpus embedding dataset: a PCA-reduced vector plus metadata.
@@ -12,16 +13,9 @@ export const EmbeddingNodeSchema = z.object({
   vec: z.array(z.number()),
 })
 
-/** The corpus this dataset came from (the pipeline's reduced `lib.Source`). */
-const SourceRefSchema = z.object({
-  id: z.string().nullable(),
-  url: z.string().nullable(),
-  title: z.string().nullable(),
-  description: z.string().nullable(),
-})
-
 export const EmbeddingDatasetSchema = z.object({
-  source: SourceRefSchema.nullable(),
+  /** The corpus this dataset came from (the pipeline's reduced `lib.Source`). */
+  source: SourceSchema.nullable(),
   dims: z.number(),
   nodes: z.array(EmbeddingNodeSchema),
 })

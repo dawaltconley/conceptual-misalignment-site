@@ -117,7 +117,7 @@ def save_cooccurrence(
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn)
               for s in network_sources)
-    NetworkData(TermData(label, occ), meta_source, net).save_json(
+    NetworkData(TermData(label), meta_source, net, occurrences=occ).save_json(
         p.out_dir / f"{label}_{file_id}.json")
 
 
@@ -134,8 +134,8 @@ def save_similarity(
         pruned = prune_to_neighborhood(G, target, p.max_network_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
-        term = TermData(target, int(occ_counts.get(target, 0)))
-        NetworkData(term, corpus_source, pruned).save_json(
+        NetworkData(TermData(target), corpus_source, pruned,
+                    occurrences=int(occ_counts.get(target, 0))).save_json(
             p.out_dir / f"{target}_embeds.json")
 
 
@@ -366,12 +366,22 @@ def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, out_dir
 # Master index (scans the written files so paths reflect what's on disk)
 # ---------------------------------------------------------------------------
 
+def _source_entry(src: dict, web: str) -> dict:
+    """One master-index `Source`: a file's recorded provenance + its web `data` path."""
+    return {
+        "id": src.get("id"), "url": src.get("url") or "",
+        "title": src.get("title") or "", "description": src.get("description"),
+        "occurrences": src.get("occurrences"), "data": web,
+    }
+
+
 def _scan_networks(out_dir, web_prefix: str) -> dict[str, dict]:
     """Group a directory's NetworkData files by term label into
-    ``{label: {"sources": [{id,title,cooccurrence}], "similarity": path|None}}``.
-    Co-occurrence files are ``{label}_{source.id}.json``; similarity is
-    ``{label}_embeds.json``. Legacy/unrelated JSON (no ``term``/``source`` dict)
-    is skipped."""
+    ``{label: {"variants", "total", "cooccurrence": [Source], "similarity": [Source]}}``.
+    Co-occurrence files are ``{label}_{source.id}.json``; the similarity file is
+    ``{label}_embeds.json`` (whole corpus). Each entry is a master-index `Source`
+    (provenance + `data` path + per-source `occurrences`). Non-NetworkData JSON is
+    skipped."""
     by_term: dict[str, dict] = {}
     for path in sorted(out_dir.glob("*.json")):
         obj = json.loads(path.read_text(encoding="utf-8"))
@@ -379,67 +389,81 @@ def _scan_networks(out_dir, web_prefix: str) -> dict[str, dict]:
         if not (isinstance(term, dict) and isinstance(obj.get("source"), dict)):
             continue
         label = term["label"]
-        entry = by_term.setdefault(label, {"sources": [], "similarity": None})
-        web = f"{web_prefix}/{path.name}"
+        entry = by_term.setdefault(
+            label, {"variants": term.get("variants", []), "total": 0,
+                    "cooccurrence": [], "similarity": []})
+        src = _source_entry(obj["source"], f"{web_prefix}/{path.name}")
+        occ = src["occurrences"] or 0
         if path.name == f"{label}_embeds.json":
-            entry["similarity"] = web
+            entry["similarity"].append(src)
+            entry["total"] = occ or entry["total"]        # similarity = whole corpus
         else:
-            src = obj["source"]
-            entry["sources"].append(
-                {"id": src.get("id"), "title": src.get("title"),
-                 "cooccurrence": web})
+            entry["cooccurrence"].append(src)
+            if path.name.endswith(("_mengzi.json", "_combined.json")):
+                entry["total"] = occ or entry["total"]    # whole-corpus co-occurrence
     return by_term
 
 
 def _full_first(sources: list[dict]) -> list[dict]:
-    """Order sources with the whole-corpus one first (identified by its file name,
-    ``*_mengzi.json`` / ``*_combined.json`` — its source.id may be a URL)."""
+    """Order co-occurrence sources with the whole-corpus one first (by ``data`` name,
+    ``*_mengzi.json`` / ``*_combined.json``)."""
     def is_full(s: dict) -> bool:
-        p = s.get("cooccurrence", "")
-        return p.endswith("_mengzi.json") or p.endswith("_combined.json")
+        d = s.get("data") or ""
+        return d.endswith("_mengzi.json") or d.endswith("_combined.json")
     return sorted(sources, key=lambda s: (not is_full(s), str(s.get("id"))))
+
+
+def _embedding_source(corpus: str, total: int) -> dict:
+    """The corpus's embedding dataset as a master-index `Source` (`data` → its JSON,
+    `occurrences` = the term's whole-corpus total). Reuses the file's own provenance."""
+    path = EMBEDDINGS / f"{corpus}.json"
+    src = (json.loads(path.read_text(encoding="utf-8")).get("source") or {}) \
+        if path.exists() else {}
+    entry = _source_entry(src, f"/embeddings/{corpus}.json")
+    entry["id"] = entry["id"] or corpus
+    entry["title"] = entry["title"] or corpus
+    entry["occurrences"] = total
+    return entry
 
 
 def build_master(out_path=None) -> dict:
     """Assemble the master index over whatever the pipeline has written: per term,
-    the Chinese (Mengzi) side and its English renderings, each with its source
-    file paths, similarity network, and corpus embedding. Scans the output dirs so
-    paths mirror what is actually on disk."""
+    the Chinese (Mengzi) side and one side per English rendering. Each side lists its
+    co-occurrence / similarity / embedding sources (with `data` web paths), scanned
+    from the output dirs so paths mirror what is on disk."""
     out_path = out_path or (DATA / "terms.json")
     ctext = _scan_networks(CTEXT, "/ctext")
     sep = _scan_networks(SEP, "/sep")
 
-    def side(entry, corpus, embeddings):
+    empty = {"variants": [], "total": 0, "cooccurrence": [], "similarity": []}
+
+    def side(label: str, corpus: str, scan: dict) -> dict:
+        e = scan.get(label, empty)
         return {
             "corpus": corpus,
-            "embeddings": embeddings,
-            "similarity": entry["similarity"],
-            "sources": _full_first(entry["sources"]),
+            "term": {"label": label, "variants": e["variants"]},
+            "occurrences": e["total"],
+            "embeddings": [_embedding_source(corpus, e["total"])],
+            "similarity": e["similarity"],
+            "cooccurrence": _full_first(e["cooccurrence"]),
         }
 
-    empty = {"sources": [], "similarity": None}
     terms = []
     for term in TERMS:
-        english = [
-            {"label": r.label,
-             **side(sep.get(r.label, empty), "sep", "/embeddings/sep.json")}
-            for r in term.renderings
-        ]
         terms.append({
             "hanzi": term.hanzi,
             "renderings": list(term.english),
-            "chinese": side(ctext.get(term.hanzi, empty),
-                            "mengzi", "/embeddings/mengzi.json"),
-            "english": english,
+            "chinese": side(term.hanzi, "mengzi", ctext),
+            "english": [side(r.label, "sep", sep) for r in term.renderings],
         })
 
     master = {"terms": terms}
     out_path.write_text(json.dumps(master, ensure_ascii=False, indent=2),
                         encoding="utf-8")
-    n_src = sum(len(t["chinese"]["sources"])
-                + sum(len(e["sources"]) for e in t["english"]) for t in terms)
+    n_src = sum(len(t["chinese"]["cooccurrence"])
+                + sum(len(e["cooccurrence"]) for e in t["english"]) for t in terms)
     print(
-        f"master     : {len(terms)} terms, {n_src} source files -> {out_path}")
+        f"master     : {len(terms)} terms, {n_src} co-occurrence files -> {out_path}")
     return master
 
 
