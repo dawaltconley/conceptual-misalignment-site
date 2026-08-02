@@ -70,8 +70,10 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   starves co-occurrence (null graphs despite real occurrences). Fix in flight:
   a **separate `cooccurrence_min_freq`**, and thin the scatter by relevance
   (top-N by nearest-target similarity) instead of frequency.
-- SEP community register-domination — to try (per-pipeline): **HDBSCAN** option,
-  **debiasing** (all-but-the-top / whitening). See the notes.
+- SEP community register-domination — to try (per-pipeline): **HDBSCAN** option.
+  **Debiasing** (all-but-the-top / whitening) is **done**: `Pipeline.debias`
+  (`abtt`/`whiten`) + `scripts/tools/debias_diagnostics.py`; see
+  `notes/frequency-gradient-and-debiasing.md`.
 - Active terms: **仁 義 禮 智 信** (others commented out in `config.py`).
 
 ## Memory & notes
