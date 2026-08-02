@@ -13,6 +13,9 @@ export const EmbeddingNodeSchema = z.object({
   vec: z.array(z.number()),
   /** How many documents (sources) in the corpus this word appears in. */
   doc_freq: z.number().default(0),
+  /** L2 norm in the centered/debiased space (≈ distance from the corpus centroid);
+   * the radial signal that `vec` (L2-normalized, direction-only) drops. */
+  norm: z.number().default(0),
   /** Weighted degree in the similarity graph (sum of incident edge weights). */
   strength: z.number().default(0),
   /** PageRank on the weighted similarity graph (global importance). */

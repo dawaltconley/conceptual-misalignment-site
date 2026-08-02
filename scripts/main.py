@@ -169,10 +169,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     pooler, doc_freq, n_docs = embed(p, embedder, chapters, targets,
                                      keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
-    mean = None
-    if p.center:
-        matrix, mean = vectors.center_matrix(matrix)
-        print("centered   : subtracted vocab centroid (anisotropy fix)")
+    matrix, mean, project = transform_matrix(p, matrix)
     sw.lap("embedding")
 
     G, _, community_map = analyze.build_networks(
@@ -184,15 +181,17 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
     save_similarity(p, targets, mengzi, G, occ_counts=occ_counts)
 
+    norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
-                           doc_freq=doc_freq, documents=n_docs, graph=G) \
+                           doc_freq=doc_freq, documents=n_docs, graph=G,
+                           norms=norms) \
         .save_json(EMBEDDINGS / "mengzi.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
     sw.lap("similarity+export")
 
     if artifacts:
-        run_artifacts(labels, matrix, targets, pooler, mean,
+        run_artifacts(labels, matrix, targets, pooler, mean, project,
                       ANALYSIS / "mengzi", p.sim_network, p.quantile, p.knn_k,
                       p.sim_transform, p.resolution, p.max_network_nodes)
         sw.lap("artifacts")
@@ -244,10 +243,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
         p, embedder, combined, labels_by_target, match_fn=match_fn,
         keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
-    mean = None
-    if p.center:
-        matrix, mean = vectors.center_matrix(matrix)
-        print("centered   : subtracted vocab centroid (anisotropy fix)")
+    matrix, mean, project = transform_matrix(p, matrix)
     sw.lap("embedding")
 
     G, _, community_map = analyze.build_networks(
@@ -260,15 +256,16 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
     save_similarity(p, labels_by_target, SEP_CORPUS, G, occ_counts=occ_counts)
 
+    norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                            community_map, doc_freq=doc_freq, documents=n_docs,
-                           graph=G).save_json(EMBEDDINGS / "sep.json")
+                           graph=G, norms=norms).save_json(EMBEDDINGS / "sep.json")
     print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
     sw.lap("similarity+export")
 
     if artifacts:
-        run_artifacts(labels, matrix, labels_by_target, pooler, mean,
+        run_artifacts(labels, matrix, labels_by_target, pooler, mean, project,
                       ANALYSIS / "sep", p.sim_network, p.quantile, p.knn_k,
                       p.sim_transform, p.resolution, p.max_network_nodes)
         sw.lap("artifacts")
@@ -346,6 +343,26 @@ def pool(pooler: vectors.Pooler, target_labels) -> tuple[list[str], ndarray]:
     return labels, matrix
 
 
+def transform_matrix(
+    p: Pipeline, matrix: ndarray
+) -> tuple[ndarray, ndarray | None, vectors.Callable[[ndarray], ndarray] | None]:
+    """Center (anisotropy) then optionally debias (remove frequency-dominated
+    directions). Returns ``(matrix, mean, project)`` — ``mean`` centers other vectors
+    into the same space (occurrence stacks), ``project`` applies the same debias map
+    to them (both ``None`` when their step is off), so every downstream measurement
+    (sim graph, PCA export, cohesion) shares one space."""
+    mean = None
+    if p.center:
+        matrix, mean = vectors.center_matrix(matrix)
+        print("centered   : subtracted vocab centroid (anisotropy fix)")
+    project = None
+    if p.debias != "none":
+        matrix, project = vectors.debias_matrix(matrix, p.debias, p.debias_k)
+        k = p.debias_k if p.debias_k is not None else "auto"
+        print(f"debiased   : {p.debias} (k={k}) — removed dominant directions")
+    return matrix, mean, project
+
+
 def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
     """Warn if any word we embed loses a character to [UNK]."""
     unk = emb.unk_words(sorted(words))
@@ -357,14 +374,26 @@ def unk_check(emb: Embedder, words: set[str] | frozenset[str]) -> None:
         print(f"UNK check  : OK — all {len(words)} words in-vocab")
 
 
-def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, out_dir,
-                  network: SimMethod, quantile: float, knn_k: int,
+def node_norms(labels: list[str], matrix: ndarray) -> dict[str, float]:
+    """Per-word L2 norm in the centered/debiased analysis space (≈ distance from the
+    corpus centroid). The exported vectors are L2-normalized (direction only), so this
+    is the only surviving radial signal — needed by the debias diagnostics."""
+    return dict(zip(labels, np.linalg.norm(matrix, axis=1).tolist()))
+
+
+def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, project,
+                  out_dir, network: SimMethod, quantile: float, knn_k: int,
                   sim_transform: analyze.SimTransform, resolution: float,
                   max_nodes: int) -> None:
     """Opt-in: the heavy PNG/CSV analysis dump, decoupled from the JSON outputs."""
     is_target = np.array([l in targets for l in labels])
-    target_occ = {w: (s if mean is None else s - mean)
-                  for w, s in pooler.stacks().items()}
+
+    def to_space(s: ndarray) -> ndarray:
+        """Project an occurrence stack into the same centered/debiased space as
+        ``matrix``, so cohesion is measured where the scatter lives."""
+        s = s if mean is None else s - mean
+        return s if project is None else project(s)
+    target_occ = {w: to_space(s) for w, s in pooler.stacks().items()}
     summary = analyze.run_analysis(
         labels, matrix, is_target, target_occ, out_dir, quantile, kmeans_k=4,
         method=network, knn_k=knn_k, sim_transform=sim_transform,

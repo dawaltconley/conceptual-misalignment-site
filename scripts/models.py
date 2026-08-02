@@ -7,6 +7,7 @@ if TYPE_CHECKING:
     from numpy import ndarray
     from _typeshed import DataclassInstance
     from embeddings.analyze import Method as SimMethod, SimTransform
+    from embeddings.vectors import DebiasMethod
 
 Pooling = Literal["mean", "max", "none"]
 
@@ -101,6 +102,11 @@ class Vector:
     vec: "ndarray"
     doc_freq: int = 0
     """How many documents (sources) in the corpus this word appears in."""
+    norm: float = 0.0
+    """L2 norm in the centered/debiased analysis space (≈ distance from the corpus
+    centroid). The exported ``vec`` is L2-normalized (direction only), so this is the
+    only place the radial 'how far out on the manifold' signal survives — the
+    discriminating variable for the norm-vs-bipolar debias diagnostics."""
     strength: float = 0.0
     """Weighted degree in the similarity graph (sum of incident edge weights);
     high = a dense/tight region of the space. 0 for nodes absent from the graph."""
@@ -148,7 +154,7 @@ class Embeddings:
     nodes: list[Vector]
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}):
         strength = _weighted_degree(graph)
         pagerank = _pagerank(graph)
         eigenvector = _eigenvector(graph)
@@ -157,6 +163,7 @@ class Embeddings:
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row,
                             doc_freq.get(label, 0),
+                            norms.get(label, 0.0),
                             strength.get(label, 0.0),
                             pagerank.get(label, 0.0),
                             eigenvector.get(label, 0.0))
@@ -227,6 +234,20 @@ class Pipeline:
     center: bool = True
     """Whether to center embeddings by subtracting their centroid. Used to fix
     anisotropy."""
+
+    debias: "DebiasMethod" = "none"
+    """Nuisance-direction removal applied *after* centering (so pair with
+    ``center=True``). Centering fixes the anisotropy offset but leaves word frequency
+    loaded onto the top PCs — the reason a doc-frequency coloring still shows a clean
+    PCA gradient. ``abtt`` (all-but-the-top) projects out the top ``debias_k``
+    components; ``whiten`` PCA-whitens so no direction dominates the variance;
+    ``none`` leaves the space untouched. See ``embeddings.vectors.debias_matrix``."""
+
+    debias_k: int | None = None
+    """Components for ``debias``: for ``abtt`` the number to project out (default
+    ``max(1, D // 100)``, Mu & Viswanath's rule); for ``whiten`` the number of top
+    axes to keep before whitening (``None`` keeps all). Ignored when ``debias`` is
+    ``none``."""
 
     sim_network: "SimMethod" = "knn"
     """The kind of similarity network produced: a global quantile threshold

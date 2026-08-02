@@ -10,11 +10,12 @@ sum+count; ``none`` keeps the first occurrence.)
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Callable, Literal
 
 import numpy as np
 
 Pooling = Literal["mean", "max", "none"]
+DebiasMethod = Literal["none", "abtt", "whiten"]
 
 
 class Pooler:
@@ -79,6 +80,48 @@ def center_matrix(
     if mean is None:
         mean = matrix.mean(axis=0)
     return matrix - mean, mean  # pyright:ignore -- bad typing
+
+
+def debias_matrix(
+    matrix: np.ndarray, method: DebiasMethod, k: int | None = None
+) -> tuple[np.ndarray, Callable[[np.ndarray], np.ndarray]]:
+    """Remove the dominant (frequency/register-correlated) directions from *centered*
+    embeddings, so the leading axes stop encoding word frequency instead of meaning.
+
+    Word frequency loads onto the top principal components of a contextual-embedding
+    matrix (Mu & Viswanath 2018, "All-but-the-Top"); centering fixes the anisotropy
+    *offset* but not this *direction*, which is why a document-frequency coloring
+    still shows a clean gradient along a PCA axis. Two removals:
+
+    - ``abtt`` (all-but-the-top): project out the top ``k`` principal components.
+      ``k`` defaults to ``max(1, D // 100)`` (Mu & Viswanath's rule of thumb).
+    - ``whiten``: PCA-whitening — rotate to the principal axes and rescale each to
+      unit variance, so *no* direction dominates the variance (dissolves the gradient
+      entirely rather than just deleting a few axes). ``k`` optionally truncates to
+      the top-``k`` axes kept before whitening (``None`` keeps all).
+
+    Assumes ``matrix`` is already mean-centered (see :func:`center_matrix`); pair it
+    with ``center=True``. Returns ``(debiased, project)`` where ``project`` applies the
+    *same* linear map to other centered vectors (e.g. the target occurrence stacks),
+    so every downstream measurement stays in one space.
+    """
+    from sklearn.decomposition import PCA
+    n_samples, dim = matrix.shape
+    if method == "abtt":
+        k = max(1, dim // 100) if k is None else k
+        k = max(1, min(k, n_samples, dim))
+        comps = np.asarray(
+            PCA(n_components=k, random_state=0).fit(matrix).components_)  # (k, D)
+
+        def project(x: np.ndarray) -> np.ndarray:
+            return x - (x @ comps.T) @ comps
+        return project(matrix), project
+    if method == "whiten":
+        n = min(k or dim, n_samples, dim)
+        pca = PCA(n_components=n, whiten=True, random_state=0).fit(matrix)
+        return pca.transform(matrix), pca.transform
+    raise ValueError(f"unknown debias method {method!r}; "
+                     "choose from 'none', 'abtt', 'whiten'")
 
 
 def reduce_vectors(matrix: np.ndarray, dims: int) -> np.ndarray:
