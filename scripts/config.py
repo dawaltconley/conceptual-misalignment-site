@@ -122,7 +122,8 @@ MENGZI_PIPELINE = Pipeline(
     cooccurrence_min_freq=3,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
-    resolution=4.0,
+    debias="abtt",
+    resolution=2.0,
 )
 
 SEP_PIPELINE = Pipeline(
@@ -132,6 +133,7 @@ SEP_PIPELINE = Pipeline(
     cooccurrence_min_freq=10,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
+    debias="abtt",
     # narrower communities (splits the register hub); tune to taste
-    resolution=4.0,
+    resolution=2.0,
 )
