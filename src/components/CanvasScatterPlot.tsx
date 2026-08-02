@@ -134,16 +134,20 @@ function CanvasScatterPlot({
       const cx = zx(p.x)
       const cy = zy(p.y)
       const r = p.size ?? DEFAULT_RADIUS
+      const alpha = p.opacity ?? DEFAULT_OPACITY
 
-      ctx.globalAlpha = p.opacity ?? DEFAULT_OPACITY
+      ctx.globalAlpha = alpha
       ctx.beginPath()
       ctx.fillStyle = p.color || DEFAULT_COLOR
       ctx.arc(cx, cy, r, 0, 2 * Math.PI)
       ctx.fill()
       if (isHighlighted(p)) {
         ctx.strokeStyle = '#000000'
-        ctx.stroke()
+      } else {
+        ctx.strokeStyle = p.color || DEFAULT_COLOR
+        ctx.globalAlpha = alpha + (1 - alpha) * 0.2
       }
+      ctx.stroke()
       if (transform.k > TEXT_THRESHOLD) {
         ctx.globalAlpha = 1
         ctx.font = '14px sans-serif'
@@ -286,8 +290,8 @@ function CanvasScatterPlot({
     })
 
     ctx.beginPath()
-    ctx.arc(px, py, r, 0, 2 * Math.PI)
-    ctx.lineWidth = 1
+    ctx.arc(px, py, r * 1.1, 0, 2 * Math.PI)
+    ctx.lineWidth = 1.5
     ctx.strokeStyle = '#000000'
     ctx.stroke()
     ctx.fillStyle = p.color || DEFAULT_COLOR
