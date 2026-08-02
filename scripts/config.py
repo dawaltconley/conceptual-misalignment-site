@@ -137,3 +137,14 @@ SEP_PIPELINE = Pipeline(
     # narrower communities (splits the register hub); tune to taste
     resolution=2.0,
 )
+
+# # for reference, not currently used for filtering
+# NER_EXCLUDES = {
+#     'PERSON',  # gets some people not picked up by propn
+#     'DATE',
+#     # "geopolitical entity," includes some famous philosophers (e.g. Descartes)
+#     'GPE',
+#     'ORDINAL',  # usually a century
+#     'ORG',  # often misidentified people
+#     'NORP',  # philosophical schools
+# }
