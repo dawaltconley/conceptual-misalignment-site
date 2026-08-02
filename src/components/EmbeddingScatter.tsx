@@ -58,16 +58,23 @@ export default function EmbeddingScatter({
   )
 
   const communityLegend = useMemo<LegendLabel[]>(() => {
-    const communities: string[][] = []
+    const communities: EmbeddingNode[][] = []
     data?.nodes.forEach((n) => {
       communities[n.community] ??= []
-      communities[n.community].push(n.id)
+      communities[n.community].push(n)
     })
-    return communities.map<LegendLabel>((terms, community) => ({
-      id: community.toString(),
-      color: getColor(community),
-      description: `C${community}: ${terms.sort().join(', ')}`,
-    }))
+    return communities.map<LegendLabel>((nodes, community) => {
+      // Rank members by weighted degree (strength) so the tightest/most
+      // central words in each community come first; alphabetical is noise.
+      const terms = [...nodes]
+        .sort((a, b) => b.strength - a.strength)
+        .map((n) => n.id)
+      return {
+        id: community.toString(),
+        color: getColor(community),
+        description: `C${community}: ${terms.join(', ')}`,
+      }
+    })
   }, [data])
 
   // t-SNE runs in a worker: (re)start on entering t-SNE / data / perplexity
