@@ -31,6 +31,7 @@ const rangeMultiplier = 1.05
 const TEXT_THRESHOLD = 4
 const DEFAULT_RADIUS = 3
 const DEFAULT_COLOR = '#808080'
+const DEFAULT_OPACITY = 0.7
 
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
   isHighlighted?: (p: ScatterPoint) => boolean
@@ -134,7 +135,7 @@ function CanvasScatterPlot({
       const cy = zy(p.y)
       const r = p.size ?? DEFAULT_RADIUS
 
-      ctx.globalAlpha = p.opacity ?? 0.7
+      ctx.globalAlpha = p.opacity ?? DEFAULT_OPACITY
       ctx.beginPath()
       ctx.fillStyle = p.color || DEFAULT_COLOR
       ctx.arc(cx, cy, r, 0, 2 * Math.PI)
