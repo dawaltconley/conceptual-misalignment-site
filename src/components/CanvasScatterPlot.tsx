@@ -31,7 +31,7 @@ const rangeMultiplier = 1.05
 const TEXT_THRESHOLD = 4
 
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
-  highlightedCommunities?: Set<number>
+  isHighlighted?: (p: ScatterPoint) => boolean
   dictionary?: Dictionary
 }
 
@@ -46,8 +46,8 @@ export interface CanvasScatterPlotProps extends ScatterPlotProps {
  */
 function CanvasScatterPlot({
   points,
-  getColor,
-  highlightedCommunities = new Set(),
+  targets,
+  isHighlighted = () => false,
   dictionary = {},
 }: CanvasScatterPlotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -109,14 +109,15 @@ function CanvasScatterPlot({
   useLayoutEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || !ready) return
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { alpha: true })
     if (!ctx) return
 
     const dpr = window.devicePixelRatio || 1
     canvas.width = width * dpr // also resets the transform to identity
     canvas.height = height * dpr
     ctx.scale(dpr, dpr)
-    ctx.clearRect(0, 0, width, height)
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(0, 0, width, height)
     ctx.translate(body.x, body.y) // draw in body-local coords (like the SVG body group)
     // Clip to the plot body so zoomed/panned points don't spill into the gutters.
     ctx.beginPath()
@@ -124,18 +125,18 @@ function CanvasScatterPlot({
     ctx.clip()
 
     // Non-targets first (behind), then targets + labels on top.
-    ctx.globalAlpha = 0.7
     for (const p of points) {
       if (!p) continue
-      if (p.target) continue
+      if (targets.has(p.id)) continue
       const cx = zx(p.x)
       const cy = zy(p.y)
 
+      ctx.globalAlpha = p.opacity ?? 0.7
       ctx.beginPath()
-      ctx.fillStyle = getColor(p.community)
+      ctx.fillStyle = p.color || '#808080'
       ctx.arc(cx, cy, 3, 0, 2 * Math.PI)
       ctx.fill()
-      if (highlightedCommunities.has(p.community)) {
+      if (isHighlighted(p)) {
         ctx.strokeStyle = '#000000'
         ctx.stroke()
       }
@@ -152,11 +153,11 @@ function CanvasScatterPlot({
     ctx.font = 'bold 14px sans-serif'
     ctx.textBaseline = 'middle'
     for (const p of points) {
-      if (!p.target) continue
+      if (!targets.has(p.id)) continue
       const cx = zx(p.x)
       const cy = zy(p.y)
       ctx.beginPath()
-      ctx.fillStyle = getColor(p.community)
+      ctx.fillStyle = p.color || '#808080'
       ctx.arc(cx, cy, 7, 0, 2 * Math.PI)
       ctx.fill()
       ctx.lineWidth = 1.5
@@ -165,7 +166,7 @@ function CanvasScatterPlot({
       ctx.fillStyle = '#111827'
       ctx.fillText(p.id, cx + 9, cy)
     }
-  }, [points, width, height, highlightedCommunities, transform])
+  }, [points, width, height, isHighlighted, transform])
 
   // --- ctrl+wheel to zoom, drag to pan (bounded to the plot body) ---
   useLayoutEffect(() => {
@@ -260,8 +261,8 @@ function CanvasScatterPlot({
     // delaunay lives in un-zoomed scale-pixel space, so invert the zoom first.
     const [ix, iy] = transform.invert([x, y])
     const index = delaunay.find(ix, iy)
-    const p = points[index]
-    if (p.target) return
+    const p: ScatterPoint | undefined = points[index]
+    if (!p || targets.has(p.id)) return
 
     const px = zx(p.x)
     const py = zy(p.y)

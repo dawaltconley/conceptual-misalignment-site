@@ -9,13 +9,15 @@ export interface ScatterPoint extends Point {
   id: string
   x: number
   y: number
-  community: number
-  target: boolean
+  color?: string
+  size?: number
+  opacity?: number
+  data?: Record<string, unknown>
 }
 
 export interface ScatterPlotProps {
   points: ScatterPoint[]
-  getColor: (community: number) => string
+  targets: Set<string>
 }
 
 /**
@@ -23,7 +25,7 @@ export interface ScatterPlotProps {
  * with fixed x/y, draws an SVG scatter coloured by community with targets
  * emphasised. No data fetching and no projection math — the wrapper owns those.
  */
-function ScatterPlot({ points, getColor }: ScatterPlotProps): JSX.Element {
+function ScatterPlot({ points, targets }: ScatterPlotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const size = useSize(containerRef)
   const { width = 0, height = 0 } = size || {}
@@ -88,22 +90,23 @@ function ScatterPlot({ points, getColor }: ScatterPlotProps): JSX.Element {
             points.map((p) => {
               const cx = xScale(p.x)
               const cy = yScale(p.y)
-              const fill = getColor(p.community)
+              const fill = p.color || '#808080'
+              const isTarget = targets.has(p.id)
               return (
                 <g key={p.id}>
                   <circle
                     cx={cx}
                     cy={cy}
-                    r={p.target ? 7 : 3}
+                    r={isTarget ? 7 : 3}
                     fill={fill}
-                    stroke={p.target ? '#111827' : 'none'}
-                    strokeWidth={p.target ? 1.5 : 0}
-                    opacity={p.target ? 1 : 0.7}
-                    data-community={p.community}
+                    stroke={isTarget ? '#111827' : 'none'}
+                    strokeWidth={isTarget ? 1.5 : 0}
+                    opacity={isTarget ? 1 : 0.7}
+                    data-community={p.data?.community?.toString()}
                   >
                     <title>{p.id}</title>
                   </circle>
-                  {p.target && (
+                  {isTarget && (
                     <text
                       x={cx + 9}
                       y={cy + 4}

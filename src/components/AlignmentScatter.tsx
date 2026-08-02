@@ -2,7 +2,11 @@ import type { Dictionary } from '@lib/build/cedict'
 import { useState, useEffect, useMemo } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
-import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
+import {
+  EmbeddingDatasetSchema,
+  type EmbeddingDataset,
+  type EmbeddingNode,
+} from '@lib/embeddings'
 import {
   procrustes,
   applyRotation,
@@ -154,17 +158,26 @@ export default function AlignmentScatter({
   const points = useMemo<ScatterPoint[]>(() => {
     if (!chineseData || !englishData) return []
     return coords.map<ScatterPoint>((c, i) => {
-      const node =
+      const { id, vec, ...data } =
         i < zhCount ? chineseData.nodes[i] : englishData.nodes[i - zhCount]
+      const community = i < zhCount ? CHINESE : ENGLISH
       return {
-        id: node.id,
+        id,
         x: c?.[0] ?? 0,
         y: c?.[1] ?? 0,
-        community: i < zhCount ? CHINESE : ENGLISH,
-        target: node.target,
+        color: getColor(community),
+        data,
       }
     })
   }, [chineseData, englishData, coords, zhCount])
+
+  const targets = useMemo<Set<string>>(() => {
+    if (!chineseData || !englishData) return new Set()
+    const ids = [chineseData, englishData].flatMap((data) =>
+      data?.nodes.filter((n) => n.target).map((n) => n.id),
+    )
+    return new Set(ids)
+  }, [chineseData, englishData])
 
   const legend: LegendLabel[] = [
     {
@@ -206,7 +219,7 @@ export default function AlignmentScatter({
     <div className="w-full">
       <CanvasScatterPlot
         points={points}
-        getColor={getColor}
+        targets={targets}
         dictionary={dictionary}
       />
 
