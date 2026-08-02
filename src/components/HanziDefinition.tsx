@@ -12,7 +12,7 @@ export interface HanziDefinitionProps {
  * distinguishes them — 中 as `zhōng` "within" versus `zhòng` "to hit".
  *
  * `maxDefinitions` is a budget across the whole card, spent reading by reading,
- * so the common sense is never crowded out by a surname.
+ * so a rarer reading can't crowd out the everyday one.
  */
 export default function HanziDefinition({
   entry,
@@ -74,9 +74,6 @@ function Pronunciation({
           {' '}
           (or {reading.altPronunciation.join(', ')})
         </span>
-      )}
-      {reading.isProperNoun && (
-        <span className="font-normal text-gray-500"> (name)</span>
       )}
     </>
   )

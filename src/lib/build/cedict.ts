@@ -10,16 +10,11 @@ export interface DictionaryReading {
   definitions: string[]
   /** The `also pr.` variants CC-CEDICT notes for this reading. */
   altPronunciation?: string[]
-  /**
-   * CC-CEDICT capitalises the pinyin of proper-noun senses (`Zhong1` = the
-   * surname). These sort last and are worth labelling as such.
-   */
-  isProperNoun: boolean
 }
 
 export interface DictionaryEntry {
   hanzi: string
-  /** Every reading, ordinary senses before proper nouns. Never empty. */
+  /** Every reading, meanings before cross-references. Never empty. */
   readings: DictionaryReading[]
   /** The first reading's pinyin — what a one-line label shows. */
   pinyin: string
@@ -30,16 +25,15 @@ export type Dictionary = Record<string, DictionaryEntry>
 const CEDICT_PATH = path.resolve('src/data/cedict_1_0_ts_utf-8_mdbg.txt')
 const LINE_RE = /^(\S+)\s+\S+\s+\[([^\]]+)\]\s+\/(.+)\/$/
 
+/** `pinyin-tone` only marks lowercase input, so normalise first. */
+const toTonePinyin = (raw: string): string => toPinyinTones(raw.toLowerCase())
+
 /**
- * Tone marks, preserving CC-CEDICT's capitalisation of proper nouns —
- * `pinyin-tone` only marks lowercase input, so `Zhong1` would come back
- * unchanged rather than as `Zhōng`.
+ * CC-CEDICT capitalises the pinyin of proper-noun senses — `Zhong1` is the
+ * surname 中, `Le4` the place name 樂. Those are handled downstream, so they
+ * never make it into an entry.
  */
-function toTonePinyin(raw: string): string {
-  const marked = toPinyinTones(raw.toLowerCase())
-  if (!/^[A-Z]/.test(raw)) return marked
-  return marked.charAt(0).toUpperCase() + marked.slice(1)
-}
+const isProperNoun = (pinyinRaw: string): boolean => /^[A-Z]/.test(pinyinRaw)
 
 /**
  * Senses that only point elsewhere — `used in 惡心[e3 xin1]`, `variant of …`.
@@ -52,13 +46,12 @@ const isCrossReference = (reading: DictionaryReading): boolean =>
   reading.definitions.every((def) => CROSS_REFERENCE.test(def))
 
 /**
- * Sort key: real senses first, then proper nouns, then cross-references. Within
- * a rank CC-CEDICT's own order is kept. Without this, 樂 leads with `lào`
- * ("used in place names") and 惡 with `ě`, purely because those lines come
- * first in the file.
+ * Sort key: real senses before cross-references. Within a rank CC-CEDICT's own
+ * order is kept. Without this, 樂 leads with `lào` ("used in place names") and
+ * 惡 with `ě`, purely because those lines come first in the file.
  */
 const readingRank = (reading: DictionaryReading): number =>
-  (isCrossReference(reading) ? 2 : 0) + (reading.isProperNoun ? 1 : 0)
+  isCrossReference(reading) ? 1 : 0
 
 /**
  * Pull the trailing `also pr. [xx1 yy2]` note out of a sense list, since it
@@ -78,14 +71,14 @@ function takeAltPronunciation(definitions: string[]): string[] | undefined {
 /**
  * Build a dictionary for `chars` from the bundled CC-CEDICT.
  *
- * A character usually has several CC-CEDICT lines — one per pronunciation, plus
- * a capitalised one for any surname or place-name sense. They are merged into a
- * single entry keyed by the headword, keeping each pronunciation's senses
- * separate: 中 is `zhōng` (within, middle), `zhòng` (to hit a target) and
- * `Zhōng` (China; surname), not whichever line happened to come last.
+ * A character usually has several CC-CEDICT lines, one per pronunciation. They
+ * are merged into a single entry keyed by the headword, keeping each
+ * pronunciation's senses separate: 中 is `zhōng` (within, middle) *and* `zhòng`
+ * (to hit a target), not whichever line happened to come last.
  *
  * Lines sharing a pronunciation are folded together, and readings are ordered
- * with proper nouns last so `entry.pinyin` is the everyday reading.
+ * with cross-references last so `entry.pinyin` is the everyday reading. Proper
+ * nouns are dropped; a headword with no other sense gets no entry at all.
  */
 export async function buildDictionary(
   chars: Iterable<string>,
@@ -105,7 +98,7 @@ export async function buildDictionary(
     const m = line.match(LINE_RE)
     if (!m) return
     const [, traditional, pinyinRaw, defsRaw] = m
-    if (!targets.has(traditional)) return
+    if (!targets.has(traditional) || isProperNoun(pinyinRaw)) return
 
     const definitions = defsRaw
       .split('/')
@@ -129,12 +122,7 @@ export async function buildDictionary(
       return
     }
 
-    readings.set(pinyin, {
-      pinyin,
-      definitions,
-      altPronunciation,
-      isProperNoun: /^[A-Z]/.test(pinyinRaw),
-    })
+    readings.set(pinyin, { pinyin, definitions, altPronunciation })
   })
 
   return new Promise((resolve, reject) => {
