@@ -44,7 +44,10 @@ export default function EmbeddingScatter({
   const [layout, setLayout] = useState<Layout>('pca')
   const [perplexity, setPerplexity] = useState(30)
   const [highlighted, setHighlighted] = useState<Set<number>>(new Set())
-  const [extraTargets, setExtraTargets] = useState<string[]>([])
+  // `null` until the control is touched, which is what lets the corpus's own
+  // targets stand in as the initial selection: they only arrive with the data,
+  // and seeding state from an effect would fight a user who deselects them.
+  const [selectedTargets, setSelectedTargets] = useState<string[] | null>(null)
   const { coords, steps, done, run, stop } = useTsne()
 
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
@@ -53,16 +56,15 @@ export default function EmbeddingScatter({
     () => data?.nodes.map((n) => nodeToScatterPoint(n, data.documents)) || [],
     [data],
   )
-  // The corpus's own targets (the core terms list), plus whatever the user has
-  // picked out. Both are drawn the same way — larger, outlined, labelled.
+  // The corpus's core terms — the pipeline's `target` nodes. They seed the
+  // selection rather than being pinned to it, so any of them can be dropped.
   const coreTargets = useMemo<string[]>(
     () => data?.nodes.filter((n) => n.target).map((n) => n.id) || [],
     [data],
   )
-  const targets = useMemo<Set<string>>(
-    () => new Set([...coreTargets, ...extraTargets]),
-    [coreTargets, extraTargets],
-  )
+  // Whatever is selected *is* what the plot emphasises: larger, outlined, labelled.
+  const selection = selectedTargets ?? coreTargets
+  const targets = useMemo<Set<string>>(() => new Set(selection), [selection])
 
   // Every node is selectable. Chinese options carry pinyin so the vocabulary is
   // reachable from a plain keyboard — `ren2`, `ren` and `rén` all find 仁.
@@ -164,11 +166,11 @@ export default function EmbeddingScatter({
 
       <TagsCombobox
         className="mt-4"
-        label="Highlight terms"
-        value={extraTargets}
+        label="Highlighted terms"
+        value={selection}
         options={options}
-        onChange={setExtraTargets}
-        placeholder={extraTargets.length ? '' : 'add a term…'}
+        onChange={setSelectedTargets}
+        placeholder={selection.length ? '' : 'add a term…'}
       />
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
