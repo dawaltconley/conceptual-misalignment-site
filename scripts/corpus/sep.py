@@ -138,6 +138,11 @@ class SEPSearch(Source):
                 break  # ...and stop paging (the for-break alone kept looping)
             page += 1
 
+        global _max_len_citation
+        print("max length citation:")
+        print(_max_len_citation)
+        _max_len_citation = ""
+
         return sep
 
 
@@ -202,12 +207,17 @@ _PARENS_RE = re.compile(r"\((.*?)[\(\)]", re.DOTALL)
 _CITATION_RE = re.compile(
     r"[^();.]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—0-9]+)?[^();.]*", re.DOTALL)
 
+_max_len_citation = ""
+
 
 def _strip_citations(text: str) -> str:
     stripped = text
     citation_spans: list[tuple[int, int]] = []
     for parens in _PARENS_RE.finditer(text):
         inner = parens.group(1)
+        global _max_len_citation
+        if len(inner) > len(_max_len_citation):
+            _max_len_citation = inner
         for match in _CITATION_RE.finditer(inner):
             start = parens.start() + match.start() + 1
             end = parens.start() + match.end() + 1
