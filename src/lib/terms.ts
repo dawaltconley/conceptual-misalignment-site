@@ -60,3 +60,15 @@ export type MasterSource = z.infer<typeof SourceSchema>
 export type CorpusSide = z.infer<typeof CorpusSideSchema>
 export type MasterTerm = z.infer<typeof MasterTermSchema>
 export type Master = z.infer<typeof MasterSchema>
+
+export function getTermFrequencies(terms: MasterTerm[]): Map<string, number> {
+  const map = new Map<string, number>()
+  terms
+    .flatMap((t) => [t.chinese, ...t.english])
+    .forEach((c) => {
+      const k = c.term.label
+      const o = map.get(k) || 0
+      map.set(k, o + c.occurrences)
+    })
+  return map
+}
