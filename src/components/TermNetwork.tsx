@@ -19,21 +19,12 @@ interface TermNetworkProps {
 }
 
 /** The networks to feed one MultiNetwork for a corpus side, per kind. */
-function refsFor(
-  side: CorpusSide,
-  kind: NetworkKind,
-  label: string,
-): NetworkRef[] {
-  if (kind === 'similarity') {
-    return side.similarity
-      ? [{ id: 'similarity', title: label, path: side.similarity }]
-      : []
-  }
-  return side.sources.map((s) => ({
-    id: s.id,
-    title: s.title,
-    path: s.cooccurrence,
-  }))
+function refsFor(side: CorpusSide, kind: NetworkKind): NetworkRef[] {
+  const sources = kind === 'similarity' ? side.similarity : side.cooccurrence
+  // `data` is nullish on the shared Source type; keep only sources with a path.
+  return sources.flatMap((s) =>
+    s.data ? [{ id: s.id, title: s.title, path: s.data }] : [],
+  )
 }
 
 /**
@@ -54,7 +45,8 @@ export default function TermNetwork({
     term?.renderings[0] ?? '',
   )
   const english =
-    term?.english.find((e) => e.label === renderingLabel) ?? term?.english[0]
+    term?.english.find((e) => e.term.label === renderingLabel) ??
+    term?.english[0]
 
   function selectHanzi(next: string): void {
     setHanzi(next)
@@ -77,7 +69,7 @@ export default function TermNetwork({
         />
         <MultiNetwork
           key={`${kind}:${term.hanzi}`}
-          sources={refsFor(term.chinese, kind, term.hanzi)}
+          sources={refsFor(term.chinese, kind)}
           centralNodeId={term.hanzi}
           dictionary={dictionary}
           sourceAlign="left"
@@ -86,16 +78,16 @@ export default function TermNetwork({
       <div className="mt-8 xl:mt-0 xl:w-1/2">
         <Select
           label="English rendering"
-          value={english.label}
+          value={english.term.label}
           options={term.renderings}
           onChange={setRenderingLabel}
           className="mb-3"
           triggerClassName="text-lg"
         />
         <MultiNetwork
-          key={`${kind}:${term.hanzi}:${english.label}`}
-          sources={refsFor(english, kind, english.label)}
-          centralNodeId={english.label}
+          key={`${kind}:${term.hanzi}:${english.term.label}`}
+          sources={refsFor(english, kind)}
+          centralNodeId={english.term.label}
           sourceAlign="right"
         />
       </div>

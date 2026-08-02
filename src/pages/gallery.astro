@@ -13,10 +13,10 @@ const master = MasterSchema.parse(termsJson)
 
 // The same dictionary index.astro builds, reused here so the comboboxes are
 // searched against real hanzi and real CC-CEDICT readings.
-const chinesePaths = master.terms.flatMap((t) => [
-  ...t.chinese.sources.map((s) => s.cooccurrence),
-  ...(t.chinese.similarity ? [t.chinese.similarity] : []),
-])
+const chinesePaths = master.terms
+  .flatMap((t) => [...t.chinese.cooccurrence, ...t.chinese.similarity])
+  .map((s) => s.data)
+  .filter((d): d is string => Boolean(d))
 const dictionary = await buildDictionaryFromFiles(chinesePaths)
 
 const hanzi: ComboboxOption[] = Object.values(dictionary)

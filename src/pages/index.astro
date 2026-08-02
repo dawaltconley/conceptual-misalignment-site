@@ -11,10 +11,10 @@ const master = MasterSchema.parse(termsJson)
 
 // Dictionary over every hanzi in the Chinese networks — co-occurrence and
 // similarity — read at build time.
-const chinesePaths = master.terms.flatMap((t) => [
-  ...t.chinese.sources.map((s) => s.cooccurrence),
-  ...(t.chinese.similarity ? [t.chinese.similarity] : []),
-])
+const chinesePaths = master.terms
+  .flatMap((t) => [...t.chinese.cooccurrence, ...t.chinese.similarity])
+  .map((s) => s.data)
+  .filter((d): d is string => Boolean(d))
 const dictionary = await buildDictionaryFromFiles(chinesePaths)
 ---
 
