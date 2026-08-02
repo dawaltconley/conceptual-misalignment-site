@@ -175,7 +175,7 @@ function CanvasScatterPlot({
       ctx.fillStyle = '#111827'
       ctx.fillText(p.id, cx + 9, cy)
     }
-  }, [points, width, height, isHighlighted, transform])
+  }, [points, targets, width, height, isHighlighted, transform])
 
   // --- ctrl+wheel to zoom, drag to pan (bounded to the plot body) ---
   useLayoutEffect(() => {
