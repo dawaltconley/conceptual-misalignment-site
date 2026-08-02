@@ -222,7 +222,8 @@ function drawEdges(
   for (const { x1, y1, x2, y2, weight = 1 } of edges) {
     ctx.beginPath()
     ctx.strokeStyle = '#9ca3af'
-    ctx.lineWidth = Math.log2(weight + 1) * 0.4
+    ctx.globalAlpha = Math.min(1, Math.max(0, 0.3 * weight))
+    ctx.lineWidth = Math.log2(weight + 1) * 2
     ctx.moveTo(toX(x1), toY(y1))
     ctx.lineTo(toX(x2), toY(y2))
     ctx.stroke()
