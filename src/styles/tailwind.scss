@@ -224,7 +224,8 @@
     cursor: default;
     outline: none;
 
-    &[data-highlighted] {
+    &[data-highlighted],
+    &:focus-visible {
       background-color: theme('colors.primary.DEFAULT');
       color: theme('colors.white');
     }
