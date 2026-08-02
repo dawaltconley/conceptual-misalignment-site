@@ -42,12 +42,17 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
         <div class="xl:w-1/2">
           <EmbeddingScatter
             client:only="react"
+            terms={master.terms}
             data="/embeddings/mengzi.json"
             dictionary={dictionary}
           />
         </div>
         <div class="mt-8 xl:mt-0 xl:w-1/2">
-          <EmbeddingScatter client:only="react" data="/embeddings/sep.json" />
+          <EmbeddingScatter
+            terms={master.terms}
+            client:only="react"
+            data="/embeddings/sep.json"
+          />
         </div>
       </div>
     </div>

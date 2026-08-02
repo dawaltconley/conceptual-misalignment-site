@@ -1,4 +1,5 @@
 import type { Dictionary } from '@lib/build/cedict'
+import type { MasterTerm } from '@lib/terms'
 import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
@@ -19,6 +20,7 @@ type Layout = 'pca' | 'tsne'
 const TSNE_MAX_ITER = 500
 
 interface EmbeddingScatterProps {
+  terms: MasterTerm[]
   data: string
   dictionary?: Dictionary
 }
@@ -44,7 +46,7 @@ export default function EmbeddingScatter({
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
   const pcaPoints = useMemo<ScatterPoint[]>(
-    () => data?.nodes.map(nodeToScatterPoint) || [],
+    () => data?.nodes.map((n) => nodeToScatterPoint(n, data.documents)) || [],
     [data],
   )
   const targets = useMemo<Set<string>>(
@@ -83,8 +85,9 @@ export default function EmbeddingScatter({
 
   const tsnePoints = useMemo<ScatterPoint[]>(() => {
     if (!data) return []
+    console.log(data.documents)
     return coords.map((c, i) => ({
-      ...nodeToScatterPoint(data.nodes[i]),
+      ...nodeToScatterPoint(data.nodes[i], data.documents),
       x: c[0],
       y: c[1],
     }))
@@ -195,12 +198,18 @@ function getColor(community: number): string {
   return community < 0 ? NO_COMMUNITY_COLOR : color(community)
 }
 
-function nodeToScatterPoint({ id, vec, ...data }: EmbeddingNode): ScatterPoint {
+function nodeToScatterPoint(
+  { id, vec, ...data }: EmbeddingNode,
+  corpusDocuments: number,
+): ScatterPoint {
   return {
     id,
     x: vec[0] ?? 0,
     y: vec[1] ?? 0,
     color: getColor(data.community),
+    opacity: data.doc_freq / corpusDocuments,
+    size: Math.log2(data.strength + 1), // works well
+    // size: Math.log10(data.pagerank + 1) * 5000,
     data,
   }
 }

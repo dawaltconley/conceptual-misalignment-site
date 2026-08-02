@@ -29,6 +29,9 @@ const leftAxisWidth = 50
 const rangeMultiplier = 1.05
 
 const TEXT_THRESHOLD = 4
+const DEFAULT_RADIUS = 3
+const DEFAULT_COLOR = '#808080'
+const DEFAULT_OPACITY = 0.7
 
 export interface CanvasScatterPlotProps extends ScatterPlotProps {
   isHighlighted?: (p: ScatterPoint) => boolean
@@ -130,11 +133,12 @@ function CanvasScatterPlot({
       if (targets.has(p.id)) continue
       const cx = zx(p.x)
       const cy = zy(p.y)
+      const r = p.size ?? DEFAULT_RADIUS
 
-      ctx.globalAlpha = p.opacity ?? 0.7
+      ctx.globalAlpha = p.opacity ?? DEFAULT_OPACITY
       ctx.beginPath()
-      ctx.fillStyle = p.color || '#808080'
-      ctx.arc(cx, cy, 3, 0, 2 * Math.PI)
+      ctx.fillStyle = p.color || DEFAULT_COLOR
+      ctx.arc(cx, cy, r, 0, 2 * Math.PI)
       ctx.fill()
       if (isHighlighted(p)) {
         ctx.strokeStyle = '#000000'
@@ -156,9 +160,10 @@ function CanvasScatterPlot({
       if (!targets.has(p.id)) continue
       const cx = zx(p.x)
       const cy = zy(p.y)
+      const r = p.size ?? DEFAULT_RADIUS
       ctx.beginPath()
-      ctx.fillStyle = p.color || '#808080'
-      ctx.arc(cx, cy, 7, 0, 2 * Math.PI)
+      ctx.fillStyle = p.color || DEFAULT_COLOR
+      ctx.arc(cx, cy, r * 2, 0, 2 * Math.PI)
       ctx.fill()
       ctx.lineWidth = 1.5
       ctx.strokeStyle = '#111827'
@@ -266,6 +271,7 @@ function CanvasScatterPlot({
 
     const px = zx(p.x)
     const py = zy(p.y)
+    const r = p.size ?? DEFAULT_RADIUS
 
     if (getDistSq({ x: px, y: py }, { x, y }) > 1200) {
       setTooltip(null)
@@ -280,10 +286,12 @@ function CanvasScatterPlot({
     })
 
     ctx.beginPath()
-    ctx.arc(px, py, 3, 0, 2 * Math.PI)
+    ctx.arc(px, py, r, 0, 2 * Math.PI)
     ctx.lineWidth = 1
     ctx.strokeStyle = '#000000'
     ctx.stroke()
+    ctx.fillStyle = p.color || DEFAULT_COLOR
+    ctx.fill()
   }
 
   return (
