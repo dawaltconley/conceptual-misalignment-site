@@ -7,6 +7,7 @@ import toPinyinTones from 'pinyin-tone'
 export interface DictionaryReading {
   /** Tone-marked pinyin for this reading, e.g. `zhòng`. */
   pinyin: string
+  /** Empty only for a headword whose reading was assembled per-character. */
   definitions: string[]
   /** The `also pr.` variants CC-CEDICT notes for this reading. */
   altPronunciation?: string[]
@@ -82,27 +83,19 @@ function takeAltPronunciation(definitions: string[]): string[] | undefined {
   return alt.length > 0 ? alt : undefined
 }
 
+/** Readings keyed headword → pinyin, in file order. */
+type Collected = Map<string, Map<string, DictionaryReading>>
+
 /**
- * Build a dictionary for `chars` from the bundled CC-CEDICT.
- *
- * A character usually has several CC-CEDICT lines, one per pronunciation. They
- * are merged into a single entry keyed by the headword, keeping each
- * pronunciation's senses separate: 中 is `zhōng` (within, middle) *and* `zhòng`
- * (to hit a target), not whichever line happened to come last.
- *
- * Lines sharing a pronunciation are folded together, and readings are ordered
- * with cross-references last so `entry.pinyin` is the everyday reading. Names
- * are set aside: 中 keeps only `zhōng`/`zhòng`, but a headword CC-CEDICT knows
- * *only* as a name (舜, 孟子) gets that, marked `isProperNoun`.
+ * One streaming pass over CC-CEDICT, collecting every line whose headword is in
+ * `targets`. Ordinary senses and names land in separate maps, since names are
+ * only ever a fallback.
  */
-export async function buildDictionary(
-  chars: Iterable<string>,
-): Promise<Dictionary> {
-  const targets = new Set(chars)
-  // Readings in file order, keyed headword → pinyin, so repeated pronunciations
-  // (CC-CEDICT lists some once per simplified form) accumulate rather than clash.
-  const senses = new Map<string, Map<string, DictionaryReading>>()
-  const names = new Map<string, Map<string, DictionaryReading>>()
+async function scanCedict(
+  targets: ReadonlySet<string>,
+): Promise<{ senses: Collected; names: Collected }> {
+  const senses: Collected = new Map()
+  const names: Collected = new Map()
 
   const rl = readline.createInterface({
     input: fs.createReadStream(CEDICT_PATH, { encoding: 'utf8' }),
@@ -132,7 +125,8 @@ export async function buildDictionary(
     const pinyin = toTonePinyin(pinyinRaw)
     const existing = readings.get(pinyin)
     if (existing) {
-      // Same pronunciation seen again: union the senses, keeping first order.
+      // Same pronunciation seen again (CC-CEDICT lists some once per simplified
+      // form): union the senses, keeping first order.
       const seen = new Set(existing.definitions)
       existing.definitions.push(...definitions.filter((d) => !seen.has(d)))
       existing.altPronunciation ??= altPronunciation
@@ -143,28 +137,85 @@ export async function buildDictionary(
   })
 
   return new Promise((resolve, reject) => {
-    rl.on('close', () => {
-      const result: Dictionary = {}
-      for (const hanzi of targets) {
-        // Ordinary senses win outright; the name is a fallback, so 中 is
-        // "within" rather than the surname but 舜 still gets its sage-king.
-        const readings = senses.get(hanzi) ?? names.get(hanzi)
-        if (!readings) continue
-        // Stable sort, so within a rank CC-CEDICT's own order survives.
-        const ordered = [...readings.values()].sort(
-          (a, b) => readingRank(a) - readingRank(b),
-        )
-        result[hanzi] = {
-          hanzi,
-          readings: ordered,
-          pinyin: ordered[0].pinyin,
-          ...(senses.has(hanzi) ? {} : { isProperNoun: true }),
-        }
-      }
-      resolve(result)
-    })
+    rl.on('close', () => resolve({ senses, names }))
     rl.on('error', (e) => reject(e))
   })
+}
+
+/**
+ * Fold one headword's collected readings into an entry. Ordinary senses win
+ * outright; the name is a fallback, so 中 is "within" rather than the surname
+ * but 舜 still gets its sage-king.
+ */
+function toEntry(
+  hanzi: string,
+  { senses, names }: { senses: Collected; names: Collected },
+): DictionaryEntry | null {
+  const readings = senses.get(hanzi) ?? names.get(hanzi)
+  if (!readings) return null
+  // Stable sort, so within a rank CC-CEDICT's own order survives.
+  const ordered = [...readings.values()].sort(
+    (a, b) => readingRank(a) - readingRank(b),
+  )
+  return {
+    hanzi,
+    readings: ordered,
+    pinyin: ordered[0].pinyin,
+    ...(senses.has(hanzi) ? {} : { isProperNoun: true }),
+  }
+}
+
+/**
+ * Build a dictionary for `chars` from the bundled CC-CEDICT.
+ *
+ * A character usually has several CC-CEDICT lines, one per pronunciation. They
+ * are merged into a single entry keyed by the headword, keeping each
+ * pronunciation's senses separate: 中 is `zhōng` (within, middle) *and* `zhòng`
+ * (to hit a target), not whichever line happened to come last.
+ *
+ * Lines sharing a pronunciation are folded together, and readings are ordered
+ * with cross-references last so `entry.pinyin` is the everyday reading. Names
+ * are set aside: 中 keeps only `zhōng`/`zhòng`, but a headword CC-CEDICT knows
+ * *only* as a name (舜, 孟子) gets that, marked `isProperNoun`.
+ *
+ * A multi-character headword that isn't in CC-CEDICT at all falls back to its
+ * characters' readings joined together — pinyin with no definitions, 許子 as
+ * `Xǔ zǐ`. Costs a second pass, taken only when something is missing.
+ */
+export async function buildDictionary(
+  chars: Iterable<string>,
+): Promise<Dictionary> {
+  const targets = new Set(chars)
+  const collected = await scanCedict(targets)
+
+  const result: Dictionary = {}
+  for (const hanzi of targets) {
+    const entry = toEntry(hanzi, collected)
+    if (entry) result[hanzi] = entry
+  }
+
+  // Multi-character headwords CC-CEDICT has never heard of — mostly Mengzi's
+  // minor figures (許子, 瞽瞍). A per-character reading is still better than a
+  // bare glyph, so gather the characters we don't already have and go again.
+  const unresolved = [...targets].filter(
+    (hanzi) => !result[hanzi] && [...hanzi].length > 1,
+  )
+  const wanted = new Set(
+    unresolved.flatMap((hanzi) => [...hanzi]).filter((char) => !result[char]),
+  )
+  const parts = wanted.size > 0 ? await scanCedict(wanted) : null
+
+  for (const hanzi of unresolved) {
+    const syllables = [...hanzi].map(
+      (char) => result[char]?.pinyin ?? (parts && toEntry(char, parts)?.pinyin),
+    )
+    // All or nothing: half a reading would be misleading rather than useful.
+    if (syllables.some((syllable) => !syllable)) continue
+    const pinyin = syllables.join(' ')
+    result[hanzi] = { hanzi, pinyin, readings: [{ pinyin, definitions: [] }] }
+  }
+
+  return result
 }
 
 /**
