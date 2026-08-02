@@ -49,3 +49,9 @@ export const toRichText = (str: string) => ({
 })
 
 export const slugify = (str: string): string => npmSlugify(str, { lower: true })
+
+export function alphaToHex(alpha: number): string {
+  return Math.ceil(alpha * 255)
+    .toString(16)
+    .padStart(2, '0')
+}

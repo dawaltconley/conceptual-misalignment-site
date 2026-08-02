@@ -2,7 +2,7 @@ import type { Dictionary } from '@lib/build/cedict'
 import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
-import { EmbeddingDatasetSchema } from '@lib/embeddings'
+import { EmbeddingDatasetSchema, type EmbeddingNode } from '@lib/embeddings'
 import Button from './Button'
 import Toggle from './Toggle'
 import {
@@ -44,16 +44,14 @@ export default function EmbeddingScatter({
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
   const pcaPoints = useMemo<ScatterPoint[]>(
+    () => data?.nodes.map(nodeToScatterPoint) || [],
+    [data],
+  )
+  const targets = useMemo<Set<string>>(
     () =>
-      data
-        ? data.nodes.map((n) => ({
-            id: n.id,
-            community: n.community,
-            target: n.target,
-            x: n.vec[0] ?? 0,
-            y: n.vec[1] ?? 0,
-          }))
-        : [],
+      new Set<string>(
+        data?.nodes.filter((n) => n.target).map((n) => n.id) || [],
+      ),
     [data],
   )
 
@@ -83,19 +81,14 @@ export default function EmbeddingScatter({
     }
   }, [layout, data, perplexity, run, stop])
 
-  const tsnePoints = useMemo<ScatterPoint[]>(
-    () =>
-      data
-        ? coords.map((c, i) => ({
-            id: data.nodes[i].id,
-            community: data.nodes[i].community,
-            target: data.nodes[i].target,
-            x: c[0],
-            y: c[1],
-          }))
-        : [],
-    [data, coords],
-  )
+  const tsnePoints = useMemo<ScatterPoint[]>(() => {
+    if (!data) return []
+    return coords.map((c, i) => ({
+      ...nodeToScatterPoint(data.nodes[i]),
+      x: c[0],
+      y: c[1],
+    }))
+  }, [data, coords])
 
   if (status === 'error') {
     return (
@@ -124,8 +117,8 @@ export default function EmbeddingScatter({
     <Wrapper>
       <ScatterPlot
         points={points}
-        getColor={getColor}
-        highlightedCommunities={highlighted}
+        targets={targets}
+        isHighlighted={(p) => highlighted.has(Number(p.data?.community))}
         dictionary={dictionary}
       />
       <div className="ml-8 columns-2 text-xs">
@@ -200,4 +193,14 @@ const NO_COMMUNITY_COLOR = '#cbd5e1' // grey for isolates (community -1)
 
 function getColor(community: number): string {
   return community < 0 ? NO_COMMUNITY_COLOR : color(community)
+}
+
+function nodeToScatterPoint({ id, vec, ...data }: EmbeddingNode): ScatterPoint {
+  return {
+    id,
+    x: vec[0] ?? 0,
+    y: vec[1] ?? 0,
+    color: getColor(data.community),
+    data,
+  }
 }
