@@ -47,7 +47,6 @@
     "ml-matrix": "^6.14.0",
     "pinyin-tone": "^2.4.0",
     "postcss": "^8.4.38",
-    "radix-ui": "^1.6.5",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "sass": "^1.74.1",

@@ -6,10 +6,12 @@ import {
   memo,
   useMemo,
   type MouseEvent,
+  type PointerEvent,
 } from 'react'
 import * as d3 from 'd3'
 import { Position, getDistSq } from '@lib/graphs'
 import useSize from '@lib/browser/hooks/useSize'
+import useTooltipGesture from '@lib/browser/hooks/useTooltipGesture'
 import SVGAxis from './SVGAxis'
 import SVGTranslate from './SVGTranslate'
 import {
@@ -17,7 +19,7 @@ import {
   type ScatterPoint,
   type ScatterPlotProps,
 } from './ScatterPlot'
-import { Tooltip } from 'radix-ui'
+import VirtualTooltip from './VirtualTooltip'
 import HanziDefinition from './HanziDefinition'
 import clsx from 'clsx'
 
@@ -63,6 +65,17 @@ function CanvasScatterPlot({
   const { width = 0, height = 0 } = size || {}
 
   const [isInteractive, setIsInteractive] = useState(true)
+
+  const gesture = useTooltipGesture<string>({
+    hoverDelay: 0,
+    holdDelay: 400,
+    moveTolerance: 8,
+  })
+  // Read inside the zoom effect via a ref so pan-start can close a touch
+  // tooltip without adding `gesture` to that effect's deps (which would tear
+  // down/rebuild d3.zoom on every render).
+  const gestureRef = useRef(gesture)
+  gestureRef.current = gesture
 
   const body = new Position({
     width: Math.max(width - leftAxisWidth - 2 * paddingX, 0),
@@ -195,6 +208,9 @@ function CanvasScatterPlot({
       .on('zoom', (e: d3.D3ZoomEvent<HTMLCanvasElement, unknown>) =>
         setTransform(e.transform),
       )
+      // A pinch/pan starting elsewhere would otherwise leave a touch-opened
+      // tooltip visually detached from its (now-stale) anchor position.
+      .on('start', () => gestureRef.current.close())
     zoomRef.current = zoom
 
     const selection = d3.select(canvas)
@@ -241,9 +257,41 @@ function CanvasScatterPlot({
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
   const hanziDefinition = tooltip && dictionary[tooltip.id]
 
+  // Delaunay lookup shared by mouse hover and touch tap/hold, so the target-node
+  // exclusion and distance cutoff below apply identically to both input paths.
+  // Lives in un-zoomed scale-pixel space, so invert the zoom first.
+  const hitTest = (clientX: number, clientY: number): ScatterPoint | null => {
+    const canvas = hoverCanvasRef.current
+    if (!canvas || !ready || !delaunay) return null
+    const bounds = canvas.getBoundingClientRect()
+    const x = clientX - bounds.left - body.x
+    const y = clientY - bounds.top - body.y
+
+    const [ix, iy] = transform.invert([x, y])
+    const index = delaunay.find(ix, iy)
+    const p: ScatterPoint | undefined = points[index]
+    if (!p || targets.has(p.id)) return null
+
+    const px = zx(p.x)
+    const py = zy(p.y)
+    if (getDistSq({ x: px, y: py }, { x, y }) > 1200) return null
+
+    return p
+  }
+
+  // Viewport-absolute position for a hit point, for the tooltip's virtual anchor.
+  const anchorPoint = (p: ScatterPoint): ScatterPoint => {
+    const bounds = hoverCanvasRef.current?.getBoundingClientRect()
+    return {
+      ...p,
+      x: zx(p.x) + body.x + (bounds?.left ?? 0),
+      y: zy(p.y) + body.y + (bounds?.top ?? 0),
+    }
+  }
+
   const handleHover = (e: MouseEvent<HTMLCanvasElement> | null) => {
     const canvas = hoverCanvasRef.current
-    if (!canvas || !ready || !delaunay) return
+    if (!canvas || !ready) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -260,35 +308,22 @@ function CanvasScatterPlot({
     // Clear on leave, and don't hover while panning (drag holds the button down).
     if (!e || e.buttons) {
       setTooltip(null)
+      gesture.onHover(null)
       return
     }
 
-    let [x, y] = d3.pointer(e, canvas)
-    x -= body.x
-    y -= body.y
-
-    // delaunay lives in un-zoomed scale-pixel space, so invert the zoom first.
-    const [ix, iy] = transform.invert([x, y])
-    const index = delaunay.find(ix, iy)
-    const p: ScatterPoint | undefined = points[index]
-    if (!p || targets.has(p.id)) return
-
-    const px = zx(p.x)
-    const py = zy(p.y)
-    const r = p.size ?? DEFAULT_RADIUS
-
-    if (getDistSq({ x: px, y: py }, { x, y }) > 1200) {
+    const p = hitTest(e.clientX, e.clientY)
+    gesture.onHover(p?.id ?? null)
+    if (!p) {
       setTooltip(null)
       return
     }
 
-    const bounds = canvas.getBoundingClientRect()
-    setTooltip({
-      ...p,
-      x: px + body.x + bounds.left,
-      y: py + body.y + bounds.top,
-    })
+    setTooltip(anchorPoint(p))
 
+    const px = zx(p.x)
+    const py = zy(p.y)
+    const r = p.size ?? DEFAULT_RADIUS
     ctx.beginPath()
     ctx.arc(px, py, r * 1.1, 0, 2 * Math.PI)
     ctx.lineWidth = 1.5
@@ -298,57 +333,91 @@ function CanvasScatterPlot({
     ctx.fill()
   }
 
+  // Touch/pen only — mouse keeps using handleHover above. Hit-testing eagerly on
+  // pointerdown lets the canvas ring/tooltip anchor track the press immediately;
+  // whether the popup actually opens is decided by `gesture` (tap, hold-still,
+  // or a pan that never resolves into either).
+  const handlePress = (e: PointerEvent<HTMLCanvasElement>) => {
+    if (e.pointerType === 'mouse') return
+    const p = isInteractive ? hitTest(e.clientX, e.clientY) : null
+    setTooltip(p ? anchorPoint(p) : null)
+    gesture.onPointerDown(
+      p?.id ?? null,
+      { x: e.clientX, y: e.clientY },
+      e.pointerType,
+    )
+  }
+
+  const handlePressMove = (e: PointerEvent<HTMLCanvasElement>) => {
+    if (e.pointerType === 'mouse') return
+    gesture.onPointerMove({ x: e.clientX, y: e.clientY })
+  }
+
+  const handlePressEnd = (e: PointerEvent<HTMLCanvasElement>) => {
+    if (e.pointerType === 'mouse') return
+    gesture.onPointerUp()
+  }
+
+  const handlePressCancel = (e: PointerEvent<HTMLCanvasElement>) => {
+    if (e.pointerType === 'mouse') return
+    gesture.onPointerCancel()
+  }
+
   return (
     <Wrapper ref={containerRef}>
-      <Tooltip.Provider>
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0"
-          style={{ width, height }}
-        />
-        <canvas
-          ref={hoverCanvasRef}
-          className={clsx(
-            'absolute inset-0',
-            isZoomed && 'cursor-grab active:cursor-grabbing',
-            tooltip && 'cursor-pointer',
-          )}
-          style={{ width, height }}
-          onMouseMove={(e) => isInteractive && handleHover(e)}
-          onMouseOut={() => handleHover(null)}
-        />
-        {ready && (
-          <svg
-            width={width}
-            height={height}
-            className="pointer-events-none absolute inset-0"
-            viewBox={`0 0 ${width} ${height}`}
-          >
-            <SVGTranslate {...leftAxis.pos}>
-              <SVGAxis orientation="left" scale={zy} {...leftAxis.size} />
-            </SVGTranslate>
-            <SVGTranslate {...bottomAxis.pos}>
-              <SVGAxis orientation="bottom" scale={zx} {...bottomAxis.size} />
-            </SVGTranslate>
-          </svg>
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0"
+        style={{ width, height }}
+      />
+      <canvas
+        ref={hoverCanvasRef}
+        className={clsx(
+          'absolute inset-0',
+          isZoomed && 'cursor-grab active:cursor-grabbing',
+          tooltip && 'cursor-pointer',
         )}
-        <Tooltip.Root open={!!tooltip}>
-          <Tooltip.Content
-            className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full"
-            style={
-              tooltip ? { top: tooltip.y - 16, left: tooltip.x } : undefined
-            }
-          >
-            {hanziDefinition ? (
-              <HanziDefinition entry={hanziDefinition} />
-            ) : (
-              <div className="rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200">
-                {tooltip?.id}
-              </div>
-            )}
-          </Tooltip.Content>
-        </Tooltip.Root>
-      </Tooltip.Provider>
+        style={{ width, height }}
+        onMouseMove={(e) => isInteractive && handleHover(e)}
+        onMouseOut={() => handleHover(null)}
+        onPointerDown={handlePress}
+        onPointerMove={handlePressMove}
+        onPointerUp={handlePressEnd}
+        onPointerCancel={handlePressCancel}
+      />
+      {ready && (
+        <svg
+          width={width}
+          height={height}
+          className="pointer-events-none absolute inset-0"
+          viewBox={`0 0 ${width} ${height}`}
+        >
+          <SVGTranslate {...leftAxis.pos}>
+            <SVGAxis orientation="left" scale={zy} {...leftAxis.size} />
+          </SVGTranslate>
+          <SVGTranslate {...bottomAxis.pos}>
+            <SVGAxis orientation="bottom" scale={zx} {...bottomAxis.size} />
+          </SVGTranslate>
+        </svg>
+      )}
+      <VirtualTooltip
+        open={
+          gesture.target != null &&
+          tooltip != null &&
+          gesture.target === tooltip.id
+        }
+        onDismiss={gesture.close}
+        point={tooltip}
+        containerRef={hoverCanvasRef}
+      >
+        {hanziDefinition ? (
+          <HanziDefinition entry={hanziDefinition} />
+        ) : (
+          <div className="rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200">
+            {tooltip?.id}
+          </div>
+        )}
+      </VirtualTooltip>
     </Wrapper>
   )
 }
