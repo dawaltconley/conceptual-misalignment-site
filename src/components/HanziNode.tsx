@@ -1,7 +1,7 @@
 import type { NodeId } from '~/types/networkx'
 import type { DictionaryEntry } from '@build/cedict'
-import { useState, useRef } from 'react'
-import { createPortal } from 'react-dom'
+import { useRef } from 'react'
+import NetworkTooltip, { useNetworkTooltip } from './NetworkTooltip'
 import HanziDefinition from './HanziDefinition'
 
 interface HanziNodeProps {
@@ -18,27 +18,13 @@ export default function HanziNode({
   maxEntries = 7,
 }: HanziNodeProps) {
   const nodeRef = useRef<HTMLSpanElement>(null)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null)
-
-  function handlePointerEnter() {
-    timerRef.current = setTimeout(() => {
-      setTooltipRect(nodeRef.current?.getBoundingClientRect() ?? null)
-    }, 1000)
-  }
-
-  function handlePointerLeave() {
-    if (timerRef.current) clearTimeout(timerRef.current)
-    setTooltipRect(null)
-  }
+  const { open, close, triggerProps } = useNetworkTooltip(id)
 
   return (
     <span
       ref={nodeRef}
       className="flex flex-col items-center py-1 leading-none"
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={handlePointerLeave}
-      onPointerDown={handlePointerLeave}
+      {...triggerProps}
     >
       <span>{id.toString()}</span>
       <span
@@ -46,20 +32,9 @@ export default function HanziNode({
       >
         {entry.pinyin}
       </span>
-      {tooltipRect &&
-        createPortal(
-          <div
-            className="pointer-events-none fixed z-50"
-            style={{
-              top: tooltipRect.top - 8,
-              left: tooltipRect.left + tooltipRect.width / 2,
-              transform: 'translate(-50%, -100%)',
-            }}
-          >
-            <HanziDefinition entry={entry} maxDefinitions={maxEntries} />
-          </div>,
-          document.body,
-        )}
+      <NetworkTooltip open={open} onDismiss={close} anchor={nodeRef}>
+        <HanziDefinition entry={entry} maxDefinitions={maxEntries} />
+      </NetworkTooltip>
     </span>
   )
 }
