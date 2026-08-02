@@ -44,59 +44,60 @@ TERMS: list[Term] = [
     Term('義', (
         Rendering('righteousness', 'righteous*'),
         Rendering('justice', 'justness'),
-        Rendering('meaning', 'meaning*'),
+        Rendering('meaning'),
         Rendering('morality', 'moral*'),
     )),
     Term('禮', (
         Rendering('ritual', 'ritual*'),
-        Rendering('propriety', 'propriet*'),
+        Rendering('propriety'),
         Rendering('etiquette', 'etiquette*'),
-        Rendering('social norms', 'norm*'),
+        Rendering('social norms', 'social norm*'),
     )),
     Term('智', (
         Rendering('knowledge', 'knowledge*'),
         Rendering('wisdom', 'wisdom*', 'wise*'),
+        Rendering('intelligence', 'intelligen*'),
     )),
     Term('信', (
         Rendering('trustworthiness', 'trustworth*'),
         Rendering('faith', 'faith*'),
         Rendering('sincerity', 'sincer*'),
     )),
-    Term('性', (
-        Rendering('nature', 'nature*', 'human nature'),
-        Rendering('character', 'character*'),
-        Rendering('predisposition', 'predispos*'),
-    )),
-    Term('心', (
-        Rendering('heart', 'heart', 'hearts', 'heartfelt'),
-        Rendering('mind', 'mind', 'minds', 'mindful*'),
-        Rendering('heartmind', 'heartmind*', 'heart-mind'),
-        Rendering('feeling', 'feeling*'),
-    )),
-    Term('親', (
-        Rendering('parents', 'parent*'),
-        Rendering('kin', 'kin', 'kinship*'),
-        Rendering('intimates', 'intimate*', 'intimacy'),
-        Rendering('affection', 'affection*'),
-    )),
-    Term('愛', (
-        Rendering('care for', 'care*'),
-        Rendering('cherish', 'cherish*'),
-        Rendering('love', 'love*'),
-        Rendering('pity', 'pity', 'piti*'),
-    )),
-    Term('道', (
-        Rendering('way', 'way', 'ways'),
-        Rendering('doctrine', 'doctrine*'),
-        Rendering('method', 'method*'),
-        Rendering('road', 'road*'),
-        Rendering('to speak', 'speak*'),
-    )),
-    Term('德', (
-        Rendering('virtue', 'virtue*'),
-        Rendering('power', 'power*'),
-        Rendering('charisma', 'charisma*'),
-    )),
+    # Term('性', (
+    #     Rendering('nature', 'nature*', 'human nature'),
+    #     Rendering('character', 'character*'),
+    #     Rendering('predisposition', 'predispos*'),
+    # )),
+    # Term('心', (
+    #     Rendering('heart', 'heart', 'hearts', 'heartfelt'),
+    #     Rendering('mind', 'mind', 'minds', 'mindful*'),
+    #     Rendering('heartmind', 'heartmind*', 'heart-mind*'),
+    #     Rendering('feeling', 'feeling*'),
+    # )),
+    # Term('親', (
+    #     Rendering('parents', 'parent*'),
+    #     Rendering('kin', 'kin', 'kinship*'),
+    #     Rendering('intimates', 'intimate*', 'intimacy'),
+    #     Rendering('affection', 'affection*'),
+    # )),
+    # Term('愛', (
+    #     Rendering('care', 'care*'),
+    #     Rendering('cherish', 'cherish*'),
+    #     Rendering('love', 'love*'),
+    #     Rendering('pity', 'pity', 'piti*'),
+    # )),
+    # Term('道', (
+    #     Rendering('way', 'ways'),
+    #     Rendering('doctrine', 'doctrine*'),
+    #     Rendering('method', 'method*'),
+    #     Rendering('path', 'path*'),
+    #     Rendering('speak', 'speaks', 'speaking', 'spoke*'),
+    # )),
+    # Term('德', (
+    #     Rendering('virtue', 'virtue*'),
+    #     Rendering('power', 'power*'),
+    #     Rendering('charisma', 'charisma*'),
+    # )),
 ]
 
 CHINESE_STOPWORDS: set[str] = {
@@ -119,7 +120,9 @@ MENGZI_PIPELINE = Pipeline(
     out_dir=CTEXT,
     min_freq=5,
     cooccurrence_min_freq=3,
+    content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
+    resolution=4.0,
 )
 
 SEP_PIPELINE = Pipeline(
