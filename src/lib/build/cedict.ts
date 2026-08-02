@@ -18,6 +18,12 @@ export interface DictionaryEntry {
   readings: DictionaryReading[]
   /** The first reading's pinyin — what a one-line label shows. */
   pinyin: string
+  /**
+   * CC-CEDICT knows this headword *only* as a name — 舜, 孟子, 秦. Ordinary
+   * senses always win, so this is all-or-nothing, and it's the flag downstream
+   * filters on.
+   */
+  isProperNoun?: boolean
 }
 
 export type Dictionary = Record<string, DictionaryEntry>
@@ -25,13 +31,21 @@ export type Dictionary = Record<string, DictionaryEntry>
 const CEDICT_PATH = path.resolve('src/data/cedict_1_0_ts_utf-8_mdbg.txt')
 const LINE_RE = /^(\S+)\s+\S+\s+\[([^\]]+)\]\s+\/(.+)\/$/
 
-/** `pinyin-tone` only marks lowercase input, so normalise first. */
-const toTonePinyin = (raw: string): string => toPinyinTones(raw.toLowerCase())
+/**
+ * Tone marks, preserving CC-CEDICT's capitalisation of names — `pinyin-tone`
+ * only marks lowercase input, so `Shun4` would come back unchanged rather than
+ * as `Shùn`.
+ */
+function toTonePinyin(raw: string): string {
+  const marked = toPinyinTones(raw.toLowerCase())
+  if (!/^[A-Z]/.test(raw)) return marked
+  return marked.charAt(0).toUpperCase() + marked.slice(1)
+}
 
 /**
  * CC-CEDICT capitalises the pinyin of proper-noun senses — `Zhong1` is the
- * surname 中, `Le4` the place name 樂. Those are handled downstream, so they
- * never make it into an entry.
+ * surname 中, `Le4` the place name 樂. They're set aside and only used for
+ * headwords that have no ordinary sense at all.
  */
 const isProperNoun = (pinyinRaw: string): boolean => /^[A-Z]/.test(pinyinRaw)
 
@@ -77,8 +91,9 @@ function takeAltPronunciation(definitions: string[]): string[] | undefined {
  * (to hit a target), not whichever line happened to come last.
  *
  * Lines sharing a pronunciation are folded together, and readings are ordered
- * with cross-references last so `entry.pinyin` is the everyday reading. Proper
- * nouns are dropped; a headword with no other sense gets no entry at all.
+ * with cross-references last so `entry.pinyin` is the everyday reading. Names
+ * are set aside: 中 keeps only `zhōng`/`zhòng`, but a headword CC-CEDICT knows
+ * *only* as a name (舜, 孟子) gets that, marked `isProperNoun`.
  */
 export async function buildDictionary(
   chars: Iterable<string>,
@@ -86,7 +101,8 @@ export async function buildDictionary(
   const targets = new Set(chars)
   // Readings in file order, keyed headword → pinyin, so repeated pronunciations
   // (CC-CEDICT lists some once per simplified form) accumulate rather than clash.
-  const collected = new Map<string, Map<string, DictionaryReading>>()
+  const senses = new Map<string, Map<string, DictionaryReading>>()
+  const names = new Map<string, Map<string, DictionaryReading>>()
 
   const rl = readline.createInterface({
     input: fs.createReadStream(CEDICT_PATH, { encoding: 'utf8' }),
@@ -98,7 +114,7 @@ export async function buildDictionary(
     const m = line.match(LINE_RE)
     if (!m) return
     const [, traditional, pinyinRaw, defsRaw] = m
-    if (!targets.has(traditional) || isProperNoun(pinyinRaw)) return
+    if (!targets.has(traditional)) return
 
     const definitions = defsRaw
       .split('/')
@@ -106,6 +122,7 @@ export async function buildDictionary(
     const altPronunciation = takeAltPronunciation(definitions)
     if (!definitions.length) return
 
+    const collected = isProperNoun(pinyinRaw) ? names : senses
     let readings = collected.get(traditional)
     if (!readings) {
       readings = new Map()
@@ -128,12 +145,21 @@ export async function buildDictionary(
   return new Promise((resolve, reject) => {
     rl.on('close', () => {
       const result: Dictionary = {}
-      for (const [hanzi, readings] of collected) {
+      for (const hanzi of targets) {
+        // Ordinary senses win outright; the name is a fallback, so 中 is
+        // "within" rather than the surname but 舜 still gets its sage-king.
+        const readings = senses.get(hanzi) ?? names.get(hanzi)
+        if (!readings) continue
         // Stable sort, so within a rank CC-CEDICT's own order survives.
         const ordered = [...readings.values()].sort(
           (a, b) => readingRank(a) - readingRank(b),
         )
-        result[hanzi] = { hanzi, readings: ordered, pinyin: ordered[0].pinyin }
+        result[hanzi] = {
+          hanzi,
+          readings: ordered,
+          pinyin: ordered[0].pinyin,
+          ...(senses.has(hanzi) ? {} : { isProperNoun: true }),
+        }
       }
       resolve(result)
     })

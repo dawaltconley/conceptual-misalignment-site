@@ -18,7 +18,7 @@ export default function HanziDefinition({
   entry,
   maxDefinitions = Infinity,
 }: HanziDefinitionProps): JSX.Element {
-  const { hanzi, readings } = entry
+  const { hanzi, readings, isProperNoun } = entry
   const [primary, ...rest] = readings
 
   let budget = maxDefinitions
@@ -37,6 +37,9 @@ export default function HanziDefinition({
       <p className="mb-1 align-baseline font-semibold text-gray-900">
         <span className="mr-0.5 text-lg">{hanzi}</span>
         {rest.length === 0 && <Pronunciation reading={primary} />}
+        {isProperNoun && (
+          <span className="font-normal text-gray-500"> (name)</span>
+        )}
       </p>
 
       {shown.map(({ reading, definitions }) =>
