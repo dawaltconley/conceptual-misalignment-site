@@ -205,7 +205,7 @@ def _parse_search_results(r: _Response) -> _ParsedSearchPage:
 
 _PARENS_RE = re.compile(r"\((.*?)[\(\)]", re.DOTALL)
 _CITATION_RE = re.compile(
-    r"[^();.]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—0-9]+)?[^();.]*", re.DOTALL)
+    r"[^();.]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—/0-9]+)?[^();.]*", re.DOTALL)
 
 _max_len_citation = ""
 
@@ -215,13 +215,13 @@ def _strip_citations(text: str) -> str:
     citation_spans: list[tuple[int, int]] = []
     for parens in _PARENS_RE.finditer(text):
         inner = parens.group(1)
-        global _max_len_citation
-        if len(inner) > len(_max_len_citation):
-            _max_len_citation = inner
         for match in _CITATION_RE.finditer(inner):
             start = parens.start() + match.start() + 1
             end = parens.start() + match.end() + 1
             match_text = match.group(0)
+            global _max_len_citation
+            if len(match_text) > len(_max_len_citation):
+                _max_len_citation = match_text
             if match_text != text[start:end]:
                 print("MISMATCH: couldn't strip citations, aborting")
                 print("  text:  " + text[start:end].replace("\n", " "))
