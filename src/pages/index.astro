@@ -1,9 +1,12 @@
 ---
 import Layout from '@layouts/Page.astro'
 import TermNetwork from '@components/TermNetwork'
-import { buildDictionaryFromFiles } from '@build/cedict'
+import { buildDictionaryFromFiles, buildDictionary } from '@build/cedict'
+import { isNotEmpty } from '@lib/utils'
 import { MasterSchema } from '@lib/terms'
 import termsJson from '@data/terms.json'
+import { EmbeddingDatasetSchema } from '@lib/embeddings'
+import mengziEmbeds from '~/public/embeddings/mengzi.json'
 import EmbeddingScatter from '@components/EmbeddingScatter'
 import AlignmentScatter from '@components/AlignmentScatter'
 
@@ -11,11 +14,16 @@ const master = MasterSchema.parse(termsJson)
 
 // Dictionary over every hanzi in the Chinese networks — co-occurrence and
 // similarity — read at build time.
-const chinesePaths = master.terms
+const networkDataPaths = master.terms
   .flatMap((t) => [...t.chinese.cooccurrence, ...t.chinese.similarity])
   .map((s) => s.data)
-  .filter((d): d is string => Boolean(d))
-const dictionary = await buildDictionaryFromFiles(chinesePaths)
+  .filter(isNotEmpty)
+const networkDictionary = await buildDictionaryFromFiles(networkDataPaths)
+
+const embeddingData = EmbeddingDatasetSchema.parse(mengziEmbeds)
+const embeddingDictionary = await buildDictionary(
+  embeddingData.nodes.map((n) => n.id),
+)
 ---
 
 <Layout>
@@ -25,7 +33,7 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
       client:load
       kind="cooccurrence"
       data={master}
-      dictionary={dictionary}
+      dictionary={networkDictionary}
     />
 
     <h2 class="mb-4 mt-12 text-xl font-bold">Similarity networks</h2>
@@ -33,7 +41,7 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
       client:load
       kind="similarity"
       data={master}
-      dictionary={dictionary}
+      dictionary={networkDictionary}
     />
 
     <div class="mx-auto mt-12 max-w-screen-xl">
@@ -44,7 +52,7 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
             client:only="react"
             terms={master.terms}
             data="/embeddings/mengzi.json"
-            dictionary={dictionary}
+            dictionary={embeddingDictionary}
           />
         </div>
         <div class="mt-8 xl:mt-0 xl:w-1/2">
@@ -63,7 +71,7 @@ const dictionary = await buildDictionaryFromFiles(chinesePaths)
           client:only="react"
           chinese="/embeddings/mengzi.json"
           english="/embeddings/sep.json"
-          dictionary={dictionary}
+          dictionary={embeddingDictionary}
         />
       </div>
     </div>
