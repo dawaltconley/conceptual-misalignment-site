@@ -28,6 +28,12 @@ interface EmbeddingScatterProps {
   dictionary?: Dictionary
 
   /**
+   * The number of steps in the t-SNE calculation that are calculated before
+   * the component animates a new frame.
+   */
+  stepsPerPost?: number
+
+  /**
    * The minimum proportion of documents a term must appear in to be shown in
    * the scatterplot. Should be a number between 0 and 1.
    */
@@ -49,6 +55,7 @@ interface EmbeddingScatterProps {
 export default function EmbeddingScatter({
   data: dataPath,
   dictionary,
+  stepsPerPost = 2,
   minDocFreq = 0,
   maxDocFreq = 1,
 }: EmbeddingScatterProps): JSX.Element {
@@ -138,7 +145,7 @@ export default function EmbeddingScatter({
   // change; stop on leaving. The worker streams back the evolving solution.
   useEffect(() => {
     if (layout === 'tsne' && data) {
-      run(vectors, { perplexity, maxIter: TSNE_MAX_ITER })
+      run(vectors, { perplexity, maxIter: TSNE_MAX_ITER, stepsPerPost })
     } else {
       stop()
     }

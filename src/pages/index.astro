@@ -53,6 +53,7 @@ const embeddingDictionary = await buildDictionary(
             terms={master.terms}
             data="/embeddings/mengzi.json"
             dictionary={embeddingDictionary}
+            stepsPerPost={4}
           />
         </div>
         <div class="mt-8 xl:mt-0 xl:w-1/2">
@@ -60,6 +61,7 @@ const embeddingDictionary = await buildDictionary(
             terms={master.terms}
             client:only="react"
             data="/embeddings/sep.json"
+            stepsPerPost={1}
             minDocFreq={0.2}
           />
         </div>
