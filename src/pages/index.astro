@@ -60,6 +60,7 @@ const embeddingDictionary = await buildDictionary(
             terms={master.terms}
             client:only="react"
             data="/embeddings/sep.json"
+            minDocFreq={0.2}
           />
         </div>
       </div>

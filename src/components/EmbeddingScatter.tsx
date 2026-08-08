@@ -26,6 +26,18 @@ interface EmbeddingScatterProps {
   terms: MasterTerm[]
   data: string
   dictionary?: Dictionary
+
+  /**
+   * The minimum proportion of documents a term must appear in to be shown in
+   * the scatterplot. Should be a number between 0 and 1.
+   */
+  minDocFreq?: number
+
+  /**
+   * The maximum proportion of documents a term can appear in and be shown in
+   * the scatterplot. Should be a number between 0 and 1.
+   */
+  maxDocFreq?: number
 }
 
 /**
@@ -37,6 +49,8 @@ interface EmbeddingScatterProps {
 export default function EmbeddingScatter({
   data: dataPath,
   dictionary,
+  minDocFreq = 0,
+  maxDocFreq = 1,
 }: EmbeddingScatterProps): JSX.Element {
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
@@ -50,12 +64,6 @@ export default function EmbeddingScatter({
   const [selectedTargets, setSelectedTargets] = useState<string[] | null>(null)
   const { coords, steps, done, run, stop } = useTsne()
 
-  // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
-  // are the 2-D principal-component coordinates.
-  const pcaPoints = useMemo<ScatterPoint[]>(
-    () => data?.nodes.map((n) => nodeToScatterPoint(n, data.documents)) || [],
-    [data],
-  )
   // The corpus's core terms — the pipeline's `target` nodes. They seed the
   // selection rather than being pinned to it, so any of them can be dropped.
   const coreTargets = useMemo<string[]>(
@@ -65,6 +73,31 @@ export default function EmbeddingScatter({
   // Whatever is selected *is* what the plot emphasises: larger, outlined, labelled.
   const selection = selectedTargets ?? coreTargets
   const targets = useMemo<Set<string>>(() => new Set(selection), [selection])
+
+  const filteredNodes = useMemo<EmbeddingNode[]>(
+    () =>
+      data?.nodes.filter((n) => {
+        if (targets.has(n.id)) return true
+        const docFreq = n.doc_freq / data.documents
+        return docFreq > minDocFreq && docFreq <= maxDocFreq
+      }) || [],
+    [data, targets],
+  )
+
+  // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
+  // are the 2-D principal-component coordinates.
+  const pcaPoints = useMemo<ScatterPoint[]>(
+    () =>
+      data
+        ? filteredNodes.map((n) => nodeToScatterPoint(n, data?.documents))
+        : [],
+    [filteredNodes, data],
+  )
+
+  const vectors = useMemo<number[][]>(
+    () => filteredNodes.map((n) => n.vec),
+    [filteredNodes],
+  )
 
   // Every node is selectable. Chinese options carry pinyin so the vocabulary is
   // reachable from a plain keyboard — `ren2`, `ren` and `rén` all find 仁.
@@ -105,22 +138,18 @@ export default function EmbeddingScatter({
   // change; stop on leaving. The worker streams back the evolving solution.
   useEffect(() => {
     if (layout === 'tsne' && data) {
-      run(
-        data.nodes.map((n) => n.vec),
-        { perplexity, maxIter: TSNE_MAX_ITER },
-      )
+      run(vectors, { perplexity, maxIter: TSNE_MAX_ITER })
     } else {
       stop()
     }
   }, [layout, data, perplexity, run, stop])
 
   const tsnePoints = useMemo<ScatterPoint[]>(() => {
-    if (!data) return []
-    console.log(data.documents)
-    return coords.map((c, i) => ({
-      ...nodeToScatterPoint(data.nodes[i], data.documents),
-      x: c[0],
-      y: c[1],
+    if (!coords || !coords.length) return []
+    return pcaPoints.map((p, i) => ({
+      ...p,
+      x: coords[i][0],
+      y: coords[i][1],
     }))
   }, [data, coords])
 
