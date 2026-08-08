@@ -231,6 +231,13 @@ class Pipeline:
     fraction of the corpus's documents, > 1 an absolute document count; None disables
     it. Targets are always kept regardless."""
 
+    min_doc_freq: float | None = None
+    """Document-frequency floor on the embedding vocabulary (drops words confined to
+    a handful of documents, which a corpus-wide frequency floor alone can miss — e.g.
+    a word repeated many times within one source). Same sklearn ``min_df`` convention
+    as ``max_doc_freq``: <= 1.0 is a fraction of the corpus's documents, > 1 an
+    absolute document count; None disables it. Targets are always kept regardless."""
+
     center: bool = True
     """Whether to center embeddings by subtracting their centroid. Used to fix
     anisotropy."""
