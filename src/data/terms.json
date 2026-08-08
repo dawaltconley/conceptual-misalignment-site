@@ -188,7 +188,7 @@
           "cooccurrence": [
             {
               "id": "benevolence_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=benevolence+benevolen%2A&page=1",
               "title": "SEP search: benevolence",
               "description": "SEP search results benevolence benevolen*",
               "occurrences": 239,
@@ -322,7 +322,7 @@
           "cooccurrence": [
             {
               "id": "humaneness_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=humaneness+humane%2A&page=1",
               "title": "SEP search: humaneness",
               "description": "SEP search results humaneness humane*",
               "occurrences": 14,
@@ -359,6 +359,14 @@
               "description": "In the nineteenth century, geometry, like most academic disciplines,\nwent through a period of growth verging on cataclysm. During this\nperiod, the content of ge",
               "occurrences": 0,
               "data": "/sep/humaneness_geometry-19th.json"
+            },
+            {
+              "id": "hegel-social-political",
+              "url": "https://plato.stanford.edu/entries/hegel-social-political/",
+              "title": "Hegel’s Social and Political Philosophy",
+              "description": "Georg Wilhelm Friedrich Hegel (1770–1831) developed a philosophy\nbased on freedom within a wider philosophical system offering novel\nviews on topics ranging fro",
+              "occurrences": 1,
+              "data": "/sep/humaneness_hegel-social-political.json"
             },
             {
               "id": "https://plato.stanford.edu/entries/chinese-mind/",
@@ -448,14 +456,14 @@
             "label": "humanity",
             "variants": []
           },
-          "occurrences": 475,
+          "occurrences": 474,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 475,
+              "occurrences": 474,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -465,14 +473,14 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 475,
+              "occurrences": 474,
               "data": "/sep/humanity_embeds.json"
             }
           ],
           "cooccurrence": [
             {
               "id": "humanity_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humanity+humanit%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=humanity+humanit%2A&page=1",
               "title": "SEP search: humanity",
               "description": "SEP search results humanity humanit*",
               "occurrences": 283,
@@ -767,7 +775,7 @@
           "cooccurrence": [
             {
               "id": "righteousness_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=righteousness+righteous%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=righteousness+righteous%2A&page=1",
               "title": "SEP search: righteousness",
               "description": "SEP search results righteousness righteous*",
               "occurrences": 38,
@@ -917,7 +925,7 @@
           "cooccurrence": [
             {
               "id": "justice_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=justice+justness&page=1",
               "title": "SEP search: justice",
               "description": "SEP search results justice justness",
               "occurrences": 1397,
@@ -1027,14 +1035,14 @@
             "label": "meaning",
             "variants": []
           },
-          "occurrences": 2397,
+          "occurrences": 2395,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2397,
+              "occurrences": 2395,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1044,7 +1052,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2397,
+              "occurrences": 2395,
               "data": "/sep/meaning_embeds.json"
             }
           ],
@@ -1161,14 +1169,14 @@
             "label": "morality",
             "variants": []
           },
-          "occurrences": 8185,
+          "occurrences": 8248,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 8185,
+              "occurrences": 8248,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1178,17 +1186,17 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 8185,
+              "occurrences": 8248,
               "data": "/sep/morality_embeds.json"
             }
           ],
           "cooccurrence": [
             {
               "id": "morality_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=morality+moral%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=morality+moral%2A&page=1",
               "title": "SEP search: morality",
               "description": "SEP search results morality moral*",
-              "occurrences": 3487,
+              "occurrences": 3521,
               "data": "/sep/morality_combined.json"
             },
             {
@@ -1238,6 +1246,14 @@
               "description": "Contemporary interest in the idea that there is a psychologically real\nand philosophically important distinction between moral judgments and\nconventional judgme",
               "occurrences": 369,
               "data": "/sep/morality_moral-conventional.json"
+            },
+            {
+              "id": "moral-realism",
+              "url": "https://plato.stanford.edu/entries/moral-realism/",
+              "title": "Moral Realism",
+              "description": "Taken at face value, the claim that Nigel has a moral obligation to\nkeep his promise, like the claim that Nyx is a black cat, purports to\nreport a fact and is t",
+              "occurrences": 250,
+              "data": "/sep/morality_moral-realism.json"
             },
             {
               "id": "moral-relativism",
@@ -1480,7 +1496,7 @@
           "cooccurrence": [
             {
               "id": "ritual_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=ritual+ritual%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=ritual+ritual%2A&page=1",
               "title": "SEP search: ritual",
               "description": "SEP search results ritual ritual*",
               "occurrences": 140,
@@ -1590,14 +1606,14 @@
             "label": "propriety",
             "variants": []
           },
-          "occurrences": 77,
+          "occurrences": 76,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 77,
+              "occurrences": 76,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1607,7 +1623,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 77,
+              "occurrences": 76,
               "data": "/sep/propriety_embeds.json"
             }
           ],
@@ -1748,7 +1764,7 @@
           "cooccurrence": [
             {
               "id": "etiquette_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=etiquette+etiquette%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=etiquette+etiquette%2A&page=1",
               "title": "SEP search: etiquette",
               "description": "SEP search results etiquette etiquette*",
               "occurrences": 39,
@@ -2160,14 +2176,14 @@
             "label": "knowledge",
             "variants": []
           },
-          "occurrences": 4540,
+          "occurrences": 4491,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 4540,
+              "occurrences": 4491,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2177,14 +2193,14 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 4540,
+              "occurrences": 4491,
               "data": "/sep/knowledge_embeds.json"
             }
           ],
           "cooccurrence": [
             {
               "id": "knowledge_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=knowledge+knowledge%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=knowledge+knowledge%2A&page=1",
               "title": "SEP search: knowledge",
               "description": "SEP search results knowledge knowledge*",
               "occurrences": 2454,
@@ -2318,7 +2334,7 @@
           "cooccurrence": [
             {
               "id": "wisdom_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=wisdom+wisdom%2A+wise%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=wisdom+wisdom%2A+wise%2A&page=1",
               "title": "SEP search: wisdom",
               "description": "SEP search results wisdom wisdom* wise*",
               "occurrences": 569,
@@ -2746,7 +2762,7 @@
           "cooccurrence": [
             {
               "id": "trustworthiness_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=trustworthiness+trustworth%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=trustworthiness+trustworth%2A&page=1",
               "title": "SEP search: trustworthiness",
               "description": "SEP search results trustworthiness trustworth*",
               "occurrences": 200,
@@ -2856,14 +2872,14 @@
             "label": "faith",
             "variants": []
           },
-          "occurrences": 1003,
+          "occurrences": 1002,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 1003,
+              "occurrences": 1002,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2873,14 +2889,14 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 1003,
+              "occurrences": 1002,
               "data": "/sep/faith_embeds.json"
             }
           ],
           "cooccurrence": [
             {
               "id": "faith_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=faith+faith%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=faith+faith%2A&page=1",
               "title": "SEP search: faith",
               "description": "SEP search results faith faith*",
               "occurrences": 822,
@@ -2990,14 +3006,14 @@
             "label": "sincerity",
             "variants": []
           },
-          "occurrences": 136,
+          "occurrences": 149,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 136,
+              "occurrences": 149,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -3007,14 +3023,14 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 136,
+              "occurrences": 149,
               "data": "/sep/sincerity_embeds.json"
             }
           ],
           "cooccurrence": [
             {
               "id": "sincerity_combined",
-              "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=sincerity+sincer%2A",
+              "url": "https://plato.stanford.edu/search/searcher.py?query=sincerity+sincer%2A&page=1",
               "title": "SEP search: sincerity",
               "description": "SEP search results sincerity sincer*",
               "occurrences": 73,
