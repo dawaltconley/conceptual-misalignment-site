@@ -290,14 +290,22 @@ def embed(
 
     Returns ``(pooler, doc_freq, n_documents)`` — the pooled vectors plus the
     per-word document frequency and the corpus document count (for the scatter's
-    doc-freq fields and the ``max_doc_freq`` cap). The embedder yields occurrences
-    one batch at a time; we fold each into a running max-pool here, so the whole
-    corpus's occurrence vectors are never all resident at once. ``keep`` words
-    additionally retain their full occurrence stacks (cohesion under ``--artifacts``)."""
+    doc-freq fields and the ``min_doc_freq``/``max_doc_freq`` bounds). The embedder
+    yields occurrences one batch at a time; we fold each into a running max-pool
+    here, so the whole corpus's occurrence vectors are never all resident at once.
+    ``keep`` words additionally retain their full occurrence stacks (cohesion under
+    ``--artifacts``)."""
     pos, stop = _to_set(p.content_pos), p.stopwords or set()
     vocab = build_vocab(sources, p.min_freq, match_fn, content_pos=pos, stopwords=stop)
     doc_freq = document_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
     n_docs = len(sources)
+
+    if p.min_doc_freq is not None:
+        floor = p.min_doc_freq if p.min_doc_freq > 1 else p.min_doc_freq * n_docs
+        before = len(vocab)
+        vocab = {w for w in vocab if doc_freq.get(w, 0) >= floor}
+        print(f"doc-freq   : floor {floor:.0f}/{n_docs} docs -> dropped "
+              f"{before - len(vocab)} of {before} vocab words")
 
     if p.max_doc_freq is not None:
         cap = p.max_doc_freq if p.max_doc_freq > 1 else p.max_doc_freq * n_docs
@@ -306,7 +314,7 @@ def embed(
         print(f"doc-freq   : cap {cap:.0f}/{n_docs} docs -> dropped "
               f"{before - len(vocab)} of {before} vocab words")
 
-    vocab |= set(target_labels)     # targets always kept, regardless of the cap
+    vocab |= set(target_labels)     # targets always kept, regardless of the bounds
     unk_check(emb, target_labels)
     segments = segment(p, emb, sources, vocab, match_fn)
     pooler = vectors.Pooler(mode=p.occurrence_pooling, keep=set(keep))
