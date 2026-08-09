@@ -1,0 +1,2129 @@
+{
+  "corpus": "sep",
+  "source": {
+    "id": "sep",
+    "url": "https://plato.stanford.edu/",
+    "title": "SEP (combined)",
+    "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+    "occurrences": null,
+    "data": null
+  },
+  "embeddings": {
+    "id": "sep",
+    "url": "https://plato.stanford.edu/",
+    "title": "SEP (combined)",
+    "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+    "occurrences": null,
+    "data": "/embeddings/sep.json"
+  },
+  "terms": {
+    "benevolence": {
+      "term": {
+        "label": "benevolence",
+        "variants": []
+      },
+      "total_occurrences": 328,
+      "chinese_philosophy_occurrences": 129,
+      "cooccurrence": [
+        {
+          "id": "benevolence_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
+          "title": "SEP search: benevolence",
+          "description": "SEP search results benevolence benevolen*",
+          "occurrences": 239,
+          "data": "/sep/benevolence_combined.json"
+        },
+        {
+          "id": "edwards",
+          "url": "https://plato.stanford.edu/entries/edwards/",
+          "title": "Jonathan Edwards",
+          "description": "Jonathan Edwards (1703–1758) is widely acknowledged to be\nAmerica's most important and original philosophical theologian. His\nwork as a whole is an expression o",
+          "occurrences": 40,
+          "data": "/sep/benevolence_edwards.json"
+        },
+        {
+          "id": "butler-moral",
+          "url": "https://plato.stanford.edu/entries/butler-moral/",
+          "title": "Joseph Butler’s Moral Philosophy",
+          "description": "Joseph Butler is best known for his criticisms of the hedonic and\negoistic “selfish” theories associated with Hobbes and\nBernard Mandeville and for his positive",
+          "occurrences": 35,
+          "data": "/sep/benevolence_butler-moral.json"
+        },
+        {
+          "id": "gratitude",
+          "url": "https://plato.stanford.edu/entries/gratitude/",
+          "title": "Gratitude",
+          "description": "Gratitude is the proper or called-for response in a beneficiary to\nbenefits or beneficence from a benefactor. It is a topic of interest\nin normative ethics, app",
+          "occurrences": 41,
+          "data": "/sep/benevolence_gratitude.json"
+        },
+        {
+          "id": "principle-beneficence",
+          "url": "https://plato.stanford.edu/entries/principle-beneficence/",
+          "title": "The Principle of Beneficence in Applied Ethics",
+          "description": "Beneficent actions and motives have traditionally occupied a central\nplace in morality. Common examples today are found in social welfare\nprograms, scholarships",
+          "occurrences": 34,
+          "data": "/sep/benevolence_principle-beneficence.json"
+        },
+        {
+          "id": "emily-elizabeth-constance-jones",
+          "url": "https://plato.stanford.edu/entries/emily-elizabeth-constance-jones/",
+          "title": "Emily Elizabeth Constance Jones",
+          "description": "Emily Elizabeth Constance Jones (1848–1922), a contemporary of\nBertrand Russell and G. E. Moore at Cambridge University, worked\nprimarily in philosophical logic",
+          "occurrences": 22,
+          "data": "/sep/benevolence_emily-elizabeth-constance-jones.json"
+        },
+        {
+          "id": "hutcheson",
+          "url": "https://plato.stanford.edu/entries/hutcheson/",
+          "title": "Francis Hutcheson",
+          "description": "Francis Hutcheson (1694–1746) was an influential British\nmoralist, an advocate of moral sentimentalism, and a key figure of the\nScottish Enlightenment. While Hu",
+          "occurrences": 32,
+          "data": "/sep/benevolence_hutcheson.json"
+        },
+        {
+          "id": "hume",
+          "url": "https://plato.stanford.edu/entries/hume/",
+          "title": "David Hume",
+          "description": "[Editor’s Note: The following new entry by Hsueh Qu and\nElizabeth S. Radcliffe replaces the\n former entry\n on this topic by the previous authors.]\n\n\nDavid Hume ",
+          "occurrences": 12,
+          "data": "/sep/benevolence_hume.json"
+        },
+        {
+          "id": "richard-price",
+          "url": "https://plato.stanford.edu/entries/richard-price/",
+          "title": "Richard Price",
+          "description": "Richard Price (1723–1791) was a prominent dissenting minister\nand a leading figure in philosophical and political thought in the\nsecond half of the eighteenth c",
+          "occurrences": 9,
+          "data": "/sep/benevolence_richard-price.json"
+        },
+        {
+          "id": "epictetus",
+          "url": "https://plato.stanford.edu/entries/epictetus/",
+          "title": "Epictetus",
+          "description": "A Greek philosopher of 1st and early 2nd\ncenturies C.E., and an exponent of Stoic ethics notable for the\nconsistency and power of his ethical thought and for ef",
+          "occurrences": 3,
+          "data": "/sep/benevolence_epictetus.json"
+        },
+        {
+          "id": "peirce-benjamin",
+          "url": "https://plato.stanford.edu/entries/peirce-benjamin/",
+          "title": "Benjamin Peirce",
+          "description": "Benjamin Peirce  (b. April 4, 1809, d. October 6, 1880) was a professor\nat Harvard with interests in celestial mechanics, applications of plane\nand spherical tr",
+          "occurrences": 1,
+          "data": "/sep/benevolence_peirce-benjamin.json"
+        },
+        {
+          "id": "well-being",
+          "url": "https://plato.stanford.edu/entries/well-being/",
+          "title": "Well-Being",
+          "description": "The concept of well-being is most commonly used in philosophy to\ndescribe what is non-instrumentally or ultimately good for a\nperson – what it is in their life,",
+          "occurrences": 4,
+          "data": "/sep/benevolence_well-being.json"
+        },
+        {
+          "id": "astell",
+          "url": "https://plato.stanford.edu/entries/astell/",
+          "title": "Mary Astell",
+          "description": "Mary Astell (1666–1731) was an English philosopher. She was born\nin Newcastle, and lived her adult life in London. Her patrons were\nLady Ann Coventry, Lady Eliz",
+          "occurrences": 6,
+          "data": "/sep/benevolence_astell.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 328,
+          "data": "/sep/benevolence_embeds.json"
+        }
+      ]
+    },
+    "etiquette": {
+      "term": {
+        "label": "etiquette",
+        "variants": []
+      },
+      "total_occurrences": 43,
+      "chinese_philosophy_occurrences": 8,
+      "cooccurrence": [
+        {
+          "id": "etiquette_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=etiquette+etiquette%2A",
+          "title": "SEP search: etiquette",
+          "description": "SEP search results etiquette etiquette*",
+          "occurrences": 39,
+          "data": "/sep/etiquette_combined.json"
+        },
+        {
+          "id": "philippa-foot",
+          "url": "https://plato.stanford.edu/entries/philippa-foot/",
+          "title": "Philippa Foot",
+          "description": "Philippa Foot wrote many articles treating issues in metaethics, moral\npsychology, and applied ethics, as well as one monograph on moral\nphilosophy.  Throughout",
+          "occurrences": 14,
+          "data": "/sep/etiquette_philippa-foot.json"
+        },
+        {
+          "id": "arabic-islamic-language",
+          "url": "https://plato.stanford.edu/entries/arabic-islamic-language/",
+          "title": "Arabic and Islamic Philosophy of Language and Logic",
+          "description": "Arabic logic is a philosophical tradition which has lasted from the\nmid-eighth century down to today. For many years, western study of\nArabic logic tended to co",
+          "occurrences": 5,
+          "data": "/sep/etiquette_arabic-islamic-language.json"
+        },
+        {
+          "id": "moral-conventional",
+          "url": "https://plato.stanford.edu/entries/moral-conventional/",
+          "title": "The Moral/Conventional Distinction",
+          "description": "Contemporary interest in the idea that there is a psychologically real\nand philosophically important distinction between moral judgments and\nconventional judgme",
+          "occurrences": 3,
+          "data": "/sep/etiquette_moral-conventional.json"
+        },
+        {
+          "id": "meaning",
+          "url": "https://plato.stanford.edu/entries/meaning/",
+          "title": "Theories of Meaning",
+          "description": "The term “theory of meaning” has figured, in one way or\nanother, in a great number of philosophical disputes over the last\ncentury. Unfortunately, this term has",
+          "occurrences": 4,
+          "data": "/sep/etiquette_meaning.json"
+        },
+        {
+          "id": "psychology-normative-cognition",
+          "url": "https://plato.stanford.edu/entries/psychology-normative-cognition/",
+          "title": "The Psychology of Normative Cognition",
+          "description": "From an early age, humans exhibit a tendency to identify, adopt, and\nenforce the norms of their local communities. Norms are the social\nrules that mark out what",
+          "occurrences": 3,
+          "data": "/sep/etiquette_psychology-normative-cognition.json"
+        },
+        {
+          "id": "madeleine-scudery",
+          "url": "https://plato.stanford.edu/entries/madeleine-scudery/",
+          "title": "Madeleine de Scudéry",
+          "description": "A prominent novelist, Madeleine de Scudéry (1607–1701)\ncomposed a series of dialogues dealing with philosophical issues.\nPrimarily ethical in focus, her dialogu",
+          "occurrences": 1,
+          "data": "/sep/etiquette_madeleine-scudery.json"
+        },
+        {
+          "id": "convention",
+          "url": "https://plato.stanford.edu/entries/convention/",
+          "title": "Convention",
+          "description": "The central philosophical task posed by conventions is to analyze what\nthey are and how they differ from mere regularities of action and\ncognition. Subsidiary q",
+          "occurrences": 2,
+          "data": "/sep/etiquette_convention.json"
+        },
+        {
+          "id": "feminism-argumentation",
+          "url": "https://plato.stanford.edu/entries/feminism-argumentation/",
+          "title": "Feminist Perspectives on Argumentation",
+          "description": "The noun “argument” and verb “to argue” can\ndescribe various things in ordinary language and in different academic\ndisciplines (O’Keefe 1982; Wenzel 1980 [1992]",
+          "occurrences": 2,
+          "data": "/sep/etiquette_feminism-argumentation.json"
+        },
+        {
+          "id": "meaning-normativity",
+          "url": "https://plato.stanford.edu/entries/meaning-normativity/",
+          "title": "The Normativity of Meaning and Content",
+          "description": "Normativism in the theory of meaning and content is the view that\nlinguistic meaning and/or intentional content are essentially\nnormative. As both normativity a",
+          "occurrences": 2,
+          "data": "/sep/etiquette_meaning-normativity.json"
+        },
+        {
+          "id": "moral-arguments-god",
+          "url": "https://plato.stanford.edu/entries/moral-arguments-god/",
+          "title": "Moral Arguments for the Existence of God",
+          "description": "Moral arguments for God’s existence form a diverse family of\narguments that reason from some feature of morality or the moral life\nto the existence of God, usua",
+          "occurrences": 1,
+          "data": "/sep/etiquette_moral-arguments-god.json"
+        },
+        {
+          "id": "privacy-medicine",
+          "url": "https://plato.stanford.edu/entries/privacy-medicine/",
+          "title": "Privacy and Medicine",
+          "description": "Individuals, organizations and governments value and protect medical\nprivacy (Francis and Francis 2017; Beauchamp and Childress 2008;\nHumber and Almeder 2001; E",
+          "occurrences": 1,
+          "data": "/sep/etiquette_privacy-medicine.json"
+        },
+        {
+          "id": "shantideva",
+          "url": "https://plato.stanford.edu/entries/shantideva/",
+          "title": "Śāntideva",
+          "description": "Śāntideva (late 7th to mid-8th century\nCE) was a Buddhist monk, philosopher, and poet whose reflections on\nthe overall structure of Buddhist moral commitments r",
+          "occurrences": 1,
+          "data": "/sep/etiquette_shantideva.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 43,
+          "data": "/sep/etiquette_embeds.json"
+        }
+      ]
+    },
+    "faith": {
+      "term": {
+        "label": "faith",
+        "variants": []
+      },
+      "total_occurrences": 1002,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "faith_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=faith+faith%2A",
+          "title": "SEP search: faith",
+          "description": "SEP search results faith faith*",
+          "occurrences": 822,
+          "data": "/sep/faith_combined.json"
+        },
+        {
+          "id": "faith",
+          "url": "https://plato.stanford.edu/entries/faith/",
+          "title": "Faith",
+          "description": "Questions about faith have inspired centuries of philosophical and\ntheological reflection, particularly, though by no means exclusively,\nas faith is understood ",
+          "occurrences": 461,
+          "data": "/sep/faith_faith.json"
+        },
+        {
+          "id": "fideism",
+          "url": "https://plato.stanford.edu/entries/fideism/",
+          "title": "Fideism",
+          "description": "“What indeed has Athens to do with Jerusalem?” (246) This\nquestion of the relation between reason – here represented by\nAthens – and faith – represented by Jeru",
+          "occurrences": 83,
+          "data": "/sep/faith_fideism.json"
+        },
+        {
+          "id": "leibowitz-yeshayahu",
+          "url": "https://plato.stanford.edu/entries/leibowitz-yeshayahu/",
+          "title": "Yeshayahu Leibowitz",
+          "description": "Yeshayahu Leibowitz (1903–1994) was one of the most outspoken\nand controversial twentieth century Jewish thinkers and Israeli public\nintellectuals. Once termed ",
+          "occurrences": 77,
+          "data": "/sep/faith_leibowitz-yeshayahu.json"
+        },
+        {
+          "id": "religion-epistemology",
+          "url": "https://plato.stanford.edu/entries/religion-epistemology/",
+          "title": "The Epistemology of Religion",
+          "description": "This entry focuses on two topics, evidentialism and disagreement. They\nare related because one reaction to the latter could be return to the\nformer. Both are ge",
+          "occurrences": 14,
+          "data": "/sep/faith_religion-epistemology.json"
+        },
+        {
+          "id": "kierkegaard",
+          "url": "https://plato.stanford.edu/entries/kierkegaard/",
+          "title": "Søren Kierkegaard",
+          "description": "Søren Aabye Kierkegaard (1813–1855) was an astonishingly\nprolific writer whose work—almost all of which was written in\nthe 1840s—is difficult to categorize, spa",
+          "occurrences": 50,
+          "data": "/sep/faith_kierkegaard.json"
+        },
+        {
+          "id": "religious-language",
+          "url": "https://plato.stanford.edu/entries/religious-language/",
+          "title": "Religious Language",
+          "description": "The principal aim of research on religious language is to give an\naccount of the meaning of religious sentences and utterances.\nReligious sentences are generall",
+          "occurrences": 26,
+          "data": "/sep/faith_religious-language.json"
+        },
+        {
+          "id": "divine-hiddenness",
+          "url": "https://plato.stanford.edu/entries/divine-hiddenness/",
+          "title": "Hiddenness of God",
+          "description": "“Divine hiddenness”, as the phrase suggests, refers, most\nfundamentally, to the hiddenness of God, i.e., the alleged fact that\nGod is hidden, absent, or silent.",
+          "occurrences": 4,
+          "data": "/sep/faith_divine-hiddenness.json"
+        },
+        {
+          "id": "astell",
+          "url": "https://plato.stanford.edu/entries/astell/",
+          "title": "Mary Astell",
+          "description": "Mary Astell (1666–1731) was an English philosopher. She was born\nin Newcastle, and lived her adult life in London. Her patrons were\nLady Ann Coventry, Lady Eliz",
+          "occurrences": 26,
+          "data": "/sep/faith_astell.json"
+        },
+        {
+          "id": "free-will-foreknowledge",
+          "url": "https://plato.stanford.edu/entries/free-will-foreknowledge/",
+          "title": "Foreknowledge and Free Will",
+          "description": "Fatalism is the thesis that human acts occur by necessity and hence\nare unfree. Theological fatalism is the thesis that infallible\nforeknowledge of a human act ",
+          "occurrences": 1,
+          "data": "/sep/faith_free-will-foreknowledge.json"
+        },
+        {
+          "id": "toleration",
+          "url": "https://plato.stanford.edu/entries/toleration/",
+          "title": "Toleration",
+          "description": "The term “toleration”—from the Latin\ntolerare: to put up with, countenance or\nsuffer—generally refers to the conditional acceptance of or\nnon-interference with ",
+          "occurrences": 25,
+          "data": "/sep/faith_toleration.json"
+        },
+        {
+          "id": "divine-revelation",
+          "url": "https://plato.stanford.edu/entries/divine-revelation/",
+          "title": "Divine Revelation",
+          "description": "“Revelation” (lat. revelatio) is a translation of the Greek word apokalypsis, which means the removal of a veil so that something can be seen. Many religions ap",
+          "occurrences": 23,
+          "data": "/sep/faith_divine-revelation.json"
+        },
+        {
+          "id": "dewey",
+          "url": "https://plato.stanford.edu/entries/dewey/",
+          "title": "John Dewey",
+          "description": "John Dewey (1859–1952) was one of American pragmatism’s\nearly founders, along with Charles Sanders Peirce and William James,\nand arguably the most prominent Ame",
+          "occurrences": 32,
+          "data": "/sep/faith_dewey.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 1002,
+          "data": "/sep/faith_embeds.json"
+        }
+      ]
+    },
+    "humaneness": {
+      "term": {
+        "label": "humaneness",
+        "variants": []
+      },
+      "total_occurrences": 22,
+      "chinese_philosophy_occurrences": 78,
+      "cooccurrence": [
+        {
+          "id": "humaneness_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
+          "title": "SEP search: humaneness",
+          "description": "SEP search results humaneness humane*",
+          "occurrences": 14,
+          "data": "/sep/humaneness_combined.json"
+        },
+        {
+          "id": "sophie-de-grouchy",
+          "url": "https://plato.stanford.edu/entries/sophie-de-grouchy/",
+          "title": "Sophie de Grouchy",
+          "description": "Sophie de Grouchy (1764–1822) was a French philosopher whose\nbook The Letters on Sympathy offers clear and original\nperspectives on a number of important moral,",
+          "occurrences": 1,
+          "data": "/sep/humaneness_sophie-de-grouchy.json"
+        },
+        {
+          "id": "africana",
+          "url": "https://plato.stanford.edu/entries/africana/",
+          "title": "Africana Philosophy",
+          "description": "“Africana philosophy” is the name for an emergent and\nstill developing field of ideas and idea-spaces, intellectual\nendeavors, discourses, and discursive networ",
+          "occurrences": 4,
+          "data": "/sep/humaneness_africana.json"
+        },
+        {
+          "id": "communitarianism",
+          "url": "https://plato.stanford.edu/entries/communitarianism/",
+          "title": "Communitarianism",
+          "description": "Communitarianism is the idea that human identities are largely shaped\nby different kinds of constitutive communities (or social relations)\nand that this concept",
+          "occurrences": 2,
+          "data": "/sep/humaneness_communitarianism.json"
+        },
+        {
+          "id": "meritocracy",
+          "url": "https://plato.stanford.edu/entries/meritocracy/",
+          "title": "Meritocracy",
+          "description": "Understood literally, a meritocracy is a society in which influence\n(of some sort) is possessed on the basis of merit (whatever that\nmeans). Meritocracy is of p",
+          "occurrences": 1,
+          "data": "/sep/humaneness_meritocracy.json"
+        },
+        {
+          "id": "nietzsche-moral-political",
+          "url": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+          "title": "Nietzsche’s Moral and Political Philosophy",
+          "description": "Nietzsche’s moral philosophy is primarily critical in\norientation: he attacks morality both for its commitment to untenable\ndescriptive (metaphysical and empiri",
+          "occurrences": 1,
+          "data": "/sep/humaneness_nietzsche-moral-political.json"
+        },
+        {
+          "id": "sidgwick",
+          "url": "https://plato.stanford.edu/entries/sidgwick/",
+          "title": "Henry Sidgwick",
+          "description": "Henry Sidgwick was one of the most influential ethical philosophers of\nthe Victorian era, and his work continues to exert a powerful\ninfluence on Anglo-American",
+          "occurrences": 1,
+          "data": "/sep/humaneness_sidgwick.json"
+        },
+        {
+          "id": "aesthetics-critical-theory",
+          "url": "https://plato.stanford.edu/entries/aesthetics-critical-theory/",
+          "title": "Aesthetics in Critical Theory",
+          "description": "Critical theory arose as a response to perceived inadequacies in\nMarxist theory, and perceived changes in modern capitalism. Critical\ntheorists emphasized the a",
+          "occurrences": 1,
+          "data": "/sep/humaneness_aesthetics-critical-theory.json"
+        },
+        {
+          "id": "ruth-barcan-marcus",
+          "url": "https://plato.stanford.edu/entries/ruth-barcan-marcus/",
+          "title": "Ruth Barcan Marcus",
+          "description": "Ruth Barcan Marcus (1921–2012) was one of the most influential\nphilosophers of the second half of the twentieth century. Her first\n1946 publication contains the",
+          "occurrences": 1,
+          "data": "/sep/humaneness_ruth-barcan-marcus.json"
+        },
+        {
+          "id": "montessori-maria",
+          "url": "https://plato.stanford.edu/entries/montessori-maria/",
+          "title": "Maria Montessori",
+          "description": "Maria Montessori (1870–1952) was one of the most influential\npedagogues of the late nineteenth and early twentieth centuries,\ndeveloping an educational method t",
+          "occurrences": 0,
+          "data": "/sep/humaneness_montessori-maria.json"
+        },
+        {
+          "id": "geometry-19th",
+          "url": "https://plato.stanford.edu/entries/geometry-19th/",
+          "title": "Nineteenth Century Geometry",
+          "description": "In the nineteenth century, geometry, like most academic disciplines,\nwent through a period of growth verging on cataclysm. During this\nperiod, the content of ge",
+          "occurrences": 0,
+          "data": "/sep/humaneness_geometry-19th.json"
+        },
+        {
+          "id": "justus-lipsius",
+          "url": "https://plato.stanford.edu/entries/justus-lipsius/",
+          "title": "Justus Lipsius",
+          "description": "The humanist and classical scholar Justus Lipsius (Joost Lips)\n(1547–1606), described by his admiring correspondent Michel de\nMontaigne as one of the most learn",
+          "occurrences": 1,
+          "data": "/sep/humaneness_justus-lipsius.json"
+        },
+        {
+          "id": "hegel-social-political",
+          "url": "https://plato.stanford.edu/entries/hegel-social-political/",
+          "title": "Hegel’s Social and Political Philosophy",
+          "description": "Georg Wilhelm Friedrich Hegel (1770–1831) developed a philosophy\nbased on freedom within a wider philosophical system offering novel\nviews on topics ranging fro",
+          "occurrences": 1,
+          "data": "/sep/humaneness_hegel-social-political.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 22,
+          "data": "/sep/humaneness_embeds.json"
+        }
+      ]
+    },
+    "humanity": {
+      "term": {
+        "label": "humanity",
+        "variants": []
+      },
+      "total_occurrences": 474,
+      "chinese_philosophy_occurrences": 20,
+      "cooccurrence": [
+        {
+          "id": "humanity_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humanity+humanit%2A",
+          "title": "SEP search: humanity",
+          "description": "SEP search results humanity humanit*",
+          "occurrences": 283,
+          "data": "/sep/humanity_combined.json"
+        },
+        {
+          "id": "comte",
+          "url": "https://plato.stanford.edu/entries/comte/",
+          "title": "Auguste Comte",
+          "description": "Auguste Comte (1798–1857) is the founder of positivism, a\nphilosophical and political movement which enjoyed a very wide\ndiffusion in the second half of the nin",
+          "occurrences": 28,
+          "data": "/sep/humanity_comte.json"
+        },
+        {
+          "id": "cohen",
+          "url": "https://plato.stanford.edu/entries/cohen/",
+          "title": "Hermann Cohen",
+          "description": "Hermann Cohen (b. 1842, d. 1918), more than any other single figure,\nis responsible for founding the orthodox neo-Kantianism that dominated\nacademic philosophy ",
+          "occurrences": 29,
+          "data": "/sep/humanity_cohen.json"
+        },
+        {
+          "id": "kant-moral",
+          "url": "https://plato.stanford.edu/entries/kant-moral/",
+          "title": "Kant’s Moral Philosophy",
+          "description": "Immanuel Kant (1724–1804) argued that the supreme principle of\nmorality is a principle of rationality that he dubbed the\n“Categorical Imperative” (CI). In Kant’",
+          "occurrences": 48,
+          "data": "/sep/humanity_kant-moral.json"
+        },
+        {
+          "id": "feminism-objectification",
+          "url": "https://plato.stanford.edu/entries/feminism-objectification/",
+          "title": "Feminist Perspectives on Objectification",
+          "description": "Objectification is a notion central to feminist theory. It can be\nroughly defined as the seeing and/or treating a person, usually a\nwoman, as an object. In this",
+          "occurrences": 26,
+          "data": "/sep/humanity_feminism-objectification.json"
+        },
+        {
+          "id": "dehumanization",
+          "url": "https://plato.stanford.edu/entries/dehumanization/",
+          "title": "Dehumanization",
+          "description": "Dehumanization is widely thought to occur when someone is treated or\nregarded as less than human. However, there is an ongoing debate about\nhow to develop this ",
+          "occurrences": 20,
+          "data": "/sep/humanity_dehumanization.json"
+        },
+        {
+          "id": "penbygull",
+          "url": "https://plato.stanford.edu/entries/penbygull/",
+          "title": "William Penbygull",
+          "description": "Wyclif’s logico-metaphysical works were very influential at\nOxford at the end of the 14th century and the beginning of the 15th.\nAmong the authors who followed ",
+          "occurrences": 7,
+          "data": "/sep/humanity_penbygull.json"
+        },
+        {
+          "id": "african-ethics",
+          "url": "https://plato.stanford.edu/entries/african-ethics/",
+          "title": "African Ethics",
+          "description": "The ethics of a society is embedded in the ideas and beliefs about\nwhat is right or wrong, what is a good or bad character; it is also\nembedded in the conceptio",
+          "occurrences": 26,
+          "data": "/sep/humanity_african-ethics.json"
+        },
+        {
+          "id": "al-farabi-soc-rel",
+          "url": "https://plato.stanford.edu/entries/al-farabi-soc-rel/",
+          "title": "al-Farabi’s Philosophy of Society and Religion",
+          "description": "While al-Farabi does not have a specific term for ‘philosophy of\nreligion’, he does in fact have one which can more or less\nliterally be translated as ‘philosop",
+          "occurrences": 14,
+          "data": "/sep/humanity_al-farabi-soc-rel.json"
+        },
+        {
+          "id": "enlightenment",
+          "url": "https://plato.stanford.edu/entries/enlightenment/",
+          "title": "Enlightenment",
+          "description": "The heart of the eighteenth century Enlightenment is the loosely\norganized activity of prominent French thinkers of the mid-decades of\nthe eighteenth century, t",
+          "occurrences": 24,
+          "data": "/sep/humanity_enlightenment.json"
+        },
+        {
+          "id": "schiller",
+          "url": "https://plato.stanford.edu/entries/schiller/",
+          "title": "Friedrich Schiller",
+          "description": "Johann Christoph Friedrich Schiller (1759–1805) is best known\nfor his immense influence on German literature. In his relatively\nshort life, he authored an extra",
+          "occurrences": 17,
+          "data": "/sep/humanity_schiller.json"
+        },
+        {
+          "id": "cognitive-disability",
+          "url": "https://plato.stanford.edu/entries/cognitive-disability/",
+          "title": "Cognitive Disability and Moral Status",
+          "description": "Why are cognitive disability and moral status thought to be\nsufficiently connected to warrant a separate entry? The reason is that\nindividuals with cognitive di",
+          "occurrences": 15,
+          "data": "/sep/humanity_cognitive-disability.json"
+        },
+        {
+          "id": "heidegger-aesthetics",
+          "url": "https://plato.stanford.edu/entries/heidegger-aesthetics/",
+          "title": "Heidegger’s Aesthetics",
+          "description": "Heidegger is against the modern tradition of philosophical\n“aesthetics” because he is for the true “work of\nart” which, he argues, the aesthetic approach to art",
+          "occurrences": 29,
+          "data": "/sep/humanity_heidegger-aesthetics.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 474,
+          "data": "/sep/humanity_embeds.json"
+        }
+      ]
+    },
+    "intelligence": {
+      "term": {
+        "label": "intelligence",
+        "variants": []
+      },
+      "total_occurrences": 593,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "intelligence_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=intelligence+intelligen%2A",
+          "title": "SEP search: intelligence",
+          "description": "SEP search results intelligence intelligen*",
+          "occurrences": 396,
+          "data": "/sep/intelligence_combined.json"
+        },
+        {
+          "id": "artificial-intelligence",
+          "url": "https://plato.stanford.edu/entries/artificial-intelligence/",
+          "title": "Artificial Intelligence",
+          "description": "Artificial intelligence (AI) is the field devoted to building\nartificial animals (or at least artificial creatures that – in\nsuitable contexts – appear to be an",
+          "occurrences": 79,
+          "data": "/sep/intelligence_artificial-intelligence.json"
+        },
+        {
+          "id": "logic-ai",
+          "url": "https://plato.stanford.edu/entries/logic-ai/",
+          "title": "Logic-Based Artificial Intelligence",
+          "description": "Artificial Intelligence (referred to hereafter by its nickname,\n“AI”) is the subfield of Computer Science devoted to\ndeveloping programs that enable computers t",
+          "occurrences": 9,
+          "data": "/sep/intelligence_logic-ai.json"
+        },
+        {
+          "id": "ethics-ai",
+          "url": "https://plato.stanford.edu/entries/ethics-ai/",
+          "title": "Ethics of Artificial Intelligence and Robotics",
+          "description": "After around 70 years of development, it is now clear that AI and\nrobotics do have substantial impact on the world, even if the\nexact nature and depth of that i",
+          "occurrences": 29,
+          "data": "/sep/intelligence_ethics-ai.json"
+        },
+        {
+          "id": "turing-test",
+          "url": "https://plato.stanford.edu/entries/turing-test/",
+          "title": "The Turing Test",
+          "description": "The phrase “The Turing Test” is most properly used to\nrefer to a proposal made by Turing (1950) as a way of dealing with the\nquestion whether machines can think",
+          "occurrences": 154,
+          "data": "/sep/intelligence_turing-test.json"
+        },
+        {
+          "id": "reasoning-defeasible",
+          "url": "https://plato.stanford.edu/entries/reasoning-defeasible/",
+          "title": "Defeasible Reasoning",
+          "description": "Reasoning is defeasible when the corresponding argument is\nrationally compelling but not deductively valid. The truth of the\npremises of a good defeasible argum",
+          "occurrences": 11,
+          "data": "/sep/intelligence_reasoning-defeasible.json"
+        },
+        {
+          "id": "frame-problem",
+          "url": "https://plato.stanford.edu/entries/frame-problem/",
+          "title": "The Frame Problem",
+          "description": "To most AI researchers, the frame problem is the challenge of\nrepresenting the effects of action in logic without having to represent\nexplicitly a large number ",
+          "occurrences": 5,
+          "data": "/sep/intelligence_frame-problem.json"
+        },
+        {
+          "id": "logic-nonmonotonic",
+          "url": "https://plato.stanford.edu/entries/logic-nonmonotonic/",
+          "title": "Non-monotonic Logic",
+          "description": "Non-monotonic logic (NML) is a family of formal\nlogics designed to model and better understand defeasible\nreasoning. Reasoners draw conclusions in a defeasible ",
+          "occurrences": 1,
+          "data": "/sep/intelligence_logic-nonmonotonic.json"
+        },
+        {
+          "id": "turing",
+          "url": "https://plato.stanford.edu/entries/turing/",
+          "title": "Alan Turing",
+          "description": "Alan Turing (1912–1954) never described himself as a philosopher, but\nhis 1950 paper “Computing Machinery and Intelligence” is one of the\nmost frequently cited ",
+          "occurrences": 32,
+          "data": "/sep/intelligence_turing.json"
+        },
+        {
+          "id": "cognitive-science",
+          "url": "https://plato.stanford.edu/entries/cognitive-science/",
+          "title": "Cognitive Science",
+          "description": "Cognitive science is the interdisciplinary study of mind and\nintelligence, embracing philosophy, psychology, artificial\nintelligence, neuroscience, linguistics,",
+          "occurrences": 18,
+          "data": "/sep/intelligence_cognitive-science.json"
+        },
+        {
+          "id": "logic-action",
+          "url": "https://plato.stanford.edu/entries/logic-action/",
+          "title": "The Logic of Action",
+          "description": "In this article we provide a brief overview of the logic of action in philosophy, linguistics, computer science, and artificial intelligence. The logic of actio",
+          "occurrences": 24,
+          "data": "/sep/intelligence_logic-action.json"
+        },
+        {
+          "id": "bergson",
+          "url": "https://plato.stanford.edu/entries/bergson/",
+          "title": "Henri Bergson",
+          "description": "Henri Bergson (1859–1941) was one of the most famous and\ninfluential French philosophers of the late 19th century-early 20th\ncentury. Although his international",
+          "occurrences": 30,
+          "data": "/sep/intelligence_bergson.json"
+        },
+        {
+          "id": "ontology-is",
+          "url": "https://plato.stanford.edu/entries/ontology-is/",
+          "title": "Ontology and Information Systems",
+          "description": "When two agents communicate they must have some significant body of\nshared understanding about the meaning of the symbols they use. Humans\nhave attempted to cod",
+          "occurrences": 4,
+          "data": "/sep/intelligence_ontology-is.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 593,
+          "data": "/sep/intelligence_embeds.json"
+        }
+      ]
+    },
+    "justice": {
+      "term": {
+        "label": "justice",
+        "variants": []
+      },
+      "total_occurrences": 2080,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "justice_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
+          "title": "SEP search: justice",
+          "description": "SEP search results justice justness",
+          "occurrences": 1397,
+          "data": "/sep/justice_combined.json"
+        },
+        {
+          "id": "justice",
+          "url": "https://plato.stanford.edu/entries/justice/",
+          "title": "Justice",
+          "description": "The idea of justice occupies centre stage both in ethics, and in legal\nand political philosophy. We apply it to individual actions, to laws,\nto public policies,",
+          "occurrences": 326,
+          "data": "/sep/justice_justice.json"
+        },
+        {
+          "id": "justice-global",
+          "url": "https://plato.stanford.edu/entries/justice-global/",
+          "title": "Global Justice",
+          "description": "On common accounts, we have a state of justice when everyone has their\ndue. The study of justice has been concerned with what we owe one\nanother, what obligatio",
+          "occurrences": 123,
+          "data": "/sep/justice_justice-global.json"
+        },
+        {
+          "id": "justice-climate",
+          "url": "https://plato.stanford.edu/entries/justice-climate/",
+          "title": "Climate Justice",
+          "description": "There is overwhelming evidence that human activities are changing the\nclimate\n system.[1]\n The emission of greenhouse gases is resulting in increased\ntemperatur",
+          "occurrences": 69,
+          "data": "/sep/justice_justice-climate.json"
+        },
+        {
+          "id": "justice-distributive",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/",
+          "title": "Distributive Justice",
+          "description": "The economic, political, and social frameworks that each society \nhas—its laws, institutions, policies, etc.—result in\ndifferent distributions of benefits and b",
+          "occurrences": 84,
+          "data": "/sep/justice_justice-distributive.json"
+        },
+        {
+          "id": "justice-transitional",
+          "url": "https://plato.stanford.edu/entries/justice-transitional/",
+          "title": "Transitional Justice",
+          "description": "Once violent conflict between two groups has subsided, what is the\nbest way to transition to a civil society? Do former enemies need to\n“come to terms with thei",
+          "occurrences": 82,
+          "data": "/sep/justice_justice-transitional.json"
+        },
+        {
+          "id": "justice-intergenerational",
+          "url": "https://plato.stanford.edu/entries/justice-intergenerational/",
+          "title": "Intergenerational Justice",
+          "description": "Central questions of intergenerational justice are: first, whether\npresent generations can be duty-bound because of considerations of\njustice to past and future",
+          "occurrences": 59,
+          "data": "/sep/justice_justice-intergenerational.json"
+        },
+        {
+          "id": "justice-retributive",
+          "url": "https://plato.stanford.edu/entries/justice-retributive/",
+          "title": "Retributive Justice",
+          "description": "The concept of retributive justice has been used in a variety of ways,\nbut it is best understood as that form of justice committed to the\nfollowing three princi",
+          "occurrences": 40,
+          "data": "/sep/justice_justice-retributive.json"
+        },
+        {
+          "id": "justice-virtue",
+          "url": "https://plato.stanford.edu/entries/justice-virtue/",
+          "title": "Justice as a Virtue",
+          "description": "Justice as a virtue was originally understood to be a property of\nindividuals or, more precisely, of an individual’s character.\nToday, we tend to think of the v",
+          "occurrences": 242,
+          "data": "/sep/justice_justice-virtue.json"
+        },
+        {
+          "id": "international-justice",
+          "url": "https://plato.stanford.edu/entries/international-justice/",
+          "title": "International Distributive Justice",
+          "description": "International distributive justice has, in the past several decades,\nbecome a prominent topic within political philosophy. Philosophers\nhave, of course, long be",
+          "occurrences": 166,
+          "data": "/sep/justice_international-justice.json"
+        },
+        {
+          "id": "disability-justice",
+          "url": "https://plato.stanford.edu/entries/disability-justice/",
+          "title": "Disability and Justice",
+          "description": "Among the topics in philosophy and disability, the relationship\nbetween disability and justice has received the lion’s share of\nattention. No doubt this is in p",
+          "occurrences": 77,
+          "data": "/sep/justice_disability-justice.json"
+        },
+        {
+          "id": "justice-bad-luck",
+          "url": "https://plato.stanford.edu/entries/justice-bad-luck/",
+          "title": "Justice and Bad Luck",
+          "description": "Some people end up worse off than others partly because of their bad\nluck. For instance, some die young due to a genetic disease, whereas\nothers live long lives",
+          "occurrences": 56,
+          "data": "/sep/justice_justice-bad-luck.json"
+        },
+        {
+          "id": "justice-inequality-health",
+          "url": "https://plato.stanford.edu/entries/justice-inequality-health/",
+          "title": "Justice, Inequality, and Health",
+          "description": "Among American men, there is a 14.6 year difference in life expectancy\nbetween the top 1% and the bottom 1% of the income distribution\n(Chetty et al. 2016). Amo",
+          "occurrences": 73,
+          "data": "/sep/justice_justice-inequality-health.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 2080,
+          "data": "/sep/justice_embeds.json"
+        }
+      ]
+    },
+    "knowledge": {
+      "term": {
+        "label": "knowledge",
+        "variants": []
+      },
+      "total_occurrences": 4491,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "knowledge_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=knowledge+knowledge%2A",
+          "title": "SEP search: knowledge",
+          "description": "SEP search results knowledge knowledge*",
+          "occurrences": 2454,
+          "data": "/sep/knowledge_combined.json"
+        },
+        {
+          "id": "knowledge-how",
+          "url": "https://plato.stanford.edu/entries/knowledge-how/",
+          "title": "Knowledge How",
+          "description": "In introductory classes to epistemology, we are taught to distinguish\nbetween three different kinds of knowledge. The first kind is\nacquaintance knowledge: we k",
+          "occurrences": 347,
+          "data": "/sep/knowledge_knowledge-how.json"
+        },
+        {
+          "id": "common-knowledge",
+          "url": "https://plato.stanford.edu/entries/common-knowledge/",
+          "title": "Common Knowledge",
+          "description": "A proposition \\(A\\) is mutual knowledge among a set of agents\nif each agent knows that \\(A\\). Mutual knowledge by itself implies\nnothing about what, if any, kno",
+          "occurrences": 334,
+          "data": "/sep/knowledge_common-knowledge.json"
+        },
+        {
+          "id": "self-knowledge",
+          "url": "https://plato.stanford.edu/entries/self-knowledge/",
+          "title": "Self-Knowledge",
+          "description": "In philosophy, “self-knowledge” standardly refers to\nknowledge of one’s own mental states—that is, of what one\nis feeling or thinking, or what one believes or d",
+          "occurrences": 164,
+          "data": "/sep/knowledge_self-knowledge.json"
+        },
+        {
+          "id": "knowledge-analysis",
+          "url": "https://plato.stanford.edu/entries/knowledge-analysis/",
+          "title": "The Analysis of Knowledge",
+          "description": "For any person, there are some things they know, and some things they\ndon’t. What exactly is the difference? What does it take to know\nsomething? It’s not enoug",
+          "occurrences": 239,
+          "data": "/sep/knowledge_knowledge-analysis.json"
+        },
+        {
+          "id": "qualia-knowledge",
+          "url": "https://plato.stanford.edu/entries/qualia-knowledge/",
+          "title": "Qualia: The Knowledge Argument",
+          "description": "The knowledge argument aims to establish that conscious experience\ninvolves non-physical properties. It rests on the idea that someone\nwho has complete physical",
+          "occurrences": 222,
+          "data": "/sep/knowledge_qualia-knowledge.json"
+        },
+        {
+          "id": "knowledge-value",
+          "url": "https://plato.stanford.edu/entries/knowledge-value/",
+          "title": "The Value of Knowledge",
+          "description": "The value of knowledge has always been a central topic within\nepistemology. Going all the way back to Plato’s Meno,\nphilosophers have asked, why is knowledge mo",
+          "occurrences": 260,
+          "data": "/sep/knowledge_knowledge-value.json"
+        },
+        {
+          "id": "self-knowledge-externalism",
+          "url": "https://plato.stanford.edu/entries/self-knowledge-externalism/",
+          "title": "Externalism and Self-Knowledge",
+          "description": "Externalism in the philosophy of mind contends that the meaning or\ncontent of a\n thought[1]\n is partly determined by the environment. The view has garnered\natte",
+          "occurrences": 108,
+          "data": "/sep/knowledge_self-knowledge-externalism.json"
+        },
+        {
+          "id": "knowledge-acquaindescrip",
+          "url": "https://plato.stanford.edu/entries/knowledge-acquaindescrip/",
+          "title": "Knowledge by Acquaintance vs. Description",
+          "description": "The terminology is most clearly associated with Bertrand Russell, but\nthe distinction between knowledge by acquaintance and knowledge by\ndescription is arguably",
+          "occurrences": 177,
+          "data": "/sep/knowledge_knowledge-acquaindescrip.json"
+        },
+        {
+          "id": "apriori",
+          "url": "https://plato.stanford.edu/entries/apriori/",
+          "title": "A Priori Justification and Knowledge",
+          "description": "A priori justification is a type of epistemic justification\nthat is, in some sense, independent of experience. Gettier examples\nhave led most philosophers to th",
+          "occurrences": 99,
+          "data": "/sep/knowledge_apriori.json"
+        },
+        {
+          "id": "plato-theaetetus",
+          "url": "https://plato.stanford.edu/entries/plato-theaetetus/",
+          "title": "Plato on Knowledge in the Theaetetus",
+          "description": "This article introduces Plato’s dialogue the Theaetetus\n(section 1), and briefly summarises its plot (section 2). Two leading\ninterpretations of the dialogue, t",
+          "occurrences": 219,
+          "data": "/sep/knowledge_plato-theaetetus.json"
+        },
+        {
+          "id": "scientific-knowledge-social",
+          "url": "https://plato.stanford.edu/entries/scientific-knowledge-social/",
+          "title": "The Social Dimensions of Scientific Knowledge",
+          "description": "Study of the social dimensions of scientific knowledge encompasses the\neffects of scientific research on human life and social relations, the\neffects of social ",
+          "occurrences": 82,
+          "data": "/sep/knowledge_scientific-knowledge-social.json"
+        },
+        {
+          "id": "rationalism-empiricism",
+          "url": "https://plato.stanford.edu/entries/rationalism-empiricism/",
+          "title": "Rationalism vs. Empiricism",
+          "description": "In its most general terms, the dispute between rationalism and\nempiricism has been taken to concern the extent to which we are\ndependent upon experience in our ",
+          "occurrences": 203,
+          "data": "/sep/knowledge_rationalism-empiricism.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 4491,
+          "data": "/sep/knowledge_embeds.json"
+        }
+      ]
+    },
+    "meaning": {
+      "term": {
+        "label": "meaning",
+        "variants": []
+      },
+      "total_occurrences": 2395,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "meaning_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=meaning",
+          "title": "SEP search: meaning",
+          "description": "SEP search results meaning",
+          "occurrences": 1708,
+          "data": "/sep/meaning_combined.json"
+        },
+        {
+          "id": "meaning-holism",
+          "url": "https://plato.stanford.edu/entries/meaning-holism/",
+          "title": "Meaning Holism",
+          "description": "The term “meaning holism” is generally applied to views\nthat treat the meanings of all of the words in a language as\ninterdependent. Holism draws much of its ap",
+          "occurrences": 124,
+          "data": "/sep/meaning_meaning-holism.json"
+        },
+        {
+          "id": "word-meaning",
+          "url": "https://plato.stanford.edu/entries/word-meaning/",
+          "title": "Word Meaning",
+          "description": "Word meaning has played a somewhat marginal role in early contemporary\nphilosophy of language, which focused more on the compositional\nprocesses whereby words c",
+          "occurrences": 195,
+          "data": "/sep/meaning_word-meaning.json"
+        },
+        {
+          "id": "life-meaning",
+          "url": "https://plato.stanford.edu/entries/life-meaning/",
+          "title": "The Meaning of Life",
+          "description": "Many major historical figures in philosophy have provided an answer to\nthe question of what, if anything, makes life meaningful, although\nthey typically have no",
+          "occurrences": 176,
+          "data": "/sep/meaning_life-meaning.json"
+        },
+        {
+          "id": "meaning",
+          "url": "https://plato.stanford.edu/entries/meaning/",
+          "title": "Theories of Meaning",
+          "description": "The term “theory of meaning” has figured, in one way or\nanother, in a great number of philosophical disputes over the last\ncentury. Unfortunately, this term has",
+          "occurrences": 149,
+          "data": "/sep/meaning_meaning.json"
+        },
+        {
+          "id": "meaning-normativity",
+          "url": "https://plato.stanford.edu/entries/meaning-normativity/",
+          "title": "The Normativity of Meaning and Content",
+          "description": "Normativism in the theory of meaning and content is the view that\nlinguistic meaning and/or intentional content are essentially\nnormative. As both normativity a",
+          "occurrences": 154,
+          "data": "/sep/meaning_meaning-normativity.json"
+        },
+        {
+          "id": "literal-nonliteral-india",
+          "url": "https://plato.stanford.edu/entries/literal-nonliteral-india/",
+          "title": "The Literal-Nonliteral Distinction in Classical Indian Philosophy",
+          "description": "Indian thinkers distinguish between literal and nonliteral meaning\nearly in their history. They do so within different intellectual\ndisciplines (śāstra-s), each",
+          "occurrences": 281,
+          "data": "/sep/meaning_literal-nonliteral-india.json"
+        },
+        {
+          "id": "language-india",
+          "url": "https://plato.stanford.edu/entries/language-india/",
+          "title": "Language and Testimony in Classical Indian Philosophy",
+          "description": "Speculations about the nature and function of language in India can be\ntraced to its earliest period. These speculations are multi-faceted in\nthat one detects m",
+          "occurrences": 110,
+          "data": "/sep/meaning_language-india.json"
+        },
+        {
+          "id": "rule-following",
+          "url": "https://plato.stanford.edu/entries/rule-following/",
+          "title": "Rule-Following and Intentionality",
+          "description": "Ludwig Wittgenstein’s reflections on\nrule-following—principally, sections 138–242 of\nPhilosophical Investigations and section VI of Remarks on\nthe Foundations o",
+          "occurrences": 122,
+          "data": "/sep/meaning_rule-following.json"
+        },
+        {
+          "id": "compositionality",
+          "url": "https://plato.stanford.edu/entries/compositionality/",
+          "title": "Compositionality",
+          "description": "Languages contain meaningful expressions built from other meaningful\nexpressions. On the traditional view, the meaning of a complex\nexpression is determined by ",
+          "occurrences": 39,
+          "data": "/sep/meaning_compositionality.json"
+        },
+        {
+          "id": "names",
+          "url": "https://plato.stanford.edu/entries/names/",
+          "title": "Names",
+          "description": "Proper names are familiar expressions of natural language, whose\nsemantics remains a contested subject. Do names have meanings, or do\nthey simply refer to parti",
+          "occurrences": 141,
+          "data": "/sep/meaning_names.json"
+        },
+        {
+          "id": "grice",
+          "url": "https://plato.stanford.edu/entries/grice/",
+          "title": "Paul Grice",
+          "description": "Herbert Paul Grice, universally known as Paul, was born on March 13,\n1913 in Birmingham, England and died on August 28, 1988 in Berkeley\nCA. Grice received firs",
+          "occurrences": 94,
+          "data": "/sep/meaning_grice.json"
+        },
+        {
+          "id": "legal-interpretation",
+          "url": "https://plato.stanford.edu/entries/legal-interpretation/",
+          "title": "Legal Interpretation",
+          "description": "Legal interpretation involves scrutinizing legal texts such as the\ntexts of statutes, constitutions, contracts, and wills. This chapter\nintroduces the foundatio",
+          "occurrences": 123,
+          "data": "/sep/meaning_legal-interpretation.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 2395,
+          "data": "/sep/meaning_embeds.json"
+        }
+      ]
+    },
+    "morality": {
+      "term": {
+        "label": "morality",
+        "variants": []
+      },
+      "total_occurrences": 8248,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "morality_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=morality+moral%2A",
+          "title": "SEP search: morality",
+          "description": "SEP search results morality moral*",
+          "occurrences": 3521,
+          "data": "/sep/morality_combined.json"
+        },
+        {
+          "id": "morality-definition",
+          "url": "https://plato.stanford.edu/entries/morality-definition/",
+          "title": "The Definition of Morality",
+          "description": "The topic of this entry is not—at least directly—moral\ntheory; rather, it is the definition of morality. Moral\ntheories are large and complex things; definition",
+          "occurrences": 353,
+          "data": "/sep/morality_morality-definition.json"
+        },
+        {
+          "id": "morality-biology",
+          "url": "https://plato.stanford.edu/entries/morality-biology/",
+          "title": "Morality and Evolutionary Biology",
+          "description": "An article in The Economist (21 February 2008, “Moral\nthinking”), sporting the provocative subtitle “Biology\nInvades a Field Philosophers Thought was Safely The",
+          "occurrences": 486,
+          "data": "/sep/morality_morality-biology.json"
+        },
+        {
+          "id": "kant-hume-morality",
+          "url": "https://plato.stanford.edu/entries/kant-hume-morality/",
+          "title": "Kant and Hume on Morality",
+          "description": "The relationship between Immanuel Kant (1724–1804) and David\nHume (1711–1776) is a source of longstanding fascination. Kant\ncredited Hume with waking him from h",
+          "occurrences": 295,
+          "data": "/sep/morality_kant-hume-morality.json"
+        },
+        {
+          "id": "religion-morality",
+          "url": "https://plato.stanford.edu/entries/religion-morality/",
+          "title": "Religion and Morality in Western Philosophy",
+          "description": "From the beginning of the Abrahamic faiths and of Greek philosophy,\nreligion and morality have been closely intertwined in Western\nthought. This is true whether",
+          "occurrences": 112,
+          "data": "/sep/morality_religion-morality.json"
+        },
+        {
+          "id": "moral-theory",
+          "url": "https://plato.stanford.edu/entries/moral-theory/",
+          "title": "Moral Theory",
+          "description": "There is much disagreement about what, exactly, constitutes a moral\ntheory. Some of that disagreement centers on the issue of\ndemarcating the moral from other a",
+          "occurrences": 187,
+          "data": "/sep/morality_moral-theory.json"
+        },
+        {
+          "id": "moral-conventional",
+          "url": "https://plato.stanford.edu/entries/moral-conventional/",
+          "title": "The Moral/Conventional Distinction",
+          "description": "Contemporary interest in the idea that there is a psychologically real\nand philosophically important distinction between moral judgments and\nconventional judgme",
+          "occurrences": 369,
+          "data": "/sep/morality_moral-conventional.json"
+        },
+        {
+          "id": "locke-moral",
+          "url": "https://plato.stanford.edu/entries/locke-moral/",
+          "title": "Locke’s Moral Philosophy",
+          "description": "Locke’s greatest philosophical work, An Essay Concerning Human\nUnderstanding, is generally seen as a defining work of\nseventeenth-century empiricist epistemolog",
+          "occurrences": 210,
+          "data": "/sep/morality_locke-moral.json"
+        },
+        {
+          "id": "nietzsche-moral-political",
+          "url": "https://plato.stanford.edu/entries/nietzsche-moral-political/",
+          "title": "Nietzsche’s Moral and Political Philosophy",
+          "description": "Nietzsche’s moral philosophy is primarily critical in\norientation: he attacks morality both for its commitment to untenable\ndescriptive (metaphysical and empiri",
+          "occurrences": 187,
+          "data": "/sep/morality_nietzsche-moral-political.json"
+        },
+        {
+          "id": "moral-arguments-god",
+          "url": "https://plato.stanford.edu/entries/moral-arguments-god/",
+          "title": "Moral Arguments for the Existence of God",
+          "description": "Moral arguments for God’s existence form a diverse family of\narguments that reason from some feature of morality or the moral life\nto the existence of God, usua",
+          "occurrences": 234,
+          "data": "/sep/morality_moral-arguments-god.json"
+        },
+        {
+          "id": "moral-relativism",
+          "url": "https://plato.stanford.edu/entries/moral-relativism/",
+          "title": "Moral Relativism",
+          "description": "Moral relativism is an important topic in metaethics. It is also\nwidely discussed outside philosophy (for example, by political and\nreligious leaders), and it i",
+          "occurrences": 434,
+          "data": "/sep/morality_moral-relativism.json"
+        },
+        {
+          "id": "moral-realism",
+          "url": "https://plato.stanford.edu/entries/moral-realism/",
+          "title": "Moral Realism",
+          "description": "Taken at face value, the claim that Nigel has a moral obligation to\nkeep his promise, like the claim that Nyx is a black cat, purports to\nreport a fact and is t",
+          "occurrences": 250,
+          "data": "/sep/morality_moral-realism.json"
+        },
+        {
+          "id": "moral-anti-realism",
+          "url": "https://plato.stanford.edu/entries/moral-anti-realism/",
+          "title": "Moral Anti-Realism",
+          "description": "It might be expected that it would suffice for the entry for\n“moral anti-realism” to contain only some links to other\nentries in this encyclopedia. It could con",
+          "occurrences": 404,
+          "data": "/sep/morality_moral-anti-realism.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 8248,
+          "data": "/sep/morality_embeds.json"
+        }
+      ]
+    },
+    "propriety": {
+      "term": {
+        "label": "propriety",
+        "variants": []
+      },
+      "total_occurrences": 76,
+      "chinese_philosophy_occurrences": 74,
+      "cooccurrence": [
+        {
+          "id": "propriety_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=propriety",
+          "title": "SEP search: propriety",
+          "description": "SEP search results propriety",
+          "occurrences": 71,
+          "data": "/sep/propriety_combined.json"
+        },
+        {
+          "id": "truthlikeness",
+          "url": "https://plato.stanford.edu/entries/truthlikeness/",
+          "title": "Truthlikeness",
+          "description": "Truth is widely held to be the constitutive aim of inquiry.\nEven those who think the aim of inquiry is something more accessible\nthan the truth (such as the emp",
+          "occurrences": 11,
+          "data": "/sep/propriety_truthlikeness.json"
+        },
+        {
+          "id": "smith-moral-political",
+          "url": "https://plato.stanford.edu/entries/smith-moral-political/",
+          "title": "Adam Smith’s Moral and Political Philosophy",
+          "description": "Adam Smith developed a comprehensive and unusual version of moral\nsentimentalism in his Theory of Moral Sentiments (1759, TMS).\nHe did not expressly lay out a p",
+          "occurrences": 8,
+          "data": "/sep/propriety_smith-moral-political.json"
+        },
+        {
+          "id": "epistemic-utility",
+          "url": "https://plato.stanford.edu/entries/epistemic-utility/",
+          "title": "Epistemic Utility Arguments for Epistemic Norms",
+          "description": "If I believe George Eliot wrote more than six novels and also believe\nshe wrote fewer than four, you will no doubt judge my beliefs\nirrational. After all, if sh",
+          "occurrences": 13,
+          "data": "/sep/propriety_epistemic-utility.json"
+        },
+        {
+          "id": "assertion",
+          "url": "https://plato.stanford.edu/entries/assertion/",
+          "title": "Assertion",
+          "description": "Asserting is the act of claiming that something is the case—for\ninstance, that oranges are citruses, or that there is a\ntraffic congestion on Brooklyn Bridge (a",
+          "occurrences": 9,
+          "data": "/sep/propriety_assertion.json"
+        },
+        {
+          "id": "korean-confucianism",
+          "url": "https://plato.stanford.edu/entries/korean-confucianism/",
+          "title": "Korean Confucianism",
+          "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
+          "occurrences": 5,
+          "data": "/sep/propriety_korean-confucianism.json"
+        },
+        {
+          "id": "confucian-gender",
+          "url": "https://plato.stanford.edu/entries/confucian-gender/",
+          "title": "Gender in Confucian Philosophy",
+          "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
+          "occurrences": 4,
+          "data": "/sep/propriety_confucian-gender.json"
+        },
+        {
+          "id": "dai-zhen",
+          "url": "https://plato.stanford.edu/entries/dai-zhen/",
+          "title": "Dai Zhen",
+          "description": "Dai Zhen 戴震 (1724–1777), also known by his\ncourtesy name Dai Dongyuan 戴東原, was a highly\naccomplished scholar of the Qianlong-Jiaqing era of the Qing dynasty.\nHi",
+          "occurrences": 4,
+          "data": "/sep/propriety_dai-zhen.json"
+        },
+        {
+          "id": "scottish-18th",
+          "url": "https://plato.stanford.edu/entries/scottish-18th/",
+          "title": "Scottish Philosophy in the 18th Century",
+          "description": "Philosophy was at the core of the eighteenth century movement known as\nthe Scottish Enlightenment. The movement included major figures, such\nas Francis Hutcheso",
+          "occurrences": 4,
+          "data": "/sep/propriety_scottish-18th.json"
+        },
+        {
+          "id": "fiction-emotion-response",
+          "url": "https://plato.stanford.edu/entries/fiction-emotion-response/",
+          "title": "Emotional Responses to Fiction",
+          "description": "Imagine that you are reading The Fellowship of the Ring.\nTolkien introduces you to a strange new world where, amongst other\nmagical occurrences, you fictionally",
+          "occurrences": 4,
+          "data": "/sep/propriety_fiction-emotion-response.json"
+        },
+        {
+          "id": "justice-retributive",
+          "url": "https://plato.stanford.edu/entries/justice-retributive/",
+          "title": "Retributive Justice",
+          "description": "The concept of retributive justice has been used in a variety of ways,\nbut it is best understood as that form of justice committed to the\nfollowing three princi",
+          "occurrences": 3,
+          "data": "/sep/propriety_justice-retributive.json"
+        },
+        {
+          "id": "moral-sentimentalism",
+          "url": "https://plato.stanford.edu/entries/moral-sentimentalism/",
+          "title": "Moral Sentimentalism",
+          "description": "For moral sentimentalists, our emotions and desires play a leading\nrole in the anatomy of morality. Some believe moral thoughts are\nfundamentally sentimental, o",
+          "occurrences": 3,
+          "data": "/sep/propriety_moral-sentimentalism.json"
+        },
+        {
+          "id": "sellars",
+          "url": "https://plato.stanford.edu/entries/sellars/",
+          "title": "Wilfrid Sellars",
+          "description": "Wilfrid Stalker Sellars (1912–89) was an original, systematic,\nand profound American philosopher. His effort in philosophy was\n“to formulate a scientifically or",
+          "occurrences": 3,
+          "data": "/sep/propriety_sellars.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 76,
+          "data": "/sep/propriety_embeds.json"
+        }
+      ]
+    },
+    "righteousness": {
+      "term": {
+        "label": "righteousness",
+        "variants": []
+      },
+      "total_occurrences": 50,
+      "chinese_philosophy_occurrences": 163,
+      "cooccurrence": [
+        {
+          "id": "righteousness_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=righteousness+righteous%2A",
+          "title": "SEP search: righteousness",
+          "description": "SEP search results righteousness righteous*",
+          "occurrences": 38,
+          "data": "/sep/righteousness_combined.json"
+        },
+        {
+          "id": "locke-moral",
+          "url": "https://plato.stanford.edu/entries/locke-moral/",
+          "title": "Locke’s Moral Philosophy",
+          "description": "Locke’s greatest philosophical work, An Essay Concerning Human\nUnderstanding, is generally seen as a defining work of\nseventeenth-century empiricist epistemolog",
+          "occurrences": 9,
+          "data": "/sep/righteousness_locke-moral.json"
+        },
+        {
+          "id": "luther",
+          "url": "https://plato.stanford.edu/entries/luther/",
+          "title": "Martin Luther",
+          "description": "Martin Luther (1483–1546) is the central figure of the\nProtestant Reformation. Whilst he is primarily seen as a theologian,\nthe philosophical interest and impac",
+          "occurrences": 9,
+          "data": "/sep/righteousness_luther.json"
+        },
+        {
+          "id": "tibbon",
+          "url": "https://plato.stanford.edu/entries/tibbon/",
+          "title": "Samuel Ibn Tibbon",
+          "description": "Samuel Ibn Tibbon (c. 1165–1232) was a translator, philosopher,\nand philosophical commentator on the Bible. He is most famous for his\ntranslation of Maimonides’",
+          "occurrences": 2,
+          "data": "/sep/righteousness_tibbon.json"
+        },
+        {
+          "id": "conway",
+          "url": "https://plato.stanford.edu/entries/conway/",
+          "title": "Lady Anne Conway",
+          "description": "Lady Anne Conway (nee Anne Finch) was one of a tiny minority of\nseventeenth-century women who was able to pursue an interest in\nphilosophy. She was associated w",
+          "occurrences": 1,
+          "data": "/sep/righteousness_conway.json"
+        },
+        {
+          "id": "confucian-gender",
+          "url": "https://plato.stanford.edu/entries/confucian-gender/",
+          "title": "Gender in Confucian Philosophy",
+          "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
+          "occurrences": 4,
+          "data": "/sep/righteousness_confucian-gender.json"
+        },
+        {
+          "id": "african-sage",
+          "url": "https://plato.stanford.edu/entries/african-sage/",
+          "title": "African Sage Philosophy",
+          "description": "“African Sage Philosophy” is the name now commonly given\nto the body of thought produced by persons considered wise in African\ncommunities, and more specificall",
+          "occurrences": 1,
+          "data": "/sep/righteousness_african-sage.json"
+        },
+        {
+          "id": "abner-burgos",
+          "url": "https://plato.stanford.edu/entries/abner-burgos/",
+          "title": "Abner of Burgos",
+          "description": "Abner of Burgos (Alfonso de Valladolid; c. 1260–1347) was\nperhaps the most important philosopher in the stream of Jewish Spanish\nrabbi-apostates in the 14th and",
+          "occurrences": 1,
+          "data": "/sep/righteousness_abner-burgos.json"
+        },
+        {
+          "id": "kilvington",
+          "url": "https://plato.stanford.edu/entries/kilvington/",
+          "title": "Richard Kilvington",
+          "description": "Richard Kilvington (ca. 1302–1361), Master of Arts and Doctor of\nTheology at Oxford, member of the household of Richard de Bury, then\nArchdeacon of London, and ",
+          "occurrences": 2,
+          "data": "/sep/righteousness_kilvington.json"
+        },
+        {
+          "id": "cosmopolitanism",
+          "url": "https://plato.stanford.edu/entries/cosmopolitanism/",
+          "title": "Cosmopolitanism",
+          "description": "The word ‘cosmopolitan’, which derives from the Greek\nword kosmopolitēs (‘citizen of the world’),\nhas been used to describe a wide variety of important views in",
+          "occurrences": 2,
+          "data": "/sep/righteousness_cosmopolitanism.json"
+        },
+        {
+          "id": "clarke",
+          "url": "https://plato.stanford.edu/entries/clarke/",
+          "title": "Samuel Clarke",
+          "description": "Samuel Clarke (1675–1729) was the most influential British\nmetaphysician and philosophical theologian in the generation between\nLocke and Berkeley, and only Sha",
+          "occurrences": 3,
+          "data": "/sep/righteousness_clarke.json"
+        },
+        {
+          "id": "korean-confucianism",
+          "url": "https://plato.stanford.edu/entries/korean-confucianism/",
+          "title": "Korean Confucianism",
+          "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
+          "occurrences": 2,
+          "data": "/sep/righteousness_korean-confucianism.json"
+        },
+        {
+          "id": "epistemology-india",
+          "url": "https://plato.stanford.edu/entries/epistemology-india/",
+          "title": "Epistemology in Classical Indian Philosophy",
+          "description": "Theory of knowledge, pramāṇa-śāstra, is\na rich genre of Sanskrit literature, spanning almost twenty centuries,\ncarried out in texts belonging to distinct school",
+          "occurrences": 2,
+          "data": "/sep/righteousness_epistemology-india.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 50,
+          "data": "/sep/righteousness_embeds.json"
+        }
+      ]
+    },
+    "ritual": {
+      "term": {
+        "label": "ritual",
+        "variants": []
+      },
+      "total_occurrences": 164,
+      "chinese_philosophy_occurrences": 462,
+      "cooccurrence": [
+        {
+          "id": "ritual_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=ritual+ritual%2A",
+          "title": "SEP search: ritual",
+          "description": "SEP search results ritual ritual*",
+          "occurrences": 140,
+          "data": "/sep/ritual_combined.json"
+        },
+        {
+          "id": "confucian-gender",
+          "url": "https://plato.stanford.edu/entries/confucian-gender/",
+          "title": "Gender in Confucian Philosophy",
+          "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
+          "occurrences": 43,
+          "data": "/sep/ritual_confucian-gender.json"
+        },
+        {
+          "id": "language-india",
+          "url": "https://plato.stanford.edu/entries/language-india/",
+          "title": "Language and Testimony in Classical Indian Philosophy",
+          "description": "Speculations about the nature and function of language in India can be\ntraced to its earliest period. These speculations are multi-faceted in\nthat one detects m",
+          "occurrences": 13,
+          "data": "/sep/ritual_language-india.json"
+        },
+        {
+          "id": "kumaarila",
+          "url": "https://plato.stanford.edu/entries/kumaarila/",
+          "title": "Kumārila",
+          "description": "Kumārila Bhaṭṭa, a Brahmanical proponent of the\nPūrva Mīmāṃsā school who flourished around\n660 ce, was among the most influential\nthinkers in the history of Ind",
+          "occurrences": 12,
+          "data": "/sep/ritual_kumaarila.json"
+        },
+        {
+          "id": "korean-confucianism",
+          "url": "https://plato.stanford.edu/entries/korean-confucianism/",
+          "title": "Korean Confucianism",
+          "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
+          "occurrences": 14,
+          "data": "/sep/ritual_korean-confucianism.json"
+        },
+        {
+          "id": "literal-nonliteral-india",
+          "url": "https://plato.stanford.edu/entries/literal-nonliteral-india/",
+          "title": "The Literal-Nonliteral Distinction in Classical Indian Philosophy",
+          "description": "Indian thinkers distinguish between literal and nonliteral meaning\nearly in their history. They do so within different intellectual\ndisciplines (śāstra-s), each",
+          "occurrences": 13,
+          "data": "/sep/ritual_literal-nonliteral-india.json"
+        },
+        {
+          "id": "social-procedures",
+          "url": "https://plato.stanford.edu/entries/social-procedures/",
+          "title": "Formal Approaches to Social Procedures",
+          "description": "Social procedures that have algorithmic aspects can often be improved\nby redesign. This holds for voting and other peaceful decision making\nprocedures, for matc",
+          "occurrences": 4,
+          "data": "/sep/ritual_social-procedures.json"
+        },
+        {
+          "id": "pythagoras",
+          "url": "https://plato.stanford.edu/entries/pythagoras/",
+          "title": "Pythagoras",
+          "description": "Pythagoras, one of the most famous and controversial ancient Greek\nphilosophers, lived from ca. 570 to ca. 490 BCE. He spent his early\nyears on the island of Sa",
+          "occurrences": 14,
+          "data": "/sep/ritual_pythagoras.json"
+        },
+        {
+          "id": "postmodernism",
+          "url": "https://plato.stanford.edu/entries/postmodernism/",
+          "title": "Postmodernism",
+          "description": "That postmodernism is indefinable is a truism. However, it can be\ndescribed as a set of critical, strategic and rhetorical practices\nemploying concepts such as ",
+          "occurrences": 7,
+          "data": "/sep/ritual_postmodernism.json"
+        },
+        {
+          "id": "david",
+          "url": "https://plato.stanford.edu/entries/david/",
+          "title": "David",
+          "description": "‘David’ is named in certain manuscripts of three works of\nphilosophy as their author: a set of introductory lectures on\nphilosophy, a commentary on Porphyry’s I",
+          "occurrences": 1,
+          "data": "/sep/ritual_david.json"
+        },
+        {
+          "id": "shankara",
+          "url": "https://plato.stanford.edu/entries/shankara/",
+          "title": "Śaṅkara",
+          "description": "The classical Indian philosophy of Advaita Vedānta articulates a\nphilosophical position of radical nondualism, a revisionary worldview\nwhich it derives from the",
+          "occurrences": 6,
+          "data": "/sep/ritual_shankara.json"
+        },
+        {
+          "id": "empedocles",
+          "url": "https://plato.stanford.edu/entries/empedocles/",
+          "title": "Empedocles",
+          "description": "In the middle of the fifth century BCE, Empedocles of Acragas\nformulated a philosophical program in hexameter verse that pioneered\nthe influential four-part the",
+          "occurrences": 6,
+          "data": "/sep/ritual_empedocles.json"
+        },
+        {
+          "id": "langer",
+          "url": "https://plato.stanford.edu/entries/langer/",
+          "title": "Susanne Langer",
+          "description": "Susanne K. Langer (born Susanne Katherina Knauth, 1895–1985) was\nand remains a widely-read and influential American philosopher, best\nknown for her analyses of ",
+          "occurrences": 7,
+          "data": "/sep/ritual_langer.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 164,
+          "data": "/sep/ritual_embeds.json"
+        }
+      ]
+    },
+    "sincerity": {
+      "term": {
+        "label": "sincerity",
+        "variants": []
+      },
+      "total_occurrences": 149,
+      "chinese_philosophy_occurrences": 7,
+      "cooccurrence": [
+        {
+          "id": "sincerity_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=sincerity+sincer%2A",
+          "title": "SEP search: sincerity",
+          "description": "SEP search results sincerity sincer*",
+          "occurrences": 73,
+          "data": "/sep/sincerity_combined.json"
+        },
+        {
+          "id": "authenticity",
+          "url": "https://plato.stanford.edu/entries/authenticity/",
+          "title": "Authenticity",
+          "description": "The term ‘authentic’ is used either in the strong sense of\nbeing “of undisputed origin or authorship”, or in a weaker\nsense of being “faithful to an original” o",
+          "occurrences": 13,
+          "data": "/sep/sincerity_authenticity.json"
+        },
+        {
+          "id": "loyalty",
+          "url": "https://plato.stanford.edu/entries/loyalty/",
+          "title": "Loyalty",
+          "description": "Loyalty is usually seen as a virtue, albeit a problematic one. It is\nconstituted centrally by perseverance in an association to which a\nperson has become intrin",
+          "occurrences": 7,
+          "data": "/sep/sincerity_loyalty.json"
+        },
+        {
+          "id": "mandeville",
+          "url": "https://plato.stanford.edu/entries/mandeville/",
+          "title": "Bernard Mandeville",
+          "description": "Bernard Mandeville (1670–1733), an Anglo-Dutch physician and\nphilosopher, achieved fame through his notorious work The Fable of\nthe Bees: Or, Private Vices, Pub",
+          "occurrences": 5,
+          "data": "/sep/sincerity_mandeville.json"
+        },
+        {
+          "id": "assertion",
+          "url": "https://plato.stanford.edu/entries/assertion/",
+          "title": "Assertion",
+          "description": "Asserting is the act of claiming that something is the case—for\ninstance, that oranges are citruses, or that there is a\ntraffic congestion on Brooklyn Bridge (a",
+          "occurrences": 11,
+          "data": "/sep/sincerity_assertion.json"
+        },
+        {
+          "id": "lying-definition",
+          "url": "https://plato.stanford.edu/entries/lying-definition/",
+          "title": "The Definition of Lying and Deception",
+          "description": "Questions central to the philosophical discussion of lying to others\nand other-deception (interpersonal deceiving) may be divided into two\nkinds. Questions of t",
+          "occurrences": 6,
+          "data": "/sep/sincerity_lying-definition.json"
+        },
+        {
+          "id": "speech-acts",
+          "url": "https://plato.stanford.edu/entries/speech-acts/",
+          "title": "Speech Acts",
+          "description": "We are attuned in everyday conversation not primarily to the sentences\nwe utter to one another, but to the speech acts that those utterances\nare used to perform",
+          "occurrences": 7,
+          "data": "/sep/sincerity_speech-acts.json"
+        },
+        {
+          "id": "montaigne",
+          "url": "https://plato.stanford.edu/entries/montaigne/",
+          "title": "Michel de Montaigne",
+          "description": "The question is not who will hit the ring, but who will make the\nbest runs at it.\n\n\n\nGiven the huge breadth of his readings, Montaigne could have been\nranked am",
+          "occurrences": 2,
+          "data": "/sep/sincerity_montaigne.json"
+        },
+        {
+          "id": "civil-disobedience",
+          "url": "https://plato.stanford.edu/entries/civil-disobedience/",
+          "title": "Civil Disobedience",
+          "description": "From the Boston Tea Party to Mahatma Gandhi’s Salt March, and\nfrom suffragists’ illegally casting their ballots to whites-only\nlunch counter sit-ins, civil diso",
+          "occurrences": 8,
+          "data": "/sep/sincerity_civil-disobedience.json"
+        },
+        {
+          "id": "category-mistakes",
+          "url": "https://plato.stanford.edu/entries/category-mistakes/",
+          "title": "Category Mistakes",
+          "description": "Category mistakes are sentences such as ‘The number two is\nblue’, ‘The theory of relativity is eating\nbreakfast’, or ‘Green ideas sleep furiously’. Such\nsentenc",
+          "occurrences": 3,
+          "data": "/sep/sincerity_category-mistakes.json"
+        },
+        {
+          "id": "publicity",
+          "url": "https://plato.stanford.edu/entries/publicity/",
+          "title": "Publicity",
+          "description": "Publicity can be opposed both to privacy and to secrecy. This entry will mostly deal with the latter meaning. In everyday life, calls for greater transparency o",
+          "occurrences": 3,
+          "data": "/sep/sincerity_publicity.json"
+        },
+        {
+          "id": "public-reason",
+          "url": "https://plato.stanford.edu/entries/public-reason/",
+          "title": "Public Reason",
+          "description": "Public reason requires that the moral or political rules that regulate\nour common life be, in some sense, justifiable or acceptable to all\nthose persons over wh",
+          "occurrences": 6,
+          "data": "/sep/sincerity_public-reason.json"
+        },
+        {
+          "id": "hobbes-moral",
+          "url": "https://plato.stanford.edu/entries/hobbes-moral/",
+          "title": "Hobbes’s Moral and Political Philosophy",
+          "description": "The 17th Century English philosopher Thomas Hobbes is now\nwidely regarded as one of a handful of truly great political\nphilosophers, whose masterwork Leviathan ",
+          "occurrences": 2,
+          "data": "/sep/sincerity_hobbes-moral.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 149,
+          "data": "/sep/sincerity_embeds.json"
+        }
+      ]
+    },
+    "social norms": {
+      "term": {
+        "label": "social norms",
+        "variants": []
+      },
+      "total_occurrences": 0,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "social norms_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=social+norms+social+norm%2A",
+          "title": "SEP search: social norms",
+          "description": "SEP search results social norms social norm*",
+          "occurrences": 0,
+          "data": "/sep/social norms_combined.json"
+        },
+        {
+          "id": "social-norms",
+          "url": "https://plato.stanford.edu/entries/social-norms/",
+          "title": "Social Norms",
+          "description": "Social norms, the informal rules that govern behavior in groups and\nsocieties, have been extensively studied in the social sciences.\nAnthropologists have descri",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-norms.json"
+        },
+        {
+          "id": "social-institutions",
+          "url": "https://plato.stanford.edu/entries/social-institutions/",
+          "title": "Social Institutions",
+          "description": "The term, “social institution” is somewhat unclear both in\nordinary language and in the philosophical literature (see below).\nHowever, contemporary sociology is",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-institutions.json"
+        },
+        {
+          "id": "epistemology-social",
+          "url": "https://plato.stanford.edu/entries/epistemology-social/",
+          "title": "Social Epistemology",
+          "description": "Until recently, epistemology—the study of (the nature, sources,\nand pursuit of) knowledge—was heavily individualistic in focus.\nThe emphasis was on the pursuit ",
+          "occurrences": 0,
+          "data": "/sep/social norms_epistemology-social.json"
+        },
+        {
+          "id": "social-ontology",
+          "url": "https://plato.stanford.edu/entries/social-ontology/",
+          "title": "Social Ontology",
+          "description": "Social ontology is the study of the nature and properties of the\nsocial world. It is concerned with analyzing things in the world that\narise from social interac",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-ontology.json"
+        },
+        {
+          "id": "ethics-social-networking",
+          "url": "https://plato.stanford.edu/entries/ethics-social-networking/",
+          "title": "Social Networking and Ethics",
+          "description": "In the 21st century, new media technologies for social\nnetworking such as Facebook, Twitter, WhatsApp and YouTube began to\ntransform the social, political and i",
+          "occurrences": 0,
+          "data": "/sep/social norms_ethics-social-networking.json"
+        },
+        {
+          "id": "feminist-social-epistemology",
+          "url": "https://plato.stanford.edu/entries/feminist-social-epistemology/",
+          "title": "Feminist Social Epistemology",
+          "description": "Many of the significant contributors to the fast-developing field of\nsocial epistemology have been feminist epistemologists, theorists who\ninvestigate the role ",
+          "occurrences": 0,
+          "data": "/sep/social norms_feminist-social-epistemology.json"
+        },
+        {
+          "id": "animal-social-cognition",
+          "url": "https://plato.stanford.edu/entries/animal-social-cognition/",
+          "title": "Animal Social Cognition",
+          "description": "Nonhuman animals have long been seen as a crucial source of evidence\nregarding the nature and origins of human social capacities, such as\ncommunication, decepti",
+          "occurrences": 0,
+          "data": "/sep/social norms_animal-social-cognition.json"
+        },
+        {
+          "id": "social-minimum",
+          "url": "https://plato.stanford.edu/entries/social-minimum/",
+          "title": "Social Minimum",
+          "description": "Consider the following statements:\n\n\nPeople should not be allowed to starve.\n\nNo one should be denied access to a decent minimum of health-care.\n\nEvery citizen ",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-minimum.json"
+        },
+        {
+          "id": "social-construction-naturalistic",
+          "url": "https://plato.stanford.edu/entries/social-construction-naturalistic/",
+          "title": "Naturalistic Approaches to Social Construction",
+          "description": "Social “construction,” “constructionism” and\n“constructivism” are terms in wide use in the humanities\nand social sciences, and are applied to a diverse range of",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-construction-naturalistic.json"
+        },
+        {
+          "id": "social-procedures",
+          "url": "https://plato.stanford.edu/entries/social-procedures/",
+          "title": "Formal Approaches to Social Procedures",
+          "description": "Social procedures that have algorithmic aspects can often be improved\nby redesign. This holds for voting and other peaceful decision making\nprocedures, for matc",
+          "occurrences": 0,
+          "data": "/sep/social norms_social-procedures.json"
+        },
+        {
+          "id": "contractarianism-contemporary",
+          "url": "https://plato.stanford.edu/entries/contractarianism-contemporary/",
+          "title": "Contemporary Approaches to the Social Contract",
+          "description": "The idea of the social contract goes back at least to Protagoras and\nEpicurus. In its recognizably modern form, however, the idea is\nrevived by Thomas Hobbes an",
+          "occurrences": 0,
+          "data": "/sep/social norms_contractarianism-contemporary.json"
+        },
+        {
+          "id": "scientific-knowledge-social",
+          "url": "https://plato.stanford.edu/entries/scientific-knowledge-social/",
+          "title": "The Social Dimensions of Scientific Knowledge",
+          "description": "Study of the social dimensions of scientific knowledge encompasses the\neffects of scientific research on human life and social relations, the\neffects of social ",
+          "occurrences": 0,
+          "data": "/sep/social norms_scientific-knowledge-social.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 0,
+          "data": "/sep/social norms_embeds.json"
+        }
+      ]
+    },
+    "trustworthiness": {
+      "term": {
+        "label": "trustworthiness",
+        "variants": []
+      },
+      "total_occurrences": 217,
+      "chinese_philosophy_occurrences": 14,
+      "cooccurrence": [
+        {
+          "id": "trustworthiness_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=trustworthiness+trustworth%2A",
+          "title": "SEP search: trustworthiness",
+          "description": "SEP search results trustworthiness trustworth*",
+          "occurrences": 200,
+          "data": "/sep/trustworthiness_combined.json"
+        },
+        {
+          "id": "trust",
+          "url": "https://plato.stanford.edu/entries/trust/",
+          "title": "Trust",
+          "description": "Trust is important, but it is also dangerous. It is important because\nit allows us to depend on others—for love, for advice, for help\nwith our plumbing, or what",
+          "occurrences": 138,
+          "data": "/sep/trustworthiness_trust.json"
+        },
+        {
+          "id": "faith",
+          "url": "https://plato.stanford.edu/entries/faith/",
+          "title": "Faith",
+          "description": "Questions about faith have inspired centuries of philosophical and\ntheological reflection, particularly, though by no means exclusively,\nas faith is understood ",
+          "occurrences": 19,
+          "data": "/sep/trustworthiness_faith.json"
+        },
+        {
+          "id": "feminist-social-epistemology",
+          "url": "https://plato.stanford.edu/entries/feminist-social-epistemology/",
+          "title": "Feminist Social Epistemology",
+          "description": "Many of the significant contributors to the fast-developing field of\nsocial epistemology have been feminist epistemologists, theorists who\ninvestigate the role ",
+          "occurrences": 12,
+          "data": "/sep/trustworthiness_feminist-social-epistemology.json"
+        },
+        {
+          "id": "memory-episprob",
+          "url": "https://plato.stanford.edu/entries/memory-episprob/",
+          "title": "Epistemological Problems of Memory",
+          "description": "You tell your friend about a strange event you witnessed. Your friend\npresses you: how do you know it really happened? It’s\nnatural to answer that you saw it ha",
+          "occurrences": 9,
+          "data": "/sep/trustworthiness_memory-episprob.json"
+        },
+        {
+          "id": "divine-revelation",
+          "url": "https://plato.stanford.edu/entries/divine-revelation/",
+          "title": "Divine Revelation",
+          "description": "“Revelation” (lat. revelatio) is a translation of the Greek word apokalypsis, which means the removal of a veil so that something can be seen. Many religions ap",
+          "occurrences": 5,
+          "data": "/sep/trustworthiness_divine-revelation.json"
+        },
+        {
+          "id": "loyalty",
+          "url": "https://plato.stanford.edu/entries/loyalty/",
+          "title": "Loyalty",
+          "description": "Loyalty is usually seen as a virtue, albeit a problematic one. It is\nconstituted centrally by perseverance in an association to which a\nperson has become intrin",
+          "occurrences": 3,
+          "data": "/sep/trustworthiness_loyalty.json"
+        },
+        {
+          "id": "justep-foundational",
+          "url": "https://plato.stanford.edu/entries/justep-foundational/",
+          "title": "Foundationalist Theories of Epistemic Justification",
+          "description": "Foundationalism is a view about the structure of (epistemic)\njustification or knowledge. The foundationalist’s thesis in\nshort is that (a) there are some “basic",
+          "occurrences": 4,
+          "data": "/sep/trustworthiness_justep-foundational.json"
+        },
+        {
+          "id": "john-italos",
+          "url": "https://plato.stanford.edu/entries/john-italos/",
+          "title": "John Italos",
+          "description": "John Italos (fl. 1070s) was a prominent and controversial intellectual\nfigure in eleventh-century Byzantium. An immigrant from Byzantine\nItaly, he made a stella",
+          "occurrences": 1,
+          "data": "/sep/trustworthiness_john-italos.json"
+        },
+        {
+          "id": "femapproach-analytic",
+          "url": "https://plato.stanford.edu/entries/femapproach-analytic/",
+          "title": "Analytic Feminism",
+          "description": "Analytic feminists are philosophers who believe that both philosophy\nand feminism are well served by using some of the concepts, theories,\nand methods of analyt",
+          "occurrences": 0,
+          "data": "/sep/trustworthiness_femapproach-analytic.json"
+        },
+        {
+          "id": "richard-price",
+          "url": "https://plato.stanford.edu/entries/richard-price/",
+          "title": "Richard Price",
+          "description": "Richard Price (1723–1791) was a prominent dissenting minister\nand a leading figure in philosophical and political thought in the\nsecond half of the eighteenth c",
+          "occurrences": 2,
+          "data": "/sep/trustworthiness_richard-price.json"
+        },
+        {
+          "id": "pyrrho",
+          "url": "https://plato.stanford.edu/entries/pyrrho/",
+          "title": "Pyrrho",
+          "description": "Pyrrho was the starting-point for a philosophical movement known as\nPyrrhonism that flourished beginning several centuries after his own\ntime. This later Pyrrho",
+          "occurrences": 2,
+          "data": "/sep/trustworthiness_pyrrho.json"
+        },
+        {
+          "id": "parmenides",
+          "url": "https://plato.stanford.edu/entries/parmenides/",
+          "title": "Parmenides",
+          "description": "Parmenides of Elea, active in the earlier part of the 5th c. BCE,\nauthored a difficult metaphysical poem that has earned him a\nreputation as early Greek philoso",
+          "occurrences": 5,
+          "data": "/sep/trustworthiness_parmenides.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 217,
+          "data": "/sep/trustworthiness_embeds.json"
+        }
+      ]
+    },
+    "wisdom": {
+      "term": {
+        "label": "wisdom",
+        "variants": []
+      },
+      "total_occurrences": 787,
+      "chinese_philosophy_occurrences": 29,
+      "cooccurrence": [
+        {
+          "id": "wisdom_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=wisdom+wisdom%2A+wise%2A",
+          "title": "SEP search: wisdom",
+          "description": "SEP search results wisdom wisdom* wise*",
+          "occurrences": 569,
+          "data": "/sep/wisdom_combined.json"
+        },
+        {
+          "id": "wisdom-analytic",
+          "url": "https://plato.stanford.edu/entries/wisdom-analytic/",
+          "title": "Wisdom in Contemporary Analytic Philosophy",
+          "description": "What is wisdom? Despite receiving less attention than other epistemic\ngoods in contemporary analytic epistemology, wisdom is affirmed by\nphilosophers across dif",
+          "occurrences": 267,
+          "data": "/sep/wisdom_wisdom-analytic.json"
+        },
+        {
+          "id": "vico",
+          "url": "https://plato.stanford.edu/entries/vico/",
+          "title": "Giambattista Vico",
+          "description": "Giovanni Battista Vico (1668–1744) spent most of his\nprofessional life as Professor of Rhetoric at the University of\nNaples. He was trained in jurisprudence, bu",
+          "occurrences": 24,
+          "data": "/sep/wisdom_vico.json"
+        },
+        {
+          "id": "plato-ethics-shorter",
+          "url": "https://plato.stanford.edu/entries/plato-ethics-shorter/",
+          "title": "Plato’s Shorter Ethical Works",
+          "description": "Plato’s shorter ethical works show Socrates at work on topics\nrelated to virtue, which he believes we should seek for the sake of\nthe soul as we should seek hea",
+          "occurrences": 40,
+          "data": "/sep/wisdom_plato-ethics-shorter.json"
+        },
+        {
+          "id": "ethics-ancient",
+          "url": "https://plato.stanford.edu/entries/ethics-ancient/",
+          "title": "Ancient Ethical Theory",
+          "description": "While moral theory does not invent morality, or even reflection on it,\nit does try to bring systematic thinking to bear on these activities.\nAncient moral theor",
+          "occurrences": 37,
+          "data": "/sep/wisdom_ethics-ancient.json"
+        },
+        {
+          "id": "aristotle-ethics",
+          "url": "https://plato.stanford.edu/entries/aristotle-ethics/",
+          "title": "Aristotle’s Ethics",
+          "description": "Aristotle conceives of ethical theory as a field distinct from the\ntheoretical sciences. Its methodology must match its subject\nmatter—good action—and must resp",
+          "occurrences": 42,
+          "data": "/sep/wisdom_aristotle-ethics.json"
+        },
+        {
+          "id": "plato-friendship",
+          "url": "https://plato.stanford.edu/entries/plato-friendship/",
+          "title": "Plato on Friendship and Eros",
+          "description": "Plato discusses love (erôs) and friendship\n(philia) primarily in two dialogues, the Lysis and\nthe Symposium, though the Phaedrus also adds\nsignificantly to his ",
+          "occurrences": 21,
+          "data": "/sep/wisdom_plato-friendship.json"
+        },
+        {
+          "id": "madhyamaka",
+          "url": "https://plato.stanford.edu/entries/madhyamaka/",
+          "title": "Madhyamaka",
+          "description": "The Madhyamaka school of Buddhism, the followers of which are called\nMādhyamikas, was one of the two principal schools of\nMahāyāna Buddhism in India, the other ",
+          "occurrences": 12,
+          "data": "/sep/wisdom_madhyamaka.json"
+        },
+        {
+          "id": "ibn-gabirol",
+          "url": "https://plato.stanford.edu/entries/ibn-gabirol/",
+          "title": "Solomon Ibn Gabirol [Avicebron]",
+          "description": "A prolific poet and the author of the Fons Vitae, Ibn Gabirol\nis well known in the history of philosophy for the doctrine that all\nthings —including soul and in",
+          "occurrences": 23,
+          "data": "/sep/wisdom_ibn-gabirol.json"
+        },
+        {
+          "id": "arabic-islamic-mysticism",
+          "url": "https://plato.stanford.edu/entries/arabic-islamic-mysticism/",
+          "title": "Mysticism in Arabic and Islamic Philosophy",
+          "description": "Mysticism in the Islamic context has traditionally been intertwined\nwith the notion of Ḥikmah, which is at once both wisdom\nand philosophy (Nasr 1996). The sour",
+          "occurrences": 15,
+          "data": "/sep/wisdom_arabic-islamic-mysticism.json"
+        },
+        {
+          "id": "ethics-virtue",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/",
+          "title": "Virtue Ethics",
+          "description": "Virtue ethics is currently one of three major approaches in normative\nethics. It may, initially, be identified as the one that emphasizes\nthe virtues, or moral ",
+          "occurrences": 21,
+          "data": "/sep/wisdom_ethics-virtue.json"
+        },
+        {
+          "id": "divine-simplicity",
+          "url": "https://plato.stanford.edu/entries/divine-simplicity/",
+          "title": "Divine Simplicity",
+          "description": "According to the classical theism of Augustine, Anselm, Aquinas and\ntheir adherents, God is radically unlike creatures and cannot be\nadequately understood in wa",
+          "occurrences": 31,
+          "data": "/sep/wisdom_divine-simplicity.json"
+        },
+        {
+          "id": "arnauld",
+          "url": "https://plato.stanford.edu/entries/arnauld/",
+          "title": "Antoine Arnauld",
+          "description": "Antoine Arnauld (1612–1694) was a powerful figure in the\nintellectual life of seventeenth-century Europe. He had a long and\nhighly controversial career as a the",
+          "occurrences": 36,
+          "data": "/sep/wisdom_arnauld.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 787,
+          "data": "/sep/wisdom_embeds.json"
+        }
+      ]
+    }
+  }
+}
