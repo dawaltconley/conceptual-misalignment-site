@@ -42,10 +42,11 @@ def _sorted_node_link(data: dict | None) -> dict | None:
     return data
 
 
-def _save_json(data: "DataclassInstance", filepath: "Path") -> None:
+def _save_json(data: "DataclassInstance", filepath: "Path",
+               *, indent: int | None = None) -> None:
     import json
     with filepath.open("w", encoding="utf-8") as file:
-        json.dump(asdict(data), file, ensure_ascii=False,
+        json.dump(asdict(data), file, ensure_ascii=False, indent=indent,
                   default=_json_default)
 
 
@@ -173,6 +174,67 @@ class Embeddings:
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)
+
+
+@dataclass
+class TermIndex:
+    """What one corpus run produced for one term label: its whole-corpus counts
+    and the ``Source`` (provenance + ``data`` web path + per-source
+    ``occurrences``) of every file written for it."""
+    term: TermData
+    total_occurrences: int = 0
+    """The term's occurrences across the analyzed corpus. The master index adds
+    ``chinese_philosophy_occurrences`` on top for its grand total."""
+    chinese_philosophy_occurrences: int = 0
+    """Occurrences inside the SEP articles excluded as Chinese philosophy —
+    fetched for counting only, never fed to the embedding corpus. 0 for Mengzi."""
+    cooccurrence: list[Source] = field(default_factory=list)
+    similarity: list[Source] = field(default_factory=list)
+
+
+@dataclass
+class CorpusIndex:
+    """A manifest of one corpus run — everything it wrote and where the site can
+    fetch it. Written to ``<Pipeline.out_dir>/index.json`` by
+    ``output.CorpusWriter``, and the *only* thing ``main.build_master`` reads for
+    that corpus: paths are recorded at write time rather than re-derived from
+    filenames, and one corpus's manifest survives a run of the other."""
+    corpus: str
+    """``"mengzi"`` / ``"sep"`` — the corpus key used in the master index."""
+    source: Source
+    """Corpus-level provenance (the Mengzi, or the combined SEP)."""
+    embeddings: Source | None = None
+    """The corpus's PCA-reduced embedding dataset (``/embeddings/{corpus}.json``)."""
+    terms: dict[str, TermIndex] = field(default_factory=dict)
+    """Keyed by term label — hanzi for Mengzi, ``Rendering.label`` for SEP."""
+
+    def save_json(self, filepath: "Path") -> None:
+        # Terms are accumulated from a set, so sort them for a stable diff — the
+        # manifests are checked in. Source lists keep their insertion order
+        # (whole corpus first, then chapters/articles), which is meaningful.
+        self.terms = dict(sorted(self.terms.items()))
+        _save_json(self, filepath, indent=2)
+
+    @classmethod
+    def load(cls, filepath: "Path") -> "CorpusIndex | None":
+        """Rehydrate a manifest, or ``None`` if the corpus has never been run."""
+        import json
+        if not filepath.exists():
+            return None
+        raw = json.loads(filepath.read_text(encoding="utf-8"))
+        emb = raw.get("embeddings")
+        return cls(
+            corpus=raw["corpus"],
+            source=Source(**raw["source"]),
+            embeddings=Source(**emb) if emb else None,
+            terms={label: TermIndex(
+                term=TermData(**t["term"]),
+                total_occurrences=t["total_occurrences"],
+                chinese_philosophy_occurrences=t["chinese_philosophy_occurrences"],
+                cooccurrence=[Source(**s) for s in t["cooccurrence"]],
+                similarity=[Source(**s) for s in t["similarity"]],
+            ) for label, t in raw["terms"].items()},
+        )
 
 
 class Rendering:

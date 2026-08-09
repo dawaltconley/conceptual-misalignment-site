@@ -12,6 +12,10 @@ Per corpus it writes three kinds of JSON:
   neighborhood over the whole corpus.
 - embeddings:    one ``Embeddings`` file per corpus (PCA-reduced vectors).
 
+Everything a run writes goes through an ``output.CorpusWriter``, which records it
+in that corpus's ``index.json`` manifest; ``build_master`` composes
+``src/data/terms.json`` from the two manifests alone.
+
 Optional ``analysis/`` artifacts (PNGs/CSVs) are decoupled behind ``--artifacts``.
 """
 
@@ -21,14 +25,17 @@ import argparse
 import json
 import time
 from collections import Counter
+from dataclasses import asdict, replace
 
 import numpy as np
 from numpy import ndarray
 from networkx import Graph
 from spacy.tokens import Doc
 
-from config import TERMS, CTEXT, SEP, EMBEDDINGS, DATA, ANALYSIS
-from models import Pipeline, Source, TermData, NetworkData, Embeddings
+from config import TERMS, CTEXT, SEP, DATA, ANALYSIS
+from models import (
+    CorpusIndex, Embeddings, Pipeline, Source, TermData, TermIndex)
+from output import CorpusWriter
 from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter
@@ -45,9 +52,6 @@ from embeddings.occurrences import (
 )
 from cooccurrence import pmi_spacy
 from graph.prune import prune_to_neighborhood
-
-MENGZI_MODEL = "hsc748NLP/GujiRoBERTa_fan"
-SEP_MODEL = "roberta-base"
 
 
 class Stopwatch:
@@ -107,19 +111,18 @@ def count_occurrences(doc, label: str, match_fn: MatchFn | None) -> int:
 
 
 def save_cooccurrence(
-    p: Pipeline, label: str, network_sources: list[SourceDoc], meta_source: Source, file_id: str,
-    *, match_fn: MatchFn | None,
+    p: Pipeline, w: CorpusWriter, label: str, network_sources: list[SourceDoc],
+    meta_source: Source, file_id: str, *, match_fn: MatchFn | None,
 ) -> None:
-    """Build ``label``'s PMI network over ``network_sources`` and write it as one
-    ``NetworkData`` file ``{label}_{file_id}.json`` (``meta_source`` is the source
-    recorded in the file — a chapter, an article, or a whole-corpus stand-in)."""
+    """Build ``label``'s PMI network over ``network_sources`` and hand it to the
+    writer as one ``NetworkData`` file (``meta_source`` is the source recorded in
+    the file — a chapter, an article, or a whole-corpus stand-in)."""
     net = get_cooccurrence(p, label, network_sources, match_fn=match_fn)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn)
               for s in network_sources)
-    NetworkData(TermData(label), meta_source, net, occurrences=occ).save_json(
-        p.out_dir / f"{label}_{file_id}.json")
+    w.add_cooccurrence(label, meta_source, file_id, net, occ)
 
 
 # ---------------------------------------------------------------------------
@@ -127,17 +130,18 @@ def save_cooccurrence(
 # ---------------------------------------------------------------------------
 
 def save_similarity(
-    p: Pipeline, targets: set[str] | frozenset[str], corpus_source: Source, G: Graph,
-    *, occ_counts: Counter,
+    p: Pipeline, w: CorpusWriter, targets: set[str] | frozenset[str],
+    corpus_source: Source, G: Graph, *, occ_counts: Counter,
 ) -> None:
-    """Write one ``NetworkData`` file per term: its pruned cosine neighborhood."""
+    """Write one ``NetworkData`` file per term — its pruned cosine neighborhood —
+    and record each term's whole-corpus occurrence count on the manifest."""
     for target in targets:
         pruned = prune_to_neighborhood(G, target, p.max_network_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
-        NetworkData(TermData(target), corpus_source, pruned,
-                    occurrences=int(occ_counts.get(target, 0))).save_json(
-            p.out_dir / f"{target}_embeds.json")
+        occ = int(occ_counts.get(target, 0))
+        w.add_similarity(target, corpus_source, pruned, occ)
+        w.set_total(target, occ)
 
 
 # ---------------------------------------------------------------------------
@@ -154,12 +158,16 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     print(f"parsed     : {len(chapters)} chapters + full corpus")
     sw.lap("parse")
 
+    writer = CorpusWriter(p, "mengzi", mengzi)
+
     # --- co-occurrence: full corpus + each chapter, per target ---
+    # (the whole-corpus file first, so the manifest lists it first)
     for target in targets:
-        save_cooccurrence(p, target, [full], mengzi, "mengzi", match_fn=None)
+        save_cooccurrence(p, writer, target, [full],
+                          mengzi, "mengzi", match_fn=None)
         for ch in chapters:
-            save_cooccurrence(
-                p, target, [ch], ch.source, ch.source.id, match_fn=None)
+            save_cooccurrence(p, writer, target, [ch],
+                              ch.source, ch.source.id, match_fn=None)
     sw.lap("co-occurrence")
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
@@ -179,15 +187,16 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
 
     occ_counts = Counter(
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
-    save_similarity(p, targets, mengzi, G, occ_counts=occ_counts)
+    save_similarity(p, writer, targets, mengzi, G, occ_counts=occ_counts)
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
-    Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
-                           doc_freq=doc_freq, documents=n_docs, graph=G,
-                           norms=norms) \
-        .save_json(EMBEDDINGS / "mengzi.json")
-    print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'mengzi.json'}")
+    path = writer.add_embeddings(
+        Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
+                               doc_freq=doc_freq, documents=n_docs, graph=G,
+                               norms=norms))
+    print(f"embeddings : {len(labels)} nodes -> {path}")
+    writer.save_index()
     sw.lap("similarity+export")
 
     if artifacts:
@@ -221,16 +230,19 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     searches = build_english_corpus(per_term)
     sw.lap("fetch+search")
 
+    writer = CorpusWriter(p, "sep", SEP_CORPUS)
+
     # --- co-occurrence: each rendering over its combined search + each article ---
     # (also parses + caches every article, reused for the embedding space below)
+    # The combined file goes first, so the manifest lists it first.
     for ts in searches:
         label, articles = ts.term.label, ts.search.articles
         adocs = [source_doc(a) for a in articles]
-        save_cooccurrence(p, label, adocs, ts.search,
+        save_cooccurrence(p, writer, label, adocs, ts.search,
                           "combined", match_fn=match_fn)
         for sd in adocs:
-            save_cooccurrence(
-                p, label, [sd], sd.source, sd.source.id, match_fn=match_fn)
+            save_cooccurrence(p, writer, label, [sd],
+                              sd.source, sd.source.id, match_fn=match_fn)
     sw.lap("parse+co-occurrence")
 
     # --- occurrence counts within the excluded Chinese-philosophy articles ---
@@ -242,19 +254,15 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
             chinese_phil_doc_cache[a.url] = SourceDoc(a, parse_sep_article(a))
         return chinese_phil_doc_cache[a.url]
 
-    chinese_phil_occurrences: dict[str, int] = {}
+    n_cn_occ = 0
     for ts in searches:
         label = ts.term.label
         docs = [chinese_phil_source_doc(a) for a in ts.search.excluded]
-        chinese_phil_occurrences[label] = sum(
-            count_occurrences(sd.doc, label, match_fn) for sd in docs)
-    (DATA / "sep_chinese_philosophy_occurrences.json").write_text(
-        json.dumps(chinese_phil_occurrences, ensure_ascii=False, indent=2),
-        encoding="utf-8")
-    n_cn_articles = len(chinese_phil_doc_cache)
-    n_cn_occ = sum(chinese_phil_occurrences.values())
-    print(f"chinese-phil: {n_cn_articles} articles, {n_cn_occ} occurrences "
-          f"-> {DATA / 'sep_chinese_philosophy_occurrences.json'}")
+        occ = sum(count_occurrences(sd.doc, label, match_fn) for sd in docs)
+        writer.set_chinese_philosophy(label, occ)
+        n_cn_occ += occ
+    print(f"chinese-phil: {len(chinese_phil_doc_cache)} articles, "
+          f"{n_cn_occ} occurrences")
     sw.lap("chinese-philosophy")
 
     # --- one combined embedding space over every (deduped) article ---
@@ -278,14 +286,17 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
     occ_counts = Counter(
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
-    save_similarity(p, labels_by_target, SEP_CORPUS, G, occ_counts=occ_counts)
+    save_similarity(p, writer, labels_by_target,
+                    SEP_CORPUS, G, occ_counts=occ_counts)
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
-    Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
-                           community_map, doc_freq=doc_freq, documents=n_docs,
-                           graph=G, norms=norms).save_json(EMBEDDINGS / "sep.json")
-    print(f"embeddings : {len(labels)} nodes -> {EMBEDDINGS / 'sep.json'}")
+    path = writer.add_embeddings(
+        Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
+                               community_map, doc_freq=doc_freq,
+                               documents=n_docs, graph=G, norms=norms))
+    print(f"embeddings : {len(labels)} nodes -> {path}")
+    writer.save_index()
     sw.lap("similarity+export")
 
     if artifacts:
@@ -435,96 +446,44 @@ def run_artifacts(labels, matrix, targets, pooler: vectors.Pooler, mean, project
 
 
 # ---------------------------------------------------------------------------
-# Master index (scans the written files so paths reflect what's on disk)
+# Master index (composed from the per-corpus manifests each run wrote)
 # ---------------------------------------------------------------------------
 
-def _source_entry(src: dict, web: str) -> dict:
-    """One master-index `Source`: a file's recorded provenance + its web `data` path."""
-    return {
-        "id": src.get("id"), "url": src.get("url") or "",
-        "title": src.get("title") or "", "description": src.get("description"),
-        "occurrences": src.get("occurrences"), "data": web,
-    }
-
-
-def _scan_networks(out_dir, web_prefix: str) -> dict[str, dict]:
-    """Group a directory's NetworkData files by term label into
-    ``{label: {"variants", "total", "cooccurrence": [Source], "similarity": [Source]}}``.
-    Co-occurrence files are ``{label}_{source.id}.json``; the similarity file is
-    ``{label}_embeds.json`` (whole corpus). Each entry is a master-index `Source`
-    (provenance + `data` path + per-source `occurrences`). Non-NetworkData JSON is
-    skipped."""
-    by_term: dict[str, dict] = {}
-    for path in sorted(out_dir.glob("*.json")):
-        obj = json.loads(path.read_text(encoding="utf-8"))
-        term = obj.get("term") if isinstance(obj, dict) else None
-        if not (isinstance(term, dict) and isinstance(obj.get("source"), dict)):
-            continue
-        label = term["label"]
-        entry = by_term.setdefault(
-            label, {"variants": term.get("variants", []), "total": 0,
-                    "cooccurrence": [], "similarity": []})
-        src = _source_entry(obj["source"], f"{web_prefix}/{path.name}")
-        occ = src["occurrences"] or 0
-        if path.name == f"{label}_embeds.json":
-            entry["similarity"].append(src)
-            entry["total"] = occ or entry["total"]        # similarity = whole corpus
-        else:
-            entry["cooccurrence"].append(src)
-            if path.name.endswith(("_mengzi.json", "_combined.json")):
-                entry["total"] = occ or entry["total"]    # whole-corpus co-occurrence
-    return by_term
-
-
-def _full_first(sources: list[dict]) -> list[dict]:
-    """Order co-occurrence sources with the whole-corpus one first (by ``data`` name,
-    ``*_mengzi.json`` / ``*_combined.json``)."""
-    def is_full(s: dict) -> bool:
-        d = s.get("data") or ""
-        return d.endswith("_mengzi.json") or d.endswith("_combined.json")
-    return sorted(sources, key=lambda s: (not is_full(s), str(s.get("id"))))
-
-
-def _embedding_source(corpus: str, total: int) -> dict:
-    """The corpus's embedding dataset as a master-index `Source` (`data` → its JSON,
-    `occurrences` = the term's whole-corpus total). Reuses the file's own provenance."""
-    path = EMBEDDINGS / f"{corpus}.json"
-    src = (json.loads(path.read_text(encoding="utf-8")).get("source") or {}) \
-        if path.exists() else {}
-    entry = _source_entry(src, f"/embeddings/{corpus}.json")
-    entry["id"] = entry["id"] or corpus
-    entry["title"] = entry["title"] or corpus
-    entry["occurrences"] = total
-    return entry
+CORPUS_DIRS = {"mengzi": CTEXT, "sep": SEP}
 
 
 def build_master(out_path=None) -> dict:
-    """Assemble the master index over whatever the pipeline has written: per term,
-    the Chinese (Mengzi) side and one side per English rendering. Each side lists its
-    co-occurrence / similarity / embedding sources (with `data` web paths), scanned
-    from the output dirs so paths mirror what is on disk."""
+    """Assemble the master index from the per-corpus ``index.json`` manifests: per
+    term, the Chinese (Mengzi) side and one side per English rendering, each listing
+    its co-occurrence / similarity / embedding sources with their `data` web paths.
+
+    The manifests are the only input — paths were recorded when the files were
+    written, so nothing here re-derives one. A corpus that has never been run has no
+    manifest; its sides come out empty (with a warning)."""
     out_path = out_path or (DATA / "terms.json")
-    ctext = _scan_networks(CTEXT, "/ctext")
-    sep = _scan_networks(SEP, "/sep")
+    indexes: dict[str, CorpusIndex | None] = {
+        corpus: CorpusIndex.load(out_dir / CorpusWriter.INDEX_NAME)
+        for corpus, out_dir in CORPUS_DIRS.items()}
+    for corpus, index in indexes.items():
+        if index is None:
+            print(f"  WARNING: no {CorpusWriter.INDEX_NAME} for {corpus} — its "
+                  f"sides will be empty (run --corpus {corpus})")
 
-    cn_path = DATA / "sep_chinese_philosophy_occurrences.json"
-    chinese_phil: dict[str, int] = json.loads(
-        cn_path.read_text(encoding="utf-8")) if cn_path.exists() else {}
-
-    empty = {"variants": [], "total": 0, "cooccurrence": [], "similarity": []}
-
-    def side(label: str, corpus: str, scan: dict) -> dict:
-        e = scan.get(label, empty)
-        non_cn = e["total"]
-        cn = chinese_phil.get(label, 0) if corpus == "sep" else 0
+    def side(label: str, corpus: str) -> dict:
+        index = indexes[corpus]
+        entry = (index.terms.get(label) if index else None) or TermIndex(
+            TermData(label))
+        total = entry.total_occurrences + entry.chinese_philosophy_occurrences
+        embeddings = index.embeddings if index else None
         return {
             "corpus": corpus,
-            "term": {"label": label, "variants": e["variants"]},
-            "totalOccurrences": non_cn + cn,
-            "chinesePhilosophyOccurrences": cn,
-            "embeddings": [_embedding_source(corpus, non_cn + cn)],
-            "similarity": e["similarity"],
-            "cooccurrence": _full_first(e["cooccurrence"]),
+            "term": asdict(entry.term),
+            "totalOccurrences": total,
+            "chinesePhilosophyOccurrences": entry.chinese_philosophy_occurrences,
+            "embeddings": ([asdict(replace(embeddings, occurrences=total))]
+                           if embeddings else []),
+            "similarity": [asdict(s) for s in entry.similarity],
+            "cooccurrence": [asdict(s) for s in entry.cooccurrence],
         }
 
     terms = []
@@ -532,8 +491,8 @@ def build_master(out_path=None) -> dict:
         terms.append({
             "hanzi": term.hanzi,
             "renderings": list(term.english),
-            "chinese": side(term.hanzi, "mengzi", ctext),
-            "english": [side(r.label, "sep", sep) for r in term.renderings],
+            "chinese": side(term.hanzi, "mengzi"),
+            "english": [side(r.label, "sep") for r in term.renderings],
         })
 
     master = {"terms": terms}
