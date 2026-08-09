@@ -30,6 +30,7 @@ from models import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
     from networkx import Graph
 
 
@@ -102,10 +103,30 @@ class CorpusWriter:
         print(f"index      : {len(self.index.terms)} terms -> {path}")
         return path
 
+    def prune(self) -> int:
+        """Delete every JSON in ``out_dir`` this run didn't write — output left
+        behind by terms since removed from ``config.TERMS``, or by an earlier
+        naming scheme. Only safe because the manifest is a complete record of the
+        run, so call it after the run, never on a partial one."""
+        keep = {p.name for p in self._paths()} | {self.INDEX_NAME}
+        stale = [p for p in self.out_dir.glob("*.json") if p.name not in keep]
+        for path in stale:
+            path.unlink()
+        print(f"pruned     : {len(stale)} stale file(s) from {self.out_dir}")
+        return len(stale)
+
     # --- internals ---------------------------------------------------------
 
     def _term(self, label: str) -> TermIndex:
         return self.index.terms.setdefault(label, TermIndex(TermData(label)))
+
+    def _paths(self) -> "Iterator[Path]":
+        """Every file the manifest points at, back as a filesystem path. The
+        manifest is the record of the run, so nothing separate has to be kept."""
+        for term in self.index.terms.values():
+            for source in (*term.cooccurrence, *term.similarity):
+                if source.data:
+                    yield PUBLIC / source.data.lstrip("/")
 
     def _write(self, data: NetworkData, filename: str) -> str:
         path = self.out_dir / filename
