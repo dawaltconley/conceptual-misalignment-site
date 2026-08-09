@@ -26,7 +26,11 @@ The CLI is deliberately small — it only chooses *what* to run:
 - `--per-term N` — SEP articles fetched per English rendering (default 12; caps
   corpus size / embedding memory).
 - `--artifacts` — also dump the PNG/CSV analysis into `analysis/`.
-- `--master-only` — just rebuild `src/data/terms.json` from files already on disk.
+- `--master-only` — just rebuild `src/data/terms.json` from the manifests.
+- `--prune` — after each corpus run, delete files in its output directory that
+  the run didn't write (leftovers from terms since removed from `TERMS`).
+  Destructive, so opt-in; review the `git status public/` diff. Can't be used
+  with `--master-only`, which writes nothing to compare against.
 
 Everything about *how* each corpus is processed lives in `config.py`, as the
 `MENGZI_PIPELINE` / `SEP_PIPELINE` `Pipeline` objects: `model`, `min_freq`,
@@ -44,14 +48,23 @@ directory. Change a run's behavior by editing those, not by passing flags.
   corpus): `public/ctext/{hanzi}_embeds.json` / `public/sep/{label}_embeds.json`.
 - **Embeddings** — one PCA-reduced dataset per corpus: `public/embeddings/{mengzi,sep}.json`
   (`models.Embeddings`), with Louvain communities from the same cosine graph.
-- **Master index** — `src/data/terms.json`: every term → its sources → the paths above.
+- **Manifest** — one per corpus: `public/ctext/index.json` / `public/sep/index.json`
+  (`models.CorpusIndex`). Everything above goes through an `output.CorpusWriter`,
+  which writes the file *and* records its `Source` — provenance, occurrence count,
+  and web path — in the manifest, in one call. So a path is derived once, from
+  `config.PUBLIC`, and never parsed back out of a filename.
+- **Master index** — `src/data/terms.json`: every term → its sources → the paths
+  above, composed from the two manifests alone. A corpus that hasn't been run has
+  no manifest and gets empty sides (with a warning); a corpus that *has* keeps its
+  side across a run of the other, so `--corpus sep` doesn't drop the Mengzi terms.
 
 ## Layout
 
 ```
 config.py            Term/Rendering taxonomy, MENGZI_PIPELINE/SEP_PIPELINE configs, stopwords, absolute path constants
 main.py              the pipeline entrypoint (run_mengzi / run_sep / build_master + CLI)
-models.py            Source/Rendering/Term + Pipeline config + NetworkData/Embeddings/Vector + JSON serialization
+models.py            Source/Rendering/Term + Pipeline config + NetworkData/Embeddings/Vector + CorpusIndex/TermIndex + JSON serialization
+output.py            CorpusWriter — the one place a name becomes a path; writes each file and records it in the corpus manifest
 
 data/                inputs, no code
   mengzi.conllu      UD Kyoto treebank (gold tokens/lemmas/POS) — the Chinese source of record
