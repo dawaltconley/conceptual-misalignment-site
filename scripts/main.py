@@ -479,15 +479,20 @@ def build_master(out_path=None) -> dict:
         index = indexes[corpus]
         entry = (index.terms.get(label) if index else None) or TermIndex(
             TermData(label))
-        total = entry.total_occurrences + entry.chinese_philosophy_occurrences
         embeddings = index.embeddings if index else None
+        # Every `Source.occurrences` is the term's count *in that source*, so the
+        # embedding dataset gets the analyzed-corpus count — it never saw the
+        # excluded Chinese-philosophy articles. Only the side's grand total adds
+        # them back in.
         return {
             "corpus": corpus,
             "term": asdict(entry.term),
-            "totalOccurrences": total,
+            "totalOccurrences": (entry.total_occurrences
+                                 + entry.chinese_philosophy_occurrences),
             "chinesePhilosophyOccurrences": entry.chinese_philosophy_occurrences,
-            "embeddings": ([asdict(replace(embeddings, occurrences=total))]
-                           if embeddings else []),
+            "embeddings": ([asdict(replace(
+                embeddings, occurrences=entry.total_occurrences))]
+                if embeddings else []),
             "similarity": [asdict(s) for s in entry.similarity],
             "cooccurrence": [asdict(s) for s in entry.cooccurrence],
         }
