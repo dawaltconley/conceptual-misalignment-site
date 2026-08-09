@@ -148,7 +148,8 @@ def save_similarity(
 # Corpus runners
 # ---------------------------------------------------------------------------
 
-def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
+def run_mengzi(p: Pipeline, *, artifacts: bool = False,
+               prune: bool = False) -> None:
     sw = Stopwatch()
     targets = frozenset(t.hanzi for t in TERMS)
 
@@ -197,6 +198,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
                                norms=norms))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
+    if prune:
+        writer.prune()
     sw.lap("similarity+export")
 
     if artifacts:
@@ -208,7 +211,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False) -> None:
     sw.summary("mengzi")
 
 
-def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None:
+def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
+            prune: bool = False) -> None:
     sw = Stopwatch()
     renderings = [r for term in TERMS for r in term.renderings]
     labels_by_target = frozenset(r.label for r in renderings)
@@ -297,6 +301,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
                                documents=n_docs, graph=G, norms=norms))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
+    if prune:
+        writer.prune()
     sw.lap("similarity+export")
 
     if artifacts:
@@ -519,8 +525,16 @@ def parse_args() -> argparse.Namespace:
                         "size / embedding memory).")
     p.add_argument("--master-only", action="store_true",
                    help="Skip the corpora; just rebuild the master index from the "
-                        "files already on disk.")
-    return p.parse_args()
+                        "per-corpus index.json manifests.")
+    p.add_argument("--prune", action="store_true",
+                   help="After each corpus run, delete files in its output dir "
+                        "that the run did not write (output left behind by terms "
+                        "since removed from TERMS). Destructive — review the diff.")
+    args = p.parse_args()
+    if args.prune and args.master_only:
+        p.error("--prune needs a corpus run to know what to keep; "
+                "it cannot be combined with --master-only")
+    return args
 
 
 def main() -> None:
@@ -530,12 +544,13 @@ def main() -> None:
     if not args.master_only:
         if args.corpus in ("mengzi", "all"):
             print("\n=== Mengzi ===")
-            run_mengzi(MENGZI_PIPELINE, artifacts=args.artifacts)
+            run_mengzi(MENGZI_PIPELINE, artifacts=args.artifacts,
+                       prune=args.prune)
             sw.lap("mengzi")
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
             run_sep(SEP_PIPELINE, per_term=args.per_term,
-                    artifacts=args.artifacts)
+                    artifacts=args.artifacts, prune=args.prune)
             sw.lap("sep")
     print("\n=== Master index ===")
     build_master()
