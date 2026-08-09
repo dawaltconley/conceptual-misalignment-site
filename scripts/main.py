@@ -233,6 +233,30 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False) -> None
                 p, label, [sd], sd.source, sd.source.id, match_fn=match_fn)
     sw.lap("parse+co-occurrence")
 
+    # --- occurrence counts within the excluded Chinese-philosophy articles ---
+    # (parsed separately from `doc_cache` — must NOT feed the embedding corpus)
+    chinese_phil_doc_cache: dict[str, SourceDoc] = {}
+
+    def chinese_phil_source_doc(a) -> SourceDoc:
+        if a.url not in chinese_phil_doc_cache:
+            chinese_phil_doc_cache[a.url] = SourceDoc(a, parse_sep_article(a))
+        return chinese_phil_doc_cache[a.url]
+
+    chinese_phil_occurrences: dict[str, int] = {}
+    for ts in searches:
+        label = ts.term.label
+        docs = [chinese_phil_source_doc(a) for a in ts.search.excluded]
+        chinese_phil_occurrences[label] = sum(
+            count_occurrences(sd.doc, label, match_fn) for sd in docs)
+    (DATA / "sep_chinese_philosophy_occurrences.json").write_text(
+        json.dumps(chinese_phil_occurrences, ensure_ascii=False, indent=2),
+        encoding="utf-8")
+    n_cn_articles = len(chinese_phil_doc_cache)
+    n_cn_occ = sum(chinese_phil_occurrences.values())
+    print(f"chinese-phil: {n_cn_articles} articles, {n_cn_occ} occurrences "
+          f"-> {DATA / 'sep_chinese_philosophy_occurrences.json'}")
+    sw.lap("chinese-philosophy")
+
     # --- one combined embedding space over every (deduped) article ---
     combined = list(doc_cache.values())
     print(f"parsed     : {len(combined)} SEP articles")
@@ -483,15 +507,22 @@ def build_master(out_path=None) -> dict:
     ctext = _scan_networks(CTEXT, "/ctext")
     sep = _scan_networks(SEP, "/sep")
 
+    cn_path = DATA / "sep_chinese_philosophy_occurrences.json"
+    chinese_phil: dict[str, int] = json.loads(
+        cn_path.read_text(encoding="utf-8")) if cn_path.exists() else {}
+
     empty = {"variants": [], "total": 0, "cooccurrence": [], "similarity": []}
 
     def side(label: str, corpus: str, scan: dict) -> dict:
         e = scan.get(label, empty)
+        non_cn = e["total"]
+        cn = chinese_phil.get(label, 0) if corpus == "sep" else 0
         return {
             "corpus": corpus,
             "term": {"label": label, "variants": e["variants"]},
-            "occurrences": e["total"],
-            "embeddings": [_embedding_source(corpus, e["total"])],
+            "totalOccurrences": non_cn + cn,
+            "chinesePhilosophyOccurrences": cn,
+            "embeddings": [_embedding_source(corpus, non_cn + cn)],
             "similarity": e["similarity"],
             "cooccurrence": _full_first(e["cooccurrence"]),
         }
