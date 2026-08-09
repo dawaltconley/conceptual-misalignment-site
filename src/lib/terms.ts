@@ -35,8 +35,12 @@ export type Corpora = z.infer<typeof CorporaSchema>
 const CorpusSideSchema = z.object({
   corpus: CorporaSchema,
   term: TermSchema,
-  /** term occurrences across the whole corpora */
-  occurrences: z.number(),
+  /** Term occurrences across the whole corpora — grand total, including
+   * `chinesePhilosophyOccurrences`. */
+  totalOccurrences: z.number(),
+  /** Occurrences within Chinese-philosophy SEP articles (excluded from the
+   * analyzed corpus); always 0 on the Mengzi side. */
+  chinesePhilosophyOccurrences: z.number().default(0),
   /** Each source's `data` returns an embedding dataset (usually one, per corpus). */
   embeddings: SourceSchema.array(),
   /** Each source's `data` returns a similarity NetworkData JSON. */
@@ -68,7 +72,7 @@ export function getTermFrequencies(terms: MasterTerm[]): Map<string, number> {
     .forEach((c) => {
       const k = c.term.label
       const o = map.get(k) || 0
-      map.set(k, o + c.occurrences)
+      map.set(k, o + c.totalOccurrences)
     })
   return map
 }

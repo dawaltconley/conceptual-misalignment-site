@@ -5,7 +5,7 @@ import requests
 import time
 import re
 from corpus import cache
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from urllib.parse import urlparse
 from random import random
 from models import Source, Rendering
@@ -90,13 +90,16 @@ class SEPSearch(Source):
     description: str
     articles: list[SEP]
     total_articles: int
+    excluded: list[SEP] = field(default_factory=list)
+    """Articles that ``pre_filter`` rejected but were fetched anyway for counting
+    (only populated when ``from_term`` is called with ``capture_excluded=True``)."""
 
     @property
     def text(self) -> str:
         return "\n\n".join([a.text.strip() for a in self.articles])
 
     @classmethod
-    def from_term(cls, term: str | Rendering, *, max_results: int | None = None, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None):
+    def from_term(cls, term: str | Rendering, *, max_results: int | None = None, filter: Callable[[SEP], bool] | None = None, pre_filter: Callable[[str], bool] | None = None, capture_excluded: bool = False):
         sep: SEPSearch | None = None
         page = 1
 
@@ -127,6 +130,8 @@ class SEPSearch(Source):
                 break  # empty search page, break loop
             for url in results:
                 if pre_filter and not pre_filter(url):
+                    if capture_excluded:
+                        sep.excluded.append(SEP.from_url(url))
                     continue
                 article = SEP.from_url(url)
                 if filter and not filter(article):

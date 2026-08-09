@@ -25,7 +25,8 @@ def build_english_corpus(max_per_term=4) -> list[SEPTermSearch]:
         search = SEPSearch.from_term(
             term,
             max_results=max_per_term,
-            pre_filter=is_not_chinese_philosophy
+            pre_filter=is_not_chinese_philosophy,
+            capture_excluded=True,
         )
         print(f"  [{term.label}] {search.total_articles} articles found")
         results.append(SEPTermSearch(term, search))
