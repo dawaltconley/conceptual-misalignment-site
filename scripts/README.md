@@ -77,7 +77,7 @@ corpus/              "get the source text" layer (the only code that hits the ne
   sep.py             Stanford Encyclopedia search / scrape
   inpho.py           InPhO topic filter (is_chinese_philosophy)
   conllu.py          load a UD .conllu into spaCy Docs (no model needed)
-  parse.py           chapters/articles → spaCy Docs (conllu loader; en_core_web_sm html tokenizer)
+  parse.py           chapters/articles → spaCy Docs (conllu loader; en_core_web_sm html tokenizer) + lemma exceptions + multi-token rendering merge
   cache.py           shared requests cache (scripts/.cache)
 
 embeddings/          the transformer semantic space
