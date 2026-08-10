@@ -66,13 +66,13 @@ export function ComboboxPopup({
                 value={option}
                 className="option"
               >
-                <BaseCombobox.ItemIndicator>
-                  <Icon icon={faCheck} width="0.75em" height="0.75em" />
-                </BaseCombobox.ItemIndicator>
-                <span>{optionLabel(option)}</span>
+                <span className="min-w-6">{optionLabel(option)}</span>
                 {option.note !== undefined && (
                   <span className="option__note">{option.note}</span>
                 )}
+                <BaseCombobox.ItemIndicator>
+                  <Icon icon={faCheck} width="0.75em" height="0.75em" />
+                </BaseCombobox.ItemIndicator>
               </BaseCombobox.Item>
             )}
           </BaseCombobox.List>
