@@ -50,6 +50,7 @@ from embeddings.occurrences import (
     build_segments,
     content_frequencies,
     document_frequencies,
+    dominant_pos,
 )
 from cooccurrence import pmi_spacy
 from graph.prune import prune_to_neighborhood
@@ -296,9 +297,13 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
         # artifact reads high; this is the only record of what the gate actually saw.
         dump_family_candidates(ANALYSIS / "sep", labels, matrix,
                                labels_by_target, extra)
+        # Type-level POS, so a merged family can be named after its noun rather
+        # than whichever member the corpus happens to say most often.
+        word_pos = dominant_pos(combined, match_fn, content_pos=pos, stopwords=stop)
         alias, variants = families.merge_map(
             labels, matrix, threshold=p.merge_threshold,
-            exclude=labels_by_target, counts=freq, extra_pairs=extra)
+            exclude=labels_by_target, counts=freq, pos=word_pos,
+            extra_pairs=extra)
         if alias:
             pooler.merge(alias)
             labels, matrix = pool(pooler, labels_by_target)
