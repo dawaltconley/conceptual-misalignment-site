@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from config import MENGZI_CONLLU
+from config import ENGLISH_LEMMAS, MENGZI_CONLLU
 
 if TYPE_CHECKING:
     from spacy.tokens import Doc
@@ -17,9 +17,28 @@ def _get_en_nlp():
     return _nlp
 
 
+def _apply_lemma_exceptions(doc: "Doc") -> "Doc":
+    """Patch en_core_web_sm's lemma mistakes in place, keyed on surface form.
+
+    Two error classes dominate the SEP corpus (both measured, see
+    ``scripts/lemmas/english.conf``): discipline names in ``-ics`` lose their
+    final s and collapse into an unrelated adjective (``ethics``/``aesthetics``
+    /``semantics`` -> ``ethic``/``aesthetic``/``semantic``), and a handful of
+    words get a back-formed base that is not English at all (``species`` ->
+    ``specie``, ``senses`` -> ``sens``). Fixing it here rather than in
+    ``content_key`` means the embedding and co-occurrence lenses both get the
+    correction, and nothing has to thread a table through six call sites.
+    """
+    for token in doc:
+        lemma = ENGLISH_LEMMAS.get(token.text.lower())
+        if lemma is not None:
+            token.lemma_ = lemma
+    return doc
+
+
 def parse_sep_article(sep: "SEP") -> "Doc":
     nlp = _get_en_nlp()
-    return nlp(sep.text)
+    return _apply_lemma_exceptions(nlp(sep.text))
 
 
 _mengzi_chapter_docs: dict[str, "Doc"] = {}

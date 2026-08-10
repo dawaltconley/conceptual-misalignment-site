@@ -115,6 +115,19 @@ with open(_SCRIPTS / "stopwords" / "english.conf", "r") as file:
         if line and not line.startswith('#'):
             ENGLISH_STOPWORDS.add(line)
 
+# Surface form -> corrected lemma, patching en_core_web_sm's mistakes before any
+# downstream code sees them (applied in corpus.parse). Keyed on the surface, not
+# the wrong lemma, because the wrong lemma is often a real word too — see the
+# conf file's header.
+with open(_SCRIPTS / "lemmas" / "english.conf", "r") as file:
+    ENGLISH_LEMMAS = dict[str, str]()
+    for line in file:
+        line = line.split('#')[0].strip()
+        if not line:
+            continue
+        surface, _, lemma = line.partition('->')
+        ENGLISH_LEMMAS[surface.strip()] = lemma.strip()
+
 MENGZI_PIPELINE = Pipeline(
     model="hsc748NLP/GujiRoBERTa_fan",
     out_dir=CTEXT,
