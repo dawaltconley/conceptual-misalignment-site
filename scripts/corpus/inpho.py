@@ -19,6 +19,7 @@ _EXCLUDE = {
     'confucian-gender',
     'korean-confucianism',
     'dai-zhen',
+    'daoism',
 }
 
 
