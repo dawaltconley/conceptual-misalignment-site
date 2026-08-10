@@ -37,3 +37,8 @@ export function getDistSq(a: Point, b: Point): number {
   const dy = a.y - b.y
   return dx * dx + dy * dy
 }
+
+export interface Range {
+  min: number
+  max: number
+}

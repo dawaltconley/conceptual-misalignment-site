@@ -35,6 +35,7 @@ const embeddingDictionary = await buildDictionary(
         kind="cooccurrence"
         data={master}
         dictionary={networkDictionary}
+        actualEdgeWeightRange={{ min: 0.1, max: 5 }}
       />
     </div>
 
@@ -45,6 +46,7 @@ const embeddingDictionary = await buildDictionary(
         kind="similarity"
         data={master}
         dictionary={networkDictionary}
+        actualEdgeWeightRange={{ min: 0.1, max: 0.5 }}
       />
     </div>
 

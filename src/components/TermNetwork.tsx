@@ -1,5 +1,7 @@
 import type { Master, CorpusSide } from '@lib/terms'
+import type { Range } from '@lib/graphs'
 import type { Dictionary } from '@build/cedict'
+import type { NetworkProps } from './Network'
 import { useState } from 'react'
 import MultiNetwork from './MultiNetwork'
 import Select from './Select'
@@ -7,9 +9,11 @@ import { getHeading, type Heading } from '@lib/headings'
 
 type NetworkKind = 'cooccurrence' | 'similarity'
 
-interface TermNetworkProps {
+interface TermNetworkProps extends Omit<
+  NetworkProps,
+  'data' | 'centralNodeId'
+> {
   title: string
-
   /** The master term index (passed from Astro, not fetched). */
   data: Master
   /**
@@ -21,6 +25,8 @@ interface TermNetworkProps {
   dictionary?: Dictionary
 
   headingLevel?: Heading
+  actualEdgeWeightRange?: Range
+  targetEdgeWeightRange?: Range
 }
 
 /** The networks to feed one MultiNetwork for a corpus side, per kind. */
@@ -39,6 +45,8 @@ export default function TermNetwork({
   kind = 'cooccurrence',
   dictionary,
   headingLevel,
+  actualEdgeWeightRange,
+  targetEdgeWeightRange,
 }: TermNetworkProps): JSX.Element {
   const H = headingLevel ? getHeading(headingLevel) : 'p'
 
@@ -101,6 +109,8 @@ export default function TermNetwork({
             sources={refsFor(term.chinese, kind)}
             centralNodeId={term.hanzi}
             dictionary={dictionary}
+            actualEdgeWeightRange={actualEdgeWeightRange}
+            targetEdgeWeightRange={targetEdgeWeightRange}
             sourceAlign="left"
           />
         </div>
@@ -109,6 +119,8 @@ export default function TermNetwork({
             key={`${kind}:${term.hanzi}:${english.term.label}`}
             sources={refsFor(english, kind)}
             centralNodeId={english.term.label}
+            actualEdgeWeightRange={actualEdgeWeightRange}
+            targetEdgeWeightRange={targetEdgeWeightRange}
             sourceAlign="right"
           />
         </div>

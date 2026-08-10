@@ -1,7 +1,12 @@
 import type { Dictionary } from '@build/cedict'
 import type { MasterSource } from '@lib/terms'
 import type { NetworkData } from '@lib/networkx'
-import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
+import type { Range } from '@lib/graphs'
+import Network, {
+  NetworkSkeleton,
+  Wrapper as NetworkWrapper,
+  type NetworkProps,
+} from './Network'
 import useData from '@lib/browser/hooks/useData'
 import { NetworkDataSchema } from '@lib/networkx'
 import { useState, useMemo, type ReactNode } from 'react'
@@ -20,12 +25,14 @@ export interface NetworkRef {
   path: string
 }
 
-interface MultiNetworkProps {
+interface MultiNetworkProps extends Omit<NetworkProps, 'data'> {
   /** The networks to switch between. A single entry hides the sidebar. */
   sources: MasterSource[]
   /** The node held at the centre of the graph (the term / rendering label). */
   centralNodeId: string
   sourceAlign?: Side
+  actualEdgeWeightRange?: Range
+  targetEdgeWeightRange?: Range
   dictionary?: Dictionary
 }
 
@@ -39,7 +46,7 @@ export default function MultiNetwork({
   sources,
   centralNodeId,
   sourceAlign = 'right',
-  dictionary,
+  ...networkProps
 }: MultiNetworkProps): JSX.Element {
   const sourceMap = useMemo(
     () => new Map(sources.map((s) => [s.id, s])),
@@ -54,12 +61,13 @@ export default function MultiNetwork({
   const network = data?.network ?? null
 
   return (
+    // <<<<<<< HEAD
     <Tabs.Root
       value={selected}
       onValueChange={(v) => setSelected(v)}
       orientation="vertical"
       render={
-        <Wrapper align={sourceAlign}>
+        <Wrapper>
           <div className="xl:col-span-2">
             {sources.length === 0 ? (
               <NetworkError message={`No network for ${centralNodeId}`} />
@@ -71,13 +79,13 @@ export default function MultiNetwork({
               <Network
                 centralNodeId={centralNodeId}
                 data={network}
-                dictionary={dictionary}
+                // dictionary={dictionary}
+                {...networkProps}
               />
             ) : (
               <NetworkError message={`No occurrences of ${centralNodeId}`} />
             )}
           </div>
-
           {sources.length > 1 && (
             <Tabs.List
               render={
