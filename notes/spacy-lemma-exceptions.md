@@ -163,11 +163,43 @@ auto-preservation safe, by letting a rendering declare which reading it means.
 
 ### A second, unrelated way a rendering can match nothing
 
-Patterns are matched against one token's lemma, so a **multi-word** pattern
-(`'social norm*'` for 禮, `'human nature'` for 性) can never match, no matter
-what the lemmatizer does. No exception table reaches this; it needs the phrase
-merged into a single token at parse time. The guard reports it separately
-because the fix is different.
+Patterns are matched against one token's lemma, so a **multi-token** pattern can
+never match on its own, no matter what the lemmatizer does. Three of the
+concepts in `config.TERMS` are phrases — `'social norm*'` (禮),
+`'human nature'` (性), `'care for'` (愛) — and `'heart-mind*'` (心) is in the
+same position without containing a space, because the English tokenizer splits
+hyphens.
+
+No exception table reaches this, since the unit being matched is the problem.
+`corpus.parse.merge_phrases` fixes it upstream instead: a spaCy `Matcher` holds
+every multi-token pattern, and each match is retokenized into a **single token
+whose lemma is the rendering's label**. From there the phrase is an ordinary
+node — it matches its own label by construction, carries the phrase as its
+display `form`, and keeps exact `token.idx` offsets, because merging does not
+alter `doc.text`. The embedder then sees the whole phrase as one span, which is
+the right span to embed anyway.
+
+Two details worth knowing:
+
+- **Patterns are split by the real tokenizer, not on spaces**, so `heart-mind*`
+  becomes `heart` `-` `mind*` and is caught like any phrase. This is also the
+  definition `renderings.RenderingAudit.multiword` uses, so the guard classifies
+  a failure the same way the merger would.
+- **Each pattern is registered twice, over `LEMMA` and over `LOWER`.** A phrase
+  inflects on its head (`social norms` lemmatizes to `social norm`), and either
+  spelling should reach `social norm*`. Matching on either attribute is strictly
+  more forgiving than the single-token rule, never less.
+- Merged attributes other than the lemma are **inherited from the span's
+  syntactic head**, so `social norms` stays NOUN and `care for` stays VERB
+  rather than taking a POS hardcoded by the merger.
+
+Measured on four SEP articles, `social norm*` went from 0 occurrences and a null
+network to 7 occurrences and a 16-node network (`disgust`, `conformity`,
+`circumstance`, `capacity`), with `social norms` as the display form.
+
+A match that would cross a sentence boundary is skipped — "That is not social.
+Norms, however, are." must not merge — since `build_segments` packs whole
+sentences and a token straddling the break would corrupt the packing.
 
 ## What is *not* fixed here
 

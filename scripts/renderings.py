@@ -14,9 +14,9 @@ Two distinct failure modes, and they want different fixes:
 
 - **lemma drift** — the surface form is in the corpus, but its lemma is not what
   the pattern expects. Fixed by one line in ``scripts/lemmas/english.conf``.
-- **multi-word pattern** — a pattern containing a space can never match, because
-  the thing it is matched against is a single token's lemma. Fixed by merging the
-  phrase into one token at parse time, not by an exception table.
+- **multi-token pattern** — the thing a pattern is matched against is a single
+  token's lemma, so a phrase can only match if it is *made* one token first;
+  ``corpus.parse.merge_phrases`` does that, and no exception table could.
 
 :func:`check_coverage` is the pipeline guard (cheap: it is handed the occurrence
 counts the run already computed, and only pays for a corpus scan on the
@@ -58,8 +58,14 @@ class RenderingAudit:
 
     @property
     def multiword(self) -> tuple[str, ...]:
-        """Patterns that can never match, because a lemma is a single token."""
-        return tuple(p for p in self.patterns if " " in p)
+        """Patterns needing more than one token — handled by the phrase merger.
+
+        Asks ``corpus.parse`` rather than looking for a space, so the answer is
+        the merger's own (``heart-mind*`` is multi-token too). Imported lazily:
+        it loads the spaCy model, and a healthy run never gets here.
+        """
+        from corpus.parse import spans_multiple_tokens
+        return tuple(p for p in self.patterns if spans_multiple_tokens(p))
 
     @property
     def empty(self) -> bool:
@@ -72,13 +78,15 @@ class RenderingAudit:
                  f"{', '.join(repr(p) for p in self.patterns)})"]
         if self.multiword:
             lines += [
-                f"      {len(self.multiword)} multi-word pattern(s): "
+                f"      {len(self.multiword)} multi-token pattern(s): "
                 f"{', '.join(repr(p) for p in self.multiword)}",
-                "      A rendering is matched against one token's lemma, so a "
-                "pattern containing",
-                "      a space can never match. Needs the phrase merged into a "
-                "single token at",
-                "      parse time — an exception table cannot reach this.",
+                "      These are reachable — corpus.parse.merge_phrases merges "
+                "the phrase into one",
+                "      token before matching — so the corpus simply never "
+                "contained it as tokenized.",
+                "      Check the pattern against how the tokenizer actually "
+                "splits the phrase, and",
+                "      that its head inflects the way the pattern expects.",
             ]
         if self.shadowed:
             total = sum(self.shadowed.values())

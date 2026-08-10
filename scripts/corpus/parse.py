@@ -1,10 +1,13 @@
-from typing import TYPE_CHECKING
-from config import ENGLISH_LEMMAS, MENGZI_CONLLU
+from fnmatch import translate
+from typing import TYPE_CHECKING, Sequence
+from config import ENGLISH_LEMMAS, MENGZI_CONLLU, TERMS
 
 if TYPE_CHECKING:
+    from spacy.matcher import Matcher
     from spacy.tokens import Doc
     from corpus.sep import SEP
     from corpus.mengzi import Chapter as MengziChapter
+    from models import Rendering
 
 _nlp = None
 
@@ -54,9 +57,123 @@ def _apply_lemma_exceptions(doc: "Doc") -> "Doc":
     return doc
 
 
+# ---------------------------------------------------------------------------
+# Multi-word renderings → one token
+# ---------------------------------------------------------------------------
+# A ``Rendering`` is matched against *one token's lemma*
+# (``models.Rendering.matches``), so a pattern spanning more than one token can
+# never match, however the text is written: ``social norm*`` for 禮 and
+# ``human nature`` for 性 are dead on arrival, and so is ``heart-mind*`` for 心,
+# because the English tokenizer splits hyphens. Unlike the lemma errors in
+# ``lemmas/english.conf``, no exception table reaches this — the fix has to
+# change what counts as a token.
+#
+# So: find the phrases with a ``Matcher`` and merge each one into a single token
+# whose LEMMA is the rendering's label. Downstream nothing changes — the merged
+# token matches the label pattern like any other lemma, carries the phrase as its
+# surface ``form`` for display, and keeps exact ``token.idx`` offsets (merging
+# does not alter ``doc.text``), so ``build_segments`` and the embedder see the
+# whole phrase as one span, which is what you want embedded anyway.
+
+
+def _token_spec(piece: str, attr: str) -> dict:
+    """One Matcher token spec, as a glob if ``piece`` has wildcards."""
+    if any(c in piece for c in "*?["):
+        # fnmatch's regex is right-anchored (``\Z``) but not left-anchored, and
+        # spaCy's REGEX predicate uses re.search — so anchor it explicitly, or
+        # ``norm*`` would also match "abnormal".
+        return {attr: {"REGEX": "^" + translate(piece)}}
+    return {attr: piece}
+
+
+def _token_specs(pattern: str, tokenizer, attr: str) -> list[dict] | None:
+    """Matcher specs for ``pattern``, or ``None`` if it fits in one token.
+
+    Each whitespace-separated chunk is run through the *real* tokenizer, so a
+    pattern is caught whenever the tokenizer would split it — hyphens included —
+    not only when it contains a space. A trailing wildcard stays attached to the
+    last piece (``heart-mind*`` -> ``heart`` ``-`` ``mind*``).
+    """
+    specs: list[dict] = []
+    for chunk in pattern.split():
+        stem = chunk.rstrip("*")
+        glob = chunk[len(stem):]
+        pieces = [t.text for t in tokenizer(stem)] or [stem]
+        specs += [_token_spec(p + (glob if i == len(pieces) - 1 else ""), attr)
+                  for i, p in enumerate(pieces)]
+    return specs if len(specs) > 1 else None
+
+
+def spans_multiple_tokens(pattern: str) -> bool:
+    """Would ``pattern`` have to cover more than one token to match?
+
+    The one definition of "multi-token", shared with ``renderings`` so the
+    coverage guard classifies a failure the same way the merger does — and by
+    the real tokenizer, so ``heart-mind*`` counts even without a space in it.
+    """
+    return _token_specs(pattern, _get_en_nlp().tokenizer, "LEMMA") is not None
+
+
+_matcher: "Matcher | None" = None
+
+
+def _get_phrase_matcher(renderings: "Sequence[Rendering] | None" = None):
+    """A Matcher keyed on rendering label, holding every multi-token pattern.
+
+    Two variants per pattern — one over LEMMA, one over LOWER — because the
+    single-token path matches lemmas but a phrase's inflection usually sits on
+    its head (``social norms`` lemmatizes to ``social norm``, and both should
+    hit ``social norm*``). Matching either way is strictly more forgiving than
+    the single-token rule, never less.
+    """
+    global _matcher
+    if renderings is None and _matcher is not None:
+        return _matcher
+    from spacy.matcher import Matcher
+    nlp = _get_en_nlp()
+    rends = renderings if renderings is not None else [
+        r for term in TERMS for r in term.renderings]
+    matcher = Matcher(nlp.vocab)
+    for rendering in rends:
+        variants = [specs for pattern in rendering.patterns
+                    for attr in ("LEMMA", "LOWER")
+                    if (specs := _token_specs(pattern, nlp.tokenizer, attr))]
+        if variants:
+            matcher.add(rendering.label, variants)
+    if renderings is None:
+        _matcher = matcher
+    return matcher
+
+
+def merge_phrases(doc: "Doc",
+                  renderings: "Sequence[Rendering] | None" = None) -> "Doc":
+    """Merge each multi-token rendering occurrence into one token, in place.
+
+    The merged token's lemma is the rendering's label, which is always
+    ``patterns[0]`` and therefore matches the rendering by construction. Every
+    other attribute is inherited from the span's syntactic head, so the phrase
+    keeps a sensible POS (``social norms`` NOUN, ``care for`` VERB) rather than
+    one hardcoded here.
+    """
+    from spacy.util import filter_spans
+    matcher = _get_phrase_matcher(renderings)
+    if not len(matcher):
+        return doc
+    # A phrase never spans a sentence break; a match that does is the matcher
+    # reaching across punctuation, and merging it would corrupt the sentence
+    # boundaries build_segments packs on.
+    label_of = {doc[start:end]: doc.vocab.strings[match_id]
+                for match_id, start, end in matcher(doc)
+                if not any(t.is_sent_start for t in doc[start + 1:end])}
+    with doc.retokenize() as retokenizer:
+        for span in filter_spans(list(label_of)):  # longest wins, no overlaps
+            retokenizer.merge(span, attrs={"LEMMA": label_of[span]})
+    return doc
+
+
 def parse_sep_article(sep: "SEP") -> "Doc":
     nlp = _get_en_nlp()
-    return _apply_lemma_exceptions(nlp(sep.text))
+    return merge_phrases(_apply_lemma_exceptions(nlp(sep.text)))
 
 
 _mengzi_chapter_docs: dict[str, "Doc"] = {}
