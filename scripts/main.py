@@ -177,11 +177,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     sw.lap("co-occurrence")
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
-    embedder = Embedder(p.model)
-    print(
-        f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler, doc_freq, n_docs, _ = embed(
-        p, embedder, chapters, targets,
+        p, chapters, targets,
         keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
     matrix, mean, project = transform_matrix(p, matrix)
@@ -286,11 +283,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     # --- one combined embedding space over every (deduped) article ---
     combined = list(doc_cache.values())
     print(f"parsed     : {len(combined)} SEP articles")
-    embedder = Embedder(p.model)
-    print(
-        f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
     pooler, doc_freq, n_docs, freq = embed(
-        p, embedder, combined, labels_by_target, match_fn=match_fn,
+        p, combined, labels_by_target, match_fn=match_fn,
         keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
     matrix, mean, project = transform_matrix(p, matrix)
@@ -310,7 +304,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
                                labels_by_target, extra)
         # Type-level POS, so a merged family can be named after its noun rather
         # than whichever member the corpus happens to say most often.
-        word_pos = dominant_pos(combined, match_fn, content_pos=pos, stopwords=stop)
+        word_pos = dominant_pos(
+            combined, match_fn, content_pos=pos, stopwords=stop)
         alias, variants = families.merge_map(
             labels, matrix, threshold=p.merge_threshold,
             exclude=labels_by_target, counts=freq, pos=word_pos,
@@ -364,7 +359,6 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
 
 def embed(
     p: Pipeline,
-    emb: Embedder,
     sources: list[SourceDoc],
     target_labels: frozenset[str],
     *,
@@ -381,10 +375,17 @@ def embed(
     here, so the whole corpus's occurrence vectors are never all resident at once.
     ``keep`` words additionally retain their full occurrence stacks (cohesion under
     ``--artifacts``)."""
+
+    emb = Embedder(p.model)
+    print(
+        f"device     : {emb.device_label}  hidden: {emb.hidden_size}")
+
     pos, stop = _to_set(p.content_pos), p.stopwords or set()
-    freq = content_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
+    freq = content_frequencies(
+        sources, match_fn, content_pos=pos, stopwords=stop)
     vocab = {k for k, c in freq.items() if c >= p.min_freq}
-    doc_freq = document_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
+    doc_freq = document_frequencies(
+        sources, match_fn, content_pos=pos, stopwords=stop)
     n_docs = len(sources)
 
     if p.min_doc_freq is not None:
@@ -401,7 +402,8 @@ def embed(
         print(f"doc-freq   : cap {cap:.0f}/{n_docs} docs -> dropped "
               f"{before - len(vocab)} of {before} vocab words")
 
-    vocab |= set(target_labels)     # targets always kept, regardless of the bounds
+    # targets always kept, regardless of the bounds
+    vocab |= set(target_labels)
     unk_check(emb, target_labels)
     segments = segment(p, emb, sources, vocab, match_fn)
     pooler = vectors.Pooler(mode=p.occurrence_pooling, keep=set(keep))
@@ -429,7 +431,8 @@ def dump_family_candidates(
     vocab = [lbl for lbl in labels if lbl not in exclude]
     fams = families.candidate_families(vocab, extra_pairs)
     index = {lbl: i for i, lbl in enumerate(labels)}
-    unit = matrix / np.clip(np.linalg.norm(matrix, axis=1, keepdims=True), 1e-12, None)
+    unit = matrix / np.clip(np.linalg.norm(matrix,
+                            axis=1, keepdims=True), 1e-12, None)
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / "family_candidates.csv"
     with open(path, "w", newline="", encoding="utf-8") as fh:
