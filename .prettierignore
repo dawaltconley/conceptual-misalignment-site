@@ -6,5 +6,7 @@ content/
 scripts/.venv/
 src/data/ctext/
 src/data/sep/
+analysis/
+notes/
 .agents/
 .claude/
