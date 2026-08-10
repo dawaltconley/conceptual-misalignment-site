@@ -157,7 +157,7 @@ export const Wrapper = forwardRef<HTMLDivElement, { children: ReactNode }>(
   ({ children }, ref) => (
     <div
       ref={ref}
-      className="relative aspect-square min-h-96 w-full overflow-hidden"
+      className="relative aspect-square min-h-96 w-full touch-manipulation overflow-hidden"
     >
       {children}
     </div>
