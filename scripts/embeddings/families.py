@@ -247,6 +247,8 @@ def merge_map(
     threshold: float,
     exclude: Container[str] = frozenset(),
     counts: Mapping[str, int] | None = None,
+    pos: Mapping[str, str] | None = None,
+    prefer_pos: Container[str] = frozenset({"NOUN"}),
     extra_pairs: Iterable[Pair] = (),
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Decide which vocabulary entries collapse together.
@@ -257,9 +259,16 @@ def merge_map(
 
     ``exclude`` holds words that must never merge (the target renderings:
     ``Rendering`` globs already family-merge those by hand, and stemming would
-    collapse ``humaneness`` and ``humanity`` into one). ``counts`` picks each
-    family's surviving label — the most frequent member, falling back to the
-    shortest then alphabetical order.
+    collapse ``humaneness`` and ``humanity`` into one).
+
+    Which member survives as the family's label is decided by, in order:
+    ``prefer_pos`` (nouns first), then ``counts`` (most frequent), then shortest,
+    then alphabetical. The POS preference exists because raw frequency alone
+    picks the adjective in a noun/adjective family — the corpus says
+    ``ethical`` more often than ``ethics``, but ``ethics`` is the term a reader
+    looks for on a philosophy scatter. ``pos`` is a **type-level** map from
+    ``occurrences.dominant_pos``, not per-token: one vocabulary entry covers many
+    occurrences whose tags may disagree.
 
     Returns ``(alias, variants)``: ``alias`` maps every absorbed word to its
     surviving label, and ``variants`` maps each surviving label to the sorted
@@ -273,8 +282,10 @@ def merge_map(
 
     vocab = {label for label in labels if label not in exclude}
 
-    def rank(word: str) -> tuple[int, int, str]:
-        return (-(counts or {}).get(word, 0), len(word), word)
+    def rank(word: str) -> tuple[int, int, int, str]:
+        preferred = pos is not None and pos.get(word, "") in prefer_pos
+        return (0 if preferred else 1,
+                -(counts or {}).get(word, 0), len(word), word)
 
     alias: dict[str, str] = {}
     variants: dict[str, list[str]] = {}

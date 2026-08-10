@@ -118,6 +118,31 @@ def content_frequencies(
     return freq
 
 
+def dominant_pos(
+    sources: Iterable[SourceDoc],
+    match_fn: MatchFn | None = None,
+    content_pos: set[str] | None = CONTENT_POS,
+    stopwords: frozenset[str] | set[str] = frozenset(),
+) -> dict[str, str]:
+    """The most frequent part of speech for each content key.
+
+    Type-level, because a vocabulary entry *is* a type: ``study`` may be tagged
+    ``NOUN`` in some occurrences and ``VERB`` in others, and a merge needs one
+    answer for the whole key rather than whichever token happened to be sampled.
+    Ties break toward the POS seen first, which is stable for a fixed corpus.
+
+    Used to prefer the noun when naming a merged family (see
+    ``embeddings.families.merge_map``).
+    """
+    tally: dict[str, Counter[str]] = {}
+    for source in sources:
+        for token in source.doc:
+            key = content_key(token, match_fn, content_pos, stopwords)
+            if key is not None:
+                tally.setdefault(key, Counter())[token.pos_] += 1
+    return {key: counts.most_common(1)[0][0] for key, counts in tally.items()}
+
+
 def build_vocab(
     sources: Iterable[SourceDoc],
     min_freq: int,
