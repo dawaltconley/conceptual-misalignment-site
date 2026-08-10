@@ -63,6 +63,7 @@ directory. Change a run's behavior by editing those, not by passing flags.
 ```
 config.py            Term/Rendering taxonomy, MENGZI_PIPELINE/SEP_PIPELINE configs, stopwords, absolute path constants
 main.py              the pipeline entrypoint (run_mengzi / run_sep / build_master + CLI)
+renderings.py        coverage guard — a Rendering that matches no token aborts the run (see notes/spacy-lemma-exceptions.md)
 models.py            Source/Rendering/Term + Pipeline config + NetworkData/Embeddings/Vector + CorpusIndex/TermIndex + JSON serialization
 output.py            CorpusWriter — the one place a name becomes a path; writes each file and records it in the corpus manifest
 
@@ -112,4 +113,10 @@ cli/                 auxiliary runnable tools
 
 # One-off — inventory punctuation in a text file
 .venv/bin/python -m cli.find_punctuation <path>
+
+# Which Renderings matched, and which lost occurrences to a lemmatizer error?
+# (`mores` -> lemma `more` silently zeroed 禮's "mores" for entire runs.) The
+# pipeline aborts on a rendering that matches *nothing*; this also reports
+# partial losses. -> analysis/sep/rendering_diagnostics.md
+.venv/bin/python tools/rendering_diagnostics.py --per-term 12
 ```

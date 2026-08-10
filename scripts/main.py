@@ -37,6 +37,7 @@ from config import TERMS, CTEXT, SEP, DATA, ANALYSIS
 from models import (
     CorpusIndex, Embeddings, Pipeline, Source, TermData, TermIndex)
 from output import CorpusWriter
+from renderings import check_coverage
 from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter, verb_lemma
@@ -115,16 +116,18 @@ def count_occurrences(doc, label: str, match_fn: MatchFn | None) -> int:
 def save_cooccurrence(
     p: Pipeline, w: CorpusWriter, label: str, network_sources: list[SourceDoc],
     meta_source: Source, file_id: str, *, match_fn: MatchFn | None,
-) -> None:
+) -> int:
     """Build ``label``'s PMI network over ``network_sources`` and hand it to the
     writer as one ``NetworkData`` file (``meta_source`` is the source recorded in
-    the file — a chapter, an article, or a whole-corpus stand-in)."""
+    the file — a chapter, an article, or a whole-corpus stand-in). Returns the
+    occurrence count, which the caller reuses for the coverage guard."""
     net = get_cooccurrence(p, label, network_sources, match_fn=match_fn)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn)
               for s in network_sources)
     w.add_cooccurrence(label, meta_source, file_id, net, occ)
+    return occ
 
 
 # ---------------------------------------------------------------------------
@@ -215,7 +218,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
 
 
 def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
-            prune: bool = False) -> None:
+            prune: bool = False, allow_empty: bool = False) -> None:
     sw = Stopwatch()
     renderings = [r for term in TERMS for r in term.renderings]
     labels_by_target = frozenset(r.label for r in renderings)
@@ -242,15 +245,23 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     # --- co-occurrence: each rendering over its combined search + each article ---
     # (also parses + caches every article, reused for the embedding space below)
     # The combined file goes first, so the manifest lists it first.
+    corpus_occ: dict[str, int] = {}
     for ts in searches:
         label, articles = ts.term.label, ts.search.articles
         adocs = [source_doc(a) for a in articles]
-        save_cooccurrence(p, writer, label, adocs, ts.search,
-                          "combined", match_fn=match_fn)
+        corpus_occ[label] = save_cooccurrence(
+            p, writer, label, adocs, ts.search, "combined", match_fn=match_fn)
         for sd in adocs:
             save_cooccurrence(p, writer, label, [sd],
                               sd.source, sd.source.id, match_fn=match_fn)
     sw.lap("parse+co-occurrence")
+
+    # A rendering that matched nothing is a config/lemmatizer bug far more often
+    # than a real absence, and it fails silently — every file it owns is written
+    # with a null network. Check here, before the expensive embedding phase.
+    check_coverage(renderings, corpus_occ,
+                   [sd.doc for sd in doc_cache.values()],
+                   corpus="SEP", allow_empty=allow_empty)
 
     # --- occurrence counts within the excluded Chinese-philosophy articles ---
     # (parsed separately from `doc_cache` — must NOT feed the embedding corpus)
@@ -602,6 +613,11 @@ def parse_args() -> argparse.Namespace:
                    help="After each corpus run, delete files in its output dir "
                         "that the run did not write (output left behind by terms "
                         "since removed from TERMS). Destructive — review the diff.")
+    p.add_argument("--allow-empty-renderings", action="store_true",
+                   dest="allow_empty",
+                   help="Downgrade the empty-rendering check to a warning. A "
+                        "rendering that matches no token writes null networks "
+                        "for every file it owns; by default that aborts the run.")
     args = p.parse_args()
     if args.prune and args.master_only:
         p.error("--prune needs a corpus run to know what to keep; "
@@ -622,7 +638,8 @@ def main() -> None:
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
             run_sep(SEP_PIPELINE, per_term=args.per_term,
-                    artifacts=args.artifacts, prune=args.prune)
+                    artifacts=args.artifacts, prune=args.prune,
+                    allow_empty=args.allow_empty)
             sw.lap("sep")
     print("\n=== Master index ===")
     build_master()

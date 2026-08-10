@@ -44,7 +44,7 @@ dev = [
 # py-modules (config/models are imported by the packages; main is the entrypoint).
 [tool.setuptools]
 package-dir = { "" = "scripts" }
-py-modules = ["config", "models", "main"]
+py-modules = ["config", "models", "main", "output", "renderings"]
 packages = [
     "cli",
     "cooccurrence",

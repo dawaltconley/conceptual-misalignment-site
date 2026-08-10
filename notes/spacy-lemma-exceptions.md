@@ -104,6 +104,71 @@ coexist with the untouched adjective `aesthetic`.
 it belongs in the vocabulary at all, since it is a proper noun that escaped the
 `PROPN` filter. Left in for now; add to `stopwords/english.conf` to drop it.
 
+## Error 3 — a lemma error can erase an entire rendering
+
+Errors 1 and 2 damage the *vocabulary*: a node lands in the wrong bucket, and
+you see it as scatter clutter. The same mistake landing on a
+`config.TERMS` rendering is worse, because a `Rendering` is matched against a
+token's **lemma** (`models.Rendering.matches`), so a bad lemma does not
+mis-bucket the term — it deletes it from the run.
+
+禮's `mores` was dead this way. `en_core_web_sm` reads it as a plural and emits
+the lemma `more`:
+
+| surface | spaCy lemma | POS | occurrences |
+|---|---|---|---|
+| `mores` | `more` | NOUN | 11 across 7 articles (montesquieu 1, weber 2, diderot 3, godwin 1, solidarity 2, double-consciousness 1, addams-jane 1) |
+
+`mores` is a Latin pluralium tantum, so this is the same class as error 1 —
+but the consequence is different in kind. The pattern `'mores'` never fired,
+`TermData.occurrences` came out 0 for every article, `build_cooccurrence_network`
+returned `None`, and all 15 `public/sep/mores_*.json` files were written with
+`"network": null`. Fixed by `mores -> mores`.
+
+**Why it stayed hidden.** Nothing distinguishes an erased rendering from an
+honest one. A term the corpus does not discuss also has 0 occurrences and also
+writes null networks, and the only console output was one
+`no co-occurrence for mores in …` line per article, which reads as a sparse-data
+result. After the fix the same articles yield 16-node networks (`custom`,
+`ethos`, `citizen`, `democracy`, `cultural`, `community`), so the data was
+always there.
+
+**This one *is* worth detecting automatically** — unlike errors 1 and 2, where
+the detection rule can only propose candidates. The signature is exact: a token
+whose *surface* matches a rendering's patterns while its *lemma* does not.
+`renderings.check_coverage` runs it as a pipeline guard (fatal by default,
+`--allow-empty-renderings` to downgrade), and
+`scripts/tools/rendering_diagnostics.py` runs the full audit, which also catches
+*partial* erasure — a rendering matching most of its occurrences while losing a
+slice.
+
+**But the fix still must not be automatic.** The tempting shortcut is to have
+`Rendering.matches` fall back to the surface form, or to auto-generate a
+`surface -> surface` exception for every literal pattern. Measured over 70
+sampled SEP articles, the only rendering where that would change anything is
+義's `meaning`:
+
+| surface | spaCy lemma | POS | count | matched by lemma |
+|---|---|---|---|---|
+| `meaning` | `mean` | VERB | 55 | 573 |
+
+and there the loss is *correct* — the verb ("meaning that p is true") is not the
+noun 義 is rendered as. A surface fallback would fold those 55 into the target
+node. No token in the sample matched one rendering by lemma and a *different*
+one by surface, so the hazard is exactly this: not mislabeling, but over-capture
+of a POS the rendering never wanted. Detection is automatic; the conf line stays
+a human decision, which is the same discipline errors 1 and 2 established.
+`Rendering.pos` (unused as of this writing) is the knob that would make
+auto-preservation safe, by letting a rendering declare which reading it means.
+
+### A second, unrelated way a rendering can match nothing
+
+Patterns are matched against one token's lemma, so a **multi-word** pattern
+(`'social norm*'` for 禮, `'human nature'` for 性) can never match, no matter
+what the lemmatizer does. No exception table reaches this; it needs the phrase
+merged into a single token at parse time. The guard reports it separately
+because the fix is different.
+
 ## What is *not* fixed here
 
 Participial adjectives (`devoted`, `alleged`, `determined`, `compelling`) keep
@@ -119,8 +184,18 @@ discriminator.
 
 ## Reproducing
 
-`scripts/tools/` has no permanent audit script; the one used here lived in the
-session scratchpad. It parses the corpus via `corpus.build.build_english_corpus`
-+ `corpus.parse.parse_sep_article`, tallies `lemma -> Counter(surface)` over
-tokens that pass the SEP content filter, and applies the two detection rules
-above.
+For errors 1 and 2 there is no permanent audit script; the one used here lived in
+the session scratchpad. It parses the corpus via
+`corpus.build.build_english_corpus` + `corpus.parse.parse_sep_article`, tallies
+`lemma -> Counter(surface)` over tokens that pass the SEP content filter, and
+applies the two detection rules above.
+
+Error 3 does have one, since its rule is exact:
+
+```bash
+scripts/.venv/bin/python scripts/tools/rendering_diagnostics.py --per-term 12
+```
+
+It writes `analysis/sep/rendering_diagnostics.md` — every rendering with its
+matched count, its shadowed surfaces (`surface -> lemma (POS)`), and the ones
+that matched nothing at all.
