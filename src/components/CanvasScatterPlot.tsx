@@ -262,6 +262,11 @@ function CanvasScatterPlot({
 
   const [tooltip, setTooltip] = useState<ScatterPoint | null>(null)
   const hanziDefinition = tooltip && dictionary[tooltip.id]
+  // Derivational variants folded into this node by the pipeline's variant merge;
+  // `data` is an open bag, so narrow before trusting it.
+  const variants = Array.isArray(tooltip?.data?.variants)
+    ? (tooltip.data.variants as string[])
+    : []
 
   // Delaunay lookup shared by mouse hover and touch tap/hold, so the target-node
   // exclusion and distance cutoff below apply identically to both input paths.
@@ -421,6 +426,11 @@ function CanvasScatterPlot({
         ) : (
           <div className="rounded-sm bg-white p-2 text-sm shadow-xl ring-1 ring-gray-200">
             {tooltip?.id}
+            {variants.length > 0 && (
+              <span className="ml-1 text-gray-500">
+                + {variants.join(', ')}
+              </span>
+            )}
           </div>
         )}
       </VirtualTooltip>

@@ -51,6 +51,37 @@ class Pooler:
         if word in self._keep:
             self._stacks.setdefault(word, []).append(vec)
 
+    def merge(self, alias: dict[str, str]) -> None:
+        """Fold each aliased word's accumulator into its surviving label.
+
+        Exact, not an approximation: every mode's accumulator is associative
+        over the occurrence set, so folding two *pooled* accumulators gives the
+        same result as having pooled the union of their occurrences in the first
+        place. ``max`` is an element-wise max of running maxima, ``mean`` a sum
+        of running sums with summed counts, and ``none`` keeps whichever
+        first-seen vector belongs to the surviving label.
+        """
+        for word, primary in alias.items():
+            vec = self._acc.pop(word, None)
+            count = self._count.pop(word, 0)
+            stack = self._stacks.pop(word, None)
+            if vec is None:
+                continue
+            current = self._acc.get(primary)
+            if current is None:
+                self._acc[primary] = vec
+                self._count[primary] = count
+            elif self._mode == "max":
+                self._acc[primary] = np.maximum(current, vec)
+                self._count[primary] += count
+            elif self._mode == "mean":
+                self._acc[primary] = current + vec
+                self._count[primary] += count
+            else:               # "none": the surviving label's own vector wins
+                self._count[primary] += count
+            if stack:
+                self._stacks.setdefault(primary, []).extend(stack)
+
     def matrix(self) -> tuple[list[str], np.ndarray]:
         """``(labels, matrix)`` where ``matrix[i]`` is the pooled vector for
         ``labels[i]``. Words are sorted for stable ordering."""

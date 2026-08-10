@@ -22,6 +22,10 @@ export const EmbeddingNodeSchema = z.object({
   pagerank: z.number().default(0),
   /** Eigenvector centrality on the weighted similarity graph. */
   eigenvector: z.number().default(0),
+  /** Derivational variants folded into this node (`inspiration` carrying
+   * `inspire`). Empty when the pipeline's `merge_variants` is off, and always
+   * empty for targets, which never merge. */
+  variants: z.array(z.string()).default([]),
 })
 
 export const EmbeddingDatasetSchema = z.object({

@@ -24,7 +24,7 @@ the old CJK-non-stopword behaviour) and the ``stopwords`` set (English uses spaC
 from __future__ import annotations
 
 from collections import Counter
-from collections.abc import Callable, Iterable, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
 from typing import Protocol, NamedTuple
 from models import Source
@@ -95,6 +95,29 @@ def content_key(
     return lemma if is_content else None
 
 
+def content_frequencies(
+    sources: Iterable[SourceDoc],
+    match_fn: MatchFn | None = None,
+    content_pos: set[str] | None = CONTENT_POS,
+    stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
+) -> Counter[str]:
+    """Corpus occurrence count per content key.
+
+    ``alias`` re-keys each hit to its surviving label, for recounting after a
+    variant merge (see ``embeddings.families``). Occurrences sum exactly under a
+    merge, unlike document frequencies, but going through the same path keeps the
+    two counts consistent.
+    """
+    freq: Counter[str] = Counter()
+    for source in sources:
+        for token in source.doc:
+            key = content_key(token, match_fn, content_pos, stopwords)
+            if key is not None:
+                freq[alias.get(key, key) if alias else key] += 1
+    return freq
+
+
 def build_vocab(
     sources: Iterable[SourceDoc],
     min_freq: int,
@@ -103,12 +126,7 @@ def build_vocab(
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> set[str]:
     """Content-word vocabulary: keys occurring >= ``min_freq``."""
-    freq: Counter[str] = Counter()
-    for source in sources:
-        for token in source.doc:
-            key = content_key(token, match_fn, content_pos, stopwords)
-            if key is not None:
-                freq[key] += 1
+    freq = content_frequencies(sources, match_fn, content_pos, stopwords)
     return {k for k, c in freq.items() if c >= min_freq}
 
 
@@ -117,13 +135,21 @@ def document_frequencies(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
 ) -> Counter[str]:
     """Document frequency per content key: how many distinct sources (documents)
-    each key appears in (each source counted once, regardless of within-doc count)."""
+    each key appears in (each source counted once, regardless of within-doc count).
+
+    ``alias`` re-keys each hit to its surviving label. Document frequency must be
+    *recomputed* this way after a variant merge rather than summed — one article
+    can contain both ``inspire`` and ``inspiration``, and summing would count it
+    twice.
+    """
     df: Counter[str] = Counter()
     for source in sources:
         keys = {
-            key for token in source.doc
+            alias.get(key, key) if alias else key
+            for token in source.doc
             if (key := content_key(token, match_fn, content_pos, stopwords))
             is not None
         }

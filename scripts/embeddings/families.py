@@ -180,6 +180,23 @@ def stem_pairs(vocab: Iterable[str]) -> set[Pair]:
 # Gating
 # ---------------------------------------------------------------------------
 
+def candidate_families(
+    vocab: Iterable[str], extra_pairs: Iterable[Pair] = ()
+) -> list[list[str]]:
+    """Connected groups of morphologically related words, before any gating.
+
+    Exposed separately from :func:`merge_map` so the threshold can be swept
+    offline: these groups plus their pairwise cosines are everything the gate
+    consumes, and dumping them lets ``tools/family_diagnostics.py`` reproduce any
+    threshold's outcome exactly, in the real analysis space, without re-running
+    the embedder.
+    """
+    words = set(vocab)
+    pairs = derivational_pairs(words)
+    pairs |= {_pair(a, b) for a, b in extra_pairs if a in words and b in words}
+    return _components(pairs)
+
+
 def _components(pairs: Iterable[Pair]) -> list[list[str]]:
     """Connected components of the candidate graph (union-find)."""
     parent: dict[str, str] = {}
@@ -255,15 +272,13 @@ def merge_map(
         return float(unit[index[a]] @ unit[index[b]])
 
     vocab = {label for label in labels if label not in exclude}
-    pairs = derivational_pairs(vocab)
-    pairs |= {_pair(a, b) for a, b in extra_pairs if a in vocab and b in vocab}
 
     def rank(word: str) -> tuple[int, int, str]:
         return (-(counts or {}).get(word, 0), len(word), word)
 
     alias: dict[str, str] = {}
     variants: dict[str, list[str]] = {}
-    for family in _components(pairs):
+    for family in candidate_families(vocab, extra_pairs):
         for cluster in _complete_linkage(family, sim, threshold):
             if len(cluster) < 2:
                 continue
