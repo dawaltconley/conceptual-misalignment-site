@@ -1,14 +1,15 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
-import type { Size, Range } from '@lib/graphs'
+import type { Size, Range, Line } from '@lib/graphs'
 import { useState, useEffect, useRef, forwardRef, type ReactNode } from 'react'
 import useSize from '@lib/browser/hooks/useSize'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
+import { isPoint } from '@lib/graphs'
 import HanziNode from '@components/HanziNode'
 
-const COLLISION_RADIUS = 12
+const COLLISION_RADIUS = 8
 
 export interface NetworkProps {
   data: WeightedNodeLinkData
@@ -21,8 +22,8 @@ export interface NetworkProps {
 export default function Network({
   data,
   centralNodeId,
-  actualEdgeWeightRange,
-  targetEdgeWeightRange,
+  actualEdgeWeightRange = { min: 1, max: 3 },
+  targetEdgeWeightRange = { min: 1, max: 5 },
   dictionary = {},
 }: NetworkProps): JSX.Element {
   const [nodes, setNodes] = useState<Node[]>([])
@@ -41,6 +42,28 @@ export default function Network({
     )
     const links = data.edges.map<Link>((e) => ({ ...e, value: e.weight }))
 
+    const toLinkDistance = getNormalizer(
+      {
+        min: Math.min(...links.map((l) => l.value)),
+        max: Math.max(...links.map((l) => l.value)),
+      },
+      {
+        min: 40,
+        max: 1,
+      },
+    )
+
+    const toLinkStrength = getNormalizer(
+      {
+        min: Math.min(...links.map((l) => l.value)),
+        max: Math.max(...links.map((l) => l.value)),
+      },
+      {
+        min: 0.7,
+        max: 1,
+      },
+    )
+
     const simulation = d3
       .forceSimulation(nodes)
       .force(
@@ -48,11 +71,15 @@ export default function Network({
         d3
           .forceLink<Node, Link>(links)
           .id((d) => d.id)
-          .distance(8),
+          .distance((d) => toLinkDistance(d.value))
+          .strength((d) => toLinkStrength(d.value)),
       )
-      .force('collide', d3.forceCollide().radius(COLLISION_RADIUS))
-      .force('charge', d3.forceManyBody().strength(-1))
-      .force('center', d3.forceCenter(50, 50))
+      .force(
+        'collide',
+        d3.forceCollide().radius(COLLISION_RADIUS).strength(0.2),
+      )
+      .force('charge', d3.forceManyBody().strength(-0.4))
+      .force('center', d3.forceCenter(50, 50).strength(0.1))
       .alphaDecay(0.05)
       .velocityDecay(0.5)
       .on('tick', () => setNodes([...nodes]))
@@ -67,11 +94,11 @@ export default function Network({
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    drawEdges(getEdges(nodes, data.edges), canvas, {
-      canvasSize: size,
-      actualEdgeWeightRange,
-      targetEdgeWeightRange,
+    const edges = getEdges(nodes, data.edges, {
+      toWidth: getNormalizer(actualEdgeWeightRange, targetEdgeWeightRange),
+      toOpacity: getNormalizer(actualEdgeWeightRange, { min: 0, max: 1 }),
     })
+    drawEdges(edges, canvas, size)
   }, [nodes, data, size])
 
   function handlePointerDown(
@@ -183,45 +210,43 @@ interface Link extends d3.SimulationLinkDatum<Node> {
   value: number
 }
 
-interface Edge {
-  x1: number
-  y1: number
-  x2: number
-  y2: number
-  weight?: number
+interface Edge extends Line {
+  lineWidth: number
+  opacity: number
+}
+
+interface GetEdgesOpts {
+  toWidth?: (n: number) => number
+  toOpacity?: (n: number) => number
 }
 
 function getEdges(
   nodes: Node[],
   edges: SimpleEdge<'source', 'target', { weight: number }>[],
+  { toWidth = (n) => n, toOpacity = (n) => n }: GetEdgesOpts = {},
 ): Edge[] {
   const nodeMap = new Map(nodes.map((n) => [n.id, n]))
   return edges
     .map<Edge | null>(({ source, target, weight }) => {
-      const { x: x1, y: y1 } = nodeMap.get(source) || {}
-      const { x: x2, y: y2 } = nodeMap.get(target) || {}
-      if (!x1 || !x2 || !y1 || !y2) {
+      const start = nodeMap.get(source) || {}
+      const end = nodeMap.get(target) || {}
+      if (!isPoint(start) || !isPoint(end)) {
         return null
       }
-      return { x1, y1, x2, y2, weight }
+      return {
+        start,
+        end,
+        lineWidth: toWidth(weight),
+        opacity: toOpacity(weight),
+      }
     })
     .filter(isNotEmpty)
-}
-
-interface DrawEdgesOpts {
-  canvasSize?: Size
-  actualEdgeWeightRange?: Range
-  targetEdgeWeightRange?: Range
 }
 
 function drawEdges(
   edges: Edge[],
   canvas: HTMLCanvasElement,
-  {
-    canvasSize,
-    actualEdgeWeightRange,
-    targetEdgeWeightRange,
-  }: DrawEdgesOpts = {},
+  canvasSize?: Size,
 ): void {
   const { width = canvas.width, height = canvas.height } = canvasSize || {}
   const dpr = window.devicePixelRatio || 1
@@ -238,26 +263,20 @@ function drawEdges(
   const toX = (v: number) => (v / 100) * width
   const toY = (v: number) => (v / 100) * height
 
-  const { min: rMin = 1, max: rMax = 3 } = actualEdgeWeightRange || {}
-  const { min: dMin = 1, max: dMax = 5 } = targetEdgeWeightRange || {}
-
-  const toWeight = (nodeWeight: number): number =>
-    dMin + ((nodeWeight - rMin) * (dMax - dMin)) / (rMax - rMin)
-
-  const toOpacity = (nodeWeight: number): number => {
-    const opacity = (nodeWeight - rMin) / (rMax - rMin)
-    return Math.min(1, Math.max(0, opacity))
-  }
-
-  for (const { x1, y1, x2, y2, weight = rMin } of edges) {
+  for (const { start, end, lineWidth, opacity } of edges) {
     ctx.beginPath()
     ctx.strokeStyle = '#9ca3af'
-    // ctx.globalAlpha = Math.min(1, Math.max(0, 0.3 * weight))
-    // ctx.lineWidth = Math.log2(weight + 1) * 2
-    ctx.globalAlpha = toOpacity(weight)
-    ctx.lineWidth = toWeight(weight)
-    ctx.moveTo(toX(x1), toY(y1))
-    ctx.lineTo(toX(x2), toY(y2))
+    ctx.globalAlpha = Math.min(1, Math.max(0, opacity))
+    ctx.lineWidth = lineWidth
+    ctx.moveTo(toX(start.x), toY(start.y))
+    ctx.lineTo(toX(end.x), toY(end.y))
     ctx.stroke()
   }
+}
+
+/** returns a function which normalizes a value from an actual range within a target range */
+function getNormalizer(actual: Range, target: Range): (n?: number) => number {
+  return (n = actual.min) =>
+    target.min +
+    ((n - actual.min) * (target.max - target.min)) / (actual.max - actual.min)
 }

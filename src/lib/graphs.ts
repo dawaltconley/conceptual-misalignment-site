@@ -8,6 +8,18 @@ export interface Point {
   y: number
 }
 
+export function isPoint(p: object): p is Point {
+  return (
+    p &&
+    'x' in p &&
+    'y' in p &&
+    typeof p.x === 'number' &&
+    typeof p.y === 'number' &&
+    !Number.isNaN(p.x) &&
+    !Number.isNaN(p.y)
+  )
+}
+
 export class Position implements Point, Size {
   width: number
   height: number
@@ -41,4 +53,9 @@ export function getDistSq(a: Point, b: Point): number {
 export interface Range {
   min: number
   max: number
+}
+
+export interface Line {
+  start: Point
+  end: Point
 }
