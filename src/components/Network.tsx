@@ -1,5 +1,6 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
+import type { Size, Range } from '@lib/graphs'
 import { useState, useEffect, useRef, forwardRef, type ReactNode } from 'react'
 import useSize from '@lib/browser/hooks/useSize'
 import clsx from 'clsx'
@@ -12,12 +13,16 @@ const COLLISION_RADIUS = 12
 export interface NetworkProps {
   data: WeightedNodeLinkData
   centralNodeId: NodeId
+  actualEdgeWeightRange?: Range
+  targetEdgeWeightRange?: Range
   dictionary?: Dictionary
 }
 
 export default function Network({
   data,
   centralNodeId,
+  actualEdgeWeightRange,
+  targetEdgeWeightRange,
   dictionary = {},
 }: NetworkProps): JSX.Element {
   const [nodes, setNodes] = useState<Node[]>([])
@@ -62,7 +67,11 @@ export default function Network({
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    drawEdges(getEdges(nodes, data.edges), canvas, size)
+    drawEdges(getEdges(nodes, data.edges), canvas, {
+      canvasSize: size,
+      actualEdgeWeightRange,
+      targetEdgeWeightRange,
+    })
   }, [nodes, data, size])
 
   function handlePointerDown(
@@ -199,12 +208,22 @@ function getEdges(
     .filter(isNotEmpty)
 }
 
+interface DrawEdgesOpts {
+  canvasSize?: Size
+  actualEdgeWeightRange?: Range
+  targetEdgeWeightRange?: Range
+}
+
 function drawEdges(
   edges: Edge[],
   canvas: HTMLCanvasElement,
-  size?: { width: number; height: number },
+  {
+    canvasSize,
+    actualEdgeWeightRange,
+    targetEdgeWeightRange,
+  }: DrawEdgesOpts = {},
 ): void {
-  const { width = canvas.width, height = canvas.height } = size || {}
+  const { width = canvas.width, height = canvas.height } = canvasSize || {}
   const dpr = window.devicePixelRatio || 1
   canvas.width = width * dpr
   canvas.height = height * dpr
@@ -219,11 +238,24 @@ function drawEdges(
   const toX = (v: number) => (v / 100) * width
   const toY = (v: number) => (v / 100) * height
 
-  for (const { x1, y1, x2, y2, weight = 1 } of edges) {
+  const { min: rMin = 1, max: rMax = 3 } = actualEdgeWeightRange || {}
+  const { min: dMin = 1, max: dMax = 5 } = targetEdgeWeightRange || {}
+
+  const toWeight = (nodeWeight: number): number =>
+    dMin + ((nodeWeight - rMin) * (dMax - dMin)) / (rMax - rMin)
+
+  const toOpacity = (nodeWeight: number): number => {
+    const opacity = (nodeWeight - rMin) / (rMax - rMin)
+    return Math.min(1, Math.max(0, opacity))
+  }
+
+  for (const { x1, y1, x2, y2, weight = rMin } of edges) {
     ctx.beginPath()
     ctx.strokeStyle = '#9ca3af'
-    ctx.globalAlpha = Math.min(1, Math.max(0, 0.3 * weight))
-    ctx.lineWidth = Math.log2(weight + 1) * 2
+    // ctx.globalAlpha = Math.min(1, Math.max(0, 0.3 * weight))
+    // ctx.lineWidth = Math.log2(weight + 1) * 2
+    ctx.globalAlpha = toOpacity(weight)
+    ctx.lineWidth = toWeight(weight)
     ctx.moveTo(toX(x1), toY(y1))
     ctx.lineTo(toX(x2), toY(y2))
     ctx.stroke()
