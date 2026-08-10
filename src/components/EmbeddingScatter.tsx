@@ -16,6 +16,8 @@ import {
 } from './ScatterPlot'
 import ScatterPlot from './CanvasScatterPlot'
 import ScatterLegend, { type LegendLabel } from './ScatterLegend'
+import CommunityDialog from './CommunityDialog'
+import { Dialog } from '@base-ui/react'
 import * as d3 from 'd3'
 
 type Layout = 'pca' | 'tsne'
@@ -121,25 +123,29 @@ export default function EmbeddingScatter({
     [data, dictionary],
   )
 
-  const communityLegend = useMemo<LegendLabel[]>(() => {
-    const communities: EmbeddingNode[][] = []
-    data?.nodes.forEach((n) => {
-      communities[n.community] ??= []
-      communities[n.community].push(n)
-    })
-    return communities.map<LegendLabel>((nodes, community) => {
-      // Rank members by weighted degree (strength) so the tightest/most
-      // central words in each community come first; alphabetical is noise.
-      const terms = [...nodes]
-        .sort((a, b) => b.strength - a.strength)
-        .map((n) => n.id)
-      return {
+  // Rank members by weighted degree (strength) so the tightest/most
+  // central words in each community come first; alphabetical is noise.
+  const communities = useMemo<EmbeddingNode[][]>(
+    () =>
+      data?.nodes
+        .toSorted((a, b) => b.strength - a.strength)
+        .reduce<EmbeddingNode[][]>((communities, n) => {
+          communities[n.community] ??= []
+          communities[n.community].push(n)
+          return communities
+        }, []) || [],
+    [data],
+  )
+  const communityLegend = useMemo<LegendLabel[]>(
+    () =>
+      communities.map<LegendLabel>((nodes, community) => ({
         id: community.toString(),
         color: getColor(community),
-        description: `C${community}: ${terms.join(', ')}`,
-      }
-    })
-  }, [data])
+        description: `C${community}: ${nodes.map((n) => n.id).join(', ')}`,
+        dialog: Dialog.createHandle(),
+      })),
+    [communities],
+  )
 
   // t-SNE runs in a worker: (re)start on entering t-SNE / data / perplexity
   // change; stop on leaving. The worker streams back the evolving solution.
@@ -199,6 +205,21 @@ export default function EmbeddingScatter({
           }
         />
       </div>
+
+      {communityLegend.map(({ id, dialog }) => {
+        const nodes = communities[Number(id)]
+        return (
+          nodes && (
+            <CommunityDialog
+              title={`Louvain community C${id}`}
+              description="The Louvain communities, with elements sorted by embedding strength."
+              nodes={nodes}
+              handle={dialog}
+              dictionary={dictionary}
+            />
+          )
+        )
+      })}
 
       <TagsCombobox
         className="mt-4"

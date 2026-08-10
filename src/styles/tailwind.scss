@@ -263,6 +263,32 @@
     }
   }
 
+  .dialog__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: theme('colors.gray.900');
+    opacity: 50%;
+  }
+
+  .dialog__viewport {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: safe center;
+    inset: 0;
+    padding: theme('spacing.8');
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .dialog__popup {
+    background-color: theme('colors.white');
+    border-radius: theme('borderRadius.md');
+    // max-width: min(100%, theme('maxWidth.prose'));
+    padding: theme('spacing.4');
+    width: max(auto, theme('width.96'), 50%);
+  }
+
   .card {
     @apply overflow-hidden rounded-sm bg-white shadow;
 
