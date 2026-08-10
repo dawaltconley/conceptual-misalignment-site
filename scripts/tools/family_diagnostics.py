@@ -138,15 +138,34 @@ def main() -> None:
 
     merged_pairs = {(a, b) if a < b else (b, a)
                     for c in merges for i, a in enumerate(c) for b in c[i + 1:]}
+    # Two different reasons a candidate pair does not merge, worth telling apart:
+    # below the floor, or above it but split because a THIRD family member fails
+    # complete linkage (`tolerance`/`toleration` at 0.576 loses to `tolerant`).
+    # Only the first kind is fixed by lowering the threshold.
     rejected = sorted(((s, a, b) for (a, b), s in cosine.items()
                        if (a, b) not in merged_pairs), reverse=True)
-    print(f"\nclosest candidates the gate REJECTED (top 20 of {len(rejected)}):")
-    lines += ["", f"## Rejected candidates at cosine >= {show}", "",
-              "Morphologically related but kept apart — the near-misses to read "
-              "when choosing a threshold.", "", "| cosine | a | b |", "|---|---|---|"]
-    for sim, a, b in rejected[:20]:
+    by_linkage = [r for r in rejected if r[0] >= show]
+    by_floor = [r for r in rejected if r[0] < show]
+
+    print(f"\nsplit by complete linkage despite clearing {show} "
+          f"({len(by_linkage)}) — a third family member failed:")
+    for sim, a, b in by_linkage[:10]:
         print(f"  {sim:.3f}  {a} / {b}")
-    for sim, a, b in rejected[:60]:
+    print(f"\nclosest pairs below the floor (top 15 of {len(by_floor)}):")
+    for sim, a, b in by_floor[:15]:
+        print(f"  {sim:.3f}  {a} / {b}")
+
+    lines += ["", f"## Not merged at cosine >= {show}", "",
+              f"**Split by complete linkage** ({len(by_linkage)}) — the pair "
+              f"clears the floor, but a third member of its family does not, so "
+              f"the cluster could not absorb it. Lowering the threshold does not "
+              f"necessarily fix these.", "", "| cosine | a | b |", "|---|---|---|"]
+    for sim, a, b in by_linkage[:40]:
+        lines.append(f"| {sim:.3f} | {a} | {b} |")
+    lines += ["", f"**Below the floor** ({len(by_floor)}) — the near-misses to "
+              f"read when choosing a threshold.", "",
+              "| cosine | a | b |", "|---|---|---|"]
+    for sim, a, b in by_floor[:60]:
         lines.append(f"| {sim:.3f} | {a} | {b} |")
 
     out = args.out or (config.ANALYSIS / args.corpus / "family_diagnostics.md")
