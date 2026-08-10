@@ -160,12 +160,71 @@ morphologically entangled. Within-family cosine: median 0.412, p75 0.517, p90
 | 0.60 | 129 | 136 | 3815 |
 | 0.70 | 29 | 31 | 3920 |
 
-**The anchor that makes this choosable:** the most similar pair of distinct
-*target renderings* — `benevolence`/`humaneness`, two English words for the same
-character 仁 — sits at **0.322**, and no target pair anywhere exceeds **0.335**.
-So any floor above ~0.40 guarantees every merge is tighter than any two words the
-project itself treats as different concepts. That is the principled floor; above
-it the choice is how much clutter to trade for caution.
+### The anchor: what "no target pair exceeds 0.335" means
+
+A cosine threshold is meaningless in the abstract. 0.45 sounds low if you are
+used to raw sentence-embedding similarities, which cluster around 0.8+; this
+space is mean-centred *and* debiased with all-but-the-top, which deliberately
+strips the common direction that inflates those numbers. So "is 0.45 high?" can
+only be answered against something measured in **this** space.
+
+The project supplies a natural yardstick — the English words the five Chinese
+terms get translated as:
+
+| term | renderings |
+|---|---|
+| 仁 | benevolence, humaneness, humanity |
+| 義 | righteousness, justice, meaning, morality |
+| 禮 | ritual, propriety, etiquette, ~~social norms~~ |
+| 智 | knowledge, wisdom, intelligence |
+| 信 | trustworthiness, faith, sincerity |
+
+`social norms` never reaches the embedding vocabulary (it is also reported
+absent from the similarity graph each run), leaving **16 targets** in the space.
+
+Every one of these is a word the project treats as a **distinct concept** —
+telling them apart is the research question. Their 120 pairwise cosines
+(16 × 15 / 2) are already computed in the analysis space and written to
+`analysis/sep/cosine_targets.csv` on an `--artifacts` run. The distribution:
+
+| | cosine | pair |
+|---|---|---|
+| max | **0.335** | justice / propriety |
+| 2nd | 0.322 | benevolence / humaneness |
+| 3rd | 0.296 | justice / morality |
+| median | 0.117 | — |
+| min | −0.120 | — |
+
+"No target pair exceeds 0.335" means: **across all 120 pairs, the two most
+similar words the project considers different concepts sit at 0.335.** The
+runner-up is more pointed still — `benevolence` and `humaneness` are two English
+renderings of the *same character* 仁, the pair with the strongest possible claim
+to being near-synonyms, and they only reach 0.322.
+
+That gives the threshold a floor with an argument behind it. Setting
+`merge_threshold` above ~0.40 guarantees that **every merge the pipeline makes is
+tighter than any pair of words the project itself declines to identify.** If the
+gate ever merged something at 0.30, that merge would be looser than
+`benevolence`/`humaneness` — words nobody would want collapsed into one point.
+At 0.45 there is comfortable margin above that line.
+
+The comparison also shows the candidates are not marginal: within-family
+candidate pairs have a **median of 0.412**, i.e. the typical morphological
+relative is already more similar than *all but two* of the 120 distinct-concept
+pairs.
+
+Two honest limits on the argument:
+
+- It is a **necessary, not sufficient** condition. Clearing 0.335 does not prove
+  two words are one lexeme; it only rules out merges looser than the project's
+  own "clearly different concepts" band. The morphological gate does the actual
+  work of establishing they are the same word — this just bounds how loose the
+  cosine half is allowed to be.
+- The 16 targets are a small and non-random sample, chosen for being
+  *translations of related virtue terms*, so they are probably more similar to
+  each other than 16 arbitrary words would be. That biases the yardstick
+  *conservative* (a ceiling drawn from unusually-related words is, if anything,
+  too high), which is the safe direction for a floor.
 
 0.45 was chosen because the floor stays clean there (`famous`/`fame`,
 `equal`/`equality`, `crime`/`criminal`, `grow`/`growth`, `sympathy`/`sympathize`)

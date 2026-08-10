@@ -61,6 +61,45 @@ form. That flags 43 lemmas; 9 were errors and 34 were correct lemmas of verbs
 whose base form simply never occurs (`make` from `makes`/`making`, `say`,
 `take`, `being` from `beings`). After the fix, only the 34 correct ones remain.
 
+### Verifying these are artifacts, not corpus vocabulary
+
+`specie` and `sens` are both real English/French words, so "spaCy invented it"
+needed checking against the raw article text rather than assumed. Counting
+whole-word matches over the 182 fetched SEP articles, before any parsing:
+
+| form | occurrences in raw SEP text | verdict |
+|---|---|---|
+| `specie` | **0** | pure artifact of `species` (260) |
+| `sens` | **2** | both French; see below |
+| `ture` | **0** | pure artifact of `turing` (586) |
+| `logo` | **0** | pure artifact of `logos` (37) |
+
+The two `sens` hits are a French title in the *Antoine Arnauld* entry
+("…du bon sens, written the year before his death…"). They are not the source of
+the 242-occurrence `sens` vocabulary entry, which came entirely from the surface
+form `senses` (249). Independently, spaCy lemmatizes a genuine `sens` token to
+**`sen`**, not `sens`, so those two occurrences never landed in that bucket — and
+at n=2 they are far below `min_freq=20` anyway.
+
+Confirming spaCy is the source, directly:
+
+```
+"Several species evolved together."      species -> specie   (NOUN)
+"The species is endangered."             species -> species  (NOUN)
+"He distinguishes two senses of X."      senses  -> sens     (NOUN)
+```
+
+Note `species` is lemmatized inconsistently — correct when the tagger reads it as
+singular, back-formed when it reads plural. That is why 207 of 260 occurrences
+were affected rather than all of them.
+
+**Why keying on the surface form makes this safe regardless.** The table maps
+`senses -> sense`, not `sens -> sense`. A genuine `sens` or `specie` token in the
+corpus is therefore never rewritten — the fix can only ever fire on the surface
+forms named, so it cannot damage a real word that happens to look like one of
+spaCy's mistakes. This is the same property that lets `aesthetics -> aesthetics`
+coexist with the untouched adjective `aesthetic`.
+
 `turing` is the largest single item at 421 occurrences — worth deciding whether
 it belongs in the vocabulary at all, since it is a proper noun that escaped the
 `PROPN` filter. Left in for now; add to `stopwords/english.conf` to drop it.
