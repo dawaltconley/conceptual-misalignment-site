@@ -256,29 +256,66 @@ The counter-example resolved too, and by the intended mechanism. Family 34 is
 `know ← knowing, known` and `knower ← knowable`, leaving `know`/`knowable` apart
 at 0.4196. `knowledge` is a target and never entered the running.
 
-### Open judgment call: which member wins the label
+### Which member wins the label: prefer the noun
 
-The surviving label is the most frequent member, which means an adjective can
-beat the noun a reader would look for. Four of the discipline names protected in
-[[spacy-lemma-exceptions]] get re-folded into their adjective:
+Ranking by raw frequency alone picked the **adjective** in any noun/adjective
+family — the corpus says `ethical` more often than `ethics` — so four of the
+discipline names protected in [[spacy-lemma-exceptions]] came back labelled as
+adjectives. `merge_map` therefore ranks by **preferred POS → frequency →
+shortest → alphabetical**, with `prefer_pos` defaulting to `{"NOUN"}`:
 
-| merged as | absorbing |
+| before | after |
 |---|---|
-| `ethical` | `ethics` |
-| `mathematical` | `mathematics` |
-| `metaphysical` | `metaphysics` |
-| `semantic` | `semantics` |
+| `ethical ← ethics` | `ethics ← ethical` |
+| `mathematical ← mathematics` | `mathematics ← mathematical, mathematician` |
+| `metaphysical ← metaphysics` | `metaphysics ← metaphysical` |
+| `semantic ← semantics` | `semantics ← semantic` |
 
-(Eleven others — `aesthetics`, `politics`, `physics`, `economics`, `linguistics`,
-`pragmatics`, `hermeneutics`, `metaethics`, `metasemantics`, `mechanics`,
-`robotics` — survive as their own nodes.)
+482 of 507 merged families (95%) are now named by a noun. The other 25 contain no
+noun at all and fall back to frequency (`allege ← alleged`, `embody ← embodied`).
+The preference is not restricted to `-ics` families, so verb/noun pairs flip too:
+`feeling ← feel`, `suffering ← suffer`, `understanding ← understand`,
+`punishment ← punish`.
 
-This is not a regression of the lemma fix. Before it, spaCy silently pooled
-`ethics` into `ethic`, a *different* word, with no record. Now `ethics` is
-explicitly grouped with a genuine relative, the vector is a correct pooling of
-both, and the tooltip names what was absorbed. But `ethical ← ethics` still reads
-oddly on a philosophy scatter, where `ethics` is the more salient term. If that
-matters, bias `merge_map`'s `rank` toward nouns rather than raw frequency.
+**Membership is untouched** — same 3393 nodes, 507 merges, 558 absorbed as the
+frequency-ranked run. POS decides only which member is named.
+
+The POS input is **type-level** (`occurrences.dominant_pos`), not per-token, and
+that distinction matters. A vocabulary entry *is* a type: `study` may be tagged
+`NOUN` in 200 occurrences and `VERB` in 150, so no single `Token` represents it
+and choosing one would make the label depend on which occurrence was sampled.
+Some keys are not surface tokens at all — target labels come from a `Rendering`
+glob, so `benevolence` can be keyed from the surface `benevolent`. Passing a
+`dict[str, str]` also keeps `embeddings/` free of a spaCy dependency for what
+amounts to one scalar per type.
+
+### Greedy linkage is order-dependent, and that is fine here
+
+`_complete_linkage` merges the cluster pair with the highest *worst* cross-pair
+similarity, repeatedly. Two consequences worth being precise about:
+
+- A word joins a cluster iff it clears the threshold against **every** member. So
+  a third word C that is similar enough to both A and B *does* join `{A,B}` —
+  that case is not a failure mode.
+- But an early strong pairing can foreclose a better partition. At τ = 0.50 the
+  tolerance family splits as `{tolerance, tolerant}` (greedy takes the strongest
+  edge, 0.604) when `{tolerance, toleration} + {tolerant, tolerate}` would have
+  merged two pairs instead of one.
+
+Families are tiny (max 8 members), so the exact minimum clique partition is
+cheap to compute. Measured over all 771 families it recovers **one extra word**
+at τ = 0.45 (560 vs 559), one at 0.50, and none at 0.60 — most families are size
+2, where greedy and optimal coincide. Not worth the complexity, and "fewest
+clusters" is anyway a questionable objective: greedy-by-strongest-pair prefers
+merging the *most similar* things, which is the better bias when the goal is
+correct merges rather than many merges.
+
+Note also that pooling is **not** iterative. `merge_map` decides complete
+membership first and `Pooler.merge` folds each family in one pass; element-wise
+max is associative and commutative, so the result equals the max over all members
+simultaneously. And every similarity comparison during clustering reads the
+original pre-merge matrix, so no merged vector ever feeds back into a later
+decision.
 
 ## Knobs
 
