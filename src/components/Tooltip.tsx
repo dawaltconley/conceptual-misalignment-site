@@ -13,6 +13,20 @@ export interface TooltipProps {
   children: ReactNode
 }
 
+// Nothing in this app renders `Tooltip.Trigger` — `open` is always driven
+// externally by useTooltipGesture — so Base UI never registers a reference
+// element to exempt from its outside-press check. That makes it treat a
+// press on the anchor itself (the trigger that just opened the tooltip, or a
+// touch tap's synthetic post-touchend mousedown/click landing on the same
+// element) as an outside press, closing the tooltip a frame after it opened.
+function containsEventTarget(anchor: TooltipAnchor, target: EventTarget | null) {
+  if (!(target instanceof Node)) return false
+  if (anchor instanceof Node) return anchor.contains(target)
+  if (anchor && typeof anchor === 'object' && 'current' in anchor)
+    return anchor.current instanceof Node ? anchor.current.contains(target) : false
+  return false
+}
+
 /**
  * Base UI wiring only — no gesture/content knowledge. `anchor` accepts a real
  * element, a ref, or a Floating-UI virtual element, so this works for both a
@@ -30,8 +44,10 @@ export default function Tooltip({
     <BaseTooltip.Root
       open={open}
       onOpenChange={(next, eventDetails) => {
-        if (!next && eventDetails.reason === 'outside-press')
+        if (!next && eventDetails.reason === 'outside-press') {
+          if (containsEventTarget(anchor, eventDetails.event.target)) return
           onDismiss(eventDetails.event)
+        }
       }}
     >
       <BaseTooltip.Portal>
