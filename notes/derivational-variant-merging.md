@@ -184,6 +184,43 @@ it is what stops `know`-`knowable`-`knowledge` chaining — but it means lowerin
 the threshold does not necessarily capture a given pair. `family_diagnostics.py`
 reports these separately from pairs that are simply below the floor.
 
+## Result of the shipped run (τ = 0.45)
+
+`3951 -> 3393` nodes: **507 merges absorbing 558 words, 14.1% of the vocabulary**.
+No target merged, and no absorbed word survives as a stray node. Communities
+dropped 21 → 20 and graph edges 21056 → 18206, as expected from a smaller vocab.
+
+The motivating case resolved: `inspire` now carries `inspiration` (0.4714).
+
+The counter-example resolved too, and by the intended mechanism. Family 34 is
+`{know, knowable, knower, knowing, known}`; the gate split it into
+`know ← knowing, known` and `knower ← knowable`, leaving `know`/`knowable` apart
+at 0.4196. `knowledge` is a target and never entered the running.
+
+### Open judgment call: which member wins the label
+
+The surviving label is the most frequent member, which means an adjective can
+beat the noun a reader would look for. Four of the discipline names protected in
+[[spacy-lemma-exceptions]] get re-folded into their adjective:
+
+| merged as | absorbing |
+|---|---|
+| `ethical` | `ethics` |
+| `mathematical` | `mathematics` |
+| `metaphysical` | `metaphysics` |
+| `semantic` | `semantics` |
+
+(Eleven others — `aesthetics`, `politics`, `physics`, `economics`, `linguistics`,
+`pragmatics`, `hermeneutics`, `metaethics`, `metasemantics`, `mechanics`,
+`robotics` — survive as their own nodes.)
+
+This is not a regression of the lemma fix. Before it, spaCy silently pooled
+`ethics` into `ethic`, a *different* word, with no record. Now `ethics` is
+explicitly grouped with a genuine relative, the vector is a correct pooling of
+both, and the tooltip names what was absorbed. But `ethical ← ethics` still reads
+oddly on a philosophy scatter, where `ethics` is the more salient term. If that
+matters, bias `merge_map`'s `rank` toward nouns rather than raw frequency.
+
 ## Knobs
 
 - `Pipeline.merge_variants` — off by default; on for SEP. English-only, since
