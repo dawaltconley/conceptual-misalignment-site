@@ -51,7 +51,8 @@ TERMS: list[Term] = [
         Rendering('ritual', 'ritual*'),
         Rendering('propriety'),
         Rendering('etiquette', 'etiquette*'),
-        Rendering('social norms', 'social norm*'),
+        Rendering('mores'),
+        # Rendering('social norms', 'social norm*'),
     )),
     Term('智', (
         Rendering('knowledge', 'knowledge*'),
@@ -65,6 +66,7 @@ TERMS: list[Term] = [
     )),
     # Term('性', (
     #     Rendering('nature', 'nature*', 'human nature'),
+    #     Rendering('innateness', 'innate*'),
     #     Rendering('character', 'character*'),
     #     Rendering('predisposition', 'predispos*'),
     # )),
@@ -133,6 +135,7 @@ MENGZI_PIPELINE = Pipeline(
     out_dir=CTEXT,
     min_freq=5,
     cooccurrence_min_freq=3,
+    sim_network="threshold",
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
     debias="abtt",
@@ -143,10 +146,11 @@ SEP_PIPELINE = Pipeline(
     out_dir=SEP,
     min_freq=20,
     cooccurrence_min_freq=10,
+    sim_network="threshold",
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
-    debias="abtt",
     merge_variants=True,
+    debias="abtt",
 )
 
 # # for reference, not currently used for filtering
