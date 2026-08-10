@@ -22,7 +22,7 @@
         "label": "benevolence",
         "variants": []
       },
-      "total_occurrences": 332,
+      "total_occurrences": 330,
       "chinese_philosophy_occurrences": 129,
       "cooccurrence": [
         {
@@ -136,7 +136,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 332,
+          "occurrences": 330,
           "data": "/sep/benevolence_embeds.json"
         }
       ]
@@ -146,7 +146,7 @@
         "label": "etiquette",
         "variants": []
       },
-      "total_occurrences": 42,
+      "total_occurrences": 41,
       "chinese_philosophy_occurrences": 8,
       "cooccurrence": [
         {
@@ -260,7 +260,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 42,
+          "occurrences": 41,
           "data": "/sep/etiquette_embeds.json"
         }
       ]
@@ -518,7 +518,7 @@
         "label": "humanity",
         "variants": []
       },
-      "total_occurrences": 489,
+      "total_occurrences": 486,
       "chinese_philosophy_occurrences": 20,
       "cooccurrence": [
         {
@@ -632,7 +632,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 489,
+          "occurrences": 486,
           "data": "/sep/humanity_embeds.json"
         }
       ]
@@ -642,7 +642,7 @@
         "label": "intelligence",
         "variants": []
       },
-      "total_occurrences": 609,
+      "total_occurrences": 611,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -756,7 +756,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 609,
+          "occurrences": 611,
           "data": "/sep/intelligence_embeds.json"
         }
       ]
@@ -890,7 +890,7 @@
         "label": "knowledge",
         "variants": []
       },
-      "total_occurrences": 4574,
+      "total_occurrences": 4581,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -1004,7 +1004,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 4574,
+          "occurrences": 4581,
           "data": "/sep/knowledge_embeds.json"
         }
       ]
@@ -1014,7 +1014,7 @@
         "label": "meaning",
         "variants": []
       },
-      "total_occurrences": 2394,
+      "total_occurrences": 2395,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -1128,7 +1128,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2394,
+          "occurrences": 2395,
           "data": "/sep/meaning_embeds.json"
         }
       ]
@@ -1138,7 +1138,7 @@
         "label": "morality",
         "variants": []
       },
-      "total_occurrences": 8333,
+      "total_occurrences": 8297,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -1252,7 +1252,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 8333,
+          "occurrences": 8297,
           "data": "/sep/morality_embeds.json"
         }
       ]
@@ -1262,24 +1262,16 @@
         "label": "mores",
         "variants": []
       },
-      "total_occurrences": 1,
-      "chinese_philosophy_occurrences": 0,
+      "total_occurrences": 0,
+      "chinese_philosophy_occurrences": 1,
       "cooccurrence": [
         {
           "id": "mores_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=mores&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=mores",
           "title": "SEP search: mores",
           "description": "SEP search results mores",
-          "occurrences": 1,
+          "occurrences": 0,
           "data": "/sep/mores_combined.json"
-        },
-        {
-          "id": "daoism",
-          "url": "https://plato.stanford.edu/entries/daoism/",
-          "title": "Daoism",
-          "description": "Chinese Daoism is a Chinese philosophy of natural practice structured\naround a normative focus on dào (道 path, way).\nThis naturalist philosophical project treat",
-          "occurrences": 1,
-          "data": "/sep/mores_daoism.json"
         },
         {
           "id": "economics-early-modern",
@@ -1368,6 +1360,14 @@
           "description": "Double-consciousness is a concept in social philosophy\nreferring, originally, to a source of inward “twoness”\nputatively experienced by African-Americans becaus",
           "occurrences": 0,
           "data": "/sep/mores_double-consciousness.json"
+        },
+        {
+          "id": "addams-jane",
+          "url": "https://plato.stanford.edu/entries/addams-jane/",
+          "title": "Jane Addams",
+          "description": "Jane Addams (1860–1935) was an activist, community organizer,\ninternational peace advocate, and social philosopher in the United\nStates during the late 19th cen",
+          "occurrences": 0,
+          "data": "/sep/mores_addams-jane.json"
         }
       ],
       "similarity": [
@@ -1376,7 +1376,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1,
+          "occurrences": 0,
           "data": "/sep/mores_embeds.json"
         }
       ]
@@ -1510,7 +1510,7 @@
         "label": "righteousness",
         "variants": []
       },
-      "total_occurrences": 53,
+      "total_occurrences": 52,
       "chinese_philosophy_occurrences": 163,
       "cooccurrence": [
         {
@@ -1624,7 +1624,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 53,
+          "occurrences": 52,
           "data": "/sep/righteousness_embeds.json"
         }
       ]
@@ -1634,7 +1634,7 @@
         "label": "ritual",
         "variants": []
       },
-      "total_occurrences": 168,
+      "total_occurrences": 160,
       "chinese_philosophy_occurrences": 462,
       "cooccurrence": [
         {
@@ -1748,7 +1748,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 168,
+          "occurrences": 160,
           "data": "/sep/ritual_embeds.json"
         }
       ]
@@ -2006,7 +2006,7 @@
         "label": "wisdom",
         "variants": []
       },
-      "total_occurrences": 807,
+      "total_occurrences": 801,
       "chinese_philosophy_occurrences": 29,
       "cooccurrence": [
         {
@@ -2120,7 +2120,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 807,
+          "occurrences": 801,
           "data": "/sep/wisdom_embeds.json"
         }
       ]
