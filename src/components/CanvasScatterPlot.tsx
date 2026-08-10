@@ -209,8 +209,13 @@ function CanvasScatterPlot({
         setTransform(e.transform),
       )
       // A pinch/pan starting elsewhere would otherwise leave a touch-opened
-      // tooltip visually detached from its (now-stale) anchor position.
-      .on('start', () => gestureRef.current.close())
+      // tooltip visually detached from its (now-stale) anchor position. Only
+      // close an *already-open* tooltip, though — d3-zoom fires 'start' on
+      // every touchstart (even one that stays a stationary tap), so closing
+      // unconditionally would kill the very touch that's trying to open one.
+      .on('start', () => {
+        if (gestureRef.current.target != null) gestureRef.current.close()
+      })
     zoomRef.current = zoom
 
     const selection = d3.select(canvas)

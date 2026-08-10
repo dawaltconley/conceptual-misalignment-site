@@ -30,9 +30,9 @@ export interface UseTooltipGestureResult<T> {
   close: () => void
 }
 
-const DEFAULT_HOVER_DELAY = 0
+const DEFAULT_HOVER_DELAY = 10
 const DEFAULT_HOLD_DELAY = 400
-const DEFAULT_MOVE_TOLERANCE = 64
+const DEFAULT_MOVE_TOLERANCE = 8
 
 type Phase =
   | 'idle'
