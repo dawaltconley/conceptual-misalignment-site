@@ -123,6 +123,67 @@ family" and declutters the display; it does not create structure. Any claim read
 off the merged scatter should be one that would survive on the unmerged scatter
 with the variants overplotted.
 
+## Calibrating the threshold — measure in the right space
+
+The first attempt picked `merge_threshold` by sweeping cosine on the **exported**
+vectors (`public/embeddings/sep.json`). That was wrong, and wrong by a lot. The
+export is PCA-reduced to `reduce_to_dims` (50) and the truncation discards
+low-variance dimensions, which is precisely where unrelated words differ — so
+cosine reads much higher there than in the 768-d space the gate actually uses:
+
+| threshold | merges on the 50-d export | merges in the real analysis space |
+|---|---|---|
+| 0.70 | 231 | 31 |
+
+Same threshold, same candidates, 7× difference in outcome. The lesson generalizes
+past this feature: **any threshold tuned against the artifact is not the
+threshold the pipeline applies.**
+
+The fix is `dump_family_candidates` in `main.run_sep`, which writes every
+candidate family's pairwise cosines *in the analysis space* to
+`analysis/{corpus}/family_candidates.csv` at merge time. Those pairs are exactly
+what complete linkage consumes, so `tools/family_diagnostics.py` can replay any
+threshold exactly without re-running the embedder (~18 min a run).
+
+### What the real space looks like
+
+771 candidate families over 1871 words — **47% of the vocabulary** is
+morphologically entangled. Within-family cosine: median 0.412, p75 0.517, p90
+0.593, max 0.863.
+
+| threshold | merges | words absorbed | resulting vocab |
+|---|---|---|---|
+| 0.30 | 701 | 843 | 3108 |
+| 0.40 | 592 | 660 | 3291 |
+| **0.45** | **508** | **559** | **3392** |
+| 0.50 | 379 | 409 | 3542 |
+| 0.60 | 129 | 136 | 3815 |
+| 0.70 | 29 | 31 | 3920 |
+
+**The anchor that makes this choosable:** the most similar pair of distinct
+*target renderings* — `benevolence`/`humaneness`, two English words for the same
+character 仁 — sits at **0.322**, and no target pair anywhere exceeds **0.335**.
+So any floor above ~0.40 guarantees every merge is tighter than any two words the
+project itself treats as different concepts. That is the principled floor; above
+it the choice is how much clutter to trade for caution.
+
+0.45 was chosen because the floor stays clean there (`famous`/`fame`,
+`equal`/`equality`, `crime`/`criminal`, `grow`/`growth`, `sympathy`/`sympathize`)
+and it captures `inspire`/`inspiration` at 0.4714 — the pair that prompted the
+whole investigation. At 0.40 the floor starts admitting doubtful merges
+(`temper`/`temperance`, `set`/`setting`).
+
+### Complete linkage splits some strong pairs, by design
+
+51 candidate pairs at 0.45 clear the floor and still do not merge, because a
+*third* family member fails. `{tolerance, tolerant, tolerate, toleration}` is the
+clean example: `tolerance`/`tolerant` is 0.604 and merges, after which
+`toleration` cannot join (`tolerant`/`toleration` = 0.4985, just under). So
+`tolerance`/`toleration` at 0.576 stays split. This is the guard doing its job —
+it is what stops `know`-`knowable`-`knowledge` chaining — but it means lowering
+the threshold does not necessarily capture a given pair. `family_diagnostics.py`
+reports these separately from pairs that are simply below the floor.
+
 ## Knobs
 
 - `Pipeline.merge_variants` — off by default; on for SEP. English-only, since
