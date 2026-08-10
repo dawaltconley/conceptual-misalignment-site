@@ -117,6 +117,10 @@ class Vector:
     eigenvector: float = 0.0
     """Eigenvector centrality on the weighted similarity graph — importance weighted
     by neighbors' importance. 0 for graph-absent nodes (or if it fails to converge)."""
+    variants: list[str] = field(default_factory=list)
+    """Other vocabulary entries folded into this one by ``Pipeline.merge_variants``
+    (``inspiration`` carrying ``['inspirational', 'inspire']``). Empty for every
+    unmerged node, and always empty for targets, which never merge."""
 
 
 def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
@@ -155,7 +159,7 @@ class Embeddings:
     nodes: list[Vector]
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}, variants: dict[str, list[str]] = {}):
         strength = _weighted_degree(graph)
         pagerank = _pagerank(graph)
         eigenvector = _eigenvector(graph)
@@ -167,7 +171,8 @@ class Embeddings:
                             norms.get(label, 0.0),
                             strength.get(label, 0.0),
                             pagerank.get(label, 0.0),
-                            eigenvector.get(label, 0.0))
+                            eigenvector.get(label, 0.0),
+                            list(variants.get(label, ())))
             nodes.append(vector)
         return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
                    documents, nodes)
@@ -299,6 +304,27 @@ class Pipeline:
     a word repeated many times within one source). Same sklearn ``min_df`` convention
     as ``max_doc_freq``: <= 1.0 is a fraction of the corpus's documents, > 1 an
     absolute document count; None disables it. Targets are always kept regardless."""
+
+    merge_variants: bool = False
+    """Collapse derivational variants of one word into a single vocabulary entry
+    (``inspire``/``inspiration``), so the scatter plots one point per word rather
+    than one per lemma. English-only: candidates come from Open English Wordnet,
+    and classical Chinese has no derivational suffixes, so leave it off for
+    Mengzi. Target renderings are never merged. See ``embeddings.families``."""
+
+    merge_threshold: float = 0.45
+    """Cosine floor for ``merge_variants``, applied in the centred/debiased
+    analysis space with complete linkage — every pair inside a merged family must
+    clear it. Guards the merge against collapsing stem-mates that drifted apart
+    (``know``/``knowledge``); raise it to merge only near-duplicates.
+
+    Calibrate against ``analysis/{corpus}/family_candidates.csv`` via
+    ``tools/family_diagnostics.py``, NOT against the exported vectors — those are
+    PCA-reduced and the truncation inflates cosine badly (0.70 picks 231 merges on
+    the export and 31 in the real space). A useful anchor: the *most* similar pair
+    of distinct target renderings, ``benevolence``/``humaneness``, sits at 0.322,
+    and no target pair exceeds 0.335 — so a floor above ~0.40 keeps every merge
+    tighter than any two words the project treats as different concepts."""
 
     center: bool = True
     """Whether to center embeddings by subtracting their centroid. Used to fix

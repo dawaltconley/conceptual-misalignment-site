@@ -146,6 +146,7 @@ SEP_PIPELINE = Pipeline(
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
     debias="abtt",
+    merge_variants=True,
 )
 
 # # for reference, not currently used for filtering

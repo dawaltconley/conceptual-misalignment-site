@@ -26,6 +26,7 @@ import json
 import time
 from collections import Counter
 from dataclasses import asdict, replace
+from pathlib import Path
 
 import numpy as np
 from numpy import ndarray
@@ -38,8 +39,8 @@ from models import (
 from output import CorpusWriter
 from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
-from corpus.parse import parse_sep_article, parse_mengzi_chapter
-from embeddings import analyze, vectors
+from corpus.parse import parse_sep_article, parse_mengzi_chapter, verb_lemma
+from embeddings import analyze, families, vectors
 from embeddings.analyze import Method as SimMethod
 from embeddings.model import Embedder
 from embeddings.occurrences import (
@@ -47,7 +48,7 @@ from embeddings.occurrences import (
     Segment,
     SourceDoc,
     build_segments,
-    build_vocab,
+    content_frequencies,
     document_frequencies,
 )
 from cooccurrence import pmi_spacy
@@ -175,8 +176,9 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler, doc_freq, n_docs = embed(p, embedder, chapters, targets,
-                                     keep=targets if artifacts else frozenset())
+    pooler, doc_freq, n_docs, _ = embed(
+        p, embedder, chapters, targets,
+        keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
     matrix, mean, project = transform_matrix(p, matrix)
     sw.lap("embedding")
@@ -275,11 +277,36 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     embedder = Embedder(p.model)
     print(
         f"device     : {embedder.device_label}  hidden: {embedder.hidden_size}")
-    pooler, doc_freq, n_docs = embed(
+    pooler, doc_freq, n_docs, freq = embed(
         p, embedder, combined, labels_by_target, match_fn=match_fn,
         keep=labels_by_target if artifacts else frozenset())
     labels, matrix = pool(pooler, labels_by_target)
     matrix, mean, project = transform_matrix(p, matrix)
+
+    # Collapse derivational variants, then rebuild the space from the merged
+    # accumulators. The decision needs vectors, so this cannot move earlier; it
+    # stays ahead of the graph, communities, norms and the PCA export so every
+    # derived field is computed over the merged vocabulary.
+    variants: dict[str, list[str]] = {}
+    if p.merge_variants:
+        pos, stop = _to_set(p.content_pos), p.stopwords or set()
+        extra = families.participial_pairs(labels, verb_lemma)
+        # Dump the candidates and their cosines *in this space* before merging.
+        # The exported vectors are PCA-reduced, so a threshold swept against the
+        # artifact reads high; this is the only record of what the gate actually saw.
+        dump_family_candidates(ANALYSIS / "sep", labels, matrix,
+                               labels_by_target, extra)
+        alias, variants = families.merge_map(
+            labels, matrix, threshold=p.merge_threshold,
+            exclude=labels_by_target, counts=freq, extra_pairs=extra)
+        if alias:
+            pooler.merge(alias)
+            labels, matrix = pool(pooler, labels_by_target)
+            matrix, mean, project = transform_matrix(p, matrix)
+            doc_freq = document_frequencies(
+                combined, match_fn, content_pos=pos, stopwords=stop, alias=alias)
+        print(f"merged     : {len(alias)} variants into {len(variants)} words "
+              f"(cosine >= {p.merge_threshold}) -> {len(labels)} nodes")
     sw.lap("embedding")
 
     G, _, community_map = analyze.build_networks(
@@ -298,7 +325,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     path = writer.add_embeddings(
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
-                               documents=n_docs, graph=G, norms=norms))
+                               documents=n_docs, graph=G, norms=norms,
+                               variants=variants))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -326,18 +354,20 @@ def embed(
     *,
     match_fn: MatchFn | None = None,
     keep: set[str] | frozenset[str] = frozenset(),
-) -> tuple[vectors.Pooler, Counter, int]:
+) -> tuple[vectors.Pooler, Counter, int, Counter]:
     """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
 
-    Returns ``(pooler, doc_freq, n_documents)`` — the pooled vectors plus the
-    per-word document frequency and the corpus document count (for the scatter's
-    doc-freq fields and the ``min_doc_freq``/``max_doc_freq`` bounds). The embedder
+    Returns ``(pooler, doc_freq, n_documents, freq)`` — the pooled vectors, the
+    per-word document frequency, the corpus document count (for the scatter's
+    doc-freq fields and the ``min_doc_freq``/``max_doc_freq`` bounds), and the raw
+    per-word occurrence counts (which label survives a variant merge). The embedder
     yields occurrences one batch at a time; we fold each into a running max-pool
     here, so the whole corpus's occurrence vectors are never all resident at once.
     ``keep`` words additionally retain their full occurrence stacks (cohesion under
     ``--artifacts``)."""
     pos, stop = _to_set(p.content_pos), p.stopwords or set()
-    vocab = build_vocab(sources, p.min_freq, match_fn, content_pos=pos, stopwords=stop)
+    freq = content_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
+    vocab = {k for k, c in freq.items() if c >= p.min_freq}
     doc_freq = document_frequencies(sources, match_fn, content_pos=pos, stopwords=stop)
     n_docs = len(sources)
 
@@ -362,7 +392,39 @@ def embed(
     for word, vec in emb.embed(segments, p.batch_size,
                                subword_pooling=p.subword_pooling):
         pooler.add(word, vec)
-    return pooler, doc_freq, n_docs
+    return pooler, doc_freq, n_docs, freq
+
+
+def dump_family_candidates(
+    out_dir: Path,
+    labels: list[str],
+    matrix: ndarray,
+    exclude: frozenset[str],
+    extra_pairs,
+) -> None:
+    """Write every candidate family's pairwise cosines in the analysis space.
+
+    One row per within-family pair, which is exactly what complete linkage
+    consumes — so ``tools/family_diagnostics.py`` can replay any threshold
+    against the real 768-d geometry instead of the PCA-reduced export, where
+    truncation inflates cosine and makes a swept threshold read far too high.
+    """
+    import csv
+    vocab = [lbl for lbl in labels if lbl not in exclude]
+    fams = families.candidate_families(vocab, extra_pairs)
+    index = {lbl: i for i, lbl in enumerate(labels)}
+    unit = matrix / np.clip(np.linalg.norm(matrix, axis=1, keepdims=True), 1e-12, None)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / "family_candidates.csv"
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["family", "a", "b", "cosine"])
+        for n, fam in enumerate(fams):
+            for i, a in enumerate(fam):
+                for b in fam[i + 1:]:
+                    w.writerow([n, a, b,
+                                f"{float(unit[index[a]] @ unit[index[b]]):.4f}"])
+    print(f"candidates : {len(fams)} families -> {path}")
 
 
 def segment(
