@@ -17,6 +17,24 @@ def _get_en_nlp():
     return _nlp
 
 
+def verb_lemma(word: str) -> str | None:
+    """The verb lemma of ``word`` per spaCy's own rules, or ``None``.
+
+    Used to link participial vocabulary entries back to their base verb
+    (``devoted`` -> ``devote``). spaCy tags participial adjectives ``JJ``, so
+    asking the pipeline directly returns the inflected form; this forces the
+    ``VERB`` reading and re-runs the rule lemmatizer over the same tables.
+    """
+    nlp = _get_en_nlp()
+    doc = nlp(word)
+    if len(doc) != 1:
+        return None
+    token = doc[0]
+    token.pos_ = "VERB"
+    lemmas = nlp.get_pipe("lemmatizer").rule_lemmatize(token)
+    return lemmas[0].lower() if lemmas else None
+
+
 def _apply_lemma_exceptions(doc: "Doc") -> "Doc":
     """Patch en_core_web_sm's lemma mistakes in place, keyed on surface form.
 
