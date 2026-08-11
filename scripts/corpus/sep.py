@@ -213,7 +213,7 @@ def _parse_search_results(r: _Response) -> _ParsedSearchPage:
 
 _PARENS_RE = re.compile(r"\((.*?)[\(\)]", re.DOTALL)
 _CITATION_RE = re.compile(
-    r"[^();.]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—/0-9]+)?[^();.]*", re.DOTALL)
+    r"[^();.?!]+\s\d{4}[a-z]?(,\s(\w+\.\s)?[-–—/0-9]+)?[^();.?!]*", re.DOTALL)
 
 _max_len_citation = ""
 
