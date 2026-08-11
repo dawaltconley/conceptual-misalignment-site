@@ -122,7 +122,8 @@ class SEPSearch(Source):
                     id=f"{search_term}_combined",
                     url=search.url,
                     title=f"SEP search: {search_term}",
-                    description=f"SEP search results {search_string}",
+                    description=f'Top {f"{max_results} " if max_results else ""}results for "{
+                        search_string}"',
                     articles=[],
                     total_articles=total_results,
                 )
