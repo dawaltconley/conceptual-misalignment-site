@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING, Literal, Self
 from dataclasses import dataclass, asdict, field
 
 if TYPE_CHECKING:
+    from collections import Counter
     from networkx import Graph
     from pathlib import Path
     from numpy import ndarray
@@ -103,6 +104,14 @@ class Vector:
     vec: "ndarray"
     doc_freq: int = 0
     """How many documents (sources) in the corpus this word appears in."""
+    freq: int = 0
+    """Raw occurrence count over the whole corpus — how often the word is actually
+    said, as opposed to how widely it is spread (``doc_freq``). The two answer
+    different questions and rank differently: ``doc_freq`` saturates at the corpus's
+    document count, so most of the vocabulary ties, while occurrences are
+    heavy-tailed (log or rank them for display). Summed across a variant merge,
+    which is exact for occurrences but not for document frequencies — see
+    ``embeddings.occurrences.content_frequencies``."""
     norm: float = 0.0
     """L2 norm in the centered/debiased analysis space (≈ distance from the corpus
     centroid). The exported ``vec`` is L2-normalized (direction only), so this is the
@@ -159,7 +168,7 @@ class Embeddings:
     nodes: list[Vector]
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}, variants: dict[str, list[str]] = {}):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}, variants: dict[str, list[str]] = {}, freq: "dict[str, int] | Counter[str]" = {}):
         strength = _weighted_degree(graph)
         pagerank = _pagerank(graph)
         eigenvector = _eigenvector(graph)
@@ -168,6 +177,7 @@ class Embeddings:
             vector = Vector(label, label in targets,
                             communities.get(label, -1), row,
                             doc_freq.get(label, 0),
+                            int(freq.get(label, 0)),
                             norms.get(label, 0.0),
                             strength.get(label, 0.0),
                             pagerank.get(label, 0.0),

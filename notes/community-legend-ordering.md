@@ -90,29 +90,37 @@ Prototypicality is reporting the register band; proximity is reporting the conce
 
 **The genuinely orthogonal second axis is frequency** (ρ −0.03…+0.08 against everything,
 including proximity at −0.02) — so the useful toggle is *proximity / frequency*, not
-*prototypicality / silhouette*. That makes the `freq` export below the blocking piece
-rather than a nice-to-have.
+*prototypicality / silhouette*.
 
-### Why frequency does not currently register
+### Why frequency did not register, and the `freq` export (done)
 
-Two separate faults, one now fixed:
+Two separate faults:
 
-1. **There is no corpus-frequency field in the export at all.** `Embeddings.from_matrix`
-   writes `doc_freq`, `norm`, `strength`, `pagerank`, `eigenvector` — never the raw count.
-   `community_ordering.py` was reading frequency from a **conllu**, which only Mengzi has,
-   so every SEP word scored 0.0: a dead column, and a row of +0.00 across the correlation
-   matrix that made frequency look uncorrelated when it was simply absent. The tool now
-   falls back to `doc_freq` for SEP.
-2. **`doc_freq` is a saturating stand-in.** It is bounded by the corpus's 184 documents
-   and heavily tied: **85% of nodes sit in a tie group of 10 or more**, and the maximum is
-   184 — every document. Within a community it separates far less than a token count
-   would, and ties fall back to insertion order.
+1. **There was no corpus-frequency field in the export at all.** `Embeddings.from_matrix`
+   wrote `doc_freq`, `norm`, `strength`, `pagerank`, `eigenvector` — never the raw count.
+   `community_ordering.py` read frequency from a **conllu**, which only Mengzi has, so
+   every SEP word scored 0.0: a dead column, and a row of +0.00 across the correlation
+   matrix that made frequency look uncorrelated when it was simply absent.
+2. **`doc_freq` is a saturating stand-in**, bounded by the corpus's document count. On the
+   184-document SEP run, **85% of nodes sat in a tie group of 10 or more** and the maximum
+   was 184 — every document. Ties then fall back to insertion order.
 
-The fix is the one this note already called cheapest: `embed()` **already computes** the
-raw counts (`content_frequencies` → `freq`, passed to `families.merge_map(counts=…)`) and
-then discards them. Threading that into `Embeddings.from_matrix` as a `freq` field, plus
-the `src/lib/embeddings.ts` Zod schema, makes the second sort axis real. Log or rank it
-for display — the counts are heavy-tailed.
+**Fixed:** `Vector.freq` is now exported (`src/lib/embeddings.ts` matches, defaulted so
+pre-existing artifacts still validate). It costs nothing to compute — `embed()` already
+had the counts (`content_frequencies` → `freq`, handed to `families.merge_map(counts=…)`)
+and was discarding them. Under a variant merge the counts are **summed**, which is exact
+for occurrences though not for document frequencies, so no second corpus pass is needed
+(see `embeddings.occurrences.content_frequencies`).
+
+Measured on a 17-article verification run: `freq` gives 178 distinct values against
+`doc_freq`'s 17, and 51% of nodes in a 10+ tie group against doc_freq's 100%. Merges fold
+in correctly (`action` = 434 absorbing `act`; `ability` = 157 absorbing `able`).
+`community_ordering.py` now prefers the exported `freq`, falls back to the conllu, and
+only then to `doc_freq` — printing which source it used, since an artifact predating this
+change silently lands on the saturating one.
+
+The counts are heavy-tailed (`morality` 882 vs a floor of 3), so **log or rank before
+sorting a legend by them**.
 
 Compute similarities on the full 50-d `vec` (not the 2-D projection); L2-normalize first so
 it's true cosine (the reduced vectors aren't unit-norm).

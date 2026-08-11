@@ -78,7 +78,7 @@ def load_embeddings(path: Path):
     targets = {n["id"] for n in nodes if n.get("target")}
     node_scores = {
         field: {n["id"]: float(n.get(field) or 0.0) for n in nodes}
-        for field in ("strength", "pagerank", "eigenvector", "doc_freq")
+        for field in ("strength", "pagerank", "eigenvector", "doc_freq", "freq")
     }
     return ids, unit, community, targets, node_scores
 
@@ -178,14 +178,28 @@ def coreness_metric(G: nx.Graph, community: dict[str, int]) -> dict[str, float]:
     return coreness
 
 
+def frequency_metric(ids, node_scores, freq) -> tuple[dict[str, float], str]:
+    """The best available "how common is this word", and where it came from.
+
+    The artifact's ``freq`` is the right answer for both corpora — a raw
+    occurrence count, merged consistently with the communities it is reported
+    against. The conllu is the legacy Mengzi path, kept as a fallback for
+    artifacts written before ``freq`` existed; ``doc_freq`` is the last resort
+    and a poor one, since it saturates at the corpus's document count and leaves
+    most of the vocabulary tied.
+    """
+    exported = node_scores.get("freq", {})
+    if len(set(exported.values())) > 1:
+        return dict(exported), "artifact freq (corpus occurrences)"
+    if freq:
+        return {n: float(freq.get(n, 0)) for n in ids}, "conllu lemma counts"
+    return dict(node_scores["doc_freq"]), "doc_freq (saturating — re-run to export freq)"
+
+
 def collect(ids, unit, community, targets, node_scores, freq,
             G: nx.Graph | None) -> dict[str, dict]:
     proto, prox, sil = vec_metrics(ids, unit, community, targets)
-    # Corpus token frequency where we have a parsed corpus to count (Mengzi);
-    # otherwise the artifact's document frequency, which is the frequency signal
-    # the SEP side actually has. Either way it is "how common is this word".
-    frequency = ({n: float(freq.get(n, 0)) for n in ids} if freq
-                 else dict(node_scores["doc_freq"]))
+    frequency, _ = frequency_metric(ids, node_scores, freq)
     scores = {
         "prototypicality": proto,
         "proximity_to_virtue": prox,
@@ -315,10 +329,9 @@ def main() -> None:
     ids, unit, community, targets, node_scores = load_embeddings(emb_path)
     G, graph_why = load_graph(graph_path, ids)
     freq = load_frequencies(conllu)
-    if not freq:
-        print(f"note: no token frequencies for {args.corpus}; using the artifact's "
-              "doc_freq instead. TF-IDF specificity is skipped either way "
-              "(needs per-community co-occurrence counts).")
+    _, freq_source = frequency_metric(ids, node_scores, freq)
+    print(f"note: frequency metric from {freq_source}. TF-IDF specificity is "
+          "skipped regardless (needs per-community co-occurrence counts).")
     if G is None:
         print(f"note: coreness skipped — {graph_why}")
 

@@ -185,7 +185,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     sw.lap("co-occurrence")
 
     # --- embeddings over the whole corpus (chapters; full would double-count) ---
-    pooler, doc_freq, n_docs, _ = embed(
+    pooler, doc_freq, n_docs, freq = embed(
         p, chapters, targets,
         keep=targets if artifacts else frozenset())
     labels, matrix = pool(pooler, targets)
@@ -206,7 +206,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     path = writer.add_embeddings(
         Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
                                doc_freq=doc_freq, documents=n_docs, graph=G,
-                               norms=norms))
+                               norms=norms, freq=freq))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -324,6 +324,13 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
             matrix, mean, project = transform_matrix(p, matrix)
             doc_freq = document_frequencies(
                 combined, match_fn, content_pos=pos, stopwords=stop, alias=alias)
+            # Occurrences sum exactly under a merge (an article containing both
+            # `inspire` and `inspiration` contributes both counts), so unlike
+            # doc_freq this needs no second pass over the corpus.
+            merged_freq: Counter[str] = Counter()
+            for word, n in freq.items():
+                merged_freq[alias.get(word, word)] += n
+            freq = merged_freq
         elif alias:
             # Computed for the PMI lens only; the scatter stays one point per
             # lemma, so claiming merged families on its nodes would be a lie.
@@ -370,7 +377,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
                                documents=n_docs, graph=G, norms=norms,
-                               variants=variants))
+                               variants=variants, freq=freq))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -397,7 +404,7 @@ def embed(
     *,
     match_fn: MatchFn | None = None,
     keep: set[str] | frozenset[str] = frozenset(),
-) -> tuple[vectors.Pooler, Counter, int, Counter]:
+) -> tuple[vectors.Pooler, Counter[str], int, Counter[str]]:
     """Vocab -> segments -> streaming max-pool of per-occurrence span vectors.
 
     Returns ``(pooler, doc_freq, n_documents, freq)`` — the pooled vectors, the
