@@ -42,6 +42,7 @@ from renderings import check_coverage
 from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter, verb_lemma
+from corpus.inpho import is_chinese_philosophy
 from embeddings import analyze, families, vectors
 from embeddings.analyze import Method as SimMethod
 from embeddings.model import Embedder
@@ -222,7 +223,7 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     sw.summary("mengzi")
 
 
-def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
+def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None = None, artifacts: bool = False,
             prune: bool = False, allow_empty: bool = False) -> None:
     sw = Stopwatch()
     renderings = [r for term in TERMS for r in term.renderings]
@@ -242,7 +243,11 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
             doc_cache[a.url] = SourceDoc(a, parse_sep_article(a))
         return doc_cache[a.url]
 
-    searches = build_english_corpus(per_term)
+    searches = build_english_corpus(
+        per_term,
+        max_chinese_topic=max_chinese_topic,
+        min_freq=p.cooccurrence_min_freq
+    )
     sw.lap("fetch+search")
 
     writer = CorpusWriter(p, "sep", SEP_CORPUS)
@@ -279,7 +284,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     n_cn_occ = 0
     for ts in searches:
         label = ts.term.label
-        docs = [chinese_phil_source_doc(a) for a in ts.search.excluded]
+        docs = [chinese_phil_source_doc(
+            a) for a in ts.search.excluded if is_chinese_philosophy(a.url, max_chinese_topic)]
         occ = sum(count_occurrences(sd.doc, label, match_fn) for sd in docs)
         writer.set_chinese_philosophy(label, occ)
         n_cn_occ += occ
@@ -681,6 +687,7 @@ def main() -> None:
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
             run_sep(SEP_PIPELINE, per_term=args.per_term,
+                    max_chinese_topic=0.25,
                     artifacts=args.artifacts, prune=args.prune,
                     allow_empty=args.allow_empty)
             sw.lap("sep")
