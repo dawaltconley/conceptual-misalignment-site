@@ -10,7 +10,6 @@ import {
 } from 'react'
 import * as d3 from 'd3'
 import { Position, getDistSq } from '@lib/graphs'
-import useSize from '@lib/browser/hooks/useSize'
 import useTooltipGesture from '@lib/browser/hooks/useTooltipGesture'
 import SVGAxis from './SVGAxis'
 import SVGTranslate from './SVGTranslate'
@@ -21,6 +20,7 @@ import {
 } from './ScatterPlot'
 import VirtualTooltip from './VirtualTooltip'
 import HanziDefinition from './HanziDefinition'
+import { useResizeObserver } from 'use-resize-observer'
 import clsx from 'clsx'
 
 // --- layout (kept identical to ScatterPlot so the two are interchangeable) ---
@@ -55,14 +55,16 @@ function CanvasScatterPlot({
   isHighlighted = () => false,
   dictionary = {},
 }: CanvasScatterPlotProps): JSX.Element {
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const hoverCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const zoomRef = useRef<d3.ZoomBehavior<HTMLCanvasElement, unknown> | null>(
     null,
   )
-  const size = useSize(containerRef)
-  const { width = 0, height = 0 } = size || {}
+  const {
+    ref: containerRef,
+    width = 0,
+    height = 0,
+  } = useResizeObserver<HTMLDivElement>()
 
   const [isInteractive, setIsInteractive] = useState(true)
 

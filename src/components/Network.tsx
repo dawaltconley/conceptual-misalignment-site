@@ -2,7 +2,7 @@ import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
 import type { Size, Range, Line } from '@lib/graphs'
 import { useState, useEffect, useRef, forwardRef, type ReactNode } from 'react'
-import useSize from '@lib/browser/hooks/useSize'
+import { useResizeObserver } from 'use-resize-observer'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
@@ -28,13 +28,15 @@ export default function Network({
   dictionary = {},
 }: NetworkProps): JSX.Element {
   const [nodes, setNodes] = useState<Node[]>([])
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const simulationRef = useRef<d3.Simulation<Node, Link> | null>(null)
   const draggingId = useRef<NodeId | null>(null)
 
-  const size = useSize(containerRef)
-  const { width = 0, height = 0 } = size || {}
+  const {
+    ref: containerRef,
+    width = 0,
+    height = 0,
+  } = useResizeObserver<HTMLDivElement>()
 
   // Run D3 simulation in normalized 0–100 coordinate space
   useEffect(() => {
@@ -99,8 +101,8 @@ export default function Network({
       toWidth: getNormalizer(actualEdgeWeightRange, targetEdgeWeightRange),
       toOpacity: getNormalizer(actualEdgeWeightRange, { min: 0, max: 1 }),
     })
-    drawEdges(edges, canvas, size)
-  }, [nodes, data, size])
+    drawEdges(edges, canvas, { width, height })
+  }, [nodes, data, width, height])
 
   function handlePointerDown(
     e: React.PointerEvent<HTMLDivElement>,

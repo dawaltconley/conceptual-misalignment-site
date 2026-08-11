@@ -1,7 +1,7 @@
-import { useRef, forwardRef, memo, type ReactNode } from 'react'
+import { forwardRef, memo, type ReactNode } from 'react'
+import { useResizeObserver } from 'use-resize-observer'
 import * as d3 from 'd3'
 import { Position, type Point } from '@lib/graphs'
-import useSize from '@lib/browser/hooks/useSize'
 import SVGAxis from './SVGAxis'
 import SVGTranslate from './SVGTranslate'
 
@@ -26,9 +26,11 @@ export interface ScatterPlotProps {
  * emphasised. No data fetching and no projection math — the wrapper owns those.
  */
 function ScatterPlot({ points, targets }: ScatterPlotProps): JSX.Element {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const size = useSize(containerRef)
-  const { width = 0, height = 0 } = size || {}
+  const {
+    ref: containerRef,
+    width = 0,
+    height = 0,
+  } = useResizeObserver<HTMLDivElement>()
 
   const paddingX = 2
   const paddingY = 2
