@@ -42,7 +42,6 @@ from cooccurrence.pmi import (
     build_similarity_network as _build_similarity_network,
 )
 from embeddings.occurrences import (
-    CONTENT_POS,
     MatchFn,
     SourceDoc,
     build_vocab,
@@ -60,7 +59,7 @@ def sentence_node_keys(
     sent: Span,
     nodes: set[str] | frozenset[str],
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> list[str]:
     """The node keys occurring in one spaCy sentence, restricted to ``nodes``.
@@ -84,7 +83,7 @@ def collect_node_sentences(
     targets: Targets = frozenset(),
     *,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
@@ -157,7 +156,7 @@ def build_pmi_graph(
     targets: Targets = frozenset(),
     *,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
@@ -183,7 +182,7 @@ def build_cosine_similarity_graph(
     targets: Targets = frozenset(),
     *,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
@@ -194,7 +193,8 @@ def build_cosine_similarity_graph(
         content_pos=content_pos, stopwords=stopwords, alias=alias,
         min_sent_nodes=min_sent_nodes,
     )
-    S = _build_cosine_similarity_graph(sent_node_lists, sorted(nodes), threshold)
+    S = _build_cosine_similarity_graph(
+        sent_node_lists, sorted(nodes), threshold)
     return attach_forms(S, forms)
 
 
@@ -205,7 +205,7 @@ def build_cooccurrence_network(
     *,
     max_nodes: int = 15,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
 ) -> nx.Graph | None:
@@ -230,7 +230,7 @@ def build_similarity_network(
     max_nodes: int = 15,
     sim_threshold: float = 0.7,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
 ) -> nx.Graph | None:
