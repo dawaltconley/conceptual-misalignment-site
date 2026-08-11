@@ -4,7 +4,16 @@ import { TermSchema, SourceSchema } from './terms'
 
 const NodeId = z.union([z.string(), z.number()])
 
-const GraphNode = z.looseObject({ id: NodeId })
+/**
+ * `form` is the display glyph for the node's key (敎 -> 教); `variants` lists the
+ * words the pipeline's derivational merge folded into this node (`inspiration`
+ * carrying `inspire`). Both are optional labels — most nodes carry neither.
+ */
+const GraphNode = z.looseObject({
+  id: NodeId,
+  form: z.string().optional(),
+  variants: z.array(z.string()).optional(),
+})
 
 const WeightedEdge = z.object({
   source: NodeId,

@@ -1,7 +1,7 @@
 import type { PointerEvent, ReactNode, RefObject } from 'react'
 import { useEffect, useRef } from 'react'
 import useTooltipGesture from '@lib/browser/hooks/useTooltipGesture'
-import Tooltip from './Tooltip'
+import Tooltip, { type TooltipProps } from './Tooltip'
 
 export interface UseNetworkTooltipOptions {
   /** ms of mouse/pen hover before opening. */
@@ -82,7 +82,7 @@ export function useNetworkTooltip<T>(
   }
 }
 
-export interface NetworkTooltipProps {
+export interface NetworkTooltipProps extends TooltipProps {
   open: boolean
   onDismiss: (event: Event) => void
   anchor: RefObject<Element | null>
@@ -95,9 +95,10 @@ export default function NetworkTooltip({
   onDismiss,
   anchor,
   children,
+  ...props
 }: NetworkTooltipProps): JSX.Element {
   return (
-    <Tooltip open={open} onDismiss={onDismiss} anchor={anchor}>
+    <Tooltip open={open} onDismiss={onDismiss} anchor={anchor} {...props}>
       {children}
     </Tooltip>
   )
