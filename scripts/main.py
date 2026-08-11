@@ -56,6 +56,7 @@ from embeddings.occurrences import (
     dominant_pos,
 )
 from cooccurrence import pmi_spacy
+from graph.annotate import attach_variants
 from graph.prune import prune_to_neighborhood
 
 
@@ -124,15 +125,21 @@ def save_cooccurrence(
     p: Pipeline, w: CorpusWriter, label: str, network_sources: list[SourceDoc],
     meta_source: Source, file_id: str, *, match_fn: MatchFn | None,
     alias: Mapping[str, str] | None = None,
+    variants: Mapping[str, list[str]] | None = None,
 ) -> int:
     """Build ``label``'s PMI network over ``network_sources`` and hand it to the
     writer as one ``NetworkData`` file (``meta_source`` is the source recorded in
     the file — a chapter, an article, or a whole-corpus stand-in). Returns the
-    occurrence count recorded on the manifest."""
+    occurrence count recorded on the manifest.
+
+    ``variants`` is the other half of ``alias``: the merge decides what a node
+    *is*, this records which words it stands for, on the node itself."""
     net = get_cooccurrence(p, label, network_sources, match_fn=match_fn,
                            alias=alias)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
+    else:
+        attach_variants(net, variants)
     occ = sum(count_occurrences(s.doc, label, match_fn)
               for s in network_sources)
     w.add_cooccurrence(label, meta_source, file_id, net, occ)
@@ -146,9 +153,14 @@ def save_cooccurrence(
 def save_similarity(
     p: Pipeline, w: CorpusWriter, targets: set[str] | frozenset[str],
     corpus_source: Source, G: Graph, *, occ_counts: Counter,
+    variants: Mapping[str, list[str]] | None = None,
 ) -> None:
     """Write one ``NetworkData`` file per term — its pruned cosine neighborhood —
-    and record each term's whole-corpus occurrence count on the manifest."""
+    and record each term's whole-corpus occurrence count on the manifest.
+
+    ``variants`` labels each node with the words the merge folded into it (the
+    same map the embedding export carries); the pruned subgraphs inherit it."""
+    attach_variants(G, variants)
     for target in targets:
         pruned = prune_to_neighborhood(G, target, p.max_network_nodes)
         if pruned is None:
@@ -337,10 +349,6 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
             for word, n in freq.items():
                 merged_freq[alias.get(word, word)] += n
             freq = merged_freq
-        elif alias:
-            # Computed for the PMI lens only; the scatter stays one point per
-            # lemma, so claiming merged families on its nodes would be a lie.
-            variants = {}
         lenses = " + ".join(
             [n for n, on in (("similarity", p.merge_similarity),
                              ("co-occurrence", p.merge_cooccurrence)) if on]
@@ -349,6 +357,12 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
               f"{len(set(alias.values()))} words "
               f"(cosine >= {p.merge_threshold}) -> {len(labels)} nodes; "
               f"applied to {lenses}")
+
+    # Only a lens the merge was actually *applied* to may claim the families on
+    # its nodes: with a lens opted out its nodes are still one per lemma, so
+    # listing variants there would be a lie about what the node covers.
+    sim_variants = variants if p.merge_similarity else {}
+    cooc_variants = variants if p.merge_cooccurrence else {}
     sw.lap("embedding")
 
     # --- co-occurrence: each rendering over its combined search + each article ---
@@ -360,10 +374,12 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
     cooc_alias = alias if p.merge_cooccurrence else {}
     for label, search, adocs in per_label:
         save_cooccurrence(p, writer, label, adocs, search, "combined",
-                          match_fn=match_fn, alias=cooc_alias)
+                          match_fn=match_fn, alias=cooc_alias,
+                          variants=cooc_variants)
         for sd in adocs:
             save_cooccurrence(p, writer, label, [sd], sd.source, sd.source.id,
-                              match_fn=match_fn, alias=cooc_alias)
+                              match_fn=match_fn, alias=cooc_alias,
+                              variants=cooc_variants)
     sw.lap("co-occurrence")
 
     G, _, community_map = analyze.build_networks(
@@ -375,7 +391,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
         lbl for sd in combined for t in sd.doc
         if (lbl := match_fn(t.lemma_.lower(), t.pos_)) is not None)
     save_similarity(p, writer, labels_by_target,
-                    SEP_CORPUS, G, occ_counts=occ_counts)
+                    SEP_CORPUS, G, occ_counts=occ_counts,
+                    variants=sim_variants)
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
@@ -383,7 +400,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
                                documents=n_docs, graph=G, norms=norms,
-                               variants=variants, freq=freq))
+                               variants=sim_variants, freq=freq))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:

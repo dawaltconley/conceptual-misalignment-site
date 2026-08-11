@@ -8,6 +8,7 @@ import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
 import { isPoint } from '@lib/graphs'
 import HanziNode from '@components/HanziNode'
+import EnglishNode from '@components/EnglishNode'
 
 const COLLISION_RADIUS = 8
 
@@ -168,11 +169,15 @@ export default function Network({
           {dictionary[node.id.toString()] ? (
             <HanziNode
               id={node.id}
-              entry={dictionary[String(node.id)]}
+              entry={dictionary[node.id.toString()]}
               isCentral={node.id === centralNodeId}
             />
           ) : (
-            String(node.id)
+            <EnglishNode
+              id={node.id}
+              variants={node.variants}
+              isCentral={node.id === centralNodeId}
+            />
           )}
         </div>
       ))}
@@ -202,6 +207,8 @@ export const Wrapper = forwardRef<HTMLDivElement, { children: ReactNode }>(
 
 interface Node extends d3.SimulationNodeDatum {
   id: NodeId
+  /** Words the pipeline's derivational merge folded into this node, if any. */
+  variants?: string[]
 }
 
 interface Link extends d3.SimulationLinkDatum<Node> {

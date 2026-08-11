@@ -33,7 +33,7 @@ export default function HanziDefinition({
   )
 
   return (
-    <div className="w-52 rounded-lg bg-white p-2.5 text-xs shadow-xl ring-1 ring-gray-200">
+    <div className="popup w-52 border-gray-200 p-2.5 text-xs shadow-xl">
       <p className="mb-1 align-baseline font-semibold text-gray-900">
         <span className="mr-0.5 text-lg">{hanzi}</span>
         {rest.length === 0 && <Pronunciation reading={primary} />}
