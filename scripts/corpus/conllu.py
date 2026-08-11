@@ -15,6 +15,8 @@ import spacy
 from spacy.tokens import Doc
 from spacy.vocab import Vocab
 
+from corpus.recombine import MergeConfig, MergeReport, merge_doc
+
 
 class ChapterDoc(NamedTuple):
     id: str      # the `# newdoc id`, e.g. "KR1h0001_001"
@@ -48,11 +50,19 @@ def load_conllu(
     path: str | Path,
     vocab: Vocab | None = None,
     skip_titles: bool = True,
+    merge: MergeConfig | None = None,
+    report: MergeReport | None = None,
 ) -> Iterator[ChapterDoc]:
     """Yield one :class:`ChapterDoc` per ``# newdoc``.
 
     ``skip_titles`` drops each chapter's ``_title`` sentence from the body (its
     text is still returned as ``ChapterDoc.title``); set False to keep it inline.
+
+    ``merge`` recombines each chapter's subword tokens into whole words before it
+    is yielded (see :mod:`corpus.recombine`), so no consumer downstream has to
+    know the treebank annotates one character per token. ``None`` leaves the
+    tokenization exactly as the file has it. Pass ``report`` to collect what the
+    merge did across every chapter.
     """
     path = Path(path)
     vocab = vocab or spacy.blank("xx").vocab  # bare container; no language model
@@ -75,6 +85,8 @@ def load_conllu(
             pos=cols["pos"], tags=cols["tags"], morphs=cols["morphs"],
             heads=cols["heads"], deps=cols["deps"], sent_starts=cols["sent_starts"],
         )
+        if merge is not None:
+            doc = merge_doc(doc, merge, report)
         return ChapterDoc(doc_id, title, doc)
 
     reset()

@@ -9,6 +9,8 @@ _ROOT = _SCRIPTS.parent                       # repo root
 # --- Inputs (live inside scripts/) ---
 MENGZI_DIR = _SCRIPTS / "data" / "mengzi"     # per-chapter Mengzi source .txt
 MENGZI_CONLLU = _SCRIPTS / "data" / "mengzi.conllu"
+# Hand-curated word-merge overrides layered on the UD relations (optional file).
+MERGE_OVERRIDES = _SCRIPTS / "data" / "merge_overrides.json"
 
 # --- Outputs (live at the repo root) ---
 DATA = _ROOT / "src" / "data"
@@ -122,6 +124,7 @@ MENGZI_PIPELINE = Pipeline(
     cooccurrence_min_freq=3,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
+    merge_deps=frozenset({"compound", "flat", "fixed"}),
     debias="abtt",
 )
 

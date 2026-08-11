@@ -374,4 +374,14 @@ class Pipeline:
     stopwords: frozenset[str] = frozenset()
     """Words to exclude from results."""
 
+    merge_deps: frozenset[str] | None = None
+    """UD dependency relations treated as *word formation*: a token attached to its
+    head by one of these is part of the same word, and the two are recombined into
+    a single token before anything else sees the corpus (天 + 下 -> 天下). Chinese
+    only — the treebank annotates one character per token, so without this the
+    vocabulary is characters rather than words. ``frozenset({"compound", "flat",
+    "fixed"})`` is the vetted set; ``conj``/``nmod`` are deliberately absent (they
+    would merge 仁義). None leaves tokenization exactly as the source has it.
+    See ``corpus.recombine`` and ``notes/multi-character-tokenization.md``."""
+
     out_dir: "Path"
