@@ -67,7 +67,7 @@ function CanvasScatterPlot({
   const [isInteractive, setIsInteractive] = useState(true)
 
   const gesture = useTooltipGesture<string>({
-    hoverDelay: 0,
+    hoverDelay: 10,
     holdDelay: 400,
     moveTolerance: 8,
   })
@@ -180,7 +180,7 @@ function CanvasScatterPlot({
       const r = p.size ?? DEFAULT_RADIUS
       ctx.beginPath()
       ctx.fillStyle = p.color || DEFAULT_COLOR
-      ctx.arc(cx, cy, r * 2, 0, 2 * Math.PI)
+      ctx.arc(cx, cy, r * 1.1, 0, 2 * Math.PI)
       ctx.fill()
       ctx.lineWidth = 1.5
       ctx.strokeStyle = '#111827'

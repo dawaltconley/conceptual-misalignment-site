@@ -31,7 +31,7 @@ export interface UseNetworkTooltipResult {
  */
 export function useNetworkTooltip<T>(
   id: T,
-  { hoverDelay = 1000 }: UseNetworkTooltipOptions = {},
+  { hoverDelay = 300 }: UseNetworkTooltipOptions = {},
 ): UseNetworkTooltipResult {
   const gesture = useTooltipGesture<T>({ hoverDelay })
   const open = gesture.target === id
