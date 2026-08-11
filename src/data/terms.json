@@ -165,7 +165,7 @@
             "label": "benevolence",
             "variants": []
           },
-          "totalOccurrences": 459,
+          "totalOccurrences": 452,
           "chinesePhilosophyOccurrences": 129,
           "embeddings": [
             {
@@ -173,7 +173,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 330,
+              "occurrences": 323,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -183,7 +183,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 330,
+              "occurrences": 323,
               "data": "/sep/benevolence_embeds.json"
             }
           ],
@@ -300,7 +300,7 @@
             "label": "humaneness",
             "variants": []
           },
-          "totalOccurrences": 103,
+          "totalOccurrences": 101,
           "chinesePhilosophyOccurrences": 78,
           "embeddings": [
             {
@@ -308,7 +308,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 25,
+              "occurrences": 23,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -318,7 +318,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 25,
+              "occurrences": 23,
               "data": "/sep/humaneness_embeds.json"
             }
           ],
@@ -435,7 +435,7 @@
             "label": "humanity",
             "variants": []
           },
-          "totalOccurrences": 506,
+          "totalOccurrences": 488,
           "chinesePhilosophyOccurrences": 20,
           "embeddings": [
             {
@@ -443,7 +443,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 486,
+              "occurrences": 468,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -453,7 +453,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 486,
+              "occurrences": 468,
               "data": "/sep/humanity_embeds.json"
             }
           ],
@@ -732,15 +732,15 @@
             "label": "righteousness",
             "variants": []
           },
-          "totalOccurrences": 215,
-          "chinesePhilosophyOccurrences": 163,
+          "totalOccurrences": 218,
+          "chinesePhilosophyOccurrences": 170,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 52,
+              "occurrences": 48,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -750,7 +750,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 52,
+              "occurrences": 48,
               "data": "/sep/righteousness_embeds.json"
             }
           ],
@@ -760,7 +760,7 @@
               "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=righteousness+righteous%2A",
               "title": "SEP search: righteousness",
               "description": "SEP search results righteousness righteous*",
-              "occurrences": 38,
+              "occurrences": 34,
               "data": "/sep/righteousness_combined.json"
             },
             {
@@ -794,14 +794,6 @@
               "description": "Lady Anne Conway (nee Anne Finch) was one of a tiny minority of\nseventeenth-century women who was able to pursue an interest in\nphilosophy. She was associated w",
               "occurrences": 1,
               "data": "/sep/righteousness_conway.json"
-            },
-            {
-              "id": "confucian-gender",
-              "url": "https://plato.stanford.edu/entries/confucian-gender/",
-              "title": "Gender in Confucian Philosophy",
-              "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
-              "occurrences": 4,
-              "data": "/sep/righteousness_confucian-gender.json"
             },
             {
               "id": "african-sage",
@@ -844,20 +836,28 @@
               "data": "/sep/righteousness_clarke.json"
             },
             {
-              "id": "korean-confucianism",
-              "url": "https://plato.stanford.edu/entries/korean-confucianism/",
-              "title": "Korean Confucianism",
-              "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
-              "occurrences": 2,
-              "data": "/sep/righteousness_korean-confucianism.json"
-            },
-            {
               "id": "epistemology-india",
               "url": "https://plato.stanford.edu/entries/epistemology-india/",
               "title": "Epistemology in Classical Indian Philosophy",
               "description": "Theory of knowledge, pramāṇa-śāstra, is\na rich genre of Sanskrit literature, spanning almost twenty centuries,\ncarried out in texts belonging to distinct school",
               "occurrences": 2,
               "data": "/sep/righteousness_epistemology-india.json"
+            },
+            {
+              "id": "saadya",
+              "url": "https://plato.stanford.edu/entries/saadya/",
+              "title": "Saadya [Saadiah]",
+              "description": "In his philosophical commitment to reason and revelation as joint\ngrounds for knowing and living, Saadya creates a space for the\ninterplay of faith, understandi",
+              "occurrences": 1,
+              "data": "/sep/righteousness_saadya.json"
+            },
+            {
+              "id": "jayaraasi",
+              "url": "https://plato.stanford.edu/entries/jayaraasi/",
+              "title": "Jayarāśi",
+              "description": "Jayarāśi Bhaṭṭa, who most likely flourished\nbetween 800–840 probably in Southern India, was an Indian\nphilosopher, a ‘qualified sceptic’, resorting to a kind of",
+              "occurrences": 1,
+              "data": "/sep/righteousness_jayaraasi.json"
             }
           ]
         },
@@ -867,7 +867,7 @@
             "label": "justice",
             "variants": []
           },
-          "totalOccurrences": 2069,
+          "totalOccurrences": 2084,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -875,7 +875,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2069,
+              "occurrences": 2084,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -885,7 +885,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2069,
+              "occurrences": 2084,
               "data": "/sep/justice_embeds.json"
             }
           ],
@@ -1002,7 +1002,7 @@
             "label": "meaning",
             "variants": []
           },
-          "totalOccurrences": 2395,
+          "totalOccurrences": 2398,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -1010,7 +1010,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2395,
+              "occurrences": 2398,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1020,7 +1020,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 2395,
+              "occurrences": 2398,
               "data": "/sep/meaning_embeds.json"
             }
           ],
@@ -1137,7 +1137,7 @@
             "label": "morality",
             "variants": []
           },
-          "totalOccurrences": 8297,
+          "totalOccurrences": 8191,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -1145,7 +1145,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 8297,
+              "occurrences": 8191,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1155,7 +1155,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 8297,
+              "occurrences": 8191,
               "data": "/sep/morality_embeds.json"
             }
           ],
@@ -1434,15 +1434,15 @@
             "label": "ritual",
             "variants": []
           },
-          "totalOccurrences": 622,
-          "chinesePhilosophyOccurrences": 462,
+          "totalOccurrences": 623,
+          "chinesePhilosophyOccurrences": 519,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 160,
+              "occurrences": 104,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1452,7 +1452,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 160,
+              "occurrences": 104,
               "data": "/sep/ritual_embeds.json"
             }
           ],
@@ -1462,16 +1462,8 @@
               "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=ritual+ritual%2A",
               "title": "SEP search: ritual",
               "description": "SEP search results ritual ritual*",
-              "occurrences": 140,
+              "occurrences": 89,
               "data": "/sep/ritual_combined.json"
-            },
-            {
-              "id": "confucian-gender",
-              "url": "https://plato.stanford.edu/entries/confucian-gender/",
-              "title": "Gender in Confucian Philosophy",
-              "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
-              "occurrences": 43,
-              "data": "/sep/ritual_confucian-gender.json"
             },
             {
               "id": "language-india",
@@ -1488,14 +1480,6 @@
               "description": "Kumārila Bhaṭṭa, a Brahmanical proponent of the\nPūrva Mīmāṃsā school who flourished around\n660 ce, was among the most influential\nthinkers in the history of Ind",
               "occurrences": 12,
               "data": "/sep/ritual_kumaarila.json"
-            },
-            {
-              "id": "korean-confucianism",
-              "url": "https://plato.stanford.edu/entries/korean-confucianism/",
-              "title": "Korean Confucianism",
-              "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
-              "occurrences": 14,
-              "data": "/sep/ritual_korean-confucianism.json"
             },
             {
               "id": "literal-nonliteral-india",
@@ -1560,6 +1544,22 @@
               "description": "Susanne K. Langer (born Susanne Katherina Knauth, 1895–1985) was\nand remains a widely-read and influential American philosopher, best\nknown for her analyses of ",
               "occurrences": 7,
               "data": "/sep/ritual_langer.json"
+            },
+            {
+              "id": "phenomenology-religion",
+              "url": "https://plato.stanford.edu/entries/phenomenology-religion/",
+              "title": "Phenomenology of Religion",
+              "description": "This entry examines the relevance of phenomenological considerations\nfor the concept of God (or the sacred otherwise characterised) and the\nquestion of what sor",
+              "occurrences": 1,
+              "data": "/sep/ritual_phenomenology-religion.json"
+            },
+            {
+              "id": "tsongkhapa",
+              "url": "https://plato.stanford.edu/entries/tsongkhapa/",
+              "title": "Tsongkhapa",
+              "description": "Tsongkhapa Losang Drakpa (1357–1419) is a well-known Tibetan\nreligious philosopher and one of the most influential and innovative\nscholars and practitioners in ",
+              "occurrences": 5,
+              "data": "/sep/ritual_tsongkhapa.json"
             }
           ]
         },
@@ -1569,15 +1569,15 @@
             "label": "propriety",
             "variants": []
           },
-          "totalOccurrences": 150,
-          "chinesePhilosophyOccurrences": 74,
+          "totalOccurrences": 154,
+          "chinesePhilosophyOccurrences": 87,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 76,
+              "occurrences": 67,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1587,7 +1587,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 76,
+              "occurrences": 67,
               "data": "/sep/propriety_embeds.json"
             }
           ],
@@ -1597,7 +1597,7 @@
               "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=propriety",
               "title": "SEP search: propriety",
               "description": "SEP search results propriety",
-              "occurrences": 71,
+              "occurrences": 62,
               "data": "/sep/propriety_combined.json"
             },
             {
@@ -1631,30 +1631,6 @@
               "description": "Asserting is the act of claiming that something is the case—for\ninstance, that oranges are citruses, or that there is a\ntraffic congestion on Brooklyn Bridge (a",
               "occurrences": 9,
               "data": "/sep/propriety_assertion.json"
-            },
-            {
-              "id": "korean-confucianism",
-              "url": "https://plato.stanford.edu/entries/korean-confucianism/",
-              "title": "Korean Confucianism",
-              "description": "Koreans have played a pivotal role in shaping Asian intellectual\nhistory, serving as dynamic agents of intercultural synthesis. By the\nfifth century CE, the “Th",
-              "occurrences": 5,
-              "data": "/sep/propriety_korean-confucianism.json"
-            },
-            {
-              "id": "confucian-gender",
-              "url": "https://plato.stanford.edu/entries/confucian-gender/",
-              "title": "Gender in Confucian Philosophy",
-              "description": "The study of gender in Confucian philosophy is a complicated task,\nsince there is no conceptual equivalent of “gender” in the\nChinese linguistic construct. Inst",
-              "occurrences": 4,
-              "data": "/sep/propriety_confucian-gender.json"
-            },
-            {
-              "id": "dai-zhen",
-              "url": "https://plato.stanford.edu/entries/dai-zhen/",
-              "title": "Dai Zhen",
-              "description": "Dai Zhen 戴震 (1724–1777), also known by his\ncourtesy name Dai Dongyuan 戴東原, was a highly\naccomplished scholar of the Qianlong-Jiaqing era of the Qing dynasty.\nHi",
-              "occurrences": 4,
-              "data": "/sep/propriety_dai-zhen.json"
             },
             {
               "id": "scottish-18th",
@@ -1695,6 +1671,30 @@
               "description": "Wilfrid Stalker Sellars (1912–89) was an original, systematic,\nand profound American philosopher. His effort in philosophy was\n“to formulate a scientifically or",
               "occurrences": 3,
               "data": "/sep/propriety_sellars.json"
+            },
+            {
+              "id": "envy",
+              "url": "https://plato.stanford.edu/entries/envy/",
+              "title": "Envy",
+              "description": "Envy is a complex and puzzling emotion. It is, notoriously, one of the\nseven deadly sins in the Catholic tradition. It is very commonly\ncharged with being (eith",
+              "occurrences": 1,
+              "data": "/sep/propriety_envy.json"
+            },
+            {
+              "id": "humanism-civic",
+              "url": "https://plato.stanford.edu/entries/humanism-civic/",
+              "title": "Civic Humanism",
+              "description": "Although widely and commonly confused with republicanism, civic\nhumanism forms a separate and distinct phenomenon in the history of\nWestern political thought. R",
+              "occurrences": 1,
+              "data": "/sep/propriety_humanism-civic.json"
+            },
+            {
+              "id": "teleological-arguments",
+              "url": "https://plato.stanford.edu/entries/teleological-arguments/",
+              "title": "Teleological Arguments for God’s Existence",
+              "description": "Some phenomena within nature exhibit such exquisiteness of structure,\nfunction or interconnectedness that many people have found it natural\nto see a deliberativ",
+              "occurrences": 2,
+              "data": "/sep/propriety_teleological-arguments.json"
             }
           ]
         },
@@ -2135,7 +2135,7 @@
             "label": "knowledge",
             "variants": []
           },
-          "totalOccurrences": 4581,
+          "totalOccurrences": 4631,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -2143,7 +2143,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 4581,
+              "occurrences": 4631,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2153,7 +2153,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 4581,
+              "occurrences": 4631,
               "data": "/sep/knowledge_embeds.json"
             }
           ],
@@ -2270,7 +2270,7 @@
             "label": "wisdom",
             "variants": []
           },
-          "totalOccurrences": 830,
+          "totalOccurrences": 845,
           "chinesePhilosophyOccurrences": 29,
           "embeddings": [
             {
@@ -2278,7 +2278,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 801,
+              "occurrences": 816,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2288,7 +2288,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 801,
+              "occurrences": 816,
               "data": "/sep/wisdom_embeds.json"
             }
           ],
@@ -2405,7 +2405,7 @@
             "label": "intelligence",
             "variants": []
           },
-          "totalOccurrences": 611,
+          "totalOccurrences": 629,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -2413,7 +2413,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 611,
+              "occurrences": 629,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2423,7 +2423,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 611,
+              "occurrences": 629,
               "data": "/sep/intelligence_embeds.json"
             }
           ],
@@ -2836,7 +2836,7 @@
             "label": "faith",
             "variants": []
           },
-          "totalOccurrences": 1030,
+          "totalOccurrences": 1046,
           "chinesePhilosophyOccurrences": 0,
           "embeddings": [
             {
@@ -2844,7 +2844,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 1030,
+              "occurrences": 1046,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2854,7 +2854,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 1030,
+              "occurrences": 1046,
               "data": "/sep/faith_embeds.json"
             }
           ],
@@ -2971,7 +2971,7 @@
             "label": "sincerity",
             "variants": []
           },
-          "totalOccurrences": 157,
+          "totalOccurrences": 154,
           "chinesePhilosophyOccurrences": 7,
           "embeddings": [
             {
@@ -2979,7 +2979,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 150,
+              "occurrences": 147,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -2989,7 +2989,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 150,
+              "occurrences": 147,
               "data": "/sep/sincerity_embeds.json"
             }
           ],
