@@ -122,8 +122,7 @@ class SEPSearch(Source):
                     id=f"{search_term}_combined",
                     url=search.url,
                     title=f"SEP search: {search_term}",
-                    description=f'Top {f"{max_results} " if max_results else ""}results for "{
-                        search_string}"',
+                    description=f'Top results for "{search_string}"',
                     articles=[],
                     total_articles=total_results,
                 )
@@ -143,6 +142,8 @@ class SEPSearch(Source):
             if max_results and len(sep.articles) >= max_results:
                 break  # ...and stop paging (the for-break alone kept looping)
             page += 1
+
+        sep.description = f'Top {len(sep.articles)} results for "{search_string}"'
 
         global _max_len_citation
         print("max length citation:")

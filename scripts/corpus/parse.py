@@ -171,9 +171,21 @@ def merge_phrases(doc: "Doc",
     return doc
 
 
+_sep_article_docs: dict[str, "Doc"] = {}
+
+
 def parse_sep_article(sep: "SEP") -> "Doc":
+    global _sep_article_docs
+    if sep.id in _sep_article_docs:
+        return _sep_article_docs[sep.id]
     nlp = _get_en_nlp()
-    return merge_phrases(_apply_lemma_exceptions(nlp(sep.text)))
+    parsed = merge_phrases(_apply_lemma_exceptions(nlp(sep.text)))
+    _sep_article_docs[sep.id] = parsed
+    return parsed
+
+
+def unparse_sep_article(sep: "SEP") -> None:
+    del _sep_article_docs[sep.id]
 
 
 _mengzi_chapter_docs: dict[str, "Doc"] = {}

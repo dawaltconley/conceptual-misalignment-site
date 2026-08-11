@@ -21,6 +21,10 @@ Run:  scripts/.venv/bin/python scripts/tools/rendering_diagnostics.py
 """
 
 from __future__ import annotations
+from corpus.parse import parse_sep_article
+from corpus.build import build_english_corpus
+from renderings import NOTE, RenderingAudit
+import config
 
 import argparse
 import sys
@@ -29,13 +33,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import config
-from renderings import NOTE, RenderingAudit
-from corpus.build import build_english_corpus
-from corpus.parse import parse_sep_article
 
-
-def audit_corpus(per_term: int) -> tuple[list[RenderingAudit], int]:
+def audit_corpus(per_term: int, min_freq: int = 1) -> tuple[list[RenderingAudit], int]:
     """Full audit over the SEP corpus: ``(audits, n_articles)``.
 
     One pass over every parsed article, testing each token's lemma and (only
@@ -50,7 +49,7 @@ def audit_corpus(per_term: int) -> tuple[list[RenderingAudit], int]:
                 return r.label
         return None
 
-    searches = build_english_corpus(per_term)
+    searches = build_english_corpus(per_term, min_freq=min_freq)
     # Dedupe: one article can be a search result for several renderings.
     articles = {a.url: a for ts in searches for a in ts.search.articles}
     print(f"\nparsing {len(articles)} articles...")
@@ -128,12 +127,15 @@ def main() -> None:
     ap.add_argument("--per-term", type=int, default=12, dest="per_term",
                     help="SEP articles per rendering — match the pipeline run "
                          "you are auditing (default 12).")
+    ap.add_argument("--min-freq", type=int, default=3, dest="min_freq",
+                    help="SEP articles per rendering — match the pipeline run "
+                         "you are auditing (default 12).")
     ap.add_argument("--out", type=Path, default=None,
                     help="Markdown report path "
                          "(default analysis/sep/rendering_diagnostics.md).")
     args = ap.parse_args()
 
-    audits, n_articles = audit_corpus(args.per_term)
+    audits, n_articles = audit_corpus(args.per_term, args.min_freq)
     lines = report(audits, n_articles)
     out = args.out or (config.ANALYSIS / "sep" / "rendering_diagnostics.md")
     out.parent.mkdir(parents=True, exist_ok=True)
