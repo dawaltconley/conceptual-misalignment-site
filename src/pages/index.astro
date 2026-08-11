@@ -28,21 +28,25 @@ const embeddingDictionary = await buildDictionary(
 
 <Layout>
   <main class="mx-auto w-full px-4 py-8">
-    <h2 class="mb-4 text-xl font-bold">Co-occurrence networks</h2>
-    <TermNetwork
-      client:load
-      kind="cooccurrence"
-      data={master}
-      dictionary={networkDictionary}
-    />
+    <div>
+      <TermNetwork
+        client:load
+        title="Co-occurrence networks"
+        kind="cooccurrence"
+        data={master}
+        dictionary={networkDictionary}
+      />
+    </div>
 
-    <h2 class="mb-4 mt-12 text-xl font-bold">Similarity networks</h2>
-    <TermNetwork
-      client:load
-      kind="similarity"
-      data={master}
-      dictionary={networkDictionary}
-    />
+    <div class="mt-8">
+      <TermNetwork
+        client:load
+        title="Similarity networks"
+        kind="similarity"
+        data={master}
+        dictionary={networkDictionary}
+      />
+    </div>
 
     <div class="mx-auto mt-12 max-w-screen-xl">
       <h2 class="mb-4 text-xl font-bold">Embedding spaces (PCA / t-SNE)</h2>
