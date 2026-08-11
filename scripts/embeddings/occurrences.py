@@ -31,8 +31,6 @@ from models import Source
 
 from spacy.tokens import Doc, Token
 
-CONTENT_POS = {"NOUN", "VERB", "ADJ", "PROPN"}
-
 
 class SourceDoc(NamedTuple):
     """A source unit: a stable id + its parsed Doc. (``corpus.conllu.ChapterDoc``
@@ -71,7 +69,7 @@ class Segment:
 def content_key(
     token: Token,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> str | None:
     """The one shared decision: this token's node key, or ``None`` to drop it.
@@ -98,7 +96,7 @@ def content_key(
 def content_frequencies(
     sources: Iterable[SourceDoc],
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
 ) -> Counter[str]:
@@ -121,7 +119,7 @@ def content_frequencies(
 def dominant_pos(
     sources: Iterable[SourceDoc],
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> dict[str, str]:
     """The most frequent part of speech for each content key.
@@ -147,7 +145,7 @@ def build_vocab(
     sources: Iterable[SourceDoc],
     min_freq: int,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
 ) -> set[str]:
@@ -159,14 +157,15 @@ def build_vocab(
     (13) clears, so filtering first would make the merge lose nodes instead of
     combining them.
     """
-    freq = content_frequencies(sources, match_fn, content_pos, stopwords, alias)
+    freq = content_frequencies(
+        sources, match_fn, content_pos, stopwords, alias)
     return {k for k, c in freq.items() if c >= min_freq}
 
 
 def document_frequencies(
     sources: Iterable[SourceDoc],
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
     alias: Mapping[str, str] | None = None,
 ) -> Counter[str]:
@@ -197,7 +196,7 @@ def build_segments(
     sent_len_fn: Callable[[list[str]], list[int]],
     max_tokens: int,
     match_fn: MatchFn | None = None,
-    content_pos: set[str] | None = CONTENT_POS,
+    content_pos: set[str] | None = set(),
     stopwords: frozenset[str] | set[str] = frozenset(),
 ) -> list[Segment]:
     """Greedily pack each source's sentences into <=cap segments; record spans.
