@@ -1839,15 +1839,15 @@
             "label": "mores",
             "variants": []
           },
-          "totalOccurrences": 1,
-          "chinesePhilosophyOccurrences": 1,
+          "totalOccurrences": 66,
+          "chinesePhilosophyOccurrences": 45,
           "embeddings": [
             {
               "id": "sep",
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 0,
+              "occurrences": 21,
               "data": "/embeddings/sep.json"
             }
           ],
@@ -1857,7 +1857,7 @@
               "url": "https://plato.stanford.edu/",
               "title": "SEP (combined)",
               "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-              "occurrences": 0,
+              "occurrences": 21,
               "data": "/sep/mores_embeds.json"
             }
           ],
@@ -1867,7 +1867,7 @@
               "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=mores",
               "title": "SEP search: mores",
               "description": "SEP search results mores",
-              "occurrences": 0,
+              "occurrences": 18,
               "data": "/sep/mores_combined.json"
             },
             {
@@ -1875,7 +1875,7 @@
               "url": "https://plato.stanford.edu/entries/economics-early-modern/",
               "title": "Economics in Early Modern Philosophy",
               "description": "Economic discourse of the early modern period offers probing accounts\nof inequality and distributive justice, in addition to detailed\nanalyses of specific core ",
-              "occurrences": 0,
+              "occurrences": 3,
               "data": "/sep/mores_economics-early-modern.json"
             },
             {
@@ -1883,7 +1883,7 @@
               "url": "https://plato.stanford.edu/entries/diderot/",
               "title": "Denis Diderot",
               "description": "Because of his public leadership of the philosophe party in\neighteenth-century France, Voltaire stands today as the iconic example\nof the French Enlightenment p",
-              "occurrences": 0,
+              "occurrences": 3,
               "data": "/sep/mores_diderot.json"
             },
             {
@@ -1891,7 +1891,7 @@
               "url": "https://plato.stanford.edu/entries/austin-john/",
               "title": "John Austin",
               "description": "John Austin is considered by many to be the creator of the school of\nanalytical jurisprudence, as well as, more specifically, the approach\nto law known as “lega",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_austin-john.json"
             },
             {
@@ -1899,7 +1899,7 @@
               "url": "https://plato.stanford.edu/entries/solidarity/",
               "title": "Solidarity in Social and Political Philosophy",
               "description": "The term “solidarity” first becomes prevalent in the\nearly- to late-nineteenth century in France. Since then, it has always\nbeen used to describe a special rela",
-              "occurrences": 0,
+              "occurrences": 2,
               "data": "/sep/mores_solidarity.json"
             },
             {
@@ -1907,7 +1907,7 @@
               "url": "https://plato.stanford.edu/entries/cardano/",
               "title": "Girolamo [Geronimo] Cardano",
               "description": "In addition to being one of the most original and talented physicians,\nmathematicians and astrologers of his time, Girolamo Cardano (b. 1501,\nPavia, d. 1576, Ro",
-              "occurrences": 0,
+              "occurrences": 2,
               "data": "/sep/mores_cardano.json"
             },
             {
@@ -1915,7 +1915,7 @@
               "url": "https://plato.stanford.edu/entries/weber/",
               "title": "Max Weber",
               "description": "Arguably the foremost social theorist of the twentieth century, Max\nWeber is known as a principal architect of modern social science along\nwith Karl Marx and Ém",
-              "occurrences": 0,
+              "occurrences": 2,
               "data": "/sep/mores_weber.json"
             },
             {
@@ -1923,7 +1923,7 @@
               "url": "https://plato.stanford.edu/entries/pyrrho/",
               "title": "Pyrrho",
               "description": "Pyrrho was the starting-point for a philosophical movement known as\nPyrrhonism that flourished beginning several centuries after his own\ntime. This later Pyrrho",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_pyrrho.json"
             },
             {
@@ -1931,7 +1931,7 @@
               "url": "https://plato.stanford.edu/entries/montesquieu/",
               "title": "Baron de Montesquieu, Charles-Louis de Secondat",
               "description": "Montesquieu was one of the great political philosophers of the\nEnlightenment. Insatiably curious and mordantly funny, he constructed\na naturalistic account of t",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_montesquieu.json"
             },
             {
@@ -1939,7 +1939,7 @@
               "url": "https://plato.stanford.edu/entries/godwin/",
               "title": "William Godwin",
               "description": "William Godwin (1756–1836) was the founder of philosophical\nanarchism. In his An Enquiry Concerning Political Justice\n(1793) he argued that government is a corr",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_godwin.json"
             },
             {
@@ -1955,7 +1955,7 @@
               "url": "https://plato.stanford.edu/entries/double-consciousness/",
               "title": "Double Consciousness",
               "description": "Double-consciousness is a concept in social philosophy\nreferring, originally, to a source of inward “twoness”\nputatively experienced by African-Americans becaus",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_double-consciousness.json"
             },
             {
@@ -1963,7 +1963,7 @@
               "url": "https://plato.stanford.edu/entries/addams-jane/",
               "title": "Jane Addams",
               "description": "Jane Addams (1860–1935) was an activist, community organizer,\ninternational peace advocate, and social philosopher in the United\nStates during the late 19th cen",
-              "occurrences": 0,
+              "occurrences": 1,
               "data": "/sep/mores_addams-jane.json"
             }
           ]
