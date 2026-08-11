@@ -1,0 +1,15 @@
+diff --git a/node_modules/tailwindcss-fade/dist/.index.js.swp b/node_modules/tailwindcss-fade/dist/.index.js.swp
+new file mode 100644
+index 0000000..92b9726
+Binary files /dev/null and b/node_modules/tailwindcss-fade/dist/.index.js.swp differ
+diff --git a/node_modules/tailwindcss-fade/dist/index.js b/node_modules/tailwindcss-fade/dist/index.js
+index a7e5e28..e20640e 100644
+--- a/node_modules/tailwindcss-fade/dist/index.js
++++ b/node_modules/tailwindcss-fade/dist/index.js
+@@ -1,5 +1,5 @@
+ // packages/tailwindcss-fade/src/index.ts
+-import plugin from "tailwindcss/plugin";
++import plugin from "tailwindcss/plugin.js";
+ var normalizeIntensity = (value) => {
+   const trimmed = value.trim();
+   if (trimmed.endsWith("%")) {
