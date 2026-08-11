@@ -2,8 +2,11 @@
 
 For a given corpus it loads the shipped artifacts —
 
-  * ``public/embeddings/{corpus}.json``     (id / target / community / 50-d PCA vec)
-  * ``analysis/{corpus}/networks/full.json`` (the weighted similarity graph)
+  * ``public/embeddings/{corpus}.json``     (id / target / community / 50-d PCA vec,
+    plus the per-node ``strength`` / ``pagerank`` / ``eigenvector`` / ``doc_freq``
+    the pipeline already computed on that run's similarity graph)
+  * ``analysis/{corpus}/networks/full.json`` (the weighted similarity graph —
+    **optional**, needed only for ``coreness``)
   * ``scripts/data/{corpus}.conllu``         (lemma frequencies; Mengzi only)
 
 — computes each candidate ordering per node, and reports (a) how much the orderings
@@ -19,6 +22,17 @@ Metrics (grouped as in the note):
   B. distinctive  — silhouette, coreness (in-community edge-weight fraction)
 The one listed metric this cannot cover is TF-IDF specificity: it needs per-community
 co-occurrence counts, which are not in these artifacts (it is reported as skipped).
+
+**Every metric except ``coreness`` comes from the embeddings artifact alone**, so it
+cannot go out of sync with itself. ``networks/full.json`` is only written under
+``--artifacts``, so on any ordinary pipeline run it is left behind by the newer
+``{corpus}.json`` — which is what used to crash this tool with a ``KeyError`` on the
+first node the stale graph had never heard of. Now a mismatched or absent graph
+simply drops ``coreness`` from the report, with the reason printed.
+
+A metric whose values are all identical (e.g. ``frequency`` when there is nothing to
+read it from) is dropped too, rather than shown as a column of zeros that also drags
+a row of 0.00 through the correlation matrix.
 """
 
 from __future__ import annotations
@@ -46,8 +60,14 @@ METRICS = IMPORTANCE + DISTINCTIVE
 # --------------------------------------------------------------------------- #
 
 def load_embeddings(path: Path):
-    """-> (ids, unit_vecs NxD, community dict, target set). Vectors are L2-normalized
-    so dot products are true cosines (the PCA-reduced vecs are not unit-norm)."""
+    """-> (ids, unit_vecs NxD, community, targets, node_scores). Vectors are
+    L2-normalized so dot products are true cosines (the PCA-reduced vecs are not
+    unit-norm).
+
+    ``node_scores`` are the graph-derived fields the pipeline already wrote onto
+    each node from *this run's* similarity graph, so they need no second artifact
+    and cannot disagree with the communities they are reported against.
+    """
     data = json.loads(path.read_text(encoding="utf-8"))
     nodes = data["nodes"]
     ids = [n["id"] for n in nodes]
@@ -56,12 +76,34 @@ def load_embeddings(path: Path):
     unit = vecs / np.clip(norms, 1e-12, None)
     community = {n["id"]: int(n["community"]) for n in nodes}
     targets = {n["id"] for n in nodes if n.get("target")}
-    return ids, unit, community, targets
+    node_scores = {
+        field: {n["id"]: float(n.get(field) or 0.0) for n in nodes}
+        for field in ("strength", "pagerank", "eigenvector", "doc_freq")
+    }
+    return ids, unit, community, targets, node_scores
 
 
-def load_graph(path: Path) -> nx.Graph:
+def load_graph(path: Path, ids: list[str]) -> tuple[nx.Graph | None, str]:
+    """The weighted similarity graph, or ``(None, reason)``.
+
+    Only ``coreness`` needs it, and it is written solely by ``--artifacts`` — so it
+    is routinely older than the embeddings artifact beside it. Comparing node sets
+    is what catches that: a graph from another run describes another vocabulary
+    (different variant merges, different ``min_freq``), and scoring one run's
+    communities with the other's edges is meaningless even where the ids overlap.
+    """
+    if not path.exists():
+        return None, f"{path} not found (written only by --artifacts)"
     data = json.loads(path.read_text(encoding="utf-8"))
-    return nx.node_link_graph(data, edges="edges")
+    G = nx.node_link_graph(data, edges="edges")
+    missing = set(ids) - set(G)
+    extra = set(G) - set(ids)
+    if missing or extra:
+        return None, (
+            f"{path.name} is from a different run than the embeddings "
+            f"({len(missing)} nodes missing from the graph, {len(extra)} extra) — "
+            f"re-run with --artifacts to refresh it")
+    return G, ""
 
 
 def load_frequencies(path: Path) -> collections.Counter:
@@ -122,15 +164,8 @@ def vec_metrics(ids, unit, community, targets):
     return proto, prox, sil
 
 
-def graph_metrics(G: nx.Graph, community: dict[int, int]):
-    """strength, pagerank, eigenvector, coreness — all from the weighted graph."""
-    strength = {n: float(d) for n, d in G.degree(weight="weight")}
-    pagerank = nx.pagerank(G, weight="weight")
-    try:
-        eigen = nx.eigenvector_centrality_numpy(G, weight="weight")
-    except Exception:                       # disconnected / convergence
-        eigen = {n: float("nan") for n in G}
-
+def coreness_metric(G: nx.Graph, community: dict[str, int]) -> dict[str, float]:
+    """Fraction of a node's edge weight that stays inside its own community."""
     coreness = {}
     for n in G:
         inside = total = 0.0
@@ -140,41 +175,50 @@ def graph_metrics(G: nx.Graph, community: dict[int, int]):
             if community.get(nbr) == community.get(n):
                 inside += w
         coreness[n] = (inside / total) if total else 0.0
-    return strength, pagerank, eigen, coreness
+    return coreness
 
 
-def collect(ids, unit, community, targets, G, freq) -> dict[str, dict]:
+def collect(ids, unit, community, targets, node_scores, freq,
+            G: nx.Graph | None) -> dict[str, dict]:
     proto, prox, sil = vec_metrics(ids, unit, community, targets)
-    strength, pagerank, eigen, coreness = graph_metrics(G, community)
-    return {
+    # Corpus token frequency where we have a parsed corpus to count (Mengzi);
+    # otherwise the artifact's document frequency, which is the frequency signal
+    # the SEP side actually has. Either way it is "how common is this word".
+    frequency = ({n: float(freq.get(n, 0)) for n in ids} if freq
+                 else dict(node_scores["doc_freq"]))
+    scores = {
         "prototypicality": proto,
         "proximity_to_virtue": prox,
-        "frequency": {n: float(freq.get(n, 0)) for n in ids},
-        "strength": strength,
-        "pagerank": pagerank,
-        "eigenvector": eigen,
+        "frequency": frequency,
+        "strength": node_scores["strength"],
+        "pagerank": node_scores["pagerank"],
+        "eigenvector": node_scores["eigenvector"],
         "silhouette": sil,
-        "coreness": coreness,
     }
+    if G is not None:
+        scores["coreness"] = coreness_metric(G, community)
+    # A metric with no variation ranks nothing; keeping it would only add a column
+    # of ties and a row of 0.00 to the correlation matrix.
+    return {met: s for met, s in scores.items() if len(set(s.values())) > 1}
 
 
 # --------------------------------------------------------------------------- #
 # Reporting
 # --------------------------------------------------------------------------- #
 
-def within_community_spearman(ids, community, scores) -> np.ndarray:
+def within_community_spearman(ids, community, scores, metrics) -> np.ndarray:
     """Mean (community-size-weighted) Spearman rank-corr between every metric pair,
     computed *within* each community (the legend ranks within a community)."""
     comms = collections.defaultdict(list)
     for n in ids:
         comms[community[n]].append(n)
-    m = len(METRICS)
+    m = len(metrics)
     acc = np.zeros((m, m))
     wsum = 0.0
     for members in comms.values():
         if len(members) < 3:
             continue
-        cols = np.array([[scores[met][n] for met in METRICS] for n in members])
+        cols = np.array([[scores[met][n] for met in metrics] for n in members])
         if np.allclose(cols.std(axis=0), 0):
             continue
         rho, _ = spearmanr(cols)
@@ -188,22 +232,25 @@ def ranked(members, score) -> list[str]:
     return sorted(members, key=lambda n: score[n], reverse=True)
 
 
-def build_report(ids, community, targets, scores, top: int) -> str:
+def build_report(ids, community, targets, scores, metrics, top: int,
+                 skipped: dict[str, str]) -> str:
     comms = collections.defaultdict(list)
     for n in ids:
         comms[community[n]].append(n)
 
     out = ["# Community node-ordering — metric comparison\n"]
-    corr = within_community_spearman(ids, community, scores)
+    for met, why in skipped.items():
+        out.append(f"> **{met} skipped** — {why}\n")
+    corr = within_community_spearman(ids, community, scores, metrics)
     out.append("## Within-community Spearman correlation between orderings\n")
     out.append("How redundant the metrics are (1.0 = identical ranking). "
                "Low/negative pairs give genuinely different legends.\n")
-    head = "| |" + "|".join(m[:6] for m in METRICS) + "|"
+    head = "| |" + "|".join(m[:6] for m in metrics) + "|"
     out.append(head)
-    out.append("|" + "---|" * (len(METRICS) + 1))
-    for i, met in enumerate(METRICS):
+    out.append("|" + "---|" * (len(metrics) + 1))
+    for i, met in enumerate(metrics):
         row = f"| **{met[:12]}** |" + \
-            "|".join(f"{corr[i, j]:+.2f}" for j in range(len(METRICS))) + "|"
+            "|".join(f"{corr[i, j]:+.2f}" for j in range(len(metrics))) + "|"
         out.append(row)
     out.append("")
 
@@ -212,12 +259,12 @@ def build_report(ids, community, targets, scores, top: int) -> str:
         tset = [n for n in members if n in targets]
         out.append(f"## Community {c} — {len(members)} nodes"
                    + (f"  (targets: {' '.join(tset)})" if tset else ""))
-        cols = {met: ranked(members, scores[met])[:top] for met in METRICS}
-        out.append("| rank |" + "|".join(METRICS) + "|")
-        out.append("|---|" + "---|" * len(METRICS))
+        cols = {met: ranked(members, scores[met])[:top] for met in metrics}
+        out.append("| rank |" + "|".join(metrics) + "|")
+        out.append("|---|" + "---|" * len(metrics))
         for r in range(min(top, len(members))):
             cells = []
-            for met in METRICS:
+            for met in metrics:
                 n = cols[met][r]
                 mark = "*" if n in targets else ""
                 cells.append(f"{mark}{n}{mark}")
@@ -226,17 +273,17 @@ def build_report(ids, community, targets, scores, top: int) -> str:
     return "\n".join(out)
 
 
-def print_digest(corr: np.ndarray) -> None:
+def print_digest(corr: np.ndarray, metrics: list[str]) -> None:
     print("\nWithin-community Spearman (metric redundancy):")
-    print("        " + " ".join(f"{m[:5]:>5}" for m in METRICS))
-    for i, met in enumerate(METRICS):
+    print("        " + " ".join(f"{m[:5]:>5}" for m in metrics))
+    for i, met in enumerate(metrics):
         print(f"{met[:7]:>7} " +
-              " ".join(f"{corr[i, j]:+.2f}"[:5].rjust(5) for j in range(len(METRICS))))
+              " ".join(f"{corr[i, j]:+.2f}"[:5].rjust(5) for j in range(len(metrics))))
     # Flag the most-distinct pairs (candidates for a useful two-way toggle).
     pairs = []
-    for i in range(len(METRICS)):
-        for j in range(i + 1, len(METRICS)):
-            pairs.append((corr[i, j], METRICS[i], METRICS[j]))
+    for i in range(len(metrics)):
+        for j in range(i + 1, len(metrics)):
+            pairs.append((corr[i, j], metrics[i], metrics[j]))
     pairs.sort()
     print("\nMost divergent metric pairs (distinct orderings):")
     for rho, a, b in pairs[:5]:
@@ -260,28 +307,37 @@ def main() -> None:
     emb_path = config.EMBEDDINGS / f"{args.corpus}.json"
     graph_path = config.ANALYSIS / args.corpus / "networks" / "full.json"
     conllu = config.MENGZI_CONLLU if args.corpus == "mengzi" else Path("/nonexistent")
-    for p in (emb_path, graph_path):
-        if not p.exists():
-            raise SystemExit(f"missing artifact: {p} — run `python -m main "
-                             f"--corpus {args.corpus} --artifacts` first")
+    # Only the embeddings artifact is required; the graph is coreness-only.
+    if not emb_path.exists():
+        raise SystemExit(f"missing artifact: {emb_path} — run "
+                         f"`python -m main --corpus {args.corpus}` first")
 
-    ids, unit, community, targets = load_embeddings(emb_path)
-    G = load_graph(graph_path)
+    ids, unit, community, targets, node_scores = load_embeddings(emb_path)
+    G, graph_why = load_graph(graph_path, ids)
     freq = load_frequencies(conllu)
     if not freq:
-        print(f"note: no frequencies for {args.corpus} (frequency metric will be 0); "
-              "TF-IDF specificity is skipped either way (needs co-occurrence counts).")
+        print(f"note: no token frequencies for {args.corpus}; using the artifact's "
+              "doc_freq instead. TF-IDF specificity is skipped either way "
+              "(needs per-community co-occurrence counts).")
+    if G is None:
+        print(f"note: coreness skipped — {graph_why}")
 
-    scores = collect(ids, unit, community, targets, G, freq)
+    scores = collect(ids, unit, community, targets, node_scores, freq, G)
+    metrics = [m for m in METRICS if m in scores]
+    skipped = {m: (graph_why if m == "coreness" and G is None
+                   else "no variation in this run's artifact")
+               for m in METRICS if m not in scores}
 
     n_comm = len(set(community.values()))
     print(f"corpus={args.corpus}  nodes={len(ids)}  communities={n_comm}  "
-          f"targets={len(targets)}")
-    print_digest(within_community_spearman(ids, community, scores))
+          f"targets={len(targets)}  metrics={len(metrics)}/{len(METRICS)}")
+    print_digest(within_community_spearman(ids, community, scores, metrics),
+                 metrics)
 
     out = args.out or (config.ANALYSIS / args.corpus / "community_ordering.md")
-    out.write_text(build_report(ids, community, targets, scores, args.top),
-                   encoding="utf-8")
+    out.write_text(
+        build_report(ids, community, targets, scores, metrics, args.top, skipped),
+        encoding="utf-8")
     print(f"\nfull per-community tables -> {out}")
 
 
