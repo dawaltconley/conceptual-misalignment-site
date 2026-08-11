@@ -3,17 +3,17 @@
 A Digital Humanities project (dissertation MVP) that visualizes **conceptual
 misalignment** between philosophical terms across languages. It compares core
 Confucian virtue concepts — **仁 義 禮 智 信** (and more) — as they appear in the
-classical Chinese *Mengzi* against their English renderings in the **Stanford
+classical Chinese _Mengzi_ against their English renderings in the **Stanford
 Encyclopedia of Philosophy (SEP)**. Where a Chinese concept and its English
 translations occupy different semantic neighborhoods, the misalignment between a
 "thick" source concept and its "thin" translations becomes visible.
 
 The site presents each concept through three complementary lenses:
 
-- **Co-occurrence networks** — PMI graphs of what words cluster *around* a term in
-  each corpus (a *syntagmatic* / topical view).
+- **Co-occurrence networks** — PMI graphs of what words cluster _around_ a term in
+  each corpus (a _syntagmatic_ / topical view).
 - **Similarity networks & embedding scatterplots** — contextual-embedding cosine
-  neighborhoods and a PCA/t-SNE map of the whole vocabulary (a *paradigmatic* /
+  neighborhoods and a PCA/t-SNE map of the whole vocabulary (a _paradigmatic_ /
   substitutability view), with Louvain communities.
 - **Cross-lingual alignment** — an interactive Procrustes alignment of the two
   embedding spaces over user-chosen bilingual anchors.
@@ -42,7 +42,7 @@ scripts/.venv/bin/python -m main            # both corpora + master index
 python -m main --corpus sep --artifacts     # one corpus + analysis dump
 ```
 
-Everything about *how* a corpus is processed lives in `config.py` as
+Everything about _how_ a corpus is processed lives in `config.py` as
 `MENGZI_PIPELINE` / `SEP_PIPELINE` (`Pipeline` objects): model, pooling, min
 frequency, similarity-graph method, Louvain resolution, stopwords, etc. **The
 CLI is small; tune runs by editing `config.py`, not by adding flags.** Full
