@@ -6,18 +6,18 @@ overview and `scripts/README.md` for pipeline internals.
 ## What this is
 
 Dissertation MVP "Mapping Conceptual Misalignment": compares Confucian virtue
-concepts (仁 義 禮 智 信 …) in the classical-Chinese *Mengzi* against their English
+concepts (仁 義 禮 智 信 …) in the classical-Chinese _Mengzi_ against their English
 SEP renderings, via contextual embeddings + PMI co-occurrence. Astro/React/D3
 front end reads JSON produced by a Python pipeline. **MVP deadline 2026-08-15 —
 favor working end-to-end over completeness.**
 
 ## Two lenses (keep them straight)
 
-- **Co-occurrence / PMI** networks = *syntagmatic* (words appearing together →
+- **Co-occurrence / PMI** networks = _syntagmatic_ (words appearing together →
   topical relatedness). `cooccurrence/`.
-- **Embedding similarity + scatter** = *paradigmatic* (substitutable → same-type).
+- **Embedding similarity + scatter** = _paradigmatic_ (substitutable → same-type).
   `embeddings/`. Whole-vocab embedding clustering is **register/POS-dominated**,
-  not topical — see `notes/embedding-communities-and-semantics.md`.
+  not topical — see `notes/claude/embedding-communities-and-semantics.md`.
 
 ## Running things
 
@@ -48,7 +48,7 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
 
 ## Conventions & gotchas
 
-- **Don't hand-edit `public/**` or `src/data/terms.json`** — the pipeline
+- **Don't hand-edit `public/**`or`src/data/terms.json`\*\* — the pipeline
   regenerates them, and they're often mid-experiment.
 - **Treat `config.py` as the user's** — it's frequently staged / mid-edit; don't
   change `TERMS`, pipeline params, or stopwords unless asked.
@@ -63,7 +63,7 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   export**: the PMI lens shares the embedding lens's variant merge, which needs
   vectors first. Both halves are revertible (`Pipeline.merge_similarity` /
   `merge_cooccurrence`); the lens crossing is argued in
-  `notes/derivational-variant-merging.md`.
+  `notes/claude/derivational-variant-merging.md`.
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
   but harmless. Pyright may flag `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
   `vectors.reduce_vectors` as unknown — **stale false-positives**; they run fine.
@@ -78,12 +78,14 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
 - SEP community register-domination — to try (per-pipeline): **HDBSCAN** option.
   **Debiasing** (all-but-the-top / whitening) is **done**: `Pipeline.debias`
   (`abtt`/`whiten`) + `scripts/tools/debias_diagnostics.py`; see
-  `notes/frequency-gradient-and-debiasing.md`.
+  `notes/claude/frequency-gradient-and-debiasing.md`.
 - Active terms: **仁 義 禮 智 信** (others commented out in `config.py`).
 
 ## Memory & notes
 
-- `notes/` — methodology memos with verified reference lists.
+- `notes/claude` — methodology memos with verified reference lists. The parent
+  `notes/` directory and any other subdirectories are reserved for human
+  writing.
 - Persistent agent memory lives under
   `~/.claude/projects/-home-dawaltco-Code-itp-conceptual-misalignment-site/memory/`
   (indexed by `MEMORY.md`); update it for durable, non-obvious facts.
