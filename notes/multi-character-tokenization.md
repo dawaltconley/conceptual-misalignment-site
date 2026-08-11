@@ -32,11 +32,42 @@ recombined into one token by `corpus.recombine.merge_doc`, applied inside the
 CoNLL-U loader so nothing downstream has to know the corpus was ever characters.
 The merged token's **lemma is the joined lemmas** (node ids key on the lemma) and
 its **text is the joined forms** (the display glyph, which
-`cooccurrence.pmi_spacy.attach_forms` already surfaces). It inherits POS, tag,
-morph and dep from the group's syntactic root.
+`cooccurrence.pmi_spacy.attach_forms` already surfaces). It inherits tag, morph
+and dep from the group's syntactic root, and its POS from the root **except for
+names** — see below.
 
 Result over the whole Mengzi: **243 word types, 889 merged tokens** — 天下 ×173,
 父母 ×37, 文王 ×35, 萬章 ×23, 百姓 ×19, 伊尹 ×19, 周公 ×18, 公孫丑 ×17, 禽獸 ×15.
+
+### A merged name is a name
+
+Inheriting the head's POS is right for ordinary compounds — 天下 is the `NOUN` 下
+was — but wrong for a name. In a Chinese name+title compound the **modifier**
+carries the referential identity and the head is an ordinary noun:
+
+```
+文/PROPN[NameType=Prs] --compound--> 王/NOUN   ("King Wen")
+周/PROPN[NameType=Nat] --compound--> 公/NOUN   ("Duke of Zhou")
+```
+
+Head-inheritance would make those `NOUN`, and since `content_pos` is
+`{"NOUN","VERB","ADJ"}` precisely to keep proper nouns out of the vocabulary
+(the English side excludes them the same way), merging would quietly re-admit
+文王 ×35, 周公 ×18, 宣王 ×14, 武王 ×10, 繆公 ×9, 惠王 ×7 … — 29 name compounds
+clearing `min_freq=5`.
+
+So `corpus.recombine.merged_pos` gives a group containing a proper noun the POS
+`PROPN`. **The treebank's gold annotation is the entire source — no NER pass is
+needed.** 141 types / 386 tokens take PROPN this way, and every compound with no
+`PROPN` constituent (天下, 父母, 禽獸, 土地, 百姓, 國家, 君臣, 倉廩 …) is untouched.
+
+The rule catches place and state names too — 齊國, 魯國, 岐山, 梁山, 幽州 — because
+their modifier is `PROPN` as well. That is consistent with how the English side
+treats proper nouns, and academic: all seven are ≤2 occurrences, below both
+frequency floors. To restrict the rule to **persons** specifically, additionally
+require the root's XPOS to start with `n,名詞,人` — the treebank's person
+categories (王 公 伯 徒 = `人,役割`; 人 夫 = `人,人`; 子 弟 = `人,関係`) as against
+`主体,集団` (國), `固定物,地形` (山) and `制度,場` (州).
 
 ## What we do not merge, and why
 
@@ -63,8 +94,10 @@ Applied to every candidate group, with the corpus-wide counts they reject:
 
 Note what the guards do **not** have to handle. Merged tokens inherit their
 root's POS, so 足以 comes out `AUX` and the 欣然 family `ADV`; the pipeline's
-existing `content_pos={"NOUN","VERB","ADJ"}` discards those 56 of 889 with no
-extra rule. What survives is 591 `NOUN` + 224 `PROPN`.
+existing `content_pos={"NOUN","VERB","ADJ"}` discards those 72 of 889 with no
+extra rule. The final split is 431 `NOUN`, 386 `PROPN` (names, per the rule
+above), 40 `AUX`, 18 `VERB`, 14 `ADV` — so only the 431 `NOUN` merges reach the
+vocabulary.
 
 ## Curated overrides
 
@@ -88,21 +121,12 @@ the characters losing the most occurrences to a merge.
 ## Consequences to watch
 
 **`Pipeline.min_freq` shifts under you.** Measured on the embedding vocabulary at
-`min_freq=5`: 602 → 616 words. 天 drops 292 → 117, 下 227 → 47, 父 82 → 26, 母
-47 → 10, while 天下 (173), 父母 (37) and 文王 (35) appear as words. Fifteen
+`min_freq=5`: 602 → 606 words. 天 drops 292 → 117, 下 227 → 47, 父 82 → 26, 母
+47 → 10, while 天下 (173) and 父母 (37) appear as words. Fifteen
 characters fall _below_ the floor because they only ever occurred inside a
 compound (倉, 廩, 姓, 禽, 畎 …). The distribution the vocab is cut from is not the
 one `min_freq=5` was tuned against — re-check it after any change to the merge
 set. (Target counts are unchanged by construction: 仁 156, 義 108.)
-
-**Merging partly defeats the `PROPN` exclusion.** `content_pos` is
-`{"NOUN","VERB","ADJ"}`, so proper nouns are deliberately out of the vocabulary —
-but a royal name is a `PROPN` modifying a common noun (文 --`compound`--> 王), so
-the merged token inherits `NOUN` from its head and enters the vocabulary anyway.
-29 such words clear `min_freq=5`, including 文王 ×35, 周公 ×18, 宣王 ×14, 武王 ×10,
-繆公 ×9, 惠王 ×7. Whether that is wanted is a judgement call — these are
-referential nouns, but they are also names — and `never_merge` is where to act on
-it.
 
 **Merged spans embed as spans.** GujiRoBERTa is character-tokenized, so a
 two-character word is two subwords pooled by `subword_pooling="mean"` (already
