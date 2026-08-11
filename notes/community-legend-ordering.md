@@ -55,6 +55,65 @@ The two that are **free, on-theme, and answer each framing directly**:
 - For a corpus-grounded "most represented," add a **`freq`** field to the embeddings export
   (cheapest high-value pipeline change; rank or log it).
 
+## Measured against the post-debiasing SEP run (2026-08-10)
+
+Every metric above, computed over the shipped artifact (3455 nodes, 21 communities,
+17 targets) with `scripts/tools/community_ordering.py --corpus sep`. Within-community
+Spearman, so it measures the ranking the legend actually shows.
+
+**The recommendation above pairs two metrics that turn out to be the same metric.**
+Prototypicality and silhouette correlate at **+0.90** — as a toggle they would give the
+reader the same list twice. Strength and pagerank are worse, at **+0.99**: pick either,
+never both. Eigenvector is only weakly tied to anything (+0.13…+0.44) but earns its
+independence by surfacing oddities rather than exemplars — `patrilineage`, `psychopath`,
+`piano`, `trolley`, `noun`, `grammarian` are its per-community winners. Not a legend.
+
+**`proximity_to_virtue` is the one to default to.** Two independent reasons:
+
+1. It **degrades into prototypicality exactly where it has to** and nowhere else.
+   Verified: the two rankings are identical in 11 of 21 communities, and those 11 are
+   precisely the target-free ones (the anchor falls back to the centroid by
+   construction). So choosing it costs nothing in the communities it cannot speak to.
+2. In the 10 communities that **do** hold a target it is dramatically better, because it
+   inherits the local geometry rather than the noisy partition — the same asymmetry
+   recorded in [[sep-community-register-domination]], where per-target neighbourhoods
+   are coherent while the community around them often is not:
+
+| community | prototypicality says | proximity_to_virtue says |
+|---|---|---|
+| C5 *trustworthiness* | trustor, wrongdoer, interrogator, employer, perpetrator | **trust, distrust, reliability, unreliable, betray** |
+| C14 *faith ritual righteousness* | sermon, textual, scripture, poem, prose | **prayer, religion, salvation, divine, rite** |
+| C6 *knowledge* | conceptualization, imagine, conception, vision | **knowing, ignorance, awareness, learning, foreknowledge** |
+| C12 *wisdom* | apartheid, immigrant, indigenous, woman, racism | **courage, virtue, philosophizing, advice** |
+
+Prototypicality is reporting the register band; proximity is reporting the concept.
+
+**The genuinely orthogonal second axis is frequency** (ρ −0.03…+0.08 against everything,
+including proximity at −0.02) — so the useful toggle is *proximity / frequency*, not
+*prototypicality / silhouette*. That makes the `freq` export below the blocking piece
+rather than a nice-to-have.
+
+### Why frequency does not currently register
+
+Two separate faults, one now fixed:
+
+1. **There is no corpus-frequency field in the export at all.** `Embeddings.from_matrix`
+   writes `doc_freq`, `norm`, `strength`, `pagerank`, `eigenvector` — never the raw count.
+   `community_ordering.py` was reading frequency from a **conllu**, which only Mengzi has,
+   so every SEP word scored 0.0: a dead column, and a row of +0.00 across the correlation
+   matrix that made frequency look uncorrelated when it was simply absent. The tool now
+   falls back to `doc_freq` for SEP.
+2. **`doc_freq` is a saturating stand-in.** It is bounded by the corpus's 184 documents
+   and heavily tied: **85% of nodes sit in a tie group of 10 or more**, and the maximum is
+   184 — every document. Within a community it separates far less than a token count
+   would, and ties fall back to insertion order.
+
+The fix is the one this note already called cheapest: `embed()` **already computes** the
+raw counts (`content_frequencies` → `freq`, passed to `families.merge_map(counts=…)`) and
+then discards them. Threading that into `Embeddings.from_matrix` as a `freq` field, plus
+the `src/lib/embeddings.ts` Zod schema, makes the second sort axis real. Log or rank it
+for display — the counts are heavy-tailed.
+
 Compute similarities on the full 50-d `vec` (not the 2-D projection); L2-normalize first so
 it's true cosine (the reduced vectors aren't unit-norm).
 
