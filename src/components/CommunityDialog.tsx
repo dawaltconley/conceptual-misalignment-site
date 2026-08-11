@@ -2,6 +2,7 @@ import type { EmbeddingNode } from '@lib/embeddings'
 import type { Dictionary, DictionaryEntry } from '@lib/build/cedict'
 import { useRef } from 'react'
 import { Dialog } from '@base-ui/react/dialog'
+import clsx from 'clsx'
 
 export interface CommunityDialogProps {
   title: string
@@ -47,7 +48,7 @@ export default function CommunityDialog({
                     </>
                   )}
                   <th scope="col">Strength</th>
-                  <th scope="col">Document frequency</th>
+                  <th scope="col">Documents</th>
                   <th scope="col">Eigenvector</th>
                 </tr>
               </thead>
@@ -60,13 +61,19 @@ export default function CommunityDialog({
                   return readings.map((r, i) => (
                     <tr
                       key={n.id + (r ? r[0] : '')}
-                      className="*:border *:border-gray-300 *:p-1"
+                      className={clsx(
+                        '*:border *:border-gray-300 *:p-1',
+                        n.target && 'font-bold',
+                      )}
                     >
                       {i === 0 && (
                         <th
                           scope="row"
                           rowSpan={readings.length}
-                          className="text-left font-normal"
+                          className={clsx(
+                            'text-left',
+                            !n.target && 'font-normal',
+                          )}
                         >
                           {n.id}
                         </th>
@@ -74,7 +81,7 @@ export default function CommunityDialog({
                       {r && (
                         <>
                           <td>{r[0]}</td>
-                          <td>{r[1]}</td>
+                          <td className="max-w-prose">{r[1]}</td>
                         </>
                       )}
                       {i === 0 && (
@@ -83,7 +90,7 @@ export default function CommunityDialog({
                             {n.strength.toPrecision(5)}
                           </td>
                           <td rowSpan={readings.length} className="text-right">
-                            {n.doc_freq.toPrecision(5)}
+                            {n.doc_freq.toFixed(0)}
                           </td>
                           <td rowSpan={readings.length} className="text-right">
                             {n.eigenvector.toPrecision(5)}
