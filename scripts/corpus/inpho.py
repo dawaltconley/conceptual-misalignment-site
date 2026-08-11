@@ -16,6 +16,9 @@ _EXCLUDE = {
     'confucianism-modern',
     'chinese-mind',
     'emotions-chinese',
+    'confucian-gender',
+    'korean-confucianism',
+    'dai-zhen',
 }
 
 
