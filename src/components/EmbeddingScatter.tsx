@@ -212,6 +212,7 @@ export default function EmbeddingScatter({
         return (
           nodes && (
             <CommunityDialog
+              key={id}
               title={`Louvain community C${id}`}
               description="The Louvain communities, with elements sorted by embedding strength."
               nodes={nodes}
