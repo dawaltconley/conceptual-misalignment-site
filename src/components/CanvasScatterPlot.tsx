@@ -156,6 +156,7 @@ function CanvasScatterPlot({
       ctx.fill()
       if (isHighlighted(p)) {
         ctx.strokeStyle = '#000000'
+        ctx.globalAlpha = 1
       } else {
         ctx.strokeStyle = p.color || DEFAULT_COLOR
         ctx.globalAlpha = alpha + (1 - alpha) * 0.2
