@@ -14,9 +14,8 @@ export const TermSchema = z.object({
 
 /**
  * One source: a chapter, an article, the whole corpus, or a corpus stand-in.
- * `occurrences` and `data` are nullish because they don't apply in every context
- * — the per-corpus embedding source has no term `occurrences`, and a per-file
- * `NetworkData.source` has no `data` path to itself; only the master index sets both.
+ * `occurrences` is nullish because the per-corpus embedding source has no term
+ * `occurrences`.
  */
 export const SourceSchema = z.object({
   id: z.string(),
@@ -25,6 +24,14 @@ export const SourceSchema = z.object({
   description: z.string().nullable(),
   /** Term occurrences in this source (absent on the corpus embedding source). */
   occurrences: z.number().nullish(),
+})
+export type Source = z.infer<typeof SourceSchema>
+
+/**
+ * A per-file `NetworkData.source` has no `data` path to
+ * itself; only the master index sets the data path.
+ */
+export const MasterSourceSchema = SourceSchema.extend({
   /** Web path to this source's dataset (set only in the master index). */
   data: z.string().nullish(),
 })
@@ -42,11 +49,11 @@ const CorpusSideSchema = z.object({
    * analyzed corpus); always 0 on the Mengzi side. */
   chinesePhilosophyOccurrences: z.number().default(0),
   /** Each source's `data` returns an embedding dataset (usually one, per corpus). */
-  embeddings: SourceSchema.array(),
+  embeddings: MasterSourceSchema.array(),
   /** Each source's `data` returns a similarity NetworkData JSON. */
-  similarity: SourceSchema.array(),
+  similarity: MasterSourceSchema.array(),
   /** Each source's `data` returns a co-occurrence NetworkData JSON (one per source). */
-  cooccurrence: SourceSchema.array(),
+  cooccurrence: MasterSourceSchema.array(),
 })
 
 export const MasterTermSchema = z.object({
