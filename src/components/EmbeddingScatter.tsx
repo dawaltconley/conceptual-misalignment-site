@@ -4,6 +4,11 @@ import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema, type EmbeddingNode } from '@lib/embeddings'
+import {
+  groupCommunities,
+  COMMUNITY_SORT_LABELS,
+  type CommunitySort,
+} from '@lib/communities'
 import { pinyinKeywords } from '@lib/pinyin'
 import Button from './Button'
 import Toggle from './Toggle'
@@ -46,6 +51,14 @@ interface EmbeddingScatterProps {
    * the scatterplot. Should be a number between 0 and 1.
    */
   maxDocFreq?: number
+
+  /**
+   * How to order the words listed inside each community, in the legend and the
+   * community dialog. Defaults to `proximity` (closeness to that community's
+   * virtue), which `notes/community-legend-ordering.md` measures as the most
+   * informative; `strength` is the previous behaviour.
+   */
+  communitySort?: CommunitySort
 }
 
 /**
@@ -60,6 +73,7 @@ export default function EmbeddingScatter({
   stepsPerPost = 2,
   minDocFreq = 0,
   maxDocFreq = 1,
+  communitySort = 'proximity',
 }: EmbeddingScatterProps): JSX.Element {
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
@@ -124,18 +138,11 @@ export default function EmbeddingScatter({
     [data, dictionary],
   )
 
-  // Rank members by weighted degree (strength) so the tightest/most
-  // central words in each community come first; alphabetical is noise.
+  // Rank members within each community so the words that say what it is come
+  // first; alphabetical is noise. See `communitySort`.
   const communities = useMemo<EmbeddingNode[][]>(
-    () =>
-      data?.nodes
-        .toSorted((a, b) => b.strength - a.strength)
-        .reduce<EmbeddingNode[][]>((communities, n) => {
-          communities[n.community] ??= []
-          communities[n.community].push(n)
-          return communities
-        }, []) || [],
-    [data],
+    () => (data ? groupCommunities(data.nodes, communitySort) : []),
+    [data, communitySort],
   )
   const communityLegend = useMemo<LegendLabel[]>(
     () =>
@@ -214,7 +221,7 @@ export default function EmbeddingScatter({
             <CommunityDialog
               key={id}
               title={`Louvain community C${id}`}
-              description="The Louvain communities, with elements sorted by embedding strength."
+              description={`The Louvain communities, with elements sorted by ${COMMUNITY_SORT_LABELS[communitySort]}.`}
               nodes={nodes}
               handle={dialog}
               dictionary={dictionary}
