@@ -42,6 +42,7 @@ const renderings = [...new Set(master.terms.flatMap((t) => t.renderings))]
     </p>
     <ComponentGallery
       client:only="react"
+      master={master}
       hanzi={hanzi}
       terms={terms}
       renderings={renderings}

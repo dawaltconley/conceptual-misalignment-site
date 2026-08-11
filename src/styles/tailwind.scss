@@ -341,6 +341,15 @@
     }
   }
 
+  .link {
+    color: theme('colors.primary.DEFAULT');
+    text-decoration: underline;
+
+    &:hover {
+      color: theme('colors.primary.400');
+    }
+  }
+
   .underline-link {
     @apply relative;
 

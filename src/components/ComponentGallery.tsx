@@ -1,3 +1,4 @@
+import type { Master } from '@lib/terms'
 import { useEffect, useState } from 'react'
 import Button from './Button'
 import Select from './Select'
@@ -5,10 +6,12 @@ import Toggle from './Toggle'
 import Progress from './Progress'
 import Combobox, { type ComboboxOption } from './Combobox'
 import TagsCombobox from './TagsCombobox'
+import SourceCard from './SourceCard'
 
 const PROGRESS_MAX = 500
 
 interface ComponentGalleryProps {
+  master: Master
   /** Hanzi from the Mengzi networks, keyed for pinyin search. */
   hanzi: ComboboxOption[]
   /** The English renderings from the master term index. */
@@ -24,6 +27,7 @@ interface ComponentGalleryProps {
  * are wired into the real views.
  */
 export default function ComponentGallery({
+  master,
   hanzi,
   renderings,
   terms,
@@ -96,6 +100,13 @@ export default function ComponentGallery({
         <span className="text-sm text-gray-500">
           layout: {layout}, centered: {String(centered)}
         </span>
+      </Section>
+
+      <Section
+        title="SourceCard"
+        note="Displays information on a corpus source."
+      >
+        <SourceCard source={master.terms[0].english[0].cooccurrence[0]} />
       </Section>
 
       <Section
