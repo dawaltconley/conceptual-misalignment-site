@@ -24,7 +24,7 @@ const hanzi: ComboboxOption[] = Object.values(dictionary)
     value: entry.hanzi,
     // Every reading, so 中 is reachable by both zhong1 and zhong4.
     keywords: entry.readings.flatMap((r) => pinyinKeywords(r.pinyin)),
-    note: [entry.pinyin, entry.readings[0].definitions[0]]
+    note: [entry.readings[0].pinyin, entry.readings[0].definitions[0]]
       .filter(Boolean)
       .join(' · '),
   }))

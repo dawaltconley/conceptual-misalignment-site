@@ -19,6 +19,7 @@ export default function HanziNode({
 }: HanziNodeProps) {
   const nodeRef = useRef<HTMLSpanElement>(null)
   const { open, close, triggerProps } = useNetworkTooltip(id)
+  const pinyin = entry.readings[0].pinyin
 
   return (
     <span
@@ -30,7 +31,7 @@ export default function HanziNode({
       <span
         className={`mt-0.5 text-xs ${isCentral ? 'text-red-100' : 'text-gray-400'}`}
       >
-        {entry.pinyin}
+        {pinyin}
       </span>
       <NetworkTooltip open={open} onDismiss={close} anchor={nodeRef}>
         <HanziDefinition entry={entry} maxDefinitions={maxEntries} />

@@ -17,7 +17,7 @@ export interface DictionaryEntry {
   hanzi: string
   /** Every reading, meanings before cross-references. Never empty. */
   readings: DictionaryReading[]
-  /** The first reading's pinyin — what a one-line label shows. */
+  /** @deprecated The first reading's pinyin — what a one-line label shows. */
   pinyin: string
   /**
    * CC-CEDICT knows this headword *only* as a name — 舜, 孟子, 秦. Ordinary
@@ -206,9 +206,11 @@ export async function buildDictionary(
   const parts = wanted.size > 0 ? await scanCedict(wanted) : null
 
   for (const hanzi of unresolved) {
-    const syllables = [...hanzi].map(
-      (char) => result[char]?.pinyin ?? (parts && toEntry(char, parts)?.pinyin),
-    )
+    const syllables = [...hanzi].map((char) => {
+      const entry =
+        char in result ? result[char] : parts && toEntry(char, parts)
+      return entry?.readings[0]?.pinyin
+    })
     // All or nothing: half a reading would be misleading rather than useful.
     if (syllables.some((syllable) => !syllable)) continue
     const pinyin = syllables.join(' ')

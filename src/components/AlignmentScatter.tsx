@@ -2,11 +2,7 @@ import type { Dictionary } from '@lib/build/cedict'
 import { useState, useEffect, useMemo } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
-import {
-  EmbeddingDatasetSchema,
-  type EmbeddingDataset,
-  type EmbeddingNode,
-} from '@lib/embeddings'
+import { EmbeddingDatasetSchema, type EmbeddingDataset } from '@lib/embeddings'
 import {
   procrustes,
   applyRotation,
@@ -97,7 +93,7 @@ export default function AlignmentScatter({
           value: n.id,
           // Every reading, so 中 is reachable by both zhong1 and zhong4.
           keywords: entry?.readings.flatMap((r) => pinyinKeywords(r.pinyin)),
-          note: entry?.pinyin,
+          note: entry?.readings[0]?.pinyin,
         }
       }),
     [chineseData, dictionary],

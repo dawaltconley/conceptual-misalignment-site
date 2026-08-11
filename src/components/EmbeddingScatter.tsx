@@ -114,10 +114,11 @@ export default function EmbeddingScatter({
     () =>
       data?.nodes.map((n) => {
         const entry = dictionary?.[n.id]
+        const pinyin = entry?.readings[0]?.pinyin
         return {
           value: n.id,
-          keywords: entry && pinyinKeywords(entry.pinyin),
-          note: entry?.pinyin,
+          keywords: pinyin ? pinyinKeywords(pinyin) : undefined,
+          note: pinyin,
         }
       }) || [],
     [data, dictionary],
