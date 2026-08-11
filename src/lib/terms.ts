@@ -35,6 +35,7 @@ export const MasterSourceSchema = SourceSchema.extend({
   /** Web path to this source's dataset (set only in the master index). */
   data: z.string().nullish(),
 })
+export type MasterSource = z.infer<typeof MasterSourceSchema>
 
 const CorporaSchema = z.literal(['mengzi', 'sep'])
 export type Corpora = z.infer<typeof CorporaSchema>
@@ -67,7 +68,6 @@ export const MasterSchema = z.object({
   terms: MasterTermSchema.array(),
 })
 
-export type MasterSource = z.infer<typeof SourceSchema>
 export type CorpusSide = z.infer<typeof CorpusSideSchema>
 export type MasterTerm = z.infer<typeof MasterTermSchema>
 export type Master = z.infer<typeof MasterSchema>

@@ -1,7 +1,7 @@
 import type { Master, CorpusSide } from '@lib/terms'
 import type { Dictionary } from '@build/cedict'
 import { useState } from 'react'
-import MultiNetwork, { type NetworkRef } from './MultiNetwork'
+import MultiNetwork from './MultiNetwork'
 import Select from './Select'
 
 type NetworkKind = 'cooccurrence' | 'similarity'
@@ -19,12 +19,8 @@ interface TermNetworkProps {
 }
 
 /** The networks to feed one MultiNetwork for a corpus side, per kind. */
-function refsFor(side: CorpusSide, kind: NetworkKind): NetworkRef[] {
-  const sources = kind === 'similarity' ? side.similarity : side.cooccurrence
-  // `data` is nullish on the shared Source type; keep only sources with a path.
-  return sources.flatMap((s) =>
-    s.data ? [{ id: s.id, title: s.title, path: s.data }] : [],
-  )
+function refsFor(side: CorpusSide, kind: NetworkKind) {
+  return kind === 'similarity' ? side.similarity : side.cooccurrence
 }
 
 /**
@@ -57,8 +53,8 @@ export default function TermNetwork({
   if (!term || !english) return <div>No term data.</div>
 
   return (
-    <div className="items-start justify-center xl:flex xl:gap-6">
-      <div className="xl:w-1/2">
+    <div className="items-start justify-center 2xl:flex 2xl:gap-6">
+      <div className="2xl:w-1/2">
         <Select
           label="Chinese term"
           value={term.hanzi}
@@ -75,7 +71,7 @@ export default function TermNetwork({
           sourceAlign="left"
         />
       </div>
-      <div className="mt-8 xl:mt-0 xl:w-1/2">
+      <div className="mt-8 2xl:mt-0 2xl:w-1/2">
         <Select
           label="English rendering"
           value={english.term.label}

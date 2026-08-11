@@ -1,10 +1,13 @@
 import type { Dictionary } from '@build/cedict'
+import type { MasterSource } from '@lib/terms'
 import type { NetworkData } from '@lib/networkx'
 import Network, { NetworkSkeleton, Wrapper as NetworkWrapper } from './Network'
 import useData from '@lib/browser/hooks/useData'
 import { NetworkDataSchema } from '@lib/networkx'
-import { useState, type ReactNode } from 'react'
-import Toggle from './Toggle'
+import { useState, useMemo, type ReactNode } from 'react'
+import useScrollPosition from '@lib/browser/hooks/useScrollPosition'
+import { Tabs } from '@base-ui/react'
+import SourceCard from './SourceCard'
 import clsx from 'clsx'
 
 type Side = 'left' | 'right'
@@ -19,7 +22,7 @@ export interface NetworkRef {
 
 interface MultiNetworkProps {
   /** The networks to switch between. A single entry hides the sidebar. */
-  sources: NetworkRef[]
+  sources: MasterSource[]
   /** The node held at the centre of the graph (the term / rendering label). */
   centralNodeId: string
   sourceAlign?: Side
@@ -38,50 +41,69 @@ export default function MultiNetwork({
   sourceAlign = 'right',
   dictionary,
 }: MultiNetworkProps): JSX.Element {
-  const [selected, setSelected] = useState(0)
-  const active = sources[selected]
+  const sourceMap = useMemo(
+    () => new Map(sources.map((s) => [s.id, s])),
+    [sources],
+  )
+  const [selected, setSelected] = useState(sources[0].id)
+  const active = sourceMap.get(selected)
   const { status, data, errorMessage } = useData(
-    active?.path ?? '',
+    active?.data ?? '',
     assertNetworkData,
   )
   const network = data?.network ?? null
 
   return (
-    <Wrapper>
-      {sources.length === 0 ? (
-        <NetworkError message={`No network for ${centralNodeId}`} />
-      ) : status === 'loading' ? (
-        <NetworkSkeleton />
-      ) : status === 'error' ? (
-        <NetworkError message={errorMessage} />
-      ) : network ? (
-        <Network
-          centralNodeId={centralNodeId}
-          data={network}
-          dictionary={dictionary}
-        />
-      ) : (
-        <NetworkError message={`No occurrences of ${centralNodeId}`} />
-      )}
-
-      {sources.length > 1 && (
-        <SourceSidebar align={sourceAlign}>
-          {sources.map((s, i) => (
-            <Source
-              key={s.id}
-              title={s.title}
-              isActive={i === selected}
-              onClick={() => setSelected(i)}
+    <Tabs.Root
+      value={selected}
+      onValueChange={(v) => setSelected(v)}
+      orientation="vertical"
+      render={
+        <Wrapper>
+          {sources.length === 0 ? (
+            <NetworkError message={`No network for ${centralNodeId}`} />
+          ) : status === 'loading' ? (
+            <NetworkSkeleton />
+          ) : status === 'error' ? (
+            <NetworkError message={errorMessage} />
+          ) : network ? (
+            <Network
+              centralNodeId={centralNodeId}
+              data={network}
+              dictionary={dictionary}
             />
-          ))}
-        </SourceSidebar>
-      )}
-    </Wrapper>
+          ) : (
+            <NetworkError message={`No occurrences of ${centralNodeId}`} />
+          )}
+
+          {sources.length > 1 && (
+            <Tabs.List
+              render={
+                <SourceSidebar align={sourceAlign}>
+                  {sources.map((s) => (
+                    <Tabs.Tab key={s.id} value={s.id}>
+                      <SourceCard
+                        source={s}
+                        isHighlighted={s.id === selected}
+                      />
+                    </Tabs.Tab>
+                  ))}
+                </SourceSidebar>
+              }
+            />
+          )}
+        </Wrapper>
+      }
+    />
   )
 }
 
 function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-  return <div className="flex-row xl:flex">{children}</div>
+  return (
+    <div className="items-top flex-row justify-between xl:flex xl:aspect-video">
+      {children}
+    </div>
+  )
 }
 
 interface SourceSidebarProps {
@@ -90,13 +112,20 @@ interface SourceSidebarProps {
 }
 
 function SourceSidebar({ align, children }: SourceSidebarProps): JSX.Element {
+  const { ref, position } = useScrollPosition<HTMLDivElement>({ threshold: 8 })
   return (
     <div
+      ref={ref}
       className={clsx(
-        'mt-4 flex shrink flex-row flex-wrap gap-2 xl:mt-0 xl:flex-col',
+        'fade-mask mt-4 flex max-h-96 shrink-0 flex-row flex-wrap items-stretch justify-center gap-2 overflow-y-scroll p-1 pr-4 xl:mt-0 xl:h-full xl:max-h-none xl:basis-auto xl:flex-col xl:flex-nowrap xl:justify-normal',
         align === 'right'
           ? 'items-start xl:ml-2'
           : '-order-1 items-end xl:mr-2',
+        {
+          'fade-bottom-8': position === 'top',
+          'fade-y-8': position === 'middle',
+          'fade-top-8': position === 'bottom',
+        },
       )}
     >
       {children}
@@ -120,23 +149,4 @@ function NetworkError({ message }: NetworkErrorProps): JSX.Element {
 
 function assertNetworkData(data: unknown): NetworkData {
   return NetworkDataSchema.parse(data)
-}
-
-interface SourceProps {
-  title: string
-  isActive?: boolean
-  onClick: () => void
-}
-
-function Source({ title, isActive, onClick }: SourceProps): JSX.Element {
-  return (
-    // Radio-like: pressing the selected source keeps it selected.
-    <Toggle
-      className="max-w-40 p-1 xl:block"
-      pressed={isActive}
-      onPressedChange={onClick}
-    >
-      {title}
-    </Toggle>
-  )
 }
