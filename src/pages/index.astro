@@ -8,7 +8,7 @@ import termsJson from '@data/terms.json'
 import { EmbeddingDatasetSchema } from '@lib/embeddings'
 import mengziEmbeds from '~/public/embeddings/mengzi.json'
 import EmbeddingScatter from '@components/EmbeddingScatter'
-import AlignmentScatter from '@components/AlignmentScatter'
+// import AlignmentScatter from '@components/AlignmentScatter'
 
 const master = MasterSchema.parse(termsJson)
 
@@ -67,16 +67,16 @@ const embeddingDictionary = await buildDictionary(
         </div>
       </div>
     </div>
-    <div class="mx-auto mt-12 max-w-screen-xl">
-      <h2 class="mb-4 text-xl font-bold">Cross-lingual alignment</h2>
-      <div class="mx-auto max-w-2xl">
-        <AlignmentScatter
-          client:only="react"
-          chinese="/embeddings/mengzi.json"
-          english="/embeddings/sep.json"
-          dictionary={embeddingDictionary}
-        />
-      </div>
-    </div>
+    <!-- <div class="mx-auto mt-12 max-w-screen-xl"> -->
+    <!--   <h2 class="mb-4 text-xl font-bold">Cross-lingual alignment</h2> -->
+    <!--   <div class="mx-auto max-w-2xl"> -->
+    <!--     <AlignmentScatter -->
+    <!--       client:only="react" -->
+    <!--       chinese="/embeddings/mengzi.json" -->
+    <!--       english="/embeddings/sep.json" -->
+    <!--       dictionary={embeddingDictionary} -->
+    <!--     /> -->
+    <!--   </div> -->
+    <!-- </div> -->
   </main>
 </Layout>
