@@ -314,7 +314,7 @@ function nodeToScatterPoint(
     y: vec[1] ?? 0,
     color: getColor(data.community),
     opacity: data.doc_freq / corpusDocuments,
-    size: Math.log2(data.strength + 1), // works well
+    size: Math.log2(data.strength + 1) * 2, // works well
     // size: Math.log10(data.pagerank + 1) * 5000,
     data,
   }
