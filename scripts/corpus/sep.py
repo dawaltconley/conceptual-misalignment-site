@@ -8,6 +8,7 @@ from corpus import cache
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
 from random import random
+from slugify import slugify
 from models import Source, Rendering
 cache.install()
 
@@ -161,12 +162,12 @@ def get_doc_id(sep_url: str) -> str:
     paths = urlparse(sep_url).path.split("/")
     try:
         e = paths.index("entries")
-        doc_id = paths[e + 1]
+        doc_id = "-".join(paths[e + 1:])
     except (IndexError, ValueError):
         raise err
     if not doc_id:
         raise err
-    return doc_id
+    return slugify(doc_id)
 
 
 def _search(term: str, page: int = 1) -> _Response:
