@@ -1,0 +1,5 @@
+{
+  "_comment": "Hand-curated word merges layered on the UD word-formation relations. `merge` force-merges a run of whole tokens spelling the word, wherever it appears inside one sentence — this is where bisyllabic words the Kyoto treebank labels `nmod` belong (諸侯, 天子, 大夫, 聖人), since widening the relation set would over-merge genuine modifiers. `never_merge` drops a word the relations do produce. Both match the joined surface forms or the joined lemmas, so either glyph works (荅 / 答). A listed `merge` word is an explicit judgement, so it bypasses the stopword and target guards — see notes/multi-character-tokenization.md. Populate from `python -m tools.merge_report`.",
+  "merge": [],
+  "never_merge": []
+}

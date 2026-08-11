@@ -41,7 +41,9 @@ from output import CorpusWriter
 from renderings import check_coverage
 from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
-from corpus.parse import parse_sep_article, parse_mengzi_chapter, verb_lemma
+from corpus.parse import (
+    parse_sep_article, parse_mengzi_chapter, mengzi_merge_config,
+    mengzi_merge_report, verb_lemma)
 from corpus.inpho import is_chinese_philosophy
 from embeddings import analyze, families, vectors
 from embeddings.analyze import Method as SimMethod
@@ -200,10 +202,15 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     sw = Stopwatch()
     targets = frozenset(t.hanzi for t in TERMS)
 
+    merge = mengzi_merge_config(p, targets)
     mengzi = build_chinese_corpus()
-    chapters = [SourceDoc(c, parse_mengzi_chapter(c)) for c in mengzi.chapters]
+    chapters = [SourceDoc(c, parse_mengzi_chapter(c, merge))
+                for c in mengzi.chapters]
     full = SourceDoc(mengzi, Doc.from_docs([c.doc for c in chapters]))
     print(f"parsed     : {len(chapters)} chapters + full corpus")
+    report = mengzi_merge_report(merge)
+    if report is not None:
+        print(f"merged     : {report.summary()}")
     sw.lap("parse")
 
     writer = CorpusWriter(p, "mengzi", mengzi)
