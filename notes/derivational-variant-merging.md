@@ -317,13 +317,68 @@ simultaneously. And every similarity comparison during clustering reads the
 original pre-merge matrix, so no merged vector ever feeds back into a later
 decision.
 
+## The merge is shared with the co-occurrence lens — deliberately
+
+The merge is applied to **both** lenses: the same alias re-keys nodes in the PMI
+co-occurrence networks, so `understanding` is one node in the scatter and one
+node in the networks rather than `understand`/`understanding` in one and a single
+merged point in the other. Without this, a node id means two different things
+depending on which panel you are reading, which makes the two lenses
+incomparable at exactly the level the project compares them.
+
+**This is a lens crossing, and it should be stated rather than buried.** The
+project keeps syntagmatic (co-occurrence) and paradigmatic (embedding) analysis
+separate on purpose. The merge is *gated* on embedding cosine — a paradigmatic
+criterion — so switching it on for co-occurrence lets one lens decide node
+identity in the other.
+
+The argument that this is acceptable: what merges is **morphology**, not
+similarity. Candidates come only from OEWN derivational relations plus
+participial pairs; cosine never proposes a merge, it only vetoes one (see *Both
+halves of the criterion are load-bearing*). And on the syntagmatic side the merge
+is arguably more clearly right than on the paradigmatic one — `understand` and
+`understanding` co-occurring in a sentence is a fact about English morphology,
+not about the topic, so counting them as two nodes inflates the graph with a
+distinction PMI should never have seen.
+
+The argument against, kept honest: the veto is still measured in the embedding
+space, so which families survive is decided by a paradigmatic criterion, and a
+different `merge_threshold` would yield different co-occurrence graphs. If that
+stops being acceptable, `merge_cooccurrence=False` is the revert.
+
+Two consequences worth knowing:
+
+- **The alias is applied before the frequency floor**, in `build_vocab`. This is
+  the only correct order: `inspire` (6) and `inspiration` (7) each fail a floor
+  of 10 that their merged node (13) clears, so filtering first would make the
+  merge *lose* nodes rather than combine them. It also means sharing the merge
+  slightly **grows** the co-occurrence vocabulary. Measured on a 17-article run,
+  30 of 51 networks changed; `benevolence` in *edwards* gained `understanding`,
+  `depend` and `extension` (families that only clear the floor once combined)
+  and dropped `claim`, `self`, `thing` from the top-15 pruning.
+- **A merged node displays its own surface.** `collect_node_sentences` tallies
+  surface forms under the key the token itself produced, *before* aliasing, so
+  the node named `inspiration` cannot end up displaying the more frequent
+  `inspires`.
+
+The PMI math needs no adjustment: `count_pair_cooccurrences` and `sent_freq` both
+de-duplicate per sentence, so a sentence containing two members of one family
+counts once, with no self-pair.
+
 ## Knobs
 
 - `Pipeline.merge_variants` — off by default; on for SEP. English-only, since
   candidates come from an English lexicon and classical Chinese has no
-  derivational suffixes.
+  derivational suffixes. **Master switch**: it decides whether the merge is
+  computed at all.
+- `Pipeline.merge_similarity` / `Pipeline.merge_cooccurrence` — which lens the
+  merge is then *applied* to; both default on. Split so the lens crossing above
+  can be reverted on its own, without giving up the merge on the scatter. With
+  `merge_similarity=False` the scatter stays one point per lemma and the exported
+  `variants` field is dropped, since the nodes are not in fact merged.
 - `Pipeline.merge_threshold` — cosine floor, default 0.70.
-- Targets are never merged, and never become a merge's surviving label.
+- Targets are never merged, and never become a merge's surviving label — so term
+  occurrence counts and the coverage guard are unaffected by any of this.
 - `scripts/tools/family_diagnostics.py` sweeps the threshold against the shipped
   artifact and lists both the merges and the near-misses the gate rejected.
 

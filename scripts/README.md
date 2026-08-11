@@ -31,6 +31,15 @@ The CLI is deliberately small — it only chooses *what* to run:
   the run didn't write (leftovers from terms since removed from `TERMS`).
   Destructive, so opt-in; review the `git status public/` diff. Can't be used
   with `--master-only`, which writes nothing to compare against.
+- `--allow-empty-renderings` — downgrade the empty-rendering abort to a warning
+  (see `renderings.py`).
+
+`run_sep`'s phases run **parse → coverage guard → embeddings → co-occurrence →
+similarity/export**. Co-occurrence is last because it shares the embedding
+lens's derivational-variant merge, which cannot exist until there are vectors
+to gate it on (`Pipeline.merge_cooccurrence`; see
+`notes/derivational-variant-merging.md`). The guard sits right after parsing so
+a dead rendering still fails the run before the GPU work, not after.
 
 Everything about *how* each corpus is processed lives in `config.py`, as the
 `MENGZI_PIPELINE` / `SEP_PIPELINE` `Pipeline` objects: `model`, `min_freq`,

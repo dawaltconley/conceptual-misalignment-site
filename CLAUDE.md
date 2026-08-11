@@ -59,6 +59,11 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   (anisotropy), kNN cosine graph, neglog sim-transform, Louvain communities. The
   pooling modes and Louvain `resolution` are `Pipeline` knobs; `sim_network`
   "threshold" cuts at a **quantile** of the similarity distribution (rank-based).
+- `run_sep` order is **parse → coverage guard → embeddings → co-occurrence →
+  export**: the PMI lens shares the embedding lens's variant merge, which needs
+  vectors first. Both halves are revertible (`Pipeline.merge_similarity` /
+  `merge_cooccurrence`); the lens crossing is argued in
+  `notes/derivational-variant-merging.md`.
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
   but harmless. Pyright may flag `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
   `vectors.reduce_vectors` as unknown — **stale false-positives**; they run fine.

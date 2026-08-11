@@ -27,7 +27,7 @@ What is new:
 from __future__ import annotations
 
 from collections import Counter, defaultdict
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 
 import networkx as nx
 from spacy.tokens import Span
@@ -86,6 +86,7 @@ def collect_node_sentences(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
 ) -> tuple[list[list[str]], set[str], dict[str, str]]:
     """Reduce spaCy Docs to frequency-filtered node-key sentences for PMI.
@@ -100,13 +101,24 @@ def collect_node_sentences(
     - ``forms`` — ``node id -> display glyph``: the most common surface form seen
       for that key, for use as a node label. Collected over every occurrence, not
       only the kept sentences.
+
+    ``alias`` (``variant -> surviving label``) re-keys every hit, so a merged
+    family is one node here exactly as it is in the embedding lens. It is applied
+    before the frequency floor — see :func:`build_vocab`. The PMI math needs no
+    special handling: pair counts and sentence frequencies both de-duplicate per
+    sentence, so a sentence containing two members of one family counts once.
     """
     nodes = build_vocab(
         sources, min_freq,
         match_fn=match_fn, content_pos=content_pos, stopwords=stopwords,
+        alias=alias,
     )
     nodes |= set(targets)
 
+    # Surfaces are tallied under the key the token *itself* produced, before
+    # aliasing, so a merged node displays its own surface: keying after the merge
+    # would let the more frequent `inspires` become the display form of the node
+    # named `inspiration`.
     surface: dict[str, Counter[str]] = defaultdict(Counter)
     sent_node_lists: list[list[str]] = []
     for source in sources:
@@ -114,13 +126,17 @@ def collect_node_sentences(
             keys: list[str] = []
             for token in sent:
                 key = content_key(token, match_fn, content_pos, stopwords)
-                if key is not None and key in nodes:
-                    keys.append(key)
+                if key is None:
+                    continue
+                merged = alias.get(key, key) if alias else key
+                if merged in nodes:
+                    keys.append(merged)
                     surface[key][token.text] += 1
             if len(keys) >= min_sent_nodes:
                 sent_node_lists.append(keys)
 
-    forms = {key: counts.most_common(1)[0][0] for key, counts in surface.items()}
+    forms = {key: counts.most_common(1)[0][0]
+             for key, counts in surface.items() if key in nodes}
     return sent_node_lists, nodes, forms
 
 
@@ -143,6 +159,7 @@ def build_pmi_graph(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
 ) -> tuple[nx.Graph, Counter[tuple[str, str]], Counter[str], int]:
     """PMI-weighted graph over spaCy Docs; returns the same tuple as the base
@@ -151,7 +168,8 @@ def build_pmi_graph(
     carry the ``form`` display attribute."""
     sent_node_lists, nodes, forms = collect_node_sentences(
         sources, min_freq, targets, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords, min_sent_nodes=min_sent_nodes,
+        content_pos=content_pos, stopwords=stopwords, alias=alias,
+        min_sent_nodes=min_sent_nodes,
     )
     G, pair_cooc, sent_freq, n_sents = _build_pmi_graph(sent_node_lists, nodes)
     attach_forms(G, forms)
@@ -167,12 +185,14 @@ def build_cosine_similarity_graph(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
     min_sent_nodes: int = 2,
 ) -> nx.Graph:
     """Co-occurrence-vector cosine graph over spaCy Docs; nodes carry ``form``."""
     sent_node_lists, nodes, forms = collect_node_sentences(
         sources, min_freq, targets, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords, min_sent_nodes=min_sent_nodes,
+        content_pos=content_pos, stopwords=stopwords, alias=alias,
+        min_sent_nodes=min_sent_nodes,
     )
     S = _build_cosine_similarity_graph(sent_node_lists, sorted(nodes), threshold)
     return attach_forms(S, forms)
@@ -187,6 +207,7 @@ def build_cooccurrence_network(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
 ) -> nx.Graph | None:
     """PMI network pruned to ``term``'s neighborhood; nodes carry ``form``.
 
@@ -195,7 +216,7 @@ def build_cooccurrence_network(
     """
     sent_node_lists, nodes, forms = collect_node_sentences(
         sources, min_freq, {term}, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords,
+        content_pos=content_pos, stopwords=stopwords, alias=alias,
     )
     G = _build_cooccurrence_network(sent_node_lists, nodes, term, max_nodes)
     return attach_forms(G, forms) if G is not None else None
@@ -211,12 +232,13 @@ def build_similarity_network(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
 ) -> nx.Graph | None:
     """Cosine-similarity network pruned to ``term``'s neighborhood; nodes carry
     ``form``. Returns ``None`` if ``term`` is absent from the graph."""
     sent_node_lists, nodes, forms = collect_node_sentences(
         sources, min_freq, {term}, match_fn=match_fn,
-        content_pos=content_pos, stopwords=stopwords,
+        content_pos=content_pos, stopwords=stopwords, alias=alias,
     )
     S = _build_similarity_network(
         sent_node_lists, nodes, term, max_nodes, sim_threshold)

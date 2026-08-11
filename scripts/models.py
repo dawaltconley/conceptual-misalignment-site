@@ -310,7 +310,28 @@ class Pipeline:
     (``inspire``/``inspiration``), so the scatter plots one point per word rather
     than one per lemma. English-only: candidates come from Open English Wordnet,
     and classical Chinese has no derivational suffixes, so leave it off for
-    Mengzi. Target renderings are never merged. See ``embeddings.families``."""
+    Mengzi. Target renderings are never merged. See ``embeddings.families``.
+
+    Master switch: it decides whether the merge is *computed* at all. The two
+    flags below decide which lens it is then *applied* to."""
+
+    merge_similarity: bool = True
+    """Apply the variant merge to the embedding lens — pooled vectors, cosine
+    graph, communities, scatter export. Off (with ``merge_variants`` on) computes
+    the merge for co-occurrence only and leaves the scatter one point per lemma;
+    the exported ``variants`` field is then omitted, since the nodes are not in
+    fact merged."""
+
+    merge_cooccurrence: bool = True
+    """Apply the variant merge to the PMI lens, so a node means the same word in
+    both networks. Only has an effect where the merge runs (``merge_variants``,
+    i.e. SEP today — ``run_mengzi`` computes no alias).
+
+    Separable from ``merge_similarity`` on purpose: the merge is *gated* on
+    embedding cosine, a paradigmatic criterion, so switching it on here lets one
+    lens shape the other. See ``notes/derivational-variant-merging.md`` — the
+    argument is that the candidates are morphological and cosine only vetoes
+    them, but if that stops convincing, this is the revert."""
 
     merge_threshold: float = 0.45
     """Cosine floor for ``merge_variants``, applied in the centred/debiased

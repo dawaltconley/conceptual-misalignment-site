@@ -149,9 +149,17 @@ def build_vocab(
     match_fn: MatchFn | None = None,
     content_pos: set[str] | None = CONTENT_POS,
     stopwords: frozenset[str] | set[str] = frozenset(),
+    alias: Mapping[str, str] | None = None,
 ) -> set[str]:
-    """Content-word vocabulary: keys occurring >= ``min_freq``."""
-    freq = content_frequencies(sources, match_fn, content_pos, stopwords)
+    """Content-word vocabulary: keys occurring >= ``min_freq``.
+
+    ``alias`` re-keys each hit to its surviving label *before* the floor is
+    applied, which is the only correct order under a variant merge: ``inspire``
+    (6) and ``inspiration`` (7) each fail a floor of 10 that their merged node
+    (13) clears, so filtering first would make the merge lose nodes instead of
+    combining them.
+    """
+    freq = content_frequencies(sources, match_fn, content_pos, stopwords, alias)
     return {k for k, c in freq.items() if c >= min_freq}
 
 

@@ -25,6 +25,7 @@ import argparse
 import json
 import time
 from collections import Counter
+from collections.abc import Mapping
 from dataclasses import asdict, replace
 from pathlib import Path
 
@@ -94,14 +95,19 @@ def get_cooccurrence(
     sources: list[SourceDoc],
     *,
     match_fn: MatchFn | None = None,
+    alias: Mapping[str, str] | None = None,
 ) -> Graph | None:
-    """The term's PMI co-occurrence neighborhood over ``sources`` (spaCy Docs)."""
+    """The term's PMI co-occurrence neighborhood over ``sources`` (spaCy Docs).
+
+    ``alias`` is the embedding lens's variant merge (``Pipeline.merge_cooccurrence``),
+    so the two lenses agree on what one node is."""
     return pmi_spacy.build_cooccurrence_network(
         sources, term, p.cooccurrence_min_freq,
         max_nodes=p.max_network_nodes,
         match_fn=match_fn,
         content_pos=_to_set(p.content_pos),
         stopwords=p.stopwords or set(),
+        alias=alias,
     )
 
 
@@ -116,12 +122,14 @@ def count_occurrences(doc, label: str, match_fn: MatchFn | None) -> int:
 def save_cooccurrence(
     p: Pipeline, w: CorpusWriter, label: str, network_sources: list[SourceDoc],
     meta_source: Source, file_id: str, *, match_fn: MatchFn | None,
+    alias: Mapping[str, str] | None = None,
 ) -> int:
     """Build ``label``'s PMI network over ``network_sources`` and hand it to the
     writer as one ``NetworkData`` file (``meta_source`` is the source recorded in
     the file — a chapter, an article, or a whole-corpus stand-in). Returns the
-    occurrence count, which the caller reuses for the coverage guard."""
-    net = get_cooccurrence(p, label, network_sources, match_fn=match_fn)
+    occurrence count recorded on the manifest."""
+    net = get_cooccurrence(p, label, network_sources, match_fn=match_fn,
+                           alias=alias)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     occ = sum(count_occurrences(s.doc, label, match_fn)
@@ -239,23 +247,22 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
 
     writer = CorpusWriter(p, "sep", SEP_CORPUS)
 
-    # --- co-occurrence: each rendering over its combined search + each article ---
-    # (also parses + caches every article, reused for the embedding space below)
-    # The combined file goes first, so the manifest lists it first.
-    corpus_occ: dict[str, int] = {}
-    for ts in searches:
-        label, articles = ts.term.label, ts.search.articles
-        adocs = [source_doc(a) for a in articles]
-        corpus_occ[label] = save_cooccurrence(
-            p, writer, label, adocs, ts.search, "combined", match_fn=match_fn)
-        for sd in adocs:
-            save_cooccurrence(p, writer, label, [sd],
-                              sd.source, sd.source.id, match_fn=match_fn)
-    sw.lap("parse+co-occurrence")
+    # --- parse every article once, per rendering (deduped across renderings) ---
+    # Co-occurrence used to run here and parse as a side effect, but it now needs
+    # the variant merge, which only exists once there are vectors — so parsing is
+    # its own phase and the PMI networks are built after the embedding below.
+    per_label: list[tuple[str, Source, list[SourceDoc]]] = [
+        (ts.term.label, ts.search, [source_doc(a) for a in ts.search.articles])
+        for ts in searches]
+    corpus_occ = {
+        label: sum(count_occurrences(sd.doc, label, match_fn) for sd in adocs)
+        for label, _, adocs in per_label}
+    sw.lap("parse")
 
     # A rendering that matched nothing is a config/lemmatizer bug far more often
     # than a real absence, and it fails silently — every file it owns is written
-    # with a null network. Check here, before the expensive embedding phase.
+    # with a null network. Check as soon as the counts exist, so the run still
+    # fails before the expensive embedding phase rather than after it.
     check_coverage(renderings, corpus_occ,
                    [sd.doc for sd in doc_cache.values()],
                    corpus="SEP", allow_empty=allow_empty)
@@ -294,6 +301,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
     # stays ahead of the graph, communities, norms and the PCA export so every
     # derived field is computed over the merged vocabulary.
     variants: dict[str, list[str]] = {}
+    alias: dict[str, str] = {}
     if p.merge_variants:
         pos, stop = _to_set(p.content_pos), p.stopwords or set()
         extra = families.participial_pairs(labels, verb_lemma)
@@ -310,15 +318,40 @@ def run_sep(p: Pipeline, *, per_term: int = 12, artifacts: bool = False,
             labels, matrix, threshold=p.merge_threshold,
             exclude=labels_by_target, counts=freq, pos=word_pos,
             extra_pairs=extra)
-        if alias:
+        if alias and p.merge_similarity:
             pooler.merge(alias)
             labels, matrix = pool(pooler, labels_by_target)
             matrix, mean, project = transform_matrix(p, matrix)
             doc_freq = document_frequencies(
                 combined, match_fn, content_pos=pos, stopwords=stop, alias=alias)
-        print(f"merged     : {len(alias)} variants into {len(variants)} words "
-              f"(cosine >= {p.merge_threshold}) -> {len(labels)} nodes")
+        elif alias:
+            # Computed for the PMI lens only; the scatter stays one point per
+            # lemma, so claiming merged families on its nodes would be a lie.
+            variants = {}
+        lenses = " + ".join(
+            [n for n, on in (("similarity", p.merge_similarity),
+                             ("co-occurrence", p.merge_cooccurrence)) if on]
+        ) or "nothing (both lenses opted out)"
+        print(f"merged     : {len(alias)} variants into "
+              f"{len(set(alias.values()))} words "
+              f"(cosine >= {p.merge_threshold}) -> {len(labels)} nodes; "
+              f"applied to {lenses}")
     sw.lap("embedding")
+
+    # --- co-occurrence: each rendering over its combined search + each article ---
+    # The combined file goes first, so the manifest lists it first. `cooc_alias`
+    # is what makes a node mean the same word in both lenses; it is deliberately
+    # separable, because the merge is *gated* on embedding cosine and this is the
+    # point where a paradigmatic criterion reaches into the syntagmatic graphs.
+    # See notes/derivational-variant-merging.md.
+    cooc_alias = alias if p.merge_cooccurrence else {}
+    for label, search, adocs in per_label:
+        save_cooccurrence(p, writer, label, adocs, search, "combined",
+                          match_fn=match_fn, alias=cooc_alias)
+        for sd in adocs:
+            save_cooccurrence(p, writer, label, [sd], sd.source, sd.source.id,
+                              match_fn=match_fn, alias=cooc_alias)
+    sw.lap("co-occurrence")
 
     G, _, community_map = analyze.build_networks(
         labels, matrix, method=p.sim_network, quantile=p.quantile, knn_k=p.knn_k,
