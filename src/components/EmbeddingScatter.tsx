@@ -73,7 +73,7 @@ export default function EmbeddingScatter({
   stepsPerPost = 2,
   minDocFreq = 0,
   maxDocFreq = 1,
-  communitySort = 'proximity',
+  communitySort = 'prototypicality',
 }: EmbeddingScatterProps): JSX.Element {
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
