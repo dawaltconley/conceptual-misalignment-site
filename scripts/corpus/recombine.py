@@ -308,6 +308,32 @@ def _sentence_ids(doc: "Doc") -> list[int]:
     return ids
 
 
+def merged_pos(doc: "Doc", group: Sequence[int], root: int) -> str:
+    """The POS a merged token should carry — its root's, except for names.
+
+    Inheriting the syntactic head's POS is right for ordinary compounds (天下 is
+    the NOUN 下 was) but wrong for a name: in a Chinese name+title compound the
+    *modifier* carries the referential identity and the head is an ordinary noun,
+    so 文 (PROPN) --``compound``--> 王 (NOUN) would come out NOUN and 文王 would
+    read as a kind of king rather than as King Wen. A group containing a proper
+    noun **is** a proper noun, so it inherits PROPN instead.
+
+    This matters because it is what keeps names out of the vocabulary:
+    ``content_pos`` is ``{"NOUN","VERB","ADJ"}`` precisely to exclude them, and
+    the English side excludes proper nouns the same way. Without this, merging
+    would quietly re-admit 文王, 周公, 宣王, 武王 …
+
+    The treebank's gold annotation is the whole source here — no NER pass needed.
+    To restrict this to *persons* only, additionally require the root's XPOS to
+    start with ``n,名詞,人`` (王 公 伯 人 夫 子 弟 徒); that leaves the 7 place/state
+    compounds (齊國, 岐山, 幽州 …) as NOUN, all of which fall below both frequency
+    floors anyway.
+    """
+    if doc[root].pos_ != "PROPN" and any(doc[i].pos_ == "PROPN" for i in group):
+        return "PROPN"
+    return doc[root].pos_
+
+
 def _root(doc: "Doc", group: Sequence[int]) -> int:
     """The group's syntactic root: the member whose head lies outside it. The
     merged token inherits this token's POS/tag/morph/dep, so 天下 comes out as the
@@ -394,18 +420,20 @@ def merge_doc(
 
     with doc.retokenize() as retokenizer:
         for group, word in keep:
-            root = doc[_root(doc, group)]
+            root_i = _root(doc, group)
+            root = doc[root_i]
+            pos = merged_pos(doc, group, root_i)
             span = doc[group[0]:group[-1] + 1]
             attrs: dict[str | int, Any] = {
                 "LEMMA": "".join(lemmas[i] for i in group),
-                "POS": root.pos_,
+                "POS": pos,
                 "TAG": root.tag_,
                 "DEP": root.dep_,
                 "MORPH": str(root.morph),
             }
             retokenizer.merge(span, attrs=attrs)
-            report.root_pos[root.pos_ or "_"] += 1
+            report.root_pos[pos or "_"] += 1
             # Keyed by the joined forms, exactly as ``report.merged`` is — a span
             # that happened to contain whitespace would key differently.
-            report.pos_by_word[word][root.pos_ or "_"] += 1
+            report.pos_by_word[word][pos or "_"] += 1
     return doc
