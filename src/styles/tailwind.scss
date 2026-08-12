@@ -136,9 +136,9 @@
   }
 
   .option {
-    display: grid;
-    grid-template-columns: 1fr 1rem;
-    align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
     gap: theme('spacing.2');
     padding: theme('spacing[1.5]') theme('spacing.3');
     cursor: default;

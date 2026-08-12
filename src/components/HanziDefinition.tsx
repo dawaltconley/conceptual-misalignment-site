@@ -50,7 +50,7 @@ export default function HanziDefinition({
                 <Pronunciation reading={reading} />
               </p>
             )}
-            <ol className="list-inside list-decimal text-gray-500">
+            <ol className="ml-2 list-decimal text-gray-500">
               {definitions.map((def, i) => (
                 <li key={`${def}_${i}`}>{def}</li>
               ))}

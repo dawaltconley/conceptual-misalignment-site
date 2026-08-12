@@ -70,7 +70,7 @@ export function ComboboxPopup({
                 {option.note !== undefined && (
                   <span className="option__note">{option.note}</span>
                 )}
-                <BaseCombobox.ItemIndicator>
+                <BaseCombobox.ItemIndicator className="ml-auto">
                   <Icon icon={faCheck} width="0.75em" height="0.75em" />
                 </BaseCombobox.ItemIndicator>
               </BaseCombobox.Item>
