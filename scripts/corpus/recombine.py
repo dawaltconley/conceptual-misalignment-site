@@ -44,11 +44,19 @@ if TYPE_CHECKING:
 # on purpose — see the module docstring for what is excluded and why.
 MERGE_DEPS = frozenset({"compound", "flat", "fixed"})
 
-# Particles that nominalize what precedes them. 者 turns a predicate into "one who
-# …" (賢者 "the worthy", 死者 "the dead"), but the treebank tags it PART and makes
-# it the group's head, so a merge would inherit PART and be refused as a
-# non-lexical word. See :func:`merged_pos`.
-NOMINALIZERS = frozenset({"者"})
+# POS tags that can head a nominal, even though they are tagged as function words.
+# 者 nominalizes a predicate (賢者 "the worthy one", 死者 "the dead") and a numeral
+# heads a quantity used as a thing (萬鍾 "ten thousand zhong", 百里 "a hundred li").
+# Either way the merge would inherit a non-lexical POS and be thrown away.
+#
+# Deliberately NOT extended to the other function-word tags, all of which have a
+# case in a nominal slot that the rule would get wrong:
+#   AUX   不敢 sits at `root`, but it is a predicate ("dare not"), not a noun.
+#   PRON  由此 sits at `obl`, but it is a prepositional phrase.
+#   SCONJ 之 is a clitic on what PRECEDES it — its slot is `case`/`mark`, so a
+#         之+X group straddles a constituent boundary (古之人 is 古之 | 人). Not a
+#         mis-tagged word; not a word.
+NOMINALIZABLE_POS = frozenset({"PART", "NUM"})
 
 # Dependency labels that put a token in a nominal slot. 者's *own* label is what
 # separates the two constructions: 賢者 --nsubj--> is "the worthy one" (a noun),
@@ -460,11 +468,12 @@ def merged_pos(doc: "Doc", group: Sequence[int], root: int) -> str:
     """
     if doc[root].pos_ != "PROPN" and any(doc[i].pos_ == "PROPN" for i in group):
         return "PROPN"
-    # A nominalized predicate is a noun, whatever the particle is tagged. The
-    # treebank makes 者 the head and tags it PART, so 賢者 would inherit PART and
-    # be refused as a non-word — but 者's own slot says which construction it is:
-    # nominal (賢者/nsubj "the worthy one") or adverbial (昔者/advmod "formerly").
-    if (doc[root].lemma_ in NOMINALIZERS
+    # A nominalizable head in a nominal slot forms a noun, whatever it is tagged.
+    # The treebank makes 者 the head and tags it PART, so 賢者 would inherit PART
+    # and be refused as a non-word — but the head's own slot says which
+    # construction it is: nominal (賢者/nsubj "the worthy one", 萬鍾/nsubj) or not
+    # (昔者/advmod "formerly", 萬乘/nummod "ten-thousand-chariot").
+    if (doc[root].pos_ in NOMINALIZABLE_POS
             and doc[root].dep_ in NOMINAL_DEPS
             and len(group) > 1):
         return "NOUN"
