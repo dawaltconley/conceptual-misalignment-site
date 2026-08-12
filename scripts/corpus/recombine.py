@@ -44,6 +44,17 @@ if TYPE_CHECKING:
 # on purpose — see the module docstring for what is excluded and why.
 MERGE_DEPS = frozenset({"compound", "flat", "fixed"})
 
+# Particles that nominalize what precedes them. 者 turns a predicate into "one who
+# …" (賢者 "the worthy", 死者 "the dead"), but the treebank tags it PART and makes
+# it the group's head, so a merge would inherit PART and be refused as a
+# non-lexical word. See :func:`merged_pos`.
+NOMINALIZERS = frozenset({"者"})
+
+# Dependency labels that put a token in a nominal slot. 者's *own* label is what
+# separates the two constructions: 賢者 --nsubj--> is "the worthy one" (a noun),
+# while 昔者 --advmod--> is "in former times" (an adverbial, and not a word we want).
+NOMINAL_DEPS = frozenset({"nsubj", "obj", "iobj", "obl", "nmod", "appos", "root"})
+
 
 # ---------------------------------------------------------------------------
 # Grouping (pure: indices in, indices out)
@@ -449,6 +460,14 @@ def merged_pos(doc: "Doc", group: Sequence[int], root: int) -> str:
     """
     if doc[root].pos_ != "PROPN" and any(doc[i].pos_ == "PROPN" for i in group):
         return "PROPN"
+    # A nominalized predicate is a noun, whatever the particle is tagged. The
+    # treebank makes 者 the head and tags it PART, so 賢者 would inherit PART and
+    # be refused as a non-word — but 者's own slot says which construction it is:
+    # nominal (賢者/nsubj "the worthy one") or adverbial (昔者/advmod "formerly").
+    if (doc[root].lemma_ in NOMINALIZERS
+            and doc[root].dep_ in NOMINAL_DEPS
+            and len(group) > 1):
+        return "NOUN"
     return doc[root].pos_
 
 

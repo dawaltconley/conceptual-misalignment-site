@@ -158,6 +158,27 @@ No action taken; just make sure it is intended before the next run.
 
 ---
 
+## 5c. Should measure phrases be words? (`NUM`-headed merges)
+
+The 者 nominalizer rule generalises: when a merged group inherits a function-word
+POS, its root's _dependency slot_ often says what it really is. The remaining
+candidate is `NUM`-headed groups, 15 tokens:
+
+- **nominal slots** — 萬鍾 (`nsubj`), 百里 (`obl`, `root`), 什一 (`root`). Applying
+  the same rule would make these nouns and merge them.
+- **adnominal slots** — 萬乘, 千里, 五霸, 什一 (`nummod`). Would stay refused.
+
+I did not implement it, because unlike 者 this is not a parsing question. 百里 "a
+hundred _li_" is a measure phrase; whether it should be a vocabulary node is a
+philological call. 五霸 "the Five Hegemons" is arguably a proper noun and a
+different case again.
+
+Everything else refused as non-lexical looks correctly refused: `ADV` 66 (然後,
+沛然, the whole X然 adverbial family), `AUX` 43 (足以, 敢以), `SCONJ` 11 (之心, 之人),
+`PART` 14 (昔者 ×9 and friends), plus 由此 (`PRON`) and 而後 (`CCONJ`).
+
+---
+
 ## 6. Housekeeping
 
 - `merge-report.txt` is untracked at the repo root (your run). Keep, gitignore,
