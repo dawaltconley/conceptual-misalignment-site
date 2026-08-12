@@ -141,6 +141,23 @@ excludes proper nouns wholesale.
 
 ---
 
+## 5b. `content_pos` is commented out in `MENGZI_PIPELINE` — deliberate?
+
+Uncommitted in `config.py`: `# content_pos=frozenset({"NOUN", "VERB", "ADJ"})`,
+so it is `None` and **no POS filtering happens on the Chinese side**. Flagging it
+because it interacts with two things above:
+
+- Proper nouns are no longer excluded, so 文王, 周公, 齊宣王 … now become nodes.
+  The `merged_pos` rule (item 5) still labels them `PROPN`; nothing acts on it.
+- It is why the "don't merge non-lexical groups" rule is written against its own
+  `mergeable_pos` set rather than against `content_pos` — tying word formation to
+  a filter that may be `None` would have made the rule vanish exactly when you
+  turned the filter off.
+
+No action taken; just make sure it is intended before the next run.
+
+---
+
 ## 6. Housekeeping
 
 - `merge-report.txt` is untracked at the repo root (your run). Keep, gitignore,

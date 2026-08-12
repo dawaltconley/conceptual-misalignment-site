@@ -38,7 +38,8 @@ names** — see below.
 
 From the relations alone: **243 word types, 889 merged tokens** — 天下 ×173,
 父母 ×37, 文王 ×35, 萬章 ×23, 百姓 ×19, 伊尹 ×19, 周公 ×18, 公孫丑 ×17, 禽獸 ×15.
-With the segmenter lexicon (below) the total is **777 types / 2064 tokens**.
+With the segmenter lexicon (below) and the lexical-word guard, the total is
+**730 types / 1907 tokens**.
 
 ### A merged name is a name
 
@@ -51,11 +52,13 @@ carries the referential identity and the head is an ordinary noun:
 周/PROPN[NameType=Nat] --compound--> 公/NOUN   ("Duke of Zhou")
 ```
 
-Head-inheritance would make those `NOUN`, and since `content_pos` is
-`{"NOUN","VERB","ADJ"}` precisely to keep proper nouns out of the vocabulary
-(the English side excludes them the same way), merging would quietly re-admit
-文王 ×35, 周公 ×18, 宣王 ×14, 武王 ×10, 繆公 ×9, 惠王 ×7 … — 29 name compounds
-clearing `min_freq=5`.
+Head-inheritance would make those `NOUN`. Whenever `content_pos` is set to
+`{"NOUN","VERB","ADJ"}` — as it is on the English side, precisely to keep proper
+nouns out of the vocabulary — merging would then quietly re-admit 文王 ×35,
+周公 ×18, 宣王 ×14, 武王 ×10, 繆公 ×9, 惠王 ×7 … , 29 name compounds clearing
+`min_freq=5`, through a door the filter thought it had shut. Labelling them
+`PROPN` keeps that decision in one place; whether the label excludes anything is
+`content_pos`'s business (currently `None` for the Mengzi, so it excludes nothing).
 
 So `corpus.recombine.merged_pos` gives a group containing a proper noun the POS
 `PROPN`. **The treebank's gold annotation is the entire source — no NER pass is
@@ -102,17 +105,33 @@ the full run (relations + lexicon):
 | Begins/ends on a token boundary | 5                                           | Lexicon only: the segmenter may split a token the treebank keeps whole (孟子 → 孟 + 子). Skipped, never forced                                             |
 | All constituents are stopwords  | 161 — 可以 ×77, 以為 ×12, 而已 ×12, 得而 ×7 | Each character is already dropped downstream, so _not_ merging reproduces current behaviour. Merging would invent a 可以 content node out of two stopwords |
 | Contains a target hanzi         | 23 — 禮貌, 仁政, 仁人, 智慧, 禮義           | 仁 義 禮 智 信 keep every occurrence, so counts stay comparable across runs. Logged in the report, never silently swallowed                                |
+| **Result is a lexical word**    | 157 — 然後, 足以, 昔者, 之心, 萬乘          | The group's inherited POS must be `NOUN`/`PROPN`/`VERB`/`ADJ`. See below                                                                                   |
 | `never_merge` override          | curated                                     | See below                                                                                                                                                  |
 
 The target guard is what makes the segmenter safe to consult: its own convention
 merges 仁政, 仁人 and 智慧, and all 23 such groups are refused, so the shipped
 occurrence counts are byte-identical to the unmerged baseline.
 
-Note what the guards do **not** have to handle. Merged tokens inherit their
-root's POS, so 足以 comes out `AUX` and the 欣然 family `ADV`, which
-`content_pos={"NOUN","VERB","ADJ"}` discards without any extra rule. The full
-split is 1249 `NOUN`, 434 `PROPN` (names, per the rule above), 224 `VERB`, 53
-`ADV`, 42 `PART`, 40 `AUX`, 12 `SCONJ`, 10 `NUM`.
+### Why a merge must produce a lexical word
+
+`MergeConfig.mergeable_pos` refuses any group whose inherited POS is a function
+word — `SCONJ` (之心, 之人), `PART` (昔者, 賢者), `AUX` (足以, 敢以), `ADV` (然後,
+沛然), `NUM` (萬乘, 萬鍾). 157 tokens across 52 types.
+
+This is not a filter on what gets analysed; it is a statement about **word
+formation**, and it must stay independent of `Pipeline.content_pos` (a tuning knob
+that may be `None`). The reason is that merging is destructive in both directions:
+a merged token _replaces_ its constituents, so forming 之心 buries 心 inside a
+token that is not a word and that nothing downstream wants either — 心 loses the
+occurrence and nothing gains it. Refusing the merge lets 之 be dropped as a
+stopword and 心 stand as itself, which is what 惻隱之心 needs if the 仁–心 relation
+is to survive.
+
+Measured, the rule restores 足 +35, 後 +21, 昔 +11, 心 +7, 賢 +7, 長 +6, 人 +6,
+萬 +6, 惡 +4. `PROPN` stays mergeable on purpose: a name **is** a lexical word, and
+whether names are analysed is `content_pos`'s business, not this rule's.
+
+Totals with the rule: **730 types / 1907 tokens**.
 
 ## Curated overrides
 
