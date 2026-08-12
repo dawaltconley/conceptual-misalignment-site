@@ -10,7 +10,7 @@ import { isPoint } from '@lib/graphs'
 import HanziNode from '@components/HanziNode'
 import EnglishNode from '@components/EnglishNode'
 
-const COLLISION_RADIUS = 8
+const COLLISION_RADIUS = 4
 
 export interface NetworkProps {
   data: WeightedNodeLinkData
@@ -52,7 +52,7 @@ export default function Network({
       },
       {
         min: 40,
-        max: 1,
+        max: 5,
       },
     )
 
@@ -81,7 +81,7 @@ export default function Network({
         'collide',
         d3.forceCollide().radius(COLLISION_RADIUS).strength(0.2),
       )
-      .force('charge', d3.forceManyBody().strength(-0.4))
+      .force('charge', d3.forceManyBody().strength(-0.5))
       .force('center', d3.forceCenter(50, 50).strength(0.1))
       .alphaDecay(0.05)
       .velocityDecay(0.5)
