@@ -6,22 +6,25 @@ corpus arrives as characters rather than words: 天下 is 天 + 下, 父母 is �
 glyphs and splits one word's occurrences across two nodes, in both the PMI
 networks and the embedding scatter.
 
-The treebank already says which adjacent tokens form one word — the UD
-*word-formation* relations ``compound``, ``flat`` and ``fixed``. This module turns
-those relations (plus a hand-curated override list) into token-index groups, and
-applies them with spaCy's retokenizer so every consumer downstream sees words.
+Word boundaries come from three sources, each contributing ``(i, j)`` token-index
+pairs that are unioned before any guard runs, then applied in one spaCy
+retokenizer pass so every consumer downstream sees words:
 
-Two things are deliberately *not* merged:
+1. **UD word-formation relations** — ``compound``, ``flat``, ``fixed``. The
+   treebank's own statement that two tokens are one word.
+2. **A segmenter lexicon** (:func:`load_lexicon`) — a segmentation of the
+   treebank's *own* text, which supplies the words the relations cannot reach.
+3. **A hand-curated override list** (:class:`Overrides`) — the final say.
 
-- **Coordination and modification.** ``conj`` and ``nmod`` are excluded, so 仁義
-  (義 --conj--> 仁) stays two tokens. This matters: 仁 and 義 are target terms.
-- **Bisyllabic words the treebank labels ``nmod``** — 諸侯, 天子, 大夫, 聖人. Adding
-  ``nmod`` to the relation set would over-merge genuine modifiers, so these are
-  left to the curated override list (and, later, to a segmentation-derived
-  lexicon). See ``notes/multi-character-tokenization.md``.
+``conj`` and ``nmod`` are deliberately excluded from (1). 仁義 is 義 --conj--> 仁,
+and merging it would eat occurrences of two target terms. ``nmod`` is worse: it is
+the relation on genuine modifiers, so adding it merges phrases (民父母, 方百) and
+extends good words into bad ones (天下 -> 天下諸侯). The real bisyllabic words it
+would have caught — 諸侯, 天子, 大夫, 聖人 — come from (2) instead, without the
+collateral. See ``notes/multi-character-tokenization.md``.
 
 The grouping functions are pure — index sequences in, index groups out — so they
-can be exercised without spaCy, and so a second boundary source can join in by
+can be exercised without spaCy, and a further boundary source can join in by
 contributing pairs rather than by touching the merge logic.
 """
 
