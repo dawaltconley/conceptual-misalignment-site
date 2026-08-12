@@ -73,6 +73,36 @@ require the root's XPOS to start with `n,名詞,人` — the treebank's person
 categories (王 公 伯 徒 = `人,役割`; 人 夫 = `人,人`; 子 弟 = `人,関係`) as against
 `主体,集団` (國), `固定物,地形` (山) and `制度,場` (州).
 
+### A nominalized predicate is a noun
+
+Same problem, different construction. 者 nominalizes what precedes it — 賢者 "the
+worthy one", 死者 "the dead" — but the treebank tags 者 `PART` and makes it the
+group's head, so the merge inherits `PART` and the lexical-word guard throws it
+away.
+
+The fix is not "者 makes a noun", which would be wrong. **者's own dependency label
+says which construction it is**, and the parse already records it:
+
+```
+賢者 = 賢/VERB/amod  + 者/PART/nsubj    "the worthy one"    nominal    -> NOUN
+死者 = 死/VERB/amod  + 者/PART/obj      "the dead"          nominal    -> NOUN
+儒者 = 儒/NOUN/nmod  + 者/PART/nmod     "a Confucian"       nominal    -> NOUN
+昔者 = 昔/NOUN/nmod  + 者/PART/advmod   "in former times"   adverbial  -> refused
+古者 = 古/NOUN/nmod  + 者/PART/advmod   "in ancient times"  adverbial  -> refused
+```
+
+`NOMINALIZERS` × `NOMINAL_DEPS` in `merged_pos` implements exactly that: +10 types
+/ +26 tokens (賢者 8, 王者 5, 長者 5, 壯者 2, 死者, 老者, 儒者, 顯者, 使者, 生者), while
+昔者 ×9, 或者 and 古者 stay refused as the adverbials they are.
+
+**The general technique** — when a merged group inherits a function-word POS,
+check the root's _slot_ rather than its tag — has one more plausible application,
+not implemented: `NUM`-headed groups. 萬鍾 sits in `nsubj` and 百里 in `obl`/`root`,
+which would make them nouns, whereas 萬乘, 千里, 五霸, 什一 sit in `nummod`, an
+adnominal slot. Whether a measure phrase like 百里 "a hundred _li_" should be a
+word at all is a judgement call rather than a parsing question, so it is left
+alone. 15 tokens.
+
 ## What we do not merge, and why
 
 **`conj` and `nmod` are excluded.** This is the load-bearing decision. 仁義 is
