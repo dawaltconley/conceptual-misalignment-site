@@ -206,6 +206,7 @@ def mengzi_merge_config(
         stopwords=p.stopwords,
         targets=targets,
         overrides=load_overrides(MERGE_OVERRIDES),
+        lexicon_path=p.merge_lexicon,
     )
 
 

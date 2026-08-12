@@ -450,4 +450,11 @@ class Pipeline:
     would merge 仁義). None leaves tokenization exactly as the source has it.
     See ``corpus.recombine`` and ``notes/multi-character-tokenization.md``."""
 
+    merge_lexicon: "Path | None" = None
+    """A segmentation JSONL (from ``python -m cli.segment --source conllu``) whose
+    word boundaries are merged alongside ``merge_deps``. This is what supplies the
+    bisyllabic words the treebank labels ``nmod`` and the relations therefore miss
+    — 諸侯, 天子, 大夫, 聖人. Requires ``merge_deps`` to be set. The file is optional:
+    generating it is a manual step, so a missing one is a no-op, never an error."""
+
     out_dir: "Path"

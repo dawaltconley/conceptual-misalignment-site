@@ -15,7 +15,8 @@ import spacy
 from spacy.tokens import Doc
 from spacy.vocab import Vocab
 
-from corpus.recombine import MergeConfig, MergeReport, merge_doc
+from corpus.recombine import (
+    MergeConfig, MergeReport, load_lexicon, merge_doc)
 
 
 class ChapterDoc(NamedTuple):
@@ -137,6 +138,9 @@ def load_conllu(
     """
     path = Path(path)
     vocab = vocab or spacy.blank("xx").vocab  # bare container; no language model
+    # Keyed by chapter title, matching `ChapterDoc.title`. Empty when no lexicon
+    # is configured or the file is absent — the segmentation is a manual step.
+    lexicon = load_lexicon(merge.lexicon_path) if merge is not None else {}
 
     doc_id = title = ""
     cols: dict[str, list] = {}
@@ -157,7 +161,7 @@ def load_conllu(
             heads=cols["heads"], deps=cols["deps"], sent_starts=cols["sent_starts"],
         )
         if merge is not None:
-            doc = merge_doc(doc, merge, report)
+            doc = merge_doc(doc, merge, report, lexicon.get(title, ()))
         return ChapterDoc(doc_id, title, doc)
 
     reset()

@@ -69,6 +69,18 @@ def print_merged(report: MergeReport, pos_filter: set[str] | None,
         print(f"  {word:<8} {count:>4}  {pos}{forced}")
 
 
+def print_sources(report: MergeReport) -> None:
+    """Which source proposed each merge. The reason for a second boundary source
+    is the words the UD relations cannot reach, so `lexicon` alone is the number
+    that says whether it earned its place."""
+    print("\n=== merges by source ===")
+    for src, words in sorted(report.by_source.items(),
+                             key=lambda kv: -sum(kv[1].values())):
+        top = " ".join(w for w, _ in words.most_common(10))
+        print(f"  {src:<16} {sum(words.values()):>5} tokens / "
+              f"{len(words):>3} types   {top}")
+
+
 def print_skipped(report: MergeReport) -> None:
     print("\n=== groups a guard rejected ===")
     if not report.skipped:
@@ -120,10 +132,13 @@ def main() -> None:
     print(f"targets    : {' '.join(sorted(targets))} (never merged into a word)")
     print(f"overrides  : {len(overrides.merge)} merge, "
           f"{len(overrides.never_merge)} never-merge")
+    lex = merge.lexicon_path
+    print(f"lexicon    : {lex if lex and lex.is_file() else 'none'}")
 
     report, absorbed = build_report(merge)
     print_merged(report, set(args.pos.split(",")) if args.pos else None,
                  args.min_count)
+    print_sources(report)
     print_skipped(report)
     print_absorbed(absorbed, report, args.absorbed)
 
