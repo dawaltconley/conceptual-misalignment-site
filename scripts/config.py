@@ -11,6 +11,10 @@ MENGZI_DIR = _SCRIPTS / "data" / "mengzi"     # per-chapter Mengzi source .txt
 MENGZI_CONLLU = _SCRIPTS / "data" / "mengzi.conllu"
 # Hand-curated word-merge overrides layered on the UD relations (optional file).
 MERGE_OVERRIDES = _SCRIPTS / "data" / "merge_overrides.json"
+# Segmenter word boundaries over the treebank's own text, from
+# `python -m cli.segment seg --source conllu`. Optional: a manual step, so the
+# pipeline runs without it (see notes/multi-character-tokenization.md).
+MERGE_LEXICON = _ROOT / "segpos" / "conllu" / "mengzi.seg.jsonl"
 
 # --- Outputs (live at the repo root) ---
 DATA = _ROOT / "src" / "data"
@@ -125,6 +129,7 @@ MENGZI_PIPELINE = Pipeline(
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
     merge_deps=frozenset({"compound", "flat", "fixed"}),
+    merge_lexicon=MERGE_LEXICON,
     debias="abtt",
 )
 

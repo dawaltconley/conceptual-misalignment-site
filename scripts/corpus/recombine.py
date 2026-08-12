@@ -32,7 +32,7 @@ from collections import Counter, defaultdict
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, NamedTuple
 
 if TYPE_CHECKING:
     from spacy.tokens import Doc
@@ -233,6 +233,92 @@ def override_pairs(
 
 
 # ---------------------------------------------------------------------------
+# Segmenter lexicon — the second boundary source
+# ---------------------------------------------------------------------------
+
+class LexRecord(NamedTuple):
+    """One segmented unit of the treebank, as ``cli.segment --source conllu`` writes it."""
+
+    token_start: int          # index of the unit's first token within the chapter
+    n_tokens: int
+    passage: str              # the unit's text (== the tokens' forms, joined)
+    words: tuple[str, ...]    # the segmenter's words, partitioning ``passage``
+
+
+def load_lexicon(path: str | Path | None) -> dict[str, list[LexRecord]]:
+    """Read a segmentation JSONL into ``{chapter title: [LexRecord, …]}``.
+
+    A missing file yields ``{}`` rather than raising: the segmentation is a manual
+    step, so the pipeline must run without it. Records lacking ``token_start`` are
+    skipped — those come from the ``ctext`` source, which describes a different
+    edition and cannot be mapped onto treebank indices.
+    """
+    out: dict[str, list[LexRecord]] = defaultdict(list)
+    if path is None:
+        return {}
+    path = Path(path)
+    if not path.is_file():
+        return {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if "token_start" not in row or not row.get("chapter"):
+            continue
+        words = tuple(w["word"] if isinstance(w, dict) else w
+                      for w in row.get("tokens", ()))
+        out[row["chapter"]].append(LexRecord(
+            row["token_start"], row["n_tokens"], row["passage"], words))
+    return dict(out)
+
+
+def lexicon_groups(
+    doc: "Doc",
+    records: Iterable[LexRecord],
+    report: "MergeReport | None" = None,
+) -> list[list[int]]:
+    """Token-index groups for the multi-token words a segmentation proposes.
+
+    Each record names the exact token range it covers, so this is a direct index
+    map — the segmenter and the treebank are describing the *same* text, and no
+    alignment between editions is involved. A word is only usable when it begins
+    and ends on treebank token boundaries: the segmenter is free to split a token
+    the treebank keeps whole (孟子 -> 孟 + 子), and such a word is skipped rather
+    than forced.
+    """
+    groups: list[list[int]] = []
+    for rec in records:
+        span = doc[rec.token_start:rec.token_start + rec.n_tokens]
+        if len(span) != rec.n_tokens or "".join(t.text for t in span) != rec.passage:
+            if report is not None:
+                report.skipped["lexicon-stale"][rec.passage[:12]] += 1
+            continue
+        # char offset within the record -> local token index, for offsets that
+        # fall on a token boundary.
+        boundary: dict[int, int] = {}
+        offset = 0
+        for local, token in enumerate(span):
+            boundary[offset] = local
+            offset += len(token.text)
+        boundary[offset] = len(span)
+
+        pos = 0
+        for word in rec.words:
+            start, end = pos, pos + len(word)
+            pos = end
+            if len(word) < 2:
+                continue
+            lo, hi = boundary.get(start), boundary.get(end)
+            if lo is None or hi is None or hi - lo < 2:
+                if lo is None or hi is None:
+                    if report is not None:
+                        report.skipped["lexicon-splits-token"][word] += 1
+                continue
+            groups.append([rec.token_start + i for i in range(lo, hi)])
+    return groups
+
+
+# ---------------------------------------------------------------------------
 # Configuration + reporting
 # ---------------------------------------------------------------------------
 
@@ -256,6 +342,13 @@ class MergeConfig:
 
     overrides: Overrides = EMPTY_OVERRIDES
 
+    lexicon_path: "Path | None" = None
+    """A segmentation JSONL from ``cli.segment --source conllu``, contributing the
+    words the UD relations miss (諸侯, 天子, 大夫, 聖人 — the ones the treebank labels
+    ``nmod``). Stored as a path rather than loaded data so this stays hashable and
+    can key the parsed-chapter cache. A missing file is a no-op: the segmentation
+    is a manual step and the pipeline must never depend on it."""
+
 
 @dataclass
 class MergeReport:
@@ -275,6 +368,12 @@ class MergeReport:
 
     forced: Counter[str] = field(default_factory=Counter)
     """Merges that came from ``Overrides.merge``."""
+
+    by_source: dict[str, Counter[str]] = field(
+        default_factory=lambda: defaultdict(Counter))
+    """Which source proposed each merge — ``ud`` / ``lexicon`` / ``override``, or
+    a combination. The point of a second source is that it contributes words the
+    relations cannot, so this is the number that says whether it earned its place."""
 
     skipped: dict[str, Counter[str]] = field(
         default_factory=lambda: defaultdict(Counter))
@@ -347,18 +446,25 @@ def _root(doc: "Doc", group: Sequence[int]) -> int:
     return group[0]
 
 
+def _groups_to_pairs(groups: Iterable[Sequence[int]]) -> list[tuple[int, int]]:
+    """Chain each group into consecutive pairs, so it can join the union."""
+    return [(g[i], g[i + 1]) for g in groups for i in range(len(g) - 1)]
+
+
 def merge_doc(
     doc: "Doc",
     config: MergeConfig,
     report: MergeReport | None = None,
+    lexicon: Iterable[LexRecord] = (),
 ) -> "Doc":
     """Recombine ``doc``'s subword tokens in place, and return it.
 
-    The UD relations and the override list each contribute pairs; they are
-    unioned so a curated word can extend a relation-derived group rather than
-    fight it. The surviving groups are applied in one retokenizer pass, which
-    remaps heads for us. The merged token's lemma is the joined lemmas (node ids
-    key on the lemma) and its text is the joined forms (the display glyph).
+    Three sources each contribute pairs — the UD relations, the segmenter lexicon,
+    and the override list — which are unioned before the guards run, so a curated
+    word can extend a relation-derived group rather than fight it. The surviving
+    groups are applied in one retokenizer pass, which remaps heads for us. The
+    merged token's lemma is the joined lemmas (node ids key on the lemma) and its
+    text is the joined forms (the display glyph).
 
     ``doc.text`` and every ``token.idx`` are unchanged by retokenization, so the
     character-offset arithmetic in ``embeddings.occurrences`` stays exact.
@@ -374,12 +480,22 @@ def merge_doc(
 
     deps = [t.dep_ for t in doc]
     heads = [t.head.i for t in doc]
-    pairs = word_formation_pairs(deps, heads, config.deps) if config.deps else []
-
+    ud_pairs = word_formation_pairs(
+        deps, heads, config.deps) if config.deps else []
+    lex_pairs = _groups_to_pairs(lexicon_groups(doc, lexicon, report))
     forced_pairs = override_pairs(
         forms, lemmas, sent_ids, config.overrides.merge)
     forced_tokens = {i for pair in forced_pairs for i in pair}
-    pairs = [*pairs, *forced_pairs]
+
+    # Which source proposed what, so the report can say whether the segmenter
+    # earned its place rather than merely duplicating the relations.
+    source_of: dict[frozenset[int], set[str]] = defaultdict(set)
+    for label, src in (("ud", ud_pairs), ("lexicon", lex_pairs),
+                       ("override", forced_pairs)):
+        for a, b in src:
+            source_of[frozenset((a, b))].add(label)
+
+    pairs = [*ud_pairs, *lex_pairs, *forced_pairs]
     components = _components(n, pairs)
 
     keep: list[tuple[list[int], str]] = []
@@ -407,6 +523,11 @@ def merge_doc(
         report.merged[word] += 1
         if forced:
             report.forced[word] += 1
+        members = set(group)
+        sources = {label
+                   for pair, labels in source_of.items() if pair <= members
+                   for label in labels}
+        report.by_source["+".join(sorted(sources)) or "?"][word] += 1
 
     # Groups the relations produced but that no longer form a contiguous run are
     # reported too — they are a real signal that the parse disagrees with itself.
