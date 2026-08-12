@@ -166,24 +166,28 @@ No action taken; just make sure it is intended before the next run.
 
 ---
 
-## 5c. Should measure phrases be words? (`NUM`-headed merges)
+## 5c. Measure phrases as words — **DONE**
 
-The 者 nominalizer rule generalises: when a merged group inherits a function-word
-POS, its root's _dependency slot_ often says what it really is. The remaining
-candidate is `NUM`-headed groups, 15 tokens:
+> **Resolved 2026-08-12.** Extended `NOMINALIZABLE_POS` to `NUM`, so a numeral
+> heading a nominal slot forms a noun: **+3 types / +5 tokens** — 萬鍾 ×2 (`nsubj`),
+> 百里 ×2 (`root`, `obl`), 什一 (`root`). 萬乘, 千里, 五霸 and 百里-at-`nummod`/`acl`
+> stay refused, since those are adnominal.
 
-- **nominal slots** — 萬鍾 (`nsubj`), 百里 (`obl`, `root`), 什一 (`root`). Applying
-  the same rule would make these nouns and merge them.
-- **adnominal slots** — 萬乘, 千里, 五霸, 什一 (`nummod`). Would stay refused.
+Note the same string can now go both ways — 百里 merges where it heads a phrase and
+is refused where it modifies one. That is per-occurrence correctness, not
+inconsistency.
 
-I did not implement it, because unlike 者 this is not a parsing question. 百里 "a
-hundred _li_" is a measure phrase; whether it should be a vocabulary node is a
-philological call. 五霸 "the Five Hegemons" is arguably a proper noun and a
-different case again.
+**If you want 百里 gone entirely**, two levers, and they are not equivalent:
 
-Everything else refused as non-lexical looks correctly refused: `ADV` 66 (然後,
-沛然, the whole X然 adverbial family), `AUX` 43 (足以, 敢以), `SCONJ` 11 (之心, 之人),
-`PART` 14 (昔者 ×9 and friends), plus 由此 (`PRON`) and 而後 (`CCONJ`).
+- `never_merge: ["百里"]` — drops the word, leaves 百 and 里 as their own nodes.
+- adding **both** 百 and 里 to `stopwords/chinese.conf` — the all-stopword guard
+  then refuses the merge _and_ removes both characters from the vocabulary. That
+  is probably what you want for measure words, but it is the bigger hammer.
+
+Everything still refused as non-lexical looks correctly refused: `ADV` 66 (然後,
+沛然, the whole X然 adverbial family), `AUX` 43 (足以, 敢以, 不敢), `SCONJ` 11
+(之心, 之人, 之下), `PART` 14 (昔者 ×9 and friends), plus 由此 (`PRON`) and 而後
+(`CCONJ`).
 
 ---
 

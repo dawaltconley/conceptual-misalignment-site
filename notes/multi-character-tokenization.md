@@ -39,7 +39,8 @@ names** — see below.
 From the relations alone: **243 word types, 889 merged tokens** — 天下 ×173,
 父母 ×37, 文王 ×35, 萬章 ×23, 百姓 ×19, 伊尹 ×19, 周公 ×18, 公孫丑 ×17, 禽獸 ×15.
 With the segmenter lexicon (below) and the lexical-word guard, the total is
-**730 types / 1907 tokens**.
+**730 types / 1907 tokens** against `segpos/conllu/`, or **817 / 2094** against the
+EvaHan-shot `segpos/conllu-fewshot/` that `MERGE_LEXICON` currently points at.
 
 ### A merged name is a name
 
@@ -73,35 +74,51 @@ require the root's XPOS to start with `n,名詞,人` — the treebank's person
 categories (王 公 伯 徒 = `人,役割`; 人 夫 = `人,人`; 子 弟 = `人,関係`) as against
 `主体,集団` (國), `固定物,地形` (山) and `制度,場` (州).
 
-### A nominalized predicate is a noun
+### A nominalizable head in a nominal slot is a noun
 
 Same problem, different construction. 者 nominalizes what precedes it — 賢者 "the
-worthy one", 死者 "the dead" — but the treebank tags 者 `PART` and makes it the
-group's head, so the merge inherits `PART` and the lexical-word guard throws it
-away.
+worthy one" — and a numeral heads a quantity used as a thing — 萬鍾 "ten thousand
+_zhong_". Both are tagged as function words and both head their group, so the
+merge inherits `PART`/`NUM` and the lexical-word guard throws it away.
 
-The fix is not "者 makes a noun", which would be wrong. **者's own dependency label
-says which construction it is**, and the parse already records it:
+The fix is not "者 makes a noun", which would over-apply. **The head's own
+dependency label says which construction it is**, and the parse already records
+it:
 
 ```
-賢者 = 賢/VERB/amod  + 者/PART/nsubj    "the worthy one"    nominal    -> NOUN
-死者 = 死/VERB/amod  + 者/PART/obj      "the dead"          nominal    -> NOUN
-儒者 = 儒/NOUN/nmod  + 者/PART/nmod     "a Confucian"       nominal    -> NOUN
-昔者 = 昔/NOUN/nmod  + 者/PART/advmod   "in former times"   adverbial  -> refused
-古者 = 古/NOUN/nmod  + 者/PART/advmod   "in ancient times"  adverbial  -> refused
+賢者 = 賢/VERB/amod + 者/PART/nsubj     "the worthy one"     nominal  -> NOUN
+死者 = 死/VERB/amod + 者/PART/obj       "the dead"           nominal  -> NOUN
+萬鍾 = 萬/NUM/nsubj + 鍾/NOUN/clf       "ten thousand zhong" nominal  -> NOUN
+昔者 = 昔/NOUN/nmod + 者/PART/advmod    "in former times"    adverbial-> refused
+萬乘 = 萬/NUM/nummod + 乘/NOUN/clf      "ten-thousand-chariot" adnominal-> refused
 ```
 
-`NOMINALIZERS` × `NOMINAL_DEPS` in `merged_pos` implements exactly that: +10 types
-/ +26 tokens (賢者 8, 王者 5, 長者 5, 壯者 2, 死者, 老者, 儒者, 顯者, 使者, 生者), while
-昔者 ×9, 或者 and 古者 stay refused as the adverbials they are.
+`NOMINALIZABLE_POS` × `NOMINAL_DEPS` in `merged_pos` implements exactly that:
+`PART` contributes +10 types / +26 tokens (賢者 8, 王者 5, 長者 5, 壯者 2, 死者, 老者,
+儒者, 顯者, 使者, 生者) and `NUM` a further +3 / +5 (萬鍾 2, 百里 2, 什一 1), while
+昔者 ×9, 或者, 古者, 萬乘, 千里 and 五霸 stay refused.
 
-**The general technique** — when a merged group inherits a function-word POS,
-check the root's _slot_ rather than its tag — has one more plausible application,
-not implemented: `NUM`-headed groups. 萬鍾 sits in `nsubj` and 百里 in `obl`/`root`,
-which would make them nouns, whereas 萬乘, 千里, 五霸, 什一 sit in `nummod`, an
-adnominal slot. Whether a measure phrase like 百里 "a hundred _li_" should be a
-word at all is a judgement call rather than a parsing question, so it is left
-alone. 15 tokens.
+Note that the same string can go both ways — 百里 merges at `root`/`obl` and is
+refused at `acl`/`nummod`. That is the rule working per occurrence, not noise.
+
+**Why the set stops there.** Every other function-word tag has a case in a
+nominal slot that this rule would get wrong:
+
+- `AUX` — 不敢 sits at `root`, but it is a predicate ("dare not"), not a noun.
+- `PRON` — 由此 sits at `obl`, but it is a prepositional phrase.
+- `SCONJ` — **之 is a clitic on what _precedes_ it.** Its slot is `case` or
+  `mark`, so it never reaches a nominal slot and the rule declines it
+  automatically — which is right, because a 之+X group straddles a constituent
+  boundary rather than being a mis-tagged word:
+
+  ```
+  之人 = 之/SCONJ/case->古 + 人/NOUN/nsubj      古之人 is 古之 | 人
+  之下 = 之/SCONJ/case->山 + 下/NOUN/obl:lmod   山之下 is 山之 | 下
+  之心 = 之/SCONJ/mark->忍 + 心/NOUN/obj        不忍之心 is 不忍之 | 心
+  ```
+
+  This is the case that matters most: 心 is a concept we measure against 仁, and
+  merging 之心 would take those occurrences out of it (see the guard section).
 
 ## What we do not merge, and why
 
@@ -135,7 +152,7 @@ the full run (relations + lexicon):
 | Begins/ends on a token boundary | 5                                           | Lexicon only: the segmenter may split a token the treebank keeps whole (孟子 → 孟 + 子). Skipped, never forced                                             |
 | All constituents are stopwords  | 161 — 可以 ×77, 以為 ×12, 而已 ×12, 得而 ×7 | Each character is already dropped downstream, so _not_ merging reproduces current behaviour. Merging would invent a 可以 content node out of two stopwords |
 | Contains a target hanzi         | 23 — 禮貌, 仁政, 仁人, 智慧, 禮義           | 仁 義 禮 智 信 keep every occurrence, so counts stay comparable across runs. Logged in the report, never silently swallowed                                |
-| **Result is a lexical word**    | 157 — 然後, 足以, 昔者, 之心, 萬乘          | The group's inherited POS must be `NOUN`/`PROPN`/`VERB`/`ADJ`. See below                                                                                   |
+| **Result is a lexical word**    | 146 — 然後, 足以, 昔者, 之心, 萬乘          | The group's inherited POS must be `NOUN`/`PROPN`/`VERB`/`ADJ`. See below                                                                                   |
 | `never_merge` override          | curated                                     | See below                                                                                                                                                  |
 
 The target guard is what makes the segmenter safe to consult: its own convention
