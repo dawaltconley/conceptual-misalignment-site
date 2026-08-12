@@ -67,9 +67,9 @@ scripts/.venv/bin/python -m cli.segment seg --source conllu --arch api \
   --fewshot evahan --output ../segpos/conllu/mengzi.seg.jsonl
 ```
 
-**Not yet wired:** `cli/segment.py` has no `--fewshot` flag — the EvaHan selector
-is only reachable from `tools/eval_segmentation.py`. Adding it is a few lines; say
-the word and I will, or I can just do the re-run end to end.
+The `--fewshot` flag is wired and smoke-tested, so that command runs as written.
+If you would rather I just do it end to end — re-segment, re-run the pipeline,
+re-verify and re-commit — say so and it is one instruction.
 
 The one caveat that survives: the evaluation is on **資治通鑑 narrative** (testb)
 with shots from **左傳** (testa), while the Mengzi is philosophical dialogue. The
