@@ -345,6 +345,22 @@ class MergeConfig:
 
     overrides: Overrides = EMPTY_OVERRIDES
 
+    mergeable_pos: frozenset[str] | None = frozenset(
+        {"NOUN", "PROPN", "VERB", "ADJ"})
+    """Only form a word when the group's inherited POS is one of these — a
+    statement about **word formation**, not about which words the pipeline later
+    analyses (that is ``Pipeline.content_pos``, and this must not depend on it).
+
+    A group headed by a particle, conjunction, auxiliary, adverb or numeral is not
+    a lexical word: 之心 (``SCONJ``), 昔者 (``PART``), 足以 (``AUX``), 然後 (``ADV``),
+    萬乘 (``NUM``). Merging one is strictly destructive — it buries content
+    characters inside a token that is not itself a word, so 心 loses occurrences to
+    a 之心 that nothing wants either. Refusing the merge leaves 之 to be dropped as
+    a stopword and 心 to stand as itself.
+
+    ``None`` disables the check. Override-forced merges bypass it, like the other
+    guards."""
+
     lexicon_path: "Path | None" = None
     """A segmentation JSONL from ``cli.segment --source conllu``, contributing the
     words the UD relations miss (諸侯, 天子, 大夫, 聖人 — the ones the treebank labels
@@ -522,6 +538,12 @@ def merge_doc(
             if any(lemmas[i] in config.targets for i in group):
                 report.skipped["target"][word] += 1
                 continue
+        # Last, because it needs the group's root: is the result a word at all?
+        pos = merged_pos(doc, group, _root(doc, group))
+        if not forced and config.mergeable_pos is not None \
+                and pos not in config.mergeable_pos:
+            report.skipped[f"non-lexical-{pos or '_'}"][word] += 1
+            continue
         keep.append((group, word))
         report.merged[word] += 1
         if forced:
