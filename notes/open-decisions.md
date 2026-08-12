@@ -104,3 +104,62 @@ excludes proper nouns wholesale.
 - `segpos/conllu/` is untracked. It is generated output like `segpos/chapters/`,
   which _is_ committed — so it probably should be too, but it is ~1 MB of JSONL
   and I did not want to commit generated data without asking.
+
+---
+
+## 7. Review the 330 words the segmenter added (the philological check)
+
+The lexicon contributes **330 types that reach the vocabulary as `NOUN`**, 80 of
+them with ≥3 occurrences. This is the part only you can sign off on. The list is
+strong on inspection — 諸侯 58, 天子 35, 大夫 29, 聖人 25, 寡人 22, 小人 13, 大人 12,
+庶人 11, 妻子 9, 中國 8, 丈夫 8, 良人 7, 先王 6, 匹夫 6, 有司 6, 人倫 6, 上士/中士/下士 6,
+四海 5, 赤子 5, 天爵 5, 人爵 5, 社稷 5, 人心 4, 經界 4, 規矩 4, 條理 4, 宗廟 3, 孝子 3,
+人性 3 — and it includes **杞柳 5** and **桮棬 5**, the two words you originally
+asked about.
+
+```
+scripts/.venv/bin/python -m tools.merge_report --min-count 3 --pos NOUN
+```
+
+Specific things I would check:
+
+- **地方 ×4** looks like an over-merge. Mengzi's phrase is 地方百里 "territory a
+  hundred _li_ square", i.e. 地 + 方百里, not the modern compound 地方 "place".
+  A `never_merge` candidate.
+- Temporal/measure expressions are borderline rather than wrong: 今日 9, 前日 6,
+  他日 4, 三年 5, 來年 3, 百世 3, 終身 3, 尺寸 3.
+- 大王 ×3 — is this the title, or 太王 (King Tai)? The treebank normalises 大/太
+  inconsistently (see the note's edition section).
+
+Two clear segmenter errors are **already harmless**: 之心 ×7 and 之人 ×4 (merging
+the genitive 之) come out `SCONJ`, and 昔者 ×11 / 賢者 ×7 / 長者 ×6 come out `PART`,
+so `content_pos` discards all of them. POS inheritance is doing real work here.
+
+---
+
+## 8. `cooccurrence_min_freq` may want lowering too
+
+Same root cause as `min_freq` (item 2), separate knob. Per-chapter networks thin
+because a chapter's characters now spread across fewer, longer types. Of 81
+network files: **74 unchanged, 6 with fewer nodes, 0 empty, 0 with more**. The
+largest drop is 義\_3A 16 → 6. The `智`/`信` chapters that log "no co-occurrence"
+were already empty before merging, so that is not a regression.
+
+`cooccurrence_min_freq=3` is already low; going to 2 would partly compensate but
+also admits more noise. Your call.
+
+---
+
+## 9. Pipeline output has been regenerated
+
+`scripts/.venv/bin/python -m main --corpus mengzi` ran clean in 10.2s and its
+output is committed separately so it is easy to revert. 67 files under
+`public/ctext/`, plus `public/embeddings/mengzi.json` and `src/data/terms.json`.
+
+Verified: target occurrence counts in `terms.json` are unchanged (仁 158, 義 108,
+禮 68, 智 32, 信 30); `npm run build` succeeds; 41 distinct multi-character node
+ids now appear across the shipped networks. The embedding vocabulary is 571 nodes
+(was 602 unmerged), 2860 edges, 15 communities.
+
+**Not re-run: the SEP corpus.** Nothing in this work touches it, and
+`build_master` composed `terms.json` from the existing manifest.
