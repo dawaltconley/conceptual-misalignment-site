@@ -36,8 +36,9 @@ its **text is the joined forms** (the display glyph, which
 and dep from the group's syntactic root, and its POS from the root **except for
 names** — see below.
 
-Result over the whole Mengzi: **243 word types, 889 merged tokens** — 天下 ×173,
+From the relations alone: **243 word types, 889 merged tokens** — 天下 ×173,
 父母 ×37, 文王 ×35, 萬章 ×23, 百姓 ×19, 伊尹 ×19, 周公 ×18, 公孫丑 ×17, 禽獸 ×15.
+With the segmenter lexicon (below) the total is **777 types / 2064 tokens**.
 
 ### A merged name is a name
 
@@ -76,40 +77,56 @@ categories (王 公 伯 徒 = `人,役割`; 人 夫 = `人,人`; 子 弟 = `人,
 is worse — it is the relation on genuine modifiers, so adding it over-merges
 broadly.
 
-The cost is that the treebank labels several real bisyllabic words `nmod` and we
-therefore miss them: **諸侯, 天子, 大夫, 聖人, 寡人, 庶人, 小人**. This is a known
-gap, not an oversight; see "Curated overrides" and "Deferred" below.
+The cost is that the treebank labels several real bisyllabic words `nmod` and the
+relations therefore miss them: **諸侯, 天子, 大夫, 聖人, 寡人, 庶人, 小人**. Those are
+supplied by the segmenter lexicon instead — see "The second boundary source".
+
+Widening the relation set to include `nmod` was measured and rejected. It takes
+the corpus from 243 to 594 types (889 → 1529 tokens) and fails three ways: it
+turns phrases into nodes (方百 ×7, from 方百里 "a hundred _li_ square"; 民父母 ×5,
+from 為民父母; 人者 ×5), it **extends words that were already right** (父母 →
+民父母 ×5 and 父母國 ×2; 天下 → 天下諸侯 ×2; 百姓 → 百姓者), and it swallows six more
+target occurrences. `nmod` is a phrase-level relation — the treebank uses the same
+label for 諸侯 and for 民父母 — so it cannot answer the question we would be asking
+it.
 
 ### Guards
 
-Applied to every candidate group, with the corpus-wide counts they reject:
+Applied to every candidate group, whatever source proposed it. Counts are for
+the full run (relations + lexicon):
 
-| Guard                          | Rejects                                           | Why                                                                                                                                                        |
-| ------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Contiguous run only            | 29 — 欣然, 由然, 子男, 民夫婦                     | The relation reaches across an intervening token; merging would reorder the text                                                                           |
-| Single sentence                | 0                                                 | Structural safety; a merge must not cross a sentence boundary                                                                                              |
-| All constituents are stopwords | 96 — 可以 ×76, 得而 ×7, 有以 ×5, 無以 ×2, 能以 ×2 | Each character is already dropped downstream, so _not_ merging reproduces current behaviour. Merging would invent a 可以 content node out of two stopwords |
-| Contains a target hanzi        | 1 — 禮義                                          | 仁 義 禮 智 信 keep every occurrence, so counts stay comparable across runs. Logged in the report, never silently swallowed                                |
-| `never_merge` override         | curated                                           | See below                                                                                                                                                  |
+| Guard                           | Rejects                                     | Why                                                                                                                                                        |
+| ------------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Contiguous run only             | 8 — 欣然, 子男, 民夫婦                      | The relation reaches across an intervening token; merging would reorder the text                                                                           |
+| Single sentence                 | 1                                           | Structural safety; a merge must not cross a sentence boundary                                                                                              |
+| Begins/ends on a token boundary | 5                                           | Lexicon only: the segmenter may split a token the treebank keeps whole (孟子 → 孟 + 子). Skipped, never forced                                             |
+| All constituents are stopwords  | 161 — 可以 ×77, 以為 ×12, 而已 ×12, 得而 ×7 | Each character is already dropped downstream, so _not_ merging reproduces current behaviour. Merging would invent a 可以 content node out of two stopwords |
+| Contains a target hanzi         | 23 — 禮貌, 仁政, 仁人, 智慧, 禮義           | 仁 義 禮 智 信 keep every occurrence, so counts stay comparable across runs. Logged in the report, never silently swallowed                                |
+| `never_merge` override          | curated                                     | See below                                                                                                                                                  |
+
+The target guard is what makes the segmenter safe to consult: its own convention
+merges 仁政, 仁人 and 智慧, and all 23 such groups are refused, so the shipped
+occurrence counts are byte-identical to the unmerged baseline.
 
 Note what the guards do **not** have to handle. Merged tokens inherit their
-root's POS, so 足以 comes out `AUX` and the 欣然 family `ADV`; the pipeline's
-existing `content_pos={"NOUN","VERB","ADJ"}` discards those 72 of 889 with no
-extra rule. The final split is 431 `NOUN`, 386 `PROPN` (names, per the rule
-above), 40 `AUX`, 18 `VERB`, 14 `ADV` — so only the 431 `NOUN` merges reach the
-vocabulary.
+root's POS, so 足以 comes out `AUX` and the 欣然 family `ADV`, which
+`content_pos={"NOUN","VERB","ADJ"}` discards without any extra rule. The full
+split is 1249 `NOUN`, 434 `PROPN` (names, per the rule above), 224 `VERB`, 53
+`ADV`, 42 `PART`, 40 `AUX`, 12 `SCONJ`, 10 `NUM`.
 
 ## Curated overrides
 
 `scripts/data/merge_overrides.json` (optional — a missing file is not an error):
 
 - **`merge`** force-merges a run of whole tokens spelling the word, anywhere it
-  appears inside one sentence. This is where 諸侯 / 天子 / 大夫 / 聖人 belong: a short
-  list you can defend line by line, rather than a relation set loosened until it
-  happens to catch them. Because listing a word is an explicit judgement, a forced
-  group bypasses the stopword and target guards (it still must be contiguous and
-  within one sentence).
-- **`never_merge`** drops a word the relations do produce.
+  appears inside one sentence. Because listing a word is an explicit judgement, a
+  forced group bypasses the stopword and target guards (it still must be
+  contiguous and within one sentence). This was the intended home for
+  諸侯 / 天子 / 大夫 / 聖人 before the lexicon existed; **the lexicon now supplies
+  those**, so the list may not be needed at all.
+- **`never_merge`** drops a word the other sources do produce. Checked first, so
+  listing a word in both means it is not merged — an explicit refusal beats an
+  explicit request.
 
 Both match either the joined surface forms or the joined lemmas, so a word can be
 listed with whichever glyphs are to hand (荅 or 答).
@@ -120,13 +137,20 @@ the characters losing the most occurrences to a merge.
 
 ## Consequences to watch
 
-**`Pipeline.min_freq` shifts under you.** Measured on the embedding vocabulary at
-`min_freq=5`: 602 → 606 words. 天 drops 292 → 117, 下 227 → 47, 父 82 → 26, 母
-47 → 10, while 天下 (173) and 父母 (37) appear as words. Fifteen
-characters fall _below_ the floor because they only ever occurred inside a
-compound (倉, 廩, 姓, 禽, 畎 …). The distribution the vocab is cut from is not the
-one `min_freq=5` was tuned against — re-check it after any change to the merge
-set. (Target counts are unchanged by construction: 仁 156, 義 108.)
+**`Pipeline.min_freq` shifts under you.** The embedding vocabulary at
+`min_freq=5` goes 602 → 606 with the relations alone, and **602 → 571** with the
+lexicon as well. 天 drops 292 → 117, 下 227 → 47, 父 82 → 26, 母 47 → 10, while
+天下 (173) and 父母 (37) appear as words; characters that only ever occurred
+inside a compound (倉, 廩, 姓, 禽, 畎 …) fall below the floor entirely. The
+distribution the vocabulary is cut from is not the one `min_freq=5` was tuned
+against — re-check it after any change to the merge set. (Target counts are
+unchanged by construction.)
+
+**`cooccurrence_min_freq` deserves the same look.** Per-chapter networks thin
+slightly, because a chapter's characters are now spread across fewer, longer
+types: of 81 network files, 74 keep their node count, 6 lose nodes (義\_3A 16 → 6
+is the largest) and none becomes empty. The `智`/`信` chapters that log "no
+co-occurrence" were already empty before merging.
 
 **Merged spans embed as spans.** GujiRoBERTa is character-tokenized, so a
 two-character word is two subwords pooled by `subword_pooling="mean"` (already
@@ -138,45 +162,69 @@ needs no change.
 multi-character headwords up in CC-CEDICT and falls back to per-character pinyin
 for words it lacks (許子, 瞽瞍).
 
-## Deferred: a second boundary source
+## The second boundary source: a segmenter lexicon
 
-The XunziALLM segmentation under `segpos/` catches exactly the words UD labels
-`nmod` — an aligned prototype found ~1,300 merges the relations miss (諸侯 ×57,
-天子 ×35, 大夫 ×29, 聖人 ×27, 寡人 ×23). It is **not** wired into the pipeline, and
-nothing here depends on `segpos/` existing: that output is a manual step, and the
-existing files were produced from the **ctext** edition rather than the treebank,
-so using them means reconciling two editions.
+The UD relations cannot reach the bisyllabic words the treebank labels `nmod`.
+Those come from a **segmentation of the treebank's own text** — XunziALLM via
+`cli.segment seg --source conllu`, written to `segpos/conllu/mengzi.seg.jsonl`
+and merged by `corpus.recombine.lexicon_groups`.
 
-Measured facts about that reconciliation, kept here so they need not be
-re-derived:
+### Why there is no alignment step
 
-- The editions are **99.4% character-identical** compared on the CoNLL-U `form`
-  column. Diffing on `form` already absorbs the big normalizations (爲→為 512×,
-  吿→告 41×, 敎→教 35×, 郷→鄉 27×) — they never appear as differences at all.
-- Normalization is not uniformly modern-ward: lemma 答 → form 荅 (6×), lemma 間 →
-  form 閒 (2×), lemma 疏 → form 䟽 (2×). A comparison should count a character as
-  matching if **either** the form or the lemma matches ctext.
-- The residual is genuine edition variance, and it is the part worth hand-review:
-  **144 single-character substitutions** over 80 distinct pairs (間/閒 ×12, 荅/答 ×6,
-  歟/與 ×6, 絜/潔 ×5, 脩/修 ×5), about **20 single-character insert/deletes**, a few
-  doubled-graph variants (鶂鶂/鶃鶃, 昏昏/昬昬), one 小子/士, and **one real gap** — a
-  34-character passage in 3A that ctext has and the treebank lacks
-  (是亂天下也巨屨小屨同賈人豈為之哉…).
-- Units do not correspond: 260 `# newpar` paragraphs in the treebank (mean 136
-  chars, max 1313) against 690 ctext passages in `segpos/chapters/*.jsonl`.
+An earlier prototype aligned the pre-existing `segpos/chapters/*.jsonl` (produced
+from the **ctext** edition) against the treebank with `difflib`. It worked — the
+editions are 99.4% character-identical — but reconciling two editions inside the
+pipeline is not something you should have to defend.
 
-The agreed path is to re-run the segmentation against the **treebank** text into a
-fresh `segpos/` subdirectory, flag only the passages where the two source texts
-genuinely differ, and hand-merge those — so the final boundary set is curated
-rather than machine-aligned. Caveat for that run: the treebank text is
-**unpunctuated**, while the prompt and few-shot examples in
-`scripts/segmentation/segpos.py` assume punctuation down to the `w` tag.
-Paragraph units are the right granularity; per-sentence would be worse (median 5
-characters, 44% ≤ 4).
+Segmenting the treebank's own text removes the problem rather than solving it.
+`corpus.conllu.iter_units` packs treebank sentences into units under
+`--max-chars` that never cross a `# newpar`, and each unit records `doc_id`,
+`sent_ids`, `token_start` and `n_tokens`. Because a unit names the exact token
+range it covers, mapping the segmentation back is a **direct index map**. The two
+sources describe the same string; nothing is aligned, matched or guessed.
 
-`corpus.recombine` is built for this: sources contribute `(i, j)` index pairs that
-are unioned before the guards run, so a lexicon source joins in without touching
-the merge logic. Its input file being absent must stay a no-op, never an error.
+A segmenter word is used only when it begins and ends on treebank token
+boundaries. The segmenter is free to split a token the treebank keeps whole
+(孟子 → 孟 + 子); such a word is skipped, never forced. Over the whole corpus that
+cost 5 words.
+
+### The run
+
+442 units (mean 80 characters), **442 succeeded, 0 errors, 0 round-trip
+failures**, covering all 34,289 tokens. Decoding is constrained by a per-unit
+GBNF grammar that permits only the input characters, so character mismatch — the
+dominant failure mode of the earlier ctext runs — is structurally impossible.
+
+Two prompt details matter for reproducing it. The treebank text is
+**unpunctuated**, so the few-shot examples must be too (`FEWSHOT_UNPUNCTUATED`,
+`seg.unpunctuated_fewshot`); demonstrating a `w` token teaches output the input
+cannot support. And paragraph-sized units are the right granularity — per-sentence
+would be far worse, since treebank sentences have a median of 5 characters and
+44% are ≤ 4.
+
+### What each source contributes
+
+| source         | tokens | types | examples                                |
+| -------------- | -----: | ----: | --------------------------------------- |
+| lexicon only   |   1154 |   523 | 諸侯 天子 大夫 聖人 寡人 小人 大人 庶人 |
+| both agree     |    732 |   206 | 天下 文王 父母 萬章 百姓 伊尹 公孫丑    |
+| relations only |    178 |    95 | 足以 牛羊 上下 管仲 鄉原 父兄 父子 左右 |
+
+**777 word types / 2064 tokens** in total. The split is the argument for keeping
+both: the segmenter finds 523 types the relations cannot, and the relations still
+find 95 the segmenter does not. Neither subsumes the other.
+
+Guards reject 161 all-stopword groups (可以 ×77, 以為 ×12, 而已 ×12 …), 23 groups
+containing a target, 8 non-contiguous, 5 that split a treebank token, and 1
+crossing a sentence. The target count rises from 1 to 23 with the lexicon active —
+the segmenter's convention merges 仁政, 仁人, 智慧 — and every one is refused, which
+is why the shipped occurrence counts are identical to the unmerged baseline
+(仁 158, 義 108, 禮 68, 智 32, 信 30).
+
+The lexicon is **optional**: generating it is a manual step, so
+`Pipeline.merge_lexicon` defaults to `None` and a missing file is a no-op, never
+an error. `segpos/chapters/*.jsonl` (the ctext-derived output) is left in place
+and unused — its records carry no `token_start`, so `load_lexicon` skips them.
 
 ## References
 
