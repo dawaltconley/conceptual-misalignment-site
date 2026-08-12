@@ -8,9 +8,17 @@ Everything below is reversible. Nothing here has been merged to `dev`.
 
 ---
 
-## 1. Re-run the segmentation with EvaHan few-shot examples?
+## 1. Re-run the segmentation with EvaHan few-shot examples? — **DONE**
 
-**Built but unmeasured.** `segmentation/evahan.py` selects few-shot examples from
+> **Resolved 2026-08-12.** Dylan ran it into `segpos/conllu-fewshot/` and pointed
+> `MERGE_LEXICON` there. Both runs are kept, so the comparison stays reproducible.
+> Measured differences between them: 98.46% boundary agreement; EvaHan merges more
+> (414 positions to 123), net **+291 multi-char tokens / +111 types**; and it is
+> more self-consistent on kept words (75.7% vs 73.3%). 以為 is equally inconsistent
+> in both (~18%) and discarded either way; 然後 goes 55% → 84% consistent.
+> The evidence below is what the decision was made on.
+
+`segmentation/evahan.py` selects few-shot examples from
 the EvaHan 2022 gold files, and `tools/eval_segmentation.py` scores word-span
 P/R/F1 against held-out gold (shots from testa 左傳, evaluation on testb).
 
@@ -143,8 +151,8 @@ excludes proper nouns wholesale.
 
 ## 5b. `content_pos` is commented out in `MENGZI_PIPELINE` — deliberate?
 
-Uncommitted in `config.py`: `# content_pos=frozenset({"NOUN", "VERB", "ADJ"})`,
-so it is `None` and **no POS filtering happens on the Chinese side**. Flagging it
+Committed in `config.py`: `# content_pos=frozenset({"NOUN", "VERB", "ADJ"})`, so
+it is `None` and **no POS filtering happens on the Chinese side**. Flagging it
 because it interacts with two things above:
 
 - Proper nouns are no longer excluded, so 文王, 周公, 齊宣王 … now become nodes.
