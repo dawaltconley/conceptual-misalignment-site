@@ -14,7 +14,7 @@ MERGE_OVERRIDES = _SCRIPTS / "data" / "merge_overrides.json"
 # Segmenter word boundaries over the treebank's own text, from
 # `python -m cli.segment seg --source conllu`. Optional: a manual step, so the
 # pipeline runs without it (see notes/multi-character-tokenization.md).
-MERGE_LEXICON = _ROOT / "segpos" / "conllu" / "mengzi.seg.jsonl"
+MERGE_LEXICON = _ROOT / "segpos" / "conllu-fewshot" / "mengzi.seg.jsonl"
 
 # --- Outputs (live at the repo root) ---
 DATA = _ROOT / "src" / "data"
