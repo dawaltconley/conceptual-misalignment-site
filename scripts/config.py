@@ -106,13 +106,12 @@ TERMS: list[Term] = [
     # )),
 ]
 
-CHINESE_STOPWORDS: set[str] = {
-    "之", "也", "乎", "矣", "焉", "哉", "邪", "耳", "已",
-    "而", "則", "以", "且", "雖", "若", "如", "猶", "亦", "故", "乃", "夫",
-    "我", "吾", "汝", "其", "此", "彼", "是",
-    "有", "無", "為", "爲", "曰", "謂", "不", "非", "所", "者", "於", "豈",
-    "然", "得", "能", "可", "將", "及", "皆", "未", "與",
-}
+with open(_SCRIPTS / "stopwords" / "chinese.conf", "r") as file:
+    CHINESE_STOPWORDS = set[str]()
+    for line in file:
+        line = line.strip()
+        if line and not line.startswith('#'):
+            CHINESE_STOPWORDS.add(line)
 
 with open(_SCRIPTS / "stopwords" / "english.conf", "r") as file:
     ENGLISH_STOPWORDS = set[str]()
