@@ -36,3 +36,13 @@ CLAUDE.local.md
 *.egg-info
 __pycache__/
 *.pyc
+
+# Obsidian - whitelist specific configs
+notes/.obsidian/
+
+# Uncomment to sync specific configurations:
+# !notes/.obsidian/app.json
+# !notes/.obsidian/appearance.json
+# !notes/.obsidian/community-plugins.json
+# !notes/.obsidian/core-plugins.json
+# !notes/.obsidian/workspace.json
