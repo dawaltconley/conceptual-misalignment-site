@@ -3,13 +3,18 @@ import type { MasterTerm } from '@lib/terms'
 import { useState, useEffect, useMemo, type ReactNode } from 'react'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
-import { EmbeddingDatasetSchema, type EmbeddingNode } from '@lib/embeddings'
+import {
+  EmbeddingDatasetSchema,
+  type EmbeddingNode,
+  type EmbeddingDataset,
+} from '@lib/embeddings'
 import {
   groupCommunities,
   COMMUNITY_SORT_LABELS,
   type CommunitySort,
 } from '@lib/communities'
 import { pinyinKeywords } from '@lib/pinyin'
+import { getNormalizer, type Range } from '@lib/graphs'
 import Button from './Button'
 import Toggle from './Toggle'
 import TagsCombobox from './TagsCombobox'
@@ -110,10 +115,7 @@ export default function EmbeddingScatter({
   // PCA layout — free: the reduced columns are variance-ordered, so [0],[1]
   // are the 2-D principal-component coordinates.
   const pcaPoints = useMemo<ScatterPoint[]>(
-    () =>
-      data
-        ? filteredNodes.map((n) => nodeToScatterPoint(n, data?.documents))
-        : [],
+    () => (data ? getScatterPoints({ ...data, nodes: filteredNodes }) : []),
     [filteredNodes, data],
   )
 
@@ -304,18 +306,35 @@ function getColor(community: number): string {
   return community < 0 ? NO_COMMUNITY_COLOR : color(community)
 }
 
-function nodeToScatterPoint(
-  { id, vec, ...data }: EmbeddingNode,
-  corpusDocuments: number,
-): ScatterPoint {
-  return {
+function getScatterPoints({ nodes }: EmbeddingDataset): ScatterPoint[] {
+  const strengthRange = nodes.reduce<Range>(
+    (range, n) => ({
+      min: Math.min(range.min, n.strength),
+      max: Math.max(range.max, n.strength),
+    }),
+    { max: -Infinity, min: Infinity },
+  )
+  const frequencyRange = nodes.reduce<Range>(
+    (range, n) => ({
+      min: Math.min(range.min, n.freq),
+      max: Math.max(range.max, n.freq),
+    }),
+    { max: -Infinity, min: Infinity },
+  )
+
+  const toOpacity = getNormalizer(strengthRange, { min: 1.05, max: 2 })
+  const toSize = getNormalizer(frequencyRange, {
+    min: Math.E,
+    max: Math.E ** 6,
+  })
+
+  return nodes.map(({ id, vec, ...data }) => ({
     id,
     x: vec[0] ?? 0,
     y: vec[1] ?? 0,
     color: getColor(data.community),
-    opacity: data.doc_freq / corpusDocuments,
-    size: Math.log2(data.strength + 1), // works well
-    // size: Math.log10(data.pagerank + 1) * 5000,
+    opacity: Math.log2(toOpacity(data.strength)),
+    size: Math.log(toSize(data.freq)),
     data,
-  }
+  }))
 }

@@ -6,7 +6,7 @@ import { useResizeObserver } from 'use-resize-observer'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
-import { isPoint } from '@lib/graphs'
+import { isPoint, getNormalizer } from '@lib/graphs'
 import HanziNode from '@components/HanziNode'
 import EnglishNode from '@components/EnglishNode'
 
@@ -44,28 +44,12 @@ export default function Network({
       n.id === centralNodeId ? { ...n, fx: 50, fy: 50 } : { ...n },
     )
     const links = data.edges.map<Link>((e) => ({ ...e, value: e.weight }))
+    const values = links.map((l) => l.value)
+    const min = Math.min(...values)
+    const max = Math.max(...values)
 
-    const toLinkDistance = getNormalizer(
-      {
-        min: Math.min(...links.map((l) => l.value)),
-        max: Math.max(...links.map((l) => l.value)),
-      },
-      {
-        min: 40,
-        max: 5,
-      },
-    )
-
-    const toLinkStrength = getNormalizer(
-      {
-        min: Math.min(...links.map((l) => l.value)),
-        max: Math.max(...links.map((l) => l.value)),
-      },
-      {
-        min: 0.7,
-        max: 1,
-      },
-    )
+    const toLinkDistance = getNormalizer({ min, max }, { min: 40, max: 5 })
+    const toLinkStrength = getNormalizer({ min, max }, { min: 0.7, max: 1 })
 
     const simulation = d3
       .forceSimulation(nodes)
@@ -281,11 +265,4 @@ function drawEdges(
     ctx.lineTo(toX(end.x), toY(end.y))
     ctx.stroke()
   }
-}
-
-/** returns a function which normalizes a value from an actual range within a target range */
-function getNormalizer(actual: Range, target: Range): (n?: number) => number {
-  return (n = actual.min) =>
-    target.min +
-    ((n - actual.min) * (target.max - target.min)) / (actual.max - actual.min)
 }

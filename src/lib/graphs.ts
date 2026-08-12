@@ -59,3 +59,13 @@ export interface Line {
   start: Point
   end: Point
 }
+
+/** returns a function which normalizes a value from an actual range within a target range */
+export function getNormalizer(
+  actual: Range,
+  target: Range,
+): (n?: number) => number {
+  return (n = actual.min) =>
+    target.min +
+    ((n - actual.min) * (target.max - target.min)) / (actual.max - actual.min)
+}
