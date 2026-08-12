@@ -75,32 +75,35 @@ export default function TermNetwork({
   ).toFixed(2)
 
   return (
-    <div className="rounded-md border border-gray-100">
-      <div className="grid divide-x divide-gray-100 2xl:grid-cols-2">
-        <div className="p-4">
-          <H className="mb-4 text-xl font-bold">{title}</H>
-          <Select
-            label="Chinese term"
-            value={term.hanzi}
-            options={terms.map((t) => t.hanzi)}
-            onChange={selectHanzi}
-            triggerClassName="text-lg"
-          />
-        </div>
-        <div className="flex justify-between gap-4 p-4 align-baseline">
-          <Select
-            label="English rendering"
-            value={english.term.label}
-            options={term.renderings}
-            onChange={setRenderingLabel}
-            className="mt-auto shrink-0"
-            triggerClassName="text-lg"
-          />
-          <div className="mt-auto max-w-64 text-sm leading-5 text-gray-700">
-            <span className="align-baseline text-lg font-bold leading-5 text-gray-900">
+    <div className="overflow-visible rounded-md border border-gray-100 bg-white">
+      <div className="grid 2xl:grid-cols-2">
+        <div className="sticky top-0 z-50 grid grid-cols-2 flex-row items-end justify-between gap-4 border-b border-gray-100 bg-white p-4 lg:flex">
+          <H className="mr-auto text-xl font-bold">{title}</H>
+          <div className="order-last col-span-2 mx-auto flex shrink-0 flex-row gap-[inherit] lg:order-none lg:col-span-1">
+            <Select
+              label="Chinese"
+              value={term.hanzi}
+              options={terms.map((t) => t.hanzi)}
+              onChange={selectHanzi}
+              className="shrink-0"
+              triggerClassName="text-lg"
+            />
+            <Select
+              label="English"
+              value={english.term.label}
+              options={term.renderings}
+              onChange={setRenderingLabel}
+              className="shrink-0"
+              triggerClassName="text-lg"
+            />
+          </div>
+          <div className="ml-auto max-w-80 text-right text-sm leading-4 text-gray-700">
+            <span className="align-baseline text-lg font-bold leading-4 text-gray-900">
               {chinesePercentage}%
             </span>{' '}
-            of sampled usage occurs in articles about Chinese philosophy
+            sampled usage of{' '}
+            <span className="italic">“{english.term.label}”</span> comes from
+            articles about Chinese philosophy
           </div>
         </div>
         <div className="p2">
