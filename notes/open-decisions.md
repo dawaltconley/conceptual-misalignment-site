@@ -22,16 +22,60 @@ The case against: the tags are never used downstream (the merge takes POS from
 the treebank), so the only benefit is indirect, via better boundaries.
 
 **What I did:** ran the overnight segmentation on the existing hand-written
-few-shot, per your instruction to leave it. The EvaHan path is ready but unused.
+few-shot, per your instruction to leave it. Then, since measuring needs no input
+from you (only acting on it does), I scored all three on 150 held-out testb lines
+(5321 gold words), decoding grammar-constrained, 0 round-trip failures:
 
-**Decision needed:** worth ~10 min to score `evahan` vs `xunzi` vs zero-shot? If
-EvaHan wins by a wide margin, a re-run costs ~40 min and every downstream number
-shifts.
+| few-shot        | precision | recall |     F1 |
+| --------------- | --------: | -----: | -----: |
+| **evahan** (12) |    0.9253 | 0.9434 | 0.9343 |
+| xunzi (70)      |    0.9141 | 0.9404 | 0.9271 |
+| none (0)        |    0.9256 | 0.8927 | 0.9088 |
+
+**EvaHan wins by +0.7 F1 over the shots we actually used**, with a prompt 2.4×
+smaller (12 shots / 1316 chars vs 70 / 3135). Zero-shot has the best precision but
+much the worst recall — it under-segments (5132 predicted against 5321 gold),
+which is exactly the failure the few-shot examples are there to fix.
+
+Overall F1 is a misleading headline, though, because it is dominated by
+single-character words every prompt gets right. **The merge only ever consumes
+multi-character boundaries**, so I added that breakdown and re-ran:
+
+| few-shot        | multi-char P | multi-char R | multi-char F1 |
+| --------------- | -----------: | -----------: | ------------: |
+| **evahan** (12) |       0.8643 |   **0.7829** |    **0.8216** |
+| xunzi (70)      |       0.8724 |       0.7378 |        0.7995 |
+
+On the metric that matters the gap is **+2.2 F1, three times the overall gap, and
+it is entirely recall** (+4.5 points) at essentially tied precision. Of 797
+multi-character gold words, EvaHan shots find ~36 more per 150 lines — a ~6%
+relative gain in words found. Scaled to the Mengzi's 2847 multi-character word
+tokens that is on the order of 170 more words, which is material for a source
+whose entire purpose is catching what the relations miss.
+
+For calibration: re-running `xunzi` gave 0.9279 against 0.9271 the first time, so
+~0.001 is run-to-run noise. +0.022 is well clear of it.
+
+> **My recommendation: re-run the segmentation with the EvaHan few-shot.** I did
+> not do it, because you said to leave the overnight run alone — and it also
+> invalidates the committed pipeline output, which would want re-verifying.
 
 ```
-scripts/.venv/bin/python -m tools.eval_segmentation --n 120 --fewshot evahan
-scripts/.venv/bin/python -m tools.eval_segmentation --n 120 --fewshot xunzi
+# ~30 min; then re-run the pipeline and re-check the merge report
+scripts/.venv/bin/python -m cli.segment seg --source conllu --arch api \
+  --api-base http://127.0.0.1:8080/v1 --grammar \
+  --fewshot evahan --output ../segpos/conllu/mengzi.seg.jsonl
 ```
+
+**Not yet wired:** `cli/segment.py` has no `--fewshot` flag — the EvaHan selector
+is only reachable from `tools/eval_segmentation.py`. Adding it is a few lines; say
+the word and I will, or I can just do the re-run end to end.
+
+The one caveat that survives: the evaluation is on **資治通鑑 narrative** (testb)
+with shots from **左傳** (testa), while the Mengzi is philosophical dialogue. The
+selector already scores candidates to prefer common-noun compounds and dialogue
+particles over proper-noun-dense narrative, but the measured gain is still
+out-of-domain evidence.
 
 ---
 

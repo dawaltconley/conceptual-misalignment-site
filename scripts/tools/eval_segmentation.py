@@ -41,11 +41,20 @@ def spans(words: list[str]) -> set[tuple[int, int, str]]:
     return out
 
 
-def prf(gold: list[list[str]], pred: list[list[str]]) -> tuple[float, float, float]:
-    """Micro-averaged precision / recall / F1 over exact word spans."""
+def prf(gold: list[list[str]], pred: list[list[str]],
+        min_len: int = 1) -> tuple[float, float, float]:
+    """Micro-averaged precision / recall / F1 over exact word spans.
+
+    ``min_len=2`` restricts the metric to **multi-character words**, which is the
+    number that matters here: the merge consumes only multi-token boundaries, and
+    overall F1 is dominated by single-character words that every prompt gets right
+    by default. A prompt can win on the headline number while being no better at
+    the only decision we actually use.
+    """
     tp = n_gold = n_pred = 0
     for g, p in zip(gold, pred):
-        gs, ps = spans(g), spans(p)
+        gs = {s for s in spans(g) if len(s[2]) >= min_len}
+        ps = {s for s in spans(p) if len(s[2]) >= min_len}
         tp += len(gs & ps)
         n_gold += len(gs)
         n_pred += len(ps)
@@ -132,9 +141,14 @@ def main() -> None:
         pred.append(words)
 
     p, r, f1 = prf(gold, pred)
+    mp, mr, mf1 = prf(gold, pred, min_len=2)
+    n_multi_gold = sum(1 for g in gold for w in g if len(w) >= 2)
     print(f"\n=== segmentation, exact word spans ({args.fewshot}) ===")
-    print(f"  precision {p:.4f}   recall {r:.4f}   F1 {f1:.4f}")
-    print(f"  gold words {sum(len(g) for g in gold)}, "
+    print(f"  all words        precision {p:.4f}   recall {r:.4f}   F1 {f1:.4f}")
+    print(f"  MULTI-char only  precision {mp:.4f}   recall {mr:.4f}   F1 {mf1:.4f}"
+          "   <- the boundaries the merge consumes")
+    print(f"  gold words {sum(len(g) for g in gold)} "
+          f"({n_multi_gold} multi-char), "
           f"predicted {sum(len(x) for x in pred)}, "
           f"lines failing round-trip {n_bad}")
 

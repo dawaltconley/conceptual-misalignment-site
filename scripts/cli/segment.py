@@ -402,6 +402,13 @@ def main():
     ap.add_argument("--max-chars", type=int, default=120, dest="max_chars",
                     help="(--source conllu) cap on a unit's characters; sentences are "
                          "packed up to it and never across a paragraph boundary.")
+    ap.add_argument("--fewshot", default="default", choices=["default", "evahan"],
+                    help="default = the bundled XunziALLM samples (seg) or the "
+                         "hand-written examples (segpos); evahan = examples selected "
+                         "from the EvaHan 2022 gold data, which score +2.2 F1 on "
+                         "multi-character words (see notes/open-decisions.md).")
+    ap.add_argument("--n-shots", type=int, default=12, dest="n_shots",
+                    help="(--fewshot evahan) how many examples to select.")
     args = ap.parse_args()
 
     errors_path = Path(args.errors) if args.errors else Path(
@@ -413,11 +420,21 @@ def main():
 
     unpunctuated = args.source == "conllu"
 
+    def evahan_shots(with_pos: bool) -> list[tuple[str, str]]:
+        from segmentation import evahan
+        return evahan.select(
+            evahan.TESTA, n=args.n_shots,
+            tagset=segmentation.segpos.VALID_TAGS,
+            unpunctuated=unpunctuated, with_pos=with_pos)
+
     segpos: SegPos
     if args.process == "seg":
-        fewshot = segmentation.seg.FEWSHOT
-        if unpunctuated:
-            fewshot = segmentation.seg.unpunctuated_fewshot(fewshot)
+        if args.fewshot == "evahan":
+            fewshot = evahan_shots(with_pos=False)
+        else:
+            fewshot = segmentation.seg.FEWSHOT
+            if unpunctuated:
+                fewshot = segmentation.seg.unpunctuated_fewshot(fewshot)
         segpos = SegPos(
             "seg",
             arch=assert_arch(args.arch),
@@ -425,12 +442,17 @@ def main():
             fewshot=fewshot,
         )
     elif args.process == "segpos":
+        if args.fewshot == "evahan":
+            fewshot = evahan_shots(with_pos=True)
+        elif unpunctuated:
+            fewshot = segmentation.segpos.FEWSHOT_UNPUNCTUATED
+        else:
+            fewshot = segmentation.segpos.FEWSHOT
         segpos = SegPos(
             "segpos",
             arch=assert_arch(args.arch),
             system_prompt=segmentation.segpos.SYSTEM_PROMPT,
-            fewshot=(segmentation.segpos.FEWSHOT_UNPUNCTUATED if unpunctuated
-                     else segmentation.segpos.FEWSHOT),
+            fewshot=fewshot,
         )
     else:
         raise ValueError(f"Bad process value: {args.process!r}")
