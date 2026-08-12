@@ -1,4 +1,4 @@
-import { forwardRef, memo, type ReactNode } from 'react'
+import { forwardRef, memo, type ComponentPropsWithoutRef } from 'react'
 import { useResizeObserver } from 'use-resize-observer'
 import * as d3 from 'd3'
 import { Position, type Point } from '@lib/graphs'
@@ -152,13 +152,15 @@ export const ScatterSkeleton = (): JSX.Element => (
   </Wrapper>
 )
 
-export const Wrapper = forwardRef<HTMLDivElement, { children: ReactNode }>(
-  ({ children }, ref) => (
-    <div
-      ref={ref}
-      className="relative aspect-square min-h-96 w-full touch-manipulation overflow-hidden"
-    >
-      {children}
-    </div>
-  ),
-)
+export const Wrapper = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<'div'>
+>(({ children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className="relative aspect-square min-h-96 w-full touch-manipulation overflow-hidden"
+    {...props}
+  >
+    {children}
+  </div>
+))
