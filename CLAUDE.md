@@ -40,7 +40,9 @@ favor working end-to-end over completeness.**
   `Embeddings`) + JSON serialization.
 - `corpus/` (fetch/parse; only place that hits the network), `embeddings/`
   (`model`, `vectors`, `occurrences`, `analyze`), `cooccurrence/`, `graph/`,
-  `segmentation/` + `cli/` (separate XunziALLM experiment).
+  `segmentation/` + `cli/segment.py` (XunziALLM word segmentation; **not** part of
+  a pipeline run — a manual step, run against a served model, whose output
+  `corpus/recombine.py` reads if present).
 
 Front end: `src/pages/index.astro` → `TermNetwork` (cooccurrence/similarity
 dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
@@ -55,6 +57,12 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
 - Chinese source of record is the **Kyoto UD `scripts/data/mengzi.conllu`** (gold
   tokens/lemmas/POS), **not CLTK**. Node id = lemma; display `form` = common modern
   glyph (敎→教).
+- The treebank is **one character per token**, so `corpus/recombine.py` merges
+  subword tokens into words at load time (天下, 諸侯, 杞柳) — every consumer
+  downstream sees words without knowing it happened. Boundaries come from UD
+  `compound`/`flat`/`fixed`, a segmenter lexicon, and a curated override file;
+  `conj`/`nmod` are **excluded** and a group containing 仁義禮智信 is never merged,
+  so target counts are stable. See `notes/multi-character-tokenization.md`.
 - Method defaults: subword-mean → cross-occurrence-max pooling, mean-center
   (anisotropy), kNN cosine graph, neglog sim-transform, Louvain communities. The
   pooling modes and Louvain `resolution` are `Pipeline` knobs; `sim_network`
@@ -68,13 +76,16 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   but harmless. Pyright may flag `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
   `vectors.reduce_vectors` as unknown — **stale false-positives**; they run fine.
 
-## Active threads (as of 2026-08-01)
+## Active threads (as of 2026-08-12)
 
-- **`min_freq` is overloaded**: shared between the embedding vocab and the
-  per-source co-occurrence networks, so a high value (set to thin the scatter)
-  starves co-occurrence (null graphs despite real occurrences). Fix in flight:
-  a **separate `cooccurrence_min_freq`**, and thin the scatter by relevance
-  (top-N by nearest-target similarity) instead of frequency.
+- **Multi-character tokenization** is on `feat/chinese-retokenization`, not yet
+  merged to `dev`. Open calls for the user are logged in
+  `notes/open-decisions.md` — read that first if you pick this up.
+- **`min_freq` / `cooccurrence_min_freq` want re-tuning.** The separate
+  `cooccurrence_min_freq` knob is **done**, but merging moved the frequency
+  distribution both are cut from (embedding vocab 602 → 571), so neither value is
+  tuned to anything now. Thinning the scatter by relevance (top-N by
+  nearest-target similarity) rather than frequency is still unbuilt.
 - SEP community register-domination — to try (per-pipeline): **HDBSCAN** option.
   **Debiasing** (all-but-the-top / whitening) is **done**: `Pipeline.debias`
   (`abtt`/`whiten`) + `scripts/tools/debias_diagnostics.py`; see
