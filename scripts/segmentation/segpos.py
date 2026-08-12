@@ -21,6 +21,12 @@ TAGSET = {
     "u":  "助词 structural particle (之/所/者 ...)",
     "y":  "语气词 modal/final particle (也/矣/乎/哉 ...)",
     "w":  "标点 punctuation",
+    # 方位词, as EvaHan tags them — a real classical category this set was
+    # missing, and a frequent one (386x in EvaHan_testb_gold). Its absence made
+    # EvaHan gold lines unusable as few-shot examples, since the GBNF grammar
+    # only permits tags listed here. Segmentation-only runs never emit tags, so
+    # this affects the `segpos` process alone.
+    "f":  "方位词 locative (上/下/中/內/外 ...)",
 }
 VALID_TAGS = set(TAGSET)
 # --------------------------------------------------------------------------- #
@@ -43,6 +49,28 @@ FEWSHOT = [
     (
         "亦有仁義而已矣。",
         "亦/d 有/v 仁義/n 而已/y 矣/y 。/w",
+    ),
+]
+
+
+# Variant for UNPUNCTUATED input (the Kyoto CoNLL-U text). Identical to FEWSHOT
+# above but with the punctuation removed: demonstrating a `w` token teaches the
+# model to emit one, and the treebank text contains no punctuation for it to
+# attach to. 仁義 stays merged here, matching FEWSHOT — whether the segmenter
+# joins a core term is immaterial, since ``corpus.recombine`` refuses to merge
+# any group containing one.
+FEWSHOT_UNPUNCTUATED = [
+    (
+        "孟子見梁惠王",
+        "孟子/nr 見/v 梁惠王/nr",
+    ),
+    (
+        "王何必曰利",
+        "王/n 何/r 必/d 曰/v 利/n",
+    ),
+    (
+        "亦有仁義而已矣",
+        "亦/d 有/v 仁義/n 而已/y 矣/y",
     ),
 ]
 

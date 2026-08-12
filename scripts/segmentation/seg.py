@@ -12,6 +12,29 @@ with open(SEG_DATA) as seg_data:
         FEWSHOT.append((shot['input'], shot['output']))
 
 
+# Punctuation the XunziALLM sample sentences use; stripped for unpunctuated input.
+PUNCTUATION = set("，。？！；：、「」『』（）《》〈〉·…—")
+
+
+def unpunctuated_fewshot(shots: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """The few-shot examples rewritten for input that carries no punctuation.
+
+    Every XunziALLM sample sentence is punctuated, but the Kyoto CoNLL-U text is
+    not, so demonstrating punctuation teaches the model to emit tokens it cannot
+    produce from the input. Punctuation-only words are dropped from both sides,
+    and any shot that no longer round-trips is skipped.
+    """
+    out: list[tuple[str, str]] = []
+    for src, tagged in shots:
+        words = [w for w in tagged.split("/")
+                 if w and not all(c in PUNCTUATION for c in w)]
+        clean_src = "".join(c for c in src if c not in PUNCTUATION)
+        if "".join(words) != clean_src:      # skip anything that doesn't round-trip
+            continue
+        out.append((clean_src, "/".join(words) + "/"))
+    return out
+
+
 SYSTEM_PROMPT = """
     You are an assistant to help in the processing of Classical Chinese texts.
     Please perform word segmentation on the input Classical Chinese sentences,

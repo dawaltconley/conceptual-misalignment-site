@@ -24,6 +24,77 @@ class ChapterDoc(NamedTuple):
     doc: Doc     # one chapter: sentences marked; token.pos_/lemma_/dep_/head set
 
 
+class ConlluUnit(NamedTuple):
+    """A span of consecutive treebank sentences, with where its tokens live.
+
+    Written for feeding the treebank's own text to a segmenter: because the unit
+    records ``token_start``/``n_tokens`` — indices into the same chapter Doc
+    :func:`load_conllu` builds — a segmentation of ``text`` maps straight back
+    onto token indices. No alignment against another edition is involved.
+    """
+
+    doc_id: str                 # the `# newdoc id`, e.g. "KR1h0001_001"
+    chapter: str                # the chapter's title, e.g. "梁惠王上"
+    par: int                    # paragraph ordinal within the chapter (0-based)
+    sent_ids: tuple[str, ...]   # the `# sent_id`s this unit covers, in order
+    token_start: int            # index of the first token within the chapter Doc
+    n_tokens: int
+    text: str                   # the tokens' forms, concatenated (unpunctuated)
+
+
+def iter_units(
+    path: str | Path,
+    *,
+    max_chars: int = 120,
+    skip_titles: bool = True,
+) -> Iterator[ConlluUnit]:
+    """Yield the treebank's text as units of at most ``max_chars`` characters.
+
+    Sentences are packed greedily and a unit never crosses a ``# newpar``
+    boundary, so each one is a contiguous stretch of a single passage — the
+    treebank's sentences are far too short to segment in isolation (median 5
+    characters), while whole paragraphs run to 1313. A single sentence longer
+    than ``max_chars`` becomes its own unit rather than being split.
+    """
+    path = Path(path)
+    doc_id = title = ""
+    par = -1
+    token_i = 0                       # running token index within the chapter
+    buf: list[tuple[str, str, int]] = []   # (sent_id, text, n_tokens)
+
+    def flush() -> Iterator[ConlluUnit]:
+        nonlocal buf
+        if buf:
+            n = sum(b[2] for b in buf)
+            yield ConlluUnit(
+                doc_id, title, par, tuple(b[0] for b in buf),
+                token_i - n, n, "".join(b[1] for b in buf),
+            )
+            buf = []
+
+    for comments, rows in _iter_sentences(path):
+        if (newdoc := comments.get("newdoc id")) is not None:
+            yield from flush()
+            doc_id, par, token_i = newdoc, -1, 0
+        if "newpar text" in comments or "newpar" in comments:
+            yield from flush()
+            par += 1
+
+        sent_id = comments.get("sent_id", "")
+        if sent_id.endswith("_title"):
+            title = comments.get("text", "")
+            if skip_titles:
+                continue
+
+        text = "".join(row[1] for row in rows)
+        if buf and sum(len(b[1]) for b in buf) + len(text) > max_chars:
+            yield from flush()
+        buf.append((sent_id, text, len(rows)))
+        token_i += len(rows)
+
+    yield from flush()
+
+
 def _iter_sentences(path: Path) -> Iterator[tuple[dict[str, str], list[list[str]]]]:
     """Yield ``(comments, rows)`` per CoNLL-U sentence (blank-line separated)."""
     comments: dict[str, str] = {}
