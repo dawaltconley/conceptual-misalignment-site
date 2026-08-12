@@ -37,7 +37,7 @@ export default function ScatterLegend({
             onClick={() => onClick && onClick(id)}
           >
             <ColorSwatch color={color} />
-            <div className="w-full overflow-x-hidden text-ellipsis whitespace-nowrap">
+            <div className="w-full overflow-x-hidden text-ellipsis whitespace-nowrap text-left">
               {description}
             </div>
           </E>
