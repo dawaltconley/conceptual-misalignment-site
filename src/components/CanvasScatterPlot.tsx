@@ -392,7 +392,6 @@ function CanvasScatterPlot({
         )}
         style={{ width, height }}
         onMouseMove={(e) => isInteractive && handleHover(e)}
-        onMouseOut={() => handleHover(null)}
         onPointerDown={handlePress}
         onPointerMove={handlePressMove}
         onPointerUp={handlePressEnd}
