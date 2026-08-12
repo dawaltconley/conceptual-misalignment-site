@@ -25,11 +25,13 @@ import json
 import re
 import sys
 from typing import Literal
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from pathlib import Path
 from difflib import ndiff
-from config import TERMS
-from corpus.mengzi import Chapter, fetch_mengzi_full
+# (config is imported lazily below; the conllu source needs nothing from it)
+# `corpus.mengzi` is imported lazily in main(): it installs the HTTP cache and
+# fetches from ctext at module scope, which the --source conllu path has no use
+# for (the treebank is a local file).
 
 import segmentation.seg
 import segmentation.segpos
@@ -86,16 +88,10 @@ class Word:
 class SegPos:
     arch: ARCH
 
-    def __init__(self, process: Literal['seg', 'segpos'], *, system_prompt: str, fewshot: list[tuple[str, str]], arch: ARCH, core_terms: list[str] = [], max_new_tokens: int = 2048):
+    def __init__(self, process: Literal['seg', 'segpos'], *, system_prompt: str, fewshot: list[tuple[str, str]], arch: ARCH, max_new_tokens: int = 2048):
         self.process: Literal['seg', 'segpos'] = process
         self.system_prompt = system_prompt
-        if core_terms:
-            self.system_prompt += "\n\n"
-            "Unless they are used as part of a proper noun, treat terms in the following"
-            "list as distinct words: {terms}".format(
-                terms=", ".join(core_terms))
         self.fewshot = fewshot
-        self.core_terms = core_terms
         self.arch = arch
         self.max_new_tokens = max_new_tokens
 
@@ -117,6 +113,14 @@ class SegPos:
         Return (ok, reason). Two invariants:
           1. concatenation of segmented words == original sentence (character-exact)
           2. every tag is in the defined tagset
+
+        Note what is deliberately NOT checked: whether a word swallows one of the
+        core terms (仁政, 仁人, 智慧). The segmenter's own convention merges those,
+        and rejecting the unit for it threw away every other boundary in an ~80
+        character passage to prevent a merge that is dropped downstream anyway —
+        ``corpus.recombine`` refuses to merge any group containing a target, so a
+        segmenter-proposed 仁政 leaves 仁 and 政 as separate treebank tokens either
+        way. The constraint belongs at the merge layer, where it already is.
         """
         if tokens is None:
             return False, "unparseable output"
@@ -131,14 +135,6 @@ class SegPos:
                     bad_tags.append(t.pos)
             if bad_tags:
                 error.append(f"unknown tags: {sorted(bad_tags)}")
-        bad_words = []
-        for t in tokens:
-            for term in self.core_terms:
-                if term in t.word and term != t.word:
-                    bad_words.append(t.word)
-                    break
-        if bad_words:
-            error.append(f"obfuscated core term: found {', '.join(bad_words)}")
         if error:
             return False, "; ".join(error)
         return True, "ok"
@@ -340,22 +336,29 @@ class Tokenized:
     chapter: str
     passage: str
     tokens: list[Word]
+    # Source-specific provenance, spliced into the record when present. The
+    # conllu source uses it to carry doc_id / sent_ids / token_start, which is
+    # what lets a segmentation be mapped straight back onto treebank token
+    # indices instead of being aligned against another edition.
+    meta: dict | None = None
 
     def serialize(self) -> str:
         serialized = asdict(self)
         serialized['tokens'] = [w.serialize() for w in self.tokens if w.word]
-        return json.dumps(serialized, ensure_ascii=False)
+        meta = serialized.pop('meta', None) or {}
+        return json.dumps({**serialized, **meta}, ensure_ascii=False)
 
 
 @dataclass
 class TokenizedError(Tokenized):
-    raw_output: str
-    reason: str
-    diffs: list[str]
+    raw_output: str = ""
+    reason: str = ""
+    diffs: list[str] = field(default_factory=list)
 
     @classmethod
     def from_tokenized(cls, t: Tokenized, raw_output: str, reason: str, diffs: list[str]):
-        return cls(t.id, t.chapter, t.passage, t.tokens, raw_output, reason, diffs)
+        return cls(t.id, t.chapter, t.passage, t.tokens, t.meta,
+                   raw_output, reason, diffs)
 
 
 # --------------------------------------------------------------------------- #
@@ -390,6 +393,15 @@ def main():
                          "characters via a per-sentence GBNF grammar; prevents char-mismatch errors")
     ap.add_argument("--limit", type=int, default=0,
                     help="tag only first N sentences (0 = all; use for a dry run)")
+    ap.add_argument("--source", default="ctext", choices=["ctext", "conllu"],
+                    help="ctext = the punctuated ctext passages (the original "
+                         "behaviour); conllu = the Kyoto treebank's own text, "
+                         "unpunctuated, in units that carry their token indices so "
+                         "the result maps back onto the treebank with no alignment. "
+                         "conllu also switches to the unpunctuated few-shot examples.")
+    ap.add_argument("--max-chars", type=int, default=120, dest="max_chars",
+                    help="(--source conllu) cap on a unit's characters; sentences are "
+                         "packed up to it and never across a paragraph boundary.")
     args = ap.parse_args()
 
     errors_path = Path(args.errors) if args.errors else Path(
@@ -399,39 +411,56 @@ def main():
     API_MODEL = args.api_model
     USE_GRAMMAR = args.grammar
 
+    unpunctuated = args.source == "conllu"
+
     segpos: SegPos
     if args.process == "seg":
+        fewshot = segmentation.seg.FEWSHOT
+        if unpunctuated:
+            fewshot = segmentation.seg.unpunctuated_fewshot(fewshot)
         segpos = SegPos(
             "seg",
             arch=assert_arch(args.arch),
             system_prompt=segmentation.seg.SYSTEM_PROMPT,
-            fewshot=segmentation.seg.FEWSHOT,
-            core_terms=[t.hanzi for t in TERMS]
+            fewshot=fewshot,
         )
     elif args.process == "segpos":
         segpos = SegPos(
             "segpos",
             arch=assert_arch(args.arch),
             system_prompt=segmentation.segpos.SYSTEM_PROMPT,
-            fewshot=segmentation.segpos.FEWSHOT,
-            core_terms=[t.hanzi for t in TERMS]
+            fewshot=(segmentation.segpos.FEWSHOT_UNPUNCTUATED if unpunctuated
+                     else segmentation.segpos.FEWSHOT),
         )
     else:
         raise ValueError(f"Bad process value: {args.process!r}")
+    print(f"[info] {len(segpos.fewshot)} few-shot example(s)"
+          f"{' (unpunctuated)' if unpunctuated else ''}", file=sys.stderr)
 
     tok, model = load_model(
         model_id=args.model, device=args.device, arch=segpos.arch, api_base=args.api_base)
 
-    mengzi = fetch_mengzi_full()
-    lines: list[tuple[str, Chapter]] = []
-    for chapter in mengzi.chapters:
-        for line in chapter.text.split("\n"):
-            lines.append((line, chapter))
+    # (text, chapter label, provenance) — the only per-source difference.
+    lines: list[tuple[str, str, dict | None]] = []
+    if args.source == "conllu":
+        from config import MENGZI_CONLLU
+        from corpus.conllu import iter_units
+        for u in iter_units(MENGZI_CONLLU, max_chars=args.max_chars):
+            lines.append((u.text, u.chapter, {
+                "doc_id": u.doc_id, "par": u.par, "sent_ids": list(u.sent_ids),
+                "token_start": u.token_start, "n_tokens": u.n_tokens,
+            }))
+    else:
+        from corpus.mengzi import fetch_mengzi_full
+        mengzi = fetch_mengzi_full()
+        for chapter in mengzi.chapters:
+            for line in chapter.text.split("\n"):
+                lines.append((line, chapter.title, None))
     if args.limit:
         lines = lines[: args.limit]
 
-    print(
-        f"[info] {len(lines)}  line(s) to tag", file=sys.stderr)
+    print(f"[info] source={args.source}  {len(lines)} unit(s) to tag "
+          f"({sum(len(t) for t, _, _ in lines)} chars)", file=sys.stderr)
 
     try:
         from tqdm import tqdm
@@ -442,7 +471,7 @@ def main():
     n_ok = n_err = 0
     with open(args.output, "w", encoding="utf-8") as fout, \
             open(errors_path, "w", encoding="utf-8") as ferr:
-        for i, (line, chapter) in iterator:
+        for i, (line, chapter, meta) in iterator:
             raw = segpos.tag_sentence(tok=tok, model=model, sentence=line)
             tokens = segpos.parse(raw)
             ok, reason = segpos.qc_check(line, tokens)
@@ -469,14 +498,15 @@ def main():
             assert tokens is not None
             if ok:
                 record = Tokenized(
-                    id=i, chapter=chapter.title, passage=line, tokens=tokens)
+                    id=i, chapter=chapter, passage=line, tokens=tokens,
+                    meta=meta)
                 fout.write(record.serialize() + "\n")
                 n_ok += 1
             else:
                 record = TokenizedError(
-                    id=i, chapter=chapter.title, passage=line, tokens=tokens,
-                    raw_output=raw, reason=reason, diffs=diff_str(
-                        ''.join([t.word for t in tokens]), line)
+                    id=i, chapter=chapter, passage=line, tokens=tokens,
+                    meta=meta, raw_output=raw, reason=reason,
+                    diffs=diff_str(''.join([t.word for t in tokens]), line)
                 )
                 ferr.write(record.serialize() + "\n")
                 n_err += 1
