@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from numpy import ndarray
     from _typeshed import DataclassInstance
     from embeddings.analyze import Method as SimMethod, SimTransform
+    from embeddings.layouts import TsneSource
     from embeddings.vectors import DebiasMethod
 
 Pooling = Literal["mean", "max", "none"]
@@ -429,6 +430,23 @@ class Pipeline:
     reduce_to_dims: int = 50
     """Number of dimensions to keep when serializing vectors to json. Affects
     the size of the export."""
+
+    tsne_sources: tuple["TsneSource", ...] = ("reduced",)
+    """Which vectors the precomputed layouts embed, one sweep each:
+
+    - ``reduced`` — the exported (``reduce_to_dims``) matrix. PCA-to-50-then-t-SNE
+      is van der Maaten's own recipe, and it is the only thing the *client* has,
+      so a precomputed layout and a live one are looking at the same numbers.
+    - ``full`` — the untruncated analysis space in the export's own preprocessing
+      (centered + L2-normalized), i.e. the matrix the export's PCA is fitted on
+      before truncation. Nothing is discarded, at the cost of a slower embed and
+      a layout the client cannot reproduce.
+
+    List both to ship both and let the scatter's picker compare them. The
+    **first** source's **first** perplexity is the default view. ``full`` needs
+    the analysis matrix, which only a pipeline run has: it is cached (see
+    ``embeddings.vectors.cache_analysis_matrix``) so ``tools/relayout.py`` can
+    rebuild those layouts too, and skipped with a warning if no run has."""
 
     tsne_perplexities: tuple[float, ...] = (5, 15, 30, 50)
     """Perplexities to precompute a t-SNE layout for — one exported ``Layout``
