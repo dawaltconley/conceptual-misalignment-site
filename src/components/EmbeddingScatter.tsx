@@ -11,7 +11,7 @@ import {
 } from '@lib/communities'
 import { pinyinKeywords } from '@lib/pinyin'
 import Button from './Button'
-import Toggle from './Toggle'
+import Select, { type SelectOption } from './Select'
 import TagsCombobox from './TagsCombobox'
 import type { ComboboxOption } from './Combobox'
 import {
@@ -25,7 +25,14 @@ import CommunityDialog from './CommunityDialog'
 import { Dialog } from '@base-ui/react'
 import * as d3 from 'd3'
 
-type Layout = 'pca' | 'tsne'
+/**
+ * Which projection the plot is showing. Besides the pipeline's precomputed
+ * layouts (keyed by their own ids), two are computed here: `pca` reads the
+ * export's variance-ordered columns, `tsne-live` runs t-SNE in a worker for a
+ * perplexity nobody precomputed.
+ */
+const PCA = 'pca'
+const LIVE_TSNE = 'tsne-live'
 
 const TSNE_MAX_ITER = 500
 
@@ -63,9 +70,17 @@ interface EmbeddingScatterProps {
 
 /**
  * Data-loading + controls wrapper (the `MultiNetwork.tsx` of scatter plots).
- * Fetches one reduced-vector dataset and derives the 2-D layout it hands to the
- * pure `ScatterPlot`: PCA is free (columns 0/1 of the variance-ordered vector);
- * t-SNE is run client-side over the full vector with a tunable perplexity.
+ * Fetches one reduced-vector dataset and hands the pure `ScatterPlot` a 2-D
+ * layout, chosen from three sources:
+ *
+ * - the pipeline's **precomputed t-SNE** layouts, read straight off the dataset
+ *   as x/y — the default, because t-SNE reads the space far better than PCA and
+ *   this is the only way to have it on screen immediately;
+ * - **PCA**, free from columns 0/1 of the variance-ordered vector;
+ * - **live t-SNE** in a worker, for a perplexity the pipeline didn't precompute.
+ *
+ * Only the coordinates differ — every point carries the same node attributes
+ * (community, strength, doc_freq, …) whichever layout is showing.
  */
 export default function EmbeddingScatter({
   data: dataPath,
@@ -78,7 +93,10 @@ export default function EmbeddingScatter({
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
   )
-  const [layout, setLayout] = useState<Layout>('pca')
+  // `null` until the picker is touched, so the dataset's own first precomputed
+  // layout can stand in as the default — it only arrives with the data, and
+  // seeding state from an effect would fight a user who picked something else.
+  const [selectedLayout, setSelectedLayout] = useState<string | null>(null)
   const [perplexity, setPerplexity] = useState(30)
   const [highlighted, setHighlighted] = useState<Set<number>>(new Set())
   // `null` until the control is touched, which is what lets the corpus's own
@@ -96,6 +114,20 @@ export default function EmbeddingScatter({
   // Whatever is selected *is* what the plot emphasises: larger, outlined, labelled.
   const selection = selectedTargets ?? coreTargets
   const targets = useMemo<Set<string>>(() => new Set(selection), [selection])
+
+  // Every precomputed layout, then the two the client can compute itself. The
+  // dataset's first layout is the default view; a dataset carrying none (an
+  // older export, or `tsne_perplexities = ()`) falls back to PCA.
+  const layoutOptions = useMemo<SelectOption[]>(
+    () => [
+      ...(data?.layouts.map((l) => ({ value: l.id, label: l.label })) || []),
+      { value: PCA, label: 'PCA' },
+      { value: LIVE_TSNE, label: 't-SNE (live)' },
+    ],
+    [data],
+  )
+  const layout = selectedLayout ?? data?.layouts[0]?.id ?? PCA
+  const precomputed = data?.layouts.find((l) => l.id === layout)
 
   const filteredNodes = useMemo<EmbeddingNode[]>(
     () =>
@@ -155,24 +187,35 @@ export default function EmbeddingScatter({
     [communities],
   )
 
-  // t-SNE runs in a worker: (re)start on entering t-SNE / data / perplexity
-  // change; stop on leaving. The worker streams back the evolving solution.
+  // Live t-SNE runs in a worker: (re)start on entering it / on the vectors or
+  // perplexity changing; stop on leaving. The worker streams back the evolving
+  // solution. `vectors` is a dependency because the solution is positional —
+  // filtering the nodes without restarting would slide every point onto the
+  // wrong word.
   useEffect(() => {
-    if (layout === 'tsne' && data) {
+    if (layout === LIVE_TSNE && data) {
       run(vectors, { perplexity, maxIter: TSNE_MAX_ITER, stepsPerPost })
     } else {
       stop()
     }
-  }, [layout, data, perplexity, run, stop])
+  }, [layout, data, vectors, perplexity, stepsPerPost, run, stop])
 
-  const tsnePoints = useMemo<ScatterPoint[]>(() => {
-    if (!coords || !coords.length) return []
-    return pcaPoints.map((p, i) => ({
-      ...p,
-      x: coords[i][0],
-      y: coords[i][1],
-    }))
-  }, [data, coords])
+  const livePoints = useMemo<ScatterPoint[]>(() => {
+    // The worker's solution is parallel to what was sent, so a length mismatch
+    // means it's mid-restart on a new vocabulary — plot nothing over guessing.
+    if (coords.length !== pcaPoints.length) return []
+    return pcaPoints.map((p, i) => ({ ...p, x: coords[i][0], y: coords[i][1] }))
+  }, [pcaPoints, coords])
+
+  // A precomputed layout is keyed by node id, so filtering is a lookup: a node
+  // the layout has no entry for simply isn't plotted.
+  const precomputedPoints = useMemo<ScatterPoint[]>(() => {
+    if (!precomputed) return []
+    return pcaPoints.flatMap((p) => {
+      const xy = precomputed.coords[p.id]
+      return xy ? [{ ...p, x: xy[0], y: xy[1] }] : []
+    })
+  }, [pcaPoints, precomputed])
 
   if (status === 'error') {
     return (
@@ -194,8 +237,12 @@ export default function EmbeddingScatter({
     )
   }
 
-  const points = layout === 'pca' ? pcaPoints : tsnePoints
-  const converging = layout === 'tsne' && !done
+  const points = precomputed
+    ? precomputedPoints
+    : layout === LIVE_TSNE
+      ? livePoints
+      : pcaPoints
+  const converging = layout === LIVE_TSNE && !done
 
   return (
     <Wrapper>
@@ -240,24 +287,15 @@ export default function EmbeddingScatter({
       />
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <div className="flex gap-2">
-          <Toggle
-            className="text-sm"
-            pressed={layout === 'pca'}
-            onPressedChange={() => setLayout('pca')}
-          >
-            PCA
-          </Toggle>
-          <Toggle
-            className="text-sm"
-            pressed={layout === 'tsne'}
-            onPressedChange={() => setLayout('tsne')}
-          >
-            t-SNE
-          </Toggle>
-        </div>
+        <Select
+          className="text-sm"
+          label="Projection"
+          value={layout}
+          options={layoutOptions}
+          onChange={setSelectedLayout}
+        />
 
-        {layout === 'tsne' && (
+        {layout === LIVE_TSNE && (
           <>
             <label className="flex items-center gap-2 text-sm">
               perplexity
@@ -273,10 +311,11 @@ export default function EmbeddingScatter({
             <Button
               className="text-sm"
               onClick={() =>
-                run(
-                  data.nodes.map((n) => n.vec),
-                  { perplexity, maxIter: TSNE_MAX_ITER },
-                )
+                run(vectors, {
+                  perplexity,
+                  maxIter: TSNE_MAX_ITER,
+                  stepsPerPost,
+                })
               }
             >
               re-run
