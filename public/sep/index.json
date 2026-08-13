@@ -20,7 +20,10 @@
     "benevolence": {
       "term": {
         "label": "benevolence",
-        "variants": []
+        "variants": [
+          "benevolent",
+          "benevolently"
+        ]
       },
       "total_occurrences": 305,
       "chinese_philosophy_occurrences": 135,
@@ -212,7 +215,14 @@
     "faith": {
       "term": {
         "label": "faith",
-        "variants": []
+        "variants": [
+          "faithful",
+          "faithfulness",
+          "faithfully",
+          "faith.[59",
+          "faith’—be",
+          "faith’—will"
+        ]
       },
       "total_occurrences": 1010,
       "chinese_philosophy_occurrences": 0,
@@ -336,7 +346,10 @@
     "humaneness": {
       "term": {
         "label": "humaneness",
-        "variants": []
+        "variants": [
+          "humane",
+          "humanely"
+        ]
       },
       "total_occurrences": 26,
       "chinese_philosophy_occurrences": 83,
@@ -404,7 +417,13 @@
     "humanity": {
       "term": {
         "label": "humanity",
-        "variants": []
+        "variants": [
+          "humanitarian",
+          "humanities",
+          "humanita",
+          "humanitarianism",
+          "humanity[3"
+        ]
       },
       "total_occurrences": 447,
       "chinese_philosophy_occurrences": 20,
@@ -528,7 +547,15 @@
     "intelligence": {
       "term": {
         "label": "intelligence",
-        "variants": []
+        "variants": [
+          "intelligent",
+          "intelligently",
+          "intelligences",
+          "intelligentsia",
+          "intelligence.)[18",
+          "intelligence”.[34",
+          "intelligent.[1"
+        ]
       },
       "total_occurrences": 621,
       "chinese_philosophy_occurrences": 0,
@@ -652,7 +679,9 @@
     "justice": {
       "term": {
         "label": "justice",
-        "variants": []
+        "variants": [
+          "justness"
+        ]
       },
       "total_occurrences": 1915,
       "chinese_philosophy_occurrences": 0,
@@ -776,7 +805,29 @@
     "knowledge": {
       "term": {
         "label": "knowledge",
-        "variants": []
+        "variants": [
+          "knowledgeable",
+          "knowledgeably",
+          "knowledge-",
+          "knowledge).[2",
+          "knowledge)—the",
+          "knowledge,[16",
+          "knowledge.[12",
+          "knowledge.[2",
+          "knowledge.[21",
+          "knowledge.[24",
+          "knowledge.[25",
+          "knowledge.[28",
+          "knowledge.[29",
+          "knowledge.[35",
+          "knowledge.[4",
+          "knowledge.[8",
+          "knowledge.[9",
+          "knowledge/",
+          "knowledge’—and",
+          "knowledge”(1995a",
+          "knowledge”—i.e"
+        ]
       },
       "total_occurrences": 4311,
       "chinese_philosophy_occurrences": 0,
@@ -1024,7 +1075,29 @@
     "morality": {
       "term": {
         "label": "morality",
-        "variants": []
+        "variants": [
+          "moral",
+          "morally",
+          "morals",
+          "moralist",
+          "moralize",
+          "moralistic",
+          "moralität",
+          "morality1",
+          "morale",
+          "moralia",
+          "moralists",
+          "morality2",
+          "morali",
+          "moralische",
+          "moralise",
+          "moralism",
+          "moralization",
+          "moralized",
+          "moralizer",
+          "moralizing",
+          "morality.[2"
+        ]
       },
       "total_occurrences": 7718,
       "chinese_philosophy_occurrences": 0,
@@ -1300,7 +1373,10 @@
     "righteousness": {
       "term": {
         "label": "righteousness",
-        "variants": []
+        "variants": [
+          "righteous",
+          "righteously"
+        ]
       },
       "total_occurrences": 45,
       "chinese_philosophy_occurrences": 183,
@@ -1376,7 +1452,12 @@
     "ritual": {
       "term": {
         "label": "ritual",
-        "variants": []
+        "variants": [
+          "ritualized",
+          "ritualist",
+          "ritualistic",
+          "ritual”—diderot"
+        ]
       },
       "total_occurrences": 114,
       "chinese_philosophy_occurrences": 530,
@@ -1500,7 +1581,11 @@
     "sincerity": {
       "term": {
         "label": "sincerity",
-        "variants": []
+        "variants": [
+          "sincere",
+          "sincerely",
+          "sincere.[47"
+        ]
       },
       "total_occurrences": 142,
       "chinese_philosophy_occurrences": 11,
@@ -1624,7 +1709,13 @@
     "trustworthiness": {
       "term": {
         "label": "trustworthiness",
-        "variants": []
+        "variants": [
+          "trustworthy",
+          "trustworthiness./",
+          "trustworthiness.[5",
+          "trustworthy.[11",
+          "trustworthy.[19"
+        ]
       },
       "total_occurrences": 230,
       "chinese_philosophy_occurrences": 15,
@@ -1748,7 +1839,14 @@
     "wisdom": {
       "term": {
         "label": "wisdom",
-        "variants": []
+        "variants": [
+          "wise",
+          "wisely",
+          "wiser",
+          "wisdoms",
+          "wisest",
+          "wisdom-“poetic"
+        ]
       },
       "total_occurrences": 761,
       "chinese_philosophy_occurrences": 29,

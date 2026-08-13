@@ -163,7 +163,10 @@
           "corpus": "sep",
           "term": {
             "label": "benevolence",
-            "variants": []
+            "variants": [
+              "benevolent",
+              "benevolently"
+            ]
           },
           "totalOccurrences": 440,
           "chinesePhilosophyOccurrences": 135,
@@ -298,7 +301,10 @@
           "corpus": "sep",
           "term": {
             "label": "humaneness",
-            "variants": []
+            "variants": [
+              "humane",
+              "humanely"
+            ]
           },
           "totalOccurrences": 109,
           "chinesePhilosophyOccurrences": 83,
@@ -377,7 +383,13 @@
           "corpus": "sep",
           "term": {
             "label": "humanity",
-            "variants": []
+            "variants": [
+              "humanitarian",
+              "humanities",
+              "humanita",
+              "humanitarianism",
+              "humanity[3"
+            ]
           },
           "totalOccurrences": 467,
           "chinesePhilosophyOccurrences": 20,
@@ -674,7 +686,10 @@
           "corpus": "sep",
           "term": {
             "label": "righteousness",
-            "variants": []
+            "variants": [
+              "righteous",
+              "righteously"
+            ]
           },
           "totalOccurrences": 228,
           "chinesePhilosophyOccurrences": 183,
@@ -761,7 +776,9 @@
           "corpus": "sep",
           "term": {
             "label": "justice",
-            "variants": []
+            "variants": [
+              "justness"
+            ]
           },
           "totalOccurrences": 1915,
           "chinesePhilosophyOccurrences": 0,
@@ -1031,7 +1048,29 @@
           "corpus": "sep",
           "term": {
             "label": "morality",
-            "variants": []
+            "variants": [
+              "moral",
+              "morally",
+              "morals",
+              "moralist",
+              "moralize",
+              "moralistic",
+              "moralität",
+              "morality1",
+              "morale",
+              "moralia",
+              "moralists",
+              "morality2",
+              "morali",
+              "moralische",
+              "moralise",
+              "moralism",
+              "moralization",
+              "moralized",
+              "moralizer",
+              "moralizing",
+              "morality.[2"
+            ]
           },
           "totalOccurrences": 7718,
           "chinesePhilosophyOccurrences": 0,
@@ -1328,7 +1367,12 @@
           "corpus": "sep",
           "term": {
             "label": "ritual",
-            "variants": []
+            "variants": [
+              "ritualized",
+              "ritualist",
+              "ritualistic",
+              "ritual”—diderot"
+            ]
           },
           "totalOccurrences": 644,
           "chinesePhilosophyOccurrences": 530,
@@ -1877,7 +1921,29 @@
           "corpus": "sep",
           "term": {
             "label": "knowledge",
-            "variants": []
+            "variants": [
+              "knowledgeable",
+              "knowledgeably",
+              "knowledge-",
+              "knowledge).[2",
+              "knowledge)—the",
+              "knowledge,[16",
+              "knowledge.[12",
+              "knowledge.[2",
+              "knowledge.[21",
+              "knowledge.[24",
+              "knowledge.[25",
+              "knowledge.[28",
+              "knowledge.[29",
+              "knowledge.[35",
+              "knowledge.[4",
+              "knowledge.[8",
+              "knowledge.[9",
+              "knowledge/",
+              "knowledge’—and",
+              "knowledge”(1995a",
+              "knowledge”—i.e"
+            ]
           },
           "totalOccurrences": 4311,
           "chinesePhilosophyOccurrences": 0,
@@ -2012,7 +2078,14 @@
           "corpus": "sep",
           "term": {
             "label": "wisdom",
-            "variants": []
+            "variants": [
+              "wise",
+              "wisely",
+              "wiser",
+              "wisdoms",
+              "wisest",
+              "wisdom-“poetic"
+            ]
           },
           "totalOccurrences": 790,
           "chinesePhilosophyOccurrences": 29,
@@ -2147,7 +2220,15 @@
           "corpus": "sep",
           "term": {
             "label": "intelligence",
-            "variants": []
+            "variants": [
+              "intelligent",
+              "intelligently",
+              "intelligences",
+              "intelligentsia",
+              "intelligence.)[18",
+              "intelligence”.[34",
+              "intelligent.[1"
+            ]
           },
           "totalOccurrences": 621,
           "chinesePhilosophyOccurrences": 0,
@@ -2443,7 +2524,13 @@
           "corpus": "sep",
           "term": {
             "label": "trustworthiness",
-            "variants": []
+            "variants": [
+              "trustworthy",
+              "trustworthiness./",
+              "trustworthiness.[5",
+              "trustworthy.[11",
+              "trustworthy.[19"
+            ]
           },
           "totalOccurrences": 245,
           "chinesePhilosophyOccurrences": 15,
@@ -2578,7 +2665,14 @@
           "corpus": "sep",
           "term": {
             "label": "faith",
-            "variants": []
+            "variants": [
+              "faithful",
+              "faithfulness",
+              "faithfully",
+              "faith.[59",
+              "faith’—be",
+              "faith’—will"
+            ]
           },
           "totalOccurrences": 1010,
           "chinesePhilosophyOccurrences": 0,
@@ -2713,7 +2807,11 @@
           "corpus": "sep",
           "term": {
             "label": "sincerity",
-            "variants": []
+            "variants": [
+              "sincere",
+              "sincerely",
+              "sincere.[47"
+            ]
           },
           "totalOccurrences": 153,
           "chinesePhilosophyOccurrences": 11,
