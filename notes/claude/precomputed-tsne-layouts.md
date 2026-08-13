@@ -94,6 +94,11 @@ scripts/.venv/bin/python scripts/tools/relayout.py                  # both corpo
 scripts/.venv/bin/python scripts/tools/relayout.py --perplexity 12  # try a value
 ```
 
+One honest caveat: the artifact stores vectors rounded to 5 decimals, so a
+relayout embeds the *rounded* matrix while a pipeline run embeds the unrounded
+one. The maps are visually the same and the neighborhoods identical, but they are
+not bit-identical — don't expect a full run to reproduce a relayout exactly.
+
 ## References
 
 - van der Maaten, L., & Hinton, G. (2008). Visualizing Data using t-SNE. *JMLR*,
