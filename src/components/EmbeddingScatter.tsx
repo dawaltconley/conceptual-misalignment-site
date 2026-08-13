@@ -1,6 +1,7 @@
 import type { Dictionary } from '@lib/build/cedict'
 import type { MasterTerm } from '@lib/terms'
 import { useState, useEffect, useMemo, type ReactNode } from 'react'
+import debounce from 'lodash/debounce'
 import useData from '@lib/browser/hooks/useData'
 import useTsne from '@lib/browser/hooks/useTsne'
 import { EmbeddingDatasetSchema, type EmbeddingNode } from '@lib/embeddings'
@@ -10,8 +11,9 @@ import {
   type CommunitySort,
 } from '@lib/communities'
 import { pinyinKeywords } from '@lib/pinyin'
-import Button from './Button'
-import Select, { type SelectOption } from './Select'
+import Toggle from './Toggle'
+import Checkbox from './Checkbox'
+import TickRange, { nearest } from './TickRange'
 import TagsCombobox from './TagsCombobox'
 import type { ComboboxOption } from './Combobox'
 import {
@@ -25,16 +27,13 @@ import CommunityDialog from './CommunityDialog'
 import { Dialog } from '@base-ui/react'
 import * as d3 from 'd3'
 
-/**
- * Which projection the plot is showing. Besides the pipeline's precomputed
- * layouts (keyed by their own ids), two are computed here: `pca` reads the
- * export's variance-ordered columns, `tsne-live` runs t-SNE in a worker for a
- * perplexity nobody precomputed.
- */
-const PCA = 'pca'
-const LIVE_TSNE = 'tsne-live'
+type Method = 'tsne' | 'pca'
 
 const TSNE_MAX_ITER = 500
+const PERPLEXITY_MIN = 5
+const PERPLEXITY_MAX = 50
+/** Long enough that dragging the slider doesn't queue a run per pixel. */
+const RECOMPUTE_DEBOUNCE_MS = 350
 
 interface EmbeddingScatterProps {
   terms: MasterTerm[]
@@ -71,13 +70,16 @@ interface EmbeddingScatterProps {
 /**
  * Data-loading + controls wrapper (the `MultiNetwork.tsx` of scatter plots).
  * Fetches one reduced-vector dataset and hands the pure `ScatterPlot` a 2-D
- * layout, chosen from three sources:
+ * layout: t-SNE (the default — it reads the space far better than PCA) or PCA,
+ * which is free from columns 0/1 of the variance-ordered vector.
  *
- * - the pipeline's **precomputed t-SNE** layouts, read straight off the dataset
- *   as x/y — the default, because t-SNE reads the space far better than PCA and
- *   this is the only way to have it on screen immediately;
- * - **PCA**, free from columns 0/1 of the variance-ordered vector;
- * - **live t-SNE** in a worker, for a perplexity the pipeline didn't precompute.
+ * The t-SNE view has two modes, and the perplexity slider is the same control in
+ * both. By default it snaps to the perplexities the pipeline precomputed, whose
+ * ticks are drawn under the track: those are instant, and they may be layouts of
+ * the *untruncated* vectors, which the browser doesn't have. Ticking
+ * "recompute" frees the slider and runs t-SNE here instead, over the reduced
+ * vectors that were downloaded — any perplexity, at the cost of a few seconds of
+ * iteration.
  *
  * Only the coordinates differ — every point carries the same node attributes
  * (community, strength, doc_freq, …) whichever layout is showing.
@@ -93,11 +95,13 @@ export default function EmbeddingScatter({
   const { status, data, errorMessage } = useData(dataPath, (d) =>
     EmbeddingDatasetSchema.parse(d),
   )
-  // `null` until the picker is touched, so the dataset's own first precomputed
-  // layout can stand in as the default — it only arrives with the data, and
-  // seeding state from an effect would fight a user who picked something else.
-  const [selectedLayout, setSelectedLayout] = useState<string | null>(null)
-  const [perplexity, setPerplexity] = useState(30)
+  const [method, setMethod] = useState<Method>('tsne')
+  const [recompute, setRecompute] = useState(false)
+  // The raw slider position. What the plot uses is `perplexity` below, which is
+  // this snapped to a tick unless the client is recomputing — keeping the raw
+  // value in state means un-ticking "recompute" lands on a mark rather than
+  // wherever the free slider happened to be.
+  const [sliderPerplexity, setSliderPerplexity] = useState(30)
   const [highlighted, setHighlighted] = useState<Set<number>>(new Set())
   // `null` until the control is touched, which is what lets the corpus's own
   // targets stand in as the initial selection: they only arrive with the data,
@@ -115,22 +119,32 @@ export default function EmbeddingScatter({
   const selection = selectedTargets ?? coreTargets
   const targets = useMemo<Set<string>>(() => new Set(selection), [selection])
 
-  // Every precomputed layout, then the two the client can compute itself. The
-  // dataset's first layout is the default view; a dataset carrying none (an
-  // older export, or `tsne_perplexities = ()`) falls back to PCA.
-  const layoutOptions = useMemo<SelectOption[]>(
-    () => [
-      ...(data?.layouts.map((l) => ({ value: l.id, label: l.label })) || []),
-      { value: PCA, label: 'PCA' },
-      // The live run only ever sees the vectors the browser downloaded, so its
-      // dimensionality is named — a precomputed layout may have embedded the
-      // untruncated space, and that difference should not be invisible here.
-      { value: LIVE_TSNE, label: `t-SNE (live · ${data?.dims ?? 0}-d)` },
-    ],
-    [data],
+  // The perplexities the pipeline shipped a layout for — the slider's ticks.
+  // Two layouts at one perplexity (`tsne_sources` listing both `reduced` and
+  // `full`) would be one tick with the first layout behind it; the pipeline
+  // ships one source at a time, so this stays a 1:1 map in practice.
+  const byPerplexity = useMemo(() => {
+    const map = new Map<number, string>()
+    for (const l of data?.layouts ?? []) {
+      const p = l.params.perplexity
+      if (typeof p === 'number' && !map.has(p)) map.set(p, l.id)
+    }
+    return map
+  }, [data])
+  const ticks = useMemo(
+    () => [...byPerplexity.keys()].sort((a, b) => a - b),
+    [byPerplexity],
   )
-  const layout = selectedLayout ?? data?.layouts[0]?.id ?? PCA
-  const precomputed = data?.layouts.find((l) => l.id === layout)
+
+  // With nothing precomputed there is nothing to snap to, so the only way to
+  // show a t-SNE is to compute it here — the checkbox then has no meaningful
+  // off state and says so by being disabled.
+  const canSnap = ticks.length > 0
+  const live = recompute || !canSnap
+  const perplexity = live ? sliderPerplexity : nearest(ticks, sliderPerplexity)
+  const precomputed = live
+    ? undefined
+    : data?.layouts.find((l) => l.id === byPerplexity.get(perplexity))
 
   const filteredNodes = useMemo<EmbeddingNode[]>(
     () =>
@@ -190,18 +204,41 @@ export default function EmbeddingScatter({
     [communities],
   )
 
+  // Dragging the slider walks through every intermediate perplexity, and each
+  // one would otherwise start (and immediately supersede) a worker run. Debounce
+  // so only the value the user settles on is computed.
+  const debouncedRun = useMemo(
+    () => debounce(run, RECOMPUTE_DEBOUNCE_MS),
+    [run],
+  )
+  useEffect(() => () => debouncedRun.cancel(), [debouncedRun])
+
   // Live t-SNE runs in a worker: (re)start on entering it / on the vectors or
   // perplexity changing; stop on leaving. The worker streams back the evolving
   // solution. `vectors` is a dependency because the solution is positional —
   // filtering the nodes without restarting would slide every point onto the
   // wrong word.
   useEffect(() => {
-    if (layout === LIVE_TSNE && data) {
-      run(vectors, { perplexity, maxIter: TSNE_MAX_ITER, stepsPerPost })
+    if (method === 'tsne' && live && data) {
+      debouncedRun(vectors, {
+        perplexity,
+        maxIter: TSNE_MAX_ITER,
+        stepsPerPost,
+      })
     } else {
+      debouncedRun.cancel()
       stop()
     }
-  }, [layout, data, vectors, perplexity, stepsPerPost, run, stop])
+  }, [
+    method,
+    live,
+    data,
+    vectors,
+    perplexity,
+    stepsPerPost,
+    debouncedRun,
+    stop,
+  ])
 
   const livePoints = useMemo<ScatterPoint[]>(() => {
     // The worker's solution is parallel to what was sent, so a length mismatch
@@ -240,12 +277,9 @@ export default function EmbeddingScatter({
     )
   }
 
-  const points = precomputed
-    ? precomputedPoints
-    : layout === LIVE_TSNE
-      ? livePoints
-      : pcaPoints
-  const converging = layout === LIVE_TSNE && !done
+  const points =
+    method === 'pca' ? pcaPoints : precomputed ? precomputedPoints : livePoints
+  const converging = method === 'tsne' && live && !done
 
   return (
     <Wrapper>
@@ -289,45 +323,68 @@ export default function EmbeddingScatter({
         placeholder={selection.length ? '' : 'add a term…'}
       />
 
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <Select
-          className="text-sm"
-          label="Projection"
-          value={layout}
-          options={layoutOptions}
-          onChange={setSelectedLayout}
-        />
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="flex gap-2">
+          <Toggle
+            className="text-sm"
+            pressed={method === 'tsne'}
+            onPressedChange={() => setMethod('tsne')}
+          >
+            t-SNE
+          </Toggle>
+          <Toggle
+            className="text-sm"
+            pressed={method === 'pca'}
+            onPressedChange={() => setMethod('pca')}
+          >
+            PCA
+          </Toggle>
+        </div>
 
-        {layout === LIVE_TSNE && (
+        {method === 'tsne' && (
           <>
             <label className="flex items-center gap-2 text-sm">
               perplexity
-              <input
-                type="range"
-                min={5}
-                max={50}
+              <TickRange
+                className="w-40"
+                aria-label="perplexity"
+                min={PERPLEXITY_MIN}
+                max={PERPLEXITY_MAX}
                 value={perplexity}
-                onChange={(e) => setPerplexity(Number(e.target.value))}
+                onChange={setSliderPerplexity}
+                ticks={ticks}
+                snap={!live}
               />
               <span className="w-6 tabular-nums">{perplexity}</span>
+              {/* Which vectors are actually behind the dots: a precomputed
+                  layout may have embedded the untruncated space, which a
+                  recompute here cannot reach. */}
+              <span className="text-gray-500">
+                {precomputed?.params.dims ?? data.dims}-d
+              </span>
             </label>
-            <Button
-              className="text-sm"
-              onClick={() =>
-                run(vectors, {
-                  perplexity,
-                  maxIter: TSNE_MAX_ITER,
-                  stepsPerPost,
-                })
-              }
+
+            <Checkbox
+              labelClassName="text-sm"
+              checked={live}
+              disabled={!canSnap}
+              onCheckedChange={setRecompute}
             >
-              re-run
-            </Button>
-            <span className="text-sm tabular-nums text-gray-500">
-              {converging
-                ? `iterating… ${steps}/${TSNE_MAX_ITER}`
-                : `done (${steps})`}
-            </span>
+              recompute
+              {!canSnap && (
+                <span className="ml-1 text-gray-500">
+                  (nothing precomputed)
+                </span>
+              )}
+            </Checkbox>
+
+            {live && (
+              <span className="text-sm tabular-nums text-gray-500">
+                {converging
+                  ? `iterating… ${steps}/${TSNE_MAX_ITER}`
+                  : `done (${steps})`}
+              </span>
+            )}
           </>
         )}
       </div>

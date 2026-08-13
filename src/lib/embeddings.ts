@@ -47,8 +47,19 @@ export const LayoutSchema = z.object({
   method: z.string(),
   /** What the layout picker shows ("t-SNE · perplexity 30"). */
   label: z.string(),
-  /** The settings that produced it — perplexity, epsilon, iterations, seed. */
-  params: z.record(z.string(), z.unknown()).default({}),
+  /**
+   * The settings that produced it. `perplexity` and `dims` are first-class
+   * because the scatter shows them — the slider keys on the perplexity, and the
+   * dimensionality is how you tell a layout of the untruncated vectors from one
+   * the browser could have computed itself. The rest (epsilon, iterations, seed,
+   * source) ride along for provenance.
+   */
+  params: z
+    .looseObject({
+      perplexity: z.number().optional(),
+      dims: z.number().optional(),
+    })
+    .default({ perplexity: undefined, dims: undefined }),
   coords: z.record(z.string(), z.tuple([z.number(), z.number()])),
 })
 

@@ -64,15 +64,17 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   vectors first. Both halves are revertible (`Pipeline.merge_similarity` /
   `merge_cooccurrence`); the lens crossing is argued in
   `notes/claude/derivational-variant-merging.md`.
-- The scatter's default view is a **precomputed t-SNE** (`Embeddings.layouts`, one
-  per `Pipeline.tsne_sources` x `tsne_perplexities`; the **first is the default**).
-  PCA and the client-side t-SNE remain options. `tsne_sources` picks the vectors:
-  `reduced` (the export — what the client also has) or `full` (untruncated; only
-  marginally more faithful — the note measures it, and PCA-50 turns out to cost
-  very little). `reduced` layouts
-  retune from the artifact via `tools/relayout.py` in seconds; `full` needs the
-  analysis matrix a run caches in `scripts/.cache/vectors/`.
-  See `notes/claude/precomputed-tsne-layouts.md`.
+- The scatter defaults to a **precomputed t-SNE** (`Embeddings.layouts`, one per
+  `Pipeline.tsne_sources` x `tsne_perplexities`; the **first is the default**),
+  with PCA as the other toggle. The pipeline precomputes only what the browser
+  can't do — `tsne_sources=("full",)`, the untruncated 768-d vectors; the
+  perplexity slider snaps to those (its ticks), and the "recompute" checkbox
+  frees it to any value, run client-side over the exported 50-d vectors.
+  `reduced` layouts can still be shipped (`tools/relayout.py` rebuilds them from
+  the artifact in seconds); `full` needs the analysis matrix a run caches in
+  `scripts/.cache/vectors/`. PCA-50 turns out to cost the layout very little —
+  see `notes/claude/precomputed-tsne-layouts.md` for the numbers and for the one
+  thing it does distort (spurious neighbours for low-projection words).
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
   but harmless. Pyright's `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
   `vectors.reduce_vectors` false-positives came from it resolving `models` in a

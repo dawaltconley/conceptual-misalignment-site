@@ -31,6 +31,15 @@ The perplexities worth looking at are computed once in the pipeline
 PCA stays as an option, and the client-side t-SNE stays for a perplexity nobody
 precomputed.
 
+**What gets precomputed, after the measurements below: the 768-d layouts only.**
+The reduced (50-d) ones are exactly what the browser can compute for itself, so
+shipping them too is dead weight — the pipeline precomputes what the client
+*can't* reach, and the client covers the rest. In the UI this is one slider:
+by default it snaps to the precomputed perplexities (ticked under the track,
+instant, 768-d), and ticking "recompute" frees it to any value, computed here
+over the downloaded 50-d vectors. The dimensionality is printed beside the value
+so the swap is visible rather than inferred.
+
 Tuning lives on the `Pipeline` (`config.py`), like every other run parameter:
 `tsne_sources` and `tsne_perplexities` (one layout per pair), `tsne_epsilon`
 (learning rate), `tsne_iterations`, `tsne_seed`.
@@ -156,14 +165,17 @@ This is the sharpest argument for keeping `full` around: not that the average
 layout is better (it barely is), but that it is the only way to check whether a
 suspicious adjacency on the scatter is real or a short-projection artifact.
 
-**What to do with that.** There is no strong case for making `full` the default,
-and a fair case for not shipping it at all on SEP, where it costs ~400 KB of
-artifact for a wash. Where it earns its place is as a check: when a layout looks
-surprising, the `full` sweep answers "is this the space, or is this the
-truncation?" — and now that answer is one config line and a relayout away rather
-than an argument. Keep `reduced` regardless: the live client-side t-SNE can only
-ever see the exported vectors, so a `reduced` layout is what makes "precomputed
-vs live" a fair comparison.
+**What to do with that.** It settled the division of labour. Since the browser
+can recompute any 50-d layout on demand, precomputing those buys nothing, and the
+`full` sweep — modest as its gain is — is the one thing shipping can add. So
+`tsne_sources = ("full",)`, and the reduced layouts are computed client-side via
+the "recompute" checkbox. The comparison stays available (tick the box and the
+same perplexity is recomputed at 50-d), it just isn't shipped.
+
+That also means the aggregate numbers above aren't really what `full` is for.
+Where it earns its place is the spurious-neighbour check below: when an adjacency
+on the scatter looks surprising, the 768-d layout answers "is this the space, or
+is this the truncation?"
 
 ## Consequences to keep in mind
 

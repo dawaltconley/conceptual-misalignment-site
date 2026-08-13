@@ -143,10 +143,11 @@ MENGZI_PIPELINE = Pipeline(
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
     debias="abtt",
-    # One precomputed t-SNE per (source x perplexity); the FIRST is the scatter's
-    # default view, hence 30 (the classic default) ahead of the sweep. Re-tune
-    # without a pipeline run: `scripts/.venv/bin/python scripts/tools/relayout.py`.
-    tsne_sources=("reduced", "full"),
+    # Precompute only what the browser *cannot* do: the untruncated 768-d
+    # layouts. The reduced (50-d) ones are exactly what the scatter's "recompute"
+    # checkbox runs client-side, so shipping them too would be dead weight.
+    # These perplexities become the slider's ticks; the first is the default view.
+    tsne_sources=("full",),
     tsne_perplexities=(30, 5, 15, 50),
 )
 
@@ -159,7 +160,7 @@ SEP_PIPELINE = Pipeline(
     stopwords=frozenset(ENGLISH_STOPWORDS),
     merge_variants=True,
     debias="abtt",
-    tsne_sources=("reduced", "full"),
+    tsne_sources=("full",),
     tsne_perplexities=(30, 5, 15, 50),
 )
 
