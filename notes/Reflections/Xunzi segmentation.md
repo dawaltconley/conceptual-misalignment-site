@@ -1,3 +1,3 @@
-## Xunzi segmentation
+Early on, I sunk too much time into the Chinese text segmentation part of the pipeline, which ultimately proved to be of uncertain value. I attempted to follow Wu and Wang (2025) in using the [[Xunzi ALLM]] for word segmentation. The Xunzi model I used is a chat LLM based on Qwen 2, meaning that it produces non-deterministic output of variable quality. Despite being on tight rails, the model frequently made segmentation errors (most often, returning terms that did not add up to the same text) that required significant hand-correction.
 
 - Time sink, ultimately limited value
