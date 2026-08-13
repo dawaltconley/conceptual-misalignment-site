@@ -122,7 +122,10 @@ export default function EmbeddingScatter({
     () => [
       ...(data?.layouts.map((l) => ({ value: l.id, label: l.label })) || []),
       { value: PCA, label: 'PCA' },
-      { value: LIVE_TSNE, label: 't-SNE (live)' },
+      // The live run only ever sees the vectors the browser downloaded, so its
+      // dimensionality is named — a precomputed layout may have embedded the
+      // untruncated space, and that difference should not be invisible here.
+      { value: LIVE_TSNE, label: `t-SNE (live · ${data?.dims ?? 0}-d)` },
     ],
     [data],
   )
