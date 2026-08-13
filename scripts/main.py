@@ -216,11 +216,13 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
+    vectors.cache_analysis_matrix("mengzi", labels, matrix)
     path = writer.add_embeddings(
         Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
                                doc_freq=doc_freq, documents=n_docs, graph=G,
                                norms=norms, freq=freq,
-                               layouts=layouts.tsne_layouts(labels, reduced, p)))
+                               layouts=layouts.tsne_layouts(
+                                   labels, {"reduced": reduced, "full": matrix}, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -397,12 +399,14 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
+    vectors.cache_analysis_matrix("sep", labels, matrix)
     path = writer.add_embeddings(
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
                                documents=n_docs, graph=G, norms=norms,
                                variants=sim_variants, freq=freq,
-                               layouts=layouts.tsne_layouts(labels, reduced, p)))
+                               layouts=layouts.tsne_layouts(
+                                   labels, {"reduced": reduced, "full": matrix}, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
