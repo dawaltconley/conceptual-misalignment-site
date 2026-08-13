@@ -13,6 +13,7 @@ import {
 import { pinyinKeywords } from '@lib/pinyin'
 import Toggle from './Toggle'
 import Checkbox from './Checkbox'
+import Progress from './Progress'
 import TickRange, { nearest } from './TickRange'
 import TagsCombobox from './TagsCombobox'
 import type { ComboboxOption } from './Combobox'
@@ -279,7 +280,15 @@ export default function EmbeddingScatter({
 
   const points =
     method === 'pca' ? pcaPoints : precomputed ? precomputedPoints : livePoints
-  const converging = method === 'tsne' && live && !done
+
+  // The three states a client-side run passes through. `queued` is the debounce
+  // window plus the worker's start-up: `useTsne` is idle-but-empty there, which
+  // is indistinguishable from finished by `done` alone, and it's also when the
+  // plot has no points to draw — so it gets the indeterminate bar rather than an
+  // unexplained gap.
+  const recomputing = method === 'tsne' && live
+  const queued = recomputing && done && steps === 0
+  const converging = recomputing && !done
 
   return (
     <Wrapper>
@@ -377,17 +386,29 @@ export default function EmbeddingScatter({
                 </span>
               )}
             </Checkbox>
-
-            {live && (
-              <span className="text-sm tabular-nums text-gray-500">
-                {converging
-                  ? `iterating… ${steps}/${TSNE_MAX_ITER}`
-                  : `done (${steps})`}
-              </span>
-            )}
           </>
         )}
       </div>
+
+      {/* Only the client-side run has iteration to report; a precomputed layout
+          is already converged, and PCA never iterates. */}
+      {recomputing && (
+        <Progress
+          className="mt-3"
+          max={TSNE_MAX_ITER}
+          // Indeterminate while queued — there is no step count to honour yet,
+          // and a bar pinned at 0% would read as stalled.
+          value={queued ? undefined : steps}
+          showValue={!queued}
+          label={
+            queued
+              ? 'recomputing…'
+              : converging
+                ? `iterating — ${steps}/${TSNE_MAX_ITER}`
+                : `converged — ${steps} iterations`
+          }
+        />
+      )}
     </Wrapper>
   )
 }
