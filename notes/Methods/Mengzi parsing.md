@@ -1,0 +1,1 @@
+See [[tagger-comparison]] for a discussion of the relative merits of different approaches to Classical Chinese segmentation and POS-tagging. Ultimately these were abandoned in favor of parsing the Kyoto treebank.

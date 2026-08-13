@@ -1,3 +1,5 @@
+A full, digitized text of the Mengzi is freely available via the Chinese Text Project (ctext.org). Following Wu & Wang (2025)  I planned to download this text using ctext's public API, 
+
 I considered several options available for tokenizing and POS-tagging Classical Chinese texts
 ### Mengzi
 
