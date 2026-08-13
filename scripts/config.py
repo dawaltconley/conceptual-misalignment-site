@@ -138,6 +138,9 @@ MENGZI_PIPELINE = Pipeline(
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
     debias="abtt",
+    # One precomputed t-SNE per perplexity; the first is the scatter's default
+    # view. Re-tune without a full run: `scripts/.venv/bin/python -m tools.relayout`.
+    tsne_perplexities=(5, 15, 30, 50),
 )
 
 SEP_PIPELINE = Pipeline(
@@ -149,6 +152,7 @@ SEP_PIPELINE = Pipeline(
     stopwords=frozenset(ENGLISH_STOPWORDS),
     merge_variants=True,
     debias="abtt",
+    tsne_perplexities=(5, 15, 30, 50),
 )
 
 # # for reference, not currently used for filtering

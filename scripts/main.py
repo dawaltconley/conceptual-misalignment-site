@@ -43,7 +43,7 @@ from corpus.sep import SEP_CORPUS
 from corpus.build import build_chinese_corpus, build_english_corpus
 from corpus.parse import parse_sep_article, parse_mengzi_chapter, verb_lemma
 from corpus.inpho import is_chinese_philosophy
-from embeddings import analyze, families, vectors
+from embeddings import analyze, families, layouts, vectors
 from embeddings.analyze import Method as SimMethod
 from embeddings.model import Embedder
 from embeddings.occurrences import (
@@ -219,7 +219,8 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
     path = writer.add_embeddings(
         Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
                                doc_freq=doc_freq, documents=n_docs, graph=G,
-                               norms=norms, freq=freq))
+                               norms=norms, freq=freq,
+                               layouts=layouts.tsne_layouts(labels, reduced, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -400,7 +401,8 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
                                documents=n_docs, graph=G, norms=norms,
-                               variants=sim_variants, freq=freq))
+                               variants=sim_variants, freq=freq,
+                               layouts=layouts.tsne_layouts(labels, reduced, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
