@@ -76,6 +76,10 @@ class Source:
 class TermData:
     label: str
     variants: list[str] = field(default_factory=list)
+    """The other words this term matched — the same list its node carries, scoped
+    to whatever the enclosing file is: one article/chapter on a per-source
+    co-occurrence file, the whole corpus on a similarity file and in the manifest
+    (and so in ``src/data/terms.json``)."""
 
 
 @dataclass
@@ -127,9 +131,14 @@ class Vector:
     """Eigenvector centrality on the weighted similarity graph — importance weighted
     by neighbors' importance. 0 for graph-absent nodes (or if it fails to converge)."""
     variants: list[str] = field(default_factory=list)
-    """Other vocabulary entries folded into this one by ``Pipeline.merge_variants``
-    (``inspiration`` carrying ``['inspirational', 'inspire']``). Empty for every
-    unmerged node, and always empty for targets, which never merge."""
+    """The other words this node stands for, from either of the two things that
+    make one label cover several: the derivational merge
+    (``Pipeline.merge_variants`` — ``inspiration`` carrying ``['inspirational',
+    'inspire']``), or, for a target, the lemmas its rendering's globs matched
+    (``wisdom`` carrying ``['wise', 'wisely']`` — see
+    ``embeddings.occurrences.matched_lemmas``). Targets never merge, so the two
+    sources never both apply to one node. Empty for every unmerged non-target,
+    and for a target the corpus happened to use only under its own label."""
 
 
 def _weighted_degree(graph: "Graph | None") -> dict[str, float]:
@@ -329,8 +338,8 @@ class Pipeline:
     """Apply the variant merge to the embedding lens — pooled vectors, cosine
     graph, communities, scatter export. Off (with ``merge_variants`` on) computes
     the merge for co-occurrence only and leaves the scatter one point per lemma;
-    the exported ``variants`` field is then omitted, since the nodes are not in
-    fact merged."""
+    the exported ``variants`` field then carries target matches only, since the
+    ordinary nodes are not in fact merged."""
 
     merge_cooccurrence: bool = True
     """Apply the variant merge to the PMI lens, so a node means the same word in

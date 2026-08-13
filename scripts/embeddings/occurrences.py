@@ -116,6 +116,60 @@ def content_frequencies(
     return freq
 
 
+def matched_lemmas(
+    doc: Doc, label: str, match_fn: MatchFn | None = None,
+) -> Counter[str]:
+    """Which lemmas ``label`` absorbed in ``doc``, and how often each.
+
+    A target label is an abstraction over a word family: ``Rendering('wisdom',
+    'wisdom*', 'wise*')`` re-keys ``wise`` and ``wisely`` to ``wisdom`` in
+    :func:`content_key`, which returns the label and drops the lemma. This is the
+    same decision, kept: the counter's total is the label's occurrence count, and
+    its keys are the words that produced it.
+
+    Deliberately *unfiltered* by ``content_pos``/``stopwords``, because
+    ``content_key`` tests ``match_fn`` before the content filter — a matched
+    target token is kept whatever its POS. Without ``match_fn`` (Chinese, where a
+    hanzi is a target because its lemma *is* the label) the rule is exact-lemma,
+    so the counter has at most the one key.
+
+    One family member yields nothing to report: a multi-word rendering is merged
+    into a single token whose LEMMA is the label itself (``corpus.parse.
+    merge_phrases``), so it counts under the label and contributes no variant.
+    """
+    if match_fn is None:
+        return Counter(t.lemma_ for t in doc if t.lemma_ == label)
+    return Counter(
+        lemma for t in doc
+        if match_fn(lemma := t.lemma_.lower(), t.pos_) == label)
+
+
+def variant_list(counts: Counter[str], label: str) -> list[str]:
+    """The exported shape of :func:`matched_lemmas`: the other words the label
+    stands for, never including the label itself.
+
+    Nothing is filtered: the list is exactly what was counted, so it inherits the
+    corpus's tokenization noise along with its words. SEP footnote markers glue
+    onto the word they follow, and ``knowledge*`` then matches lemmas like
+    ``knowledge.[24`` — ~1% of a term's occurrences, but each one distinct, so in
+    an alphabetical list they would outnumber the real variants.
+
+    Hence the order: most frequent first, well-formed words ahead of debris at
+    equal counts, alphabetical last. Deterministic for a fixed corpus (the JSON
+    still diffs cleanly), and it puts the words actually carrying the node first
+    while leaving the artifacts visible, where they belong — they are a fact about
+    the corpus, and they are being counted and embedded whether or not they are
+    printed.
+    """
+    def is_word(w: str) -> bool:
+        """A real word form, not the label with punctuation stuck to it."""
+        return w.replace("-", "").replace("'", "").isalpha()
+
+    return [word for word, _ in
+            sorted(((w, n) for w, n in counts.items() if w != label),
+                   key=lambda item: (-item[1], not is_word(item[0]), item[0]))]
+
+
 def dominant_pos(
     sources: Iterable[SourceDoc],
     match_fn: MatchFn | None = None,

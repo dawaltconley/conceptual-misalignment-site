@@ -271,6 +271,15 @@ Target renderings never merge. The merge is then re-applied from the original
 accumulators, and the space is rebuilt so the graph, communities, and scatter are
 all computed over the merged vocabulary.
 
+They don't need to: a rendering is already a family, gathered by its globs rather
+than by cosine — `Rendering('wisdom', 'wisdom*', 'wise*')` re-keys `wise` and
+`wisely` to `wisdom` when the token is first read. Those matched lemmas ride out
+in the same `variants` field the merge uses (`occurrences.matched_lemmas`), scoped
+to whatever file carries them: one article or chapter on a per-source
+co-occurrence network, the whole corpus on the similarity networks and the scatter
+export. A target always carries the field, `[]` included — the Chinese terms have
+nothing to report, since there a hanzi node _is_ its own lemma.
+
 This is also why **`run_sep` builds its co-occurrence networks after the
 embeddings** rather than before, unlike `run_mengzi`: the PMI lens reuses this
 merge so a node means the same word in both views, and the merge can't be decided

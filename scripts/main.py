@@ -25,7 +25,7 @@ import argparse
 import json
 import time
 from collections import Counter
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import asdict, replace
 from pathlib import Path
 
@@ -54,6 +54,8 @@ from embeddings.occurrences import (
     content_frequencies,
     document_frequencies,
     dominant_pos,
+    matched_lemmas,
+    variant_list,
 )
 from cooccurrence import pmi_spacy
 from graph.annotate import attach_variants
@@ -115,10 +117,21 @@ def get_cooccurrence(
 
 def count_occurrences(doc, label: str, match_fn: MatchFn | None) -> int:
     """How many tokens in ``doc`` belong to ``label`` (via ``match_fn`` if given,
-    else exact-lemma). Used for the ``TermData.occurrences`` display count."""
-    if match_fn is not None:
-        return sum(1 for t in doc if match_fn(t.lemma_.lower(), t.pos_) == label)
-    return sum(1 for t in doc if t.lemma_ == label)
+    else exact-lemma). Used for the ``TermData.occurrences`` display count.
+
+    The count is the total of :func:`matched_lemmas`, so it can never disagree
+    with the variant list built from the same pass."""
+    return sum(matched_lemmas(doc, label, match_fn).values())
+
+
+def target_matches(sources: Iterable[SourceDoc], label: str,
+                   match_fn: MatchFn | None) -> Counter[str]:
+    """:func:`matched_lemmas` folded over several sources — one scope's answer to
+    "which words did ``label`` absorb here, and how often"."""
+    counts: Counter[str] = Counter()
+    for source in sources:
+        counts += matched_lemmas(source.doc, label, match_fn)
+    return counts
 
 
 def save_cooccurrence(
@@ -133,16 +146,20 @@ def save_cooccurrence(
     occurrence count recorded on the manifest.
 
     ``variants`` is the other half of ``alias``: the merge decides what a node
-    *is*, this records which words it stands for, on the node itself."""
+    *is*, this records which words it stands for, on the node itself. The target
+    adds its own entry, scoped to ``network_sources`` — which is one article or
+    chapter here and a whole search there, exactly like the network itself."""
+    counts = target_matches(network_sources, label, match_fn)
+    matched = variant_list(counts, label)
     net = get_cooccurrence(p, label, network_sources, match_fn=match_fn,
                            alias=alias)
     if net is None:
         print(f"  no co-occurrence for {label} in {meta_source.title}")
     else:
-        attach_variants(net, variants)
-    occ = sum(count_occurrences(s.doc, label, match_fn)
-              for s in network_sources)
-    w.add_cooccurrence(label, meta_source, file_id, net, occ)
+        attach_variants(net, {**(variants or {}), label: matched},
+                        always=(label,))
+    occ = sum(counts.values())
+    w.add_cooccurrence(label, meta_source, file_id, net, occ, matched)
     return occ
 
 
@@ -158,16 +175,20 @@ def save_similarity(
     """Write one ``NetworkData`` file per term — its pruned cosine neighborhood —
     and record each term's whole-corpus occurrence count on the manifest.
 
-    ``variants`` labels each node with the words the merge folded into it (the
-    same map the embedding export carries); the pruned subgraphs inherit it."""
-    attach_variants(G, variants)
+    ``variants`` labels each node with the words it stands for — for an ordinary
+    node the family the merge folded into it, for a target the lemmas it matched
+    (the same map the embedding export carries, and whole-corpus like this graph);
+    the pruned subgraphs inherit it."""
+    attach_variants(G, variants, always=targets)
     for target in targets:
         pruned = prune_to_neighborhood(G, target, p.max_network_nodes)
         if pruned is None:
             print(f"  {target} absent from similarity graph")
         occ = int(occ_counts.get(target, 0))
-        w.add_similarity(target, corpus_source, pruned, occ)
+        matched = list((variants or {}).get(target, ()))
+        w.add_similarity(target, corpus_source, pruned, occ, matched)
         w.set_total(target, occ)
+        w.set_variants(target, matched)
 
 
 # ---------------------------------------------------------------------------
@@ -212,14 +233,22 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
 
     occ_counts = Counter(
         t.lemma_ for t in full.doc if t.text in targets or t.lemma_ in targets)
-    save_similarity(p, writer, targets, mengzi, G, occ_counts=occ_counts)
+    # Whole-corpus, like the graph. There is no `match_fn` here — a hanzi is a
+    # target because its lemma *is* the label — so every list comes out empty;
+    # it is carried anyway so the Chinese files say `[]` rather than nothing at
+    # all, and so a term whose lemma differs from its glyph would show up here.
+    target_variants = {t: variant_list(target_matches(chapters, t, None), t)
+                       for t in targets}
+    save_similarity(p, writer, targets, mengzi, G, occ_counts=occ_counts,
+                    variants=target_variants)
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
     path = writer.add_embeddings(
         Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
                                doc_freq=doc_freq, documents=n_docs, graph=G,
-                               norms=norms, freq=freq))
+                               norms=norms, variants=target_variants,
+                               freq=freq))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -361,7 +390,18 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
     # Only a lens the merge was actually *applied* to may claim the families on
     # its nodes: with a lens opted out its nodes are still one per lemma, so
     # listing variants there would be a lie about what the node covers.
-    sim_variants = variants if p.merge_similarity else {}
+    #
+    # Target labels are the one class of node whose label abstracts over several
+    # words *without* the merge — the rendering's glob does it — so they carry
+    # their matched lemmas in the same field. `merge_map(exclude=labels_by_target)`
+    # never merges a target, so these keys cannot collide. Whole-corpus over the
+    # deduped articles, matching the scope of the graph and the export they
+    # annotate (the per-source co-occurrence files scope their own).
+    target_variants = {
+        label: variant_list(target_matches(combined, label, match_fn), label)
+        for label in labels_by_target}
+    sim_variants = {**(variants if p.merge_similarity else {}),
+                    **target_variants}
     cooc_variants = variants if p.merge_cooccurrence else {}
     sw.lap("embedding")
 

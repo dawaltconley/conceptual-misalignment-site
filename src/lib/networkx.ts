@@ -6,8 +6,11 @@ const NodeId = z.union([z.string(), z.number()])
 
 /**
  * `form` is the display glyph for the node's key (敎 -> 教); `variants` lists the
- * words the pipeline's derivational merge folded into this node (`inspiration`
- * carrying `inspire`). Both are optional labels — most nodes carry neither.
+ * other words this node stands for — either the family the pipeline's
+ * derivational merge folded in (`inspiration` carrying `inspire`), or, for a term
+ * node, the lemmas its rendering matched here (`wisdom` carrying `wise`,
+ * `wisely`). Both are optional labels — most nodes carry neither, though a term
+ * node always carries `variants`, `[]` included.
  */
 const GraphNode = z.looseObject({
   id: NodeId,

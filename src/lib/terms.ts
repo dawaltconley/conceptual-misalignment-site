@@ -9,6 +9,9 @@ import { z } from 'zod'
 
 export const TermSchema = z.object({
   label: z.string(),
+  /** The other words this term matched — `wisdom` also said as `wise`/`wisely`.
+   * Scoped to the enclosing file: one source on a per-source network, the whole
+   * corpus here in the master index. Chinese terms are their own lemma, so `[]`. */
   variants: z.array(z.string()).default([]),
 })
 

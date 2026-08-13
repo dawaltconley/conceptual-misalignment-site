@@ -30,7 +30,7 @@ from models import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Iterator, Sequence
     from networkx import Graph
 
 
@@ -58,19 +58,25 @@ class CorpusWriter:
     # --- files -------------------------------------------------------------
 
     def add_cooccurrence(self, label: str, source: Source, file_id: str,
-                         network: "Graph | None", occurrences: int) -> None:
+                         network: "Graph | None", occurrences: int,
+                         variants: "Sequence[str]" = ()) -> None:
         """One PMI network for ``label`` over ``source`` (a chapter, an article,
-        or a whole-corpus stand-in) -> ``{label}_{file_id}.json``."""
-        data = NetworkData(TermData(label), source, network,
+        or a whole-corpus stand-in) -> ``{label}_{file_id}.json``.
+
+        ``variants`` are the other words ``label`` matched *in this source*, so
+        the file's ``term`` block is scoped the same way its network is."""
+        data = NetworkData(TermData(label, list(variants)), source, network,
                            occurrences=occurrences)
         web = self._write(data, f"{label}_{file_id}.json")
         self._term(label).cooccurrence.append(replace(data.source, data=web))
 
     def add_similarity(self, label: str, source: Source,
-                       network: "Graph | None", occurrences: int) -> None:
+                       network: "Graph | None", occurrences: int,
+                       variants: "Sequence[str]" = ()) -> None:
         """``label``'s pruned cosine neighborhood over the whole corpus ->
-        ``{label}_embeds.json``."""
-        data = NetworkData(TermData(label), source, network,
+        ``{label}_embeds.json``. ``variants`` is whole-corpus for the same reason
+        the network is."""
+        data = NetworkData(TermData(label, list(variants)), source, network,
                            occurrences=occurrences)
         web = self._write(data, f"{label}_embeds.json")
         self._term(label).similarity.append(replace(data.source, data=web))
@@ -89,6 +95,12 @@ class CorpusWriter:
     def set_total(self, label: str, occurrences: int) -> None:
         """``label``'s occurrence count across the analyzed corpus."""
         self._term(label).total_occurrences = occurrences
+
+    def set_variants(self, label: str, variants: "Sequence[str]") -> None:
+        """The other words ``label`` matched across the analyzed corpus — the
+        manifest's copy, and so the one that reaches ``src/data/terms.json``.
+        Whole-corpus, unlike the per-file lists the ``add_*`` methods record."""
+        self._term(label).term.variants = list(variants)
 
     def set_chinese_philosophy(self, label: str, occurrences: int) -> None:
         """``label``'s occurrence count inside the excluded Chinese-philosophy
