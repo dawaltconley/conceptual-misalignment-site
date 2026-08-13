@@ -45,6 +45,7 @@ export default function TermNetwork({
   kind = 'cooccurrence',
   dictionary,
   headingLevel,
+  maxNodes,
   actualEdgeWeightRange,
   targetEdgeWeightRange,
 }: TermNetworkProps): JSX.Element {
@@ -112,6 +113,7 @@ export default function TermNetwork({
             sources={refsFor(term.chinese, kind)}
             centralNodeId={term.hanzi}
             dictionary={dictionary}
+            maxNodes={maxNodes}
             actualEdgeWeightRange={actualEdgeWeightRange}
             targetEdgeWeightRange={targetEdgeWeightRange}
             sourceAlign="left"
@@ -122,6 +124,7 @@ export default function TermNetwork({
             key={`${kind}:${term.hanzi}:${english.term.label}`}
             sources={refsFor(english, kind)}
             centralNodeId={english.term.label}
+            maxNodes={maxNodes}
             actualEdgeWeightRange={actualEdgeWeightRange}
             targetEdgeWeightRange={targetEdgeWeightRange}
             sourceAlign="right"

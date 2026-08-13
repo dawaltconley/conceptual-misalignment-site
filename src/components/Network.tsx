@@ -1,12 +1,20 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
 import type { Size, Range, Line } from '@lib/graphs'
-import { useState, useEffect, useRef, forwardRef, type ReactNode } from 'react'
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  forwardRef,
+  type ReactNode,
+} from 'react'
 import { useResizeObserver } from 'use-resize-observer'
 import clsx from 'clsx'
 import * as d3 from 'd3'
 import { isNotEmpty } from '@lib/utils'
 import { isPoint, getNormalizer } from '@lib/graphs'
+import pruneToNeighborhood from '@lib/prune'
 import HanziNode from '@components/HanziNode'
 import EnglishNode from '@components/EnglishNode'
 
@@ -15,6 +23,12 @@ const COLLISION_RADIUS = 4
 export interface NetworkProps {
   data: WeightedNodeLinkData
   centralNodeId: NodeId
+  /**
+   * Cap on how many nodes *besides* the central one are drawn, thinning the
+   * graph from the weakest connections up (see `@lib/prune`). Unset draws the
+   * network as exported.
+   */
+  maxNodes?: number
   actualEdgeWeightRange?: Range
   targetEdgeWeightRange?: Range
   dictionary?: Dictionary
@@ -23,6 +37,7 @@ export interface NetworkProps {
 export default function Network({
   data,
   centralNodeId,
+  maxNodes,
   actualEdgeWeightRange = { min: 1, max: 3 },
   targetEdgeWeightRange = { min: 1, max: 5 },
   dictionary = {},
@@ -38,12 +53,17 @@ export default function Network({
     height = 0,
   } = useResizeObserver<HTMLDivElement>()
 
+  const graph = useMemo(
+    () => pruneToNeighborhood(data, centralNodeId, maxNodes),
+    [data, centralNodeId, maxNodes],
+  )
+
   // Run D3 simulation in normalized 0–100 coordinate space
   useEffect(() => {
-    const nodes = data.nodes.map<Node>((n) =>
+    const nodes = graph.nodes.map<Node>((n) =>
       n.id === centralNodeId ? { ...n, fx: 50, fy: 50 } : { ...n },
     )
-    const links = data.edges.map<Link>((e) => ({ ...e, value: e.weight }))
+    const links = graph.edges.map<Link>((e) => ({ ...e, value: e.weight }))
     const values = links.map((l) => l.value)
     const min = Math.min(...values)
     const max = Math.max(...values)
@@ -75,18 +95,18 @@ export default function Network({
     return () => {
       simulation.stop()
     }
-  }, [data, centralNodeId])
+  }, [graph, centralNodeId])
 
   // Redraw edges on canvas whenever node positions or container size change
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const edges = getEdges(nodes, data.edges, {
+    const edges = getEdges(nodes, graph.edges, {
       toWidth: getNormalizer(actualEdgeWeightRange, targetEdgeWeightRange),
       toOpacity: getNormalizer(actualEdgeWeightRange, { min: 0, max: 1 }),
     })
     drawEdges(edges, canvas, { width, height })
-  }, [nodes, data, width, height])
+  }, [nodes, graph, width, height])
 
   function handlePointerDown(
     e: React.PointerEvent<HTMLDivElement>,
