@@ -63,10 +63,13 @@ layout doesn't cover is not plotted.
 
 ## Does the truncation cost anything?
 
-Yes, quite a lot. Take each word's 10 nearest neighbors in the **768-d analysis
-space** — the space where the similarity graph, the communities and every
-reported cosine actually live — and ask what fraction of them are still among its
-10 nearest neighbors on the map. Mengzi, 602 words, perplexity 30:
+A little, consistently — but less than a first look suggests, and the two obvious
+ways to measure it disagree about how much. Ground truth throughout is the
+**768-d analysis space**: where the similarity graph, the communities and every
+reported cosine actually live. Mengzi, 602 words.
+
+**Strict top-10 overlap** — of each word's 10 nearest neighbors in the full
+space, how many are still among its 10 nearest on the map:
 
 | space read                       | neighbors retained |
 | -------------------------------- | -----------------: |
@@ -74,25 +77,38 @@ reported cosine actually live — and ask what fraction of them are still among 
 | t-SNE over the 50-d vectors      |              0.218 |
 | t-SNE over the full 768-d space  |              0.312 |
 
-Two things to take from this. First, **the PCA truncation alone discards about
-half the neighborhood structure** before t-SNE is even involved — the 50-d export
-is a much lossier object than "50 principal components of a 768-d space" sounds.
-Second, embedding the full space **recovers a good part of what the shipped
-layout was losing** (+43% relative), so the two maps are not cosmetic variants of
-each other.
+**Trustworthiness** (sklearn's standard projection-quality metric, which
+penalizes intruders by how far they were in the original space rather than
+demanding an exact set match):
 
-The honest caveat: this metric uses the full space as ground truth, which is the
-space the `full` layout starts from, so some advantage is baked in. But that
-framing is the right one — the question is whether the picture on screen
-represents the space the analysis is conducted in, and by that standard the
-truncated layout is measurably worse. The numbers come from a scratch script, not
-a committed tool; rerun it with `embeddings.vectors.load_analysis_matrix` if you
-want it against SEP or another k.
+| space read                       |   k=5 |  k=10 |  k=20 |
+| -------------------------------- | ----: | ----: | ----: |
+| exported 50-d vectors (no t-SNE) | 0.925 | 0.909 | 0.889 |
+| t-SNE over the 50-d vectors      | 0.837 | 0.760 | 0.692 |
+| t-SNE over the full 768-d space  | 0.866 | 0.781 | 0.706 |
 
-This is an argument for making `full` the default view (put it first in
-`tsne_sources`). It is not an argument for dropping `reduced`: the live
-client-side t-SNE can only ever see the exported vectors, so keeping a `reduced`
-layout is what makes "precomputed vs live" a fair comparison.
+Both agree on the ordering — the full-vector layout is better at every k and
+every perplexity — but they disagree sharply on the size of it. Set overlap says
+the 50-d export keeps only 55% of the exact top-10 neighbors; trustworthiness
+says 0.91, i.e. the words that fall out of the top 10 were near neighbors anyway.
+**The truncation shuffles the exact ordering much more than it moves anything
+far**, so the honest summary is: PCA-50 is a good approximation of the space, and
+embedding the untruncated version buys a small but consistent fidelity gain
+(+0.02 trustworthiness at k=10) rather than a different picture. On screen the
+768-d Mengzi layout does look tidier — the five targets land together — but that
+is one corpus and should not be over-read.
+
+Two caveats. The metric's ground truth is the space the `full` layout starts
+from, so some advantage is baked in; the framing is still the right one (does the
+picture represent the space the analysis is conducted in?), but the comparison is
+not neutral. And these are scratch-script numbers, not a committed tool — rebuild
+them from `embeddings.vectors.load_analysis_matrix` plus
+`sklearn.manifold.trustworthiness` if you want them for SEP.
+
+So this is a mild argument for making `full` the default view (put it first in
+`tsne_sources`), not a decisive one. It is not an argument for dropping
+`reduced`: the live client-side t-SNE can only ever see the exported vectors, so
+keeping a `reduced` layout is what makes "precomputed vs live" a fair comparison.
 
 ## Consequences to keep in mind
 

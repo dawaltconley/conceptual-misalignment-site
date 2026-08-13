@@ -67,8 +67,8 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
 - The scatter's default view is a **precomputed t-SNE** (`Embeddings.layouts`, one
   per `Pipeline.tsne_sources` x `tsne_perplexities`; the **first is the default**).
   PCA and the client-side t-SNE remain options. `tsne_sources` picks the vectors:
-  `reduced` (the export — what the client also has) or `full` (untruncated; keeps
-  ~43% more of the true neighborhoods, measured in the note). `reduced` layouts
+  `reduced` (the export — what the client also has) or `full` (untruncated;
+  consistently but only slightly more faithful — measured in the note). `reduced` layouts
   retune from the artifact via `tools/relayout.py` in seconds; `full` needs the
   analysis matrix a run caches in `scripts/.cache/vectors/`.
   See `notes/claude/precomputed-tsne-layouts.md`.
