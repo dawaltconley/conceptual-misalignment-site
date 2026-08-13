@@ -40,19 +40,27 @@ def tsne_layouts(labels: list[str], matrix: np.ndarray,
         return []
 
     layouts: list[Layout] = []
+    seen: set[float] = set()
     for requested in p.tsne_perplexities:
         # sklearn requires perplexity < n_samples; the effective number of
         # neighbors is 3*perplexity, so clamp there to keep the layout honest
         # rather than let a small corpus silently run a degenerate embedding.
         perplexity = float(max(2.0, min(requested, (n - 1) / 3)))
-        coords = _tsne(matrix, perplexity, p)
         if perplexity != requested:
             print(f"layout     : perplexity {requested:g} -> {perplexity:g} "
                   f"(clamped for {n} nodes)")
+        # A corpus small enough to clamp collapses several requests onto one
+        # perplexity; ship it once rather than offer the same map under three
+        # different (and now wrong) labels. Everything below names the
+        # *effective* value for the same reason.
+        if perplexity in seen:
+            continue
+        seen.add(perplexity)
+        coords = _tsne(matrix, perplexity, p)
         layouts.append(Layout(
-            id=f"tsne-p{requested:g}",
+            id=f"tsne-p{perplexity:g}",
             method="tsne",
-            label=f"t-SNE · perplexity {requested:g}",
+            label=f"t-SNE · perplexity {perplexity:g}",
             params={
                 "perplexity": perplexity,
                 "epsilon": p.tsne_epsilon,
@@ -66,7 +74,7 @@ def tsne_layouts(labels: list[str], matrix: np.ndarray,
                     for label, (x, y) in zip(labels, coords)},
         ))
     print(f"layouts    : {len(layouts)} t-SNE ({n} nodes) — perplexity "
-          f"{', '.join(f'{q:g}' for q in p.tsne_perplexities)}")
+          f"{', '.join(f'{q:g}' for q in sorted(seen))}")
     return layouts
 
 
