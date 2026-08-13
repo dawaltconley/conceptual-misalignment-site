@@ -117,6 +117,45 @@ comparison is not neutral. And these are scratch-script numbers, not a committed
 tool; rebuild from `embeddings.vectors.load_analysis_matrix` plus
 `sklearn.manifold.trustworthiness`.
 
+### Where the truncation does bite: short projections
+
+Only the `full` source is unit-norm when t-SNE sees it. Both sources get the same
+L2 step — `unit_vectors` runs inside `reduce_vectors`, before its PCA — but the
+projection then shortens every row by a word-specific amount. On the Mengzi the
+exported rows keep a mean of 0.657 of their unit length, ranging 0.37 to 0.79:
+that residual is *how much of a word's direction the top 50 PCs actually
+captured*. (Not renormalizing afterwards is deliberate. Rescaling a 0.37 row back
+to 1.0 would assert a precision the projection doesn't have.)
+
+That residual is not noise, and it is not uniform:
+
+- it correlates **+0.75** (Mengzi) / **+0.69** (SEP) with `strength` — words in
+  dense regions of the similarity graph are the ones PCA captures well;
+- on the Mengzi it correlates **−0.34** with `doc_freq`: the most widespread words
+  are among the *worst* captured, which fits [[frequency-gradient-and-debiasing]]
+  — `abtt` removes the dominant directions those words lived on, leaving a
+  residual spread thinly across many dimensions;
+- **信 sits in the 1st percentile** (0.479, 6th-worst of 602) while 仁/禮/智/義
+  are 34th–86th. So one of the five virtues is represented markedly worse than
+  its peers in the exported space.
+
+The failure mode is not what you would guess. 信's own top-10 neighbors survive
+truncation about as well as the other targets' (6/10, versus 5/10 for 禮 and 義).
+What happens instead is that **poorly-captured words crowd into everyone else's
+neighborhoods**: 信 appears in the exported top-10 of 仁, 禮 and 義 and in the
+768-d top-10 of none of them. Across the whole Mengzi vocabulary, retained norm
+versus the change in how often a word is listed as someone else's neighbor is
+**spearman −0.657**. A short projection leaves a noisy direction, and after
+normalization that noise lands plausibly close to many things.
+
+Scope: this affects the **exported vectors** — the client-side PCA and live t-SNE
+views, and any `reduced` layout. It does *not* touch the pipeline's similarity
+graph, communities, or reported cosines, which are computed before truncation.
+
+This is the sharpest argument for keeping `full` around: not that the average
+layout is better (it barely is), but that it is the only way to check whether a
+suspicious adjacency on the scatter is real or a short-projection artifact.
+
 **What to do with that.** There is no strong case for making `full` the default,
 and a fair case for not shipping it at all on SEP, where it costs ~400 KB of
 artifact for a wash. Where it earns its place is as a check: when a layout looks
