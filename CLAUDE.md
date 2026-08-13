@@ -65,10 +65,13 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   `merge_cooccurrence`); the lens crossing is argued in
   `notes/claude/derivational-variant-merging.md`.
 - The scatter's default view is a **precomputed t-SNE** (`Embeddings.layouts`, one
-  per `Pipeline.tsne_perplexities`; the **first is the default**). PCA and the
-  client-side t-SNE remain options. Layouts run over the _exported_ reduced
-  vectors, so `tools/relayout.py` retunes them from the artifact in seconds —
-  no re-embedding. See `notes/claude/precomputed-tsne-layouts.md`.
+  per `Pipeline.tsne_sources` x `tsne_perplexities`; the **first is the default**).
+  PCA and the client-side t-SNE remain options. `tsne_sources` picks the vectors:
+  `reduced` (the export — what the client also has) or `full` (untruncated; keeps
+  ~43% more of the true neighborhoods, measured in the note). `reduced` layouts
+  retune from the artifact via `tools/relayout.py` in seconds; `full` needs the
+  analysis matrix a run caches in `scripts/.cache/vectors/`.
+  See `notes/claude/precomputed-tsne-layouts.md`.
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
   but harmless. Pyright's `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
   `vectors.reduce_vectors` false-positives came from it resolving `models` in a
