@@ -1,5 +1,5 @@
 Some decent, neutral starter anchor terms, avoiding the key terms of
-interest.
+interest, for [[client-side-alignment]].
 
 善 -> good
 惡 -> bad? / vicious?
