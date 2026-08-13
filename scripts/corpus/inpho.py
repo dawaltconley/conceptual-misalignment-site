@@ -50,8 +50,11 @@ def _is_mostly_chinese_philosophy(topics: str) -> bool:
     for line in reader:
         if len(line) < 2:
             continue
-        topic = int(line[0])
-        prob = float(line[1])
+        try:
+            topic = int(line[0])
+            prob = float(line[1])
+        except (ValueError):
+            continue
         # chinese philosophy topic on the 100 topic model
         if topic == 78 and prob < main_topic[1]:
             return False  # can exit early
