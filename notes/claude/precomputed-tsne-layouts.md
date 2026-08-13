@@ -87,28 +87,44 @@ demanding an exact set match):
 | t-SNE over the 50-d vectors      | 0.837 | 0.760 | 0.692 |
 | t-SNE over the full 768-d space  | 0.866 | 0.781 | 0.706 |
 
-Both agree on the ordering — the full-vector layout is better at every k and
-every perplexity — but they disagree sharply on the size of it. Set overlap says
-the 50-d export keeps only 55% of the exact top-10 neighbors; trustworthiness
-says 0.91, i.e. the words that fall out of the top 10 were near neighbors anyway.
-**The truncation shuffles the exact ordering much more than it moves anything
-far**, so the honest summary is: PCA-50 is a good approximation of the space, and
-embedding the untruncated version buys a small but consistent fidelity gain
-(+0.02 trustworthiness at k=10) rather than a different picture. On screen the
-768-d Mengzi layout does look tidier — the five targets land together — but that
-is one corpus and should not be over-read.
+The same on SEP (3277 words, computed entirely within one run so nothing is
+mixed):
 
-Two caveats. The metric's ground truth is the space the `full` layout starts
-from, so some advantage is baked in; the framing is still the right one (does the
-picture represent the space the analysis is conducted in?), but the comparison is
-not neutral. And these are scratch-script numbers, not a committed tool — rebuild
-them from `embeddings.vectors.load_analysis_matrix` plus
-`sklearn.manifold.trustworthiness` if you want them for SEP.
+| space read                       | top-10 |   k=5 |  k=10 |  k=20 |
+| -------------------------------- | -----: | ----: | ----: | ----: |
+| exported 50-d vectors (no t-SNE) |  0.551 | 0.991 | 0.988 | 0.983 |
+| t-SNE over the 50-d vectors      |  0.233 | 0.919 | 0.862 | 0.808 |
+| t-SNE over the full 768-d space  |  0.318 | 0.931 | 0.869 | 0.805 |
 
-So this is a mild argument for making `full` the default view (put it first in
-`tsne_sources`), not a decisive one. It is not an argument for dropping
-`reduced`: the live client-side t-SNE can only ever see the exported vectors, so
-keeping a `reduced` layout is what makes "precomputed vs live" a fair comparison.
+**The two metrics disagree, and the strict one is the misleading one.** Set
+overlap says the 50-d export keeps only ~55% of the exact top-10 neighbors on
+both corpora; trustworthiness says 0.909 (Mengzi) and 0.988 (SEP), i.e. the words
+that fall out of the top 10 were near neighbors anyway. The truncation *shuffles
+the exact ordering* far more than it moves anything far. On SEP in particular,
+768 -> 50 is very nearly lossless.
+
+So the answer to "does the truncation cost anything" is: **surprisingly little**,
+and the full-vector layout is a marginal improvement rather than a different
+picture — +0.02 trustworthiness at k=10 on Mengzi, +0.007 on SEP, and at k=20 on
+SEP it is *slightly worse* (0.805 vs 0.808). The 768-d Mengzi map does look
+tidier on screen (the five targets land together), but one corpus and one
+eyeball is not evidence.
+
+Two caveats on the numbers. The ground truth is the space the `full` layout
+starts from, so some advantage is baked in — the framing is still the right one
+(does the picture represent the space the analysis is conducted in?) but the
+comparison is not neutral. And these are scratch-script numbers, not a committed
+tool; rebuild from `embeddings.vectors.load_analysis_matrix` plus
+`sklearn.manifold.trustworthiness`.
+
+**What to do with that.** There is no strong case for making `full` the default,
+and a fair case for not shipping it at all on SEP, where it costs ~400 KB of
+artifact for a wash. Where it earns its place is as a check: when a layout looks
+surprising, the `full` sweep answers "is this the space, or is this the
+truncation?" — and now that answer is one config line and a relayout away rather
+than an argument. Keep `reduced` regardless: the live client-side t-SNE can only
+ever see the exported vectors, so a `reduced` layout is what makes "precomputed
+vs live" a fair comparison.
 
 ## Consequences to keep in mind
 
@@ -154,6 +170,16 @@ pipeline run caches it under the gitignored `scripts/.cache/vectors/{corpus}.npz
 artifact's and refuses the `full` sweep on a mismatch, rather than pairing one
 run's coordinates with another's vocabulary. With no cache the `full` sweep is
 skipped with a warning and the `reduced` one still runs.
+
+That check is not theoretical: re-running SEP produced 3277 words against the
+shipped artifact's 3283, and the differences (`account`/`accounting`,
+`discussion`/`discuss`) are **variant-merge flips, not corpus drift** — pairs
+sitting near the 0.45 cosine gate, which tiny embedding differences push across.
+Worth knowing on its own: the SEP vocabulary is not bit-stable across runs, so
+anything that pairs a stored vocabulary with a fresh one needs a guard like this.
+The shipped SEP artifact therefore carries `reduced` layouts only; giving it
+`full` ones means a real `--corpus sep` run (~63 min, and it rewrites
+`public/sep/`).
 
 One honest caveat for the `reduced` sweep: the artifact stores vectors rounded to
 5 decimals, so a relayout embeds the *rounded* matrix while a pipeline run embeds
