@@ -39,8 +39,8 @@ favor working end-to-end over completeness.**
 - `models.py` — dataclasses (`Pipeline`, `Source/Rendering/Term`, `NetworkData`,
   `Embeddings`) + JSON serialization.
 - `corpus/` (fetch/parse; only place that hits the network), `embeddings/`
-  (`model`, `vectors`, `occurrences`, `analyze`), `cooccurrence/`, `graph/`,
-  `segmentation/` + `cli/` (separate XunziALLM experiment).
+  (`model`, `vectors`, `occurrences`, `analyze`, `layouts`), `cooccurrence/`,
+  `graph/`, `segmentation/` + `cli/` (separate XunziALLM experiment).
 
 Front end: `src/pages/index.astro` → `TermNetwork` (cooccurrence/similarity
 dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
@@ -64,9 +64,16 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   vectors first. Both halves are revertible (`Pipeline.merge_similarity` /
   `merge_cooccurrence`); the lens crossing is argued in
   `notes/claude/derivational-variant-merging.md`.
+- The scatter's default view is a **precomputed t-SNE** (`Embeddings.layouts`, one
+  per `Pipeline.tsne_perplexities`; the **first is the default**). PCA and the
+  client-side t-SNE remain options. Layouts run over the _exported_ reduced
+  vectors, so `tools/relayout.py` retunes them from the artifact in seconds —
+  no re-embedding. See `notes/claude/precomputed-tsne-layouts.md`.
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
-  but harmless. Pyright may flag `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
-  `vectors.reduce_vectors` as unknown — **stale false-positives**; they run fine.
+  but harmless. Pyright's `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
+  `vectors.reduce_vectors` false-positives came from it resolving `models` in a
+  **sibling clone**; `[tool.pyright]` in `pyproject.toml` now pins the venv. If they
+  reappear, check which interpreter pyright picked (`pyright --verbose`).
 
 ## Active threads (as of 2026-08-01)
 
