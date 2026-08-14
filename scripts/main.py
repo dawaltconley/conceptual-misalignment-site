@@ -719,6 +719,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--per-term", type=int, default=12, dest="per_term",
                    help="SEP articles fetched per English rendering (caps corpus "
                         "size / embedding memory).")
+    p.add_argument("--max-chinese-topic", type=lambda n: float(n) if n is not None else None, default=None, dest="max_chinese_topic",
+                   help="The max percentage an SEP article can be identified"
+                   "with InPhO's Chinese philosophy topic before it is"
+                   "discarded. This should be a float between 0 and 1. If"
+                   "unset, it filters articles whose majority topic is Chinese"
+                   "philosophy.")
     p.add_argument("--master-only", action="store_true",
                    help="Skip the corpora; just rebuild the master index from the "
                         "per-corpus index.json manifests.")
@@ -751,7 +757,7 @@ def main() -> None:
         if args.corpus in ("sep", "all"):
             print("\n=== SEP ===")
             run_sep(SEP_PIPELINE, per_term=args.per_term,
-                    max_chinese_topic=0.25,
+                    max_chinese_topic=args.max_chinese_topic,
                     artifacts=args.artifacts, prune=args.prune,
                     allow_empty=args.allow_empty)
             sw.lap("sep")
