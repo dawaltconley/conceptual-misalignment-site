@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from numpy import ndarray
     from _typeshed import DataclassInstance
     from embeddings.analyze import Method as SimMethod, SimTransform
+    from embeddings.layouts import TsneSource
     from embeddings.vectors import DebiasMethod
 
 Pooling = Literal["mean", "max", "none"]
@@ -169,15 +170,42 @@ def _eigenvector(graph: "Graph | None") -> dict[str, float]:
 
 
 @dataclass
+class Layout:
+    """A precomputed 2-D projection of the exported vectors, ready to plot.
+
+    The scatter's default view: the client reads ``coords`` straight off rather
+    than projecting anything itself (see ``notes/claude/precomputed-tsne-layouts.md``).
+    ``coords`` is keyed by node id rather than parallel to ``Embeddings.nodes``,
+    so a change in node order can never silently mis-map a point onto another
+    word's coordinates; the client ignores ids it has no node for.
+    """
+    id: str
+    """Stable identifier the client keys its layout picker on (``tsne-p30``)."""
+    method: str
+    """``"tsne"`` today — the only precomputed projection. PCA needs no layout:
+    the exported vectors are variance-ordered, so its coordinates are columns
+    0/1 of ``Vector.vec``."""
+    label: str
+    """What the layout picker shows ("t-SNE · perplexity 30")."""
+    params: dict[str, object]
+    """The settings that produced it, for display and reproducibility."""
+    coords: dict[str, list[float]]
+    """node id -> ``[x, y]``."""
+
+
+@dataclass
 class Embeddings:
     source: Source
     dims: int
     documents: int
     """Total number of documents (sources) in the corpus, for relative doc-freq."""
     nodes: list[Vector]
+    layouts: list[Layout] = field(default_factory=list)
+    """Precomputed 2-D projections (see :class:`Layout`). Empty is valid — the
+    client falls back to PCA."""
 
     @classmethod
-    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}, variants: dict[str, list[str]] = {}, freq: "dict[str, int] | Counter[str]" = {}):
+    def from_matrix(cls, source: Source, labels: list[str], matrix: "ndarray", targets: set[str] | frozenset[str] = set(), communities: dict[str, int] = {}, doc_freq: dict[str, int] = {}, documents: int = 0, graph: "Graph | None" = None, norms: dict[str, float] = {}, variants: dict[str, list[str]] = {}, freq: "dict[str, int] | Counter[str]" = {}, layouts: "list[Layout] | None" = None):
         strength = _weighted_degree(graph)
         pagerank = _pagerank(graph)
         eigenvector = _eigenvector(graph)
@@ -194,7 +222,7 @@ class Embeddings:
                             list(variants.get(label, ())))
             nodes.append(vector)
         return cls(Source.from_sourcelike(source), int(matrix.shape[1]),
-                   documents, nodes)
+                   documents, nodes, list(layouts or ()))
 
     def save_json(self, filepath: "Path") -> None:
         _save_json(self, filepath)
@@ -411,6 +439,54 @@ class Pipeline:
     reduce_to_dims: int = 50
     """Number of dimensions to keep when serializing vectors to json. Affects
     the size of the export."""
+
+    tsne_sources: tuple["TsneSource", ...] = ("reduced",)
+    """Which vectors the precomputed layouts embed, one sweep each:
+
+    - ``reduced`` — the exported (``reduce_to_dims``) matrix. PCA-to-50-then-t-SNE
+      is van der Maaten's own recipe, and it is the only thing the *client* has,
+      so a precomputed layout and a live one are looking at the same numbers.
+    - ``full`` — the untruncated analysis space in the export's own preprocessing
+      (centered + L2-normalized), i.e. the matrix the export's PCA is fitted on
+      before truncation. Nothing is discarded, at the cost of a slower embed and
+      a layout the client cannot reproduce.
+
+    List both to ship both and let the scatter's picker compare them. The
+    **first** source's **first** perplexity is the default view. ``full`` needs
+    the analysis matrix, which only a pipeline run has: it is cached (see
+    ``embeddings.vectors.cache_analysis_matrix``) so ``tools/relayout.py`` can
+    rebuild those layouts too, and skipped with a warning if no run has."""
+
+    tsne_perplexities: tuple[float, ...] = (5, 15, 30, 50)
+    """Perplexities to precompute a t-SNE layout for — one exported ``Layout``
+    each, and the first is the scatter's default view. Perplexity is roughly "how
+    many neighbors each point tries to keep": low reads local structure (and
+    fragments), high reads global (and smears). Precomputing the sweep is what
+    lets the browser show t-SNE instantly; the client-side t-SNE remains for
+    perplexities not in this tuple. Empty disables the precomputation.
+
+    Runs over the *exported* (``reduce_to_dims``) vectors, not the full analysis
+    space — PCA-to-50-then-t-SNE is van der Maaten's own recipe, and it keeps a
+    precomputed layout comparable with one the client computes from the same
+    exported vectors."""
+
+    tsne_epsilon: "float | Literal['auto']" = "auto"
+    """t-SNE learning rate (sklearn ``learning_rate``; "epsilon" in the client's
+    ``@keckelt/tsne``). ``auto`` is ``max(N / 12, 50)``, which adapts to corpus
+    size and is what sklearn recommends. NOTE the two implementations are not on
+    a shared scale — the client's default epsilon of 10 is not this 10 — so tune
+    them independently."""
+
+    tsne_iterations: int = 1000
+    """Gradient-descent steps per layout. sklearn's floor is 250; 1000 is its
+    default and converges the corpora here comfortably. (The client-side run
+    stops at 500 to keep the animation short — another reason the two layouts
+    won't match point-for-point.)"""
+
+    tsne_seed: int = 0
+    """RNG seed. t-SNE is non-convex, so this is the only thing making the
+    exported layout reproducible across runs — change it to redraw, not to
+    improve."""
 
     max_network_nodes: int = 15
     """Cap on the number of nodes included in the similarity and co-occurrence

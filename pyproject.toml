@@ -53,3 +53,12 @@ packages = [
     "graph",
     "segmentation",
 ]
+
+# Pin the type checker to *this* checkout's venv. Without it pyright picks the
+# interpreter off PATH, which in a shell that has not sourced `.envrc` can be a
+# sibling clone's venv — and then `models` resolves to that clone's copy, so every
+# field added here reads as "unknown attribute on Pipeline". Those were the stale
+# false-positives CLAUDE.md warns about; this removes their cause.
+[tool.pyright]
+venvPath = "scripts"
+venv = ".venv"

@@ -35,6 +35,36 @@ export const EmbeddingNodeSchema = z.object({
   variants: z.array(z.string()).default([]),
 })
 
+/**
+ * A 2-D projection the pipeline already computed (`models.Layout`) — today the
+ * t-SNE perplexity sweep, which is the scatter's default view. `coords` is keyed
+ * by node id rather than parallel to `nodes`, so a node the layout doesn't cover
+ * is simply not plotted instead of silently taking another word's position.
+ *
+ * PCA needs no layout: the exported vectors are variance-ordered, so its
+ * coordinates are `vec[0]`/`vec[1]`.
+ */
+export const LayoutSchema = z.object({
+  id: z.string(),
+  method: z.string(),
+  /** What the layout picker shows ("t-SNE · perplexity 30"). */
+  label: z.string(),
+  /**
+   * The settings that produced it. `perplexity` and `dims` are first-class
+   * because the scatter shows them — the slider keys on the perplexity, and the
+   * dimensionality is how you tell a layout of the untruncated vectors from one
+   * the browser could have computed itself. The rest (epsilon, iterations, seed,
+   * source) ride along for provenance.
+   */
+  params: z
+    .looseObject({
+      perplexity: z.number().optional(),
+      dims: z.number().optional(),
+    })
+    .default({ perplexity: undefined, dims: undefined }),
+  coords: z.record(z.string(), z.tuple([z.number(), z.number()])),
+})
+
 export const EmbeddingDatasetSchema = z.object({
   /** The corpus this dataset came from (the pipeline's reduced `lib.Source`). */
   source: SourceSchema.nullable(),
@@ -42,7 +72,10 @@ export const EmbeddingDatasetSchema = z.object({
   /** Total documents (sources) in the corpus, for relative doc-freq. */
   documents: z.number().default(0),
   nodes: z.array(EmbeddingNodeSchema),
+  /** Precomputed projections. Empty is valid — the view falls back to PCA. */
+  layouts: z.array(LayoutSchema).default([]),
 })
 
 export type EmbeddingNode = z.infer<typeof EmbeddingNodeSchema>
 export type EmbeddingDataset = z.infer<typeof EmbeddingDatasetSchema>
+export type EmbeddingLayout = z.infer<typeof LayoutSchema>

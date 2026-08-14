@@ -263,6 +263,127 @@
     }
   }
 
+  // A range input with tick marks under it (see `TickRange.tsx`). The thumb is
+  // sized here rather than left native because the ticks have to line up with
+  // it: a thumb's centre travels only `width - thumb` px, so the tick strip is
+  // inset by half a thumb at each end and a tick's percentage then lands
+  // exactly where the thumb will stop.
+  .range {
+    --range-thumb: theme('spacing.4');
+    --range-track: theme('spacing[1.5]');
+    position: relative;
+    display: inline-block;
+  }
+
+  .range__input {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+
+    // Track. The two vendor pseudo-elements cannot be combined in one rule —
+    // an unrecognized selector invalidates the whole list — so they repeat.
+    &::-webkit-slider-runnable-track {
+      height: var(--range-track);
+      border-radius: theme('borderRadius.full');
+      background-color: theme('colors.gray.200');
+    }
+
+    &::-moz-range-track {
+      height: var(--range-track);
+      border-radius: theme('borderRadius.full');
+      background-color: theme('colors.gray.200');
+    }
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: var(--range-thumb);
+      height: var(--range-thumb);
+      border-radius: theme('borderRadius.full');
+      background-color: theme('colors.primary.DEFAULT');
+      border: 1px solid theme('colors.gray.900');
+      // Centre the thumb on the track.
+      margin-top: calc((var(--range-track) - var(--range-thumb)) / 2);
+    }
+
+    &::-moz-range-thumb {
+      width: var(--range-thumb);
+      height: var(--range-thumb);
+      border-radius: theme('borderRadius.full');
+      background-color: theme('colors.primary.DEFAULT');
+      border: 1px solid theme('colors.gray.900');
+    }
+
+    &:focus-visible::-webkit-slider-thumb {
+      outline: 2px solid theme('colors.primary.300');
+      outline-offset: 1px;
+    }
+
+    &:focus-visible::-moz-range-thumb {
+      outline: 2px solid theme('colors.primary.300');
+      outline-offset: 1px;
+    }
+  }
+
+  // Inset by half a thumb at each end, so a tick's `left: %` matches the thumb.
+  .range__ticks {
+    position: absolute;
+    left: calc(var(--range-thumb) / 2);
+    right: calc(var(--range-thumb) / 2);
+    top: calc(50% + var(--range-thumb) / 2);
+    height: theme('spacing.1');
+    pointer-events: none;
+  }
+
+  .range__tick {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    transform: translateX(-50%);
+    background-color: theme('colors.gray.400');
+
+    &[data-current] {
+      background-color: theme('colors.primary.DEFAULT');
+      width: 2px;
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: theme('spacing.4');
+    height: theme('spacing.4');
+    border: 1px solid theme('colors.gray.900');
+    border-radius: theme('borderRadius.sm');
+    background-color: theme('colors.white');
+    color: theme('colors.white');
+
+    &[data-checked] {
+      background-color: theme('colors.primary.DEFAULT');
+      border-color: theme('colors.primary.DEFAULT');
+    }
+
+    &:disabled {
+      border-color: theme('colors.gray.400');
+      background-color: theme('colors.gray.100');
+    }
+
+    &:focus-visible {
+      outline: 2px solid theme('colors.primary.300');
+      outline-offset: 1px;
+    }
+  }
+
   .dialog__backdrop {
     position: absolute;
     inset: 0;

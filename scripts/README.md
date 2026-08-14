@@ -45,8 +45,10 @@ Everything about _how_ each corpus is processed lives in `config.py`, as the
 `MENGZI_PIPELINE` / `SEP_PIPELINE` `Pipeline` objects: `model`, `min_freq`,
 similarity-graph method (`sim_network` = `knn`/`threshold`) with its `knn_k` /
 `threshold`, `sim_transform` (default `neglog`), `center`, `reduce_to_dims`,
-`max_network_nodes`, `batch_size`, `content_pos`, `stopwords`, and the output
-directory. Change a run's behavior by editing those, not by passing flags.
+`max_network_nodes`, `batch_size`, `content_pos`, `stopwords`, the scatter's
+precomputed t-SNE layouts (`tsne_sources` / `tsne_perplexities` / `tsne_epsilon`
+/ `tsne_iterations` / `tsne_seed`), and the output directory. Change a run's
+behavior by editing those, not by passing flags.
 
 ### Outputs (all consumed by the site; paths from `config.py`)
 
@@ -56,7 +58,9 @@ directory. Change a run's behavior by editing those, not by passing flags.
 - **Similarity** — one file per term (pruned cosine neighborhood over the whole
   corpus): `public/ctext/{hanzi}_embeds.json` / `public/sep/{label}_embeds.json`.
 - **Embeddings** — one PCA-reduced dataset per corpus: `public/embeddings/{mengzi,sep}.json`
-  (`models.Embeddings`), with Louvain communities from the same cosine graph.
+  (`models.Embeddings`), with Louvain communities from the same cosine graph, plus
+  the precomputed t-SNE `layouts` the scatter opens on
+  (`notes/claude/precomputed-tsne-layouts.md`).
 - **Manifest** — one per corpus: `public/ctext/index.json` / `public/sep/index.json`
   (`models.CorpusIndex`). Everything above goes through an `output.CorpusWriter`,
   which writes the file _and_ records its `Source` — provenance, occurrence count,
@@ -94,6 +98,7 @@ embeddings/          the transformer semantic space
   model.py           Embedder — final-layer per-occurrence span vectors
   vectors.py         max-pool across occurrences + mean-center + PCA reduce for export
   analyze.py         cosine / kNN graph, Louvain communities, sim transforms, --artifacts dump
+  layouts.py         precomputed t-SNE scatter layouts (Pipeline.tsne_sources x tsne_perplexities)
 
 cooccurrence/        PMI co-occurrence networks
   pmi.py             PMI + graph construction (corpus-agnostic string lists)
@@ -128,6 +133,13 @@ cli/                 auxiliary runnable tools
 # pipeline aborts on a rendering that matches *nothing*; this also reports
 # partial losses. -> analysis/sep/rendering_diagnostics.md
 .venv/bin/python tools/rendering_diagnostics.py --per-term 12
+
+# Rebuild the scatter's precomputed t-SNE layouts from data already on disk:
+# `reduced` layouts from the artifact itself, `full` (untruncated) ones from the
+# analysis matrix a pipeline run caches in .cache/vectors/. Retuning perplexity
+# costs seconds instead of a re-embed, and everything else in the file is passed
+# through untouched. -> public/embeddings/{corpus}.json
+.venv/bin/python tools/relayout.py [--corpus mengzi] [--perplexity 12] [--source full]
 ```
 
 ---

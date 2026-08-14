@@ -45,7 +45,7 @@ from corpus.parse import (
     parse_sep_article, parse_mengzi_chapter, mengzi_merge_config,
     mengzi_merge_report, verb_lemma)
 from corpus.inpho import is_chinese_philosophy
-from embeddings import analyze, families, vectors
+from embeddings import analyze, families, layouts, vectors
 from embeddings.analyze import Method as SimMethod
 from embeddings.model import Embedder
 from embeddings.occurrences import (
@@ -251,11 +251,13 @@ def run_mengzi(p: Pipeline, *, artifacts: bool = False,
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
+    vectors.cache_analysis_matrix("mengzi", labels, matrix)
     path = writer.add_embeddings(
         Embeddings.from_matrix(mengzi, labels, reduced, targets, community_map,
                                doc_freq=doc_freq, documents=n_docs, graph=G,
-                               norms=norms, variants=target_variants,
-                               freq=freq))
+                               norms=norms, variants=target_variants, freq=freq,
+                               layouts=layouts.tsne_layouts(
+                                   labels, {"reduced": reduced, "full": matrix}, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:
@@ -444,11 +446,14 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
 
     norms = node_norms(labels, matrix)
     reduced = vectors.reduce_vectors(matrix, p.reduce_to_dims)
+    vectors.cache_analysis_matrix("sep", labels, matrix)
     path = writer.add_embeddings(
         Embeddings.from_matrix(SEP_CORPUS, labels, reduced, labels_by_target,
                                community_map, doc_freq=doc_freq,
                                documents=n_docs, graph=G, norms=norms,
-                               variants=sim_variants, freq=freq))
+                               variants=sim_variants, freq=freq,
+                               layouts=layouts.tsne_layouts(
+                                   labels, {"reduced": reduced, "full": matrix}, p)))
     print(f"embeddings : {len(labels)} nodes -> {path}")
     writer.save_index()
     if prune:

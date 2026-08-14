@@ -39,10 +39,10 @@ favor working end-to-end over completeness.**
 - `models.py` — dataclasses (`Pipeline`, `Source/Rendering/Term`, `NetworkData`,
   `Embeddings`) + JSON serialization.
 - `corpus/` (fetch/parse; only place that hits the network), `embeddings/`
-  (`model`, `vectors`, `occurrences`, `analyze`), `cooccurrence/`, `graph/`,
-  `segmentation/` + `cli/segment.py` (XunziALLM word segmentation; **not** part of
-  a pipeline run — a manual step, run against a served model, whose output
-  `corpus/recombine.py` reads if present).
+  (`model`, `vectors`, `occurrences`, `analyze`, `layouts`), `cooccurrence/`, 
+  `graph/`, `segmentation/` + `cli/segment.py` (XunziALLM word segmentation; 
+  **not** part of a pipeline run — a manual step, run against a served model, 
+  whose output `corpus/recombine.py` reads if present).
 
 Front end: `src/pages/index.astro` → `TermNetwork` (cooccurrence/similarity
 dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
@@ -72,9 +72,22 @@ dropdowns) + `EmbeddingScatter` + `AlignmentScatter`; Zod schemas in
   vectors first. Both halves are revertible (`Pipeline.merge_similarity` /
   `merge_cooccurrence`); the lens crossing is argued in
   `notes/claude/derivational-variant-merging.md`.
+- The scatter defaults to a **precomputed t-SNE** (`Embeddings.layouts`, one per
+  `Pipeline.tsne_sources` x `tsne_perplexities`; the **first is the default**),
+  with PCA as the other toggle. The pipeline precomputes only what the browser
+  can't do — `tsne_sources=("full",)`, the untruncated 768-d vectors; the
+  perplexity slider snaps to those (its ticks), and the "recompute" checkbox
+  frees it to any value, run client-side over the exported 50-d vectors.
+  `reduced` layouts can still be shipped (`tools/relayout.py` rebuilds them from
+  the artifact in seconds); `full` needs the analysis matrix a run caches in
+  `scripts/.cache/vectors/`. PCA-50 turns out to cost the layout very little —
+  see `notes/claude/precomputed-tsne-layouts.md` for the numbers and for the one
+  thing it does distort (spurious neighbours for low-projection words).
 - Importing `config`/`main` triggers a (cached) ctext fetch at module scope — noisy
-  but harmless. Pyright may flag `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
-  `vectors.reduce_vectors` as unknown — **stale false-positives**; they run fine.
+  but harmless. Pyright's `models.Pipeline` / `corpus.sep.SEP_CORPUS` /
+  `vectors.reduce_vectors` false-positives came from it resolving `models` in a
+  **sibling clone**; `[tool.pyright]` in `pyproject.toml` now pins the venv. If they
+  reappear, check which interpreter pyright picked (`pyright --verbose`).
 
 ## Active threads (as of 2026-08-12)
 
