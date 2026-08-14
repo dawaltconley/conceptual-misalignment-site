@@ -50,6 +50,7 @@ def audit_corpus(per_term: int, min_freq: int = 1) -> tuple[list[RenderingAudit]
         return None
 
     searches = build_english_corpus(per_term, min_freq=min_freq)
+    filtered = {ts.term.label: ts.articles for ts in searches}
     # Dedupe: one article can be a search result for several renderings.
     articles = {a.url: a for ts in searches for a in ts.search.articles}
     print(f"\nparsing {len(articles)} articles...")
@@ -73,7 +74,8 @@ def audit_corpus(per_term: int, min_freq: int = 1) -> tuple[list[RenderingAudit]
 
     audits = [RenderingAudit(label=r.label, patterns=r.patterns,
                              matched=matched[r.label],
-                             shadowed=shadowed[r.label])
+                             shadowed=shadowed[r.label],
+                             articles=filtered.get(r.label))
               for r in renderings]
     return audits, len(articles)
 
@@ -128,8 +130,8 @@ def main() -> None:
                     help="SEP articles per rendering — match the pipeline run "
                          "you are auditing (default 12).")
     ap.add_argument("--min-freq", type=int, default=3, dest="min_freq",
-                    help="SEP articles per rendering — match the pipeline run "
-                         "you are auditing (default 12).")
+                    help="Minimum occurrences for an article to be admitted — "
+                         "match the pipeline run you are auditing (default 3).")
     ap.add_argument("--out", type=Path, default=None,
                     help="Markdown report path "
                          "(default analysis/sep/rendering_diagnostics.md).")

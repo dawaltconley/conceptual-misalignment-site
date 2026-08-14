@@ -318,6 +318,7 @@ def run_sep(p: Pipeline, *, per_term: int = 12, max_chinese_topic: float | None 
     # fails before the expensive embedding phase rather than after it.
     check_coverage(renderings, corpus_occ,
                    [sd.doc for sd in doc_cache.values()],
+                   {ts.term.label: ts.articles for ts in searches},
                    corpus="SEP", allow_empty=allow_empty)
 
     # --- occurrence counts within the excluded Chinese-philosophy articles ---
