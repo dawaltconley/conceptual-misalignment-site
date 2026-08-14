@@ -57,8 +57,8 @@ TERMS: list[Term] = [
         Rendering('ritual', 'ritual*'),
         Rendering('propriety'),
         Rendering('etiquette', 'etiquette*'),
-        Rendering('mores'),
-        # Rendering('social norms', 'social norm*'),
+        Rendering('norms', 'norm', 'normat*')
+        # Rendering('social norms', 'social norm*', "mores"),
     )),
     Term('智', (
         Rendering('knowledge', 'knowledge*'),
@@ -73,12 +73,12 @@ TERMS: list[Term] = [
     Term('性', (
         Rendering('nature', 'nature*', 'human nature'),
         Rendering('innateness', 'innate*'),
-        Rendering('character', 'character*'),
-        Rendering('predisposition', 'predispos*'),
+        Rendering('character', 'character*', 'characteristic*'),
+        # Rendering('predisposition', 'predispos*'),
     )),
     Term('心', (
         Rendering('heart', 'hearts', 'heartfelt'),
-        Rendering('mind', 'mind', 'minds', 'mindful*'),
+        Rendering('mind', 'minds'),
         # Rendering('heartmind', 'heartmind*', 'heart-mind*'),
         Rendering('feeling', 'feeling*'),
     )),
@@ -89,17 +89,17 @@ TERMS: list[Term] = [
         Rendering('affection', 'affection*'),
     )),
     Term('愛', (
-        Rendering('care', 'care*'),
-        Rendering('cherish', 'cherish*'),
-        Rendering('love', 'love*'),
+        Rendering('care', 'cares', 'caring', 'cared'),
+        # Rendering('cherish', 'cherish*'),
+        Rendering('love'),  # love* matches too much, e.g. loveless
         Rendering('pity', 'pity', 'piti*'),
     )),
     Term('道', (
         Rendering('way', 'ways'),
         Rendering('doctrine', 'doctrine*'),
-        Rendering('method', 'method*'),
+        # Rendering('method', 'method*'),
         Rendering('path', 'path*'),
-        Rendering('speak', 'speaks', 'speaking', 'spoke*'),
+        # Rendering('speak', 'speaks', 'speaking', 'spoke*'),
     )),
     Term('德', (
         Rendering('virtue', 'virtue*'),
@@ -140,7 +140,7 @@ MENGZI_PIPELINE = Pipeline(
     out_dir=CTEXT,
     min_freq=5,
     cooccurrence_min_freq=3,
-    max_network_nodes=25,
+    max_network_nodes=20,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(CHINESE_STOPWORDS),
     merge_deps=frozenset({"compound", "flat", "fixed"}),
@@ -153,12 +153,14 @@ SEP_PIPELINE = Pipeline(
     out_dir=SEP,
     min_freq=20,
     cooccurrence_min_freq=3,
-    max_network_nodes=25,
-    min_doc_freq=20,
+    max_network_nodes=20,
+    min_doc_freq=15,
     content_pos=frozenset({"NOUN", "VERB", "ADJ"}),
     stopwords=frozenset(ENGLISH_STOPWORDS),
     merge_variants=True,
+    merge_threshold=0.4,
     debias="abtt",
+    # debias_k=2
 )
 
 # # for reference, not currently used for filtering
