@@ -1,5 +1,5 @@
 from typing import NamedTuple
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from collections.abc import Callable
 import requests
 import time
@@ -19,7 +19,7 @@ _Response = requests.Response
 class SEP(Source):
     url: str
     title: str
-    description: str
+    description: str | None
     text: str
 
     def __init__(self, *, url: str, title: str, description: str | None = None, text: str):
@@ -40,6 +40,10 @@ class SEP(Source):
             time.sleep(random() * 2 + 1)
 
         soup = BeautifulSoup(r.content, "html.parser", from_encoding="utf-8")
+
+        # remove note superscript, which corrupts tokenization
+        for ref in soup.find_all(_is_ref):
+            ref.decompose()
 
         title = soup.title or soup.find("h1")
         if title:
@@ -88,7 +92,7 @@ class SEPSearch(Source):
     id: str
     url: str
     title: str
-    description: str
+    description: str | None
     articles: list[SEP]
     total_articles: int
     excluded: list[SEP] = field(default_factory=list)
@@ -168,6 +172,26 @@ def get_doc_id(sep_url: str) -> str:
     if not doc_id:
         raise err
     return slugify(doc_id)
+
+
+_REF_ID_RE = re.compile("^ref-\\d+$")
+
+
+def _is_ref(tag: Tag) -> bool:
+    if (tag.name != "sup"):
+        return False
+    anchor: Tag | None = None
+    for i, c in enumerate(tag.children):
+        if i == 0 and c.text != "[":
+            return False
+        if i == 1:
+            if isinstance(c, Tag) and c.name == "a":
+                anchor = c
+            else:
+                return False
+        if i == 2 and c.text != "]":
+            return False
+    return anchor is not None and anchor.has_attr("id") and bool(_REF_ID_RE.match(str(anchor["id"])))
 
 
 def _search(term: str, page: int = 1) -> _Response:
