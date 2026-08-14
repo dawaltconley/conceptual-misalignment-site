@@ -68,8 +68,8 @@ export default function Network({
     const min = Math.min(...values)
     const max = Math.max(...values)
 
-    const toLinkDistance = getNormalizer({ min, max }, { min: 40, max: 5 })
-    const toLinkStrength = getNormalizer({ min, max }, { min: 0.7, max: 1 })
+    const toLinkDistance = getNormalizer({ min, max }, { min: 20, max: 5 })
+    const toLinkStrength = getNormalizer({ min, max }, { min: 0.6, max: 0.7 })
 
     const simulation = d3
       .forceSimulation(nodes)
@@ -85,7 +85,7 @@ export default function Network({
         'collide',
         d3.forceCollide().radius(COLLISION_RADIUS).strength(0.2),
       )
-      .force('charge', d3.forceManyBody().strength(-0.5))
+      .force('charge', d3.forceManyBody().strength(-5))
       .force('center', d3.forceCenter(50, 50).strength(0.1))
       .alphaDecay(0.05)
       .velocityDecay(0.5)
