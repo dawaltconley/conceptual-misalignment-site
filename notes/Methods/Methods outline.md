@@ -32,9 +32,7 @@
 6. Debiasing
 	1. Centering - subtract centroid from each vector
 	2. [[ABTT Debiasing|"All-but-the-top" remove top-principle components]]
-7. Filtering 2: merge English derivatives
-	1. Once debiasing was accomplished these started clumping together in the similarity graph + embedding space. This was a sign that things were working. But it also visually cluttered both graphs.
-	2. See [[derivational-variant-merging]]
+7. Filtering 2: [[Merging derivatives|merge English derivatives]]
 8. Network calculations \[maybe discuss this all under "Visualizations"]
 	1. Similarity
 	2. Co-occurrence / PMI

@@ -10,13 +10,7 @@ defined inline.
 
 ## What we noticed
 
-Coloring the embedding scatter by each word's **document frequency** (how many documents a word
-appears in) showed a **clear directional gradient on the PCA map** — df rose smoothly as you moved
-along one axis — and a **weaker** version of the same on the t-SNE map. Then, coloring by
-**strength** and **PageRank** (two measures of how central/well-connected a word is in the
-similarity network) showed a *different* shape: the strongest words sat at **both** the left and
-right extremes, with the weak ones bunched in the **middle** — a two-sided pattern, not a
-one-directional slope.
+Coloring the embedding scatter by each word's **document frequency** (how many documents a word appears in) showed a **clear directional gradient on the PCA map** — df rose smoothly as you moved along one axis — and a **weaker** version of the same on the t-SNE map. Then, coloring by **strength** and **PageRank** (two measures of how central/well-connected a word is in the similarity network) showed a *different* shape: the strongest words sat at **both** the left and right extremes, with the weak ones bunched in the **middle** — a two-sided pattern, not a one-directional slope.
 
 Two quick definitions:
 - **PCA** (Principal Component Analysis): a *linear* projection that finds the directions of
@@ -26,8 +20,7 @@ Two quick definitions:
 
 ## Why this is expected (in plain terms)
 
-Word **frequency is one of the biggest things that varies** in a contextual-embedding space — not
-because frequency is meaningful, but because of *how the vectors are shaped*:
+Word **frequency is one of the biggest things that varies** in a contextual-embedding space — not because frequency is meaningful, but because of *how the vectors are shaped*:
 
 - Contextual vectors are **anisotropic**: instead of pointing every which way, they crowd into a
   narrow cone (Ethayarajh 2019; Mimno & Thompson 2017). Frequency is baked into *where* in that

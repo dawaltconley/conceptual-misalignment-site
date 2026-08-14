@@ -26,11 +26,30 @@ suffix morphology + frequency/register**, with topic only a weak secondary signa
   mean-pool: the per-dim max is driven by outlier contexts and form-encoding dims.
 
 ## Is it common? Is our corpus large/diverse?
-Common, and driven by **diversity, not size**: clustering the *whole* vocabulary makes POS the
-only axis separating *every* word pair (topic is local/sparse), so broad vocabularies are
-register-dominated. Our SEP corpus is **small but diverse**: ~373 articles / ~1–1.5M tokens
-(tiny for NLP) spanning all of philosophy (topically scattered, jargon-heavy). Diversity causes
-the register domination; the small size just makes each pooled vector a noisier estimate.
+Common, and the lever is **scope/diversity, not size** — but that is a claim about *what the
+clustering finds*, not about anisotropy (caveat below). Clustering the *whole* vocabulary makes
+POS/register the only axis separating *every* word pair, because topical structure is local and
+sparse: nearest-neighbour sets are largely POS-homogeneous, enough that "proportion of nearest
+neighbours sharing a POS" is used as a model diagnostic (Hershcovich et al. 2019), and even
+*within* local clusters the dominant directions encode structural information (punctuation/stop
+words) or tense rather than sense (Rajaee & Pilehvar 2021). The diversity half has direct support
+from retrieval: a global space over a topically diverse corpus "risks capturing only coarse
+representations of those topics dominant in the corpus," while a topic-restricted space recovers
+topical neighbours for the same word — global neighbours of *cut* are cutting/squeeze/slash,
+topic-local ones tax/deficit/budget (Diaz et al. 2016). Our SEP corpus is **small but diverse**:
+~373 articles / ~1–1.5M tokens (tiny for NLP) spanning all of philosophy (topically scattered,
+jargon-heavy). Size acts on a different quantity — how well each pooled type vector is estimated
+from its occurrences; neighbourhoods are unstable even for words at 100–200 occurrences
+(Wendlandt et al. 2018), and small data degrades DSMs unevenly across frequency bands
+(Sahlgren & Lenci 2016).
+
+**Caveat (added 2026-08-14).** No source ties *vocabulary diversity* to **anisotropy**, and we
+shouldn't imply one: anisotropy is a property of the pretrained model's training dynamics
+(Ethayarajh 2019; Gao et al. 2019), fixed before our corpus is seen — the corpus only decides
+which words and contexts get pooled inside that geometry. Diaz et al. and the corpus-domain
+result that domain matters more than size (Lai et al. 2015) both concern spaces *trained* on the
+corpus, so they transfer to us only by analogy, through the **scope of the vocabulary being
+clustered** rather than through the geometry itself.
 
 ## Does the clustering algorithm matter?
 Secondary — the **geometry** decides; no method recovers topic structure the vectors bury.
@@ -100,3 +119,25 @@ clustering.
   EMNLP. https://aclanthology.org/2021.emnlp-main.552/
 - Fortunato, S., Barthélemy, M. (2007). *Resolution Limit in Community Detection.* PNAS 104(1),
   36–41. https://www.pnas.org/doi/abs/10.1073/pnas.0605965104
+
+Added for the scope/diversity vs. size discussion (verified via search, 2026-08-14):
+- Diaz, F., Mitra, B., Craswell, N. (2016). *Query Expansion with Locally-Trained Word Embeddings.*
+  ACL, 367–377. https://aclanthology.org/P16-1035/ — global embeddings over a diverse corpus
+  capture "only coarse representations of those topics dominant in the corpus"; topic-restricted
+  spaces recover topical neighbours (the *cut* example).
+- Rajaee, S., Pilehvar, M. T. (2021). *A Cluster-based Approach for Improving Isotropy in Contextual
+  Embedding Space.* ACL-IJCNLP (Short), 575–584. https://aclanthology.org/2021.acl-short.73/ —
+  clusters of punctuation/stop words whose local dominant directions encode structural information,
+  and verb clusters where tense dominates sense; removing those directions helps semantic tasks.
+- Hershcovich, D., Toledo, A., Halfon, A., Slonim, N. (2019). *Syntactic Interchangeability in Word
+  Embedding Models.* RepEval @ NAACL-HLT. https://aclanthology.org/W19-2009/ — uses shared POS among
+  nearest neighbours (with POS as proxy for syntactic interchangeability) as a model diagnostic.
+- Wendlandt, L., Kummerfeld, J. K., Mihalcea, R. (2018). *Factors Influencing the Surprising
+  Instability of Word Embeddings.* NAACL-HLT. https://aclanthology.org/N18-1190/ — nearest-neighbour
+  overlap is unstable even for words at 100–200 occurrences.
+- Sahlgren, M., Lenci, A. (2016). *The Effects of Data Size and Frequency Range on Distributional
+  Semantic Models.* EMNLP, 975–980. https://aclanthology.org/D16-1099/ — small data degrades DSMs
+  unevenly across frequency bands.
+- Lai, S., Liu, K., Xu, L., Zhao, J. (2016). *How to Generate a Good Word Embedding.* IEEE
+  Intelligent Systems 31, 5–14. https://arxiv.org/abs/1507.05523 — "corpus domain is more important
+  than corpus size" (about corpora used for *training*, hence analogy only for us).
