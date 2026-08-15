@@ -77,7 +77,7 @@ export default function TermNetwork({
   return (
     <div className="overflow-visible rounded-md border border-gray-100 bg-white">
       <div className="grid 2xl:grid-cols-2">
-        <div className="sticky top-0 z-50 grid grid-cols-2 flex-row items-end justify-between gap-4 border-b border-gray-100 bg-white p-4 lg:flex">
+        <div className="sticky top-0 z-50 grid grid-cols-2 items-end justify-between gap-4 border-b border-gray-100 bg-white p-4 lg:flex lg:flex-row 2xl:col-span-2">
           <H className="mr-auto text-xl font-bold">{title}</H>
           <div className="order-last col-span-2 mx-auto flex shrink-0 flex-row gap-[inherit] lg:order-none lg:col-span-1">
             <Select
