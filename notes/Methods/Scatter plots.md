@@ -1,7 +1,9 @@
 To give a bird's-eye view of semantic space of each corpus, the core vocabulary is represented in a pair of scatter plot graphs.
 ## PCA vs t-SNE
 
-I tried several 
+I tried several ...
+
+Recalculating the t-SNE sometimes gives different results, but these differences are often instructive. (See [[Observations]] on 孝) 
 
 ## Community legend
 

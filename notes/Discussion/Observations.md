@@ -21,12 +21,13 @@ The full semantic space of the SEP shows some similar patterns to that of the Me
 
 仁 winds up separate from the other virtues on *most* t-SNE runs, in a space of its own. But sometimes it does cluster together with them.
 
+- Just as 仁 sometimes escapes, 孝 sometimes clusters with the virtues, sometimes with the family terms (父母, 親), depending on the run.
+
 The rest of the virtues generally cluster together, *except* for 智, which winds up in a more "cognitive" community, near ""
 
 - subject of extensive debate in Korea: the relationship between 智 and its "beginings" (*duan*), which for each other virtue seem like a certain kind of *feeling* or disposition. 智's beginning is 是非之心, which Van Norden translates as "the feeling of approval and disapproval" (Mengzi 2008, 46–47).
 
 \[Alt]: some translations for 仁 seem to cluster together with some political terms on the latest run: benevolence, humaneness, and humanity all sit near government, war, power, suggesting some compatibility with 仁, which Mengzi frequently uses to describe the ideal government of a sage king (仁政, "benevolent government").
-
 
 ## Readability of networks
 
