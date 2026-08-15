@@ -5,6 +5,7 @@ import type { NetworkProps } from './Network'
 import { useState } from 'react'
 import MultiNetwork from './MultiNetwork'
 import Select from './Select'
+import TickRange from './TickRange'
 import { getHeading, type Heading } from '@lib/headings'
 
 type NetworkKind = 'cooccurrence' | 'similarity'
@@ -23,6 +24,12 @@ interface TermNetworkProps extends Omit<
   kind?: NetworkKind
   /** Dictionary for the Chinese hanzi nodes (pinyin + definitions). */
   dictionary?: Dictionary
+  /**
+   * Where the node-cap slider starts. Both networks are drawn at whatever the
+   * slider says, so it is a starting point rather than a setting. Defaults to 15.
+   */
+  nodes?: number
+  nodeRange?: Range
 
   headingLevel?: Heading
   actualEdgeWeightRange?: Range
@@ -45,11 +52,16 @@ export default function TermNetwork({
   kind = 'cooccurrence',
   dictionary,
   headingLevel,
-  maxNodes,
+  nodes: initialMaxNodes = 15,
+  nodeRange,
   actualEdgeWeightRange,
   targetEdgeWeightRange,
 }: TermNetworkProps): JSX.Element {
   const H = headingLevel ? getHeading(headingLevel) : 'p'
+
+  // One cap for both sides: the two networks are only comparable when they are
+  // thinned to the same size.
+  const [maxNodes, setMaxNodes] = useState(initialMaxNodes)
 
   const terms = data.terms
   const [hanzi, setHanzi] = useState(terms[0]?.hanzi ?? '')
@@ -97,6 +109,20 @@ export default function TermNetwork({
               className="shrink-0"
               triggerClassName="text-lg"
             />
+            {nodeRange && (
+              <label className="ml-auto flex shrink-0 items-center gap-2 pb-1 text-sm">
+                nodes
+                <TickRange
+                  className="w-28"
+                  aria-label="maximum nodes"
+                  min={nodeRange.min}
+                  max={nodeRange.max}
+                  value={maxNodes}
+                  onChange={setMaxNodes}
+                />
+                <span className="w-5 tabular-nums">{maxNodes}</span>
+              </label>
+            )}
           </div>
           <div className="ml-auto max-w-80 text-right text-sm leading-4 text-gray-700">
             <span className="align-baseline text-lg font-bold leading-4 text-gray-900">

@@ -1,6 +1,6 @@
 import type { NodeId, WeightedNodeLinkData, SimpleEdge } from '~/types/networkx'
 import type { Dictionary } from '@build/cedict'
-import type { Size, Range, Line } from '@lib/graphs'
+import type { Size, Range, Line, Point } from '@lib/graphs'
 import {
   useState,
   useEffect,
@@ -46,6 +46,11 @@ export default function Network({
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const simulationRef = useRef<d3.Simulation<Node, Link> | null>(null)
   const draggingId = useRef<NodeId | null>(null)
+  // Where each node was when the simulation last ticked. Changing `maxNodes`
+  // rebuilds the simulation, and without this every surviving node would be
+  // thrown back to a random start — dragging the cap would re-scatter the graph
+  // on every step instead of just dropping (or restoring) its weakest members.
+  const placed = useRef(new Map<NodeId, Point>())
 
   const {
     ref: containerRef,
@@ -61,7 +66,9 @@ export default function Network({
   // Run D3 simulation in normalized 0–100 coordinate space
   useEffect(() => {
     const nodes = graph.nodes.map<Node>((n) =>
-      n.id === centralNodeId ? { ...n, fx: 50, fy: 50 } : { ...n },
+      n.id === centralNodeId
+        ? { ...n, fx: 50, fy: 50 }
+        : { ...n, ...placed.current.get(n.id) },
     )
     const links = graph.edges.map<Link>((e) => ({ ...e, value: e.weight }))
     const values = links.map((l) => l.value)
@@ -89,7 +96,12 @@ export default function Network({
       .force('center', d3.forceCenter(50, 50).strength(0.1))
       .alphaDecay(0.05)
       .velocityDecay(0.5)
-      .on('tick', () => setNodes([...nodes]))
+      .on('tick', () => {
+        for (const n of nodes) {
+          if (isPoint(n)) placed.current.set(n.id, { x: n.x, y: n.y })
+        }
+        setNodes([...nodes])
+      })
 
     simulationRef.current = simulation
     return () => {

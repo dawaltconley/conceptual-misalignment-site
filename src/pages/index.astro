@@ -34,8 +34,10 @@ const embeddingDictionary = await buildDictionary(
         title="Co-occurrence networks"
         kind="cooccurrence"
         data={master}
-        dictionary={networkDictionary}
+        nodes={15}
+        nodeRange={{ min: 5, max: 20 }}
         actualEdgeWeightRange={{ min: 0.1, max: 5 }}
+        dictionary={networkDictionary}
       />
     </div>
 
@@ -45,8 +47,10 @@ const embeddingDictionary = await buildDictionary(
         title="Similarity networks"
         kind="similarity"
         data={master}
+        nodes={15}
+        nodeRange={{ min: 5, max: 20 }}
+        actualEdgeWeightRange={{ min: 0.1, max: 0.6 }}
         dictionary={networkDictionary}
-        actualEdgeWeightRange={{ min: 0.1, max: 0.5 }}
       />
     </div>
 
@@ -70,6 +74,7 @@ const embeddingDictionary = await buildDictionary(
             stepsPerPost={1}
             minDocFreq={0.2}
           />
+          <!-- maxDocFreq={0.95} -->
         </div>
       </div>
     </div>
