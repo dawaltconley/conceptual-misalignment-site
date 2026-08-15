@@ -128,7 +128,7 @@
       "cooccurrence": [
         {
           "id": "benevolence_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=benevolence+benevolen%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=benevolence+benevolen%2A",
           "title": "SEP search: benevolence",
           "description": "Top 8 results for \"benevolence benevolen*\"",
           "occurrences": 225,
@@ -218,7 +218,7 @@
           "cared"
         ]
       },
-      "total_occurrences": 1320,
+      "total_occurrences": 1322,
       "chinese_philosophy_occurrences": 237,
       "cooccurrence": [
         {
@@ -300,7 +300,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1320,
+          "occurrences": 1322,
           "data": "/sep/care_embeds.json"
         }
       ]
@@ -312,29 +312,29 @@
           "characterize",
           "characteristic",
           "characterization",
-          "characterise",
           "characteristically",
+          "characterise",
           "characterisation",
           "characteristick",
           "characteristicks",
           "characters",
           "characterology",
-          "characterised",
           "characteristics",
-          "characterized",
-          "characteristiks",
           "characterizable",
+          "characterized",
+          "characterised",
+          "characteristiks",
           "charactersand",
           "character(s",
           "characteristic”—which"
         ]
       },
-      "total_occurrences": 2846,
+      "total_occurrences": 2802,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "character_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=character+character%2A+characteristic%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=character+character%2A+characteristic%2A",
           "title": "SEP search: character",
           "description": "Top 8 results for \"character character* characteristic*\"",
           "occurrences": 553,
@@ -411,7 +411,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2846,
+          "occurrences": 2802,
           "data": "/sep/character_embeds.json"
         }
       ]
@@ -462,7 +462,7 @@
           "doctrine-"
         ]
       },
-      "total_occurrences": 951,
+      "total_occurrences": 940,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -544,7 +544,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 951,
+          "occurrences": 940,
           "data": "/sep/doctrine_embeds.json"
         }
       ]
@@ -554,12 +554,12 @@
         "label": "etiquette",
         "variants": []
       },
-      "total_occurrences": 35,
+      "total_occurrences": 37,
       "chinese_philosophy_occurrences": 11,
       "cooccurrence": [
         {
           "id": "etiquette_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=etiquette+etiquette%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=etiquette+etiquette%2A",
           "title": "SEP search: etiquette",
           "description": "Top 5 results for \"etiquette etiquette*\"",
           "occurrences": 29,
@@ -612,7 +612,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 35,
+          "occurrences": 37,
           "data": "/sep/etiquette_embeds.json"
         }
       ]
@@ -629,12 +629,12 @@
           "faith’—will"
         ]
       },
-      "total_occurrences": 1018,
+      "total_occurrences": 1016,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "faith_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=faith+faith%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=faith+faith%2A",
           "title": "SEP search: faith",
           "description": "Top 8 results for \"faith faith*\"",
           "occurrences": 741,
@@ -711,7 +711,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1018,
+          "occurrences": 1016,
           "data": "/sep/faith_embeds.json"
         }
       ]
@@ -723,7 +723,7 @@
           "feelings"
         ]
       },
-      "total_occurrences": 1134,
+      "total_occurrences": 1138,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -805,7 +805,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1134,
+          "occurrences": 1138,
           "data": "/sep/feeling_embeds.json"
         }
       ]
@@ -817,7 +817,7 @@
           "heartfelt"
         ]
       },
-      "total_occurrences": 311,
+      "total_occurrences": 306,
       "chinese_philosophy_occurrences": 238,
       "cooccurrence": [
         {
@@ -899,7 +899,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 311,
+          "occurrences": 306,
           "data": "/sep/heart_embeds.json"
         }
       ]
@@ -917,7 +917,7 @@
       "cooccurrence": [
         {
           "id": "humaneness_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=humaneness+humane%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humaneness+humane%2A",
           "title": "SEP search: humaneness",
           "description": "Top 5 results for \"humaneness humane*\"",
           "occurrences": 18,
@@ -985,12 +985,12 @@
           "humanita"
         ]
       },
-      "total_occurrences": 449,
+      "total_occurrences": 445,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "humanity_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=humanity+humanit%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=humanity+humanit%2A",
           "title": "SEP search: humanity",
           "description": "Top 8 results for \"humanity humanit*\"",
           "occurrences": 198,
@@ -1067,7 +1067,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 449,
+          "occurrences": 445,
           "data": "/sep/humanity_embeds.json"
         }
       ]
@@ -1368,12 +1368,12 @@
           "justness"
         ]
       },
-      "total_occurrences": 1858,
+      "total_occurrences": 1828,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "justice_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=justice+justness&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=justice+justness",
           "title": "SEP search: justice",
           "description": "Top 8 results for \"justice justness\"",
           "occurrences": 1026,
@@ -1450,7 +1450,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1858,
+          "occurrences": 1828,
           "data": "/sep/justice_embeds.json"
         }
       ]
@@ -1462,7 +1462,7 @@
           "kinship"
         ]
       },
-      "total_occurrences": 144,
+      "total_occurrences": 145,
       "chinese_philosophy_occurrences": 19,
       "cooccurrence": [
         {
@@ -1544,7 +1544,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 144,
+          "occurrences": 145,
           "data": "/sep/kin_embeds.json"
         }
       ]
@@ -1562,12 +1562,12 @@
           "knowledge”(1995a"
         ]
       },
-      "total_occurrences": 4406,
+      "total_occurrences": 4410,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "knowledge_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=knowledge+knowledge%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=knowledge+knowledge%2A",
           "title": "SEP search: knowledge",
           "description": "Top 8 results for \"knowledge knowledge*\"",
           "occurrences": 1851,
@@ -1644,7 +1644,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 4406,
+          "occurrences": 4410,
           "data": "/sep/knowledge_embeds.json"
         }
       ]
@@ -1652,32 +1652,17 @@
     "love": {
       "term": {
         "label": "love",
-        "variants": [
-          "lover",
-          "lovett",
-          "loved",
-          "lovelace",
-          "loves",
-          "lovely",
-          "loveless",
-          "lovedu",
-          "lovejoy",
-          "loveliness",
-          "lovelorn",
-          "lovemake",
-          "love—“the",
-          "love”—though"
-        ]
+        "variants": []
       },
-      "total_occurrences": 2249,
+      "total_occurrences": 2053,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "love_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=love+love%2A",
+          "url": "https://plato.stanford.edu/search/searcher.py?query=love&page=1",
           "title": "SEP search: love",
-          "description": "Top 8 results for \"love love*\"",
-          "occurrences": 1071,
+          "description": "Top 8 results for \"love\"",
+          "occurrences": 982,
           "data": "/sep/love_combined.json"
         },
         {
@@ -1685,7 +1670,7 @@
           "url": "https://plato.stanford.edu/entries/love/",
           "title": "Love",
           "description": "This essay focuses on personal love, or the love of particular persons\nas such. Part of the philosophical task in understanding personal love\nis to distinguish ",
-          "occurrences": 519,
+          "occurrences": 476,
           "data": "/sep/love_love.json"
         },
         {
@@ -1693,7 +1678,7 @@
           "url": "https://plato.stanford.edu/entries/plato-friendship/",
           "title": "Plato on Friendship and Eros",
           "description": "Plato discusses love (erôs) and friendship\n(philia) primarily in two dialogues, the Lysis and\nthe Symposium, though the Phaedrus also adds\nsignificantly to his ",
-          "occurrences": 176,
+          "occurrences": 137,
           "data": "/sep/love_plato-friendship.json"
         },
         {
@@ -1701,7 +1686,7 @@
           "url": "https://plato.stanford.edu/entries/abrabanel/",
           "title": "Judah Abrabanel",
           "description": "Judah Abrabanel (ca. 1465–after 1521), also known as Leone Ebreo, is\nan important transitional figure in the history of Jewish\nphilosophy. Common to any transit",
-          "occurrences": 80,
+          "occurrences": 74,
           "data": "/sep/love_abrabanel.json"
         },
         {
@@ -1725,7 +1710,7 @@
           "url": "https://plato.stanford.edu/entries/empedocles/",
           "title": "Empedocles",
           "description": "In the middle of the fifth century BCE, Empedocles of Acragas\nformulated a philosophical program in hexameter verse that pioneered\nthe influential four-part the",
-          "occurrences": 82,
+          "occurrences": 81,
           "data": "/sep/love_empedocles.json"
         },
         {
@@ -1751,7 +1736,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2249,
+          "occurrences": 2053,
           "data": "/sep/love_embeds.json"
         }
       ]
@@ -1761,7 +1746,7 @@
         "label": "meaning",
         "variants": []
       },
-      "total_occurrences": 2207,
+      "total_occurrences": 2191,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -1843,7 +1828,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2207,
+          "occurrences": 2191,
           "data": "/sep/meaning_embeds.json"
         }
       ]
@@ -1855,7 +1840,7 @@
           "minds"
         ]
       },
-      "total_occurrences": 2413,
+      "total_occurrences": 2523,
       "chinese_philosophy_occurrences": 158,
       "cooccurrence": [
         {
@@ -1937,7 +1922,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2413,
+          "occurrences": 2523,
           "data": "/sep/mind_embeds.json"
         }
       ]
@@ -1967,12 +1952,12 @@
           "moralise"
         ]
       },
-      "total_occurrences": 9264,
+      "total_occurrences": 9273,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
           "id": "morality_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=morality+moral%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=morality+moral%2A",
           "title": "SEP search: morality",
           "description": "Top 8 results for \"morality moral*\"",
           "occurrences": 2199,
@@ -2049,7 +2034,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 9264,
+          "occurrences": 9273,
           "data": "/sep/morality_embeds.json"
         }
       ]
@@ -2068,7 +2053,7 @@
           "nature”—reason"
         ]
       },
-      "total_occurrences": 2949,
+      "total_occurrences": 2985,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -2150,8 +2135,108 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2949,
+          "occurrences": 2985,
           "data": "/sep/nature_embeds.json"
+        }
+      ]
+    },
+    "norms": {
+      "term": {
+        "label": "norms",
+        "variants": [
+          "norm",
+          "normative",
+          "normativity",
+          "normatively",
+          "normativism",
+          "normativist",
+          "normativists”—read"
+        ]
+      },
+      "total_occurrences": 3867,
+      "chinese_philosophy_occurrences": 0,
+      "cooccurrence": [
+        {
+          "id": "norms_combined",
+          "url": "https://plato.stanford.edu/search/searcher.py?query=norms+norm+normat%2A&page=1",
+          "title": "SEP search: norms",
+          "description": "Top 8 results for \"norms norm normat*\"",
+          "occurrences": 2199,
+          "data": "/sep/norms_combined.json"
+        },
+        {
+          "id": "social-norms",
+          "url": "https://plato.stanford.edu/entries/social-norms/",
+          "title": "Social Norms",
+          "description": "Social norms, the informal rules that govern behavior in groups and\nsocieties, have been extensively studied in the social sciences.\nAnthropologists have descri",
+          "occurrences": 375,
+          "data": "/sep/norms_social-norms.json"
+        },
+        {
+          "id": "epistemic-utility",
+          "url": "https://plato.stanford.edu/entries/epistemic-utility/",
+          "title": "Epistemic Utility Arguments for Epistemic Norms",
+          "description": "If I believe George Eliot wrote more than six novels and also believe\nshe wrote fewer than four, you will no doubt judge my beliefs\nirrational. After all, if sh",
+          "occurrences": 80,
+          "data": "/sep/norms_epistemic-utility.json"
+        },
+        {
+          "id": "psychology-normative-cognition",
+          "url": "https://plato.stanford.edu/entries/psychology-normative-cognition/",
+          "title": "The Psychology of Normative Cognition",
+          "description": "From an early age, humans exhibit a tendency to identify, adopt, and\nenforce the norms of their local communities. Norms are the social\nrules that mark out what",
+          "occurrences": 370,
+          "data": "/sep/norms_psychology-normative-cognition.json"
+        },
+        {
+          "id": "logic-normative",
+          "url": "https://plato.stanford.edu/entries/logic-normative/",
+          "title": "The Normative Status of Logic",
+          "description": "We consider it to be a bad thing to be inconsistent. Similarly, we\ncriticize others for failing to appreciate (at least the more obvious)\nlogical consequences o",
+          "occurrences": 189,
+          "data": "/sep/norms_logic-normative.json"
+        },
+        {
+          "id": "meaning-normativity",
+          "url": "https://plato.stanford.edu/entries/meaning-normativity/",
+          "title": "The Normativity of Meaning and Content",
+          "description": "Normativism in the theory of meaning and content is the view that\nlinguistic meaning and/or intentional content are essentially\nnormative. As both normativity a",
+          "occurrences": 387,
+          "data": "/sep/norms_meaning-normativity.json"
+        },
+        {
+          "id": "normativity-metaethics",
+          "url": "https://plato.stanford.edu/entries/normativity-metaethics/",
+          "title": "Normativity in Metaethics",
+          "description": "You think to yourself, “I shouldn’t drink another Dr.\nPepper. I’ve had two already”. But the claim that you\nshouldn’t drink another seems like a very different ",
+          "occurrences": 772,
+          "data": "/sep/norms_normativity-metaethics.json"
+        },
+        {
+          "id": "rationality-normative-nonutility",
+          "url": "https://plato.stanford.edu/entries/rationality-normative-nonutility/",
+          "title": "Normative Theories of Rational Choice: Rivals to Expected Utility",
+          "description": "Expected utility theory, which holds that a decision-maker\nought to maximize expected utility, is the prevailing theory of\ninstrumental rationality. Nonetheless",
+          "occurrences": 23,
+          "data": "/sep/norms_rationality-normative-nonutility.json"
+        },
+        {
+          "id": "rationality-normative-utility",
+          "url": "https://plato.stanford.edu/entries/rationality-normative-utility/",
+          "title": "Normative Theories of Rational Choice: Expected Utility",
+          "description": "We must often make decisions under conditions of uncertainty.\nPursuing a degree in biology may lead to lucrative employment, or to\nunemployment and crushing deb",
+          "occurrences": 3,
+          "data": "/sep/norms_rationality-normative-utility.json"
+        }
+      ],
+      "similarity": [
+        {
+          "id": "sep",
+          "url": "https://plato.stanford.edu/",
+          "title": "SEP (combined)",
+          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
+          "occurrences": 3867,
+          "data": "/sep/norms_embeds.json"
         }
       ]
     },
@@ -2170,7 +2255,7 @@
           "parenthetically"
         ]
       },
-      "total_occurrences": 1118,
+      "total_occurrences": 1111,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -2252,7 +2337,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 1118,
+          "occurrences": 1111,
           "data": "/sep/parents_embeds.json"
         }
       ]
@@ -2281,7 +2366,7 @@
           "pathôn"
         ]
       },
-      "total_occurrences": 370,
+      "total_occurrences": 368,
       "chinese_philosophy_occurrences": 212,
       "cooccurrence": [
         {
@@ -2363,7 +2448,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 370,
+          "occurrences": 368,
           "data": "/sep/path_embeds.json"
         }
       ]
@@ -2476,7 +2561,7 @@
           "powerlessness"
         ]
       },
-      "total_occurrences": 2580,
+      "total_occurrences": 2522,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -2558,7 +2643,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 2580,
+          "occurrences": 2522,
           "data": "/sep/power_embeds.json"
         }
       ]
@@ -2668,7 +2753,7 @@
       "cooccurrence": [
         {
           "id": "righteousness_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=righteousness+righteous%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=righteousness+righteous%2A",
           "title": "SEP search: righteousness",
           "description": "Top 6 results for \"righteousness righteous*\"",
           "occurrences": 30,
@@ -2744,12 +2829,12 @@
           "ritualist"
         ]
       },
-      "total_occurrences": 129,
+      "total_occurrences": 123,
       "chinese_philosophy_occurrences": 495,
       "cooccurrence": [
         {
           "id": "ritual_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=ritual+ritual%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=ritual+ritual%2A",
           "title": "SEP search: ritual",
           "description": "Top 8 results for \"ritual ritual*\"",
           "occurrences": 80,
@@ -2826,7 +2911,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 129,
+          "occurrences": 123,
           "data": "/sep/ritual_embeds.json"
         }
       ]
@@ -2839,12 +2924,12 @@
           "sincerely"
         ]
       },
-      "total_occurrences": 115,
+      "total_occurrences": 118,
       "chinese_philosophy_occurrences": 7,
       "cooccurrence": [
         {
           "id": "sincerity_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=sincerity+sincer%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=sincerity+sincer%2A",
           "title": "SEP search: sincerity",
           "description": "Top 8 results for \"sincerity sincer*\"",
           "occurrences": 60,
@@ -2921,102 +3006,8 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 115,
+          "occurrences": 118,
           "data": "/sep/sincerity_embeds.json"
-        }
-      ]
-    },
-    "social norms": {
-      "term": {
-        "label": "social norms",
-        "variants": [
-          "mores"
-        ]
-      },
-      "total_occurrences": 140,
-      "chinese_philosophy_occurrences": 57,
-      "cooccurrence": [
-        {
-          "id": "social norms_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=social+norms+social+norm%2A+mores",
-          "title": "SEP search: social norms",
-          "description": "Top 8 results for \"social norms social norm* mores\"",
-          "occurrences": 89,
-          "data": "/sep/social norms_combined.json"
-        },
-        {
-          "id": "social-norms",
-          "url": "https://plato.stanford.edu/entries/social-norms/",
-          "title": "Social Norms",
-          "description": "Social norms, the informal rules that govern behavior in groups and\nsocieties, have been extensively studied in the social sciences.\nAnthropologists have descri",
-          "occurrences": 54,
-          "data": "/sep/social norms_social-norms.json"
-        },
-        {
-          "id": "social-institutions",
-          "url": "https://plato.stanford.edu/entries/social-institutions/",
-          "title": "Social Institutions",
-          "description": "The term, “social institution” is somewhat unclear both in\nordinary language and in the philosophical literature (see below).\nHowever, contemporary sociology is",
-          "occurrences": 8,
-          "data": "/sep/social norms_social-institutions.json"
-        },
-        {
-          "id": "ideology",
-          "url": "https://plato.stanford.edu/entries/ideology/",
-          "title": "Ideology",
-          "description": "The uses of the word “ideology” are so divergent as to\nmake it doubtful that there is any conceptual unity to the term. It\nmay refer to a comprehensive worldvie",
-          "occurrences": 3,
-          "data": "/sep/social norms_ideology.json"
-        },
-        {
-          "id": "feminism-moralpsych",
-          "url": "https://plato.stanford.edu/entries/feminism-moralpsych/",
-          "title": "Feminist Moral Psychology",
-          "description": "Moral psychology, broadly construed, deals with issues relating to\nmotivation of moral action. More specifically, it concerns how we see\nor fail to see moral is",
-          "occurrences": 3,
-          "data": "/sep/social norms_feminism-moralpsych.json"
-        },
-        {
-          "id": "economics-early-modern",
-          "url": "https://plato.stanford.edu/entries/economics-early-modern/",
-          "title": "Economics in Early Modern Philosophy",
-          "description": "Economic discourse of the early modern period offers probing accounts\nof inequality and distributive justice, in addition to detailed\nanalyses of specific core ",
-          "occurrences": 3,
-          "data": "/sep/social norms_economics-early-modern.json"
-        },
-        {
-          "id": "feminism-gender",
-          "url": "https://plato.stanford.edu/entries/feminism-gender/",
-          "title": "Feminist Perspectives on Sex and Gender",
-          "description": "Feminism is said to be the movement to end women’s oppression\n(hooks 2000, 26). One possible way to understand ‘woman’\nin this claim is to take it as a sex term",
-          "occurrences": 6,
-          "data": "/sep/social norms_feminism-gender.json"
-        },
-        {
-          "id": "game-ethics",
-          "url": "https://plato.stanford.edu/entries/game-ethics/",
-          "title": "Game Theory and Ethics",
-          "description": "Game theory is the study of interdependent choice and action.\nIt includes the study of strategic decision making, the\nanalysis of how the choices and decisions ",
-          "occurrences": 6,
-          "data": "/sep/social norms_game-ethics.json"
-        },
-        {
-          "id": "domination",
-          "url": "https://plato.stanford.edu/entries/domination/",
-          "title": "Domination",
-          "description": "Theories of domination try to understand the value of justice,\nfreedom, and equality by examining their absence. Such theories seek\nto clarify and systematize o",
-          "occurrences": 6,
-          "data": "/sep/social norms_domination.json"
-        }
-      ],
-      "similarity": [
-        {
-          "id": "sep",
-          "url": "https://plato.stanford.edu/",
-          "title": "SEP (combined)",
-          "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 140,
-          "data": "/sep/social norms_embeds.json"
         }
       ]
     },
@@ -3028,12 +3019,12 @@
           "trustworthiness./"
         ]
       },
-      "total_occurrences": 208,
+      "total_occurrences": 209,
       "chinese_philosophy_occurrences": 14,
       "cooccurrence": [
         {
           "id": "trustworthiness_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=trustworthiness+trustworth%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=trustworthiness+trustworth%2A",
           "title": "SEP search: trustworthiness",
           "description": "Top 8 results for \"trustworthiness trustworth*\"",
           "occurrences": 195,
@@ -3110,7 +3101,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 208,
+          "occurrences": 209,
           "data": "/sep/trustworthiness_embeds.json"
         }
       ]
@@ -3129,7 +3120,7 @@
           "virtue”—one"
         ]
       },
-      "total_occurrences": 3045,
+      "total_occurrences": 3043,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -3211,7 +3202,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 3045,
+          "occurrences": 3043,
           "data": "/sep/virtue_embeds.json"
         }
       ]
@@ -3223,7 +3214,7 @@
           "ways"
         ]
       },
-      "total_occurrences": 5557,
+      "total_occurrences": 5601,
       "chinese_philosophy_occurrences": 0,
       "cooccurrence": [
         {
@@ -3305,7 +3296,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 5557,
+          "occurrences": 5601,
           "data": "/sep/way_embeds.json"
         }
       ]
@@ -3324,12 +3315,12 @@
           "wisdom”—which"
         ]
       },
-      "total_occurrences": 724,
+      "total_occurrences": 726,
       "chinese_philosophy_occurrences": 29,
       "cooccurrence": [
         {
           "id": "wisdom_combined",
-          "url": "https://plato.stanford.edu/search/searcher.py?query=wisdom+wisdom%2A+wise%2A&page=1",
+          "url": "https://plato.stanford.edu/search/searcher.py?page=1&query=wisdom+wisdom%2A+wise%2A",
           "title": "SEP search: wisdom",
           "description": "Top 8 results for \"wisdom wisdom* wise*\"",
           "occurrences": 466,
@@ -3406,7 +3397,7 @@
           "url": "https://plato.stanford.edu/",
           "title": "SEP (combined)",
           "description": "Combined SEP corpus for the English renderings of 仁 / 義",
-          "occurrences": 724,
+          "occurrences": 726,
           "data": "/sep/wisdom_embeds.json"
         }
       ]
