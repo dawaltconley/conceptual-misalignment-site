@@ -477,7 +477,7 @@ class Pipeline:
     a shared scale — the client's default epsilon of 10 is not this 10 — so tune
     them independently."""
 
-    tsne_iterations: int = 1000
+    tsne_iterations: int = 5000
     """Gradient-descent steps per layout. sklearn's floor is 250; 1000 is its
     default and converges the corpora here comfortably. (The client-side run
     stops at 500 to keep the animation short — another reason the two layouts

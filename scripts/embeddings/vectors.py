@@ -144,6 +144,7 @@ def debias_matrix(
     if method == "abtt":
         k = max(1, dim // 100) if k is None else k
         k = max(1, min(k, n_samples, dim))
+        print(f"abtt debiasing with k = {k}")
         comps = np.asarray(
             PCA(n_components=k, random_state=0).fit(matrix).components_)  # (k, D)
 
